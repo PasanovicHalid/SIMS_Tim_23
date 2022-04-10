@@ -12,14 +12,28 @@ namespace Model
    {
       public String name;
 
-        public void FromCSV(string[] values)
+        public RoomType()
         {
-            throw new NotImplementedException();
+
         }
 
-        public void ToCSV()
+        public RoomType(string name)
         {
-            throw new NotImplementedException();
+            this.name = name;
+        }
+
+        public void FromCSV(string[] values)
+        {
+            name = values[0];
+        }
+
+        public string[] ToCSV()
+        {
+            string[] csvValue =
+            {
+                name
+            };
+            return csvValue;
         }
     }
 }

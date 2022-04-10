@@ -76,7 +76,7 @@ namespace Model
             notification.Clear();
       }
 
-        public void ToCSV()
+        public string[] ToCSV()
         {
             throw new NotImplementedException();
         }

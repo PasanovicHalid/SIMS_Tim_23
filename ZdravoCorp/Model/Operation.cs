@@ -14,7 +14,7 @@ namespace Model
             throw new NotImplementedException();
         }
 
-        public void ToCSV()
+        public string[] ToCSV()
         {
             throw new NotImplementedException();
         }

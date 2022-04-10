@@ -13,14 +13,30 @@ namespace Model
       public String name;
       public String description;
 
-        public void FromCSV(string[] values)
+        public EquipmentDescriptor()
         {
-            throw new NotImplementedException();
         }
 
-        public void ToCSV()
+        public EquipmentDescriptor(string name, string description)
         {
-            throw new NotImplementedException();
+            this.name = name;
+            this.description = description;
+        }
+
+        public void FromCSV(string[] values)
+        {
+            name = values[0];
+            description = values[1];
+        }
+
+        public string[] ToCSV()
+        {
+            string[] csvValue =
+              {
+                name,
+                description
+            };
+            return csvValue;
         }
     }
 }

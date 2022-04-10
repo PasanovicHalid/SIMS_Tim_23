@@ -87,7 +87,7 @@ namespace Model
             appointment.Clear();
       }
 
-        public void ToCSV()
+        public string[] ToCSV()
         {
             throw new NotImplementedException();
         }

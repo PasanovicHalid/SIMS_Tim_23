@@ -9,7 +9,7 @@ namespace Repository
 {
    public interface Serializable
    {
-      void ToCSV();
+      string[] ToCSV();
       
       void FromCSV(string[] values);
    

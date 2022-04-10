@@ -5,6 +5,7 @@
  ***********************************************************************/
 
 using System;
+using System.Linq;
 
 namespace Model
 {
@@ -13,11 +14,25 @@ namespace Model
       private String identifier;
       
       private EquipmentDescriptor description;
-      
-      /// <summary>
-      /// Property for EquipmentDescriptor
-      /// </summary>
-      /// <pdGenerated>Default opposite class property</pdGenerated>
+
+      public string locationIdentifier;
+
+        public Equipment()
+        {
+
+        }
+
+        public Equipment(string ident, EquipmentDescriptor desc, string local)
+        {
+            this.identifier = ident;
+            this.description = desc;
+            this.locationIdentifier = local;
+        }
+
+        /// <summary>
+        /// Property for EquipmentDescriptor
+        /// </summary>
+        /// <pdGenerated>Default opposite class property</pdGenerated>
       public EquipmentDescriptor Description
       {
          get
@@ -30,45 +45,24 @@ namespace Model
          }
       }
       
-      public Room location;
       
-      /// <summary>
-      /// Property for Room
-      /// </summary>
-      /// <pdGenerated>Default opposite class property</pdGenerated>
-      public Room Location
+
+      public string[] ToCSV()
       {
-         get
-         {
-            return location;
-         }
-         set
-         {
-            if (this.location == null || !this.location.Equals(value))
-            {
-               if (this.location != null)
-               {
-                  Room oldRoom = this.location;
-                  this.location = null;
-                  oldRoom.RemoveEquipmentList(this);
-               }
-               if (value != null)
-               {
-                  this.location = value;
-                  this.location.AddEquipmentList(this);
-               }
-            }
-         }
+            string[] csvValue =
+              {
+                identifier,
+                locationIdentifier
+            };
+            csvValue = csvValue.Concat(description.ToCSV()).ToArray();
+            return csvValue;
+        }
+
+      public void FromCSV(string[] values)
+      {
+          identifier = values[0];
+          locationIdentifier = values[1];
+          description = new EquipmentDescriptor(values[2], values[3]);
       }
-
-        public void ToCSV()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void FromCSV(string[] values)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

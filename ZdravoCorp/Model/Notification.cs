@@ -13,45 +13,17 @@ namespace Model
       public DateTime dateCreated;
       public String content;
       
-      public User creator;
+      public string creatorUsername;
       
-      /// <summary>
-      /// Property for User
-      /// </summary>
-      /// <pdGenerated>Default opposite class property</pdGenerated>
-      public User Creator
-      {
-         get
-         {
-            return creator;
-         }
-         set
-         {
-            if (this.creator == null || !this.creator.Equals(value))
-            {
-               if (this.creator != null)
-               {
-                  User oldUser = this.creator;
-                  this.creator = null;
-                  oldUser.RemoveNotifications(this);
-               }
-               if (value != null)
-               {
-                  this.creator = value;
-                  this.creator.AddNotifications(this);
-               }
-            }
-         }
-      }
 
         public void FromCSV(string[] values)
         {
             throw new NotImplementedException();
         }
 
-        public void ToCSV()
+        public string[] ToCSV()
         {
-            throw new NotImplementedException();
+           throw new NotImplementedException();
         }
     }
 }
