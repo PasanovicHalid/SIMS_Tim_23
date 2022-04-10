@@ -1,0 +1,22 @@
+// File:    Operation.cs
+// Author:  PCX
+// Created: Sunday, 10 April 2022 15:23:46
+// Purpose: Definition of Class Operation
+
+using System;
+
+namespace Model
+{
+   public class Operation : Appointment, Repository.Serializable
+   {
+        public void FromCSV(string[] values)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ToCSV()
+        {
+            throw new NotImplementedException();
+        }
+    }
+}
