@@ -8,16 +8,7 @@ using System;
 
 namespace Model
 {
-    public class Doctor : Employee, Repository.Serializable
-    {
-        public void FromCSV(string[] values)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string[] ToCSV()
-        {
-            throw new NotImplementedException();
-        }
-    }
+   public class Doctor : Employee, Repository.Serializable
+   {
+   }
 }

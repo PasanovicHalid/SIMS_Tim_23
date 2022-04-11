@@ -5,20 +5,10 @@
  ***********************************************************************/
 
 using System;
-using System.Linq;
 
 namespace Model
 {
-    public class Manager : Employee, Repository.Serializable
-    {
-        public void FromCSV(string[] values)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string[] ToCSV()
-        {
-            throw new NotImplementedException();
-        }
-    }
+   public class Manager : Employee, Repository.Serializable
+   {
+   }
 }

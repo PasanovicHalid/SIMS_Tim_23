@@ -7,16 +7,7 @@ using System;
 
 namespace Model
 {
-   public class Operation : Appointment, Repository.Serializable
+   public class Operation : Appointment
    {
-        public void FromCSV(string[] values)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string[] ToCSV()
-        {
-            throw new NotImplementedException();
-        }
-    }
+   }
 }

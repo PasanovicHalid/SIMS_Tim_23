@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace Repository
 {
-   public class Serializer<T> where T:Serializable, new() 
+   public class Serializer<T> where T:Serializable, new()
    {
       private char dELIMITER = '|';
       

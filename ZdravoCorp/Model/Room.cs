@@ -5,7 +5,6 @@
  ***********************************************************************/
 
 using System;
-using System.Linq;
 
 namespace Model
 {
@@ -33,105 +32,80 @@ namespace Model
       }
       
       public System.Collections.ArrayList equipmentList;
-
-        public Room()
-        {
-
-        }
-
-        public Room(string identifier, float size, RoomType type, System.Collections.ArrayList equipmentList)
-        {
-            this.type=type;
-            this.identifier=identifier;
-            this.size=size;
-            this.equipmentList=equipmentList;
-        }
-
-        public System.Collections.ArrayList EquipmentList
-        {
-            get
+      
+      /// <summary>
+      /// Property for collection of Equipment
+      /// </summary>
+      /// <pdGenerated>Default opposite class collection property</pdGenerated>
+      public System.Collections.ArrayList EquipmentList
+      {
+         get
+         {
+            if (equipmentList == null)
+               equipmentList = new System.Collections.ArrayList();
+            return equipmentList;
+         }
+         set
+         {
+            RemoveAllEquipmentList();
+            if (value != null)
             {
-                if (equipmentList == null)
-                    equipmentList = new System.Collections.ArrayList();
-                return equipmentList;
+               foreach (Equipment oEquipment in value)
+                  AddEquipmentList(oEquipment);
             }
-            set
+         }
+      }
+      
+      /// <summary>
+      /// Add a new Equipment in the collection
+      /// </summary>
+      /// <pdGenerated>Default Add</pdGenerated>
+      public void AddEquipmentList(Equipment newEquipment)
+      {
+         if (newEquipment == null)
+            return;
+         if (this.equipmentList == null)
+            this.equipmentList = new System.Collections.ArrayList();
+         if (!this.equipmentList.Contains(newEquipment))
+         {
+            this.equipmentList.Add(newEquipment);
+            newEquipment.Location = this;
+         }
+      }
+      
+      /// <summary>
+      /// Remove an existing Equipment from the collection
+      /// </summary>
+      /// <pdGenerated>Default Remove</pdGenerated>
+      public void RemoveEquipmentList(Equipment oldEquipment)
+      {
+         if (oldEquipment == null)
+            return;
+         if (this.equipmentList != null)
+            if (this.equipmentList.Contains(oldEquipment))
             {
-                RemoveAllEquipmentList();
-                if (value != null)
-                {
-                    foreach (Equipment oEquipment in value)
-                        AddEquipmentList(oEquipment);
-                }
+               this.equipmentList.Remove(oldEquipment);
+               oldEquipment.Location = null;
             }
-        }
-
-        /// <summary>
-        /// Add a new Equipment in the collection
-        /// </summary>
-        /// <pdGenerated>Default Add</pdGenerated>
-        public void AddEquipmentList(Equipment newEquipment)
-        {
-            if (newEquipment == null)
-                return;
-            if (this.equipmentList == null)
-                this.equipmentList = new System.Collections.ArrayList();
-            if (!this.equipmentList.Contains(newEquipment))
-                this.equipmentList.Add(newEquipment);
-        }
-
-        /// <summary>
-        /// Remove an existing Equipment from the collection
-        /// </summary>
-        /// <pdGenerated>Default Remove</pdGenerated>
-        public void RemoveEquipmentList(Equipment oldEquipment)
-        {
-            if (oldEquipment == null)
-                return;
-            if (this.equipmentList != null)
-                if (this.equipmentList.Contains(oldEquipment))
-                    this.equipmentList.Remove(oldEquipment);
-        }
-
-        /// <summary>
-        /// Remove all instances of Equipment from the collection
-        /// </summary>
-        /// <pdGenerated>Default removeAll</pdGenerated>
-        public void RemoveAllEquipmentList()
-        {
-            if (equipmentList != null)
-                equipmentList.Clear();
-        }
-
-        public void FromCSV(string[] values)
-        {
-            identifier = values[0];
-            size = float.Parse(values[1]);
-            int count = int.Parse(values[2]);
-            type = new RoomType(values[3]);
-
-            equipmentList = new System.Collections.ArrayList();
-
-            for(int i = 0; i < count; i++) {
-                equipmentList.Add(new Equipment(values[4 * (i + 1)],new EquipmentDescriptor(values[4 * (i + 1) + 1], values[4 * (i + 1) + 2]) , values[4 * (i + 1) + 3]));
-            }
-        }
-
-        public string[] ToCSV()
-        {
-
-            string[] csvValue =
-            {
-                identifier,
-                size.ToString(),
-                EquipmentList.Count.ToString()
-            };
-            csvValue = csvValue.Concat(type.ToCSV()).ToArray();
-            foreach(Equipment equipment in equipmentList)
-            {
-                csvValue = csvValue.Concat(equipment.ToCSV()).ToArray();
-            }
-            return csvValue;
-        }
-    }
+      }
+      
+      /// <summary>
+      /// Remove all instances of Equipment from the collection
+      /// </summary>
+      /// <pdGenerated>Default removeAll</pdGenerated>
+      public void RemoveAllEquipmentList()
+      {
+         if (equipmentList != null)
+         {
+            System.Collections.ArrayList tmpEquipmentList = new System.Collections.ArrayList();
+            foreach (Equipment oldEquipment in equipmentList)
+               tmpEquipmentList.Add(oldEquipment);
+            equipmentList.Clear();
+            foreach (Equipment oldEquipment in tmpEquipmentList)
+               oldEquipment.Location = null;
+            tmpEquipmentList.Clear();
+         }
+      }
+   
+   }
 }

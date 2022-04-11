@@ -10,20 +10,7 @@ namespace Model
 {
    public class Patient : User, Repository.Serializable
    {
-      private Gender gender;
-      private int jmbg;
-      private String phoneNumber;
-      private DateTime dateOfBirth;
-      
-      public Gender GetGender()
-      {
-         throw new NotImplementedException();
-      }
-      
-      public void SetGender(Gender gender)
-      {
-         throw new NotImplementedException();
-      }
+      protected Boolean guest = false;
       
       public System.Collections.ArrayList appointment;
       
@@ -86,15 +73,6 @@ namespace Model
          if (appointment != null)
             appointment.Clear();
       }
-
-        public string[] ToCSV()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void FromCSV(string[] values)
-        {
-            throw new NotImplementedException();
-        }
-    }
+   
+   }
 }

@@ -12,18 +12,6 @@ namespace Model
    {
       public DateTime dateCreated;
       public String content;
-      
-      public string creatorUsername;
-      
-
-        public void FromCSV(string[] values)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string[] ToCSV()
-        {
-           throw new NotImplementedException();
-        }
-    }
+   
+   }
 }
