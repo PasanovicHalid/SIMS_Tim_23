@@ -4,6 +4,7 @@
 // Purpose: Definition of Class AppointmenServicet
 
 using System;
+using Model;
 
 namespace Service
 {

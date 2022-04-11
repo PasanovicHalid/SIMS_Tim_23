@@ -32,7 +32,7 @@ namespace Repository
          throw new NotImplementedException();
       }
       
-      public Model.Room GetAllRooms()
+      public System.Collections.ArrayList GetAllRooms()
       {
          throw new NotImplementedException();
       }

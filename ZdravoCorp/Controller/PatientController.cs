@@ -4,6 +4,7 @@
 // Purpose: Definition of Class PatientController
 
 using System;
+using Model;
 
 namespace Controller
 {

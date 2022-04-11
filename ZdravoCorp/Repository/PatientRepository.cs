@@ -4,6 +4,7 @@
 // Purpose: Definition of Class PatientRepository
 
 using System;
+using Model;
 
 namespace Repository
 {

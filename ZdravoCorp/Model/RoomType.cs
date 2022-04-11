@@ -10,16 +10,30 @@ namespace Model
 {
    public class RoomType : Repository.Serializable
    {
-      public String name;
+        public String name;
+
+        public RoomType()
+        {
+            name = "";
+        }
+
+        public RoomType(string name)
+        {
+            this.name = name;
+        }
 
         public void FromCSV(string[] values)
         {
-            throw new NotImplementedException();
+            name = values[0];
         }
 
         public string[] ToCSV()
         {
-            throw new NotImplementedException();
+            string[] csvValue =
+            {
+                name
+            };
+            return csvValue;
         }
     }
 }

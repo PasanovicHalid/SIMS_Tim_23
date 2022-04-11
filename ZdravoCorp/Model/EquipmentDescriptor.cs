@@ -10,17 +10,35 @@ namespace Model
 {
    public class EquipmentDescriptor : Repository.Serializable
    {
-      public String name;
-      public String description;
+        public String name;
+        public String description;
+
+        public EquipmentDescriptor()
+        {
+            name = "";
+            description = "";
+        }
+
+        public EquipmentDescriptor(string name, string description)
+        {
+            this.name = name;
+            this.description = description;
+        }
 
         public void FromCSV(string[] values)
         {
-            throw new NotImplementedException();
+            name = values[0];
+            description = values[1];
         }
 
         public string[] ToCSV()
         {
-            throw new NotImplementedException();
+            string[] csvValue =
+              {
+                name,
+                description
+            };
+            return csvValue;
         }
     }
 }

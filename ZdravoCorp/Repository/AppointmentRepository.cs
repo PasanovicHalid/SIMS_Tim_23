@@ -4,6 +4,7 @@
 // Purpose: Definition of Class AppointmentRepository
 
 using System;
+using Model;
 
 namespace Repository
 {

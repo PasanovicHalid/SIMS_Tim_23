@@ -5,70 +5,62 @@
  ***********************************************************************/
 
 using System;
+using System.Linq;
 
 namespace Model
 {
    public class Equipment : Repository.Serializable
    {
-      private String identifier;
+        private String identifier;
       
-      private EquipmentDescriptor description;
-      
-      /// <summary>
-      /// Property for EquipmentDescriptor
-      /// </summary>
-      /// <pdGenerated>Default opposite class property</pdGenerated>
-      public EquipmentDescriptor Description
-      {
-         get
-         {
-            return description;
-         }
-         set
-         {
-            this.description = value;
-         }
-      }
-      
-      public Room location;
-      
-      /// <summary>
-      /// Property for Room
-      /// </summary>
-      /// <pdGenerated>Default opposite class property</pdGenerated>
-      public Room Location
-      {
-         get
-         {
-            return location;
-         }
-         set
-         {
-            if (this.location == null || !this.location.Equals(value))
+        private EquipmentDescriptor description;
+
+        public string locationIdentifier;
+        public Equipment()
+        {
+            identifier = "";
+            description = new EquipmentDescriptor();
+        }
+
+        public Equipment(string ident, EquipmentDescriptor desc, string local)
+        {
+            this.identifier = ident;
+            this.description = desc;
+            this.locationIdentifier = local;
+        }
+
+        /// <summary>
+        /// Property for EquipmentDescriptor
+        /// </summary>
+        /// <pdGenerated>Default opposite class property</pdGenerated>
+        public EquipmentDescriptor Description
+        {
+            get
             {
-               if (this.location != null)
-               {
-                  Room oldRoom = this.location;
-                  this.location = null;
-                  oldRoom.RemoveEquipmentList(this);
-               }
-               if (value != null)
-               {
-                  this.location = value;
-                  this.location.AddEquipmentList(this);
-               }
+            return description;
             }
-         }
-      }
+            set
+            {
+            this.description = value;
+            }
+        }
 
         public string[] ToCSV()
         {
-            throw new NotImplementedException();
+            string[] csvValue =
+              {
+                identifier,
+                locationIdentifier
+            };
+            csvValue = csvValue.Concat(description.ToCSV()).ToArray();
+            return csvValue;
         }
 
         public void FromCSV(string[] values)
         {
-            throw new NotImplementedException();
+            identifier = values[0];
+            locationIdentifier = values[1];
+            description = new EquipmentDescriptor(values[2], values[3]);
         }
     }
 }

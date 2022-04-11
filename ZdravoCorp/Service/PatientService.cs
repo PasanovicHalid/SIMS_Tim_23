@@ -4,6 +4,7 @@
 // Purpose: Definition of Class PatientService
 
 using System;
+using Model;
 
 namespace Service
 {
