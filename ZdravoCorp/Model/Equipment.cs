@@ -60,6 +60,15 @@ namespace Model
             }
          }
       }
-   
-   }
+
+        public string[] ToCSV()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void FromCSV(string[] values)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

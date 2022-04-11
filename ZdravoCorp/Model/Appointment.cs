@@ -15,6 +15,15 @@ namespace Model
       protected String appointmentId;
       protected int trebaIDoktor;
       protected int type;
-   
-   }
+
+        public void FromCSV(string[] values)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string[] ToCSV()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

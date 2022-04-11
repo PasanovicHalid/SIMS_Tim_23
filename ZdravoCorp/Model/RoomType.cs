@@ -11,6 +11,15 @@ namespace Model
    public class RoomType : Repository.Serializable
    {
       public String name;
-   
-   }
+
+        public void FromCSV(string[] values)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string[] ToCSV()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

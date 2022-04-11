@@ -12,6 +12,15 @@ namespace Model
    {
       public String name;
       public String description;
-   
-   }
+
+        public void FromCSV(string[] values)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string[] ToCSV()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

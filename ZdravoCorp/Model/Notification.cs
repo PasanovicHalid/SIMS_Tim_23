@@ -12,6 +12,15 @@ namespace Model
    {
       public DateTime dateCreated;
       public String content;
-   
-   }
+
+        public void FromCSV(string[] values)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string[] ToCSV()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
