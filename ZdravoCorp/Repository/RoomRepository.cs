@@ -14,11 +14,13 @@ namespace Repository
    {
         private String dbPath;
         private Serializer<Room> serializer;
+        private Serializer<Appointment> serializer1;
 
         public RoomRepository()
         {
             dbPath = "Resourses\\roomsCSV.csv";
             serializer = new Serializer<Room>();
+            serializer1 = new Serializer<Appointment>();
         }
 
         public Boolean CreateRoom(Model.Room newRoom)
@@ -87,6 +89,16 @@ namespace Repository
             }
             else
             {
+                List<Appointment> appoint = serializer1.FromCSV("Resourses\\appointmentCSV.csv");
+                foreach (Appointment appointment in appoint)
+                {
+                    if (appointment.RoomID.Equals(identificator))
+                    {
+                        appointment.RoomID = updatedRoom.Identificator;
+                    }
+                }
+                serializer1.ToCSV("Resourses\\appointmentCSV.csv", appoint);
+
                 rooms.Add(updatedRoom);
                 serializer.ToCSV(dbPath, rooms);
                 return true;
@@ -108,6 +120,23 @@ namespace Repository
             }
             if (deleted)
             {
+                List<Appointment> appoint = serializer1.FromCSV("Resourses\\appointmentCSV.csv");
+                List<int> ids = new List<int>();
+                for (int i = 0; i < appoint.Count; i++)
+                {
+                    if (appoint[i].RoomID.Equals(identifier))
+                    {
+                        ids.Add(i);
+                    }
+                }
+                for (int i = 0; i < ids.Count; i++)
+                {
+                    appoint.RemoveAt(ids[i]);
+                }
+                if(ids.Count > 0)
+                {
+                    serializer1.ToCSV("Resourses\\appointmentCSV.csv", appoint);
+                }
                 serializer.ToCSV(dbPath, rooms);
                 return true;
             }

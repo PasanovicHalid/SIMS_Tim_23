@@ -11,7 +11,7 @@ using System.Globalization;
 
 namespace Model
 {
-    public class Appointment : Repository.Serializable
+    public class Appointment : Repository.Serializable, INotifyPropertyChanged
     {
         protected DateTime startDate;
         protected DateTime endDate;
@@ -21,6 +21,8 @@ namespace Model
         protected String roomID;
 
         public System.Collections.Generic.List<Equipment> equipment;
+
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         public Appointment(String start, String end, String id, String docid, String patientid, String roomID)
         {
@@ -40,10 +42,6 @@ namespace Model
             }
         }
 
-        private void PropertyChanged(Appointment appointment, PropertyChangedEventArgs propertyChangedEventArgs)
-        {
-            throw new NotImplementedException();
-        }
 
         public String StartDate
         {
