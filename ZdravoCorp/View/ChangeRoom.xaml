@@ -5,15 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ZdravoCorp.View"
         mc:Ignorable="d"
-        Title="ChangeRoom" Height="450" Width="800">
+        Title="ChangeRoom" Height="215" Width="363">
     <Grid>
-        <Label Content="Identifier" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <Label Content="Size" HorizontalAlignment="Left" Margin="10,51,0,0" VerticalAlignment="Top"/>
-        <Label Content="RoomType" HorizontalAlignment="Left" Margin="10,97,0,0" VerticalAlignment="Top" Width="69"/>
-        <TextBox x:Name="id" HorizontalAlignment="Left" Height="26" Margin="76,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="240"/>
-        <TextBox x:Name="sz" HorizontalAlignment="Left" Height="26" Margin="76,51,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="240"/>
-        <Button Content="Change" HorizontalAlignment="Left" Margin="20,128,0,0" VerticalAlignment="Top" Click="Button_Click"/>
-        <TextBox x:Name="tp" HorizontalAlignment="Left" Height="26" Margin="79,97,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="240"/>
+        <Label Content="Identifier" HorizontalAlignment="Left" Margin="2,10,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Grid.Column="1"/>
+        <Label Content="Size" HorizontalAlignment="Left" Margin="2,51,0,0" VerticalAlignment="Top" Grid.Column="1" RenderTransformOrigin="2.338,0.619" Width="36" Grid.ColumnSpan="2"/>
+        <Label Content="RoomType" HorizontalAlignment="Left" Margin="2,97,0,0" VerticalAlignment="Top" Width="69" Grid.ColumnSpan="2" Grid.Column="1"/>
+        <TextBox x:Name="id" HorizontalAlignment="Left" Height="26" Margin="71,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="240" Grid.Column="2"/>
+        <TextBox x:Name="sz" HorizontalAlignment="Left" Height="26" Margin="71,51,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="240" Grid.Column="2"/>
+        <Button Content="Change" HorizontalAlignment="Left" Margin="252,139,0,0" VerticalAlignment="Top" Click="Button_Click" Height="31" Width="59" Grid.Column="2"/>
+        <TextBox x:Name="tp" HorizontalAlignment="Left" Height="26" Margin="71,97,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="240" Grid.Column="2"/>
 
     </Grid>
 </Window>
