@@ -32,7 +32,7 @@ namespace ZdravoCorp.View
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
             }
         }
-        public String DoctorName
+        public String DoctorID
         {
             get { return doctorName; }
             set
@@ -40,7 +40,7 @@ namespace ZdravoCorp.View
                 if (value != doctorName)
                 {
                     doctorName = value;
-                    OnPropertyChanged("DoctorName");
+                    OnPropertyChanged("DoctorID");
                 }
             }
         }
@@ -52,7 +52,7 @@ namespace ZdravoCorp.View
                 if (value != date)
                 {
                     date = value;
-                    OnPropertyChanged("Date");
+                    OnPropertyChanged("StartDate");
                 }
             }
         }
@@ -64,7 +64,7 @@ namespace ZdravoCorp.View
                 if (value != time)
                 {
                     time = value;
-                    OnPropertyChanged("Time");
+                    OnPropertyChanged("EndDate");
                 }
             }
         }

@@ -145,8 +145,13 @@ namespace ZdravoCorp
 
         private void EditPatientsAppointment_Click(object sender, RoutedEventArgs e)
         {
-
+            if (PatientTable.SelectedIndex == -1)
+            {
+                return;
+            }
+            OnPropertyChanged("AppointmentsForPatients");
         }
+    
 
         private void DeletePatientsAppointment_Click(object sender, RoutedEventArgs e)
         {
