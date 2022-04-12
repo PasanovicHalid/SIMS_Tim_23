@@ -127,6 +127,7 @@ namespace ZdravoCorp
             OnPropertyChanged("Rooms");
         }
 
+
         private void AddAppointmentToPatient_Click(object sender, RoutedEventArgs e)
         {
             var s = new View.AddAppointmentToPatient();
@@ -149,6 +150,25 @@ namespace ZdravoCorp
 
         private void DeletePatientsAppointment_Click(object sender, RoutedEventArgs e)
         {
+
+
+        }
+        private void Probaj_lekar_Click(object sender, RoutedEventArgs e)
+        {
+            var s =new View.AddAppointment();
+            s.ShowDialog();
+        }
+
+        private void ispisi_appointmente_Click(object sender, RoutedEventArgs e)
+        {
+            var s = new View.ViewAppointments();
+            s.ShowDialog();
+        }
+
+        private void Read_Button_Click(object sender, RoutedEventArgs e)
+        {
+            var s = new View.ReadAppointment();
+            s.ShowDialog();
 
         }
     }
