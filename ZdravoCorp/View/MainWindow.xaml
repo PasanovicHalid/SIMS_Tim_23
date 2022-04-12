@@ -32,6 +32,18 @@
             </TabItem>
             <TabItem Header="Pacient">
                 <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="PatientTable" ItemsSource="{Binding}" Margin="0,25,0,0" 
+                              AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Identificator" Binding="{Binding Identificator}"/>
+                            <DataGridTextColumn Header="Size" Binding="{Binding Size}" />
+                            <DataGridTextColumn Header="Room Type" Binding="{Binding Type}"/>
+                            <DataGridTextColumn Header="Equipment" Binding="{Binding Equipments}" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button Content="Obrisi" HorizontalAlignment="Left" Margin="55,0,0,0" VerticalAlignment="Top" Click="DeletePatientsAppointment_Click"/>
+                    <Button Content="Izmeni" HorizontalAlignment="Left" Margin="100,0,0,0" VerticalAlignment="Top" Click="EditPatientsAppointment_Click"/>
+                    <Button Content="Dodaj" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Click="AddAppointmentToPatient_Click"/>
                 </Grid>
             </TabItem>
         </TabControl>

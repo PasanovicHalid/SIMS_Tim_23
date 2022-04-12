@@ -5,37 +5,45 @@
  ***********************************************************************/
 
 using System;
+using Model;
+using System.Collections.Generic;
 
 namespace Service
 {
    public class DoctorService
    {
-      public Boolean CreateDoctor(Model.Doctor newDoctor)
+        public Repository.DoctorRepository doctorRepository;
+        public DoctorService()
+        {
+            doctorRepository = new Repository.DoctorRepository();
+        }
+        public Boolean CreateDoctor(Model.Doctor newDoctor)
       {
-         throw new NotImplementedException();
+            return doctorRepository.CreateDoctor(newDoctor);
       }
       
       public Boolean UpdateDoctor(Model.Doctor updatedRoom)
       {
-         throw new NotImplementedException();
+        return doctorRepository.UpdateDoctor(updatedRoom);  
       }
       
       public Boolean DeleteDoctor(Model.Doctor doctor)
       {
-         throw new NotImplementedException();
+         return doctorRepository.DeleteDoctor(doctor);
       }
       
       public Model.Doctor ReadDoctor(Model.Doctor doctor)
       {
-         throw new NotImplementedException();
+            return doctorRepository.ReadDoctor(doctor);
       }
       
-      public Array GetAllDoctors()
+      public List<Doctor> GetAllDoctors()
       {
-         throw new NotImplementedException();
+            return doctorRepository.GetAllDoctors();
       }
       
-      public Repository.DoctorRepository doctorRepository;
-   
-   }
+
+
+        
+    }
 }

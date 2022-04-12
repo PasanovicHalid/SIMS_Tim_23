@@ -4,35 +4,75 @@
 // Purpose: Definition of Class DoctorRepository
 
 using System;
+using Model;
+using System.Collections.Generic;
 
 namespace Repository
 {
    public class DoctorRepository
    {
-      public Boolean CreateDoctor(Model.Doctor newDoctor)
+        private String dbPath;
+        private Serializer<Doctor> serializer;
+
+        public DoctorRepository()
+        {
+            dbPath = "Resourses\\doctors.csv";
+            serializer = new Serializer<Doctor>();
+        }
+
+        public Boolean CreateDoctor(Model.Doctor newDoctor)
       {
-         throw new NotImplementedException();
-      }
+            dbPath = "Resourses\\doctors.csv";
+            serializer = new Serializer<Doctor>();
+            List<Doctor> doctors = serializer.FromCSV(dbPath);
+            bool found = false;
+            foreach (Doctor d in doctors)
+            {
+                if (newDoctor.Id.Equals(d.Id))
+                {
+                    found = true;
+                    break;
+                }
+            }
+            if (found)
+            {
+                return false;
+            }
+            else
+            {
+                List<Doctor> temp = new List<Doctor> { newDoctor };
+                serializer.ToCSVAppend(dbPath, temp);
+                return true;
+            }
+        }
       
       public Boolean UpdateDoctor(Model.Doctor doctor)
       {
-         throw new NotImplementedException();
-      }
+            return true;
+        }
       
       public Boolean DeleteDoctor(Model.Doctor doctor)
       {
-         throw new NotImplementedException();
+            return true;
       }
       
       public Model.Doctor ReadDoctor(Model.Doctor doctor)
       {
-         throw new NotImplementedException();
-      }
+            List<Doctor> rooms = GetAllDoctors();
+            foreach (Doctor d in rooms)
+            {
+                if (d.Id.Equals(doctor.Id))
+                {
+                    return d;
+                }
+            }
+            return null;
+        }
       
-      public Array GetAllDoctors()
+      public List<Doctor> GetAllDoctors()
       {
-         throw new NotImplementedException();
-      }
+            return serializer.FromCSV(dbPath);
+        }
    
    }
 }

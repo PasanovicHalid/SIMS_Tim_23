@@ -1,0 +1,20 @@
+﻿<Window x:Class="ZdravoCorp.View.AddAppointmentToPatient"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ZdravoCorp.View"
+        mc:Ignorable="d"
+        Title="AddAppointmentToPatient" Height="450" Width="800">
+    <Grid>
+        <Label Content="Doctor" HorizontalAlignment="Left" Margin="9,10,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+        <Label Content="Date" HorizontalAlignment="Left" Margin="9,51,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+        <Button Content="Create" HorizontalAlignment="Left" Margin="320,137,0,0" VerticalAlignment="Top" Click="Create_Click" Height="36" Width="59"/>
+        <TextBox TextWrapping="Wrap" Text="{Binding Path=doctor, UpdateSourceTrigger=PropertyChanged}" Margin="90,10,496,382"/>
+        <TextBox TextWrapping="Wrap" Text="{Binding Path=date, UpdateSourceTrigger=PropertyChanged}" Margin="90,57,496,335" />
+        <Label Content="Time" HorizontalAlignment="Left" Margin="9,104,0,0" VerticalAlignment="Top"/>
+        <TextBox TextWrapping="Wrap" Text="{Binding Path=time, UpdateSourceTrigger=PropertyChanged}" Margin="90,104,496,288" />
+
+
+    </Grid>
+</Window>

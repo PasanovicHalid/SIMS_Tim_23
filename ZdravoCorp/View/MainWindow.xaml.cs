@@ -26,7 +26,7 @@ namespace ZdravoCorp
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
         private Controller.RoomController roomController;
-
+        private Controller.AppointmentController appointmentControllerForPatients;
         public event PropertyChangedEventHandler? PropertyChanged;
 
         protected virtual void OnPropertyChanged(string name)
@@ -42,6 +42,12 @@ namespace ZdravoCorp
             get;
             set;
         }
+
+        public ObservableCollection<Appointment> AppointmentsForPatients 
+        {
+            get;
+            set;
+        }
         public MainWindow()
         {
             InitializeComponent();
@@ -53,7 +59,18 @@ namespace ZdravoCorp
             {
                 Rooms.Add(room);
             }
+            appointmentControllerForPatients = new Controller.AppointmentController();
+            AppointmentsForPatients = new ObservableCollection<Appointment>();
+            List<Appointment> appointmentsForPatients = appointmentControllerForPatients.GetAllAppointments();
+            foreach (Appointment app in appointmentsForPatients)
+            {
+                AppointmentsForPatients.Add(app);
+            }
+
+            PatientTable.DataContext = AppointmentsForPatients;
             UpravnikTable.DataContext = Rooms;
+
+            
         }
 
         private void Dodaj_Click(object sender, RoutedEventArgs e)
@@ -108,6 +125,31 @@ namespace ZdravoCorp
             }
             UpravnikTable.DataContext = Rooms;
             OnPropertyChanged("Rooms");
+        }
+
+        private void AddAppointmentToPatient_Click(object sender, RoutedEventArgs e)
+        {
+            var s = new View.AddAppointmentToPatient();
+            s.ShowDialog();
+            AppointmentsForPatients = new ObservableCollection<Appointment>();
+            List<Appointment> rooms = appointmentControllerForPatients.GetAllAppointments();
+            foreach (Appointment room in rooms)
+            {
+                AppointmentsForPatients.Add(room);
+            }
+            PatientTable.DataContext = AppointmentsForPatients;
+            OnPropertyChanged("AppointmentsForPatients");
+
+        }
+
+        private void EditPatientsAppointment_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DeletePatientsAppointment_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
