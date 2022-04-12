@@ -47,7 +47,7 @@ namespace ZdravoCorp.View
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            roomController.UpdateRoom(new Room(id.Text, float.Parse(sz.Text), new RoomType(tp.Text), room.equipmentList));
+            roomController.UpdateRoom(new Room(id.Text, float.Parse(sz.Text), new RoomType(tp.Text), room.equipmentList), room.Identificator);
             this.Close();
         }
     }

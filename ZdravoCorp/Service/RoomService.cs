@@ -29,9 +29,9 @@ namespace Service
             throw new NotImplementedException();
         }
       
-        public Boolean UpdateRoom(Model.Room updatedRoom)
+        public Boolean UpdateRoom(Model.Room updatedRoom, string identificator)
         {
-            return roomRepository.UpdateRoom(updatedRoom);
+            return roomRepository.UpdateRoom(updatedRoom, identificator);
         }
       
         public Boolean DeleteRoom(String identifier)

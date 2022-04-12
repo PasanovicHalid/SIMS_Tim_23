@@ -42,12 +42,12 @@ namespace Repository
             return null;
         }
       
-        public Boolean UpdateRoom(Model.Room updatedRoom)
+        public Boolean UpdateRoom(Model.Room updatedRoom, string identificator)
         {
             List<Room> rooms = serializer.FromCSV(dbPath);
             foreach (Room room in rooms)
             {
-                if (updatedRoom.Identificator.Equals(room.Identificator))
+                if (identificator.Equals(room.Identificator))
                 {
                     rooms.Remove(room);
                     break;
