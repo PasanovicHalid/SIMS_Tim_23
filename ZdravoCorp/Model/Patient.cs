@@ -12,7 +12,7 @@ namespace Model
    {
       protected Boolean guest = false;
       
-      public System.Collections.ArrayList appointment;
+      public System.Collections.ArrayList appointment  = new System.Collections.ArrayList() ;
       
       /// <summary>
       /// Property for collection of Appointment

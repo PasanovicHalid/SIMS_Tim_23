@@ -26,7 +26,7 @@ namespace Service
       
         public Model.Room ReadRoom(String identifier)
         {
-            throw new NotImplementedException();
+            return roomRepository.ReadRoom(identifier);
         }
       
         public Boolean UpdateRoom(Model.Room updatedRoom)

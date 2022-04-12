@@ -45,14 +45,8 @@ namespace Repository
         public Boolean UpdateRoom(Model.Room updatedRoom)
         {
             List<Room> rooms = serializer.FromCSV(dbPath);
-            foreach (Room room in rooms)
-            {
-                if (updatedRoom.Identificator.Equals(room.Identificator))
-                {
-                    rooms.Remove(room);
-                    break;
-                }
-            }
+            
+            Boolean b = DeleteRoom(updatedRoom.Identificator);
             rooms.Add(updatedRoom);
             serializer.ToCSV(dbPath, rooms);
             return true;
