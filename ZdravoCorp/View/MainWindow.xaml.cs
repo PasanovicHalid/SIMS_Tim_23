@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -22,9 +23,20 @@ namespace ZdravoCorp
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
         private Controller.RoomController roomController;
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
+
         public ObservableCollection<Room> Rooms
         {
             get;
@@ -48,17 +60,54 @@ namespace ZdravoCorp
         {
             var s = new View.AddRoom();
             s.ShowDialog();
+            Rooms = new ObservableCollection<Room>();
+            List<Room> rooms = roomController.GetAllRooms();
+            foreach (Room room in rooms)
+            {
+                Rooms.Add(room);
+            }
+            UpravnikTable.DataContext = Rooms;
+            OnPropertyChanged("Rooms");
         }
 
         private void Izmeni_Click(object sender, RoutedEventArgs e)
         {
+            if(UpravnikTable.SelectedIndex == -1)
+            {
+                return;
+            }
+
             ChangeRoom change = new ChangeRoom(Rooms.ElementAt(UpravnikTable.SelectedIndex));
             change.ShowDialog();
+            Rooms = new ObservableCollection<Room>();
+            List<Room> rooms = roomController.GetAllRooms();
+            foreach (Room room in rooms)
+            {
+                Rooms.Add(room);
+            }
+            UpravnikTable.DataContext = Rooms;
+            OnPropertyChanged("Rooms");
         }
 
         private void Obrisi_Click(object sender, RoutedEventArgs e)
         {
-            roomController.DeleteRoom(Rooms.ElementAt(UpravnikTable.SelectedIndex).Identificator);
+            if (UpravnikTable.SelectedIndex == -1)
+            {
+                return;
+            }
+            if (!roomController.DeleteRoom(Rooms.ElementAt(UpravnikTable.SelectedIndex).Identificator))
+            {
+                MessageBox.Show("Element ne postoji u bazi podataka", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            Rooms = new ObservableCollection<Room>();
+            List<Room> rooms = roomController.GetAllRooms();
+            foreach (Room room in rooms)
+            {
+                Rooms.Add(room);
+            }
+            UpravnikTable.DataContext = Rooms;
+            OnPropertyChanged("Rooms");
         }
     }
 }

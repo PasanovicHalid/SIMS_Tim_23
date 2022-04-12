@@ -29,9 +29,9 @@ namespace Controller
             return roomService.ReadRoom(identifier);
         }
       
-        public Boolean UpdateRoom(Model.Room updatedRoom)
+        public Boolean UpdateRoom(Model.Room updatedRoom, string identificator)
         {
-            return roomService.UpdateRoom(updatedRoom);
+            return roomService.UpdateRoom(updatedRoom, identificator);
         }
       
         public Boolean DeleteRoom(String identifier)
