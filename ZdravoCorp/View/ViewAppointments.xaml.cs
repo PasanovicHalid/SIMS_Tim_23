@@ -90,5 +90,36 @@ namespace ZdravoCorp.View
                 }
             }
         }
+
+        private void pretrazi_Click(object sender, RoutedEventArgs e)
+        {
+            if(!(TextBox.Text.Equals("")))
+            {
+                appointmentController = new Controller.AppointmentController();
+                appointments = new ObservableCollection<Appointment>();
+
+                List<Appointment> apps = appointmentController.GetAllAppointments();
+                foreach (Appointment temp in apps)
+                {
+                    if(temp.PatientID.Equals(TextBox.Text))
+                    {
+                        appointments.Add(temp);
+                    }
+                }
+                AppointmentGrid.DataContext = appointments;
+            }
+            else
+            {
+                appointmentController = new Controller.AppointmentController();
+                appointments = new ObservableCollection<Appointment>();
+
+                List<Appointment> apps = appointmentController.GetAllAppointments();
+                foreach (Appointment temp in apps)
+                {
+                    appointments.Add(temp);
+                }
+                AppointmentGrid.DataContext = appointments;
+            }
+        }
     }
 }

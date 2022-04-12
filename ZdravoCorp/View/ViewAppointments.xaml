@@ -28,6 +28,8 @@
         </DataGrid>
         <Button x:Name="update" Grid.Column="1" HorizontalAlignment="Left" Margin="20,17,0,0" VerticalAlignment="Top" Height="24" Width="62" Content="Update" Click="update_Click"/>
         <Button x:Name="delete" Grid.Column="2" Content="Delete" HorizontalAlignment="Left" Margin="19,17,0,0" VerticalAlignment="Top" Height="24" Width="62" Click="delete_Click"/>
+        <TextBox x:Name="TextBox" Grid.Column="5" HorizontalAlignment="Left" Height="20" Margin="25,17,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="pretrazi" Grid.Column="5" Content="Search" HorizontalAlignment="Left" Margin="187,17,0,0" VerticalAlignment="Top" Height="24" Width="62" Click="pretrazi_Click"/>
 
     </Grid>
 </Window>

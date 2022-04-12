@@ -27,7 +27,7 @@
             <TabItem Header="Lekar">
                 <Grid Background="#FFE5E5E5">
                     <Button x:Name="Probaj_lekar" HorizontalAlignment="Left" Margin="14,54,0,0" VerticalAlignment="Top" Click="Probaj_lekar_Click" Grid.Column="3" Content="Add Appointment"/>
-                    <Button x:Name="ispisi_appointmente" HorizontalAlignment="Left" Margin="14,19,0,0" VerticalAlignment="Top" Grid.Column="3" Click="ispisi_appointmente_Click" Content="Write All Appointments"/>
+                    <Button x:Name="ispisi_appointmente" HorizontalAlignment="Left" Margin="14,19,0,0" VerticalAlignment="Top" Grid.Column="3" Click="ispisi_appointmente_Click" Content="Print All Appointments"/>
                     <Button x:Name="Read_Button" Grid.Column="3" HorizontalAlignment="Left" Margin="14,95,0,0" VerticalAlignment="Top" Click="Read_Button_Click" Content="Read Specific Appointment"/>
                 </Grid>
             </TabItem>
