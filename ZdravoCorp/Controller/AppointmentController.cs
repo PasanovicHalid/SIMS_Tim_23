@@ -6,37 +6,45 @@
 using System;
 using Model;
 using Service;
+using System.Collections.Generic;
+
 
 namespace Controller
 {
    public class AppointmentController
    {
+        public AppointmenServicet appointmentServicet;
+
+        public AppointmentController()
+        {
+            appointmentServicet = new AppointmenServicet(); 
+        }
+
       public Boolean CreateAppointment(Appointment newAppointment)
       {
-         throw new NotImplementedException();
+            return appointmentServicet.CreateAppointment(newAppointment);  
       }
       
-      public Appointment ReadAppointment(Appointment appointment)
+      public Appointment ReadAppointment(String appointmentID)
       {
-         throw new NotImplementedException();
+         return appointmentServicet.ReadAppointment(appointmentID);
       }
       
       public Boolean UpdateAppointment(Appointment appointment)
       {
-         throw new NotImplementedException();
+         return appointmentServicet.UpdateAppointment(appointment); 
       }
       
-      public Boolean DeleteAppointment(Appointment appointment)
+      public Boolean DeleteAppointment(String appointmentID)
       {
-         throw new NotImplementedException();
+            return appointmentServicet.DeleteAppointment(appointmentID);
       }
       
-      public Array GetAllAppointments()
+      public List<Appointment> GetAllAppointments()
       {
-         throw new NotImplementedException();
+         return appointmentServicet.GetAllAppointments();   
       }
 
-        public AppointmenServicet appointmentServicet;
    
    }
 }

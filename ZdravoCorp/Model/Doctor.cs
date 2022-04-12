@@ -1,19 +1,19 @@
 /***********************************************************************
  * Module:  Doctor.cs
- * Author:  halid
+ * Author:  10
  * Purpose: Definition of the Class Model.Doctor
  ***********************************************************************/
 
 using System;
+using System.Collections.Generic;
 using Model;
 
 namespace Model
 {
     public class Doctor : Employee, Repository.Serializable
     {
-
-        private new String id;
-      private DoctorType type;
+        private new String id { get; set; }
+        private DoctorType type { get; set; }
       
       public System.Collections.Generic.List<Appointment> appointment;
       
@@ -86,5 +86,14 @@ namespace Model
         {
             throw new NotImplementedException();
         }
+
+        public Doctor(string id, DoctorType type, List<Appointment> appointment)
+        {
+            this.id = id;
+            this.type = type;
+            Appointment = appointment;
+        }
+
+        public Doctor() { }
     }
 }

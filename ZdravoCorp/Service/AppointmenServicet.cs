@@ -5,37 +5,46 @@
 
 using System;
 using Model;
+using Repository;
+using System.Collections.Generic;
+
 
 namespace Service
 {
    public class AppointmenServicet
    {
+
+      public AppointmentRepository appointmentRepository;
+
+      public AppointmenServicet()
+        {
+            appointmentRepository = new AppointmentRepository();    
+        }
+
       public Boolean CreateAppointment(Appointment newAppointment)
       {
-         throw new NotImplementedException();
+         return appointmentRepository.CreateAppointment(newAppointment);    
       }
       
-      public Appointment ReadAppointment(Appointment appointment)
+      public Appointment ReadAppointment(String appointmentID)
       {
-         throw new NotImplementedException();
+         return appointmentRepository.ReadAppointment(appointmentID); 
       }
       
       public Boolean UpdateAppointment(Appointment appointment)
       {
-         throw new NotImplementedException();
+         return appointmentRepository.UpdateAppointment(appointment);   
       }
       
-      public Boolean DeleteAppointment(Appointment appointment)
+      public Boolean DeleteAppointment(String appointmentID)
       {
-         throw new NotImplementedException();
+            return appointmentRepository.DeleteAppointment(appointmentID);
       }
       
-      public Array GetAllAppointments()
+      public List<Appointment> GetAllAppointments()
       {
-         throw new NotImplementedException();
+         return appointmentRepository.GetAllAppointments();
       }
-      
-      public Repository.AppointmentRepository appointmentRepository;
-   
+
    }
 }
