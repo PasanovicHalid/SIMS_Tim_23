@@ -29,6 +29,12 @@ namespace Model
             this.locationIdentifier = local;
         }
 
+        public String Identifier
+        {
+            get { return identifier; }
+            set { identifier = value; }
+        }
+
         /// <summary>
         /// Property for EquipmentDescriptor
         /// </summary>

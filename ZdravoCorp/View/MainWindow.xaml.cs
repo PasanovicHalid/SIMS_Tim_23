@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +14,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Model;
+using ZdravoCorp.View;
 
 namespace ZdravoCorp
 {
@@ -20,9 +24,41 @@ namespace ZdravoCorp
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Controller.RoomController roomController;
+        public ObservableCollection<Room> Rooms
+        {
+            get;
+            set;
+        }
         public MainWindow()
         {
             InitializeComponent();
+            this.DataContext = this;
+            roomController = new Controller.RoomController();
+            Rooms = new ObservableCollection<Room>();
+            List<Room> rooms = roomController.GetAllRooms();
+            foreach (Room room in rooms)
+            {
+                Rooms.Add(room);
+            }
+            UpravnikTable.DataContext = Rooms;
+        }
+
+        private void Dodaj_Click(object sender, RoutedEventArgs e)
+        {
+            var s = new View.AddRoom();
+            s.ShowDialog();
+        }
+
+        private void Izmeni_Click(object sender, RoutedEventArgs e)
+        {
+            ChangeRoom change = new ChangeRoom(Rooms.ElementAt(UpravnikTable.SelectedIndex));
+            change.ShowDialog();
+        }
+
+        private void Obrisi_Click(object sender, RoutedEventArgs e)
+        {
+            roomController.DeleteRoom(Rooms.ElementAt(UpravnikTable.SelectedIndex).Identificator);
         }
     }
 }

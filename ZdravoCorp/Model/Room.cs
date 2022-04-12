@@ -5,12 +5,13 @@
  ***********************************************************************/
 
 using System;
+using System.ComponentModel;
 using System.Linq;
 
 namespace Model
 {
-   public class Room : Repository.Serializable
-   {
+   public class Room : Repository.Serializable, INotifyPropertyChanged
+    {
         private String identifier;
         private float size;
       
@@ -18,19 +19,86 @@ namespace Model
 
         public System.Collections.ArrayList equipmentList;
 
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
+
+        public String Identificator
+        {
+            get { return identifier; }
+            set
+            {
+                if (identifier != value)
+                {
+                    identifier = value;
+                    OnPropertyChanged("Identificator");
+                }
+            }
+        }
+
+        public float Size
+        {
+            get { return size; }
+            set
+            {
+                if (size != value)
+                {
+                    size = value;
+                    OnPropertyChanged("Size");
+                }
+            }
+        }
+
+        public String Type
+        {
+            get
+            {
+                return type.name;
+            }
+            set
+            {
+                if (type.name != value)
+                {
+                    type.name = value;
+                    OnPropertyChanged("Type");
+                }
+            }
+        }
+
         /// <summary>
         /// Property for RoomType
         /// </summary>
         /// <pdGenerated>Default opposite class property</pdGenerated>
-        public RoomType Type
+        public RoomType TypeClass
         {
             get
             {
-            return type;
+                return type;
             }
             set
             {
-            this.type = value;
+                type = value;
+            }
+        }
+
+        public String Equpments
+        {
+            get 
+            {
+                String returnVal = "";
+                foreach (Equipment item in equipmentList)
+                {
+                    returnVal += item.Identifier;
+                    returnVal += ", ";
+                }
+                returnVal = returnVal.Remove(returnVal.Length - 1);
+                return returnVal;
             }
         }
 

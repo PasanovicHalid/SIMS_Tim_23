@@ -5,37 +5,78 @@
  ***********************************************************************/
 
 using System;
+using System.Collections.Generic;
+using Model;
 
 namespace Repository
 {
    public class RoomRepository
    {
-      private String dbPath;
+        private String dbPath;
+        private Serializer<Room> serializer;
+
+        public RoomRepository()
+        {
+            dbPath = "Resourses\\roomsCSV.txt";
+            serializer = new Serializer<Room>();
+        }
+
+        public Boolean CreateRoom(Model.Room newRoom)
+        {
+            List<Room> temp = new List<Room>();
+            temp.Add(newRoom);
+            serializer.ToCSVAppend(dbPath, temp);
+            return true;
+        }
       
-      public Boolean CreateRoom(Model.Room newRoom)
-      {
-         throw new NotImplementedException();
-      }
+        public Model.Room ReadRoom(String identifier)
+        {
+            List<Room> rooms = serializer.FromCSV(dbPath);
+            foreach (Room room in rooms)
+            {
+                if (identifier.Equals(room.Identificator))
+                {
+                    return room;
+                }
+            }
+            return null;
+        }
       
-      public Model.Room ReadRoom(String identifier)
-      {
-         throw new NotImplementedException();
-      }
+        public Boolean UpdateRoom(Model.Room updatedRoom)
+        {
+            List<Room> rooms = serializer.FromCSV(dbPath);
+            foreach (Room room in rooms)
+            {
+                if (updatedRoom.Identificator.Equals(room.Identificator))
+                {
+                    rooms.Remove(room);
+                    break;
+                }
+            }
+            rooms.Add(updatedRoom);
+            serializer.ToCSV(dbPath, rooms);
+            return true;
+        }
       
-      public Boolean UpdateRoom(Model.Room updatedRoom)
-      {
-         throw new NotImplementedException();
-      }
+        public Boolean DeleteRoom(String identifier)
+        {
+            List<Room> rooms = serializer.FromCSV(dbPath);
+            foreach (Room room in rooms)
+            {
+                if (identifier.Equals(room.Identificator))
+                {
+                    rooms.Remove(room);
+                    break;
+                }
+            }
+            serializer.ToCSV(dbPath, rooms);
+            return true;
+        }
       
-      public Boolean DeleteRoom(String identifier)
-      {
-         throw new NotImplementedException();
-      }
-      
-      public System.Collections.ArrayList GetAllRooms()
-      {
-         throw new NotImplementedException();
-      }
+        public List<Room> GetAllRooms()
+        {
+            return serializer.FromCSV(dbPath);
+        }
    
    }
 }
