@@ -82,8 +82,14 @@ namespace ZdravoCorp.View
         private void Create_Click(object sender, RoutedEventArgs e)
         {
             Controller.RoomController controller =  new Controller.RoomController();
-            controller.CreateRoom(new Model.Room(identifier, size, new Model.RoomType(roomType), new System.Collections.ArrayList()));
-            this.Close();
+            if(!controller.CreateRoom(new Model.Room(identifier, size, new Model.RoomType(roomType), new System.Collections.ArrayList())))
+            {
+                MessageBox.Show("Nije uspesno dodat element", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                this.Close();
+            }
         }
     }
 }

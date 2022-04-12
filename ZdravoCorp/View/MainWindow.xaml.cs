@@ -72,6 +72,11 @@ namespace ZdravoCorp
 
         private void Izmeni_Click(object sender, RoutedEventArgs e)
         {
+            if(UpravnikTable.SelectedIndex == -1)
+            {
+                return;
+            }
+
             ChangeRoom change = new ChangeRoom(Rooms.ElementAt(UpravnikTable.SelectedIndex));
             change.ShowDialog();
             Rooms = new ObservableCollection<Room>();
@@ -86,7 +91,15 @@ namespace ZdravoCorp
 
         private void Obrisi_Click(object sender, RoutedEventArgs e)
         {
-            roomController.DeleteRoom(Rooms.ElementAt(UpravnikTable.SelectedIndex).Identificator);
+            if (UpravnikTable.SelectedIndex == -1)
+            {
+                return;
+            }
+            if (!roomController.DeleteRoom(Rooms.ElementAt(UpravnikTable.SelectedIndex).Identificator))
+            {
+                MessageBox.Show("Element ne postoji u bazi podataka", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             Rooms = new ObservableCollection<Room>();
             List<Room> rooms = roomController.GetAllRooms();
             foreach (Room room in rooms)
