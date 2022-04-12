@@ -1,48 +1,41 @@
-﻿/***********************************************************************
- * Module:  DoctorService.cs
- * Author:  10
- * Purpose: Definition of the Class Service.DoctorService
+/***********************************************************************
+ * Module:  RoomController.cs
+ * Author:  halid
+ * Purpose: Definition of the Class Controller.RoomController
  ***********************************************************************/
 
 using System;
-using Repository;
-using Model;
 
 namespace Service
 {
-    public class DoctorService
-    {
-        DoctorRepository doctorRepository;
-
-        public DoctorService()
-        {
-            doctorRepository = new DoctorRepository();  
-        }
-        public Boolean CreateDoctor(Doctor newDoctor)
-        {
-            return doctorRepository.CreateDoctor(newDoctor);   
-        }
-
-        public Boolean UpdateDoctor(Doctor updatedDoctor)
-        {
-            return doctorRepository.UpdateDoctor(updatedDoctor);
-        }
-
-        public Boolean DeleteDoctor(Doctor doctor)
-        {
-            return doctorRepository.DeleteDoctor(doctor);
-        }
-
-        public Doctor ReadDoctor(Doctor doctor)
-        { 
-            return doctorRepository.ReadDoctor(doctor); 
-        }
-
-        public Array GetAllDoctors()
-        {
-            return doctorRepository.GetAllDoctors();
-        }
-
-
-    }
+   public class DoctorService
+   {
+      public Boolean CreateDoctor(Model.Doctor newDoctor)
+      {
+         throw new NotImplementedException();
+      }
+      
+      public Boolean UpdateDoctor(Model.Doctor updatedRoom)
+      {
+         throw new NotImplementedException();
+      }
+      
+      public Boolean DeleteDoctor(Model.Doctor doctor)
+      {
+         throw new NotImplementedException();
+      }
+      
+      public Model.Doctor ReadDoctor(Model.Doctor doctor)
+      {
+         throw new NotImplementedException();
+      }
+      
+      public Array GetAllDoctors()
+      {
+         throw new NotImplementedException();
+      }
+      
+      public Repository.DoctorRepository doctorRepository;
+   
+   }
 }

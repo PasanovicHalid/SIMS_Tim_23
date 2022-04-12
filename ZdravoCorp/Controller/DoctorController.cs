@@ -1,50 +1,41 @@
-﻿/***********************************************************************
- * Module:  DoctorController.cs
- * Author:  10
- * Purpose: Definition of the Class Controller.DoctorController
+/***********************************************************************
+ * Module:  RoomController.cs
+ * Author:  halid
+ * Purpose: Definition of the Class Controller.RoomController
  ***********************************************************************/
 
 using System;
-using Service;
-using Repository;
-using Model;
 
 namespace Controller
 {
-    public class DoctorController
-    {
-        public DoctorService doctorService;
-
-
-        public Boolean CreateDoctor(Doctor newDoctor)
-        {
-            return doctorService.CreateDoctor(newDoctor); 
-        }
-
-        public Boolean UpdateDoctor(Doctor updatedRoom)
-        {
-            return doctorService.UpdateDoctor(updatedRoom);
-        }
-
-        public Boolean DeleteDoctor(Doctor doctor)
-        {
-            return doctorService.DeleteDoctor(doctor);  
-        }
-
-        public Doctor ReadDoctor(Doctor doctor)
-        {
-            return doctorService.ReadDoctor(doctor);
-        }
-
-        public Array GetAllDoctors()
-        {
-            return doctorService.GetAllDoctors();
-        }
-
-
-        public DoctorController(DoctorService doctorService)
-        {
-            this.doctorService = doctorService;
-        }
-    }
+   public class DoctorController
+   {
+      public Boolean CreateDoctor(Model.Doctor newDoctor)
+      {
+         throw new NotImplementedException();
+      }
+      
+      public Boolean UpdateDoctor(Model.Doctor updatedRoom)
+      {
+         throw new NotImplementedException();
+      }
+      
+      public Boolean DeleteDoctor(Model.Doctor doctor)
+      {
+         throw new NotImplementedException();
+      }
+      
+      public Model.Doctor ReadDoctor(Model.Doctor doctor)
+      {
+         throw new NotImplementedException();
+      }
+      
+      public Array GetAllDoctors()
+      {
+         throw new NotImplementedException();
+      }
+      
+      public Service.DoctorService doctorService;
+   
+   }
 }
