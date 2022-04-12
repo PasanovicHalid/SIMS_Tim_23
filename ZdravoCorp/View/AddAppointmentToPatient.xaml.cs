@@ -85,7 +85,7 @@ namespace ZdravoCorp.View
             //Random rand = new Random();
             //int i = rand.Next(123456);
             string s = new string("123456");
-            if (!controller.CreateAppointment(new Model.Appointment(time, time, s, s + "1", s + "2", s + "3")))
+            if (!controller.CreateAppointment(new Model.Appointment(dateTime.Text, dateTime.Text, s, s + "1", s + "2", s + "3")))
             {
                 MessageBox.Show("Nije uspesno dodat element", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
