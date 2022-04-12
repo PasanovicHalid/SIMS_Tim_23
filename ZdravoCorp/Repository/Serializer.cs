@@ -38,6 +38,17 @@ namespace Repository
 
             return objects;
         }
-   
-   }
+
+        public void ToCSVAppend(string fileName, List<T> objects)
+        {
+            using StreamWriter streamWriter = new StreamWriter(fileName, true);
+
+            foreach (Serializable obj in objects)
+            {
+                string line = string.Join(dELIMITER, obj.ToCSV());
+                streamWriter.WriteLine(line);
+            }
+        }
+
+    }
 }

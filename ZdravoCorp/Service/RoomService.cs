@@ -4,7 +4,9 @@
  * Purpose: Definition of the Class Controller.RoomController
  ***********************************************************************/
 
+using Model;
 using System;
+using System.Collections.Generic;
 
 namespace Service
 {
@@ -19,7 +21,7 @@ namespace Service
 
         public Boolean CreateRoom(Model.Room newRoom)
         {
-            throw new NotImplementedException();
+            return roomRepository.CreateRoom(newRoom);
         }
       
         public Model.Room ReadRoom(String identifier)
@@ -29,17 +31,17 @@ namespace Service
       
         public Boolean UpdateRoom(Model.Room updatedRoom)
         {
-            throw new NotImplementedException();
+            return roomRepository.UpdateRoom(updatedRoom);
         }
       
         public Boolean DeleteRoom(String identifier)
         {
-            throw new NotImplementedException();
+            return roomRepository.DeleteRoom(identifier);
         }
       
-        public System.Collections.ArrayList GetAllRooms()
+        public List<Room> GetAllRooms()
         {
-            throw new NotImplementedException();
+           return roomRepository.GetAllRooms();
         }
       
    }

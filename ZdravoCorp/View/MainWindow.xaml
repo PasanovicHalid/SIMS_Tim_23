@@ -10,10 +10,18 @@
         <TabControl>
             <TabItem Header="Upravnik">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,25,0,0"/>
-                    <Button Content="Dodaj" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
-                    <Button Content="Obrisi" HorizontalAlignment="Left" Margin="55,0,0,0" VerticalAlignment="Top"/>
-                    <Button Content="Izmeni" HorizontalAlignment="Left" Margin="100,0,0,0" VerticalAlignment="Top"/>
+                    <DataGrid x:Name="UpravnikTable" ItemsSource="{Binding}" Margin="0,25,0,0" 
+                              AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Identificator" Binding="{Binding Identificator}"/>
+                            <DataGridTextColumn Header="Size" Binding="{Binding Size}" />
+                            <DataGridTextColumn Header="Room Type" Binding="{Binding Type}"/>
+                            <DataGridTextColumn Header="Equipment" Binding="{Binding Equipments}" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button Content="Obrisi" HorizontalAlignment="Left" Margin="55,0,0,0" VerticalAlignment="Top" Click="Obrisi_Click"/>
+                    <Button Content="Izmeni" HorizontalAlignment="Left" Margin="100,0,0,0" VerticalAlignment="Top" Click="Izmeni_Click"/>
+                    <Button Content="Dodaj" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Click="Dodaj_Click"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Lekar">
