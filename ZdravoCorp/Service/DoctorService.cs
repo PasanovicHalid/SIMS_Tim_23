@@ -1,50 +1,85 @@
 /***********************************************************************
- * Module:  DoctorService.cs
- * Author:  10
- * Purpose: Definition of the Class Service.DoctorService
+ * Module:  RoomController.cs
+ * Author:  halid
+ * Purpose: Definition of the Class Controller.RoomController
  ***********************************************************************/
 
-using System;
-
-using Repository;
 using Model;
+using Repository;
+using System;
+using System.Collections.Generic;
 
 namespace Service
 {
     public class DoctorService
     {
-        DoctorRepository doctorRepository;
+        private static DoctorService instance = null;
 
-        public DoctorService()
-        {
-            doctorRepository = new DoctorRepository();
-        }
         public Boolean CreateDoctor(Doctor newDoctor)
         {
-            return doctorRepository.CreateDoctor(newDoctor);
+            throw new NotImplementedException();
         }
 
-        public Boolean UpdateDoctor(Doctor updatedDoctor)
+        public Boolean UpdateDoctor(Doctor updatedRoom)
         {
-            return doctorRepository.UpdateDoctor(updatedDoctor);
+            throw new NotImplementedException();
         }
 
         public Boolean DeleteDoctor(Doctor doctor)
         {
-            return doctorRepository.DeleteDoctor(doctor);
+            throw new NotImplementedException();
         }
 
         public Doctor ReadDoctor(Doctor doctor)
         {
-            return doctorRepository.ReadDoctor(doctor);
+            throw new NotImplementedException();
         }
 
         public Array GetAllDoctors()
         {
-            return doctorRepository.GetAllDoctors();
+            throw new NotImplementedException();
         }
 
+        public Boolean CreateDoctorType(DoctorType newDoctorType)
+        {
+            throw new NotImplementedException();
+        }
 
+        public Boolean UpdateDoctorType(DoctorType doctorType)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Boolean DeleteDoctorType(DoctorType doctorType)
+        {
+            throw new NotImplementedException();
+        }
+
+        public DoctorType ReadDoctorType(DoctorType doctorType)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<DoctorType> GetAllDoctorType()
+        {
+            throw new NotImplementedException();
+        }
+
+        public DoctorService()
+        {
+           
+        }
+
+        public static DoctorService Instance
+        {
+            get 
+            {
+                if (instance == null)
+                {
+                    instance = new DoctorService();
+                }
+                return instance ;
+            }
+        }
     }
 }
-

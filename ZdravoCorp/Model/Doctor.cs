@@ -1,32 +1,29 @@
 /***********************************************************************
  * Module:  Doctor.cs
- * Author:  10
+ * Author:  halid
  * Purpose: Definition of the Class Model.Doctor
  ***********************************************************************/
 
+using Repository;
 using System;
 using System.Collections.Generic;
-using Model;
 
 namespace Model
 {
-    public class Doctor : Employee, Repository.Serializable
+    public class Doctor : Employee, Serializable
     {
-        private new String id { get; set; }
-        private DoctorType type { get; set; }
-
-        public System.Collections.Generic.List<Appointment> appointment;
+        private List<Appointment> appointment;
 
         /// <summary>
         /// Property for collection of Appointment
         /// </summary>
         /// <pdGenerated>Default opposite class collection property</pdGenerated>
-        public System.Collections.Generic.List<Appointment> Appointment
+        public List<Appointment> Appointment
         {
             get
             {
                 if (appointment == null)
-                    appointment = new System.Collections.Generic.List<Appointment>();
+                    appointment = new List<Appointment>();
                 return appointment;
             }
             set
@@ -49,9 +46,12 @@ namespace Model
             if (newAppointment == null)
                 return;
             if (this.appointment == null)
-                this.appointment = new System.Collections.Generic.List<Appointment>();
+                this.appointment = new List<Appointment>();
             if (!this.appointment.Contains(newAppointment))
+            {
                 this.appointment.Add(newAppointment);
+                newAppointment.AddDoctor(this);
+            }
         }
 
         /// <summary>
@@ -64,7 +64,10 @@ namespace Model
                 return;
             if (this.appointment != null)
                 if (this.appointment.Contains(oldAppointment))
+                {
                     this.appointment.Remove(oldAppointment);
+                    oldAppointment.RemoveDoctor(this);
+                }
         }
 
         /// <summary>
@@ -74,7 +77,37 @@ namespace Model
         public void RemoveAllAppointment()
         {
             if (appointment != null)
+            {
+                System.Collections.ArrayList tmpAppointment = new System.Collections.ArrayList();
+                foreach (Appointment oldAppointment in appointment)
+                    tmpAppointment.Add(oldAppointment);
                 appointment.Clear();
+                foreach (Appointment oldAppointment in tmpAppointment)
+                    oldAppointment.RemoveDoctor(this);
+                tmpAppointment.Clear();
+            }
+        }
+        private DoctorType doctorType;
+
+        /// <summary>
+        /// Property for DoctorType
+        /// </summary>
+        /// <pdGenerated>Default opposite class property</pdGenerated>
+        public DoctorType DoctorType
+        {
+            get
+            {
+                return doctorType;
+            }
+            set
+            {
+                this.doctorType = value;
+            }
+        }
+
+        public List<String> ToCSV()
+        {
+            throw new NotImplementedException();
         }
 
         public void FromCSV(string[] values)
@@ -82,18 +115,5 @@ namespace Model
             throw new NotImplementedException();
         }
 
-        public string[] ToCSV()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Doctor(string id, DoctorType type, List<Appointment> appointment)
-        {
-            this.id = id;
-            this.type = type;
-            Appointment = appointment;
-        }
-
-        public Doctor() { }
     }
 }

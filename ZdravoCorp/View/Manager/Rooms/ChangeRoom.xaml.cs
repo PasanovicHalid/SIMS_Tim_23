@@ -30,9 +30,10 @@ namespace ZdravoCorp.View
             this.DataContext = this;
             roomController = new RoomController();
             this.room = room;
-            id.Text = room.Identificator;
-            sz.Text = room.Size.ToString();
-            tp.Text = room.Type;
+            RoomId.Text = room.Identifier.ToString();
+            RoomIdentifier.Text = room.DesignationCode;
+            RoomSize.Text = room.SurfaceArea.ToString();
+            RoomType.Text = room.RoomType.Name.ToString();
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -45,9 +46,12 @@ namespace ZdravoCorp.View
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Edit_Click(object sender, RoutedEventArgs e)
         {
-            if (!roomController.UpdateRoom(new Room(id.Text, float.Parse(sz.Text), new RoomType(tp.Text), room.equipmentList), room.Identificator))
+            room.DesignationCode = RoomIdentifier.Text;
+            room.SurfaceArea = float.Parse(RoomSize.Text);
+            room.RoomType.Name = RoomType.Text;
+            if (!roomController.UpdateRoom(room))
             {
                 MessageBox.Show("Nije uspesno izmenjen element", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
             }

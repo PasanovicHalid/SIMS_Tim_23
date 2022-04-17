@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -20,6 +21,7 @@ namespace ZdravoCorp.View
     /// </summary>
     public partial class AddRoom : Window, INotifyPropertyChanged
     {
+        private int id;
         private String identifier;
         private int size;
         private String roomType;
@@ -31,6 +33,19 @@ namespace ZdravoCorp.View
             if (PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
+
+        public int Id
+        {
+            get { return id; }
+            set
+            {
+                if (value != id)
+                {
+                    id = value;
+                    OnPropertyChanged("Id");
+                }
             }
         }
 
@@ -82,7 +97,7 @@ namespace ZdravoCorp.View
         private void Create_Click(object sender, RoutedEventArgs e)
         {
             Controller.RoomController controller =  new Controller.RoomController();
-            if(!controller.CreateRoom(new Model.Room(identifier, size, new Model.RoomType(roomType), new System.Collections.ArrayList())))
+            if(!controller.CreateRoom(new Room(id ,identifier, size, new RoomType(roomType), new List<Appointment>(), new List<Equipment>(), new List<Medication>())))
             {
                 MessageBox.Show("Nije uspesno dodat element", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
             }

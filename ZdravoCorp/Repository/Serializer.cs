@@ -9,10 +9,10 @@ using System.IO;
 
 namespace Repository
 {
-   public class Serializer<T> where T:Serializable, new()
-   {
+    public class Serializer<T> where T : Serializable, new()
+    {
         private char dELIMITER = '|';
-      
+
         public void ToCSV(string fileName, List<T> objects)
         {
             using StreamWriter streamWriter = new StreamWriter(fileName);
@@ -23,7 +23,7 @@ namespace Repository
                 streamWriter.WriteLine(line);
             }
         }
-      
+
         public List<T> FromCSV(string filename)
         {
             List<T> objects = new List<T>();

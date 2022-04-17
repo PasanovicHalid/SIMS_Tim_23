@@ -4,36 +4,35 @@
  * Purpose: Definition of the Class Model.RoomType
  ***********************************************************************/
 
+using Repository;
 using System;
+using System.Collections.Generic;
 
 namespace Model
 {
-   public class RoomType : Repository.Serializable
-   {
-        public String name;
+    public class RoomType : Serializable
+    {
+        private String name;
 
         public RoomType()
         {
-            name = "";
         }
 
         public RoomType(string name)
         {
-            this.name = name;
+            this.Name = name;
         }
+
+        public string Name { get => name; set => name = value; }
 
         public void FromCSV(string[] values)
         {
-            name = values[0];
+            Name = values[0];
         }
 
-        public string[] ToCSV()
+        public List<String> ToCSV()
         {
-            string[] csvValue =
-            {
-                name
-            };
-            return csvValue;
+            return new List<String>() { Name };
         }
     }
 }

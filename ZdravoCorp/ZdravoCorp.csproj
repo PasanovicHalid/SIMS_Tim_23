@@ -7,4 +7,22 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Resources\Medicine.jpg" />
+    <None Remove="Resources\rooms.jpg" />
+    <None Remove="Resources\survey.jpg" />
+    <None Remove="View\Manager\rooms.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\medicine.jpg" />
+    <Resource Include="Resources\rooms.jpg" />
+    <Resource Include="Resources\survey.jpg" />
+    <Resource Include="View\Manager\rooms.jpg" />
+  </ItemGroup>
+
 </Project>

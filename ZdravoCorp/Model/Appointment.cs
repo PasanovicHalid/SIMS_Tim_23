@@ -4,232 +4,112 @@
  * Purpose: Definition of the Class Model.Appointment
  ***********************************************************************/
 
+using Repository;
 using System;
-using System.ComponentModel;
-using System.Linq;
-using System.Globalization;
+using System.Collections.Generic;
 
 namespace Model
 {
-    public class Appointment : Repository.Serializable, INotifyPropertyChanged
+    public class Appointment : Serializable
     {
-        protected DateTime startDate;
-        protected DateTime endDate;
-        protected String appointmentId;
-        protected String doctorID;
-        protected String patientID;
-        protected String roomID;
+        private DateTime startDate;
+        private DateTime endDate;
+        private String appointmentId;
+        private int type;
+        private int id;
 
-        public System.Collections.Generic.List<Equipment> equipment;
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        public Appointment(String start, String end, String id, String docid, String patientid, String roomID)
+        public Appointment(int id)
         {
-            this.startDate = DateTime.ParseExact(start, "dd.MM.yyyy. HH:mm:ss", CultureInfo.InvariantCulture);
-            this.endDate = DateTime.ParseExact(end, "dd.MM.yyyy. HH:mm:ss", CultureInfo.InvariantCulture);
-            this.appointmentId = id;
-            this.patientID = patientid;
-            this.doctorID = docid;
-            this.roomID = roomID;
+            this.id = id;
         }
 
-        protected virtual void OnPropertyChanged(string name)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
-            }
-        }
-
-
-        public String StartDate
-        {
-            get { return startDate.ToString(); }
-            set
-            {
-                if (startDate.ToString() != value)
-                {
-                    startDate = Convert.ToDateTime(value);
-                    OnPropertyChanged("StartDate");
-                }
-            }
-        }
-
-        public String EndDate
-        {
-            get { return endDate.ToString(); }
-            set
-            {
-                if (endDate.ToString() != value)
-                {
-                    endDate = Convert.ToDateTime(value);
-                    OnPropertyChanged("EndDate");
-                }
-            }
-        }
-
-
-        public String AppointmentID
-        {
-            get { return appointmentId; }
-            set
-            {
-                if (appointmentId != value)
-                {
-                    appointmentId = value;
-                    OnPropertyChanged("AppointmentID");
-                }
-            }
-        }
-
-        public String DoctorID
-        {
-            get { return doctorID; }
-            set
-            {
-                if (doctorID != value)
-                {
-                    doctorID = value;
-                    OnPropertyChanged("DoctorID");
-                }
-            }
-        }
-
-        public String RoomID
-        {
-            get { return roomID; }
-            set
-            {
-                if (roomID != value)
-                {
-                    roomID = value;
-                    OnPropertyChanged("RoomID");
-                }
-            }
-        }
-
-        public String PatientID
-        {
-            get { return patientID; }
-            set
-            {
-                if (patientID != value)
-                {
-                    patientID = value;
-                    OnPropertyChanged("patientID");
-                }
-            }
-        }
-
-
-        public Appointment()
-        {
-
-        }
-
-
+        private List<Doctor> doctor;
 
         /// <summary>
-        /// Property for collection of Equipment
+        /// Property for collection of Doctor
         /// </summary>
         /// <pdGenerated>Default opposite class collection property</pdGenerated>
-        public System.Collections.Generic.List<Equipment> Equipment
+        public List<Doctor> Doctor
         {
             get
             {
-                if (equipment == null)
-                    equipment = new System.Collections.Generic.List<Equipment>();
-                return equipment;
+                if (doctor == null)
+                    doctor = new List<Doctor>();
+                return doctor;
             }
             set
             {
-                RemoveAllEquipment();
+                RemoveAllDoctor();
                 if (value != null)
                 {
-                    foreach (Equipment oEquipment in value)
-                        AddEquipment(oEquipment);
+                    foreach (Doctor oDoctor in value)
+                        AddDoctor(oDoctor);
                 }
             }
         }
 
+        public string AppointmentId { get => appointmentId; set => appointmentId = value; }
+        public int Id { get => id; set => id = value; }
+
         /// <summary>
-        /// Add a new Equipment in the collection
+        /// Add a new Doctor in the collection
         /// </summary>
         /// <pdGenerated>Default Add</pdGenerated>
-        public void AddEquipment(Equipment newEquipment)
+        public void AddDoctor(Doctor newDoctor)
         {
-            if (newEquipment == null)
+            if (newDoctor == null)
                 return;
-            if (this.equipment == null)
-                this.equipment = new System.Collections.Generic.List<Equipment>();
-            if (!this.equipment.Contains(newEquipment))
-                this.equipment.Add(newEquipment);
+            if (this.doctor == null)
+                this.doctor = new List<Doctor>();
+            if (!this.doctor.Contains(newDoctor))
+            {
+                this.doctor.Add(newDoctor);
+                newDoctor.AddAppointment(this);
+            }
         }
 
         /// <summary>
-        /// Remove an existing Equipment from the collection
+        /// Remove an existing Doctor from the collection
         /// </summary>
         /// <pdGenerated>Default Remove</pdGenerated>
-        public void RemoveEquipment(Equipment oldEquipment)
+        public void RemoveDoctor(Doctor oldDoctor)
         {
-            if (oldEquipment == null)
+            if (oldDoctor == null)
                 return;
-            if (this.equipment != null)
-                if (this.equipment.Contains(oldEquipment))
-                    this.equipment.Remove(oldEquipment);
+            if (this.doctor != null)
+                if (this.doctor.Contains(oldDoctor))
+                {
+                    this.doctor.Remove(oldDoctor);
+                    oldDoctor.RemoveAppointment(this);
+                }
         }
 
         /// <summary>
-        /// Remove all instances of Equipment from the collection
+        /// Remove all instances of Doctor from the collection
         /// </summary>
         /// <pdGenerated>Default removeAll</pdGenerated>
-        public void RemoveAllEquipment()
+        public void RemoveAllDoctor()
         {
-            if (equipment != null)
-                equipment.Clear();
+            if (doctor != null)
+            {
+                System.Collections.ArrayList tmpDoctor = new System.Collections.ArrayList();
+                foreach (Doctor oldDoctor in doctor)
+                    tmpDoctor.Add(oldDoctor);
+                doctor.Clear();
+                foreach (Doctor oldDoctor in tmpDoctor)
+                    oldDoctor.RemoveAppointment(this);
+                tmpDoctor.Clear();
+            }
         }
 
-        public String getAppointmentID()
+        public List<String> ToCSV()
         {
-            return appointmentId;
+            throw new NotImplementedException();
         }
 
         public void FromCSV(string[] values)
         {
-            startDate = Convert.ToDateTime(values[0]);
-            endDate = Convert.ToDateTime(values[1]);
-            appointmentId = values[2];
-            doctorID = values[3];
-            patientID = values[4];
-            roomID = values[5];
-            //int count = int.Parse(values[5]);
-
-            //equipment = new System.Collections.Generic.List<Equipment>();   
-
-            /*for (int i = 0; i < count; i++)
-            {
-                equipment.Add(new Equipment(values[4 * (i + 1)], new EquipmentDescriptor(values[4 * (i + 1) + 1], values[4 * (i + 1) + 2]), values[4 * (i + 1) + 3]));
-            }*/
-        }
-
-        public string[] ToCSV()
-        {
-            string[] csvValue =
-            {
-                startDate.ToString(),
-                endDate.ToString(),
-                appointmentId,
-                doctorID,
-                patientID,
-                roomID
-                //equipment.Count.ToString()
-            };
-            /*foreach (Equipment eq in equipment)
-            {
-                csvValue = csvValue.Concat(eq.ToCSV()).ToArray();
-            }*/
-            return csvValue;
+            throw new NotImplementedException();
         }
     }
 }

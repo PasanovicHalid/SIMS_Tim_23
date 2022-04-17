@@ -5,6 +5,7 @@
  ***********************************************************************/
 
 using Model;
+using Service;
 using System;
 using System.Collections.Generic;
 
@@ -12,37 +13,54 @@ namespace Controller
 {
     public class RoomController
     {
-        public Service.RoomService roomService;
-
-        public RoomController()
+        public Boolean CreateRoom(Room newRoom)
         {
-            roomService = new Service.RoomService();
+            return RoomService.Instance.CreateRoom(newRoom);
         }
 
-        public Boolean CreateRoom(Model.Room newRoom)
+        public Room ReadRoom(String identifier)
         {
-            return roomService.CreateRoom(newRoom);
+            throw new NotImplementedException();
         }
-      
-        public Model.Room ReadRoom(String identifier)
+
+        public Boolean UpdateRoom(Room updatedRoom)
         {
-            return roomService.ReadRoom(identifier);
+            return RoomService.Instance.UpdateRoom(updatedRoom);
         }
-      
-        public Boolean UpdateRoom(Model.Room updatedRoom, string identificator)
+
+        public Boolean DeleteRoom(int identifier)
         {
-            return roomService.UpdateRoom(updatedRoom, identificator);
+            return RoomService.Instance.DeleteRoom(identifier);
         }
-      
-        public Boolean DeleteRoom(String identifier)
-        {
-            return roomService.DeleteRoom(identifier);
-        }
-      
+
         public List<Room> GetAllRooms()
         {
-            return roomService.GetAllRooms();
+            return RoomService.Instance.GetAllRooms();
         }
-      
+
+        public Boolean CreateRoomType(Model.RoomType newRoomType)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Boolean UpdateRoomType(Model.RoomType roomType)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Boolean DeleteRoomType(Model.RoomType roomType)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Model.RoomType ReadRoomType(Model.RoomType roomType)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<RoomType> GetAllRoomType()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

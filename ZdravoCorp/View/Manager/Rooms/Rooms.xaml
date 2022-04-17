@@ -1,0 +1,35 @@
+﻿<Window x:Class="ZdravoCorp.View.Manager.Rooms.Rooms"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ZdravoCorp.View.Manager.Rooms"
+        mc:Ignorable="d"
+        Title="Rooms" Height="750" Width="430">
+    <Grid>
+        <Grid.Resources>
+            <Style TargetType="Button" BasedOn="{StaticResource CircularButtons}"/>
+            <Style TargetType="Label" BasedOn="{StaticResource ManagerLabels}"/>
+            <Style TargetType="DataGrid" BasedOn="{StaticResource ManagerDataGrid}"/>
+            <Style TargetType="TextBox" BasedOn="{StaticResource ManagerTextBox}"/>
+        </Grid.Resources>
+        <Button Content="+" HorizontalAlignment="Left" Margin="10,52,0,0" VerticalAlignment="Top" Height="28" Width="28" Click="AddRoom_Click"/>
+        <Button Content="-" HorizontalAlignment="Left" Margin="50,52,0,0" VerticalAlignment="Top" Height="28" Width="28" Click="Delete_Click"/>
+        <Button Content="?" HorizontalAlignment="Left" Margin="90,52,0,0" VerticalAlignment="Top" Height="28" Width="28" Click="ChangeRoom_Click"/>
+        <Button Content="/" HorizontalAlignment="Left" Margin="130,52,0,0" VerticalAlignment="Top" Height="28" Width="28"/>
+        <DataGrid x:Name="RoomTable" ItemsSource="{Binding}" HorizontalAlignment="Center" Height="618" Margin="0,94,0,0" VerticalAlignment="Top" Width="430" 
+                  AutoGenerateColumns="False"
+                  SelectionMode="Single" 
+                  IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Identifier}"/>
+                <DataGridTextColumn Header="Designation Code" Binding="{Binding DesignationCode}" Width="*"/>
+                <DataGridTextColumn Header="Surface Area" Binding="{Binding SurfaceArea}" Width="*"/>
+                <DataGridTextColumn Header="Room Type" Binding="{Binding RoomTypeString}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="S" HorizontalAlignment="Left" Margin="357,51,0,0" VerticalAlignment="Top" Height="28" Width="28"/>
+        <TextBox HorizontalAlignment="Left" Margin="215,52,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="127" Height="27"/>
+
+    </Grid>
+</Window>

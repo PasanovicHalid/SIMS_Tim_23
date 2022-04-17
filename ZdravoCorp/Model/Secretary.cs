@@ -1,21 +1,22 @@
-/***********************************************************************
- * Module:  Secretary.cs
- * Author:  halid
- * Purpose: Definition of the Class Model.Secretary
- ***********************************************************************/
+// File:    Secretary.cs
+// Author:  halid
+// Created: Thursday, 14 April 2022 21:31:18
+// Purpose: Definition of Class Secretary
 
+using Repository;
 using System;
+using System.Collections.Generic;
 
 namespace Model
 {
-    public class Secretary : Employee, Repository.Serializable
+    public class Secretary : Employee, Serializable
     {
-        public void FromCSV(string[] values)
+        public List<String> ToCSV()
         {
             throw new NotImplementedException();
         }
 
-        public string[] ToCSV()
+        public void FromCSV(string[] values)
         {
             throw new NotImplementedException();
         }

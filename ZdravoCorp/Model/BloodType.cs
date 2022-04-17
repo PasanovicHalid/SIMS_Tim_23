@@ -8,15 +8,15 @@ using System;
 
 namespace Model
 {
-   public enum BloodType
-   {
-      APlus,
-      A,
-      BPlus,
-      B,
-      AbPlus,
-      Ab,
-      OPlus,
-      O
-   }
+    public enum BloodType
+    {
+        aPlus,
+        aMinus,
+        bPlus,
+        bMinus,
+        aBPlus,
+        aBMinus,
+        oPlus,
+        oMinus
+    }
 }

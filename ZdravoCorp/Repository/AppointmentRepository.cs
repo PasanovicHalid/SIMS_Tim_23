@@ -1,83 +1,65 @@
 // File:    AppointmentRepository.cs
-// Author:  10
+// Author:  Dusko
 // Created: Sunday, 10 April 2022 22:43:17
 // Purpose: Definition of Class AppointmentRepository
 
-using System;
 using Model;
+using System;
 using System.Collections.Generic;
-
 
 namespace Repository
 {
     public class AppointmentRepository
     {
         private String dbPath;
-        private Serializer<Appointment> serializer;
 
-        public AppointmentRepository()
-        {
-            dbPath = "Resourses\\appointmentCSV.csv";
-            serializer = new Serializer<Appointment>();
-        }
-
+        private static AppointmentRepository instance = null;
 
         public Boolean CreateAppointment(Appointment newAppointment)
         {
-            List<Appointment> temp = new List<Appointment>();
-            temp.Add(newAppointment);
-            serializer.ToCSVAppend(dbPath, temp);
-            return true;
+            throw new NotImplementedException();
         }
 
-        public Appointment ReadAppointment(String appointmentID)
+        public Appointment ReadAppointment(int id)
         {
-            List<Appointment> appointments = serializer.FromCSV(dbPath);
-            foreach (Appointment appointment in appointments)
-            {
-                if (appointmentID.Equals(appointment.getAppointmentID())) ;
-                {
-                    return appointment;
-                }
-            }
-            return null;
+            throw new NotImplementedException();
+        }
+
+        public List<Appointment> GetAppointmentsById(List<int> id)
+        {
+            throw new NotImplementedException();
         }
 
         public Boolean UpdateAppointment(Appointment appointment)
         {
-            List<Appointment> appointments = serializer.FromCSV(dbPath);
-            foreach (Appointment temp in appointments)
-            {
-                if (appointment.getAppointmentID().Equals(temp.getAppointmentID())) ;
-                {
-                    appointments.Remove(temp);
-                    break;
-                }
-            }
-            appointments.Add(appointment);
-            serializer.ToCSV(dbPath, appointments);
-            return true;
+            throw new NotImplementedException();
         }
 
-        public Boolean DeleteAppointment(String appointmentID)
+        public Boolean DeleteAppointment(Appointment appointment)
         {
-            List<Appointment> appointments = serializer.FromCSV(dbPath);
-            foreach (Appointment appointment in appointments)
-            {
-                if (appointmentID.Equals(appointment.getAppointmentID()))
-                {
-                    appointments.Remove(appointment);
-                    break;
-                }
-            }
-            serializer.ToCSV(dbPath, appointments);
-            return true;
+            throw new NotImplementedException();
         }
 
-        public List<Appointment> GetAllAppointments()
+        public Array GetAllAppointments()
         {
-            return serializer.FromCSV(dbPath);
+            throw new NotImplementedException();
         }
 
+        public AppointmentRepository()
+        {
+            
+        }
+
+        public static AppointmentRepository Instance
+        {
+            get 
+            {
+                if (instance == null)
+                {
+                    instance = new AppointmentRepository();
+                }
+                return instance ;
+            }
+        }
     }
 }

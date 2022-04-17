@@ -5,44 +5,81 @@
  ***********************************************************************/
 
 using Model;
+using Repository;
 using System;
 using System.Collections.Generic;
 
 namespace Service
 {
-   public class RoomService
-   {
-        public Repository.RoomRepository roomRepository;
+    public class RoomService
+    {
+        private static RoomService instance = null;
+
+        public Boolean CreateRoom(Room newRoom)
+        {
+            return RoomRepository.Instance.CreateRoom(newRoom);
+        }
+
+        public Room ReadRoom(String identifier)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Boolean UpdateRoom(Room updatedRoom)
+        {
+            return RoomRepository.Instance.UpdateRoom(updatedRoom);
+        }
+
+        public Boolean DeleteRoom(int identifier)
+        {
+            return RoomRepository.Instance.DeleteRoom(identifier);
+        }
+
+        public List<Room> GetAllRooms()
+        {
+            return RoomRepository.Instance.GetAllRooms();
+        }
+
+        public Boolean CreateRoomType(Model.RoomType newRoomType)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Boolean UpdateRoomType(Model.RoomType roomType)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Boolean DeleteRoomType(Model.RoomType roomType)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Model.RoomType ReadRoomType(Model.RoomType roomType)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<RoomType> GetAllRoomType()
+        {
+            throw new NotImplementedException();
+        }
 
         public RoomService()
         {
-            roomRepository = new Repository.RoomRepository();
+            
         }
 
-        public Boolean CreateRoom(Model.Room newRoom)
+        public static RoomService Instance
         {
-            return roomRepository.CreateRoom(newRoom);
+            get 
+            {
+                if (instance == null)
+                {
+                    instance = new RoomService();
+                }
+                return instance ;
+            }
         }
-      
-        public Model.Room ReadRoom(String identifier)
-        {
-            return roomRepository.ReadRoom(identifier);
-        }
-      
-        public Boolean UpdateRoom(Model.Room updatedRoom, string identificator)
-        {
-            return roomRepository.UpdateRoom(updatedRoom, identificator);
-        }
-      
-        public Boolean DeleteRoom(String identifier)
-        {
-            return roomRepository.DeleteRoom(identifier);
-        }
-      
-        public List<Room> GetAllRooms()
-        {
-           return roomRepository.GetAllRooms();
-        }
-      
-   }
+    }
 }

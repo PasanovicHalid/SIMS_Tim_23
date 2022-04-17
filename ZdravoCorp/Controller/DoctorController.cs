@@ -1,52 +1,65 @@
 /***********************************************************************
- * Module:  DoctorController.cs
- * Author:  10
- * Purpose: Definition of the Class Controller.DoctorController
+ * Module:  RoomController.cs
+ * Author:  halid
+ * Purpose: Definition of the Class Controller.RoomController
  ***********************************************************************/
 
-using System;
-
-using Service;
-using Repository;
 using Model;
+using System;
+using System.Collections.Generic;
 
 namespace Controller
 {
     public class DoctorController
     {
-        public DoctorService doctorService;
-
-
-        public Boolean CreateDoctor(Doctor newDoctor)
+        public Boolean CreateDoctor(Model.Doctor newDoctor)
         {
-            return doctorService.CreateDoctor(newDoctor);
+            throw new NotImplementedException();
         }
 
-        public Boolean UpdateDoctor(Doctor updatedRoom)
+        public Boolean UpdateDoctor(Model.Doctor updatedRoom)
         {
-            return doctorService.UpdateDoctor(updatedRoom);
+            throw new NotImplementedException();
         }
 
-        public Boolean DeleteDoctor(Doctor doctor)
+        public Boolean DeleteDoctor(Model.Doctor doctor)
         {
-            return doctorService.DeleteDoctor(doctor);
+            throw new NotImplementedException();
         }
 
-        public Doctor ReadDoctor(Doctor doctor)
+        public Model.Doctor ReadDoctor(Model.Doctor doctor)
         {
-            return doctorService.ReadDoctor(doctor);
+            throw new NotImplementedException();
         }
 
         public Array GetAllDoctors()
         {
-            return doctorService.GetAllDoctors();
+            throw new NotImplementedException();
         }
 
-
-        public DoctorController(DoctorService doctorService)
+        public Boolean CreateDoctorType(DoctorType newDoctorType)
         {
-            this.doctorService = doctorService;
+            throw new NotImplementedException();
+        }
+
+        public Boolean UpdateDoctorType(DoctorType doctorType)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Boolean DeleteDoctorType(DoctorType doctorType)
+        {
+            throw new NotImplementedException();
+        }
+
+        public DoctorType ReadDoctorType(DoctorType doctorType)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<DoctorType> GetAllDoctorType()
+        {
+            throw new NotImplementedException();
         }
     }
 }
-

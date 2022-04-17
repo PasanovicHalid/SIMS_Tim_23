@@ -5,51 +5,75 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ZdravoCorp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="415" Width="800">
     <Grid>
-        <TabControl>
-            <TabItem Header="Upravnik">
-                <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="UpravnikTable" ItemsSource="{Binding}" Margin="0,25,0,0" 
-                              AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Identificator" Binding="{Binding Identificator}"/>
-                            <DataGridTextColumn Header="Size" Binding="{Binding Size}" />
-                            <DataGridTextColumn Header="Room Type" Binding="{Binding Type}"/>
-                            <DataGridTextColumn Header="Equipment" Binding="{Binding Equipments}" Width="*"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                    <Button Content="Obrisi" HorizontalAlignment="Left" Margin="55,0,0,0" VerticalAlignment="Top" Click="Obrisi_Click"/>
-                    <Button Content="Izmeni" HorizontalAlignment="Left" Margin="100,0,0,0" VerticalAlignment="Top" Click="Izmeni_Click"/>
-                    <Button Content="Dodaj" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Click="Dodaj_Click"/>
-                </Grid>
-            </TabItem>
-            <TabItem Header="Lekar">
-                <Grid Background="#FFE5E5E5">
-                    <Button x:Name="Probaj_lekar" HorizontalAlignment="Left" Margin="14,54,0,0" VerticalAlignment="Top" Click="Probaj_lekar_Click" Grid.Column="3" Content="Add Appointment"/>
-                    <Button x:Name="ispisi_appointmente" HorizontalAlignment="Left" Margin="14,19,0,0" VerticalAlignment="Top" Grid.Column="3" Click="ispisi_appointmente_Click" Content="Print All Appointments"/>
-                    <Button x:Name="Read_Button" Grid.Column="3" HorizontalAlignment="Left" Margin="14,95,0,0" VerticalAlignment="Top" Click="Read_Button_Click" Content="Read Specific Appointment"/>
-                </Grid>
-            </TabItem>
-            <TabItem Header="Sekretar">
-                <Grid Background="#FFE5E5E5"/>
-            </TabItem>
-            <TabItem Header="Pacient">
-                <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="PatientTable" ItemsSource="{Binding}" Margin="0,25,0,0" 
-                              AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Doctor" Binding="{Binding DoctorID}"/>
-                            <DataGridTextColumn Header="Start" Binding="{Binding StartDate}" />
-                            <DataGridTextColumn Header="End" Binding="{Binding EndTime}"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                    <Button Content="Delete" HorizontalAlignment="Left" Margin="55,0,0,0" VerticalAlignment="Top" Click="DeletePatientsAppointment_Click"/>
-                    <Button Content="Edit" HorizontalAlignment="Left" Margin="100,0,0,0" VerticalAlignment="Top" Click="EditPatientsAppointment_Click"/>
-                    <Button Content="Add" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Click="AddAppointmentToPatient_Click"/>
-                </Grid>
-            </TabItem>
-        </TabControl>
+        <Label Content="Login" HorizontalAlignment="Center" Margin="0,30,0,0" VerticalAlignment="Top" FontSize="24" FontFamily="Bahnschrift SemiBold" Foreground="#db4845"/>
+        <TextBox HorizontalAlignment="Left" Height="27" Margin="272,114,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="268" Visibility="Visible" BorderThickness="0,0,0,1" FontFamily="Bahnschrift SemiBold" FontSize="17" >
+            <TextBox.Background>
+                <SolidColorBrush Color="#db4845" Opacity="0"/>
+            </TextBox.Background>
+            <TextBox.Foreground>
+                <SolidColorBrush Color="#db4845" Opacity="1"/>
+            </TextBox.Foreground>
+        </TextBox>
+        <Label Content="Username:" HorizontalAlignment="Left" Margin="170,111,0,0" VerticalAlignment="Top" FontSize="17" FontFamily="Bahnschrift SemiBold" Foreground="#db4845"/>
+        <Label Content="Password:" HorizontalAlignment="Left" Margin="173,179,0,0" VerticalAlignment="Top" FontSize="17" FontFamily="Bahnschrift SemiBold" Foreground="#db4845"/>
+        <PasswordBox HorizontalAlignment="Left" Margin="272,183,0,0" VerticalAlignment="Top" Width="268" Height="26" BorderThickness="0,0,0,1" FontFamily="Bahnschrift SemiBold" Foreground="#db4845" FontSize="17">
+            <PasswordBox.Background>
+                <SolidColorBrush Color="White" Opacity="0"/>
+            </PasswordBox.Background>
+        </PasswordBox>
+        <Button Content="Login" HorizontalAlignment="Left" Margin="272,260,0,0" VerticalAlignment="Top" Width="268" Height="38" FontSize="16" FontFamily="Bahnschrift SemiBold" Foreground="#fd413c" BorderBrush="#fd413c" BorderThickness="3,3,3,3">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="9"/>
+                </Style>
+            </Button.Resources>
+            <Button.Background>
+                <SolidColorBrush Color="#FF0986E6" Opacity="0"/>
+            </Button.Background>
+        </Button>
+        <Button Content="Manager" HorizontalAlignment="Left" Margin="52,338,0,0" VerticalAlignment="Top" Width="158" Height="38" FontSize="16" FontFamily="Bahnschrift SemiBold" Foreground="#fd413c" BorderBrush="#fd413c" BorderThickness="3,3,3,3" Click="Manager_Window_Click">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="9"/>
+                </Style>
+            </Button.Resources>
+            <Button.Background>
+                <SolidColorBrush Color="#FF0986E6" Opacity="0"/>
+            </Button.Background>
+        </Button>
+        <Button Content="Secretary" HorizontalAlignment="Left" Margin="236,338,0,0" VerticalAlignment="Top" Width="158" Height="38" FontSize="16" FontFamily="Bahnschrift SemiBold" Foreground="#fd413c" BorderBrush="#fd413c" BorderThickness="3,3,3,3">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="9"/>
+                </Style>
+            </Button.Resources>
+            <Button.Background>
+                <SolidColorBrush Color="#FF0986E6" Opacity="0"/>
+            </Button.Background>
+        </Button>
+        <Button Content="Doctor" HorizontalAlignment="Left" Margin="420,338,0,0" VerticalAlignment="Top" Width="158" Height="38" FontSize="16" FontFamily="Bahnschrift SemiBold" Foreground="#fd413c" BorderBrush="#fd413c" BorderThickness="3,3,3,3">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="9"/>
+                </Style>
+            </Button.Resources>
+            <Button.Background>
+                <SolidColorBrush Color="#FF0986E6" Opacity="0"/>
+            </Button.Background>
+        </Button>
+        <Button Content="Patient" HorizontalAlignment="Left" Margin="602,338,0,0" VerticalAlignment="Top" Width="158" Height="38" FontSize="16" FontFamily="Bahnschrift SemiBold" Foreground="#fd413c" BorderBrush="#fd413c" BorderThickness="3,3,3,3">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="9"/>
+                </Style>
+            </Button.Resources>
+            <Button.Background>
+                <SolidColorBrush Color="#FF0986E6" Opacity="0"/>
+            </Button.Background>
+        </Button>
+
 
     </Grid>
 </Window>

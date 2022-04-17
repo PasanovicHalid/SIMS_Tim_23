@@ -8,9 +8,9 @@ using System;
 
 namespace Model
 {
-   public enum Gender
-   {
-      Male,
-      Female
-   }
+    public enum Gender
+    {
+        Male,
+        Female
+    }
 }

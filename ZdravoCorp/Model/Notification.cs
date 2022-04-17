@@ -4,21 +4,54 @@
  * Purpose: Definition of the Class Model.Notification
  ***********************************************************************/
 
+using Repository;
 using System;
+using System.Collections.Generic;
 
 namespace Model
 {
-   public class Notification : Repository.Serializable
-   {
-      public DateTime dateCreated;
-      public String content;
+    public class Notification : Serializable
+    {
+        private DateTime dateCreated;
+        private String content;
+
+        private User user;
+
+        /// <summary>
+        /// Property for User
+        /// </summary>
+        /// <pdGenerated>Default opposite class property</pdGenerated>
+        public User User
+        {
+            get
+            {
+                return user;
+            }
+            set
+            {
+                if (this.user == null || !this.user.Equals(value))
+                {
+                    if (this.user != null)
+                    {
+                        User oldUser = this.user;
+                        this.user = null;
+                        oldUser.RemoveNotification(this);
+                    }
+                    if (value != null)
+                    {
+                        this.user = value;
+                        this.user.AddNotification(this);
+                    }
+                }
+            }
+        }
 
         public void FromCSV(string[] values)
         {
             throw new NotImplementedException();
         }
 
-        public string[] ToCSV()
+        public List<String> ToCSV()
         {
             throw new NotImplementedException();
         }

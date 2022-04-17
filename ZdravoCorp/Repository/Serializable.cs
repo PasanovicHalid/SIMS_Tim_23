@@ -4,14 +4,15 @@
 // Purpose: Definition of Interface Serializable
 
 using System;
+using System.Collections.Generic;
 
 namespace Repository
 {
-   public interface Serializable
-   {
-      string[] ToCSV();
-      
-      void FromCSV(string[] values);
-   
-   }
+    public interface Serializable
+    {
+        List<String> ToCSV();
+
+        void FromCSV(string[] values);
+
+    }
 }

@@ -4,69 +4,50 @@
  * Purpose: Definition of the Class Model.Equipment
  ***********************************************************************/
 
+using Repository;
 using System;
-using System.Linq;
+using System.Collections.Generic;
 
 namespace Model
 {
-   public class Equipment : Repository.Serializable
-   {
-        private String identifier;
-      
-        private EquipmentDescriptor description;
+    public class Equipment : Serializable
+    {
+        private int count;
 
-        public string locationIdentifier;
-        public Equipment()
-        {
-            identifier = "";
-            description = new EquipmentDescriptor();
-        }
-
-        public Equipment(string ident, EquipmentDescriptor desc, string local)
-        {
-            this.identifier = ident;
-            this.description = desc;
-            this.locationIdentifier = local;
-        }
-
-        public String Identifier
-        {
-            get { return identifier; }
-            set { identifier = value; }
-        }
+        private EquipmentType equipmentType;
 
         /// <summary>
-        /// Property for EquipmentDescriptor
+        /// Property for EquipmentType
         /// </summary>
         /// <pdGenerated>Default opposite class property</pdGenerated>
-        public EquipmentDescriptor Description
+        public EquipmentType EquipmentType
         {
             get
             {
-            return description;
+                return equipmentType;
             }
             set
             {
-            this.description = value;
+                this.equipmentType = value;
             }
         }
 
-        public string[] ToCSV()
+        public int Count { get => count; set => count = value; }
+
+        public Equipment(int identifier, int count)
         {
-            string[] csvValue =
-              {
-                identifier,
-                locationIdentifier
-            };
-            csvValue = csvValue.Concat(description.ToCSV()).ToArray();
-            return csvValue;
+            this.EquipmentType = new EquipmentType(identifier);
+            this.Count = count;
         }
 
         public void FromCSV(string[] values)
         {
-            identifier = values[0];
-            locationIdentifier = values[1];
-            description = new EquipmentDescriptor(values[2], values[3]);
+            throw new NotImplementedException();
+        }
+
+        public List<String> ToCSV()
+        {
+            throw new NotImplementedException();
         }
     }
 }

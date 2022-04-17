@@ -4,6 +4,13 @@
              xmlns:local="clr-namespace:ZdravoCorp"
              StartupUri="View/MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="View/Styles/Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="Grid">
+                <Setter Property="Background" Value="#121212"/>
+            </Style>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
