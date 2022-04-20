@@ -21,6 +21,10 @@ namespace Model
             this.id = id;
         }
 
+        public Appointment()
+        {
+        }
+
         public Appointment(DateTime startDate, DateTime endDate, int id, List<Doctor> doctor, Room room, Patient patient)
         {
             StartDate = startDate;
@@ -30,6 +34,8 @@ namespace Model
             this.room = room;
             this.patient = patient;
         }
+
+        
 
         private List<Doctor> doctor;
 
