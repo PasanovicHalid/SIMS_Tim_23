@@ -14,13 +14,21 @@ namespace Model
     {
         private DateTime startDate;
         private DateTime endDate;
-        private String appointmentId;
-        private int type;
         private int id;
 
         public Appointment(int id)
         {
             this.id = id;
+        }
+
+        public Appointment(DateTime startDate, DateTime endDate, int id, List<Doctor> doctor, Room room, Patient patient)
+        {
+            StartDate = startDate;
+            EndDate = endDate;
+            Id = id;
+            this.doctor = doctor;
+            this.room = room;
+            this.patient = patient;
         }
 
         private List<Doctor> doctor;
@@ -47,9 +55,6 @@ namespace Model
                 }
             }
         }
-
-        public string AppointmentId { get => appointmentId; set => appointmentId = value; }
-        public int Id { get => id; set => id = value; }
 
         /// <summary>
         /// Add a new Doctor in the collection
@@ -101,15 +106,94 @@ namespace Model
                 tmpDoctor.Clear();
             }
         }
+        private Room room;
+
+        /// <summary>
+        /// Property for Room
+        /// </summary>
+        /// <pdGenerated>Default opposite class property</pdGenerated>
+        public Room Room
+        {
+            get
+            {
+                return room;
+            }
+            set
+            {
+                if (this.room == null || !this.room.Equals(value))
+                {
+                    if (this.room != null)
+                    {
+                        Room oldRoom = this.room;
+                        this.room = null;
+                        oldRoom.RemoveAppointment(this);
+                    }
+                    if (value != null)
+                    {
+                        this.room = value;
+                        this.room.AddAppointment(this);
+                    }
+                }
+            }
+        }
+        private Patient patient;
+        public Patient Patient
+        {
+            get
+            {
+                return patient;
+            }
+            set
+            {
+                if (this.patient == null || !this.patient.Equals(value))
+                {
+                    if (this.patient != null)
+                    {
+                        Patient oldPatient = this.patient;
+                        this.patient = null;
+                    }
+                    if (value != null)
+                    {
+                        this.patient = value;
+                    }
+                }
+            }
+        }
+
+        public int Id { get => id; set => id = value; }
+        public DateTime StartDate { get => startDate; set => startDate = value; }
+        public DateTime EndDate { get => endDate; set => endDate = value; }
 
         public List<String> ToCSV()
         {
-            throw new NotImplementedException();
+            List<String> result = new List<String>();
+            result.Add(Id.ToString());
+            result.Add(StartDate.ToString());
+            result.Add(EndDate.ToString());
+            result.Add(Doctor.Count.ToString());
+            foreach (Doctor d in Doctor)
+            {
+                result.Add(d.Id.ToString());
+            }
+            result.Add(Room.Identifier.ToString());
+            result.Add(Patient.Id.ToString());
+            return result;
         }
 
         public void FromCSV(string[] values)
         {
-            throw new NotImplementedException();
+            int i = 0;
+            Id = int.Parse(values[i++]);
+            StartDate = DateTime.Parse(values[i++]);
+            EndDate = DateTime.Parse(values[i++]);
+            int count = int.Parse(values[i++]);
+            doctor = new List<Doctor>();
+            for (; i < i + count; i++)
+            {
+                doctor.Add(new Doctor(int.Parse(values[i++])));
+            }
+            Room = new Room(int.Parse(values[i++]));
+            Patient = new Patient(int.Parse(values[i++]));
         }
     }
 }

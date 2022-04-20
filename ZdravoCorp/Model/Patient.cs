@@ -14,6 +14,11 @@ namespace Model
     {
         private Boolean guest = false;
 
+        public Patient(int id)
+        {
+            this.id = id;
+        }
+
         private List<Appointment> appointment;
 
         /// <summary>

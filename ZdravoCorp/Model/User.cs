@@ -47,7 +47,7 @@ namespace Model
                 }
             }
         }
-
+        public int Id { get => id; set => id = value; }
         /// <summary>
         /// Add a new Notification in the collection
         /// </summary>

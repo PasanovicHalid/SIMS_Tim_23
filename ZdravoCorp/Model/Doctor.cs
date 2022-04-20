@@ -14,6 +14,10 @@ namespace Model
     {
         private List<Appointment> appointment;
 
+        public Doctor(int id)
+        {
+            this.id = id;
+        }
         /// <summary>
         /// Property for collection of Appointment
         /// </summary>
