@@ -6,6 +6,7 @@
 using Model;
 using Repository;
 using System;
+using System.Collections.Generic;
 
 namespace Service
 {
@@ -15,27 +16,27 @@ namespace Service
 
         public Boolean CreateAppointment(Appointment newAppointment)
         {
-            throw new NotImplementedException();
+            return AppointmentRepository.Instance.CreateAppointment(newAppointment);
         }
 
         public Appointment ReadAppointment(Appointment appointment)
         {
-            throw new NotImplementedException();
+            return AppointmentRepository.Instance.ReadAppointment(appointment.Id);
         }
 
         public Boolean UpdateAppointment(Appointment appointment)
         {
-            throw new NotImplementedException();
+            return AppointmentRepository.Instance.UpdateAppointment(appointment);
         }
 
         public Boolean DeleteAppointment(Appointment appointment)
         {
-            throw new NotImplementedException();
+            return AppointmentRepository.Instance.DeleteAppointment(appointment);
         }
 
-        public Array GetAllAppointments()
+        public List<Appointment> GetAllAppointments()
         {
-            throw new NotImplementedException();
+            return AppointmentRepository.Instance.GetAllAppointments();
         }
 
         public AppointmenService()
