@@ -26,14 +26,6 @@ namespace ZdravoCorp
             InitializeComponent();
         }
 
-        private void Manager_Window_Click(object sender, RoutedEventArgs e)
-        {
-            MainWindowManager window = new MainWindowManager();
-            this.Hide();
-            window.ShowDialog();
-            this.Show();
-        }
-
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
@@ -48,6 +40,13 @@ namespace ZdravoCorp
         private void Minimize_Click(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Minimized;
+        }
+
+        private void Manager_Click(object sender, RoutedEventArgs e)
+        {
+            Manager window = new Manager();
+            this.Close();
+            window.ShowDialog();
         }
     }
 }

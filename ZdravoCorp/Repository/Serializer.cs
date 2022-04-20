@@ -15,13 +15,14 @@ namespace Repository
 
         public void ToCSV(string fileName, List<T> objects)
         {
-            using StreamWriter streamWriter = new StreamWriter(fileName);
+            StreamWriter streamWriter = new StreamWriter(fileName);
 
             foreach (Serializable obj in objects)
             {
-                string line = string.Join(dELIMITER, obj.ToCSV());
+                string line = string.Join(dELIMITER.ToString(), obj.ToCSV());
                 streamWriter.WriteLine(line);
             }
+            streamWriter.Close();
         }
 
         public List<T> FromCSV(string filename)
@@ -41,13 +42,15 @@ namespace Repository
 
         public void ToCSVAppend(string fileName, List<T> objects)
         {
-            using StreamWriter streamWriter = new StreamWriter(fileName, true);
+            StreamWriter streamWriter = new StreamWriter(fileName, true);
 
             foreach (Serializable obj in objects)
             {
-                string line = string.Join(dELIMITER, obj.ToCSV());
+                string line = string.Join(dELIMITER.ToString(), obj.ToCSV());
                 streamWriter.WriteLine(line);
             }
+
+            streamWriter.Close();
         }
 
     }

@@ -15,7 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace ZdravoCorp.View
+namespace ZdravoCorp.View.Manager.Rooms
 {
     /// <summary>
     /// Interaction logic for ChangeRoom.xaml
@@ -24,6 +24,8 @@ namespace ZdravoCorp.View
     {
         private Room room;
         private RoomController roomController;
+
+        public event PropertyChangedEventHandler PropertyChanged;
         public ChangeRoom(Room room)
         {
             InitializeComponent();
@@ -35,8 +37,6 @@ namespace ZdravoCorp.View
             RoomSize.Text = room.SurfaceArea.ToString();
             RoomType.Text = room.RoomType.Name.ToString();
         }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
 
         protected virtual void OnPropertyChanged(string name)
         {

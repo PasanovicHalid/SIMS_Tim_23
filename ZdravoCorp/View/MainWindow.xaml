@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ZdravoCorp"
         mc:Ignorable="d"
+        Title="MainWindow" 
         Height="600" Width="900"
         WindowStyle="None"
         ResizeMode="NoResize"
@@ -13,12 +14,12 @@
     <Border Background="#222831"
             CornerRadius="10">
         <Grid>
-            
+
             <Grid.RowDefinitions>
-                <RowDefinition Height="30"/>
+                <RowDefinition Height="34"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            
+
             <TextBox Width="414"
                      VerticalContentAlignment="Center"
                      HorizontalAlignment="Center" Margin="0,190,0,332"
@@ -46,23 +47,58 @@
                     Height="41" 
                     Width="248"
                     Style="{StaticResource LoginButton}"/>
-            
+
             <StackPanel Orientation="Horizontal"
                         Background="Transparent">
-                
+
                 <Label Content="" 
                        MouseLeftButtonDown="Drag_MouseDown"
-                       Style="{StaticResource LoginLabels}" Width="835" Height="32"/>
-                
+                       Style="{StaticResource LoginLabels}" Width="831" Height="32"/>
+
                 <Button Content="-"
-                    Style="{StaticResource ExitButton}" 
-                    Click="Minimize_Click" Width="34" Height="36" />
-                
+                    Style="{StaticResource MinimiseButton}" 
+                    Click="Minimize_Click" Width="34" Height="34" />
                 <Button Content="×"
                     Style="{StaticResource ExitButton}" 
-                    Click="Exit_Click" Width="34" Height="36" />
-                
+                    Click="Exit_Click" Width="35" Height="34" />
+
             </StackPanel>
+
+            <Button Content="Manager" 
+                HorizontalAlignment="Left" 
+                Margin="78,506,0,0" 
+                Grid.Row="1" 
+                VerticalAlignment="Top" 
+                Height="41" 
+                Width="175"
+                Style="{StaticResource LoginButton}" Click="Manager_Click"/>
+
+            <Button Content="Patient" 
+                HorizontalAlignment="Left" 
+                Margin="272,506,0,0" 
+                Grid.Row="1" 
+                VerticalAlignment="Top" 
+                Height="41" 
+                Width="175"
+                Style="{StaticResource LoginButton}"/>
+
+            <Button Content="Secretary" 
+                HorizontalAlignment="Left" 
+                Margin="464,506,0,0" 
+                Grid.Row="1" 
+                VerticalAlignment="Top" 
+                Height="41" 
+                Width="175"
+                Style="{StaticResource LoginButton}"/>
+
+            <Button Content="Doctor" 
+                HorizontalAlignment="Left" 
+                Margin="654,506,0,0" 
+                Grid.Row="1" 
+                VerticalAlignment="Top" 
+                Height="41" 
+                Width="175"
+                Style="{StaticResource LoginButton}"/>
 
         </Grid>
     </Border>

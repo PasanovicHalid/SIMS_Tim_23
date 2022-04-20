@@ -12,8 +12,8 @@ namespace Repository
 {
     public class RoomRepository
     {
-        private String dbPath = "Data\\roomsDB.csv";
-        private String dbRoomTypePath = "Data\\roomTypesDB.csv";
+        private String dbPath = "..\\..\\Data\\roomsDB.csv";
+        private String dbRoomTypePath = "..\\..\\Data\\roomTypesDB.csv";
         private Serializer<Room> serializerRoom = new Serializer<Room>();
         private Serializer<RoomType> serializerRoomType = new Serializer<RoomType>();
 

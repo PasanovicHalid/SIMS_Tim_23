@@ -17,9 +17,9 @@ namespace ZdravoCorp.View.Manager
     /// <summary>
     /// Interaction logic for MainWindowManager.xaml
     /// </summary>
-    public partial class MainWindowManager : Window
+    public partial class Manager : Window
     {
-        public MainWindowManager()
+        public Manager()
         {
             InitializeComponent();
         }
@@ -27,7 +27,25 @@ namespace ZdravoCorp.View.Manager
         private void Rooms_Click(object sender, RoutedEventArgs e)
         {
             ZdravoCorp.View.Manager.Rooms.Rooms rooms = new ZdravoCorp.View.Manager.Rooms.Rooms();
+            this.Hide();
             rooms.ShowDialog();
+            this.Show();
+        }
+
+        private void Exit_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void Drag_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                DragMove();
+        }
+
+        private void Minimize_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
         }
     }
 }
