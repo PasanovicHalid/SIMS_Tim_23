@@ -42,12 +42,23 @@ namespace Model
 
         public void FromCSV(string[] values)
         {
-            throw new NotImplementedException();
+            int i = 0;
+            id = int.Parse(values[i++]);
+            count = int.Parse(values[i++]);
+            medicationType = new MedicationType(int.Parse(values[i++]), values[i++], values[i++], values[i++]);
         }
 
         public List<String> ToCSV()
         {
-            throw new NotImplementedException();
+            List<String> result = new List<String>();
+            result.Add(id.ToString());
+            result.Add(count.ToString());
+            result.Add(medicationType.Id.ToString());
+            result.Add(medicationType.Name);
+            result.Add(medicationType.Manufacturer);
+            result.Add(medicationType.Description);
+
+            return result;
         }
     }
 }

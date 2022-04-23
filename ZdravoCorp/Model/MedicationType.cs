@@ -20,5 +20,15 @@ namespace Model
         private String description;
 
         public int Id { get => id; set => id = value; }
+        public String Name { get => name; set => name = value; }    
+        public String Manufacturer { get => manufacturer; set => manufacturer = value; }    
+        public String Description { get => description; set => description = value; }
+
+        public MedicationType(int id, string name, string manufacturer, string description) : this(id)
+        {
+            this.name = name;
+            this.manufacturer = manufacturer;
+            this.description = description;
+        }
     }
 }
