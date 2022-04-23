@@ -17,12 +17,12 @@ namespace Controller
             return AppointmenService.Instance.CreateAppointment(newAppointment);
         }
 
-        public Appointment ReadAppointment(Appointment appointment)
+        public Appointment ReadAppointment(int appointment)
         {
             return AppointmenService.Instance.ReadAppointment(appointment);
         }
 
-        public Boolean UpdateAppointment(Appointment appointment)
+        public Boolean UpdateAppointment(int appointment)
         {
             return AppointmenService.Instance.UpdateAppointment(appointment);
         }

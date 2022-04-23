@@ -23,12 +23,12 @@ namespace Controller
             return DoctorService.Instance.UpdateDoctor(updatedRoom);
         }
 
-        public Boolean DeleteDoctor(Model.Doctor doctor)
+        public Boolean DeleteDoctor(int doctor)
         {
             return DoctorService.Instance.DeleteDoctor(doctor);
         }
 
-        public Model.Doctor ReadDoctor(Model.Doctor doctor)
+        public Model.Doctor ReadDoctor(int doctor)
         {
             return DoctorService.Instance.ReadDoctor(doctor);
         }
