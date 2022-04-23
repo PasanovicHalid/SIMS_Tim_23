@@ -19,9 +19,9 @@ namespace Service
             return AppointmentRepository.Instance.CreateAppointment(newAppointment);
         }
 
-        public Appointment ReadAppointment(Appointment appointment)
+        public Appointment ReadAppointment(int appointment)
         {
-            return AppointmentRepository.Instance.ReadAppointment(appointment.Id);
+            return AppointmentRepository.Instance.ReadAppointment(appointment);
         }
 
         public Boolean UpdateAppointment(Appointment appointment)
@@ -29,7 +29,7 @@ namespace Service
             return AppointmentRepository.Instance.UpdateAppointment(appointment);
         }
 
-        public Boolean DeleteAppointment(Appointment appointment)
+        public Boolean DeleteAppointment(int appointment)
         {
             return AppointmentRepository.Instance.DeleteAppointment(appointment);
         }

@@ -25,12 +25,12 @@ namespace Service
             return DoctorRepository.Instance.UpdateDoctor(updatedRoom);
         }
 
-        public Boolean DeleteDoctor(Doctor doctor)
+        public Boolean DeleteDoctor(int doctor)
         {
             return DoctorRepository.Instance.DeleteDoctor(doctor);
         }
 
-        public Doctor ReadDoctor(Doctor doctor)
+        public Doctor ReadDoctor(int doctor)
         {
             return DoctorRepository.Instance.ReadDoctor(doctor);
         }
