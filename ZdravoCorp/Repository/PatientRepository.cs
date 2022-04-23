@@ -57,9 +57,9 @@ namespace Repository
             {
                 patients.Add(patient);
                 serializerPatient.ToCSV(dbPath, patients);
-                return true;
+                
             }
-            return false;
+            return success;
         }
 
         public Boolean DeletePatient(int id)
