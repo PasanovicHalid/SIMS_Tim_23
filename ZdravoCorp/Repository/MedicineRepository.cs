@@ -14,7 +14,11 @@ namespace Repository
         private String dbPath = "..\\..\\Data\\medicineDB.csv";
         private Serializer<Medication> serializerMedication = new Serializer<Medication>();
 
-        private MedicineRepository instance = null;
+        private static MedicineRepository instance = null;
+
+        public MedicineRepository()
+        {
+        }
 
         public Boolean CreateMedicine(Model.Medication newMedicine)
         {
@@ -106,6 +110,17 @@ namespace Repository
         public List<MedicationType> GetAllMedicationType()
         {
             throw new NotImplementedException();
+        }
+        public static MedicineRepository Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new MedicineRepository();
+                }
+                return instance;
+            }
         }
 
     }
