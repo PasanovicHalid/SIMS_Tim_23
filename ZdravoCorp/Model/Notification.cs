@@ -17,6 +17,16 @@ namespace Model
 
         private User user;
 
+        public DateTime DateCreated { get { return dateCreated; } set { dateCreated = value; } }    
+        public String Content { get { return content; } set { content = value; } }
+
+        public Notification(DateTime dateCreated, string content, int id)
+        {
+            this.dateCreated = dateCreated;
+            this.content = content;
+            this.user.Id = id;
+        }
+
         /// <summary>
         /// Property for User
         /// </summary>

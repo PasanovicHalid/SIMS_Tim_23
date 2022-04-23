@@ -194,7 +194,7 @@ namespace Model
             EndDate = DateTime.Parse(values[i++]);
             int count = int.Parse(values[i++]);
             doctor = new List<Doctor>();
-            for (; i < i + count; i++)
+            for (int j = 0; j < count; j++)
             {
                 doctor.Add(new Doctor(int.Parse(values[i++])));
             }
