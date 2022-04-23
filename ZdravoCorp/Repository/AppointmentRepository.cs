@@ -27,10 +27,10 @@ namespace Repository
 
         public Appointment ReadAppointment(int id)
         {
-            List<Appointment> appointments = serializerAppointment.FromCSV(dbPath);
+            List<Appointment> appointments = GetAllAppointments();
             foreach (Appointment appointment in appointments)
             {
-                if (id.Equals(appointment.Id)) ;
+                if (id.Equals(appointment.Id))
                 {
                     return appointment;
                 }
@@ -77,7 +77,7 @@ namespace Repository
             List<Appointment> appointments = GetAllAppointments();
             foreach (Appointment temp in appointments)
             {
-                if (temp.Equals(appointment.Id))
+                if (temp.Id.Equals(appointment.Id))
                 {
                     appointments.Remove(appointment);
                     break;

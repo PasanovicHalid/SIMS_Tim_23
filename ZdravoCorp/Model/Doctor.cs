@@ -14,6 +14,10 @@ namespace Model
     {
         private List<Appointment> appointment;
 
+        public Doctor()
+        {
+        }
+
         public Doctor(int id)
         {
             this.id = id;
@@ -117,6 +121,7 @@ namespace Model
             result.Add(username);
             result.Add(name);
             result.Add(surname);
+            result.Add(jmbg);
             result.Add(email);
             result.Add(address);
             result.Add(phoneNumber);
@@ -136,7 +141,7 @@ namespace Model
             result.Add(vacationStartTime.ToString());
             result.Add(vacationEndTime.ToString());
             result.Add(vacationDays.ToString());
-            
+            result.AddRange(DoctorType.ToCSV());
             return result;
         }
 
@@ -148,6 +153,7 @@ namespace Model
             username = values[i++];
             name = values[i++];
             surname = values[i++];
+            jmbg = values[i++];
             email = values[i++];
             address = values[i++];
             phoneNumber = values[i++];
@@ -172,6 +178,7 @@ namespace Model
             vacationStartTime = DateTime.Parse(values[i++]);
             vacationEndTime = DateTime.Parse(values[i++]);
             vacationDays = int.Parse(values[i++]);
+            doctorType = new DoctorType(values[i++]);
         }
 
     }

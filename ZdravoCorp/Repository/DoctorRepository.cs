@@ -11,58 +11,139 @@ namespace Repository
 {
     public class DoctorRepository
     {
-        private String dbPath;
+        private String dbPath = "..\\..\\Data\\doctorsDB.csv";
+        private String DbDoctorType = "..\\..\\Data\\doctorTypesDB.csv";
+        private Serializer<Doctor> serializerDoctor = new Serializer<Doctor>();
+        private Serializer<DoctorType> serializerDoctorType = new Serializer<DoctorType>();
 
         private static DoctorRepository instance = null;
 
         public Boolean CreateDoctor(Model.Doctor newDoctor)
         {
-            throw new NotImplementedException();
+            List<Doctor> doctors = GetAllDoctors();
+            bool exists = false;
+            newDoctor.Id = doctors.Count + 1;
+            foreach(Doctor d in doctors)
+            {
+                if(d.Jmbg.Equals(newDoctor.Jmbg))
+                {
+                    exists = true;
+                    break;
+                }
+            }
+            if (!exists)
+            {
+                doctors.Add(newDoctor);
+                serializerDoctor.ToCSV(dbPath, doctors);
+                    return true;
+            }
+            return false;
         }
 
         public Boolean UpdateDoctor(Model.Doctor doctor)
         {
-            throw new NotImplementedException();
+            List<Doctor> doctors = GetAllDoctors();
+            foreach(Doctor d in doctors)
+            {
+                if (doctor.Id.Equals(d.Id))
+                {
+                    doctors.Remove(d);
+                    break;
+                }
+            }
+            doctors.Add(doctor);
+            serializerDoctor.ToCSV(dbPath, doctors);
+            return true;
         }
 
         public Boolean DeleteDoctor(Model.Doctor doctor)
         {
-            throw new NotImplementedException();
+            List<Doctor> doctors = GetAllDoctors();
+            foreach (Doctor d in doctors)
+            {
+                if (doctor.Id.Equals(d.Id))
+                {
+                    doctors.Remove(doctor);
+                    break;
+                }
+            }
+            serializerDoctor.ToCSV(dbPath, doctors);
+            return true;
         }
 
         public Model.Doctor ReadDoctor(Model.Doctor doctor)
         {
-            throw new NotImplementedException();
+            List<Doctor> doctors = GetAllDoctors();
+            foreach (Doctor d in doctors)
+            {
+                if (doctor.Id.Equals(d.Id))
+                {
+                    return d ;
+                }
+            }
+            return null;
         }
 
-        public Array GetAllDoctors()
+        public List<Doctor> GetAllDoctors()
         {
-            throw new NotImplementedException();
+            return serializerDoctor.FromCSV(dbPath);
         }
 
         public Boolean CreateDoctorType(DoctorType newDoctorType)
         {
-            throw new NotImplementedException();
+            List<DoctorType> dcType = GetAllDoctorType();
+            dcType.Add(newDoctorType);
+            serializerDoctorType.ToCSV(dbPath, dcType);
+            return true;
         }
 
         public Boolean UpdateDoctorType(DoctorType doctorType)
         {
-            throw new NotImplementedException();
+            List<DoctorType> dcType = GetAllDoctorType();
+            foreach (DoctorType dct in dcType)
+            {
+                if (dct.Type.Equals(doctorType.Type))
+                {
+                    dcType.Remove(doctorType);
+                    break;
+                }
+            }
+            dcType.Add(doctorType);
+            serializerDoctorType.ToCSV(dbPath, dcType);
+            return true;
         }
 
         public Boolean DeleteDoctorType(DoctorType doctorType)
         {
-            throw new NotImplementedException();
+            List<DoctorType> dcType = GetAllDoctorType();
+            foreach(DoctorType dct in dcType)
+            {
+                if (dct.Type.Equals(doctorType.Type))
+                {
+                    dcType.Remove(doctorType);
+                    break;
+                }
+            }
+            serializerDoctorType.ToCSV(dbPath, dcType);
+            return true;
         }
 
         public DoctorType ReadDoctorType(DoctorType doctorType)
         {
-            throw new NotImplementedException();
+            List<DoctorType> dcType = GetAllDoctorType();
+            foreach (DoctorType dct in dcType)
+            {
+                if (dct.Type.Equals(doctorType.Type))
+                {
+                    return doctorType;
+                }
+            }
+            return null;
         }
 
         public List<DoctorType> GetAllDoctorType()
         {
-            throw new NotImplementedException();
+            return serializerDoctorType.FromCSV(dbPath);
         }
 
         public DoctorRepository()
