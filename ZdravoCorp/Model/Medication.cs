@@ -11,6 +11,7 @@ namespace Model
 {
     public class Medication : Serializable
     {
+        private int id;
         private int count;
 
         private MedicationType medicationType;
@@ -30,7 +31,7 @@ namespace Model
                 this.medicationType = value;
             }
         }
-
+        public int Id { get => id; set => id = value; }
         public int Count { get => count; set => count = value; }
 
         public Medication(int id, int count)

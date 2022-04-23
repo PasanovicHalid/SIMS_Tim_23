@@ -15,7 +15,7 @@ namespace Model
         {
             this.Id = id;
         }
-
+        private String name;
         private String manufacturer;
         private String description;
 

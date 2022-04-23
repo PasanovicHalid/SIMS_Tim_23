@@ -14,9 +14,14 @@ namespace Model
     {
         private Boolean guest = false;
 
+
         public Patient(int id)
         {
             this.id = id;
+        }
+
+        public Patient()
+        {
         }
 
         private List<Appointment> appointment;
@@ -145,12 +150,78 @@ namespace Model
 
         public List<String> ToCSV()
         {
-            throw new NotImplementedException();
+            List<String> result = new List<String>();
+            result.Add(Id.ToString());
+            result.Add(password);
+            result.Add(username);
+            result.Add(name);
+            result.Add(surname);
+            result.Add(jmbg);
+            result.Add(email);
+            result.Add(address);
+            result.Add(phoneNumber);
+            result.Add(gender.ToString());
+            result.Add(dateOfBirth.ToString());
+            result.Add(notification.Count.ToString());
+            /*Mozda nije dobro*/
+            foreach (Notification n in notification)
+            {
+                result.Add(n.DateCreated.ToString());
+                result.Add(n.Content);
+                result.Add(n.User.Id.ToString());
+            }
+            result.Add(appointment.Count.ToString());
+            foreach(Appointment a in appointment)
+            {
+                result.Add(a.Id.ToString());
+            }
+            result.Add(prescription.Count.ToString());
+            foreach(Prescription p in prescription)
+            {
+                result.Add(p.Id.ToString());
+            }
+            return result;
         }
 
         public void FromCSV(string[] values)
         {
-            throw new NotImplementedException();
+            int i = 0;
+            id = int.Parse(values[i++]);
+            password = values[i++];
+            username = values[i++];
+            name = values[i++];
+            surname = values[i++];
+            jmbg = values[i++];
+            email = values[i++];
+            address = values[i++];
+            phoneNumber = values[i++];
+            if (values[i++] == "Male")
+            {
+                gender = Gender.Male;
+            }
+            else
+            {
+                gender = Gender.Female;
+            }
+            dateOfBirth = DateTime.Parse(values[i++]);
+            int count = int.Parse(values[i++]);
+            /*Mozda nije dobro*/
+            for (int j = 0; j < count; j++)
+            {
+                notification.Add(new Notification(DateTime.Parse(values[i++]), values[i++], int.Parse(values[i++])));
+            }
+
+            int count2 = int.Parse(values[i++]);
+            for(int j = 0; j < count2; j++)
+            {
+                appointment.Add(new Appointment(int.Parse(values[i++])));
+            }
+
+            int count3 = int.Parse(values[i++]);
+            for (int j = 0; j < count3; j++)
+            {
+                prescription.Add(new Prescription(int.Parse(values[i++])));
+            }
         }
 
     }

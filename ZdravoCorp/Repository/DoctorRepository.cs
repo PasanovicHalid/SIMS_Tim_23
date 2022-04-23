@@ -22,7 +22,7 @@ namespace Repository
         {
             List<Doctor> doctors = GetAllDoctors();
             bool exists = false;
-            newDoctor.Id = doctors.Count + 1;
+            
             foreach(Doctor d in doctors)
             {
                 if(d.Jmbg.Equals(newDoctor.Jmbg))
@@ -33,50 +33,59 @@ namespace Repository
             }
             if (!exists)
             {
+                newDoctor.Id = doctors.Count + 1;
                 doctors.Add(newDoctor);
                 serializerDoctor.ToCSV(dbPath, doctors);
-                    return true;
+                return true;
             }
             return false;
         }
 
         public Boolean UpdateDoctor(Model.Doctor doctor)
         {
+            Boolean success = false;
             List<Doctor> doctors = GetAllDoctors();
             foreach(Doctor d in doctors)
             {
                 if (doctor.Id.Equals(d.Id))
                 {
+                    success = true;
                     doctors.Remove(d);
                     break;
                 }
             }
-            doctors.Add(doctor);
-            serializerDoctor.ToCSV(dbPath, doctors);
-            return true;
+            if (success)
+            {
+                doctors.Add(doctor);
+                serializerDoctor.ToCSV(dbPath, doctors);
+                
+            }
+            return success;
         }
 
-        public Boolean DeleteDoctor(Model.Doctor doctor)
+        public Boolean DeleteDoctor(int id)
         {
+            Boolean success = false;
             List<Doctor> doctors = GetAllDoctors();
             foreach (Doctor d in doctors)
             {
-                if (doctor.Id.Equals(d.Id))
+                if (id.Equals(d.Id))
                 {
-                    doctors.Remove(doctor);
+                    success = true;
+                    doctors.Remove(d);
+                    serializerDoctor.ToCSV(dbPath, doctors);
                     break;
                 }
             }
-            serializerDoctor.ToCSV(dbPath, doctors);
-            return true;
+            return success;
         }
 
-        public Model.Doctor ReadDoctor(Model.Doctor doctor)
+        public Model.Doctor ReadDoctor(int id)
         {
             List<Doctor> doctors = GetAllDoctors();
             foreach (Doctor d in doctors)
             {
-                if (doctor.Id.Equals(d.Id))
+                if (id == d.Id)
                 {
                     return d ;
                 }

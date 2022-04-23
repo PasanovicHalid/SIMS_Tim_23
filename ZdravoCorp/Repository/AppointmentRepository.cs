@@ -57,34 +57,42 @@ namespace Repository
 
         public Boolean UpdateAppointment(Appointment appointment)
         {
+            Boolean success = false;
             List<Appointment> appointments = GetAllAppointments();
             foreach (Appointment temp in appointments)
             {
                 if (appointment.Id.Equals(temp.Id)) 
                 {
+                    success = true;
                     appointments.Remove(temp);
                     break;
                 }
             }
-            appointments.Add(appointment);
-            serializerAppointment.ToCSV(dbPath, appointments);
-            return true;
+            if (success)
+            {
+                appointments.Add(appointment);
+                serializerAppointment.ToCSV(dbPath, appointments);
+                
+            }
+            return success;
 
         }
 
-        public Boolean DeleteAppointment(Appointment appointment)
+        public Boolean DeleteAppointment(int id)
         {
+            Boolean success = false;
             List<Appointment> appointments = GetAllAppointments();
             foreach (Appointment temp in appointments)
             {
-                if (temp.Id.Equals(appointment.Id))
+                if (temp.Id == id)
                 {
-                    appointments.Remove(appointment);
+                    success = true;
+                    appointments.Remove(temp);
+                    serializerAppointment.ToCSV(dbPath, appointments);
                     break;
                 }
             }
-            serializerAppointment.ToCSV(dbPath, appointments);
-            return true;
+            return success;
         }
 
         public List<Appointment> GetAllAppointments()
