@@ -108,43 +108,51 @@ namespace Repository
 
         public Boolean UpdateDoctorType(DoctorType doctorType)
         {
+            Boolean success = false;
             List<DoctorType> dcType = GetAllDoctorType();
             foreach (DoctorType dct in dcType)
             {
                 if (dct.Type.Equals(doctorType.Type))
                 {
+                    success = true;
                     dcType.Remove(doctorType);
                     break;
                 }
             }
-            dcType.Add(doctorType);
-            serializerDoctorType.ToCSV(dbPath, dcType);
-            return true;
+            if (success)
+            {
+                dcType.Add(doctorType);
+                serializerDoctorType.ToCSV(dbPath, dcType);
+            }
+            return success;
         }
 
-        public Boolean DeleteDoctorType(DoctorType doctorType)
+        public Boolean DeleteDoctorType(String type)
         {
+            Boolean success = false;
             List<DoctorType> dcType = GetAllDoctorType();
             foreach(DoctorType dct in dcType)
             {
-                if (dct.Type.Equals(doctorType.Type))
+                if (dct.Type.Equals(type))
                 {
-                    dcType.Remove(doctorType);
+                    success = true;
+                    dcType.Remove(dct);
+                    serializerDoctorType.ToCSV(dbPath, dcType);
                     break;
                 }
             }
-            serializerDoctorType.ToCSV(dbPath, dcType);
-            return true;
+            
+            return success;
         }
 
-        public DoctorType ReadDoctorType(DoctorType doctorType)
+        public DoctorType ReadDoctorType(String type)
         {
             List<DoctorType> dcType = GetAllDoctorType();
             foreach (DoctorType dct in dcType)
             {
-                if (dct.Type.Equals(doctorType.Type))
+                if (dct.Type.Equals(type))
                 {
-                    return doctorType;
+                    return dct;
                 }
             }
             return null;

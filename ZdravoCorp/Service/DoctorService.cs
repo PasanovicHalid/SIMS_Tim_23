@@ -50,12 +50,12 @@ namespace Service
             return DoctorRepository.Instance.UpdateDoctorType(doctorType);
         }
 
-        public Boolean DeleteDoctorType(DoctorType doctorType)
+        public Boolean DeleteDoctorType(String doctorType)
         {
             return DoctorRepository.Instance.DeleteDoctorType(doctorType);
         }
 
-        public DoctorType ReadDoctorType(DoctorType doctorType)
+        public DoctorType ReadDoctorType(String doctorType)
         {
             return DoctorRepository.Instance.ReadDoctorType(doctorType);
         }
