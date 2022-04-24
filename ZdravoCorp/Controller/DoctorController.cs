@@ -6,6 +6,7 @@
 
 using Model;
 using System;
+using Service;
 using System.Collections.Generic;
 
 namespace Controller
@@ -14,52 +15,52 @@ namespace Controller
     {
         public Boolean CreateDoctor(Model.Doctor newDoctor)
         {
-            throw new NotImplementedException();
+            return DoctorService.Instance.CreateDoctor(newDoctor);
         }
 
         public Boolean UpdateDoctor(Model.Doctor updatedRoom)
         {
-            throw new NotImplementedException();
+            return DoctorService.Instance.UpdateDoctor(updatedRoom);
         }
 
-        public Boolean DeleteDoctor(Model.Doctor doctor)
+        public Boolean DeleteDoctor(int doctor)
         {
-            throw new NotImplementedException();
+            return DoctorService.Instance.DeleteDoctor(doctor);
         }
 
-        public Model.Doctor ReadDoctor(Model.Doctor doctor)
+        public Model.Doctor ReadDoctor(int doctor)
         {
-            throw new NotImplementedException();
+            return DoctorService.Instance.ReadDoctor(doctor);
         }
 
-        public Array GetAllDoctors()
+        public List<Doctor> GetAllDoctors()
         {
-            throw new NotImplementedException();
+            return DoctorService.Instance.GetAllDoctors();
         }
 
         public Boolean CreateDoctorType(DoctorType newDoctorType)
         {
-            throw new NotImplementedException();
+            return DoctorService.Instance.CreateDoctorType(newDoctorType);
         }
 
         public Boolean UpdateDoctorType(DoctorType doctorType)
         {
-            throw new NotImplementedException();
+            return DoctorService.Instance.UpdateDoctorType(doctorType);
         }
 
         public Boolean DeleteDoctorType(DoctorType doctorType)
         {
-            throw new NotImplementedException();
+            return DoctorService.Instance.DeleteDoctorType(doctorType);
         }
 
         public DoctorType ReadDoctorType(DoctorType doctorType)
         {
-            throw new NotImplementedException();
+            return DoctorService.Instance.ReadDoctorType(doctorType);
         }
 
         public List<DoctorType> GetAllDoctorType()
         {
-            throw new NotImplementedException();
+            return DoctorService.Instance.GetAllDoctorType();
         }
     }
 }

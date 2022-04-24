@@ -17,52 +17,52 @@ namespace Service
 
         public Boolean CreateDoctor(Doctor newDoctor)
         {
-            throw new NotImplementedException();
+            return DoctorRepository.Instance.CreateDoctor(newDoctor);
         }
 
         public Boolean UpdateDoctor(Doctor updatedRoom)
         {
-            throw new NotImplementedException();
+            return DoctorRepository.Instance.UpdateDoctor(updatedRoom);
         }
 
-        public Boolean DeleteDoctor(Doctor doctor)
+        public Boolean DeleteDoctor(int doctor)
         {
-            throw new NotImplementedException();
+            return DoctorRepository.Instance.DeleteDoctor(doctor);
         }
 
-        public Doctor ReadDoctor(Doctor doctor)
+        public Doctor ReadDoctor(int doctor)
         {
-            throw new NotImplementedException();
+            return DoctorRepository.Instance.ReadDoctor(doctor);
         }
 
-        public Array GetAllDoctors()
+        public List<Doctor> GetAllDoctors()
         {
-            throw new NotImplementedException();
+            return DoctorRepository.Instance.GetAllDoctors();
         }
 
         public Boolean CreateDoctorType(DoctorType newDoctorType)
         {
-            throw new NotImplementedException();
+            return DoctorRepository.Instance.CreateDoctorType(newDoctorType);
         }
 
         public Boolean UpdateDoctorType(DoctorType doctorType)
         {
-            throw new NotImplementedException();
+            return DoctorRepository.Instance.UpdateDoctorType(doctorType);
         }
 
-        public Boolean DeleteDoctorType(DoctorType doctorType)
+        public Boolean DeleteDoctorType(String doctorType)
         {
-            throw new NotImplementedException();
+            return DoctorRepository.Instance.DeleteDoctorType(doctorType);
         }
 
-        public DoctorType ReadDoctorType(DoctorType doctorType)
+        public DoctorType ReadDoctorType(String doctorType)
         {
-            throw new NotImplementedException();
+            return DoctorRepository.Instance.ReadDoctorType(doctorType);
         }
 
         public List<DoctorType> GetAllDoctorType()
         {
-            throw new NotImplementedException();
+            return DoctorRepository.Instance.GetAllDoctorType();
         }
 
         public DoctorService()

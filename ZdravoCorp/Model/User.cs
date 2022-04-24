@@ -17,6 +17,7 @@ namespace Model
         protected String username;
         protected String name;
         protected String surname;
+        protected String jmbg;
         protected String email;
         protected String address;
         protected String phoneNumber;
@@ -47,7 +48,8 @@ namespace Model
                 }
             }
         }
-
+        public int Id { get => id; set => id = value; }
+        public String Jmbg { get => jmbg; set => jmbg = value; }
         /// <summary>
         /// Add a new Notification in the collection
         /// </summary>

@@ -17,7 +17,10 @@ namespace Model
         private float surfaceArea;
 
         private List<Appointment> appointment;
-
+        public Room(int id)
+        {
+            this.identifier = id;
+        }
         /// <summary>
         /// Property for collection of Appointment
         /// </summary>

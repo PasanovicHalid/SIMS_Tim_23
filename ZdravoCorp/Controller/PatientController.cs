@@ -5,6 +5,8 @@
 
 using Model;
 using System;
+using Service;
+using System.Collections.Generic;
 
 namespace Controller
 {
@@ -12,27 +14,27 @@ namespace Controller
     {
         public Boolean CreatePatient(Patient newPatient)
         {
-            throw new NotImplementedException();
+            return PatientService.Instance.CreatePatient(newPatient);
         }
 
         public Boolean UpdatePatient(Patient patient)
         {
-            throw new NotImplementedException();
+            return PatientService.Instance.UpdatePatient(patient);
         }
 
-        public Boolean DeletePatient(Patient patient)
+        public Boolean DeletePatient(int patient)
         {
-            throw new NotImplementedException();
+            return PatientService.Instance.DeletePatient(patient);
         }
 
-        public Patient ReadPatient(Patient patient)
+        public Patient ReadPatient(int patient)
         {
-            throw new NotImplementedException();
+            return PatientService.Instance.ReadPatient(patient);
         }
 
-        public Array GetAllPatients()
+        public List<Patient> GetAllPatients()
         {
-            throw new NotImplementedException();
+            return PatientService.Instance.GetAllPatients();
         }
     }
 }

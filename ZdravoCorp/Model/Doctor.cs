@@ -14,6 +14,14 @@ namespace Model
     {
         private List<Appointment> appointment;
 
+        public Doctor()
+        {
+        }
+
+        public Doctor(int id)
+        {
+            this.id = id;
+        }
         /// <summary>
         /// Property for collection of Appointment
         /// </summary>
@@ -107,12 +115,70 @@ namespace Model
 
         public List<String> ToCSV()
         {
-            throw new NotImplementedException();
+            List<String> result = new List<String>();
+            result.Add(Id.ToString());
+            result.Add(password);
+            result.Add(username);
+            result.Add(name);
+            result.Add(surname);
+            result.Add(jmbg);
+            result.Add(email);
+            result.Add(address);
+            result.Add(phoneNumber);
+            result.Add(gender.ToString());
+            result.Add(dateOfBirth.ToString());
+            result.Add(notification.Count.ToString());
+            foreach(Notification n in notification)
+            {
+                result.Add(n.DateCreated.ToString());
+                result.Add(n.Content);
+                result.Add(n.User.Id.ToString());
+            }
+            result.Add(salary.ToString());
+            result.Add(enrolementDate.ToString());
+            result.Add(workStartTime.ToString());
+            result.Add(workEndTime.ToString());
+            result.Add(vacationStartTime.ToString());
+            result.Add(vacationEndTime.ToString());
+            result.Add(vacationDays.ToString());
+            result.AddRange(DoctorType.ToCSV());
+            return result;
         }
 
         public void FromCSV(string[] values)
         {
-            throw new NotImplementedException();
+            int i = 0;
+            id = int.Parse(values[i++]);
+            password = values[i++];
+            username = values[i++];
+            name = values[i++];
+            surname = values[i++];
+            jmbg = values[i++];
+            email = values[i++];
+            address = values[i++];
+            phoneNumber = values[i++];
+            if(values[i++] == "Male")
+            {
+                gender = Gender.Male;
+            }
+            else
+            {
+                gender = Gender.Female;
+            }
+            dateOfBirth = DateTime.Parse(values[i++]);
+            int count = int.Parse(values[i++]);
+            for(int j = 0 ; j < count; j++)
+            {
+                notification.Add(new Notification(DateTime.Parse(values[i++]), values[i++], int.Parse(values[i++])));
+            }
+            salary = float.Parse(values[i++]);
+            enrolementDate = DateTime.Parse(values[i++]);
+            workStartTime = DateTime.Parse(values[i++]);
+            workEndTime = DateTime.Parse(values[i++]);
+            vacationStartTime = DateTime.Parse(values[i++]);
+            vacationEndTime = DateTime.Parse(values[i++]);
+            vacationDays = int.Parse(values[i++]);
+            doctorType = new DoctorType(values[i++]);
         }
 
     }

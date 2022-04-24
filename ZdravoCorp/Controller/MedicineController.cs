@@ -6,6 +6,7 @@
 using Model;
 using System;
 using System.Collections.Generic;
+using Service;
 
 namespace Controller
 {
@@ -13,27 +14,27 @@ namespace Controller
     {
         public Boolean CreateMedicine(Model.Medication newMedicine)
         {
-            throw new NotImplementedException();
+            return MedicineService.Instance.CreateMedicine(newMedicine);
         }
 
         public Boolean UpdateMedicine(Model.Medication medicine)
         {
-            throw new NotImplementedException();
+            return MedicineService.Instance.UpdateMedicine(medicine);
         }
 
         public Boolean DeleteMedicine(int identificator)
         {
-            throw new NotImplementedException();
+            return MedicineService.Instance.DeleteMedicine(identificator);
         }
 
         public Model.Medication ReadMedicine(int identificator)
         {
-            throw new NotImplementedException();
+            return MedicineService.Instance.ReadMedicine(identificator);
         }
 
         public List<Medication> GetAllMedicine()
         {
-            throw new NotImplementedException();
+            return MedicineService.Instance.GetAllMedicine();
         }
 
         public Boolean CreateMedicationType(MedicationType newMedicationType)
