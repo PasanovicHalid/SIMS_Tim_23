@@ -48,5 +48,11 @@ namespace ZdravoCorp
             this.Close();
             window.ShowDialog();
         }
+
+        private void OnPasswordChanged(object sender, RoutedEventArgs e)
+        {
+            PasswordBox pb = sender as PasswordBox;
+            pb.Tag = (!string.IsNullOrEmpty(pb.Password)).ToString();
+        }
     }
 }

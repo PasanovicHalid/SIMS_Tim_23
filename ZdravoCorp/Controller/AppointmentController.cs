@@ -22,12 +22,12 @@ namespace Controller
             return AppointmenService.Instance.ReadAppointment(appointment);
         }
 
-        public Boolean UpdateAppointment(int appointment)
+        public Boolean UpdateAppointment(Appointment appointment)
         {
             return AppointmenService.Instance.UpdateAppointment(appointment);
         }
 
-        public Boolean DeleteAppointment(Appointment appointment)
+        public Boolean DeleteAppointment(int appointment)
         {
             return AppointmenService.Instance.DeleteAppointment(appointment);
         }

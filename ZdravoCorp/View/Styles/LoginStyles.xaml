@@ -82,7 +82,7 @@
         <Setter Property="FontSize" Value="34"/>
         <Setter Property="FontWeight" Value="Thin"/>
     </Style>
-    
+
     <Style x:Key="LoginTextBox" TargetType="{x:Type TextBox}">
         <Setter Property="Template">
             <Setter.Value>
@@ -121,54 +121,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            
-                        </Grid>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
 
-    <!--TODO Fix problem with background text staying-->
-    <!--Work in progress-->
-    <Style x:Key="LoginPasswordBox" TargetType="{x:Type PasswordBox}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type PasswordBox}">
-                    <Border CornerRadius="10"
-                            Background="#393E46">
-                        <Grid>
-                            <Rectangle StrokeThickness="1"/>
-
-                            <PasswordBox Margin="1"
-                                     BorderThickness="0"
-                                     Background="Transparent"
-                                     VerticalContentAlignment="Center"
-                                     Padding="5"
-                                     Foreground="#CFCFCF"
-                                     FontFamily="/Resources/Fonts/#Poppins"
-                                     x:Name="PassBox"/>
-
-                            <TextBlock IsHitTestVisible="False"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Left"
-                                       Margin="10,0,0,0"
-                                       FontSize="11"
-                                       Foreground="DarkGray"
-                                       FontFamily="/Resources/Fonts/#Poppins"
-                                       Text="{TemplateBinding Property=Name}">
-
-                                <TextBlock.Style>
-                                    <Style TargetType="{x:Type TextBlock}">
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding Password, ElementName=PassBox}" Value="">
-                                                <Setter Property="Visibility" Value="Visible"/>
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                        <Setter Property="Visibility" Value="Hidden"/>
-                                    </Style>
-                                </TextBlock.Style>
-                            </TextBlock>
                         </Grid>
                     </Border>
                 </ControlTemplate>

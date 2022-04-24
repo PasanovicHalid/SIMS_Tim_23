@@ -40,6 +40,10 @@ namespace Model
             this.count = count;
         }
 
+        public Medication()
+        {
+        }
+
         public void FromCSV(string[] values)
         {
             int i = 0;

@@ -50,12 +50,12 @@ namespace Controller
 
         public Boolean DeleteDoctorType(DoctorType doctorType)
         {
-            return DoctorService.Instance.DeleteDoctorType(doctorType);
+            return DoctorService.Instance.DeleteDoctorType(doctorType.Type);
         }
 
         public DoctorType ReadDoctorType(DoctorType doctorType)
         {
-            return DoctorService.Instance.ReadDoctorType(doctorType);
+            return DoctorService.Instance.ReadDoctorType(doctorType.Type);
         }
 
         public List<DoctorType> GetAllDoctorType()
