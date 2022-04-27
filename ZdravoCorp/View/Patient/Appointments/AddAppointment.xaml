@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ZdravoCorp.View.Patient.Appointments"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         Title="Zakazivanje"
         Height="450" 
@@ -36,7 +37,11 @@
             SelectedDateFormat="Short"
             FirstDayOfWeek="Monday"
             IsTodayHighlighted="True"
-            />
+            Name="datePicker">
+            <DatePicker.BlackoutDates>
+                <CalendarDateRange End="{x:Static sys:DateTime.Today}" Start="{x:Static sys:DateTime.MinValue}" />
+            </DatePicker.BlackoutDates>
+        </DatePicker>
         <Label 
             Content="Doktor" 
             HorizontalAlignment="Left" 
@@ -49,12 +54,14 @@
             Margin="54,219,0,0" 
             VerticalAlignment="Top" RenderTransformOrigin="0.46,0.618"/>
         <RadioButton 
+            Name="DateRB"
             Content="Datum" 
             HorizontalAlignment="Left"
             Margin="153,230,0,0" 
             VerticalAlignment="Top"
             IsChecked="True" Checked="RadioButton_Checked"/>
         <RadioButton 
+            Name ="DoctorRB"
             Content="Doktor" 
             HorizontalAlignment="Left" 
             Margin="153,268,0,0" 
@@ -76,7 +83,8 @@
                 Margin="153,335,0,0" 
                 VerticalAlignment="Top"
                 Height="30"
-                Width="80"/>
+                Width="80"
+                Click="Search_Click"/>
         <CheckBox Content="Notifikacije" 
                   HorizontalAlignment="Left" 
                   Margin="695,335,0,0" 

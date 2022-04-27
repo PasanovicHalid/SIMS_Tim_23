@@ -36,6 +36,11 @@ namespace ZdravoCorp.View.Patient.Appointments
             get;
             set;
         }
+        public ObservableCollection<DateTime> DateCollection
+        {
+            get;
+            set;
+        }
         public AddAppointment()
         {
             InitializeComponent();
@@ -50,8 +55,11 @@ namespace ZdravoCorp.View.Patient.Appointments
             DoctorsCB.ItemsSource = DoctorsCollection;
         }
 
-        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+
+        private void Search_Click(object sender, RoutedEventArgs e)
         {
+            Doctor doctor = doctorController.ReadDoctor(DoctorsCB.SelectedIndex);
+            DateTime date = (DateTime) datePicker.SelectedDate;
 
         }
     }

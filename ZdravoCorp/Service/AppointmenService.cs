@@ -56,5 +56,28 @@ namespace Service
             }
         }
 
+        public Appointment SuggestAppointment(Doctor doctor, DateTime start, DateTime end, bool priority)
+        {
+            Appointment appointment = new Appointment();
+            //prioritet ima doktor
+            if(priority == true)
+            {
+                appointment.StartDate = GetFirstFreeAppointmentForDoctor(doctor, start, end);
+            }
+            else
+            {
+
+            }
+            return appointment;
+        }
+        public DateTime GetFirstFreeAppointmentForDoctor(Doctor doctor, DateTime start, DateTime end)
+        {
+            
+            while (start < end)
+            {
+                start = start.AddMinutes(45);
+            }
+            return DateTime.MinValue;    
+        }
     }
 }
