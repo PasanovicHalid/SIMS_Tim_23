@@ -15,8 +15,9 @@ namespace Model
         protected int id;
         protected String password;
         protected String username;
-        protected String name;
-        protected String surname;
+        /*mora ovako*/
+        public string name { get; set; }
+        public string surname { get; set; }
         protected String jmbg;
         protected String email;
         protected String address;
@@ -25,6 +26,28 @@ namespace Model
         protected DateTime dateOfBirth;
 
         protected List<Notification> notification;
+
+        protected User(int id, string password, string username, string name, string surname, string jmbg, string email, string address, string phoneNumber, Gender gender, DateTime dateOfBirth, List<Notification> notification, List<Survey> survey)
+        {
+            this.id = id;
+            this.password = password;
+            this.username = username;
+            this.name = name;
+            this.surname = surname;
+            this.jmbg = jmbg;
+            this.email = email;
+            this.address = address;
+            this.phoneNumber = phoneNumber;
+            this.gender = gender;
+            this.dateOfBirth = dateOfBirth;
+            this.notification = notification;
+            this.survey = survey;
+        }
+
+        protected User()
+        {
+        }
+
 
         /// <summary>
         /// Property for collection of Notification

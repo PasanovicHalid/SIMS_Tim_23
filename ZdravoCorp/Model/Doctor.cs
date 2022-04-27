@@ -14,14 +14,28 @@ namespace Model
     {
         private List<Appointment> appointment;
 
+
         public Doctor()
         {
         }
+
+        //public Doctor(List<Appointment> appointment, DoctorType doctorType)
+        //{
+        //    this.appointment = appointment;
+        //    this.doctorType = doctorType;
+        //}
 
         public Doctor(int id)
         {
             this.id = id;
         }
+
+
+
+        public Doctor(int id, string password, string username, string name, string surname, string jmbg, string email, string address, string phoneNumber, Gender gender, DateTime dateOfBirth, List<Notification> notification, List<Survey> survey, float salary, DateTime enrolementdate, DateTime workstarttime, DateTime workendtime, DateTime vacationstarttime, DateTime vacationendtime, int vacationdays) : base(id, password, username, name, surname, jmbg, email, address, phoneNumber, gender, dateOfBirth, notification, survey, salary, enrolementdate, workstarttime, workendtime, vacationstarttime, vacationendtime, vacationdays)
+        {
+        }
+
         /// <summary>
         /// Property for collection of Appointment
         /// </summary>
@@ -112,7 +126,7 @@ namespace Model
                 this.doctorType = value;
             }
         }
-
+        public String getName() { return name + surname; }
         public List<String> ToCSV()
         {
             List<String> result = new List<String>();

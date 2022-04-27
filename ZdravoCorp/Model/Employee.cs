@@ -19,5 +19,22 @@ namespace Model
         protected DateTime vacationStartTime;
         protected DateTime vacationEndTime;
         protected int vacationDays;
+
+        protected Employee(int id, string password, string username, string name, string surname, string jmbg, string email, string address, string phoneNumber, Gender gender, DateTime dateOfBirth, List<Notification> notification, List<Survey> survey, float salary, DateTime enrolementDate, DateTime workStartTime, DateTime workEndTime, DateTime vacationStartTime, DateTime vacationEndTime, int vacationDays) : base(id, password, username, name, surname, jmbg, email, address, phoneNumber, gender, dateOfBirth, notification, survey)
+        {
+            this.salary = salary;
+            this.enrolementDate = enrolementDate;
+            this.workStartTime = workStartTime;
+            this.workEndTime = workEndTime;
+            this.vacationStartTime = vacationStartTime;
+            this.vacationEndTime = vacationEndTime;
+            this.vacationDays = vacationDays;
+        }
+
+        protected Employee()
+        {
+        }
     }
+
+    
 }

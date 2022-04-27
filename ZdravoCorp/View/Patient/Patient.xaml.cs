@@ -12,6 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+using System.Collections.ObjectModel;
+using Controller;
+using Model;
+using ZdravoCorp.View.Patient.Appointments;
 
 namespace ZdravoCorp.View.Patient
 {
@@ -23,6 +27,10 @@ namespace ZdravoCorp.View.Patient
         public Patient()
         {
             InitializeComponent();
+            appointmentController = new AppointmentController();
+            AppointmentsCollection = new ObservableCollection<Appointment>();
+            UpdateTable();
+
         }
 
         private void Appointments_Click(object sender, RoutedEventArgs e)
@@ -31,6 +39,50 @@ namespace ZdravoCorp.View.Patient
             this.Hide();
             window.ShowDialog();
             this.Show();
+
+        }
+
+        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void PatientAppointmentTable_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+        public AppointmentController appointmentController;
+
+        public ObservableCollection<Appointment> AppointmentsCollection
+        {
+            get;
+            set;
+        }
+          
+        
+        private void UpdateTable()
+        {
+            AppointmentsCollection = new ObservableCollection<Appointment>();
+            List<Appointment> appointments = appointmentController.GetAllAppointments();
+            foreach (Appointment app in appointments)
+            {
+                AppointmentsCollection.Add(app);
+            }
+            PatientAppointmentTable.DataContext = AppointmentsCollection;
+        }
+        private void Add_Appointment(object sender, RoutedEventArgs e)
+        {
+            AddAppointment window = new AddAppointment();
+            window.ShowDialog();
+        }
+
+        private void Change_Appointment(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Delete_Appointment(object sender, RoutedEventArgs e)
+        {
 
         }
     }
