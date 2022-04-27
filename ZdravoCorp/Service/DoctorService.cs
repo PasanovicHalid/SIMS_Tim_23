@@ -81,5 +81,11 @@ namespace Service
                 return instance ;
             }
         }
+        public bool IsDoctorFree(int id, DateTime start, DateTime end)
+        {
+            bool isFree = false;
+
+            return isFree;
+        }
     }
 }

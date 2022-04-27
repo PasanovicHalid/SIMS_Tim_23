@@ -79,5 +79,20 @@ namespace Service
             }
             return DateTime.MinValue;    
         }
+        public List<Appointment> doctorsAppointments(int id)
+        {
+            List<Appointment> result = new List<Appointment>();
+            foreach(Appointment app in GetAllAppointments())
+            {
+                foreach(Doctor doc in DoctorService.Instance.GetAllDoctors())
+                {
+                    if (doc.Id == id)
+                    {
+                        result.Add(app);
+                    }
+                }
+            }
+            return result;
+        }
     }
 }
