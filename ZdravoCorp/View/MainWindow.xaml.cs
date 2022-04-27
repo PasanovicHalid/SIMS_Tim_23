@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ZdravoCorp.View.Manager;
+using ZdravoCorp.View.Patient;
 
 namespace ZdravoCorp
 {
@@ -53,6 +54,14 @@ namespace ZdravoCorp
         {
             PasswordBox pb = sender as PasswordBox;
             pb.Tag = (!string.IsNullOrEmpty(pb.Password)).ToString();
+        }
+
+        private void Patient_Click(object sender, RoutedEventArgs e)
+        {
+            Patient window = new Patient();
+            this.Close();
+            window.ShowDialog();
+
         }
     }
 }
