@@ -231,5 +231,8 @@
   <ItemGroup>
     <Resource Include="Resources\Fonts\OFL.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="View\Patient\Appointments\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
