@@ -12,8 +12,8 @@ namespace Model
 {
     public class Appointment : Serializable
     {
-        private DateTime startDate;
-        private DateTime endDate;
+        public DateTime startDate { get; set; }
+        public DateTime endDate { get; set; }
         private int id;
 
         public Appointment(int id)

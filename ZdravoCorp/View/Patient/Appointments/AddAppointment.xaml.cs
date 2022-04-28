@@ -57,13 +57,24 @@ namespace ZdravoCorp.View.Patient.Appointments
 
 
         private void Search_Click(object sender, RoutedEventArgs e)
+
         {
+            DataContext = this;
             Doctor doctor = doctorController.ReadDoctor(DoctorsCB.SelectedIndex);
             DateTime date = (DateTime) datePicker.SelectedDate;
-            if (DateRB.IsChecked == true)
+            Appointment app = new Appointment();
+            List<Appointment> apps = new List<Appointment>();
+            for (int i = 0; i < 15; i++)
             {
-
+                if (DateRB.IsChecked == true)
+                {
+                    app = appointmentController.SuggestAppointment(doctor, date, date.AddMinutes(45), false);
+                }
+                else { app = appointmentController.SuggestAppointment(doctor, date, date.AddMinutes(45), true); }
+                apps.Add(app);
             }
+            AppointmentsCollection = new ObservableCollection<Appointment>(apps);
+            TableForSuggestedApp.DataContext= AppointmentsCollection;
         }
     }
 }

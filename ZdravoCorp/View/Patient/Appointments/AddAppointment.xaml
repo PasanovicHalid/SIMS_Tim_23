@@ -67,15 +67,16 @@
             Margin="153,268,0,0" 
             VerticalAlignment="Top"/>
         <DataGrid 
+            Name ="TableForSuggestedApp"
             ItemsSource="{Binding}" 
             Margin="400,58,26,118"
             AutoGenerateColumns="False"
             SelectionMode="Single" 
             IsReadOnly="True" >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Doktor" Binding="{Binding Doctor}" Width="*"/>
-                <DataGridTextColumn Header="Datum" Binding="{Binding Start}" Width="*"/>
-                <DataGridTextColumn Header="Vreme" Binding="{Binding Time}" Width="*"/>
+                <DataGridTextColumn x:Name ="Doctor" Header="Doktor" Binding="{Binding name}" Width="*"/>
+                <DataGridTextColumn x:Name ="Date" Header="Datum" Binding="{Binding startDate}" Width="*"/>
+                <DataGridTextColumn x:Name ="Time" Header="Vreme" Binding="{Binding endDate}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
         <Button Content="Prikaži" 

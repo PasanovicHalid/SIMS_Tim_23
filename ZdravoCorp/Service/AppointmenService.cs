@@ -73,7 +73,23 @@ namespace Service
             //prioritet ima datum
             else
             {
-
+                if(GetFirstFreeAppointmentForDoctor(doctor, start, end) != DateTime.MinValue)
+                {
+                    appointment.StartDate = start;
+                    List<Doctor> docs = new List<Doctor>();
+                    docs.Add(doctor);
+                    appointment.Doctor = docs;
+                    appointment.EndDate = appointment.StartDate.AddMinutes(45);
+                }
+                else
+                {
+                    Doctor d = GetFirstFreeDoctorForDate(doctor, start, end);
+                    appointment.StartDate = start;
+                    List<Doctor> docs = new List<Doctor>();
+                    docs.Add(d);
+                    appointment.Doctor = docs;
+                    appointment.EndDate = appointment.StartDate.AddMinutes(45);
+                }
             }
             return appointment;
         }
@@ -114,5 +130,28 @@ namespace Service
             }
             return result;
         }
+
+        public Doctor GetFirstFreeDoctorForDate(Doctor doctor, DateTime start, DateTime end)
+        {
+            List<Doctor> doctors = DoctorService.Instance.GetAllDoctors();
+            Doctor doc = new Doctor();
+            
+            foreach(Doctor d in doctors)
+            {
+                doc.Id = d.Id;
+                while (start < end) 
+                {
+                    start = start.AddMinutes(45);
+                    if (DoctorService.Instance.IsDoctorFree(d.Id, start, start.AddMinutes(45)))
+                    {
+                        return d;
+                    }
+                }
+                
+            }
+            doc.Id = -1;
+            return doc;
+        }
+        
     }
 }
