@@ -60,7 +60,10 @@ namespace ZdravoCorp.View.Patient.Appointments
         {
             Doctor doctor = doctorController.ReadDoctor(DoctorsCB.SelectedIndex);
             DateTime date = (DateTime) datePicker.SelectedDate;
+            if (DateRB.IsChecked == true)
+            {
 
+            }
         }
     }
 }

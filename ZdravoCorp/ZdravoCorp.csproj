@@ -80,6 +80,7 @@
     <Compile Include="Controller\RoomController.cs" />
     <Compile Include="Controller\SecretaryController.cs" />
     <Compile Include="Controller\SurveyController.cs" />
+    <Compile Include="Model\Suggestions.cs" />
     <Compile Include="Repository\AppointmentRepository.cs" />
     <Compile Include="Repository\DoctorRepository.cs" />
     <Compile Include="Repository\EquipmentRepository.cs" />

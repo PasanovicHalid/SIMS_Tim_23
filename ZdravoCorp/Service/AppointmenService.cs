@@ -58,12 +58,19 @@ namespace Service
 
         public Appointment SuggestAppointment(Doctor doctor, DateTime start, DateTime end, bool priority)
         {
+            
             Appointment appointment = new Appointment();
             //prioritet ima doktor
             if(priority == true)
             {
                 appointment.StartDate = GetFirstFreeAppointmentForDoctor(doctor, start, end);
+                List<Doctor> docs = new List<Doctor>();
+                docs.Add(doctor);
+                appointment.Doctor = docs;
+                appointment.EndDate = appointment.StartDate.AddMinutes(45);
+                
             }
+            //prioritet ima datum
             else
             {
 
@@ -76,6 +83,19 @@ namespace Service
             while (start < end)
             {
                 start = start.AddMinutes(45);
+                if (DoctorService.Instance.IsDoctorFree(doctor.Id, start, start.AddMinutes(45)))
+                {
+                    return start;
+                }
+            }
+            /*doktor nije slobodan taj dan*/
+            while(start < DateTime.MinValue)
+            {
+                start = start.AddMinutes(45);
+                if(DoctorService.Instance.IsDoctorFree(doctor.Id, start, start.AddMinutes(45)))
+                {
+                    return start;
+                }
             }
             return DateTime.MinValue;    
         }

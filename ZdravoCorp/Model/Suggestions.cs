@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Repository;
 namespace ZdravoCorp.Model
 {
-    public class Suggestions
+    public class Suggestions 
     {
         private int doctorID;
         private DateTime startInterval;
@@ -40,5 +40,13 @@ namespace ZdravoCorp.Model
             set { priorityDate = value; }
         }
 
+        public Suggestions(int doctorID, DateTime startInterval, DateTime endInterval, bool priorityDoctor, bool priorityDate)
+        {
+            this.doctorID = doctorID;
+            this.startInterval = startInterval;
+            this.endInterval = endInterval;
+            this.priorityDoctor = priorityDoctor;
+            this.priorityDate = priorityDate;
+        }
     }
 }
