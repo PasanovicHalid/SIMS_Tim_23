@@ -59,7 +59,7 @@
             HorizontalAlignment="Left"
             Margin="153,230,0,0" 
             VerticalAlignment="Top"
-            IsChecked="True" Checked="RadioButton_Checked"/>
+            IsChecked="True" />
         <RadioButton 
             Name ="DoctorRB"
             Content="Doktor" 
