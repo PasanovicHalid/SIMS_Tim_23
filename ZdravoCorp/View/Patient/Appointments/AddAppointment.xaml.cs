@@ -64,16 +64,28 @@ namespace ZdravoCorp.View.Patient.Appointments
             DateTime date = (DateTime) datePicker.SelectedDate;
             Appointment app = new Appointment();
             List<Appointment> apps = new List<Appointment>();
+            date.AddHours( doctor.WorkStartTime.Hour);
+            date.AddMinutes(doctor.WorkStartTime.Minute);
+            date.AddSeconds(doctor.WorkStartTime.Second);
+
             for (int i = 0; i < 15; i++)
             {
                 if (DateRB.IsChecked == true)
                 {
                     app = appointmentController.SuggestAppointment(doctor, date, date.AddMinutes(45), false);
+                    date = date.AddMinutes(45);
+                    
                 }
-                else { app = appointmentController.SuggestAppointment(doctor, date, date.AddMinutes(45), true); }
+                else 
+                { 
+                    app = appointmentController.SuggestAppointment(doctor, date, date.AddMinutes(45), true);
+                    date = date.AddMinutes(45);
+                }
                 apps.Add(app);
             }
+            
             AppointmentsCollection = new ObservableCollection<Appointment>(apps);
+           
             TableForSuggestedApp.DataContext= AppointmentsCollection;
         }
     }

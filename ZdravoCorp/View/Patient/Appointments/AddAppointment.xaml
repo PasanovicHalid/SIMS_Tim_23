@@ -74,7 +74,8 @@
             SelectionMode="Single" 
             IsReadOnly="True" >
             <DataGrid.Columns>
-                <DataGridTextColumn x:Name ="Doctor" Header="Doktor" Binding="{Binding name}" Width="*"/>
+                <DataGridTextColumn x:Name ="Doctor" Header="Doktor" Binding="{Binding doctor.nameSurname}" Width="*">
+                </DataGridTextColumn>
                 <DataGridTextColumn x:Name ="Date" Header="Datum" Binding="{Binding startDate}" Width="*"/>
                 <DataGridTextColumn x:Name ="Time" Header="Vreme" Binding="{Binding endDate}" Width="*"/>
             </DataGrid.Columns>

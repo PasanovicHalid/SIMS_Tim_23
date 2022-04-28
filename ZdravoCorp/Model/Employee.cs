@@ -14,8 +14,8 @@ namespace Model
     {
         protected float salary;
         protected DateTime enrolementDate;
-        protected DateTime workStartTime;
-        protected DateTime workEndTime;
+        public DateTime workStartTime { get; set; }
+        public DateTime workEndTime { get; set; }    
         protected DateTime vacationStartTime;
         protected DateTime vacationEndTime;
         protected int vacationDays;

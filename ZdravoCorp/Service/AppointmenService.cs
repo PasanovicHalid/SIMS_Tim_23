@@ -64,9 +64,8 @@ namespace Service
             if(priority == true)
             {
                 appointment.StartDate = GetFirstFreeAppointmentForDoctor(doctor, start, end);
-                List<Doctor> docs = new List<Doctor>();
-                docs.Add(doctor);
-                appointment.Doctor = docs;
+                
+                appointment.doctor = doctor;
                 appointment.EndDate = appointment.StartDate.AddMinutes(45);
                 
             }
@@ -76,18 +75,16 @@ namespace Service
                 if(GetFirstFreeAppointmentForDoctor(doctor, start, end) != DateTime.MinValue)
                 {
                     appointment.StartDate = start;
-                    List<Doctor> docs = new List<Doctor>();
-                    docs.Add(doctor);
-                    appointment.Doctor = docs;
+                    
+                    appointment.doctor = doctor;
                     appointment.EndDate = appointment.StartDate.AddMinutes(45);
                 }
                 else
                 {
                     Doctor d = GetFirstFreeDoctorForDate(doctor, start, end);
                     appointment.StartDate = start;
-                    List<Doctor> docs = new List<Doctor>();
-                    docs.Add(d);
-                    appointment.Doctor = docs;
+                    
+                    appointment.doctor = d;
                     appointment.EndDate = appointment.StartDate.AddMinutes(45);
                 }
             }
