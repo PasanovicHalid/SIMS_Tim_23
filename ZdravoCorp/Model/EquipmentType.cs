@@ -19,6 +19,7 @@ namespace Model
 
         private String name;
         private String description;
+        private bool disposable;
 
         public int Identifier { get => identifier; set => identifier = value; }
     }

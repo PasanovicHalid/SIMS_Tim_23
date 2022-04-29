@@ -80,6 +80,11 @@
     <Compile Include="Controller\RoomController.cs" />
     <Compile Include="Controller\SecretaryController.cs" />
     <Compile Include="Controller\SurveyController.cs" />
+    <Compile Include="Model\Action.cs" />
+    <Compile Include="Model\ActionType.cs" />
+    <Compile Include="Model\ChangeRoomAction.cs" />
+    <Compile Include="Model\RenovationAction.cs" />
+    <Compile Include="Repository\ActionRepository.cs" />
     <Compile Include="Repository\AppointmentRepository.cs" />
     <Compile Include="Repository\DoctorRepository.cs" />
     <Compile Include="Repository\EquipmentRepository.cs" />
@@ -91,6 +96,7 @@
     <Compile Include="Repository\Serializable.cs" />
     <Compile Include="Repository\Serializer.cs" />
     <Compile Include="Repository\SurveyRepository.cs" />
+    <Compile Include="Service\ActionService.cs" />
     <Compile Include="Service\AppointmenService.cs" />
     <Compile Include="Service\DoctorService.cs" />
     <Compile Include="Service\EquipmentService.cs" />
@@ -100,6 +106,11 @@
     <Compile Include="Service\RoomService.cs" />
     <Compile Include="Service\SecretaryService.cs" />
     <Compile Include="Service\SurveyService.cs" />
+    <Compile Include="Service\TimerService.cs" />
+    <Compile Include="Utility\DateManipulator.cs" />
+    <Compile Include="View\Manager\Equipment\Equpment.xaml.cs">
+      <DependentUpon>Equpment.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Manager\Manager.xaml.cs">
       <DependentUpon>Manager.xaml</DependentUpon>
     </Compile>
@@ -124,6 +135,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\Manager\Equipment\Equpment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Manager\Manager.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -194,6 +209,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Data\actionsDB.csv" />
     <None Include="Data\roomsDB.csv" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

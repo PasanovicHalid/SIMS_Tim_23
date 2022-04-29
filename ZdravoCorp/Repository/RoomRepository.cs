@@ -16,44 +16,44 @@ namespace Repository
         private String dbRoomTypePath = "..\\..\\Data\\roomTypesDB.csv";
         private Serializer<Room> serializerRoom = new Serializer<Room>();
         private Serializer<RoomType> serializerRoomType = new Serializer<RoomType>();
+        private static readonly object key = new object();
+
+        private HashSet<int> idMap;
 
         private static RoomRepository instance = null;
 
         public Boolean CreateRoom(Room newRoom)
         {
-            List<Room> rooms = serializerRoom.FromCSV(dbPath);
-
-            //Checking if the Designation Code of the new Room exists
-            bool exists = false;
-            foreach (Room room in rooms)
+            lock (key) 
             {
-                if (newRoom.DesignationCode.Equals(room.DesignationCode))
+                Random random = new Random();
+                do
                 {
-                    if (newRoom.Identifier != room.Identifier)
-                    {
-                        exists = true;
-                        break;
-                    }
+                    newRoom.Identifier = random.Next();
                 }
-            }
+                while (idMap.Contains(newRoom.Identifier));
 
-            if (!exists)
-            {
-                //Checking if the Identificator of the new Room exists 
-                bool found = false;
+                List<Room> rooms = serializerRoom.FromCSV(dbPath);
+
+                //Checking if the Designation Code of the new Room exists
+                bool exists = false;
                 foreach (Room room in rooms)
                 {
-                    if (newRoom.Identifier == room.Identifier)
+                    if (newRoom.DesignationCode.Equals(room.DesignationCode))
                     {
-                        found = true;
-                        break;
+                        if (newRoom.Identifier != room.Identifier)
+                        {
+                            exists = true;
+                            break;
+                        }
                     }
                 }
-                if (!found)
+
+                if (!exists)
                 {
-                    //Publishing changes to DB
                     rooms.Add(newRoom);
                     serializerRoom.ToCSV(dbPath, rooms);
+                    idMap.Add(newRoom.Identifier);
                     return true;
                 }
                 else
@@ -61,9 +61,26 @@ namespace Repository
                     return false;
                 }
             }
-            else
+        }
+
+        //Gets Rooms by internal ID
+        //Returns List of rooms if found
+        //Returns empty List if not found
+        public List<Room> GetRoomsByInternalID(HashSet<int> identifiers)
+        {
+            lock (key)
             {
-                return false;
+                List<Room> rooms = serializerRoom.FromCSV(dbPath);
+                List<Room> result = new List<Room>();
+
+                foreach (Room room in rooms)
+                {
+                    if (identifiers.Contains(room.Identifier))
+                    {
+                        result.Add(room);
+                    }
+                }
+                return result;
             }
         }
 
@@ -74,40 +91,76 @@ namespace Repository
 
         public Boolean UpdateRoom(Room updatedRoom)
         {
-            List<Room> rooms = serializerRoom.FromCSV(dbPath);
-
-            //Checking if Designation Code of the changed Room exists
-            bool exists = false;
-            foreach (Room room in rooms)
+            lock (key)
             {
-                if (updatedRoom.DesignationCode.Equals(room.DesignationCode))
-                {
-                    if(updatedRoom.Identifier != room.Identifier)
-                    {
-                        exists = true;
-                        break;
-                    }
-                }
-            }
+                List<Room> rooms = serializerRoom.FromCSV(dbPath);
 
-            if (!exists)
-            {
-                //Finding the Room in the list and removing it from the list
-                bool found = false;
+                //Checking if Designation Code of the changed Room exists
+                bool exists = false;
                 foreach (Room room in rooms)
                 {
-                    if (updatedRoom.Identifier == room.Identifier)
+                    if (updatedRoom.DesignationCode.Equals(room.DesignationCode))
+                    {
+                        if (updatedRoom.Identifier != room.Identifier)
+                        {
+                            exists = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (!exists)
+                {
+                    //Finding the Room in the list and removing it from the list
+                    bool found = false;
+                    foreach (Room room in rooms)
+                    {
+                        if (updatedRoom.Identifier == room.Identifier)
+                        {
+                            rooms.Remove(room);
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (found)
+                    {
+                        //Publishing changes to DB
+                        rooms.Add(updatedRoom);
+                        serializerRoom.ToCSV(dbPath, rooms);
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
+
+        public Boolean DeleteRoom(int identifier)
+        {
+            lock (key)
+            {
+                bool deleted = false;
+                List<Room> rooms = serializerRoom.FromCSV(dbPath);
+                foreach (Room room in rooms)
+                {
+                    if (identifier == room.Identifier)
                     {
                         rooms.Remove(room);
-                        found = true;
+                        deleted = true;
                         break;
                     }
                 }
-                if (found)
+                if (deleted)
                 {
-                    //Publishing changes to DB
-                    rooms.Add(updatedRoom);
                     serializerRoom.ToCSV(dbPath, rooms);
+                    idMap.Remove(identifier);
                     return true;
                 }
                 else
@@ -115,39 +168,14 @@ namespace Repository
                     return false;
                 }
             }
-            else
-            {
-                return false;
-            }
-        }
-
-        public Boolean DeleteRoom(int identifier)
-        {
-            bool deleted = false;
-            List<Room> rooms = serializerRoom.FromCSV(dbPath);
-            foreach (Room room in rooms)
-            {
-                if (identifier == room.Identifier)
-                {
-                    rooms.Remove(room);
-                    deleted = true;
-                    break;
-                }
-            }
-            if (deleted)
-            {
-                serializerRoom.ToCSV(dbPath, rooms);
-                return true;
-            }
-            else
-            {
-                return false;
-            }
         }
 
         public List<Room> GetAllRooms()
         {
-            return serializerRoom.FromCSV(dbPath);
+            lock (key)
+            {
+                return serializerRoom.FromCSV(dbPath);
+            }
         }
 
         public Boolean CreateRoomType(Model.RoomType newRoomType)
@@ -177,7 +205,13 @@ namespace Repository
 
         public RoomRepository()
         {
-            
+            idMap = new HashSet<int>();
+            List<Room> rooms = serializerRoom.FromCSV(dbPath);
+
+            foreach(Room room in rooms)
+            {
+                idMap.Add(room.Identifier);
+            }
         }
 
         public static RoomRepository Instance
@@ -186,9 +220,15 @@ namespace Repository
             {
                 if (instance == null)
                 {
-                    instance = new RoomRepository();
+                    lock (key)
+                        {
+                            if (instance == null)
+                            {
+                                instance = new RoomRepository();
+                            }
+                        }
                 }
-                return instance ;
+                return instance;
             }
         }
 

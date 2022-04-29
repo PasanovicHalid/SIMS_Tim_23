@@ -13,6 +13,7 @@ namespace Repository
     public class EquipmentRepository
     {
         private String dbPath;
+        private String dbPath_EquipmentType_path;
 
         private static EquipmentRepository instance = null;
 

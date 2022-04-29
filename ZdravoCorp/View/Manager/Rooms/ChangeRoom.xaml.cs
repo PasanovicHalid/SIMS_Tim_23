@@ -32,7 +32,6 @@ namespace ZdravoCorp.View.Manager.Rooms
             this.DataContext = this;
             roomController = new RoomController();
             this.room = room;
-            RoomId.Text = room.Identifier.ToString();
             RoomIdentifier.Text = room.DesignationCode;
             RoomSize.Text = room.SurfaceArea.ToString();
             RoomType.Text = room.RoomType.Name.ToString();

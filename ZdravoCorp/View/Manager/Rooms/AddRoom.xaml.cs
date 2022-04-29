@@ -13,6 +13,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Model;
+using Controller;
 
 namespace ZdravoCorp.View.Manager.Rooms
 {
@@ -39,19 +41,6 @@ namespace ZdravoCorp.View.Manager.Rooms
             if (PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
-            }
-        }
-
-        public int Id
-        {
-            get { return id; }
-            set
-            {
-                if (value != id)
-                {
-                    id = value;
-                    OnPropertyChanged("Id");
-                }
             }
         }
 
@@ -96,8 +85,8 @@ namespace ZdravoCorp.View.Manager.Rooms
 
         private void Create_Click(object sender, RoutedEventArgs e)
         {
-            Controller.RoomController controller = new Controller.RoomController();
-            if (!controller.CreateRoom(new Room(id, identifier, size, new RoomType(roomType), new List<Appointment>(), new List<Equipment>(), new List<Medication>())))
+            RoomController controller = new RoomController();
+            if (!controller.CreateRoom(new Room(identifier, size, new RoomType(roomType), new List<Appointment>(), new List<Model.Equipment>(), new List<Medication>())))
             {
                 MessageBox.Show("Nije uspesno dodat element", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
             }

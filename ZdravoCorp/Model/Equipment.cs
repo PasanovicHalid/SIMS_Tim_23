@@ -32,12 +32,19 @@ namespace Model
             }
         }
 
+        public int Identifier { get => equipmentType.Identifier; set => equipmentType.Identifier = value; }
         public int Count { get => count; set => count = value; }
 
         public Equipment(int identifier, int count)
         {
             this.EquipmentType = new EquipmentType(identifier);
             this.Count = count;
+        }
+
+        public Equipment(int count, EquipmentType equipmentType)
+        {
+            this.count = count;
+            this.equipmentType = equipmentType;
         }
 
         public void FromCSV(string[] values)

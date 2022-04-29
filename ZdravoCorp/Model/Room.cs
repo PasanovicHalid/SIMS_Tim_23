@@ -133,6 +133,22 @@ namespace Model
                     this.equipment.Remove(oldEquipment);
         }
 
+        public void EditEquipment(Equipment newEquipment)
+        {
+            if (newEquipment == null)
+                return;
+            if (this.equipment != null)
+                foreach(Equipment oEquipment in this.equipment)
+                {
+                    if(oEquipment.Identifier == newEquipment.Identifier)
+                    {
+                        this.equipment.Remove(oEquipment);
+                        this.equipment.Add(newEquipment);
+                        break;
+                    }
+                }
+        }
+
         /// <summary>
         /// Remove all instances of Equipment from the collection
         /// </summary>
@@ -227,9 +243,8 @@ namespace Model
                 medication.Clear();
         }
 
-        public Room(int id ,String designation, float surfaceArea, RoomType roomType, List<Appointment> appointment, List<Equipment> equipment, List<Medication> medication)
+        public Room(String designation, float surfaceArea, RoomType roomType, List<Appointment> appointment, List<Equipment> equipment, List<Medication> medication)
         {
-            Identifier = id;
             DesignationCode = designation;
             this.SurfaceArea = surfaceArea;
             this.roomType = roomType;
