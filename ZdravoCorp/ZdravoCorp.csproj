@@ -83,6 +83,7 @@
     <Compile Include="Model\Action.cs" />
     <Compile Include="Model\ActionType.cs" />
     <Compile Include="Model\ChangeRoomAction.cs" />
+    <Compile Include="Model\Suggestion.cs" />
     <Compile Include="Model\RenovationAction.cs" />
     <Compile Include="Repository\ActionRepository.cs" />
     <Compile Include="Repository\AppointmentRepository.cs" />
