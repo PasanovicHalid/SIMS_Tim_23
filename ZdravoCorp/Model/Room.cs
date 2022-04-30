@@ -299,9 +299,9 @@ namespace Model
 
             int count = int.Parse(values[i++]);
             appointment = new List<Appointment>();
-            for (; i < i + count; i++)
+            for (int j = 0; j <  count; j++)
             {
-                appointment.Add(new Appointment(int.Parse(values[i])));
+                appointment.Add(new Appointment(int.Parse(values[i++])));
             }
 
             count = int.Parse(values[i++]) * 2;
