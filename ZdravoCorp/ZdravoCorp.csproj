@@ -110,8 +110,8 @@
     <Compile Include="Service\SurveyService.cs" />
     <Compile Include="Service\TimerService.cs" />
     <Compile Include="Utility\DateManipulator.cs" />
-    <Compile Include="View\Manager\Equipment\Equpment.xaml.cs">
-      <DependentUpon>Equpment.xaml</DependentUpon>
+    <Compile Include="View\Manager\Equipments\Equipments.xaml.cs">
+      <DependentUpon>Equipments.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Manager\Manager.xaml.cs">
       <DependentUpon>Manager.xaml</DependentUpon>
@@ -146,7 +146,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\Manager\Equipment\Equpment.xaml">
+    <Page Include="View\Manager\Equipments\Equipments.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -232,6 +232,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Data\equipmentDB.csv" />
     <None Include="Data\actionsDB.csv" />
     <None Include="Data\patientsDB.csv" />
     <None Include="Data\doctorTypesDB.csv" />

@@ -12,14 +12,7 @@ namespace ZdravoCorp.Utility
 
         public static bool checkIfLaterDate(DateTime currentDate, DateTime checkingDate)
         {
-            if(currentDate >= checkingDate)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return currentDate >= checkingDate;
         }
 
     }

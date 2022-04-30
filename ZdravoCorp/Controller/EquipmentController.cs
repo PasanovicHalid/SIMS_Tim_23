@@ -4,6 +4,7 @@
 // Purpose: Definition of Class EquipmentController
 
 using Model;
+using Service;
 using System;
 using System.Collections.Generic;
 
@@ -38,17 +39,17 @@ namespace Controller
 
         public Boolean CreateEquipmentType(EquipmentType newEquipmentType)
         {
-            throw new NotImplementedException();
+            return EquipmentService.Instance.CreateEquipmentType(newEquipmentType);
         }
 
         public Boolean UpdateEquipmentType(EquipmentType equipmentType)
         {
-            throw new NotImplementedException();
+            return EquipmentService.Instance.UpdateEquipmentType(equipmentType);
         }
 
         public Boolean DeleteEquipmentType(int id)
         {
-            throw new NotImplementedException();
+            return EquipmentService.Instance.DeleteEquipmentType(id);
         }
 
         public EquipmentType ReadEquipmentType(int id)
@@ -58,12 +59,7 @@ namespace Controller
 
         public List<EquipmentType> GetAllEquipmentType()
         {
-            throw new NotImplementedException();
-        }
-
-        public EquipmentController GetInstance()
-        {
-            throw new NotImplementedException();
+            return EquipmentService.Instance.GetAllEquipmentType();
         }
     }
 }

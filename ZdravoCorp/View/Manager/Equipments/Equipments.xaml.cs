@@ -12,14 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace ZdravoCorp.View.Manager.Equipment
+namespace ZdravoCorp.View.Manager.Equipments
 {
     /// <summary>
-    /// Interaction logic for Equpment.xaml
+    /// Interaction logic for Equipments.xaml
     /// </summary>
-    public partial class Equpment : Window
+    public partial class Equipments : Window
     {
-        public Equpment()
+        public Equipments()
         {
             InitializeComponent();
         }

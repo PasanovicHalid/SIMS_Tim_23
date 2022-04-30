@@ -41,11 +41,8 @@ namespace Repository
                 {
                     if (newRoom.DesignationCode.Equals(room.DesignationCode))
                     {
-                        if (newRoom.Identifier != room.Identifier)
-                        {
-                            exists = true;
-                            break;
-                        }
+                         exists = true;
+                         break;
                     }
                 }
 
@@ -99,13 +96,10 @@ namespace Repository
                 bool exists = false;
                 foreach (Room room in rooms)
                 {
-                    if (updatedRoom.DesignationCode.Equals(room.DesignationCode))
+                    if (updatedRoom.DesignationCode.Equals(room.DesignationCode) && room.Identifier != updatedRoom.Identifier)
                     {
-                        if (updatedRoom.Identifier != room.Identifier)
-                        {
-                            exists = true;
-                            break;
-                        }
+                        exists = true;
+                        break;
                     }
                 }
 

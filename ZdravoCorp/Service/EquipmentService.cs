@@ -41,17 +41,17 @@ namespace Service
 
         public Boolean CreateEquipmentType(EquipmentType newEquipmentType)
         {
-            throw new NotImplementedException();
+            return EquipmentRepository.Instance.CreateEquipmentType(newEquipmentType);
         }
 
         public Boolean UpdateEquipmentType(EquipmentType equipmentType)
         {
-            throw new NotImplementedException();
+            return EquipmentRepository.Instance.UpdateEquipmentType(equipmentType);
         }
 
         public Boolean DeleteEquipmentType(int id)
         {
-            throw new NotImplementedException();
+            return EquipmentRepository.Instance.DeleteEquipmentType(id);
         }
 
         public EquipmentType ReadEquipmentType(int id)
@@ -61,7 +61,7 @@ namespace Service
 
         public List<EquipmentType> GetAllEquipmentType()
         {
-            throw new NotImplementedException();
+            return EquipmentRepository.Instance.GetAllEquipmentType();
         }
 
         public EquipmentService()

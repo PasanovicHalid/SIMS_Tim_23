@@ -7,6 +7,7 @@
 using Repository;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Model
 {
@@ -54,7 +55,12 @@ namespace Model
 
         public List<String> ToCSV()
         {
-            throw new NotImplementedException();
+            List<String> result = new List<String>();
+
+            result.Add(count.ToString());
+            result = (List<string>) result.Concat(equipmentType.ToCSV());
+
+            return result;
         }
     }
 }

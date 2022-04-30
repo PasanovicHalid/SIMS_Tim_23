@@ -15,11 +15,14 @@ namespace Model
         private int identifier;
         private String designationCode;
         private float surfaceArea;
+        private bool renovating;
+        private DateTime renovatedUntil;
 
         private List<Appointment> appointment;
         public Room(int id)
         {
             this.identifier = id;
+            this.renovating = false;
         }
         /// <summary>
         /// Property for collection of Appointment
@@ -205,6 +208,8 @@ namespace Model
         public string DesignationCode { get => designationCode; set => designationCode = value; }
         public float SurfaceArea { get => surfaceArea; set => surfaceArea = value; }
         public string RoomTypeString { get => RoomType.Name; set => RoomType.Name = value; }
+        public bool Renovating { get => renovating; set => renovating = value; }
+        public DateTime RenovatedUntil { get => renovatedUntil; set => renovatedUntil = value; }
 
         /// <summary>
         /// Add a new Medication in the collection
@@ -251,6 +256,7 @@ namespace Model
             this.appointment = appointment;
             this.equipment = equipment;
             this.medication = medication;
+            this.renovating = false;
         }
 
         public Room()
@@ -265,6 +271,8 @@ namespace Model
             result.Add(DesignationCode);
             result.Add(SurfaceArea.ToString());
             result.AddRange(RoomType.ToCSV());
+            result.Add(renovating.ToString());
+            result.Add(renovatedUntil.ToString());
 
             result.Add(Appointment.Count.ToString());
             foreach(Appointment it in Appointment)
@@ -296,6 +304,8 @@ namespace Model
             DesignationCode = values[i++];
             SurfaceArea = float.Parse(values[i++]);
             roomType = new RoomType(values[i++]);
+            renovating = Boolean.Parse(values[i++]);
+            renovatedUntil = DateTime.Parse(values[i++]);
 
             int count = int.Parse(values[i++]);
             appointment = new List<Appointment>();

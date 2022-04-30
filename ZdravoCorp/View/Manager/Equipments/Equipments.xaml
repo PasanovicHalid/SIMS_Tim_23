@@ -1,9 +1,9 @@
-﻿<Window x:Class="ZdravoCorp.View.Manager.Equipment.Equpment"
+﻿<Window x:Class="ZdravoCorp.View.Manager.Equipments.Equipments"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ZdravoCorp.View.Manager.Equipment"
+        xmlns:local="clr-namespace:ZdravoCorp.View.Manager.Equipments"
         mc:Ignorable="d"
         Title="Equpment" 
        Height="790" Width="430"
@@ -106,7 +106,7 @@
                     Grid.Row="2"
                     Style="{StaticResource ManagerButtons}"/>
 
-            <DataGrid x:Name="RoomTable" 
+            <DataGrid x:Name="EquipmentTable" 
                       ItemsSource="{Binding}" 
                       Margin="0,52,0,58" 
                       AutoGenerateColumns="False"
