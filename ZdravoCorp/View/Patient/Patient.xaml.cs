@@ -73,6 +73,7 @@ namespace ZdravoCorp.View.Patient
         private void Add_Appointment(object sender, RoutedEventArgs e)
         {
             AddAppointment window = new AddAppointment();
+            window.Owner = this;
             window.ShowDialog();
         }
 

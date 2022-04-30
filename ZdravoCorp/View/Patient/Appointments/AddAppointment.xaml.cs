@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using Controller;
 using System.Collections.ObjectModel;
 using Model;
+using System.ComponentModel;
 
 using System.Collections.Generic;
 
@@ -22,10 +23,13 @@ namespace ZdravoCorp.View.Patient.Appointments
     /// <summary>
     /// Interaction logic for AddAppointment.xaml
     /// </summary>
-    public partial class AddAppointment : Window
+    public partial class AddAppointment : Window, INotifyPropertyChanged
     {
         DoctorController doctorController;
         AppointmentController appointmentController;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public ObservableCollection<Appointment> AppointmentsCollection
         {
             get;
@@ -87,6 +91,14 @@ namespace ZdravoCorp.View.Patient.Appointments
             AppointmentsCollection = new ObservableCollection<Appointment>(apps);
            
             TableForSuggestedApp.DataContext= AppointmentsCollection;
+        }
+
+        private void Confirm_Click(object sender, RoutedEventArgs e)
+        {
+            AppointmentsCollection = new ObservableCollection<Appointment>();
+            Appointment appointment = new Appointment();
+
+            appointment.doctor = doctorController.ReadDoctor(TableForSuggestedApp.SelectedIndex);
         }
     }
 }
