@@ -13,9 +13,11 @@ namespace Controller
 {
     public class RoomController
     {
+        RoomService roomService = new RoomService();
+        
         public Boolean CreateRoom(Room newRoom)
         {
-            return RoomService.Instance.CreateRoom(newRoom);
+            return roomService.CreateRoom(newRoom);
         }
 
         public Room ReadRoom(String identifier)
@@ -25,17 +27,17 @@ namespace Controller
 
         public Boolean UpdateRoom(Room updatedRoom)
         {
-            return RoomService.Instance.UpdateRoom(updatedRoom);
+            return roomService.UpdateRoom(updatedRoom);
         }
 
         public Boolean DeleteRoom(int identifier)
         {
-            return RoomService.Instance.DeleteRoom(identifier);
+            return roomService.DeleteRoom(identifier);
         }
 
         public List<Room> GetAllRooms()
         {
-            return RoomService.Instance.GetAllRooms();
+            return roomService.GetAllRooms();
         }
 
         public Boolean CreateRoomType(Model.RoomType newRoomType)

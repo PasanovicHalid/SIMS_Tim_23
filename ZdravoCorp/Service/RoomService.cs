@@ -14,7 +14,7 @@ namespace Service
     public class RoomService
     {
         private static RoomService instance = null;
-
+        private static readonly object key = new object();
         public Boolean CreateRoom(Room newRoom)
         {
             return RoomRepository.Instance.CreateRoom(newRoom);
@@ -33,6 +33,11 @@ namespace Service
         public Boolean DeleteRoom(int identifier)
         {
             return RoomRepository.Instance.DeleteRoom(identifier);
+        }
+
+        public List<Room> GetRoomsByInternalID(HashSet<int> identifiers)
+        {
+            return RoomRepository.Instance.GetRoomsByInternalID(identifiers);
         }
 
         public List<Room> GetAllRooms()
@@ -69,16 +74,21 @@ namespace Service
         {
             
         }
-
         public static RoomService Instance
         {
-            get 
+            get
             {
                 if (instance == null)
                 {
-                    instance = new RoomService();
+                    lock (key)
+                    {
+                        if (instance == null)
+                        {
+                            instance = new RoomService();
+                        }
+                    }
                 }
-                return instance ;
+                return instance;
             }
         }
     }

@@ -15,8 +15,6 @@
         <TextBox HorizontalAlignment="Left" Height="26" Margin="109,82,0,0" TextWrapping="Wrap" Text="{Binding Path=Size, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="240"/>
         <Button Content="Create" HorizontalAlignment="Left" Margin="279,168,0,0" VerticalAlignment="Top" Click="Create_Click" Height="36" Width="59"/>
         <TextBox HorizontalAlignment="Left" Height="26" Margin="109,125,0,0" TextWrapping="Wrap" Text="{Binding Path=RoomType, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="240"/>
-        <Label Content="Id" HorizontalAlignment="Left" Margin="14,10,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="26" Margin="109,10,0,0" TextWrapping="Wrap" Text="{Binding Id, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="240"/>
 
     </Grid>
 </Window>

@@ -11,7 +11,7 @@
         WindowStyle="None"
         ResizeMode="NoResize"
         Background="Transparent"
-        AllowsTransparency="True">
+        AllowsTransparency="True" Closing="CloseWindow">
     <Border Background="#222831"
             CornerRadius="10">
         <Grid>
