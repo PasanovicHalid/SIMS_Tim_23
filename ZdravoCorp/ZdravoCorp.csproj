@@ -85,6 +85,7 @@
     <Compile Include="Model\ChangeRoomAction.cs" />
     <Compile Include="Model\RenovationAction.cs" />
     <Compile Include="Repository\ActionRepository.cs" />
+    <Compile Include="Model\Suggestions.cs" />
     <Compile Include="Repository\AppointmentRepository.cs" />
     <Compile Include="Repository\DoctorRepository.cs" />
     <Compile Include="Repository\EquipmentRepository.cs" />
@@ -95,6 +96,7 @@
     <Compile Include="Repository\SecretaryRepository.cs" />
     <Compile Include="Repository\Serializable.cs" />
     <Compile Include="Repository\Serializer.cs" />
+    <Compile Include="Repository\SuggestionsRepository.cs" />
     <Compile Include="Repository\SurveyRepository.cs" />
     <Compile Include="Service\ActionService.cs" />
     <Compile Include="Service\AppointmenService.cs" />
@@ -122,6 +124,15 @@
     </Compile>
     <Compile Include="View\Manager\Rooms\Rooms.xaml.cs">
       <DependentUpon>Rooms.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Patient\Appointments\AddAppointment.xaml.cs">
+      <DependentUpon>AddAppointment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Patient\Appointments\Appointments.xaml.cs">
+      <DependentUpon>Appointments.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Patient\Patient.xaml.cs">
+      <DependentUpon>Patient.xaml</DependentUpon>
     </Compile>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -152,6 +163,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Manager\Rooms\Rooms.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Patient\Appointments\AddAppointment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Patient\Appointments\Appointments.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Patient\Patient.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -210,6 +233,11 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Data\actionsDB.csv" />
+
+    <None Include="Data\patientsDB.csv" />
+    <None Include="Data\doctorTypesDB.csv" />
+    <None Include="Data\doctorsDB.csv" />
+    <None Include="Data\appointmentsDB.csv" />
     <None Include="Data\roomsDB.csv" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -247,8 +275,6 @@
   <ItemGroup>
     <Resource Include="Resources\Fonts\OFL.txt" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="View\Patient\Appointments\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

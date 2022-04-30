@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ZdravoCorp.Service;
 using ZdravoCorp.View.Manager;
+using ZdravoCorp.View.Patient;
 
 namespace ZdravoCorp
 {
@@ -68,12 +69,21 @@ namespace ZdravoCorp
             pb.Tag = (!string.IsNullOrEmpty(pb.Password)).ToString();
         }
 
+<<<<<<< HEAD
         private void CloseWindow(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (!anotherWindow)
             {
                 autoEvent.Set();
             }
+=======
+        private void Patient_Click(object sender, RoutedEventArgs e)
+        {
+            Patient window = new Patient();
+            this.Close();
+            window.ShowDialog();
+
+>>>>>>> patient-add-appointment
         }
     }
 }
