@@ -76,33 +76,27 @@ namespace ZdravoCorp.View.Patient.Appointments
             DateTime date = (DateTime) datePicker.SelectedDate;
             Appointment app ;
             List<Appointment> apps = new List<Appointment>();
-            date.AddHours( doctor.WorkStartTime.Hour);
-            date.AddMinutes(doctor.WorkStartTime.Minute);
-            date.AddSeconds(doctor.WorkStartTime.Second);
-
-            for (int i = 0; i < 15; i++)
-            {
-                if (DateRB.IsChecked == true)
-                {
-                    app = appointmentController.SuggestAppointment(doctor, date, date.AddMinutes(45), false);
-                    date = date.AddMinutes(45);
-                    PatientController pc = new PatientController();
-                    app.Patient = pc.ReadPatient(0);
-                    RoomController rc = new RoomController();
-                    app.Room = rc.ReadRoom("0");
-                }
-                else 
-                { 
-                    app = appointmentController.SuggestAppointment(doctor, date, date.AddMinutes(45), true);
-                    date = date.AddMinutes(45);
-                    PatientController pc = new PatientController();
-                    app.Patient = pc.ReadPatient(0);
-                    RoomController rc = new RoomController();
-                    app.Room = rc.ReadRoom("0");
-                }
-                apps.Add(app);
-               // suggestions.Add(new Model.Suggestion(app.doctor, app.startDate, app.endDate, true, true));
-            }
+            date.AddHours((int) doctor.WorkStartTime.Hour);
+            date.AddMinutes((int)doctor.WorkStartTime.Minute);
+            date.AddSeconds((int)doctor.WorkStartTime.Second);
+            apps = appointmentController.SuggestAppointments(doctor, date, date.AddMinutes(45), DateRB.IsChecked == true);
+            //for (int i = 0; i < 15; i++)
+            //{
+            //    if (DateRB.IsChecked == true)
+            //    {
+            //        app = appointmentController.SuggestAppointment(doctor, date, date.AddMinutes(45), false);
+            //        date = date.AddMinutes(45);
+                    
+            //    }
+            //    else 
+            //    { 
+            //        app = appointmentController.SuggestAppointment(doctor, date, date.AddMinutes(45), true);
+            //        date = date.AddMinutes(45);
+                    
+            //    }
+            //    apps.Add(app);
+            //   // suggestions.Add(new Model.Suggestion(app.doctor, app.startDate, app.endDate, true, true));
+            //}
             AppointmentsCollection = new ObservableCollection<Appointment>(apps);
             TableForSuggestedApp.DataContext = AppointmentsCollection;
             //SuggestionsCollection = new ObservableCollection<Model.Suggestion>(suggestions);
@@ -130,7 +124,7 @@ namespace ZdravoCorp.View.Patient.Appointments
             PatientController pc = new PatientController();
             app.Patient = pc.ReadPatient(0);
             RoomController rc = new RoomController();
-            app.Room = rc.ReadRoom("0");
+            app.Room = rc.ReadRoom(0);
             appointmentController.CreateAppointment(app);
             this.Close();
         }
@@ -152,7 +146,8 @@ namespace ZdravoCorp.View.Patient.Appointments
             PatientController pc = new PatientController();
             appointment.Patient = pc.ReadPatient(0);
             RoomController rc = new RoomController();
-            appointment.Room = rc.ReadRoom("0");
+            Room r = rc.findFreeRoom(appointment.startDate, appointment.endDate);
+            appointment.Room = r;
             appointmentController.CreateAppointment(appointment);
         }
     }

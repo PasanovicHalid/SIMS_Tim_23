@@ -62,12 +62,9 @@ namespace ZdravoCorp.View.Patient
         
         private void UpdateTable()
         {
-            AppointmentsCollection = new ObservableCollection<Appointment>();
+            
             List<Appointment> appointments = appointmentController.GetAllAppointments();
-            foreach (Appointment app in appointments)
-            {
-                AppointmentsCollection.Add(app);
-            }
+            AppointmentsCollection = new ObservableCollection<Appointment>(appointments);
             PatientAppointmentTable.DataContext = AppointmentsCollection;
         }
         private void Add_Appointment(object sender, RoutedEventArgs e)
@@ -75,6 +72,7 @@ namespace ZdravoCorp.View.Patient
             AddAppointment window = new AddAppointment();
             window.Owner = this;
             window.ShowDialog();
+            UpdateTable();
         }
 
         private void Change_Appointment(object sender, RoutedEventArgs e)

@@ -84,13 +84,13 @@ namespace Repository
             }
         }
 
-        public Model.Room ReadRoom(String identifier)
+        public Model.Room ReadRoom(int identifier)
         {
             List<Room> rooms = serializerRoom.FromCSV(dbPath);
-            int id = int.Parse(identifier);
+            
             foreach (Room room in rooms)
             {
-                if (id ==(room.Identifier))
+                if (identifier ==(room.Identifier))
                 {
                     return room;
                 }

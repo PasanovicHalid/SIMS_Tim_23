@@ -20,7 +20,7 @@ namespace Controller
             return roomService.CreateRoom(newRoom);
         }
 
-        public Room ReadRoom(String identifier)
+        public Room ReadRoom(int identifier)
         {
             return roomService.ReadRoom(identifier);
         }
@@ -63,6 +63,10 @@ namespace Controller
         public List<RoomType> GetAllRoomType()
         {
             throw new NotImplementedException();
+        }
+        public Room findFreeRoom(DateTime start, DateTime end)
+        {
+            return RoomService.Instance.findFreeRoom(start, end);
         }
     }
 }

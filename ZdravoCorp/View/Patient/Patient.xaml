@@ -46,10 +46,10 @@
                             SelectionChanged="PatientAppointmentTable_SelectionChanged">
 
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Doctor" Binding="{Binding Doctor}" Width="*"/>
-                                <DataGridTextColumn Header="Start" Binding="{Binding Start}" Width="*"/>
-                                <DataGridTextColumn Header="End" Binding="{Binding End}" Width="*"/>
-                                <DataGridTextColumn Header="Room" Binding="{Binding Room}" Width="*"/>
+                                <DataGridTextColumn Header="Doktor" Binding="{Binding doctor.nameSurname}" Width="*"/>
+                                <DataGridTextColumn Header="Pocetak" Binding="{Binding startDate}" Width="*"/>
+                                <DataGridTextColumn Header="Kraj" Binding="{Binding endDate}" Width="*"/>
+                                <DataGridTextColumn Header="Soba" Binding="{Binding room.designationCode}" Width="*"/>
 
                             </DataGrid.Columns>
                         </DataGrid>
