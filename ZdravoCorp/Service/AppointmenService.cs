@@ -56,5 +56,99 @@ namespace Service
             }
         }
 
+        public Appointment SuggestAppointment(Doctor doctor, DateTime start, DateTime end, bool priority)
+        {
+            
+            Appointment appointment = new Appointment();
+            //prioritet ima doktor
+            if(priority == true)
+            {
+                appointment.StartDate = GetFirstFreeAppointmentForDoctor(doctor, start, end);
+                
+                appointment.doctor = doctor;
+                appointment.EndDate = appointment.StartDate.AddMinutes(45);
+                
+            }
+            //prioritet ima datum
+            else
+            {
+                if(GetFirstFreeAppointmentForDoctor(doctor, start, end) != DateTime.MinValue)
+                {
+                    appointment.StartDate = start;
+                    
+                    appointment.doctor = doctor;
+                    appointment.EndDate = appointment.StartDate.AddMinutes(45);
+                }
+                else
+                {
+                    Doctor d = GetFirstFreeDoctorForDate(doctor, start, end);
+                    appointment.StartDate = start;
+                    
+                    appointment.doctor = d;
+                    appointment.EndDate = appointment.StartDate.AddMinutes(45);
+                }
+            }
+            return appointment;
+        }
+        public DateTime GetFirstFreeAppointmentForDoctor(Doctor doctor, DateTime start, DateTime end)
+        {
+            
+            while (start < end)
+            {
+                start = start.AddMinutes(45);
+                if (DoctorService.Instance.IsDoctorFree(doctor.Id, start, start.AddMinutes(45)))
+                {
+                    return start;
+                }
+            }
+            /*doktor nije slobodan taj dan*/
+            while(start < DateTime.MinValue)
+            {
+                start = start.AddMinutes(45);
+                if(DoctorService.Instance.IsDoctorFree(doctor.Id, start, start.AddMinutes(45)))
+                {
+                    return start;
+                }
+            }
+            return DateTime.MinValue;    
+        }
+        public List<Appointment> doctorsAppointments(int id)
+        {
+            List<Appointment> result = new List<Appointment>();
+            foreach(Appointment app in GetAllAppointments())
+            {
+                foreach(Doctor doc in DoctorService.Instance.GetAllDoctors())
+                {
+                    if (doc.Id == id)
+                    {
+                        result.Add(app);
+                    }
+                }
+            }
+            return result;
+        }
+
+        public Doctor GetFirstFreeDoctorForDate(Doctor doctor, DateTime start, DateTime end)
+        {
+            List<Doctor> doctors = DoctorService.Instance.GetAllDoctors();
+            Doctor doc = new Doctor();
+            
+            foreach(Doctor d in doctors)
+            {
+                doc.Id = d.Id;
+                while (start < end) 
+                {
+                    start = start.AddMinutes(45);
+                    if (DoctorService.Instance.IsDoctorFree(d.Id, start, start.AddMinutes(45)))
+                    {
+                        return d;
+                    }
+                }
+                
+            }
+            doc.Id = -1;
+            return doc;
+        }
+        
     }
 }

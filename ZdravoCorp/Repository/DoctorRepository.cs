@@ -12,7 +12,7 @@ namespace Repository
     public class DoctorRepository
     {
         private String dbPath = "..\\..\\Data\\doctorsDB.csv";
-        private String DbDoctorType = "..\\..\\Data\\doctorTypesDB.csv";
+        private String dbDoctorType = "..\\..\\Data\\doctorTypesDB.csv";
         private Serializer<Doctor> serializerDoctor = new Serializer<Doctor>();
         private Serializer<DoctorType> serializerDoctorType = new Serializer<DoctorType>();
 
@@ -102,7 +102,7 @@ namespace Repository
         {
             List<DoctorType> dcType = GetAllDoctorType();
             dcType.Add(newDoctorType);
-            serializerDoctorType.ToCSV(dbPath, dcType);
+            serializerDoctorType.ToCSV(dbDoctorType, dcType);
             return true;
         }
 
@@ -122,7 +122,7 @@ namespace Repository
             if (success)
             {
                 dcType.Add(doctorType);
-                serializerDoctorType.ToCSV(dbPath, dcType);
+                serializerDoctorType.ToCSV(dbDoctorType, dcType);
             }
             return success;
         }
@@ -137,7 +137,7 @@ namespace Repository
                 {
                     success = true;
                     dcType.Remove(dct);
-                    serializerDoctorType.ToCSV(dbPath, dcType);
+                    serializerDoctorType.ToCSV(dbDoctorType, dcType);
                     break;
                 }
             }
@@ -160,7 +160,7 @@ namespace Repository
 
         public List<DoctorType> GetAllDoctorType()
         {
-            return serializerDoctorType.FromCSV(dbPath);
+            return serializerDoctorType.FromCSV(dbDoctorType);
         }
 
         public DoctorRepository()

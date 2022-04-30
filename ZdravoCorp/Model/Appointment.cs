@@ -12,8 +12,8 @@ namespace Model
 {
     public class Appointment : Serializable
     {
-        private DateTime startDate;
-        private DateTime endDate;
+        public DateTime startDate { get; set; }
+        public DateTime endDate { get; set; }
         private int id;
 
         public Appointment(int id)
@@ -25,7 +25,7 @@ namespace Model
         {
         }
 
-        public Appointment(DateTime startDate, DateTime endDate, int id, List<Doctor> doctor, Room room, Patient patient)
+        public Appointment(DateTime startDate, DateTime endDate, int id, Doctor doctor, Room room, Patient patient)
         {
             StartDate = startDate;
             EndDate = endDate;
@@ -37,81 +37,8 @@ namespace Model
 
         
 
-        private List<Doctor> doctor;
+        public Doctor doctor { get; set; }
 
-        /// <summary>
-        /// Property for collection of Doctor
-        /// </summary>
-        /// <pdGenerated>Default opposite class collection property</pdGenerated>
-        public List<Doctor> Doctor
-        {
-            get
-            {
-                if (doctor == null)
-                    doctor = new List<Doctor>();
-                return doctor;
-            }
-            set
-            {
-                RemoveAllDoctor();
-                if (value != null)
-                {
-                    foreach (Doctor oDoctor in value)
-                        AddDoctor(oDoctor);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Add a new Doctor in the collection
-        /// </summary>
-        /// <pdGenerated>Default Add</pdGenerated>
-        public void AddDoctor(Doctor newDoctor)
-        {
-            if (newDoctor == null)
-                return;
-            if (this.doctor == null)
-                this.doctor = new List<Doctor>();
-            if (!this.doctor.Contains(newDoctor))
-            {
-                this.doctor.Add(newDoctor);
-                newDoctor.AddAppointment(this);
-            }
-        }
-
-        /// <summary>
-        /// Remove an existing Doctor from the collection
-        /// </summary>
-        /// <pdGenerated>Default Remove</pdGenerated>
-        public void RemoveDoctor(Doctor oldDoctor)
-        {
-            if (oldDoctor == null)
-                return;
-            if (this.doctor != null)
-                if (this.doctor.Contains(oldDoctor))
-                {
-                    this.doctor.Remove(oldDoctor);
-                    oldDoctor.RemoveAppointment(this);
-                }
-        }
-
-        /// <summary>
-        /// Remove all instances of Doctor from the collection
-        /// </summary>
-        /// <pdGenerated>Default removeAll</pdGenerated>
-        public void RemoveAllDoctor()
-        {
-            if (doctor != null)
-            {
-                System.Collections.ArrayList tmpDoctor = new System.Collections.ArrayList();
-                foreach (Doctor oldDoctor in doctor)
-                    tmpDoctor.Add(oldDoctor);
-                doctor.Clear();
-                foreach (Doctor oldDoctor in tmpDoctor)
-                    oldDoctor.RemoveAppointment(this);
-                tmpDoctor.Clear();
-            }
-        }
         private Room room;
 
         /// <summary>
@@ -176,11 +103,7 @@ namespace Model
             result.Add(Id.ToString());
             result.Add(StartDate.ToString());
             result.Add(EndDate.ToString());
-            result.Add(Doctor.Count.ToString());
-            foreach (Doctor d in Doctor)
-            {
-                result.Add(d.Id.ToString());
-            }
+            result.Add(doctor.Id.ToString());
             result.Add(Room.Identifier.ToString());
             result.Add(Patient.Id.ToString());
             return result;
@@ -192,12 +115,7 @@ namespace Model
             Id = int.Parse(values[i++]);
             StartDate = DateTime.Parse(values[i++]);
             EndDate = DateTime.Parse(values[i++]);
-            int count = int.Parse(values[i++]);
-            doctor = new List<Doctor>();
-            for (int j = 0; j < count; j++)
-            {
-                doctor.Add(new Doctor(int.Parse(values[i++])));
-            }
+            doctor = new Doctor(int.Parse(values[i++]));
             Room = new Room(int.Parse(values[i++]));
             Patient = new Patient(int.Parse(values[i++]));
         }

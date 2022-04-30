@@ -109,7 +109,8 @@
                 VerticalAlignment="Top" 
                 Height="41" 
                 Width="175"
-                Style="{StaticResource LoginButton}" Click="Manager_Click"/>
+                Style="{StaticResource LoginButton}" 
+                Click="Manager_Click"/>
 
             <Button Content="Patient" 
                 HorizontalAlignment="Left" 
@@ -118,7 +119,8 @@
                 VerticalAlignment="Top" 
                 Height="41" 
                 Width="175"
-                Style="{StaticResource LoginButton}"/>
+                Style="{StaticResource LoginButton}"
+                Click="Patient_Click"/>
 
             <Button Content="Secretary" 
                 HorizontalAlignment="Left" 

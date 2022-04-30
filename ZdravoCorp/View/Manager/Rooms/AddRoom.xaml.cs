@@ -85,6 +85,7 @@ namespace ZdravoCorp.View.Manager.Rooms
 
         private void Create_Click(object sender, RoutedEventArgs e)
         {
+            
             RoomController controller = new RoomController();
             if (!controller.CreateRoom(new Room(identifier, size, new RoomType(roomType), new List<Appointment>(), new List<Model.Equipment>(), new List<Medication>())))
             {
