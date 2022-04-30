@@ -22,7 +22,7 @@ namespace Controller
 
         public Room ReadRoom(String identifier)
         {
-            throw new NotImplementedException();
+            return roomService.ReadRoom(identifier);
         }
 
         public Boolean UpdateRoom(Room updatedRoom)

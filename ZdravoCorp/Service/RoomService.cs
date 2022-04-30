@@ -22,7 +22,7 @@ namespace Service
 
         public Room ReadRoom(String identifier)
         {
-            throw new NotImplementedException();
+            return RoomRepository.Instance.ReadRoom(identifier);
         }
 
         public Boolean UpdateRoom(Room updatedRoom)

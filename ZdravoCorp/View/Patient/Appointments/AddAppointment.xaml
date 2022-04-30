@@ -73,7 +73,7 @@
             AutoGenerateColumns="False"
             SelectionMode="Single" 
             IsReadOnly="True" 
-            SelectedItem="{Binding appointment}"
+            SelectedItem="{Binding app}"
             >
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name ="Doctor" Header="Doktor" Binding="{Binding doctor.nameSurname}" Width="*">
@@ -88,7 +88,8 @@
                 VerticalAlignment="Top"
                 Height="30"
                 Width="80"
-                Click="Search_Click"/>
+                Click="Search_Click"
+                />
         <CheckBox Content="Notifikacije" 
                   HorizontalAlignment="Left" 
                   Margin="695,335,0,0" 
