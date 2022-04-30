@@ -27,7 +27,7 @@ namespace ZdravoCorp.View.Patient.Appointments
     {
         DoctorController doctorController;
         AppointmentController appointmentController;
-        List<Model.Suggestions> suggestions = new List<Model.Suggestions>();
+       // List<Model.Suggestions> suggestions = new List<Model.Suggestions>();
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -46,11 +46,11 @@ namespace ZdravoCorp.View.Patient.Appointments
             get;
             set;
         }
-        public ObservableCollection<Model.Suggestions> SuggestionsCollection
-        {
-            get;
-            set;
-        }
+        //public ObservableCollection<Model.Suggestions> SuggestionsCollection
+        //{
+        //    get;
+        //    set;
+        //}
         public AddAppointment()
         {
             InitializeComponent();

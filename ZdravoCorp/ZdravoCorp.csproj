@@ -85,7 +85,6 @@
     <Compile Include="Model\ChangeRoomAction.cs" />
     <Compile Include="Model\RenovationAction.cs" />
     <Compile Include="Repository\ActionRepository.cs" />
-    <Compile Include="Model\Suggestions.cs" />
     <Compile Include="Repository\AppointmentRepository.cs" />
     <Compile Include="Repository\DoctorRepository.cs" />
     <Compile Include="Repository\EquipmentRepository.cs" />
@@ -233,7 +232,6 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Data\actionsDB.csv" />
-
     <None Include="Data\patientsDB.csv" />
     <None Include="Data\doctorTypesDB.csv" />
     <None Include="Data\doctorsDB.csv" />
