@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Repository;
 namespace ZdravoCorp.Model
 {
-    public class Suggestions 
+    public class Suggestions
     {
         private int doctorID;
         private DateTime startInterval;

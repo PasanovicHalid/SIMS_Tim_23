@@ -91,6 +91,7 @@
     <Compile Include="Repository\SecretaryRepository.cs" />
     <Compile Include="Repository\Serializable.cs" />
     <Compile Include="Repository\Serializer.cs" />
+    <Compile Include="Repository\SuggestionsRepository.cs" />
     <Compile Include="Repository\SurveyRepository.cs" />
     <Compile Include="Service\AppointmenService.cs" />
     <Compile Include="Service\DoctorService.cs" />
@@ -216,6 +217,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Data\patientsDB.csv" />
     <None Include="Data\doctorTypesDB.csv" />
     <None Include="Data\doctorsDB.csv" />
     <None Include="Data\appointmentsDB.csv" />

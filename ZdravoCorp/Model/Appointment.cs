@@ -115,7 +115,6 @@ namespace Model
             Id = int.Parse(values[i++]);
             StartDate = DateTime.Parse(values[i++]);
             EndDate = DateTime.Parse(values[i++]);
-            int count = int.Parse(values[i++]);
             doctor = new Doctor(int.Parse(values[i++]));
             Room = new Room(int.Parse(values[i++]));
             Patient = new Patient(int.Parse(values[i++]));

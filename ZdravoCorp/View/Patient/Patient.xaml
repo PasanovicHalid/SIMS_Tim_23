@@ -12,12 +12,15 @@
             <ColumnDefinition Width="387*"/>
             <ColumnDefinition Width="206*"/>
         </Grid.ColumnDefinitions>
-        <TabControl SelectionChanged="TabControl_SelectionChanged" Grid.ColumnSpan="3" Margin="30,30,30,10">
+        <TabControl SelectionChanged="TabControl_SelectionChanged" Grid.ColumnSpan="3" Margin="50,40,10,0">
             <TabItem Header="Osnovni podaci">
                 <Grid 
                     Background="#FFE5E5E5"
                     Margin="30,30,30,30" 
-                />
+                >
+                    <Label x:Name ="Name" Content="{Binding Patient.name}" Margin="49,26,613,300"/>
+
+                </Grid>
             </TabItem>
             <TabItem Header="Pregledi">
                 <Grid 
