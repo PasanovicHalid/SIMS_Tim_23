@@ -171,6 +171,23 @@ namespace Repository
             throw new NotImplementedException();
         }
 
+        public EquipmentType FindEquipmentTypeByName(String name)
+        {
+            lock (key)
+            {
+                List<EquipmentType> equipmentTypes = serializer.FromCSV(dbPath);
+
+                foreach (EquipmentType type in equipmentTypes)
+                {
+                    if (type.Name == name)
+                    {
+                        return type;
+                    }
+                }
+                return null;
+            }
+        }
+
         public List<EquipmentType> GetAllEquipmentType()
         {
             lock (key)
@@ -181,7 +198,13 @@ namespace Repository
 
         public EquipmentRepository()
         {
-            
+            idMap = new HashSet<int>();
+            List<EquipmentType> rooms = serializer.FromCSV(dbPath);
+
+            foreach (EquipmentType it in rooms)
+            {
+                idMap.Add(it.Identifier);
+            }
         }
 
         public static EquipmentRepository Instance

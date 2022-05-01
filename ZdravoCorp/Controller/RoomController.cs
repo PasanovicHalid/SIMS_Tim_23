@@ -8,6 +8,8 @@ using Model;
 using Service;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using ZdravoCorp.View.ViewModel;
 
 namespace Controller
 {
@@ -40,9 +42,20 @@ namespace Controller
             return roomService.GetAllRooms();
         }
 
-        public Boolean CreateRoomType(Model.RoomType newRoomType)
+        public ObservableCollection<RoomVO> GetAllRoomsVO()
         {
-            throw new NotImplementedException();
+            List<Room> types = roomService.GetAllRooms();
+            ObservableCollection<RoomVO> result = new ObservableCollection<RoomVO>();
+            foreach (Room it in types)
+            {
+                result.Add(new RoomVO(it.Identifier, it.DesignationCode, it.SurfaceArea, it.Renovating, it.RenovatedUntil, it.RoomTypeString));
+            }
+            return result;
+        }
+
+        public Boolean CreateRoomType(RoomTypeVO newRoomType)
+        {
+            return RoomService.Instance.CreateRoomType(new RoomType(newRoomType));
         }
 
         public Boolean UpdateRoomType(Model.RoomType roomType)
@@ -63,6 +76,11 @@ namespace Controller
         public List<RoomType> GetAllRoomType()
         {
             throw new NotImplementedException();
+        }
+
+        public ObservableCollection<RoomTypeVO> GetAllRoomTypeView()
+        {
+            return roomService.GetAllRoomTypeView();
         }
     }
 }

@@ -35,6 +35,14 @@ namespace ZdravoCorp.View.Manager
             this.Show();
         }
 
+        private void Equipment_Click(object sender, RoutedEventArgs e)
+        {
+            Equipments.Equipments window = new Equipments.Equipments();
+            this.Hide();
+            window.ShowDialog();
+            this.Show();
+        }
+
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
             this.Close();

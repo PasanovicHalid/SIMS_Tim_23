@@ -39,5 +39,11 @@ namespace ZdravoCorp.View.Manager.Equipments
         {
             WindowState = WindowState.Minimized;
         }
+
+        private void Add_Click(object sender, RoutedEventArgs e)
+        {
+            AddEquipment window = new AddEquipment();
+            window.ShowDialog();
+        }
     }
 }

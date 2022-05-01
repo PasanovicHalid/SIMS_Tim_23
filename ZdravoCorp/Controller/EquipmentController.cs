@@ -7,17 +7,19 @@ using Model;
 using Service;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using ZdravoCorp.View.ViewModel;
 
 namespace Controller
 {
     public class EquipmentController
     {
-        public Boolean CreateEquipment(Model.Equipment newEquipment)
+        public Boolean CreateEquipment(EquipmentTypeVO type, int count, RoomVO room)
         {
-            throw new NotImplementedException();
+            return EquipmentService.Instance.CreateEquipment(type, count, room);
         }
 
-        public Boolean UpdateEquipment(Model.Equipment equipment)
+        public Boolean UpdateEquipment(Equipment equipment)
         {
             throw new NotImplementedException();
         }
@@ -37,9 +39,10 @@ namespace Controller
             throw new NotImplementedException();
         }
 
-        public Boolean CreateEquipmentType(EquipmentType newEquipmentType)
+        public Boolean CreateEquipmentType(EquipmentTypeVO newEquipmentType)
         {
-            return EquipmentService.Instance.CreateEquipmentType(newEquipmentType);
+            EquipmentType result = new EquipmentType(newEquipmentType);
+            return EquipmentService.Instance.CreateEquipmentType(result);
         }
 
         public Boolean UpdateEquipmentType(EquipmentType equipmentType)
@@ -57,9 +60,15 @@ namespace Controller
             throw new NotImplementedException();
         }
 
-        public List<EquipmentType> GetAllEquipmentType()
+        public ObservableCollection<EquipmentTypeVO> GetAllEquipmentType()
         {
-            return EquipmentService.Instance.GetAllEquipmentType();
+            List<EquipmentType> types = EquipmentService.Instance.GetAllEquipmentType();
+            ObservableCollection<EquipmentTypeVO> result = new ObservableCollection<EquipmentTypeVO>();
+            foreach(EquipmentType it in types)
+            {
+                result.Add(new EquipmentTypeVO(it.Name, it.Description, it.Disposable));
+            }
+            return result;
         }
     }
 }

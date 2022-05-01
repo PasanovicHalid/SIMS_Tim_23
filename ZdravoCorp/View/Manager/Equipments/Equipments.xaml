@@ -73,7 +73,7 @@
                     VerticalAlignment="Top" 
                     Height="32" 
                     Width="32"
-                     
+                     Click="Add_Click"
                     Grid.Row="2"
                     Style="{StaticResource ManagerButtons}"/>
 

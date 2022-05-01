@@ -8,6 +8,8 @@ using Model;
 using Repository;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using ZdravoCorp.View.ViewModel;
 
 namespace Service
 {
@@ -47,17 +49,17 @@ namespace Service
 
         public Boolean CreateRoomType(Model.RoomType newRoomType)
         {
-            throw new NotImplementedException();
+            return RoomRepository.Instance.CreateRoomType(newRoomType);
         }
 
         public Boolean UpdateRoomType(Model.RoomType roomType)
         {
-            throw new NotImplementedException();
+            return RoomRepository.Instance.UpdateRoomType(roomType);
         }
 
         public Boolean DeleteRoomType(Model.RoomType roomType)
         {
-            throw new NotImplementedException();
+            return RoomRepository.Instance.DeleteRoomType(roomType);
         }
 
         public Model.RoomType ReadRoomType(Model.RoomType roomType)
@@ -67,7 +69,23 @@ namespace Service
 
         public List<RoomType> GetAllRoomType()
         {
-            throw new NotImplementedException();
+            return RoomRepository.Instance.GetAllRoomType();
+        }
+
+        public ObservableCollection<RoomTypeVO> GetAllRoomTypeView()
+        {
+            List<RoomType> types = RoomRepository.Instance.GetAllRoomType();
+            ObservableCollection<RoomTypeVO> result = new ObservableCollection<RoomTypeVO>();
+            foreach(RoomType roomType in types)
+            {
+                result.Add(new RoomTypeVO(roomType.Name));
+            }
+            return result;
+        }
+
+        public Boolean AddEquipment(Equipment equipment, int id)
+        {
+            return RoomRepository.Instance.AddEquipment(equipment, id);
         }
 
         public RoomService()

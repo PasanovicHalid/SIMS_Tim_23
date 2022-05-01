@@ -96,7 +96,8 @@
                     VerticalAlignment="Top" 
                     Style="{DynamicResource WindowButton}" 
                     Height="140" 
-                    Width="156"/>
+                    Width="156" 
+                    Click="Equipment_Click"/>
 
             <Label  Content="Equipment" 
                     HorizontalAlignment="Left" 

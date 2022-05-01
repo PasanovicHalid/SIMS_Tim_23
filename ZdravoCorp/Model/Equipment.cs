@@ -8,6 +8,7 @@ using Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ZdravoCorp.View.ViewModel;
 
 namespace Model
 {
@@ -46,6 +47,12 @@ namespace Model
         {
             this.count = count;
             this.equipmentType = equipmentType;
+        }
+
+        public Equipment(int count, EquipmentTypeVO equipmentType)
+        {
+            this.count = count;
+            this.equipmentType = new EquipmentType(equipmentType);
         }
 
         public void FromCSV(string[] values)

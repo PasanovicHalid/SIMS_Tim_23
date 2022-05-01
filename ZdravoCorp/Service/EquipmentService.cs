@@ -7,6 +7,7 @@ using Model;
 using Repository;
 using System;
 using System.Collections.Generic;
+using ZdravoCorp.View.ViewModel;
 
 namespace Service
 {
@@ -14,9 +15,10 @@ namespace Service
     {
         private static EquipmentService instance = null;
 
-        public Boolean CreateEquipment(Equipment newEquipment)
+        public Boolean CreateEquipment(EquipmentTypeVO type, int count, RoomVO room)
         {
-            throw new NotImplementedException();
+            Equipment equipment = new Equipment(count, FindEquipmentTypeByName(type.Name));
+            return RoomService.Instance.AddEquipment(equipment, room.Identifier);
         }
 
         public Boolean UpdateEquipment(Equipment equipment)
@@ -57,6 +59,11 @@ namespace Service
         public EquipmentType ReadEquipmentType(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public EquipmentType FindEquipmentTypeByName(String name)
+        {
+            return EquipmentRepository.Instance.FindEquipmentTypeByName(name);
         }
 
         public List<EquipmentType> GetAllEquipmentType()

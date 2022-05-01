@@ -15,6 +15,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Model;
 using Controller;
+using System.Collections.ObjectModel;
+using ZdravoCorp.View.ViewModel;
 
 namespace ZdravoCorp.View.Manager.Rooms
 {
@@ -28,10 +30,15 @@ namespace ZdravoCorp.View.Manager.Rooms
         private String identifier;
         private int size;
         private String roomType;
+        private ObservableCollection<RoomTypeVO> types;
+        private RoomController roomController;
         public AddRoom()
         {
             InitializeComponent();
+            roomController = new RoomController();
             this.DataContext = this;
+            types = roomController.GetAllRoomTypeView();
+            Types.ItemsSource = types;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -70,24 +77,11 @@ namespace ZdravoCorp.View.Manager.Rooms
             }
         }
 
-        public string RoomType
-        {
-            get { return roomType; }
-            set
-            {
-                if (value != roomType)
-                {
-                    roomType = value;
-                    OnPropertyChanged("RoomType");
-                }
-            }
-        }
-
         private void Create_Click(object sender, RoutedEventArgs e)
         {
             
             RoomController controller = new RoomController();
-            if (!controller.CreateRoom(new Room(identifier, size, new RoomType(roomType), new List<Appointment>(), new List<Model.Equipment>(), new List<Medication>())))
+            if (!controller.CreateRoom(new Room(identifier, size, new RoomType(types.ElementAt(Types.SelectedIndex)), new List<Appointment>(), new List<Equipment>(), new List<Medication>())))
             {
                 MessageBox.Show("Nije uspesno dodat element", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -95,6 +89,14 @@ namespace ZdravoCorp.View.Manager.Rooms
             {
                 this.Close();
             }
+        }
+
+        private void RoomTypeAdd_Click(object sender, RoutedEventArgs e)
+        {
+            AddRoomType window = new AddRoomType();
+            window.ShowDialog();
+            types = roomController.GetAllRoomTypeView();
+            Types.ItemsSource = types;
         }
     }
 }

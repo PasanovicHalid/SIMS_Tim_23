@@ -178,7 +178,7 @@ namespace Model
                 this.roomType = value;
             }
         }
-
+        
         private List<Medication> medication;
 
         /// <summary>
@@ -309,21 +309,24 @@ namespace Model
 
             int count = int.Parse(values[i++]);
             appointment = new List<Appointment>();
-            for (; i < i + count; i++)
+            int temp = i + count;
+            for (; i < temp; i++)
             {
                 appointment.Add(new Appointment(int.Parse(values[i])));
             }
 
-            count = int.Parse(values[i++]) * 2;
+            count = int.Parse(values[i++]);
             equipment = new List<Equipment>();
-            for (; i < i + count; i++)
+            temp = i + count;
+            for (; i < temp; i++)
             {
                 equipment.Add(new Equipment(int.Parse(values[i]), int.Parse(values[++i])));
             }
 
-            count = int.Parse(values[i++]) * 2;
+            count = int.Parse(values[i++]);
             medication = new List<Medication>();
-            for (; i < i + count; i++)
+            temp = i + count;
+            for (; i < temp; i++)
             {
                 medication.Add(new Medication(int.Parse(values[i]), int.Parse(values[++i])));
             }
