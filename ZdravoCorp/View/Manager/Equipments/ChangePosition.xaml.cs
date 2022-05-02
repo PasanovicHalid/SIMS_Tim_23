@@ -115,7 +115,7 @@ namespace ZdravoCorp.View.Manager.Equipments
             roomController = new RoomController();
             equipmentController = new EquipmentController();
             roomsList = roomController.GetAllRoomsVO();
-            MaxCountTxt = roomController.GetMaxCountForEquipment(type.Room_identifier, type.Equipment_identifier);
+            MaxCountTxt = type.Actual_count;
             Rooms.ItemsSource = roomsList;
         }
 
