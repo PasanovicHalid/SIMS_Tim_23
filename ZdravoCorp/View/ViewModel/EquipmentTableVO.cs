@@ -9,6 +9,7 @@ namespace ZdravoCorp.View.ViewModel
     public class EquipmentTableVO
     {
         private int count;
+        private int actual_count;
         private String name;
         private String designationCode;
         private Boolean disposable;
@@ -19,10 +20,11 @@ namespace ZdravoCorp.View.ViewModel
         {
         }
 
-        public EquipmentTableVO(int count, string name, string designationCode, Boolean disposable, int room_identifier, int equipment_identifier)
+        public EquipmentTableVO(int count, int actual_count,  string name, string designationCode, Boolean disposable, int room_identifier, int equipment_identifier)
         {
             this.count = count;
             this.name = name;
+            this.Actual_count = actual_count;
             this.designationCode = designationCode;
             this.disposable = disposable;
             this.room_identifier = room_identifier;
@@ -35,5 +37,6 @@ namespace ZdravoCorp.View.ViewModel
         public int Room_identifier { get => room_identifier; set => room_identifier = value; }
         public int Equipment_identifier { get => equipment_identifier; set => equipment_identifier = value; }
         public bool Disposable { get => disposable; set => disposable = value; }
+        public int Actual_count { get => actual_count; set => actual_count = value; }
     }
 }

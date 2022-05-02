@@ -108,6 +108,16 @@
                     Grid.Row="2"
                     Style="{StaticResource ManagerButtons}"/>
 
+            <Button Content="R" 
+                    HorizontalAlignment="Left" 
+                    Margin="153,15,0,0" 
+                    VerticalAlignment="Top" 
+                    Height="32" 
+                    Width="32"
+                    Click="RenovateRoom_Click" 
+                    Grid.Row="2"
+                    Style="{StaticResource ManagerButtons}"/>
+
             <DataGrid x:Name="RoomTable" 
                       ItemsSource="{Binding}" 
                       Margin="0,52,0,58" 
