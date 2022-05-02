@@ -1,4 +1,4 @@
-﻿<Window x:Class="ZdravoCorp.View.Patient.Appointments.AddAppointment"
+﻿<Window x:Class="ZdravoCorp.View.Patient.Appointments.ChangeAppointment"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,10 +6,7 @@
         xmlns:local="clr-namespace:ZdravoCorp.View.Patient.Appointments"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="Zakazivanje"
-        Height="450" 
-        Width="800"
-        >
+        Title="ChangeAppointment" Height="450" Width="800">
     <Grid>
         <ComboBox 
             x:Name ="DoctorsCB"
@@ -17,7 +14,12 @@
             Margin="153,148,0,0" 
             VerticalAlignment="Top" 
             Width="171"
-            ItemsSource="{Binding}" >
+            ItemsSource="{Binding}" 
+            SelectedItem="{Binding doctor}"
+            SelectedValue="{Binding doctor}"
+            SelectedIndex="{Binding selectedIndex}"
+            >
+            
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -37,7 +39,8 @@
             SelectedDateFormat="Short"
             FirstDayOfWeek="Monday"
             IsTodayHighlighted="True"
-            Name="datePicker">
+            Name="datePicker"
+            SelectedDate="{Binding selectedDate}">
             <DatePicker.BlackoutDates>
                 <CalendarDateRange End="{x:Static sys:DateTime.Today}" Start="{x:Static sys:DateTime.MinValue}" />
             </DatePicker.BlackoutDates>

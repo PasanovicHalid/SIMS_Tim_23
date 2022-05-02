@@ -60,6 +60,11 @@ namespace Controller
             throw new NotImplementedException();
         }
 
+        public Boolean ChangePositionOfEquipment(DateTime excecutionDate,int id_from_room,int id_to_room, int id_equipment, int count)
+        {
+            return EquipmentService.Instance.ChangePositionOfEquipment(excecutionDate, id_from_room, id_to_room, id_equipment, count);
+        }
+
         public ObservableCollection<EquipmentTypeVO> GetAllEquipmentType()
         {
             return EquipmentService.Instance.GetAllEquipmentType(); ;

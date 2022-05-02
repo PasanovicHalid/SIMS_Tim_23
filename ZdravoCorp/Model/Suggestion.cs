@@ -8,16 +8,16 @@ namespace Model
 {
     public class Suggestion
     {
-        private int doctorID;
+        private Doctor doctor;
         private DateTime startInterval;
         private DateTime endInterval;
         private bool priorityDoctor;
         private bool priorityDate;
 
-        public int DoctorID
+        public Doctor Doctor
         {
-            get { return doctorID; }
-            set { doctorID = value; }
+            get { return doctor; }
+            set { doctor = value; }
         }
         public DateTime StartInterval
         {
@@ -40,9 +40,9 @@ namespace Model
             set { priorityDate = value; }
         }
 
-        public Suggestion(int doctorID, DateTime startInterval, DateTime endInterval, bool priorityDoctor, bool priorityDate)
+        public Suggestion(Doctor doctorID, DateTime startInterval, DateTime endInterval, bool priorityDoctor, bool priorityDate)
         {
-            this.doctorID = doctorID;
+            this.doctor = doctorID;
             this.startInterval = startInterval;
             this.endInterval = endInterval;
             this.priorityDoctor = priorityDoctor;

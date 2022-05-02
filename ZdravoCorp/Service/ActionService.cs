@@ -148,6 +148,7 @@ namespace Service
                 {
                     found = true;
                     it.Count += action.Count;
+                    it.Actual_count += action.Count;
                     incoming_room.EditEquipment(it);
                     break;
                 }

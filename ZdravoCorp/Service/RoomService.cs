@@ -23,9 +23,9 @@ namespace Service
             return RoomRepository.Instance.CreateRoom(newRoom);
         }
 
-        public Room ReadRoom(String identifier)
+        public Room ReadRoom(int identifier)
         {
-            throw new NotImplementedException();
+            return RoomRepository.Instance.ReadRoom(identifier);
         }
 
         public Boolean UpdateRoom(Room updatedRoom)
@@ -68,6 +68,16 @@ namespace Service
             return RoomRepository.Instance.DeleteRoomType(roomType);
         }
 
+        public int GetMaxCountForEquipment(int id_room, int id_equipment)
+        {
+            return RoomRepository.Instance.GetMaxCountForEquipment(id_room, id_equipment);
+        }
+
+        public Boolean ChangeActualCountOfEquipment(int id_from_room, int id_equipment,int count)
+        {
+            return RoomRepository.Instance.ChangeActualCountOfEquipment(id_from_room, id_equipment, count);
+        }
+
         public Model.RoomType ReadRoomType(Model.RoomType roomType)
         {
             throw new NotImplementedException();
@@ -77,6 +87,7 @@ namespace Service
         {
             return RoomRepository.Instance.GetAllRoomType();
         }
+
 
         public ObservableCollection<RoomTypeVO> GetAllRoomTypeView()
         {
@@ -115,7 +126,30 @@ namespace Service
                 return instance;
             }
         }
-
+        public Room findFreeRoom(DateTime start, DateTime end) 
+        {
+            Room freeRoom = null;
+            List<Room> rooms = GetAllRooms();
+            foreach (Room room in rooms)
+            {
+                foreach(Appointment a in room.Appointment)
+                {
+                    if((start<a.StartDate ) && (end < a.StartDate))
+                    {
+                        freeRoom = room;
+                        break;
+                    }
+                    else if ((start > a.EndDate))
+                    {
+                        freeRoom = room;
+                        break;
+                    }
+                }
+                
+            }
+            freeRoom = rooms[0];
+            return freeRoom;
+        }
         
     }
 }

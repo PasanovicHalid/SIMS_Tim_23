@@ -15,5 +15,10 @@ namespace ZdravoCorp.Utility
             return currentDate >= checkingDate;
         }
 
+        public static DateTime addTimeToDate(DateTime date, TimeSpan time)
+        {
+            return date.Add(time);
+        }
+
     }
 }

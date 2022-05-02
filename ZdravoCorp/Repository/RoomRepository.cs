@@ -82,9 +82,18 @@ namespace Repository
             }
         }
 
-        public Model.Room ReadRoom(String identifier)
+        public Model.Room ReadRoom(int identifier)
         {
-            throw new NotImplementedException();
+            List<Room> rooms = serializerRoom.FromCSV(dbPath);
+            
+            foreach (Room room in rooms)
+            {
+                if (identifier ==(room.Identifier))
+                {
+                    return room;
+                }
+            }
+            return null;
         }
 
         public Boolean UpdateRoom(Room updatedRoom)
@@ -320,6 +329,56 @@ namespace Repository
         public Model.RoomType ReadRoomType(Model.RoomType roomType)
         {
             throw new NotImplementedException();
+        }
+
+        public int GetMaxCountForEquipment(int id_room, int id_equipment)
+        {
+            HashSet<int> roomSet = new HashSet<int>() { id_room };
+            List<Room> room = GetRoomsByInternalID(roomSet);
+            foreach(Equipment it in room[0].Equipment)
+            {
+                if (it.Identifier.Equals(id_equipment))
+                {
+                    return it.Actual_count;
+                }
+            }
+            return 0;
+        }
+
+        public Boolean ChangeActualCountOfEquipment(int id_from_room, int id_equipment, int count)
+        {
+            List<Room> room =GetAllRooms();
+            bool found = false;
+            bool added = false;
+            for (int i = 0; i < room.Count; i++)
+            {
+                if (room[i].Identifier.Equals(id_from_room))
+                {
+                    found = true;
+                    for (int j = 0; j < room[i].Equipment.Count; j++)
+                    {
+                        if (room[i].Equipment[j].Identifier.Equals(id_equipment))
+                        {
+                            added = true;
+                            room[i].Equipment[j].Actual_count += count;
+                            break;
+                        }
+                    }
+                    if (added)
+                    {
+                        break;
+                    }
+                }
+            }
+            if (!found || !added)
+            {
+                return false;
+            }
+            else
+            {
+                serializerRoom.ToCSV(dbPath, room);
+                return true;
+            }
         }
 
         public List<RoomType> GetAllRoomType()

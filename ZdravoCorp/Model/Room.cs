@@ -310,11 +310,12 @@ namespace Model
 
             int count = int.Parse(values[i++]);
             appointment = new List<Appointment>();
+
             //Multiplies by 1 because it needs to scan 1 item to get Appointment
             int temp = i + count * 1;
             for (; i < temp; i++)
             {
-                appointment.Add(new Appointment(int.Parse(values[i])));
+                appointment.Add(new Appointment(int.Parse(values[i++])));
             }
 
             count = int.Parse(values[i++]);

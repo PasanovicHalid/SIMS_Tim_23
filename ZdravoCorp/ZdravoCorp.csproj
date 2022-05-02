@@ -146,6 +146,9 @@
     <Compile Include="View\Patient\Appointments\Appointments.xaml.cs">
       <DependentUpon>Appointments.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Patient\Appointments\ChangeAppointment.xaml.cs">
+      <DependentUpon>ChangeAppointment.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Patient\Patient.xaml.cs">
       <DependentUpon>Patient.xaml</DependentUpon>
     </Compile>
@@ -214,6 +217,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Patient\Appointments\Appointments.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Patient\Appointments\ChangeAppointment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

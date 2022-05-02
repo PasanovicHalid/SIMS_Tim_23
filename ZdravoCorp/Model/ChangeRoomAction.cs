@@ -16,6 +16,18 @@ namespace Model
         private int id_equipment;
         private int count;
 
+        public ChangeRoomAction()
+        {
+        }
+
+        public ChangeRoomAction(int id_incoming_room, int id_outgoing_room, int id_equipment, int count)
+        {
+            this.id_incoming_room = id_incoming_room;
+            this.id_outgoing_room = id_outgoing_room;
+            this.id_equipment = id_equipment;
+            this.count = count;
+        }
+
         public int Id_equipment { get => id_equipment; }
         public int Count { get => count; }
         public int Id_incoming_room { get => id_incoming_room; }
