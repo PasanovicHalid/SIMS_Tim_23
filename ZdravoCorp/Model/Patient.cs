@@ -12,8 +12,10 @@ namespace Model
 {
     public class Patient : User, Serializable
     {
-        private Boolean guest = false;
 
+        public Patient(int id, string password, string username, string name, string surname, string jmbg, string email, string address, string phoneNumber, Gender gender, DateTime dateOfBirth, List<Notification> notification, List<Survey> survey) : base(id, password, username, name, surname, jmbg, email, address, phoneNumber, gender, dateOfBirth, notification, survey)
+        {
+        }
 
         public Patient(int id)
         {
@@ -162,12 +164,15 @@ namespace Model
             result.Add(phoneNumber);
             result.Add(gender.ToString());
             result.Add(dateOfBirth.ToString());
+
+            
+
             int nf = 0;
-            if(notification == null)
+            if (notification == null)
             {
                 result.Add(nf.ToString());
             }
-            else 
+            else
             {
                 result.Add(notification.Count.ToString());
                 foreach (Notification n in notification)
@@ -177,8 +182,10 @@ namespace Model
                     result.Add(n.User.Id.ToString());
                 }
             }
-            
+
+
             /*Mozda nije dobro*/
+
             if(appointment == null)
             {
                 result.Add(nf.ToString());
@@ -186,12 +193,16 @@ namespace Model
             else
             {
                 result.Add(appointment.Count.ToString());
-                foreach (Appointment a in appointment)
+
+                foreach(Appointment a in appointment)
                 {
                     result.Add(a.Id.ToString());
                 }
             }
-            if(prescription == null)
+
+
+            if (prescription == null)
+
             {
                 result.Add(nf.ToString());
             }
