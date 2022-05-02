@@ -85,11 +85,20 @@ namespace Repository
         public Model.Room ReadRoom(int identifier)
         {
             List<Room> rooms = serializerRoom.FromCSV(dbPath);
-            
+
+            Dictionary<int, EquipmentType> types = EquipmentRepository.Instance.GetAllEquipmentType().ToDictionary(keySelector: m => m.Identifier, elementSelector: m => m);
+
             foreach (Room room in rooms)
             {
                 if (identifier ==(room.Identifier))
                 {
+                    foreach (Equipment equipment in room.Equipment)
+                    {
+                        if (types.ContainsKey(equipment.Identifier))
+                        {
+                            equipment.EquipmentType = types[equipment.Identifier];
+                        }
+                    }
                     return room;
                 }
             }
@@ -333,9 +342,8 @@ namespace Repository
 
         public int GetMaxCountForEquipment(int id_room, int id_equipment)
         {
-            HashSet<int> roomSet = new HashSet<int>() { id_room };
-            List<Room> room = GetRoomsByInternalID(roomSet);
-            foreach(Equipment it in room[0].Equipment)
+            Room room = ReadRoom(id_room);
+            foreach(Equipment it in room.Equipment)
             {
                 if (it.Identifier.Equals(id_equipment))
                 {
