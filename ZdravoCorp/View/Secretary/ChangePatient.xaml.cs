@@ -19,22 +19,24 @@ namespace ZdravoCorp.View.Secretary
 
 {
     /// <summary>
-    /// Interaction logic for AddPatient.xaml
+    /// Interaction logic for ChangePatient.xaml
     /// </summary>
-    public partial class AddPatient : Window, INotifyPropertyChanged
+    public partial class ChangePatient : Window, INotifyPropertyChanged
     {
         public ObservableCollection<Model.Patient> PatientCollection { get; set; }
-        private int id;
-        private String password;
-        private String username;
-        private String name;
-        private String surname;
-        private String jmbg;
-        private String email;
-        private String address;
-        private String phoneNumber;
-        private Gender gender;
-        private DateTime dateOfBirth;
+        private Model.Patient patient;
+        private PatientController patientController;
+        //private int id;
+        //private String password;
+        //private String username;
+        //private String name;
+        //private String surname;
+        //private String jmbg;
+        //private String email;
+        //private String address;
+        //private String phoneNumber;
+        //private Gender gender;
+        //private DateTime dateOfBirth;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -46,20 +48,22 @@ namespace ZdravoCorp.View.Secretary
             }
         }
 
-        public AddPatient()
+        public ChangePatient(Model.Patient patient)
         {
             InitializeComponent();
             this.DataContext = this;
+            this.patient = patient;
+            patientController = new PatientController();
         }
 
         public String Username
         {
-            get { return username; }
+            get { return patient.Username; }
             set
             {
-                if (value != username)
+                if (value != patient.Username)
                 {
-                    username = value;
+                    patient.Username = value;
                     OnPropertyChanged("Username");
                 }
             }
@@ -67,12 +71,12 @@ namespace ZdravoCorp.View.Secretary
 
         public String Password
         {
-            get { return password; }
+            get { return patient.Password; }
             set
             {
-                if (value != password)
+                if (value != patient.Password)
                 {
-                    password = value;
+                    patient.Password = value;
                     OnPropertyChanged("Password");
                 }
             }
@@ -80,12 +84,12 @@ namespace ZdravoCorp.View.Secretary
 
         public String Namee
         {
-            get { return name; }
+            get { return patient.Namee; }
             set
             {
-                if (value != name)
+                if (value != patient.Namee)
                 {
-                    name = value;
+                    patient.Namee = value;
                     OnPropertyChanged("Namee");
                 }
             }
@@ -93,12 +97,12 @@ namespace ZdravoCorp.View.Secretary
 
         public String Surname
         {
-            get { return surname; }
+            get { return patient.Surname; }
             set
             {
-                if (value != surname)
+                if (value != patient.Surname)
                 {
-                    surname = value;
+                    patient.Surname = value;
                     OnPropertyChanged("Surname");
                 }
             }
@@ -106,12 +110,12 @@ namespace ZdravoCorp.View.Secretary
 
         public String Jmbg
         {
-            get { return jmbg; }
+            get { return patient.Jmbg; }
             set
             {
-                if (value != jmbg)
+                if (value != patient.Jmbg)
                 {
-                    jmbg = value;
+                    patient.Jmbg = value;
                     OnPropertyChanged("Jmbg");
                 }
             }
@@ -119,12 +123,12 @@ namespace ZdravoCorp.View.Secretary
 
         public String Email
         {
-            get { return email; }
+            get { return patient.Email; }
             set
             {
-                if (value != email)
+                if (value != patient.Email)
                 {
-                    email = value;
+                    patient.Email = value;
                     OnPropertyChanged("Email");
                 }
             }
@@ -132,12 +136,12 @@ namespace ZdravoCorp.View.Secretary
 
         public String Address
         {
-            get { return address; }
+            get { return patient.Address; }
             set
             {
-                if (value != address)
+                if (value != patient.Address)
                 {
-                    address = value;
+                    patient.Address = value;
                     OnPropertyChanged("Address");
                 }
             }
@@ -145,12 +149,12 @@ namespace ZdravoCorp.View.Secretary
 
         public String PhoneNumber
         {
-            get { return phoneNumber; }
+            get { return patient.PhoneNumber; }
             set
             {
-                if (value != phoneNumber)
+                if (value != patient.PhoneNumber)
                 {
-                    phoneNumber = value;
+                    patient.PhoneNumber = value;
                     OnPropertyChanged("PhoneNumber");
                 }
             }
@@ -158,18 +162,18 @@ namespace ZdravoCorp.View.Secretary
 
         public Gender Gender
         {
-            get { return gender; }
+            get { return patient.Gender; }
             set
             {
-                if (value != gender)
+                if (value != patient.Gender)
                 {
                     if (MaleButton.IsChecked == true)
                     {
-                        gender = Gender.Male;
+                        patient.Gender = Gender.Male;
                     }
                     else
                     {
-                        gender = Gender.Female;
+                        patient.Gender = Gender.Female;
                     }
                     OnPropertyChanged("Gender");
                 }
@@ -179,31 +183,31 @@ namespace ZdravoCorp.View.Secretary
 
         public DateTime DateOfBirth
         {
-            get { return dateOfBirth; }
+            get { return patient.DateOfBirth; }
             set
             {
-                if (value != dateOfBirth)
+                if (value != patient.DateOfBirth)
                 {
-                    dateOfBirth = value;
+                    patient.DateOfBirth = value;
                     OnPropertyChanged("DateOfBirth");
                 }
             }
         }
 
-        private void Add_Click(object sender, RoutedEventArgs e)
+
+        private void Change_Click(object sender, RoutedEventArgs e)
         {
-            PatientController patientController = new PatientController();
             if (MaleButton.IsChecked == true)
             {
-                gender = Gender.Male;
+                patient.Gender = Gender.Male;
             }
             else
             {
-                gender = Gender.Female;
+                patient.Gender = Gender.Female;
             }
-            if (!patientController.CreatePatient(new Model.Patient(0, password, username, name, surname, jmbg, email, address, phoneNumber, gender, dateOfBirth, null, null)))
+            if (!patientController.UpdatePatient(patient))
             {
-                MessageBox.Show("Nije uspesno dodat element", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Nije uspesno izmenjen element", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else
             {

@@ -75,7 +75,7 @@ namespace Model
         public String Jmbg { get => jmbg; set => jmbg = value; }
         public String Username { get => username; set => username = value; }
         public String Password { get => password; set => password = value; }
-        public String Name { get => name; set => name = value; }
+        public String Namee { get => name; set => name = value; }
         public String Surname { get => surname; set => surname = value; }
         public String Email { get => email; set => email = value; }
         public String Address { get => address; set => address = value; }

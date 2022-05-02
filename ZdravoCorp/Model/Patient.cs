@@ -12,8 +12,10 @@ namespace Model
 {
     public class Patient : User, Serializable
     {
-        
 
+        public Patient(int id, string password, string username, string name, string surname, string jmbg, string email, string address, string phoneNumber, Gender gender, DateTime dateOfBirth, List<Notification> notification, List<Survey> survey) : base(id, password, username, name, surname, jmbg, email, address, phoneNumber, gender, dateOfBirth, notification, survey)
+        {
+        }
 
         public Patient(int id)
         {
@@ -162,24 +164,52 @@ namespace Model
             result.Add(phoneNumber);
             result.Add(gender.ToString());
             result.Add(dateOfBirth.ToString());
-            result.Add(notification.Count.ToString());
+            
+
+            int nf = 0;
+            if (notification == null)
+            {
+                result.Add(nf.ToString());
+            }
+            else
+            {
+                result.Add(notification.Count.ToString());
+                foreach (Notification n in notification)
+                {
+                    result.Add(n.DateCreated.ToString());
+                    result.Add(n.Content);
+                    result.Add(n.User.Id.ToString());
+                }
+            }
+
             /*Mozda nije dobro*/
-            foreach (Notification n in notification)
+
+            if(appointment == null)
             {
-                result.Add(n.DateCreated.ToString());
-                result.Add(n.Content);
-                result.Add(n.User.Id.ToString());
+                result.Add(nf.ToString());
             }
-            result.Add(appointment.Count.ToString());
-            foreach(Appointment a in appointment)
+            else
             {
-                result.Add(a.Id.ToString());
+                result.Add(appointment.Count.ToString());
+                foreach(Appointment a in appointment)
+                {
+                    result.Add(a.Id.ToString());
+                }
             }
-            result.Add(prescription.Count.ToString());
-            foreach(Prescription p in prescription)
+
+            if (prescription == null)
             {
-                result.Add(p.Id.ToString());
+                result.Add(nf.ToString());
             }
+            else
+            {
+                result.Add(prescription.Count.ToString());
+                foreach (Prescription p in prescription)
+                {
+                    result.Add(p.Id.ToString());
+                }
+            }
+            
             return result;
         }
 
