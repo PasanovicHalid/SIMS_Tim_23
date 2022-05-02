@@ -95,7 +95,18 @@ namespace Repository
 
         public List<Doctor> GetAllDoctors()
         {
-            return serializerDoctor.FromCSV(dbPath);
+            List<Doctor> doctors = serializerDoctor.FromCSV(dbPath);
+            foreach(Doctor d in doctors)
+            {
+                List<int> ids = new List<int>();
+                foreach(Appointment a in d.Appointment)
+                {
+                    ids.Add(a.Id);
+                }
+                d.Appointment = AppointmentRepository.Instance.GetAppointmentsById(ids);
+                
+            }
+            return doctors;
         }
 
         public Boolean CreateDoctorType(DoctorType newDoctorType)

@@ -26,7 +26,7 @@ namespace Model
         {
         }
 
-        private List<Appointment> appointment;
+        private List<Appointment> appointment = new List<Appointment>();
 
         /// <summary>
         /// Property for collection of Appointment
@@ -249,7 +249,9 @@ namespace Model
             int count2 = int.Parse(values[i++]);
             for(int j = 0; j < count2; j++)
             {
-                appointment.Add(new Appointment(int.Parse(values[i++])));
+                appointment.Add(new Appointment(int.Parse(values[i])));
+                i++;
+                //appointment.Add(new Appointment(int.Parse(values[i++])));
             }
 
             int count3 = int.Parse(values[i++]);

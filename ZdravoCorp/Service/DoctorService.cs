@@ -83,41 +83,53 @@ namespace Service
         }
         public bool IsDoctorFree(int id, DateTime start, DateTime end)
         {
-            bool isFree = true;
+            bool isFree = false;
             
             Doctor doctor = ReadDoctor(id);
-            if(start.Date > doctor.WorkStartTime.Date && end.Date< doctor.WorkEndTime.Date && start.Hour > doctor.WorkStartTime.Hour && end.Hour < doctor.WorkEndTime.Hour)
+            List<DateTime> startDates = new List<DateTime>();
+            List<DateTime> endDates = new List<DateTime>();
+            foreach(Appointment a in doctor.Appointment)
             {
-                List<Appointment> appointments = AppointmenService.Instance.doctorsAppointments(doctor.Id); 
-                foreach(Appointment app in appointments)
-                {
-                    //if((app.startDate.TimeOfDay <= start.TimeOfDay) && (app.EndDate.TimeOfDay <= end.TimeOfDay)) { isFree = true; }
-                    
-                    
-                    if(app.StartDate.TimeOfDay < start.TimeOfDay)
-                    {
-                        if(app.EndDate.TimeOfDay > start.TimeOfDay && app.EndDate.TimeOfDay < end.TimeOfDay)
-                        {
-                            return false;
-                        }
-                        if (app.EndDate.TimeOfDay > end.TimeOfDay)
-                        {
-                            return false;
-                        }
-                    }
-                    else
-                    {
-                        if(app.StartDate < end && app.EndDate > end)
-                        {
-                            return false;
-                        }
-                        if(app.EndDate < end)
-                        {
-                            return false;
-                        }
-                    }
-                }
+                startDates.Add(a.startDate);
+                endDates.Add(a.endDate);
             }
+            if(!(startDates.Contains(start) || endDates.Contains(end)))
+            {
+                isFree = true;
+            }
+            //if(start.Date > doctor.WorkStartTime.Date && end.Date< doctor.WorkEndTime.Date && start.Hour > doctor.WorkStartTime.Hour && end.Hour < doctor.WorkEndTime.Hour)
+            //{
+            //    List<Appointment> appointments = AppointmenService.Instance.doctorsAppointments(doctor.Id); 
+            //    foreach(Appointment app in appointments)
+            //    {
+            //        //if((app.startDate.TimeOfDay <= start.TimeOfDay) && (app.EndDate.TimeOfDay <= end.TimeOfDay)) { isFree = true; }
+                    
+                    
+            //        if(app.StartDate.TimeOfDay < start.TimeOfDay)
+            //        {
+            //            if(app.EndDate.TimeOfDay > start.TimeOfDay && app.EndDate.TimeOfDay < end.TimeOfDay)
+            //            {
+            //                return false;
+            //            }
+            //            if (app.EndDate.TimeOfDay > end.TimeOfDay)
+            //            {
+            //                return false;
+            //            }
+            //        }
+            //        else
+            //        {
+            //            if(app.StartDate < end && app.EndDate > end)
+            //            {
+            //                return false;
+            //            }
+            //            if(app.EndDate < end)
+            //            {
+            //                return false;
+            //            }
+            //        }
+            //    }
+            //}
+
             return isFree;
         }
     }

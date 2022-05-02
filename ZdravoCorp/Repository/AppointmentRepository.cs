@@ -101,7 +101,16 @@ namespace Repository
 
         public List<Appointment> GetAllAppointments()
         {
-            return serializerAppointment.FromCSV(dbPath);
+            List<Appointment> appointments = serializerAppointment.FromCSV(dbPath); 
+            foreach (Appointment appointment in appointments)
+            {
+                appointment.doctor = DoctorRepository.Instance.ReadDoctor(appointment.doctor.Id);
+                appointment.Room = RoomRepository.Instance.ReadRoom(appointment.Room.Identifier);
+                appointment.Patient = PatientRepository.Instance.ReadPatient(appointment.Patient.Id);
+
+            }
+            return appointments;
+            
         }
 
         public AppointmentRepository()

@@ -106,15 +106,15 @@ namespace ZdravoCorp.View.Patient.Appointments
             RoomController rc = new RoomController();
             
             appointmentController.CreateAppointment(app);
-            //Room r = app.Room;
-            //r.AddAppointment(app);
-            //rc.UpdateRoom(r);
-            //Doctor d = app.doctor;
-            //d.AddAppointment(app);
-            //doctorController.UpdateDoctor(d);
-            //Model.Patient p = app.Patient;
-            //p.AddAppointment(app);
-            //pc.UpdatePatient(p);
+            Room r = app.Room;
+            r.AddAppointment(app);
+            rc.UpdateRoom(r);
+            Doctor d = app.doctor;
+            d.AddAppointment(app);
+            doctorController.UpdateDoctor(d);
+            Model.Patient p = app.Patient;
+            p.AddAppointment(app);
+            pc.UpdatePatient(p);
             this.Close();
         }
 

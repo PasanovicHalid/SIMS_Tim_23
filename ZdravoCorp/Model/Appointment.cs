@@ -38,7 +38,7 @@ namespace Model
         
 
         public Doctor doctor { get; set; }
-        private Room room;
+        public Room room { get; set; }
 
         /// <summary>
         /// Property for Room

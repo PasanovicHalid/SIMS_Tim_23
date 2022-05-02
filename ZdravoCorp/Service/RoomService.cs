@@ -129,25 +129,47 @@ namespace Service
         public Room findFreeRoom(DateTime start, DateTime end) 
         {
             Room freeRoom = null;
+
+            
             List<Room> rooms = GetAllRooms();
             foreach (Room room in rooms)
             {
-                foreach(Appointment a in room.Appointment)
+                List<DateTime> datesStart = new List<DateTime>();
+                List<DateTime> datesEnd = new List<DateTime>();
+
+                Boolean appOk = false;
+                Boolean renovationOk = false;
+                foreach (Appointment a in room.Appointment)
                 {
-                    if((start<a.StartDate ) && (end < a.StartDate))
-                    {
-                        freeRoom = room;
-                        break;
-                    }
-                    else if ((start > a.EndDate))
-                    {
-                        freeRoom = room;
-                        break;
-                    }
+                    //if ((start < a.StartDate) && (end < a.StartDate))
+                    //{
+                    //    freeRoom = room;
+                    //    appOk = true;
+                    //    break;
+                    //}
+                    //else if ((start > a.EndDate))
+                    //{
+                    //    freeRoom = room;
+                    //    appOk = true;
+                    //    break;
+                    //}
+                    datesStart.Add(a.StartDate);
+                    datesEnd.Add(a.endDate);
                 }
-                
+                if(!(datesStart.Contains(start) || datesEnd.Contains(end)))
+                {
+                    appOk = true;
+                }
+                if (!room.Renovating)
+                {
+                    renovationOk = true;
+                }
+                if(appOk && renovationOk)
+                {
+                    freeRoom = room;
+                }
             }
-            freeRoom = rooms[0];
+            
             return freeRoom;
         }
         
