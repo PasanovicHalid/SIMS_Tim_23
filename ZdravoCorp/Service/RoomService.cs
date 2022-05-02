@@ -147,7 +147,7 @@ namespace Service
                 }
                 
             }
-            freeRoom = ReadRoom(0);
+            freeRoom = rooms[0];
             return freeRoom;
         }
         
