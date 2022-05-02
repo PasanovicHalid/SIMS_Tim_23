@@ -149,8 +149,11 @@
     <Compile Include="View\Patient\Patient.xaml.cs">
       <DependentUpon>Patient.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Secretary\SekretarovProzor.xaml.cs">
-      <DependentUpon>SekretarovProzor.xaml</DependentUpon>
+    <Compile Include="View\Secretary\AddPatient.xaml.cs">
+      <DependentUpon>AddPatient.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Secretary\Secretary.xaml.cs">
+      <DependentUpon>Secretary.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ViewModel\EquipmentTableVO.cs" />
     <Compile Include="View\ViewModel\EquipmentTypeVO.cs" />
@@ -221,7 +224,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Secretary\SekretarovProzor.xaml">
+    <Page Include="View\Secretary\AddPatient.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Secretary\Secretary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

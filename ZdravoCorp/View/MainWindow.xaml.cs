@@ -17,6 +17,7 @@ using System.Windows.Shapes;
 using ZdravoCorp.Service;
 using ZdravoCorp.View.Manager;
 using ZdravoCorp.View.Patient;
+using ZdravoCorp.View.Secretary;
 
 namespace ZdravoCorp
 {
@@ -28,10 +29,10 @@ namespace ZdravoCorp
         private TimerService timerService;
         private AutoResetEvent autoEvent;
         private bool anotherWindow = false;
-        
+
         public MainWindow()
         {
-            
+
             InitializeComponent();
             autoEvent = new AutoResetEvent(false);
             timerService = new TimerService(autoEvent);
@@ -86,5 +87,12 @@ namespace ZdravoCorp
 
 
         }
-    }
+
+        private void Secretary_Click(object sender, RoutedEventArgs e)
+        {
+            Secretary window = new Secretary();
+            this.Close();
+            window.ShowDialog();
+        }
+    }   
 }

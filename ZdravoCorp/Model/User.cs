@@ -73,6 +73,16 @@ namespace Model
         }
         public int Id { get => id; set => id = value; }
         public String Jmbg { get => jmbg; set => jmbg = value; }
+        public String Username { get => username; set => username = value; }
+        public String Password { get => password; set => password = value; }
+        public String Name { get => name; set => name = value; }
+        public String Surname { get => surname; set => surname = value; }
+        public String Email { get => email; set => email = value; }
+        public String Address { get => address; set => address = value; }
+        public String PhoneNumber { get => phoneNumber; set => phoneNumber = value; }
+        public Gender Gender { get => gender; set => gender = value; }
+        public DateTime DateOfBirth { get => dateOfBirth; set => dateOfBirth = value; }
+
         /// <summary>
         /// Add a new Notification in the collection
         /// </summary>

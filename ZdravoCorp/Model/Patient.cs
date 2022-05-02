@@ -12,7 +12,7 @@ namespace Model
 {
     public class Patient : User, Serializable
     {
-        private Boolean guest = false;
+        
 
 
         public Patient(int id)

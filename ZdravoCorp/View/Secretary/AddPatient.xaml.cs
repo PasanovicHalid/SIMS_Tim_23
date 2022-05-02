@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace ZdravoCorp.View.Secretary
 {
     /// <summary>
-    /// Interaction logic for SekretarovProzor.xaml
+    /// Interaction logic for AddPatient.xaml
     /// </summary>
-    public partial class SekretarovProzor : Window
+    public partial class AddPatient : Window
     {
-        public SekretarovProzor()
+        public AddPatient()
         {
             InitializeComponent();
         }

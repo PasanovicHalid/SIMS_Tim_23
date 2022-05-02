@@ -129,7 +129,8 @@
                 VerticalAlignment="Top" 
                 Height="41" 
                 Width="175"
-                Style="{StaticResource LoginButton}"/>
+                Style="{StaticResource LoginButton}"
+                Click="Secretary_Click"/>
 
             <Button Content="Doctor" 
                 HorizontalAlignment="Left" 
