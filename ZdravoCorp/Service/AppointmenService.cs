@@ -110,6 +110,7 @@ namespace Service
 
                 }
             }
+            //prioritet datum
             else
             {
                 DateTime resetStart = start;
@@ -182,8 +183,5 @@ namespace Service
             }
             return result;
         }
-
-        
-
     }
 }

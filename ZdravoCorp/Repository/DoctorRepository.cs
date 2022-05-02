@@ -45,12 +45,12 @@ namespace Repository
         {
             Boolean success = false;
             List<Doctor> doctors = GetAllDoctors();
-            foreach(Doctor d in doctors)
+            for(int i = 0; i < doctors.Count; i++)
             {
-                if (doctor.Id.Equals(d.Id))
+                if (doctor.Id.Equals(doctors[i]))
                 {
                     success = true;
-                    doctors.Remove(d);
+                    doctors[i] = doctor;
                     break;
                 }
             }

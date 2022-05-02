@@ -53,7 +53,6 @@ namespace ZdravoCorp.View.Patient.Appointments
             doctor = doctorController.ReadDoctor(appointment.doctor.Id);
             selectedIndex = doctor.Id;
             DoctorsCB.SelectedIndex = selectedIndex;
-            //DoctorsCB.SelectedValue = doctor;//doctorController.ReadDoctor(appointment.doctor.Id);
             selectedDate = appointment.startDate;
             exDate = appointment.StartDate;
         }
@@ -63,21 +62,17 @@ namespace ZdravoCorp.View.Patient.Appointments
             DataContext = this;
             Doctor doctor = (Doctor)DoctorsCB.SelectedValue;
             DateTime date = (DateTime)datePicker.SelectedDate;
-            Appointment app;
             List<Appointment> apps = new List<Appointment>();
-            date.AddHours((int)doctor.WorkStartTime.Hour);
-            date.AddMinutes((int)doctor.WorkStartTime.Minute);
-            date.AddSeconds((int)doctor.WorkStartTime.Second);
             TimeSpan lessDays = new TimeSpan(-2, 0, 0, 0);
             TimeSpan moreDays = new TimeSpan(2, 0, 0, 0);
             DateTime less = exDate.Date + lessDays;
             DateTime more = exDate.Date + moreDays;
-            if (date< less)
+            if (date < less)
             {
-                MessageBox.Show("Ne smete izabrati datum 2 dana manji od prvobitnog.\nPrvobitan datum :\t"+exDate.ToString(), "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Ne smete izabrati datum 2 dana manji od prvobitnog.\nPrvobitan datum :\t" + exDate.ToString(), "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
 
             }
-            else if (date >more)
+            else if (date > more)
             {
                 MessageBox.Show("Ne smete izabrati datum 2 dana veci od prvobitnog.\nPrvobitan datum :\t" + exDate.ToString(), "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -92,12 +87,9 @@ namespace ZdravoCorp.View.Patient.Appointments
                     apps = appointmentController.SuggestAppointments(doctor, date, date.AddMinutes(45), true, true);
 
                 }
-
                 AppointmentsCollection = new ObservableCollection<Appointment>(apps);
                 TableForSuggestedApp.DataContext = AppointmentsCollection;
             }
-            
-
         }
 
         private void Confirm_Click(object sender, RoutedEventArgs e)
@@ -112,15 +104,15 @@ namespace ZdravoCorp.View.Patient.Appointments
             RoomController rc = new RoomController();
 
             appointmentController.UpdateAppointment(app);
-            //Room r = app.Room;
-            //r.AddAppointment(app);
-            //rc.UpdateRoom(r);
-            //Doctor d = app.doctor;
-            //d.AddAppointment(app);
-            //doctorController.UpdateDoctor(d);
-            //Model.Patient p = app.Patient;
-            //p.AddAppointment(app);
-            //pc.UpdatePatient(p);
+            Room r = app.Room;
+            r.AddAppointment(app);
+            rc.UpdateRoom(r);
+            Doctor d = app.doctor;
+            d.AddAppointment(app);
+            doctorController.UpdateDoctor(d);
+            Model.Patient p = app.Patient;
+            p.AddAppointment(app);
+            pc.UpdatePatient(p);
             this.Close();
 
         }

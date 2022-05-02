@@ -63,12 +63,12 @@ namespace Repository
         {
             Boolean success = false;
             List<Appointment> appointments = GetAllAppointments();
-            foreach (Appointment temp in appointments)
+            for (int i = 0; i< appointments.Count; i++)
             {
-                if (appointment.Id.Equals(temp.Id)) 
+                if (appointment.Id.Equals(appointments[i].Id)) 
                 {
                     success = true;
-                    appointments.Remove(temp);
+                    appointments[i] = appointment;
                     break;
                 }
             }
