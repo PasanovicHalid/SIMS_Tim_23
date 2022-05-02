@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Controller;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ZdravoCorp.View.ViewModel;
 
 namespace ZdravoCorp.View.Manager.Equipments
 {
@@ -19,9 +22,14 @@ namespace ZdravoCorp.View.Manager.Equipments
     /// </summary>
     public partial class Equipments : Window
     {
+        private ObservableCollection<EquipmentTableVO> table;
+        private EquipmentController controller;
         public Equipments()
         {
             InitializeComponent();
+            this.DataContext = this;
+            controller = new EquipmentController();
+            UpdateTable();
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)
@@ -44,6 +52,13 @@ namespace ZdravoCorp.View.Manager.Equipments
         {
             AddEquipment window = new AddEquipment();
             window.ShowDialog();
+            UpdateTable();
+        }
+
+        private void UpdateTable()
+        {
+            table = controller.GetAllEquipmentTableVO();
+            EquipmentTable.DataContext = table;
         }
     }
 }

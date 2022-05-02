@@ -28,7 +28,7 @@ namespace ZdravoCorp.View.Manager.Rooms
 
         private int id;
         private String identifier;
-        private int size;
+        private float size;
         private String roomType;
         private ObservableCollection<RoomTypeVO> types;
         private RoomController roomController;
@@ -51,7 +51,7 @@ namespace ZdravoCorp.View.Manager.Rooms
             }
         }
 
-        public int Size
+        public float Size
         {
             get { return size; }
             set

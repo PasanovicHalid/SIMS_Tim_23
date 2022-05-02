@@ -9,6 +9,7 @@ using ZdravoCorp.Utility;
 
 namespace Repository
 {
+    //Sequencial Data Base
     public class ActionRepository
     {
         private String dbPath = "..\\..\\Data\\actionsDB.csv";
@@ -75,8 +76,6 @@ namespace Repository
         {
             lock (key)
             {
-                //Bool for checking if it was added somewhere in the list
-                bool added = false;
                 List<Model.Action> actions = serializerAction.FromCSV(dbPath);
 
                 bool found = false;
@@ -84,7 +83,7 @@ namespace Repository
                 {
                     if (actions[i].Id == action.Id)
                     {
-                        actions.RemoveAt(i);
+                        actions[i] = action;
                         found = true;
                         break;
                     }
@@ -92,21 +91,6 @@ namespace Repository
                 if (!found)
                 {
                     return false;
-                }
-
-                for (int i = 0; i < actions.Count; i++)
-                {
-                    if (DateManipulator.checkIfLaterDate(actions[i].ExecutionDate, action.ExecutionDate))
-                    {
-                        actions.Insert(i, action);
-                        added = true;
-                        break;
-                    }
-                }
-
-                if (!added)
-                {
-                    actions.Add(action);
                 }
 
                 serializerAction.ToCSV(dbPath, actions);
@@ -147,7 +131,10 @@ namespace Repository
 
         public void SaveActions(List<Model.Action> actions)
         {
-            serializerAction.ToCSV(dbPath,actions);
+            lock (key)
+            {
+                serializerAction.ToCSV(dbPath, actions);
+            }
         }
 
         public Model.Action ReadAction(int identificator)
@@ -157,7 +144,10 @@ namespace Repository
 
         public List<Model.Action> GetAllActions()
         {
-            return serializerAction.FromCSV(dbPath);
+            lock (key)
+            {
+                return serializerAction.FromCSV(dbPath);
+            }
         }
 
         public static ActionRepository Instance

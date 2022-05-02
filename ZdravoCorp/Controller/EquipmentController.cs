@@ -62,13 +62,12 @@ namespace Controller
 
         public ObservableCollection<EquipmentTypeVO> GetAllEquipmentType()
         {
-            List<EquipmentType> types = EquipmentService.Instance.GetAllEquipmentType();
-            ObservableCollection<EquipmentTypeVO> result = new ObservableCollection<EquipmentTypeVO>();
-            foreach(EquipmentType it in types)
-            {
-                result.Add(new EquipmentTypeVO(it.Name, it.Description, it.Disposable));
-            }
-            return result;
+            return EquipmentService.Instance.GetAllEquipmentType(); ;
+        }
+
+        public ObservableCollection<EquipmentTableVO> GetAllEquipmentTableVO()
+        {
+            return EquipmentService.Instance.GetAllEquipmentTableVO();
         }
     }
 }

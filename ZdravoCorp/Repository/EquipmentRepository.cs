@@ -12,7 +12,7 @@ namespace Repository
 {
     public class EquipmentRepository
     {
-        private String dbPath = "..\\..\\Data\\equipmentDB.csv";
+        private String dbPath = "..\\..\\Data\\equipmentTypeDB.csv";
         private Serializer<EquipmentType> serializer = new Serializer<EquipmentType>();
 
         private static EquipmentRepository instance = null;
@@ -168,7 +168,19 @@ namespace Repository
 
         public EquipmentType ReadEquipmentType(int id)
         {
-            throw new NotImplementedException();
+            lock (key)
+            {
+                List<EquipmentType> equipmentTypes = serializer.FromCSV(dbPath);
+
+                foreach (EquipmentType type in equipmentTypes)
+                {
+                    if (type.Identifier == id)
+                    {
+                        return type;
+                    }
+                }
+                return null;
+            }
         }
 
         public EquipmentType FindEquipmentTypeByName(String name)

@@ -124,9 +124,9 @@
                       VerticalGridLinesBrush="Transparent" 
                       >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Name" Binding="{Binding}" Width="*"/>
-                    <DataGridTextColumn Header="Location" Binding="{Binding}" Width="*"/>
-                    <DataGridTextColumn Header="Count" Binding="{Binding}" Width="*"/>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
+                    <DataGridTextColumn Header="Location" Binding="{Binding DesignationCode}" Width="*"/>
+                    <DataGridTextColumn Header="Count" Binding="{Binding Count}" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
 

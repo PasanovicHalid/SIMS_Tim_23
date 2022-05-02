@@ -16,6 +16,7 @@ namespace Service
     public class RoomService
     {
         private static RoomService instance = null;
+        private ActionService actionService;
         private static readonly object key = new object();
         public Boolean CreateRoom(Room newRoom)
         {
@@ -35,6 +36,11 @@ namespace Service
         public Boolean DeleteRoom(int identifier)
         {
             return RoomRepository.Instance.DeleteRoom(identifier);
+        }
+
+        public Boolean RenovateRoom(int identifier, DateTime start, DateTime end)
+        {
+            return actionService.CreateAction(new Model.Action(ActionType.renovation, start, new RenovationAction(end, identifier, true)));
         }
 
         public List<Room> GetRoomsByInternalID(HashSet<int> identifiers)
@@ -90,7 +96,7 @@ namespace Service
 
         public RoomService()
         {
-            
+            actionService = new ActionService();
         }
         public static RoomService Instance
         {

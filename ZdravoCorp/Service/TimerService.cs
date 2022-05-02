@@ -10,13 +10,13 @@ namespace ZdravoCorp.Service
 {
     public class TimerService
     {
-        private int interval = 1000;
+        private int interval = 5000;
         private AutoResetEvent autoEvent;
         private ActionService actionService;
 
         public TimerService(AutoResetEvent autoEvent)
         {
-            actionService = new ActionService();
+            actionService =new ActionService();
             this.autoEvent = autoEvent;
         }
 

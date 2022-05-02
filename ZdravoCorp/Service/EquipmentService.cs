@@ -7,6 +7,7 @@ using Model;
 using Repository;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using ZdravoCorp.View.ViewModel;
 
 namespace Service
@@ -17,7 +18,7 @@ namespace Service
 
         public Boolean CreateEquipment(EquipmentTypeVO type, int count, RoomVO room)
         {
-            Equipment equipment = new Equipment(count, FindEquipmentTypeByName(type.Name));
+            Equipment equipment = new Equipment(count, count,FindEquipmentTypeByName(type.Name));
             return RoomService.Instance.AddEquipment(equipment, room.Identifier);
         }
 
@@ -58,7 +59,7 @@ namespace Service
 
         public EquipmentType ReadEquipmentType(int id)
         {
-            throw new NotImplementedException();
+             return EquipmentRepository.Instance.ReadEquipmentType(id);
         }
 
         public EquipmentType FindEquipmentTypeByName(String name)
@@ -66,9 +67,31 @@ namespace Service
             return EquipmentRepository.Instance.FindEquipmentTypeByName(name);
         }
 
-        public List<EquipmentType> GetAllEquipmentType()
+        public ObservableCollection<EquipmentTypeVO> GetAllEquipmentType()
         {
-            return EquipmentRepository.Instance.GetAllEquipmentType();
+            List<EquipmentType> types = EquipmentRepository.Instance.GetAllEquipmentType();
+            ObservableCollection<EquipmentTypeVO> result = new ObservableCollection<EquipmentTypeVO>();
+            foreach(EquipmentType it in types)
+            {
+                result.Add(new EquipmentTypeVO(it.Name, it.Description, it.Disposable));
+            }
+            return result;
+        }
+
+        public ObservableCollection<EquipmentTableVO> GetAllEquipmentTableVO()
+        {
+            ObservableCollection<EquipmentTableVO> result = new ObservableCollection<EquipmentTableVO>();
+            List<Room> rooms = RoomService.Instance.GetAllRooms();
+            foreach(Room room in rooms)
+            {
+                foreach(Equipment it in room.Equipment)
+                {
+                    result.Add(new EquipmentTableVO(it.Count, it.EquipmentType.Name, room.DesignationCode, room.Identifier, it.Identifier));
+                }
+                
+            }
+
+            return result;
         }
 
         public EquipmentService()

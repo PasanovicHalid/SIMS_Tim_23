@@ -7,6 +7,7 @@
 using Model;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Repository
 {
@@ -107,11 +108,11 @@ namespace Repository
                 {
                     //Finding the Room in the list and removing it from the list
                     bool found = false;
-                    foreach (Room room in rooms)
+                    for (int i = 0; i < rooms.Count; i++)
                     {
-                        if (updatedRoom.Identifier == room.Identifier)
+                        if (updatedRoom.Identifier == rooms[i].Identifier)
                         {
-                            rooms.Remove(room);
+                            rooms[i] = updatedRoom;
                             found = true;
                             break;
                         }
@@ -119,7 +120,6 @@ namespace Repository
                     if (found)
                     {
                         //Publishing changes to DB
-                        rooms.Add(updatedRoom);
                         serializerRoom.ToCSV(dbPath, rooms);
                         return true;
                     }
@@ -176,11 +176,12 @@ namespace Repository
                     {
                         found = true;
                         bool exists = false;
-                        for(int j = 0; i < rooms[i].Equipment.Count; j++)
+                        for(int j = 0; j < rooms[i].Equipment.Count; j++)
                         {
                             if(rooms[i].Equipment[j].Identifier == equipment.Identifier)
                             {
                                 rooms[i].Equipment[j].Count += equipment.Count;
+                                rooms[i].Equipment[j].Actual_count += equipment.Actual_count;
                                 exists = true;
                                 break;
                             }
@@ -208,7 +209,21 @@ namespace Repository
         {
             lock (key)
             {
-                return serializerRoom.FromCSV(dbPath);
+                List<Room> result = serializerRoom.FromCSV(dbPath);
+
+                Dictionary<int, EquipmentType> types = EquipmentRepository.Instance.GetAllEquipmentType().ToDictionary(keySelector: m => m.Identifier, elementSelector: m => m); 
+
+                foreach(Room room in result)
+                {
+                    foreach(Equipment equipment in room.Equipment)
+                    {
+                        if (types.ContainsKey(equipment.Identifier))
+                        {
+                            equipment.EquipmentType = types[equipment.Identifier];
+                        }
+                    }
+                }
+                return result;
             }
         }
 
@@ -262,7 +277,6 @@ namespace Repository
 
                 if (!exists)
                 {
-                    rooms.Add(roomType);
                     serializerRoomType.ToCSV(dbRoomTypePath, rooms);
                     return true;
                 }

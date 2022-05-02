@@ -21,6 +21,13 @@ namespace Model
         {
         }
 
+        public Action(ActionType type, DateTime executionDate, object obj)
+        {
+            this.type = type;
+            this.executionDate = executionDate;
+            this.obj = obj;
+        }
+
         public Action(int id, ActionType type, object obj, DateTime executionDate)
         {
             this.Id = id;
@@ -68,11 +75,11 @@ namespace Model
             {
                 case ActionType.changePosition:
                     ChangeRoomAction change = (ChangeRoomAction)obj;
-                    result = (List<string>) result.Concat(change.ToCSV());
+                    result.AddRange(change.ToCSV());
                     break;
                 case ActionType.renovation:
                     RenovationAction reno = (RenovationAction)obj;
-                    result = (List<string>) result.Concat(reno.ToCSV());
+                    result.AddRange(reno.ToCSV());
                     break;
             }
 

@@ -37,6 +37,11 @@ namespace Controller
             return roomService.DeleteRoom(identifier);
         }
 
+        public Boolean RenovateRoom(int identifier, DateTime start, DateTime end)
+        {
+            return roomService.RenovateRoom(identifier, start, end);
+        }
+
         public List<Room> GetAllRooms()
         {
             return roomService.GetAllRooms();

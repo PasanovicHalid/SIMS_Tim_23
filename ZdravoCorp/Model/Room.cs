@@ -285,6 +285,7 @@ namespace Model
             {
                 result.Add(it.EquipmentType.Identifier.ToString());
                 result.Add(it.Count.ToString());
+                result.Add(it.Actual_count.ToString());
             }
 
             result.Add(Medication.Count.ToString());
@@ -309,7 +310,8 @@ namespace Model
 
             int count = int.Parse(values[i++]);
             appointment = new List<Appointment>();
-            int temp = i + count;
+            //Multiplies by 1 because it needs to scan 1 item to get Appointment
+            int temp = i + count * 1;
             for (; i < temp; i++)
             {
                 appointment.Add(new Appointment(int.Parse(values[i])));
@@ -317,18 +319,20 @@ namespace Model
 
             count = int.Parse(values[i++]);
             equipment = new List<Equipment>();
-            temp = i + count;
+            //Multiplies by 3 because it needs to scan 3 items to get Equipment
+            temp = i + count * 3;
             for (; i < temp; i++)
             {
-                equipment.Add(new Equipment(int.Parse(values[i]), int.Parse(values[++i])));
+                equipment.Add(new Equipment(int.Parse(values[i++]), int.Parse(values[i++]), int.Parse(values[i])));
             }
 
             count = int.Parse(values[i++]);
             medication = new List<Medication>();
-            temp = i + count;
+            //Multiplies by 2 because it needs to scan 2 items to get Medication
+            temp = i + count * 2;
             for (; i < temp; i++)
             {
-                medication.Add(new Medication(int.Parse(values[i]), int.Parse(values[++i])));
+                medication.Add(new Medication(int.Parse(values[i++]), int.Parse(values[i])));
             }
         }
     }

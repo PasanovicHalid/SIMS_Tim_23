@@ -103,7 +103,8 @@
                     Margin="116,15,0,0" 
                     VerticalAlignment="Top" 
                     Height="32" 
-                    Width="32" 
+                    Width="32"
+                    Click="RenovateRoom_Click" 
                     Grid.Row="2"
                     Style="{StaticResource ManagerButtons}"/>
 
@@ -128,6 +129,7 @@
                     <DataGridTextColumn Header="Designation" Binding="{Binding DesignationCode}" Width="*"/>
                     <DataGridTextColumn Header="Surface Area" Binding="{Binding SurfaceArea}" Width="*"/>
                     <DataGridTextColumn Header="Room Type" Binding="{Binding RoomTypeString}" Width="*"/>
+                    <DataGridTextColumn Header="Renovated" Binding="{Binding Renovating}" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
 

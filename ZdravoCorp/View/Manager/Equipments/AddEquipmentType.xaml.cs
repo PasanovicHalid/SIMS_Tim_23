@@ -22,18 +22,14 @@ namespace ZdravoCorp.View.Manager.Equipments
     /// </summary>
     public partial class AddEquipmentType : Window, INotifyPropertyChanged
     {
-        private EquipmentTypeVO type;
         private String description;
         private String name;
         private EquipmentController controller;
-        private bool done;
         private bool disposable;
-        public AddEquipmentType(ref EquipmentTypeVO type,ref bool done)
+        public AddEquipmentType()
         {
             InitializeComponent();
             this.DataContext = this;
-            this.type = type;
-            this.done = done;
             controller = new EquipmentController();
         }
         public String Description
@@ -93,7 +89,6 @@ namespace ZdravoCorp.View.Manager.Equipments
             }
             else
             {
-                done = true;
                 this.Close();
             }
         }

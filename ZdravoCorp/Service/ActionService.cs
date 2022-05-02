@@ -12,6 +12,7 @@ using System.Threading;
 
 namespace Service
 {
+    
     public class ActionService
     {
         public void CheckActions(Object stateInfo)
@@ -20,7 +21,7 @@ namespace Service
 
             AutoResetEvent autoEvent = (AutoResetEvent)stateInfo;
             List<Model.Action> actions = GetAllActions();
-            List<int> removed = new List<int> ();
+            List<Model.Action> removed = new List<Model.Action>();
 
             DateTime now = DateTime.Now;
             for (int i = 0; i < actions.Count; i++)
@@ -30,22 +31,22 @@ namespace Service
                     switch (actions[i].Type)
                     {
                         case ActionType.changePosition:
-                            removed.Add(i);
+                            removed.Add(actions[i]);
                             if (!executeChangePosition((ChangeRoomAction)actions[i].Object))
                             {
-                                autoEvent.Set();
-                                removeExecutedActions(actions, removed);
+                                removeExecutedActions(removed);
                                 Console.WriteLine("\nError when executing ChangePosition Action\nShuting down Thread\n");
+                                autoEvent.Set();
                                 return;
                             }
                             break;
                         case ActionType.renovation:
-                            removed.Add(i);
+                            removed.Add(actions[i]);
                             if (!executeRenovation((RenovationAction)actions[i].Object))
                             {
-                                autoEvent.Set();
-                                removeExecutedActions(actions, removed);
+                                removeExecutedActions(removed);
                                 Console.WriteLine("\nError when executing Renovation Action\nShuting down Thread\n");
+                                autoEvent.Set();
                                 return;
                             }
                             break;
@@ -53,10 +54,13 @@ namespace Service
                 }
                 else
                 {
-                    removeExecutedActions(actions, removed);
+                    if(removed.Count != 0)
+                        removeExecutedActions(removed);
                     break;
                 }
             }
+            if (removed.Count != 0)
+                removeExecutedActions(removed);
         }
         public Boolean CreateAction(Model.Action newAction)
         {
@@ -150,7 +154,7 @@ namespace Service
             }
             if (!found)
             {
-                incoming_room.AddEquipment(new Equipment(action.Count, EquipmentRepository.Instance.ReadEquipmentType(action.Id_equipment)));
+                incoming_room.AddEquipment(new Equipment(action.Count, action.Count, EquipmentService.Instance.ReadEquipmentType(action.Id_equipment)));
             }
 
             if (!RoomService.Instance.UpdateRoom(incoming_room))
@@ -166,14 +170,46 @@ namespace Service
 
         private Boolean executeRenovation(RenovationAction action)
         {
-            return true;
+            HashSet<int> getter = new HashSet<int>();
+            getter.Add(action.Id_room);
+
+            List<Room> rooms = RoomService.Instance.GetRoomsByInternalID(getter);
+
+            if(rooms.Count != 1)
+            {
+                return false;
+            }
+
+            if(action.Renovation == true)
+            {
+                rooms[0].Renovating = true;
+                rooms[0].RenovatedUntil = action.ExpirationDate;
+                if (!RoomService.Instance.UpdateRoom(rooms[0]))
+                {
+                    return false;
+                }
+                return CreateAction(new Model.Action(ActionType.renovation, action.ExpirationDate, new RenovationAction(new DateTime(), action.Id_room, false)));
+            }
+            else
+            {
+                rooms[0].Renovating = false;
+                return RoomService.Instance.UpdateRoom(rooms[0]);
+            }
         }
 
-        private void removeExecutedActions(List<Model.Action> actions, List<int> removed)
+        private void removeExecutedActions(List<Model.Action> removed)
         {
-            foreach(int id in removed)
+            List<Model.Action> actions = GetAllActions();
+            foreach (Model.Action it in removed)
             {
-                actions.RemoveAt(id);
+                foreach(Model.Action action in actions)
+                {
+                    if(it.Id == action.Id)
+                    {
+                        actions.Remove(action);
+                        break;
+                    }
+                }
             }
             SaveActions(actions);
         }

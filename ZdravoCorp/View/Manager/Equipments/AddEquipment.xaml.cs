@@ -74,16 +74,9 @@ namespace ZdravoCorp.View.Manager.Equipments
         }
         private void EquipmentTypeAdd_Click(object sender, RoutedEventArgs e)
         {
-            bool done = false;
-            EquipmentTypeVO type = new EquipmentTypeVO();
-
-            AddEquipmentType window = new AddEquipmentType(ref type, ref done);
+            AddEquipmentType window = new AddEquipmentType();
             window.ShowDialog();
-            if (done)
-            {
-                equipmentList.Add(type);
-                UpdateData();
-            }
+            UpdateDataFromDB();
         }
         private void UpdateDataFromDB()
         {

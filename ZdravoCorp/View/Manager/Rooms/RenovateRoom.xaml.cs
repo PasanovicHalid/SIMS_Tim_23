@@ -2,7 +2,6 @@
 using Model;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -15,21 +14,28 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using ZdravoCorp.View.ViewModel;
 
 namespace ZdravoCorp.View.Manager.Rooms
 {
     /// <summary>
-    /// Interaction logic for ChangeRoom.xaml
+    /// Interaction logic for RenovateRoom.xaml
     /// </summary>
-    public partial class ChangeRoom : Window, INotifyPropertyChanged
+    public partial class RenovateRoom : Window, INotifyPropertyChanged
     {
-        private RoomController roomController;
-        private ObservableCollection<RoomTypeVO> types;
         private Room room;
+        private RoomController controller;
+
+        public RenovateRoom(Room room)
+        {
+            InitializeComponent();
+            this.DataContext = this;
+
+            this.room = room;
+            controller = new RoomController();
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        
+
         protected virtual void OnPropertyChanged(string name)
         {
             if (PropertyChanged != null)
@@ -64,44 +70,31 @@ namespace ZdravoCorp.View.Manager.Rooms
             }
         }
 
-        public ChangeRoom(Room room)
+        public String RoomType
         {
-            InitializeComponent();
-            this.DataContext = this;
-
-            this.room = room;
-
-            roomController = new RoomController();
-            types = roomController.GetAllRoomTypeView();
-            Types.ItemsSource = types;
-            for(int i = 0 ; i < types.Count ; i++)
+            get { return room.RoomTypeString; }
+            set
             {
-                if(types[i].Name == room.RoomType.Name)
+                if (value != room.RoomTypeString)
                 {
-                    Types.SelectedIndex = i;
+                    room.RoomTypeString = value;
+                    OnPropertyChanged("Identifier");
                 }
             }
         }
 
-        private void Edit_Click(object sender, RoutedEventArgs e)
+        private void Renovate_Click(object sender, RoutedEventArgs e)
         {
-            room.RoomType.Name = types[Types.SelectedIndex].Name;
-            if (!roomController.UpdateRoom(room))
+            DateTime start = (DateTime) StartDate.SelectedDate;
+            DateTime end = (DateTime)EndDate.SelectedDate;
+            if (!controller.RenovateRoom(room.Identifier, start, end))
             {
-                MessageBox.Show("Nije uspesno izmenjen element", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Nije uspesno izvrsen zadatak", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else
             {
                 this.Close();
             }
-        }
-
-        private void RoomTypeAdd_Click(object sender, RoutedEventArgs e)
-        {
-            AddRoomType window = new AddRoomType();
-            window.ShowDialog();
-            types = roomController.GetAllRoomTypeView();
-            Types.ItemsSource = types;
         }
     }
 }
