@@ -21,6 +21,7 @@ namespace Repository
             List<Appointment> appointments = GetAllAppointments();
             int id = appointments.Count;
             newAppointment.Id = id;
+            appointments.Add(newAppointment);
             serializerAppointment.ToCSV(dbPath,appointments);
             return true;
         }

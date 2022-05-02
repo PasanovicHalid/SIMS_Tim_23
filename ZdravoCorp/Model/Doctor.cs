@@ -124,7 +124,7 @@ namespace Model
                 this.doctorType = value;
             }
         }
-        public String getName() { return name + surname; }
+        
         public List<String> ToCSV()
         {
             List<String> result = new List<String>();
@@ -139,12 +139,20 @@ namespace Model
             result.Add(phoneNumber);
             result.Add(gender.ToString());
             result.Add(dateOfBirth.ToString());
-            result.Add(notification.Count.ToString());
-            foreach(Notification n in notification)
+            int nf = 0;
+            if (notification == null)
             {
-                result.Add(n.DateCreated.ToString());
-                result.Add(n.Content);
-                result.Add(n.User.Id.ToString());
+                result.Add(nf.ToString());
+            }
+            else
+            {
+                result.Add(notification.Count.ToString());
+                foreach (Notification n in notification)
+                {
+                    result.Add(n.DateCreated.ToString());
+                    result.Add(n.Content);
+                    result.Add(n.User.Id.ToString());
+                }
             }
             result.Add(salary.ToString());
             result.Add(enrolementDate.ToString());

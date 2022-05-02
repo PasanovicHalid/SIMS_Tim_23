@@ -37,9 +37,9 @@ namespace Controller
             return AppointmenService.Instance.GetAllAppointments();
         }
 
-        public Appointment SuggestAppointment(Doctor doctor, DateTime start, DateTime end, bool priority)
+        public List<Appointment> SuggestAppointments(Doctor doctor, DateTime start, DateTime end, bool priority, bool first)
         {
-            return AppointmenService.Instance.SuggestAppointment(doctor, start, end, priority);
+            return AppointmenService.Instance.SuggestAppointments(doctor, start, end, priority, first);
         }
     }
 }

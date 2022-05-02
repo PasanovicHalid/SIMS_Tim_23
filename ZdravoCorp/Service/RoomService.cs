@@ -23,9 +23,9 @@ namespace Service
             return RoomRepository.Instance.CreateRoom(newRoom);
         }
 
-        public Room ReadRoom(String identifier)
+        public Room ReadRoom(int identifier)
         {
-            throw new NotImplementedException();
+            return RoomRepository.Instance.ReadRoom(identifier);
         }
 
         public Boolean UpdateRoom(Room updatedRoom)
@@ -126,7 +126,30 @@ namespace Service
                 return instance;
             }
         }
-
+        public Room findFreeRoom(DateTime start, DateTime end) 
+        {
+            Room freeRoom = null;
+            List<Room> rooms = GetAllRooms();
+            foreach (Room room in rooms)
+            {
+                foreach(Appointment a in room.Appointment)
+                {
+                    if((start<a.StartDate ) && (end < a.StartDate))
+                    {
+                        freeRoom = room;
+                        break;
+                    }
+                    else if ((start > a.EndDate))
+                    {
+                        freeRoom = room;
+                        break;
+                    }
+                }
+                
+            }
+            freeRoom = ReadRoom(0);
+            return freeRoom;
+        }
         
     }
 }

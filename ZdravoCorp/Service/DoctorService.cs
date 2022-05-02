@@ -84,28 +84,23 @@ namespace Service
         public bool IsDoctorFree(int id, DateTime start, DateTime end)
         {
             bool isFree = true;
-            AppointmenService appointmentService = new AppointmenService();
+            
             Doctor doctor = ReadDoctor(id);
             if(start.Date > doctor.WorkStartTime.Date && end.Date< doctor.WorkEndTime.Date && start.Hour > doctor.WorkStartTime.Hour && end.Hour < doctor.WorkEndTime.Hour)
             {
-                List<Appointment> appointments = appointmentService.doctorsAppointments(doctor.Id); 
+                List<Appointment> appointments = AppointmenService.Instance.doctorsAppointments(doctor.Id); 
                 foreach(Appointment app in appointments)
                 {
-                    if(app.StartDate == start)
+                    //if((app.startDate.TimeOfDay <= start.TimeOfDay) && (app.EndDate.TimeOfDay <= end.TimeOfDay)) { isFree = true; }
+                    
+                    
+                    if(app.StartDate.TimeOfDay < start.TimeOfDay)
                     {
-                        return false;
-                    }
-                    if(app.EndDate == end)
-                    {
-                        return false;
-                    }
-                    if(app.StartDate < start)
-                    {
-                        if(app.EndDate > start && app.EndDate < end)
+                        if(app.EndDate.TimeOfDay > start.TimeOfDay && app.EndDate.TimeOfDay < end.TimeOfDay)
                         {
                             return false;
                         }
-                        if (app.EndDate > end)
+                        if (app.EndDate.TimeOfDay > end.TimeOfDay)
                         {
                             return false;
                         }

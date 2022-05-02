@@ -82,9 +82,18 @@ namespace Repository
             }
         }
 
-        public Model.Room ReadRoom(String identifier)
+        public Model.Room ReadRoom(int identifier)
         {
-            throw new NotImplementedException();
+            List<Room> rooms = serializerRoom.FromCSV(dbPath);
+            
+            foreach (Room room in rooms)
+            {
+                if (identifier ==(room.Identifier))
+                {
+                    return room;
+                }
+            }
+            return null;
         }
 
         public Boolean UpdateRoom(Room updatedRoom)

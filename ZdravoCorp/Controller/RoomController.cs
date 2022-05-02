@@ -16,15 +16,15 @@ namespace Controller
     public class RoomController
     {
         RoomService roomService = new RoomService();
-        
+
         public Boolean CreateRoom(Room newRoom)
         {
             return roomService.CreateRoom(newRoom);
         }
 
-        public Room ReadRoom(String identifier)
+        public Room ReadRoom(int identifier)
         {
-            throw new NotImplementedException();
+            return roomService.ReadRoom(identifier);
         }
 
         public Boolean UpdateRoom(Room updatedRoom)
@@ -83,6 +83,7 @@ namespace Controller
             throw new NotImplementedException();
         }
 
+
         public int GetMaxCountForEquipment(int id_room, int id_equipment)
         {
             return RoomService.Instance.GetMaxCountForEquipment(id_room, id_equipment);
@@ -91,6 +92,12 @@ namespace Controller
         public ObservableCollection<RoomTypeVO> GetAllRoomTypeView()
         {
             return roomService.GetAllRoomTypeView();
+
+        }
+        public Room findFreeRoom(DateTime start, DateTime end)
+        {
+            return RoomService.Instance.findFreeRoom(start, end);
+
         }
     }
 }
