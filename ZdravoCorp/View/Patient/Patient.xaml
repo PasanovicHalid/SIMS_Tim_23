@@ -49,7 +49,7 @@
                                 <DataGridTextColumn x:Name ="Doctor" Header="Doktor" Binding="{Binding NameSurname}" Width="*"/>
                                 <DataGridTextColumn Header="Pocetak" Binding="{Binding startDate}" Width="*"/>
                                 <DataGridTextColumn Header="Kraj" Binding="{Binding endDate}" Width="*"/>
-                                <DataGridTextColumn Header="Soba" Binding="{Binding}" Width="*"/>
+                                <DataGridTextColumn Header="Soba" Binding="{Binding Room.DesignationCode}" Width="*"/>
 
                             </DataGrid.Columns>
                         </DataGrid>

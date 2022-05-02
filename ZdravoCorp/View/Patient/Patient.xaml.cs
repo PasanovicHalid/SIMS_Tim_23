@@ -112,7 +112,8 @@ namespace ZdravoCorp.View.Patient
         private void UpdateTable()
         {
             
-            List<Appointment> appointments = appointmentController.GetAllAppointments();
+            List<Appointment> appointments = appointmentController.RightAppointments();
+
             AppointmentsCollection = new ObservableCollection<Appointment>(appointments);
             List<Doctor> doctors = new List<Doctor>();
             foreach(Appointment a in appointments)

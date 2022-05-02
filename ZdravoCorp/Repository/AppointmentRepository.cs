@@ -33,6 +33,9 @@ namespace Repository
             {
                 if (id.Equals(appointment.Id))
                 {
+                    appointment.doctor = DoctorRepository.Instance.ReadDoctor(appointment.doctor.Id);
+                    appointment.Room = RoomRepository.Instance.ReadRoom(appointment.Room.Identifier);
+                    appointment.Patient = PatientRepository.Instance.ReadPatient(appointment.Patient.Id);
                     return appointment;
                 }
             }

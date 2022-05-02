@@ -41,5 +41,9 @@ namespace Controller
         {
             return AppointmenService.Instance.SuggestAppointments(doctor, start, end, priority, first);
         }
+        public List<Appointment> RightAppointments()
+        {
+            return AppointmenService.Instance.RightAppointments();
+        }
     }
 }
