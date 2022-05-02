@@ -68,6 +68,16 @@ namespace Service
             return RoomRepository.Instance.DeleteRoomType(roomType);
         }
 
+        public int GetMaxCountForEquipment(int id_room, int id_equipment)
+        {
+            return RoomRepository.Instance.GetMaxCountForEquipment(id_room, id_equipment);
+        }
+
+        public Boolean ChangeActualCountOfEquipment(int id_from_room, int id_equipment,int count)
+        {
+            return RoomRepository.Instance.ChangeActualCountOfEquipment(id_from_room, id_equipment, count);
+        }
+
         public Model.RoomType ReadRoomType(Model.RoomType roomType)
         {
             throw new NotImplementedException();
@@ -77,6 +87,7 @@ namespace Service
         {
             return RoomRepository.Instance.GetAllRoomType();
         }
+
 
         public ObservableCollection<RoomTypeVO> GetAllRoomTypeView()
         {

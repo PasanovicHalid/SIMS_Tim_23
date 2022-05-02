@@ -15,6 +15,7 @@ namespace Service
     public class EquipmentService
     {
         private static EquipmentService instance = null;
+        private ActionService actionService;
 
         public Boolean CreateEquipment(EquipmentTypeVO type, int count, RoomVO room)
         {
@@ -67,6 +68,16 @@ namespace Service
             return EquipmentRepository.Instance.FindEquipmentTypeByName(name);
         }
 
+        public Boolean ChangePositionOfEquipment(DateTime excecutionDate, int id_from_room, int id_to_room, int id_equipment, int count)
+        {
+            if(!actionService.CreateAction(new Model.Action(ActionType.changePosition, excecutionDate, new ChangeRoomAction(id_to_room, id_from_room, id_equipment, count))))
+            {
+                return false;
+            }
+            
+            return RoomService.Instance.ChangeActualCountOfEquipment(id_from_room, id_equipment, -count);
+        }
+
         public ObservableCollection<EquipmentTypeVO> GetAllEquipmentType()
         {
             List<EquipmentType> types = EquipmentRepository.Instance.GetAllEquipmentType();
@@ -86,7 +97,7 @@ namespace Service
             {
                 foreach(Equipment it in room.Equipment)
                 {
-                    result.Add(new EquipmentTableVO(it.Count, it.EquipmentType.Name, room.DesignationCode, room.Identifier, it.Identifier));
+                    result.Add(new EquipmentTableVO(it.Count, it.EquipmentType.Name, room.DesignationCode, it.EquipmentType.Disposable ,room.Identifier, it.Identifier));
                 }
                 
             }
@@ -96,7 +107,7 @@ namespace Service
 
         public EquipmentService()
         {
-            
+            actionService = new ActionService();
         }
 
         public static EquipmentService Instance

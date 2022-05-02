@@ -60,5 +60,16 @@ namespace ZdravoCorp.View.Manager.Equipments
             table = controller.GetAllEquipmentTableVO();
             EquipmentTable.DataContext = table;
         }
+
+        private void ChangePosition_Click(object sender, RoutedEventArgs e)
+        {
+            if (EquipmentTable.SelectedIndex == -1)
+            {
+                return;
+            }
+            ChangePosition window = new ChangePosition(table[EquipmentTable.SelectedIndex]);
+            window.ShowDialog();
+            UpdateTable();
+        }
     }
 }

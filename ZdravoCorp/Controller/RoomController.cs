@@ -83,6 +83,11 @@ namespace Controller
             throw new NotImplementedException();
         }
 
+        public int GetMaxCountForEquipment(int id_room, int id_equipment)
+        {
+            return RoomService.Instance.GetMaxCountForEquipment(id_room, id_equipment);
+        }
+
         public ObservableCollection<RoomTypeVO> GetAllRoomTypeView()
         {
             return roomService.GetAllRoomTypeView();

@@ -6,42 +6,104 @@
         xmlns:local="clr-namespace:ZdravoCorp.View.Manager.Equipments"
         xmlns:Syncfusion="http://schemas.syncfusion.com/wpf" x:Class="ZdravoCorp.View.Manager.Equipments.ChangePosition"
         mc:Ignorable="d"
-        Title="ChangePosition" Height="329" Width="430">
+        Title="ChangePosition" Height="387" Width="452">
     <Grid>
-        <TextBox HorizontalAlignment="Left" 
-            Margin="115,25,0,0" 
-            TextWrapping="Wrap" 
-            Text="" 
+
+        <Label Content="Equipment Type" 
+            HorizontalAlignment="Left" 
+            Margin="18,16,0,0" 
             VerticalAlignment="Top" 
-            Width="229"/>
-        
+            Width="102"/>
+
+        <TextBox x:Name="EquipmentType"
+            HorizontalAlignment="Left" 
+            Margin="125,20,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding Path=TypeTxt, UpdateSourceTrigger=PropertyChanged}" 
+            VerticalAlignment="Top" 
+            Width="248"
+            IsReadOnly="True"/>
+
         <Label Content="Count" 
             HorizontalAlignment="Left" 
-            Margin="10,21,0,0" 
-            VerticalAlignment="Top" 
-            Width="75"/>
-        
-        <Label Content="Date" 
-            HorizontalAlignment="Left" 
-            Margin="8,71,0,0" 
+            Margin="20,61,0,0" 
             VerticalAlignment="Top" 
             Width="75"/>
 
-        <DatePicker HorizontalAlignment="Left" 
-                    Margin="115,73,0,0" 
-                    VerticalAlignment="Top"/>
+        <TextBox x:Name="Count"
+            HorizontalAlignment="Left" 
+            Margin="125,65,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding Path=CountTxt, UpdateSourceTrigger=PropertyChanged}" 
+            VerticalAlignment="Top" 
+            Width="51"/>
+
+        <Label Content="Max" 
+            HorizontalAlignment="Center" 
+            Margin="0,61,0,0" 
+            VerticalAlignment="Top" 
+            Width="42"/>
+
+        <TextBox x:Name="MaxCount"
+            HorizontalAlignment="Left" 
+            Margin="246,65,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding Path=MaxCountTxt, UpdateSourceTrigger=PropertyChanged}" 
+            VerticalAlignment="Top" 
+            Width="51"
+            IsReadOnly="True"/>
+
+        <Label Content="Date" 
+            HorizontalAlignment="Left" 
+            Margin="18,111,0,0" 
+            VerticalAlignment="Top" 
+            Width="75"/>
+
+        <DatePicker x:Name="Date"
+            HorizontalAlignment="Left" 
+            Margin="125,113,0,0" 
+            VerticalAlignment="Top" Width="108"/>
+
+        <Label Content="Time" 
+            HorizontalAlignment="Left" 
+            Margin="246,113,0,0" 
+            VerticalAlignment="Top" 
+            Width="42"/>
+
+        <TextBox x:Name="Time" 
+            HorizontalAlignment="Left" 
+            Margin="293,113,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding Path=TimeTxt, UpdateSourceTrigger=PropertyChanged}" 
+            VerticalAlignment="Top" 
+            Width="80" RenderTransformOrigin="0.746,0.836" Height="24"/>
+
+        <Label Content="Current Room" 
+            HorizontalAlignment="Left" 
+            Margin="18,166,0,0" 
+            VerticalAlignment="Top" 
+            Width="89"/>
+
+        <TextBox x:Name="Room"
+                 HorizontalAlignment="Left" 
+                 Margin="125,170,0,0" 
+                 TextWrapping="Wrap" 
+                 Text="{Binding Path=RoomTxt, UpdateSourceTrigger=PropertyChanged}" 
+                 VerticalAlignment="Top" 
+                 Width="248"
+                 IsReadOnly="True"/>
 
         <Label Content="Room" 
                HorizontalAlignment="Left" 
-               Margin="8,199,0,0" 
+               Margin="18,239,0,0" 
                VerticalAlignment="Top" 
                Width="75"/>
 
         <ComboBox x:Name="Rooms" 
                   HorizontalAlignment="Left" 
-                  Margin="115,201,0,0" 
+                  Margin="125,241,0,0" 
                   VerticalAlignment="Top" 
-                  Width="229">
+                  Width="248">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Background="Transparent" Text="{Binding DesignationCode}"/>
@@ -49,27 +111,11 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
 
-        <Label Content="Room" 
-            HorizontalAlignment="Left" 
-            Margin="8,126,0,0" 
-            VerticalAlignment="Top" 
-            Width="75"/>
-        
-        <TextBox HorizontalAlignment="Left" 
-                 Margin="115,139,0,0" 
-                 TextWrapping="Wrap" 
-                 Text="" 
-                 VerticalAlignment="Top" 
-                 Width="229"
-                 IsReadOnly="True"/>
-
         <Button Content="Change" 
                 HorizontalAlignment="Left" 
-                Margin="322,243,0,0" 
+                Margin="332,283,0,0" 
                 VerticalAlignment="Top" 
                 Height="46" 
                 Width="82" Click="Change_Click"/>
-        
-
     </Grid>
 </Window>

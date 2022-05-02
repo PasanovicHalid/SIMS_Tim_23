@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace ZdravoCorp.View.ViewModel
 {
-    public class EquipmentTyoeVO
+    public class EquipmentVO
     {
         private int count;
         private String name;
 
-        public EquipmentTyoeVO()
+        public EquipmentVO()
         {
 
         }
 
-        public EquipmentTyoeVO(int count, string name)
+        public EquipmentVO(int count, string name)
         {
             this.count = count;
             this.name = name;
