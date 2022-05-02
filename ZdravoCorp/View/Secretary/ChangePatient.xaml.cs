@@ -26,17 +26,7 @@ namespace ZdravoCorp.View.Secretary
         public ObservableCollection<Model.Patient> PatientCollection { get; set; }
         private Model.Patient patient;
         private PatientController patientController;
-        //private int id;
-        //private String password;
-        //private String username;
-        //private String name;
-        //private String surname;
-        //private String jmbg;
-        //private String email;
-        //private String address;
-        //private String phoneNumber;
-        //private Gender gender;
-        //private DateTime dateOfBirth;
+   
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -53,6 +43,16 @@ namespace ZdravoCorp.View.Secretary
             InitializeComponent();
             this.DataContext = this;
             this.patient = patient;
+            if (patient.Gender == Gender.Male)
+            {
+                MaleButton.IsChecked = true;
+
+            }
+            else
+            {
+                FemaleButton.IsChecked = true;
+            }
+            
             patientController = new PatientController();
         }
 

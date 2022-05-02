@@ -27,7 +27,7 @@
         <TextBox TextWrapping="Wrap" Margin="210,234,0,0" Height="27" Width="350" VerticalAlignment="Top" HorizontalAlignment="Left" Text="{Binding Path=Address, UpdateSourceTrigger=PropertyChanged}"/>
         <RadioButton Name="MaleButton" Content="Male" Margin="210,272,0,0"  />
         <RadioButton Name="FemaleButton" Content="Female" Margin="326,272,0,0"/>
-        <DatePicker Margin="210,304,0,0" Height="27" Width="350" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <DatePicker Margin="210,304,0,0" Height="27" Width="350" VerticalAlignment="Top" HorizontalAlignment="Left" SelectedDate="{Binding Path=DateOfBirth, UpdateSourceTrigger=PropertyChanged}"/>
         <Button Content="Cancel" Margin="130,348,0,0" Height="30" Width="80" VerticalAlignment="Top" HorizontalAlignment="Left"/>
         <Button Content="Change" Margin="385,347,0,0" Height="30" Width="80" VerticalAlignment="Top" HorizontalAlignment="Left" Click="Change_Click"/>
 
