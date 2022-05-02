@@ -18,7 +18,7 @@
                     Background="#FFE5E5E5"
                     Margin="30,30,30,30" 
                 >
-                    <Label x:Name ="Name" Content="{Binding Patient.name}" Margin="49,26,613,300"/>
+                    <Label x:Name ="Name"  Margin="49,26,613,300"/>
 
                 </Grid>
             </TabItem>
@@ -45,11 +45,11 @@
                             Grid.ColumnSpan="2"
                             SelectionChanged="PatientAppointmentTable_SelectionChanged">
 
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="Doktor" Binding="{Binding doctor.nameSurname}" Width="*"/>
+                            <DataGrid.Columns >
+                                <DataGridTextColumn x:Name ="Doctor" Header="Doktor" Binding="{Binding NameSurname}" Width="*"/>
                                 <DataGridTextColumn Header="Pocetak" Binding="{Binding startDate}" Width="*"/>
                                 <DataGridTextColumn Header="Kraj" Binding="{Binding endDate}" Width="*"/>
-                                <DataGridTextColumn Header="Soba" Binding="{Binding room.designationCode}" Width="*"/>
+                                <DataGridTextColumn Header="Soba" Binding="{Binding}" Width="*"/>
 
                             </DataGrid.Columns>
                         </DataGrid>

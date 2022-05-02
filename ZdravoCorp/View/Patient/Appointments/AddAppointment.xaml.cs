@@ -70,7 +70,7 @@ namespace ZdravoCorp.View.Patient.Appointments
         private void Search_Click(object sender, RoutedEventArgs e)
 
         {
-            Suggestion suggestion;
+            
             DataContext = this;
             Doctor doctor = doctorController.ReadDoctor(DoctorsCB.SelectedIndex);
             DateTime date = (DateTime) datePicker.SelectedDate;
@@ -106,38 +106,38 @@ namespace ZdravoCorp.View.Patient.Appointments
             RoomController rc = new RoomController();
             
             appointmentController.CreateAppointment(app);
-            Room r = app.Room;
-            r.AddAppointment(app);
-            rc.UpdateRoom(r);
-            Doctor d = app.doctor;
-            d.AddAppointment(app);
-            doctorController.UpdateDoctor(d);
-            Model.Patient p = app.Patient;
-            p.AddAppointment(app);
-            pc.UpdatePatient(p);
+            //Room r = app.Room;
+            //r.AddAppointment(app);
+            //rc.UpdateRoom(r);
+            //Doctor d = app.doctor;
+            //d.AddAppointment(app);
+            //doctorController.UpdateDoctor(d);
+            //Model.Patient p = app.Patient;
+            //p.AddAppointment(app);
+            //pc.UpdatePatient(p);
             this.Close();
         }
 
         private void TableForSuggestedApp_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            AppointmentsCollection = new ObservableCollection<Appointment>();
-            SuggestionsCollection = new ObservableCollection<Model.Suggestion>();
-            Appointment appointment = new Appointment();
+            //AppointmentsCollection = new ObservableCollection<Appointment>();
+            //SuggestionsCollection = new ObservableCollection<Model.Suggestion>();
+            //Appointment appointment = new Appointment();
 
-            if (TableForSuggestedApp.SelectedIndex == -1)
-            {
-                return;
-            }
-            Suggestion suggestion = SuggestionsCollection.ElementAt(TableForSuggestedApp.SelectedIndex);
-            appointment.doctor = doctorController.ReadDoctor(suggestion.Doctor.Id);
-            appointment.startDate = suggestion.StartInterval;
-            appointment.endDate = appointment.startDate.AddMinutes(45);
-            PatientController pc = new PatientController();
-            appointment.Patient = pc.ReadPatient(0);
-            RoomController rc = new RoomController();
-            Room r = rc.findFreeRoom(appointment.startDate, appointment.endDate);
-            appointment.Room = r;
-            appointmentController.CreateAppointment(appointment);
+            //if (TableForSuggestedApp.SelectedIndex == -1)
+            //{
+            //    return;
+            //}
+            //Suggestion suggestion = SuggestionsCollection.ElementAt(TableForSuggestedApp.SelectedIndex);
+            //appointment.doctor = doctorController.ReadDoctor(suggestion.Doctor.Id);
+            //appointment.startDate = suggestion.StartInterval;
+            //appointment.endDate = appointment.startDate.AddMinutes(45);
+            //PatientController pc = new PatientController();
+            //appointment.Patient = pc.ReadPatient(0);
+            //RoomController rc = new RoomController();
+            //Room r = rc.findFreeRoom(appointment.startDate, appointment.endDate);
+            //appointment.Room = r;
+            //appointmentController.CreateAppointment(appointment);
         }
     }
 }

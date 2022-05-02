@@ -11,7 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
+using System.ComponentModel;
 using System.Collections.ObjectModel;
 using Controller;
 using Model;
@@ -24,15 +24,54 @@ namespace ZdravoCorp.View.Patient
     /// </summary>
     public partial class Patient : Window
     {
+        private Appointment app;
+        public Doctor doctor { get; set; }
+        private DoctorController dc;
+        public String NameSurname { get => NameSurname; set => NameSurname = value; }
         public Patient()
         {
             InitializeComponent();
             appointmentController = new AppointmentController();
+            dc = new DoctorController();
             AppointmentsCollection = new ObservableCollection<Appointment>();
+            DoctorCollection = new ObservableCollection<Doctor>();
+            RoomCollection = new ObservableCollection<Room>();
             UpdateTable();
 
         }
-
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
+        
+        public String Doctorr
+        {
+            get { return app.doctor.nameSurname; }
+            set
+            {
+                if (value != app.doctor.nameSurname)
+                {
+                    app.doctor.nameSurname = value;
+                    OnPropertyChanged("Doctorr");
+                }
+            }
+        }
+        public String Room
+        {
+            get { return app.Room.DesignationCode; }
+            set
+            {
+                if (value != app.Room.DesignationCode)
+                {
+                    app.Room.DesignationCode = value;
+                    OnPropertyChanged("Room");
+                }
+            }
+        }
         private void Appointments_Click(object sender, RoutedEventArgs e)
         {
             Appointments.Appointments window = new Appointments.Appointments();
@@ -58,13 +97,29 @@ namespace ZdravoCorp.View.Patient
             get;
             set;
         }
-          
-        
+
+        public ObservableCollection<Room> RoomCollection
+        {
+            get;
+            set;
+        }
+        public ObservableCollection<Doctor> DoctorCollection
+        {
+            get;
+            set;
+        }
+
         private void UpdateTable()
         {
             
             List<Appointment> appointments = appointmentController.GetAllAppointments();
             AppointmentsCollection = new ObservableCollection<Appointment>(appointments);
+            List<Doctor> doctors = new List<Doctor>();
+            foreach(Appointment a in appointments)
+            {
+                doctors.Add(a.doctor);
+            }
+            DoctorCollection = new ObservableCollection<Doctor>();
             PatientAppointmentTable.DataContext = AppointmentsCollection;
         }
         private void Add_Appointment(object sender, RoutedEventArgs e)
@@ -77,12 +132,30 @@ namespace ZdravoCorp.View.Patient
 
         private void Change_Appointment(object sender, RoutedEventArgs e)
         {
+            if (PatientAppointmentTable.SelectedIndex == -1)
+            {
+                return;
+            }
+
+            ChangeAppointment change = new ChangeAppointment(AppointmentsCollection.ElementAt(PatientAppointmentTable.SelectedIndex));
+            change.ShowDialog();
+            UpdateTable();
 
         }
 
         private void Delete_Appointment(object sender, RoutedEventArgs e)
         {
-
+            if (PatientAppointmentTable.SelectedIndex == -1)
+            {
+                return;
+            }
+            if (!appointmentController.DeleteAppointment(AppointmentsCollection.ElementAt(PatientAppointmentTable.SelectedIndex).Id))
+            {
+                MessageBox.Show("Element ne postoji u bazi podataka", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            
+            UpdateTable();
         }
     }
 }

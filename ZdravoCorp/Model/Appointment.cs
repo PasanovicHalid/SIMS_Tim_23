@@ -38,7 +38,6 @@ namespace Model
         
 
         public Doctor doctor { get; set; }
-
         private Room room;
 
         /// <summary>
@@ -96,7 +95,8 @@ namespace Model
         public int Id { get => id; set => id = value; }
         public DateTime StartDate { get => startDate; set => startDate = value; }
         public DateTime EndDate { get => endDate; set => endDate = value; }
-
+        public Doctor Doctor { get => doctor; set => doctor = value; }
+        public String NameSurname { get => doctor.nameSurname; set => doctor.nameSurname = value; }
         public List<String> ToCSV()
         {
             List<String> result = new List<String>();

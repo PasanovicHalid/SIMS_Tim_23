@@ -124,7 +124,7 @@ namespace Model
                 this.doctorType = value;
             }
         }
-        public String getName() { return name + surname; }
+        
         public List<String> ToCSV()
         {
             List<String> result = new List<String>();
