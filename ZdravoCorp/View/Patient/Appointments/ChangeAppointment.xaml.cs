@@ -25,6 +25,7 @@ namespace ZdravoCorp.View.Patient.Appointments
         public DateTime selectedDate { get; set; }
         public DateTime exDate;
         public Appointment app;
+        public Appointment exApp;
         public Doctor doctor { get; set; }
         public DoctorController doctorController;
         public AppointmentController appointmentController;
@@ -48,6 +49,7 @@ namespace ZdravoCorp.View.Patient.Appointments
             appointmentController = new AppointmentController();
             doctorController = new DoctorController();
             this.app = appointment;
+            exApp = appointment;
             DoctorsCollection = new ObservableCollection<Doctor>(doctorController.GetAllDoctors());
             DoctorsCB.ItemsSource = DoctorsCollection;
             doctor = doctorController.ReadDoctor(appointment.doctor.Id);
@@ -105,12 +107,16 @@ namespace ZdravoCorp.View.Patient.Appointments
 
             appointmentController.UpdateAppointment(app);
             Room r = app.Room;
+            r.RemoveAppointment(exApp);
             r.AddAppointment(app);
+            
             rc.UpdateRoom(r);
             Doctor d = app.doctor;
+            d.RemoveAppointment(exApp);
             d.AddAppointment(app);
             doctorController.UpdateDoctor(d);
             Model.Patient p = app.Patient;
+            p.RemoveAppointment(exApp);
             p.AddAppointment(app);
             pc.UpdatePatient(p);
             this.Close();
