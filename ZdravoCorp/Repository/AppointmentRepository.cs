@@ -31,7 +31,7 @@ namespace Repository
             List<Appointment> appointments = GetAllAppointments();
             foreach (Appointment appointment in appointments)
             {
-                if (id.Equals(appointment.Id))
+                if (id == appointment.Id)
                 {
                     appointment.doctor = DoctorRepository.Instance.ReadDoctor(appointment.doctor.Id);
                     appointment.Room = RoomRepository.Instance.ReadRoom(appointment.Room.Identifier);
@@ -65,7 +65,7 @@ namespace Repository
             List<Appointment> appointments = GetAllAppointments();
             for (int i = 0; i< appointments.Count; i++)
             {
-                if (appointment.Id.Equals(appointments[i].Id)) 
+                if (appointment.Id== appointments[i].Id) 
                 {
                     success = true;
                     appointments[i] = appointment;
@@ -74,7 +74,7 @@ namespace Repository
             }
             if (success)
             {
-                appointments.Add(appointment);
+                //appointments.Add(appointment);
                 serializerAppointment.ToCSV(dbPath, appointments);
                 
             }

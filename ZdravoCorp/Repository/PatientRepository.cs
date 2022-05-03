@@ -46,7 +46,7 @@ namespace Repository
             List<Patient> patients = GetAllPatients();
             for(int i = 0; i < patients.Count; i++)
             {
-                if (patient.Id.Equals(patients[i]))
+                if (patient.Id == patients[i].Id)
                 {
                     success = true;
                     patients[i] = patient;
@@ -55,7 +55,7 @@ namespace Repository
             }
             if (success)
             {
-                patients.Add(patient);
+                //patients.Add(patient);
                 serializerPatient.ToCSV(dbPath, patients);
                 
             }

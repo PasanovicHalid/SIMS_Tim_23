@@ -56,7 +56,7 @@ namespace ZdravoCorp.View.Patient.Appointments
             selectedIndex = doctor.Id;
             DoctorsCB.SelectedIndex = selectedIndex;
             selectedDate = appointment.startDate;
-            exDate = appointment.StartDate;
+            this.exDate = appointment.StartDate;
         }
 
         private void Search_Click(object sender, RoutedEventArgs e)
@@ -65,18 +65,18 @@ namespace ZdravoCorp.View.Patient.Appointments
             Doctor doctor = (Doctor)DoctorsCB.SelectedValue;
             DateTime date = (DateTime)datePicker.SelectedDate;
             List<Appointment> apps = new List<Appointment>();
-            TimeSpan lessDays = new TimeSpan(-2, 0, 0, 0);
+            TimeSpan lessDays = new TimeSpan(-1, 0, 0, 0);
             TimeSpan moreDays = new TimeSpan(2, 0, 0, 0);
             DateTime less = exDate.Date + lessDays;
             DateTime more = exDate.Date + moreDays;
             if (date < less)
             {
-                MessageBox.Show("Ne smete izabrati datum 2 dana manji od prvobitnog.\nPrvobitan datum :\t" + exDate.ToString(), "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Prvobitan datum mozete pomeriti najvise 1 dan uznazad.\nPrvobitan datum :\t" + exDate.ToString(), "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
 
             }
             else if (date > more)
             {
-                MessageBox.Show("Ne smete izabrati datum 2 dana veci od prvobitnog.\nPrvobitan datum :\t" + exDate.ToString(), "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Prvobitan datum mozete pomeriti najvise 2 dana unapred.\nPrvobitan datum :\t" + exDate.ToString(), "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else
             {
@@ -104,12 +104,11 @@ namespace ZdravoCorp.View.Patient.Appointments
             PatientController pc = new PatientController();
 
             RoomController rc = new RoomController();
-
+            app.Id = exApp.Id;
             appointmentController.UpdateAppointment(app);
             Room r = app.Room;
             r.RemoveAppointment(exApp);
             r.AddAppointment(app);
-            
             rc.UpdateRoom(r);
             Doctor d = app.doctor;
             d.RemoveAppointment(exApp);
