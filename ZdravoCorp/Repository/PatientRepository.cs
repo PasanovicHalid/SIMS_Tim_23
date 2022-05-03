@@ -44,20 +44,20 @@ namespace Repository
         {
             Boolean success = false;
             List<Patient> patients = GetAllPatients();
-            foreach(Patient p in patients)
+            for (int i = 0; i < patients.Count; i++)
             {
-                if (patient.Id.Equals(p.Id))
+                if (patient.Id == patients[i].Id)
                 {
                     success = true;
-                    patients.Remove(p);
+                    patients[i] = patient;
                     break;
                 }
             }
             if (success)
             {
-                patients.Add(patient);
+                //patients.Add(patient);
                 serializerPatient.ToCSV(dbPath, patients);
-                
+
             }
             return success;
         }
@@ -94,7 +94,12 @@ namespace Repository
 
         public List<Patient> GetAllPatients()
         {
-            return serializerPatient.FromCSV(dbPath);
+            List<Patient> patients =  serializerPatient.FromCSV(dbPath);
+            foreach(Patient pat in patients)
+            {
+                pat.Record = MedicalRecordRepository.Instance.ReadMedicalRecord(pat.Record.Id);
+            }
+            return patients;
         }
 
         public PatientRepository()

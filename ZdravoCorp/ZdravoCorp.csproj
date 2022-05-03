@@ -75,6 +75,7 @@
     <Compile Include="Controller\DoctorController.cs" />
     <Compile Include="Controller\EquipmentController.cs" />
     <Compile Include="Controller\ManagerController.cs" />
+    <Compile Include="Controller\MedicalRecordController.cs" />
     <Compile Include="Controller\MedicineController.cs" />
     <Compile Include="Controller\PatientController.cs" />
     <Compile Include="Controller\RoomController.cs" />
@@ -90,6 +91,7 @@
     <Compile Include="Repository\DoctorRepository.cs" />
     <Compile Include="Repository\EquipmentRepository.cs" />
     <Compile Include="Repository\ManagerRepository.cs" />
+    <Compile Include="Repository\MedicalRecordRepository.cs" />
     <Compile Include="Repository\MedicineRepository.cs" />
     <Compile Include="Repository\PatientRepository.cs" />
     <Compile Include="Repository\RoomRepository.cs" />
@@ -103,6 +105,7 @@
     <Compile Include="Service\DoctorService.cs" />
     <Compile Include="Service\EquipmentService.cs" />
     <Compile Include="Service\ManagerService.cs" />
+    <Compile Include="Service\MedicalRecordService.cs" />
     <Compile Include="Service\MedicineService.cs" />
     <Compile Include="Service\PatientService.cs" />
     <Compile Include="Service\RoomService.cs" />
@@ -152,11 +155,17 @@
     <Compile Include="View\Patient\Patient.xaml.cs">
       <DependentUpon>Patient.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Secretary\AddRecord.xaml.cs">
+      <DependentUpon>AddRecord.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Secretary\ChangePatient.xaml.cs">
       <DependentUpon>ChangePatient.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Secretary\AddPatient.xaml.cs">
       <DependentUpon>AddPatient.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Secretary\ChangeRecord.xaml.cs">
+      <DependentUpon>ChangeRecord.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Secretary\Secretary.xaml.cs">
       <DependentUpon>Secretary.xaml</DependentUpon>
@@ -234,11 +243,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Secretary\AddRecord.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Secretary\ChangePatient.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Secretary\AddPatient.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Secretary\ChangeRecord.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -302,6 +319,7 @@
     </EmbeddedResource>
     <None Include="Data\equipmentTypeDB.csv" />
     <None Include="Data\actionsDB.csv" />
+    <None Include="Data\medicalRecordDB.csv" />
     <None Include="Data\patientsDB.csv" />
     <None Include="Data\doctorTypesDB.csv" />
     <None Include="Data\doctorsDB.csv" />

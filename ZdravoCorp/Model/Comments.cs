@@ -12,8 +12,18 @@ namespace Model
     public class Comments : Serializable
     {
         private String comment;
-
+        private int id;
         private Doctor doctor;
+        public int Id { get { return id; } set { id = value; } }
+        public Comments(int id)
+        {
+            this.id = id;
+        }
+
+        public Comments()
+        {
+        }
+
 
         /// <summary>
         /// Property for Doctor
