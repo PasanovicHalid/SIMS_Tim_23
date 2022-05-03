@@ -315,7 +315,7 @@ namespace Model
             int temp = i + count * 1;
             for (; i < temp; i++)
             {
-                appointment.Add(new Appointment(int.Parse(values[i++])));
+                appointment.Add(new Appointment(int.Parse(values[i])));
             }
 
             count = int.Parse(values[i++]);

@@ -229,8 +229,8 @@ namespace Repository
             {
                 List<Room> result = serializerRoom.FromCSV(dbPath);
 
-                Dictionary<int, EquipmentType> types = EquipmentRepository.Instance.GetAllEquipmentType().ToDictionary(keySelector: m => m.Identifier, elementSelector: m => m); 
-
+                Dictionary<int, EquipmentType> types = EquipmentRepository.Instance.GetAllEquipmentType().ToDictionary(keySelector: m => m.Identifier, elementSelector: m => m);
+                List<Appointment> appointments = new List<Appointment>();
                 foreach(Room room in result)
                 {
                     foreach(Equipment equipment in room.Equipment)
@@ -238,8 +238,14 @@ namespace Repository
                         if (types.ContainsKey(equipment.Identifier))
                         {
                             equipment.EquipmentType = types[equipment.Identifier];
+                            
                         }
                     }
+                    foreach(Appointment app in room.Appointment)
+                    {
+                        appointments.Add(AppointmentRepository.Instance.ReadAppointment(app.Id));
+                    }
+                    room.Appointment = appointments;
                 }
                 return result;
             }

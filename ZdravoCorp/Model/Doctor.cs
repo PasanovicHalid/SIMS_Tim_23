@@ -12,7 +12,7 @@ namespace Model
 {
     public class Doctor : Employee, Serializable
     {
-        private List<Appointment> appointment;
+        private List<Appointment> appointment = new List<Appointment>();
 
 
         public Doctor()
@@ -140,6 +140,18 @@ namespace Model
             result.Add(gender.ToString());
             result.Add(dateOfBirth.ToString());
             int nf = 0;
+            if(appointment == null)
+            {
+                result.Add(nf.ToString());
+            }
+            else
+            {
+                result.Add(appointment.Count.ToString());
+                foreach(Appointment a in appointment)
+                {
+                    result.Add(a.Id.ToString());
+                }
+            }
             if (notification == null)
             {
                 result.Add(nf.ToString());
@@ -187,7 +199,12 @@ namespace Model
             }
             dateOfBirth = DateTime.Parse(values[i++]);
             int count = int.Parse(values[i++]);
-            for(int j = 0 ; j < count; j++)
+            for(int j = 0; j < count; j++)
+            {
+                appointment.Add(new Appointment(int.Parse(values[i++])));
+            }
+            count = int.Parse(values[i++]);
+            for (int j = 0 ; j < count; j++)
             {
                 notification.Add(new Notification(DateTime.Parse(values[i++]), values[i++], int.Parse(values[i++])));
             }

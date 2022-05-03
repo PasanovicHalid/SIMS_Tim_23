@@ -110,6 +110,7 @@ namespace Service
 
                 }
             }
+            //prioritet datum
             else
             {
                 DateTime resetStart = start;
@@ -182,19 +183,5 @@ namespace Service
             }
             return result;
         }
-
-        public List<Appointment> RightAppointments()
-        {
-            List<Appointment> appointments = GetAllAppointments();
-            foreach (Appointment appointment in appointments)
-            {
-                appointment.doctor = DoctorService.Instance.ReadDoctor(appointment.doctor.Id);
-                appointment.Room = RoomService.Instance.ReadRoom(appointment.Room.Identifier);
-                appointment.Patient = PatientService.Instance.ReadPatient(appointment.Patient.Id);
-                
-            }
-            return appointments;
-        }
-
     }
 }

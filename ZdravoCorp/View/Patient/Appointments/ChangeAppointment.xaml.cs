@@ -25,6 +25,7 @@ namespace ZdravoCorp.View.Patient.Appointments
         public DateTime selectedDate { get; set; }
         public DateTime exDate;
         public Appointment app;
+        public Appointment exApp;
         public Doctor doctor { get; set; }
         public DoctorController doctorController;
         public AppointmentController appointmentController;
@@ -48,14 +49,14 @@ namespace ZdravoCorp.View.Patient.Appointments
             appointmentController = new AppointmentController();
             doctorController = new DoctorController();
             this.app = appointment;
+            exApp = appointment;
             DoctorsCollection = new ObservableCollection<Doctor>(doctorController.GetAllDoctors());
             DoctorsCB.ItemsSource = DoctorsCollection;
             doctor = doctorController.ReadDoctor(appointment.doctor.Id);
             selectedIndex = doctor.Id;
             DoctorsCB.SelectedIndex = selectedIndex;
-            //DoctorsCB.SelectedValue = doctor;//doctorController.ReadDoctor(appointment.doctor.Id);
             selectedDate = appointment.startDate;
-            exDate = appointment.StartDate;
+            this.exDate = appointment.StartDate;
         }
 
         private void Search_Click(object sender, RoutedEventArgs e)
@@ -63,23 +64,19 @@ namespace ZdravoCorp.View.Patient.Appointments
             DataContext = this;
             Doctor doctor = (Doctor)DoctorsCB.SelectedValue;
             DateTime date = (DateTime)datePicker.SelectedDate;
-            Appointment app;
             List<Appointment> apps = new List<Appointment>();
-            date.AddHours((int)doctor.WorkStartTime.Hour);
-            date.AddMinutes((int)doctor.WorkStartTime.Minute);
-            date.AddSeconds((int)doctor.WorkStartTime.Second);
-            TimeSpan lessDays = new TimeSpan(-2, 0, 0, 0);
+            TimeSpan lessDays = new TimeSpan(-1, 0, 0, 0);
             TimeSpan moreDays = new TimeSpan(2, 0, 0, 0);
             DateTime less = exDate.Date + lessDays;
             DateTime more = exDate.Date + moreDays;
-            if (date< less)
+            if (date < less)
             {
-                MessageBox.Show("Ne smete izabrati datum 2 dana manji od prvobitnog.\nPrvobitan datum :\t"+exDate.ToString(), "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Prvobitan datum mozete pomeriti najvise 1 dan uznazad.\nPrvobitan datum :\t" + exDate.ToString(), "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
 
             }
-            else if (date >more)
+            else if (date > more)
             {
-                MessageBox.Show("Ne smete izabrati datum 2 dana veci od prvobitnog.\nPrvobitan datum :\t" + exDate.ToString(), "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Prvobitan datum mozete pomeriti najvise 2 dana unapred.\nPrvobitan datum :\t" + exDate.ToString(), "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else
             {
@@ -92,12 +89,9 @@ namespace ZdravoCorp.View.Patient.Appointments
                     apps = appointmentController.SuggestAppointments(doctor, date, date.AddMinutes(45), true, true);
 
                 }
-
                 AppointmentsCollection = new ObservableCollection<Appointment>(apps);
                 TableForSuggestedApp.DataContext = AppointmentsCollection;
             }
-            
-
         }
 
         private void Confirm_Click(object sender, RoutedEventArgs e)
@@ -110,17 +104,20 @@ namespace ZdravoCorp.View.Patient.Appointments
             PatientController pc = new PatientController();
 
             RoomController rc = new RoomController();
-
+            app.Id = exApp.Id;
             appointmentController.UpdateAppointment(app);
-            //Room r = app.Room;
-            //r.AddAppointment(app);
-            //rc.UpdateRoom(r);
-            //Doctor d = app.doctor;
-            //d.AddAppointment(app);
-            //doctorController.UpdateDoctor(d);
-            //Model.Patient p = app.Patient;
-            //p.AddAppointment(app);
-            //pc.UpdatePatient(p);
+            Room r = app.Room;
+            r.RemoveAppointment(exApp);
+            r.AddAppointment(app);
+            rc.UpdateRoom(r);
+            Doctor d = app.doctor;
+            d.RemoveAppointment(exApp);
+            d.AddAppointment(app);
+            doctorController.UpdateDoctor(d);
+            Model.Patient p = app.Patient;
+            p.RemoveAppointment(exApp);
+            p.AddAppointment(app);
+            pc.UpdatePatient(p);
             this.Close();
 
         }

@@ -81,8 +81,8 @@
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name ="Doctor" Header="Doktor" Binding="{Binding doctor.nameSurname}" Width="*">
                 </DataGridTextColumn>
-                <DataGridTextColumn x:Name ="Date" Header="Datum" Binding="{Binding startDate}" Width="*"/>
-                <DataGridTextColumn x:Name ="Time" Header="Vreme" Binding="{Binding endDate}" Width="*"/>
+                <DataGridTextColumn x:Name ="Start" Header="Pocetak" Binding="{Binding startDate}" Width="*"/>
+                <DataGridTextColumn x:Name ="End" Header="Kraj" Binding="{Binding endDate}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
         <Button Content="Prikaži" 

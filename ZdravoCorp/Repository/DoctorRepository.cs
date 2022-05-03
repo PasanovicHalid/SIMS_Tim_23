@@ -45,18 +45,17 @@ namespace Repository
         {
             Boolean success = false;
             List<Doctor> doctors = GetAllDoctors();
-            foreach(Doctor d in doctors)
+            for(int i = 0; i < doctors.Count; i++)
             {
-                if (doctor.Id.Equals(d.Id))
+                if (doctor.Id == doctors[i].Id)
                 {
                     success = true;
-                    doctors.Remove(d);
+                    doctors[i] = doctor;
                     break;
                 }
             }
             if (success)
             {
-                doctors.Add(doctor);
                 serializerDoctor.ToCSV(dbPath, doctors);
                 
             }
@@ -95,7 +94,18 @@ namespace Repository
 
         public List<Doctor> GetAllDoctors()
         {
-            return serializerDoctor.FromCSV(dbPath);
+            List<Doctor> doctors = serializerDoctor.FromCSV(dbPath);
+            foreach(Doctor d in doctors)
+            {
+                List<int> ids = new List<int>();
+                foreach(Appointment a in d.Appointment)
+                {
+                    ids.Add(a.Id);
+                }
+                d.Appointment = AppointmentRepository.Instance.GetAppointmentsById(ids);
+                
+            }
+            return doctors;
         }
 
         public Boolean CreateDoctorType(DoctorType newDoctorType)
