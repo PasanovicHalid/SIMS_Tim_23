@@ -92,6 +92,15 @@ namespace Repository
                 {
                     success = true;
                     appointments.Remove(temp);
+                    Doctor d = DoctorRepository.Instance.ReadDoctor(temp.doctor.Id);
+                    d.RemoveAppointment(temp);
+                    DoctorRepository.Instance.UpdateDoctor(d);
+                    Room r = RoomRepository.Instance.ReadRoom(temp.Room.Identifier);
+                    r.RemoveAppointment(temp);
+                    RoomRepository.Instance.UpdateRoom(r);
+                    Patient p = PatientRepository.Instance.ReadPatient(temp.Patient.Id);
+                    p.RemoveAppointment(temp);
+                    PatientRepository.Instance.UpdatePatient(p);
                     serializerAppointment.ToCSV(dbPath, appointments);
                     break;
                 }
