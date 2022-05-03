@@ -7,6 +7,7 @@
 using Model;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Repository
 {
@@ -16,44 +17,41 @@ namespace Repository
         private String dbRoomTypePath = "..\\..\\Data\\roomTypesDB.csv";
         private Serializer<Room> serializerRoom = new Serializer<Room>();
         private Serializer<RoomType> serializerRoomType = new Serializer<RoomType>();
+        private static readonly object key = new object();
+
+        private HashSet<int> idMap;
 
         private static RoomRepository instance = null;
 
         public Boolean CreateRoom(Room newRoom)
         {
-            List<Room> rooms = serializerRoom.FromCSV(dbPath);
-
-            //Checking if the Designation Code of the new Room exists
-            bool exists = false;
-            foreach (Room room in rooms)
+            lock (key) 
             {
-                if (newRoom.DesignationCode.Equals(room.DesignationCode))
+                Random random = new Random();
+                do
                 {
-                    if (newRoom.Identifier != room.Identifier)
-                    {
-                        exists = true;
-                        break;
-                    }
+                    newRoom.Identifier = random.Next();
                 }
-            }
+                while (idMap.Contains(newRoom.Identifier));
 
-            if (!exists)
-            {
-                //Checking if the Identificator of the new Room exists 
-                bool found = false;
+                List<Room> rooms = serializerRoom.FromCSV(dbPath);
+
+                //Checking if the Designation Code of the new Room exists
+                bool exists = false;
                 foreach (Room room in rooms)
                 {
-                    if (newRoom.Identifier == room.Identifier)
+                    if (newRoom.DesignationCode.Equals(room.DesignationCode))
                     {
-                        found = true;
-                        break;
+                         exists = true;
+                         break;
                     }
                 }
-                if (!found)
+
+                if (!exists)
                 {
-                    //Publishing changes to DB
                     rooms.Add(newRoom);
                     serializerRoom.ToCSV(dbPath, rooms);
+                    idMap.Add(newRoom.Identifier);
                     return true;
                 }
                 else
@@ -61,52 +59,160 @@ namespace Repository
                     return false;
                 }
             }
-            else
+        }
+
+        //Gets Rooms by internal ID
+        //Returns List of rooms if found
+        //Returns empty List if not found
+        public List<Room> GetRoomsByInternalID(HashSet<int> identifiers)
+        {
+            lock (key)
             {
-                return false;
+                List<Room> rooms = serializerRoom.FromCSV(dbPath);
+                List<Room> result = new List<Room>();
+
+                foreach (Room room in rooms)
+                {
+                    if (identifiers.Contains(room.Identifier))
+                    {
+                        result.Add(room);
+                    }
+                }
+                return result;
             }
         }
 
-        public Model.Room ReadRoom(String identifier)
+        public Model.Room ReadRoom(int identifier)
         {
-            throw new NotImplementedException();
+            List<Room> rooms = serializerRoom.FromCSV(dbPath);
+
+            Dictionary<int, EquipmentType> types = EquipmentRepository.Instance.GetAllEquipmentType().ToDictionary(keySelector: m => m.Identifier, elementSelector: m => m);
+
+            foreach (Room room in rooms)
+            {
+                if (identifier ==(room.Identifier))
+                {
+                    foreach (Equipment equipment in room.Equipment)
+                    {
+                        if (types.ContainsKey(equipment.Identifier))
+                        {
+                            equipment.EquipmentType = types[equipment.Identifier];
+                        }
+                    }
+                    return room;
+                }
+            }
+            return null;
         }
 
         public Boolean UpdateRoom(Room updatedRoom)
         {
-            List<Room> rooms = serializerRoom.FromCSV(dbPath);
-
-            //Checking if Designation Code of the changed Room exists
-            bool exists = false;
-            foreach (Room room in rooms)
+            lock (key)
             {
-                if (updatedRoom.DesignationCode.Equals(room.DesignationCode))
+                List<Room> rooms = serializerRoom.FromCSV(dbPath);
+
+                //Checking if Designation Code of the changed Room exists
+                bool exists = false;
+                foreach (Room room in rooms)
                 {
-                    if(updatedRoom.Identifier != room.Identifier)
+                    if (updatedRoom.DesignationCode.Equals(room.DesignationCode) && room.Identifier != updatedRoom.Identifier)
                     {
                         exists = true;
                         break;
                     }
                 }
-            }
 
-            if (!exists)
+                if (!exists)
+                {
+                    //Finding the Room in the list and removing it from the list
+                    bool found = false;
+                    for (int i = 0; i < rooms.Count; i++)
+                    {
+                        if (updatedRoom.Identifier == rooms[i].Identifier)
+                        {
+                            rooms[i] = updatedRoom;
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (found)
+                    {
+                        //Publishing changes to DB
+                        serializerRoom.ToCSV(dbPath, rooms);
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
+
+        public Boolean DeleteRoom(int identifier)
+        {
+            lock (key)
             {
-                //Finding the Room in the list and removing it from the list
-                bool found = false;
+                bool deleted = false;
+                List<Room> rooms = serializerRoom.FromCSV(dbPath);
                 foreach (Room room in rooms)
                 {
-                    if (updatedRoom.Identifier == room.Identifier)
+                    if (identifier == room.Identifier)
                     {
                         rooms.Remove(room);
+                        deleted = true;
+                        break;
+                    }
+                }
+                if (deleted)
+                {
+                    serializerRoom.ToCSV(dbPath, rooms);
+                    idMap.Remove(identifier);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
+        public Boolean AddEquipment(Equipment equipment, int id)
+        {
+            lock (key)
+            {
+                bool found = false;
+                List<Room> rooms = serializerRoom.FromCSV(dbPath);
+                for(int i = 0; i < rooms.Count; i++)
+                {
+                    if (id == rooms[i].Identifier)
+                    {
                         found = true;
+                        bool exists = false;
+                        for(int j = 0; j < rooms[i].Equipment.Count; j++)
+                        {
+                            if(rooms[i].Equipment[j].Identifier == equipment.Identifier)
+                            {
+                                rooms[i].Equipment[j].Count += equipment.Count;
+                                rooms[i].Equipment[j].Actual_count += equipment.Actual_count;
+                                exists = true;
+                                break;
+                            }
+                        }
+                        if (!exists)
+                        {
+                            rooms[i].Equipment.Add(equipment);
+                        }
                         break;
                     }
                 }
                 if (found)
                 {
-                    //Publishing changes to DB
-                    rooms.Add(updatedRoom);
                     serializerRoom.ToCSV(dbPath, rooms);
                     return true;
                 }
@@ -115,54 +221,124 @@ namespace Repository
                     return false;
                 }
             }
-            else
-            {
-                return false;
-            }
-        }
-
-        public Boolean DeleteRoom(int identifier)
-        {
-            bool deleted = false;
-            List<Room> rooms = serializerRoom.FromCSV(dbPath);
-            foreach (Room room in rooms)
-            {
-                if (identifier == room.Identifier)
-                {
-                    rooms.Remove(room);
-                    deleted = true;
-                    break;
-                }
-            }
-            if (deleted)
-            {
-                serializerRoom.ToCSV(dbPath, rooms);
-                return true;
-            }
-            else
-            {
-                return false;
-            }
         }
 
         public List<Room> GetAllRooms()
         {
-            return serializerRoom.FromCSV(dbPath);
+            lock (key)
+            {
+                List<Room> result = serializerRoom.FromCSV(dbPath);
+
+                Dictionary<int, EquipmentType> types = EquipmentRepository.Instance.GetAllEquipmentType().ToDictionary(keySelector: m => m.Identifier, elementSelector: m => m);
+                List<Appointment> appointments = new List<Appointment>();
+                foreach(Room room in result)
+                {
+                    foreach(Equipment equipment in room.Equipment)
+                    {
+                        if (types.ContainsKey(equipment.Identifier))
+                        {
+                            equipment.EquipmentType = types[equipment.Identifier];
+                            
+                        }
+                    }
+                    foreach(Appointment app in room.Appointment)
+                    {
+                        appointments.Add(AppointmentRepository.Instance.ReadAppointment(app.Id));
+                    }
+                    room.Appointment = appointments;
+                }
+                return result;
+            }
         }
 
         public Boolean CreateRoomType(Model.RoomType newRoomType)
         {
-            throw new NotImplementedException();
+            lock (key)
+            {
+
+                List<RoomType> rooms = serializerRoomType.FromCSV(dbRoomTypePath);
+
+                bool exists = false;
+                foreach (RoomType room in rooms)
+                {
+                    if (newRoomType.Name.Equals(room.Name))
+                    {
+                        exists = true;
+                        break;
+                    }
+                }
+
+                if (!exists)
+                {
+                    rooms.Add(newRoomType);
+                    serializerRoomType.ToCSV(dbRoomTypePath, rooms);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
         }
 
         public Boolean UpdateRoomType(Model.RoomType roomType)
         {
-            throw new NotImplementedException();
+            lock (key)
+            {
+
+                List<RoomType> rooms = serializerRoomType.FromCSV(dbRoomTypePath);
+
+                bool exists = false;
+                for (int i = 0; i < rooms.Count ; i++)
+                {
+                    if (roomType.Name.Equals(rooms[i].Name))
+                    {
+                        rooms[i] = roomType;
+                        exists = true;
+                        break;
+                    }
+                }
+
+                if (!exists)
+                {
+                    serializerRoomType.ToCSV(dbRoomTypePath, rooms);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
         }
 
         public Boolean DeleteRoomType(Model.RoomType roomType)
         {
-            throw new NotImplementedException();
+            lock (key)
+            {
+
+                List<RoomType> rooms = serializerRoomType.FromCSV(dbRoomTypePath);
+
+                bool exists = false;
+                foreach (RoomType room in rooms)
+                {
+                    if (roomType.Name.Equals(room.Name))
+                    {
+                        rooms.Remove(room);
+                        exists = true;
+                        break;
+                    }
+                }
+
+                if (!exists)
+                {
+                    serializerRoomType.ToCSV(dbRoomTypePath, rooms);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
         }
 
         public Model.RoomType ReadRoomType(Model.RoomType roomType)
@@ -170,14 +346,72 @@ namespace Repository
             throw new NotImplementedException();
         }
 
+        public int GetMaxCountForEquipment(int id_room, int id_equipment)
+        {
+            Room room = ReadRoom(id_room);
+            foreach(Equipment it in room.Equipment)
+            {
+                if (it.Identifier.Equals(id_equipment))
+                {
+                    return it.Actual_count;
+                }
+            }
+            return 0;
+        }
+
+        public Boolean ChangeActualCountOfEquipment(int id_from_room, int id_equipment, int count)
+        {
+            List<Room> room =GetAllRooms();
+            bool found = false;
+            bool added = false;
+            for (int i = 0; i < room.Count; i++)
+            {
+                if (room[i].Identifier.Equals(id_from_room))
+                {
+                    found = true;
+                    for (int j = 0; j < room[i].Equipment.Count; j++)
+                    {
+                        if (room[i].Equipment[j].Identifier.Equals(id_equipment))
+                        {
+                            added = true;
+                            room[i].Equipment[j].Actual_count += count;
+                            break;
+                        }
+                    }
+                    if (added)
+                    {
+                        break;
+                    }
+                }
+            }
+            if (!found || !added)
+            {
+                return false;
+            }
+            else
+            {
+                serializerRoom.ToCSV(dbPath, room);
+                return true;
+            }
+        }
+
         public List<RoomType> GetAllRoomType()
         {
-            throw new NotImplementedException();
+            lock (key)
+            {
+                return serializerRoomType.FromCSV(dbRoomTypePath);
+            }
         }
 
         public RoomRepository()
         {
-            
+            idMap = new HashSet<int>();
+            List<Room> rooms = serializerRoom.FromCSV(dbPath);
+
+            foreach(Room room in rooms)
+            {
+                idMap.Add(room.Identifier);
+            }
         }
 
         public static RoomRepository Instance
@@ -186,9 +420,15 @@ namespace Repository
             {
                 if (instance == null)
                 {
-                    instance = new RoomRepository();
+                    lock (key)
+                        {
+                            if (instance == null)
+                            {
+                                instance = new RoomRepository();
+                            }
+                        }
                 }
-                return instance ;
+                return instance;
             }
         }
 

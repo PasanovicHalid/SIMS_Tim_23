@@ -7,6 +7,7 @@
 using Repository;
 using System;
 using System.Collections.Generic;
+using ZdravoCorp.View.ViewModel;
 
 namespace Model
 {
@@ -21,6 +22,11 @@ namespace Model
         public RoomType(string name)
         {
             this.Name = name;
+        }
+
+        public RoomType(RoomTypeVO type)
+        {
+            this.Name = type.Name;
         }
 
         public string Name { get => name; set => name = value; }

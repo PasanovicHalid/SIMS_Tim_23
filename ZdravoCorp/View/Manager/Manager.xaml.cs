@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -19,8 +20,10 @@ namespace ZdravoCorp.View.Manager
     /// </summary>
     public partial class Manager : Window
     {
-        public Manager()
+        private AutoResetEvent autoEvent;
+        public Manager(AutoResetEvent autoEvent)
         {
+            this.autoEvent = autoEvent;
             InitializeComponent();
         }
 
@@ -29,6 +32,14 @@ namespace ZdravoCorp.View.Manager
             ZdravoCorp.View.Manager.Rooms.Rooms rooms = new ZdravoCorp.View.Manager.Rooms.Rooms();
             this.Hide();
             rooms.ShowDialog();
+            this.Show();
+        }
+
+        private void Equipment_Click(object sender, RoutedEventArgs e)
+        {
+            Equipments.Equipments window = new Equipments.Equipments();
+            this.Hide();
+            window.ShowDialog();
             this.Show();
         }
 
@@ -46,6 +57,11 @@ namespace ZdravoCorp.View.Manager
         private void Minimize_Click(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Minimized;
+        }
+
+        private void CloseWindow(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            autoEvent.Set();
         }
     }
 }

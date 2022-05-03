@@ -12,9 +12,13 @@ namespace Repository
 {
     public class EquipmentRepository
     {
-        private String dbPath;
+        private String dbPath = "..\\..\\Data\\equipmentTypeDB.csv";
+        private Serializer<EquipmentType> serializer = new Serializer<EquipmentType>();
 
         private static EquipmentRepository instance = null;
+        private static readonly object key = new object();
+
+        private HashSet<int> idMap;
 
         public Boolean CreateEquipment(Equipment newEquipment)
         {
@@ -48,32 +52,171 @@ namespace Repository
 
         public Boolean CreateEquipmentType(EquipmentType newEquipmentType)
         {
-            throw new NotImplementedException();
+            lock (key)
+            {
+                Random random = new Random();
+                do
+                {
+                    newEquipmentType.Identifier = random.Next();
+                }
+                while (idMap.Contains(newEquipmentType.Identifier));
+
+                List<EquipmentType> equipmentTypes = serializer.FromCSV(dbPath);
+
+                //Checking if Name of EquipmentType already exists
+                bool exists = false;
+                foreach (EquipmentType type in equipmentTypes)
+                {
+                    if (newEquipmentType.Name.Equals(type.Name))
+                    {
+                        exists = true;
+                        break;
+                    }
+                }
+
+                if (!exists)
+                {
+                    equipmentTypes.Add(newEquipmentType);
+                    serializer.ToCSV(dbPath, equipmentTypes);
+                    idMap.Add(newEquipmentType.Identifier);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
         }
 
         public Boolean UpdateEquipmentType(EquipmentType equipmentType)
         {
-            throw new NotImplementedException();
+            lock (key)
+            {
+                List<EquipmentType> equipmentTypes = serializer.FromCSV(dbPath);
+
+                //Checking if Name of EquipmentType already exists
+                bool exists = false;
+                foreach (EquipmentType type in equipmentTypes)
+                {
+                    if (equipmentType.Name.Equals(type.Name) && equipmentType.Identifier != type.Identifier)
+                    {
+                        exists = true;
+                        break;
+                    }
+                }
+
+                if (!exists)
+                {
+                    bool found = false;
+                    foreach (EquipmentType type in equipmentTypes)
+                    {
+                        if (type.Identifier == equipmentType.Identifier)
+                        {
+                            equipmentTypes.Remove(type);
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (found)
+                    {
+                        //Publishing changes to DB
+                        equipmentTypes.Add(equipmentType);
+                        serializer.ToCSV(dbPath, equipmentTypes);
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
         }
 
         public Boolean DeleteEquipmentType(int id)
         {
-            throw new NotImplementedException();
+            lock (key)
+            {
+                List<EquipmentType> equipmentTypes = serializer.FromCSV(dbPath);
+
+                bool deleted = false;
+                foreach (EquipmentType type in equipmentTypes)
+                {
+                    if (type.Identifier == id)
+                    {
+                        equipmentTypes.Remove(type);
+                        deleted = true;
+                        break;
+                    }
+                }
+
+                if (!deleted)
+                {
+                    serializer.ToCSVAppend(dbPath, equipmentTypes);
+                    idMap.Remove(id);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
         }
 
         public EquipmentType ReadEquipmentType(int id)
         {
-            throw new NotImplementedException();
+            lock (key)
+            {
+                List<EquipmentType> equipmentTypes = serializer.FromCSV(dbPath);
+
+                foreach (EquipmentType type in equipmentTypes)
+                {
+                    if (type.Identifier == id)
+                    {
+                        return type;
+                    }
+                }
+                return null;
+            }
+        }
+
+        public EquipmentType FindEquipmentTypeByName(String name)
+        {
+            lock (key)
+            {
+                List<EquipmentType> equipmentTypes = serializer.FromCSV(dbPath);
+
+                foreach (EquipmentType type in equipmentTypes)
+                {
+                    if (type.Name == name)
+                    {
+                        return type;
+                    }
+                }
+                return null;
+            }
         }
 
         public List<EquipmentType> GetAllEquipmentType()
         {
-            throw new NotImplementedException();
+            lock (key)
+            {
+                return serializer.FromCSV(dbPath);
+            }
         }
 
         public EquipmentRepository()
         {
-            
+            idMap = new HashSet<int>();
+            List<EquipmentType> rooms = serializer.FromCSV(dbPath);
+
+            foreach (EquipmentType it in rooms)
+            {
+                idMap.Add(it.Identifier);
+            }
         }
 
         public static EquipmentRepository Instance
@@ -82,7 +225,13 @@ namespace Repository
             {
                 if (instance == null)
                 {
-                    instance = new EquipmentRepository();
+                    lock (key)
+                    {
+                        if (instance == null)
+                        {
+                            instance = new EquipmentRepository();
+                        }
+                    }
                 }
                 return instance;
             }

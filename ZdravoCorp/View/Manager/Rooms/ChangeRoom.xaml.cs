@@ -2,6 +2,7 @@
 using Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ZdravoCorp.View.ViewModel;
 
 namespace ZdravoCorp.View.Manager.Rooms
 {
@@ -22,22 +24,12 @@ namespace ZdravoCorp.View.Manager.Rooms
     /// </summary>
     public partial class ChangeRoom : Window, INotifyPropertyChanged
     {
-        private Room room;
         private RoomController roomController;
+        private ObservableCollection<RoomTypeVO> types;
+        private Room room;
 
         public event PropertyChangedEventHandler PropertyChanged;
-        public ChangeRoom(Room room)
-        {
-            InitializeComponent();
-            this.DataContext = this;
-            roomController = new RoomController();
-            this.room = room;
-            RoomId.Text = room.Identifier.ToString();
-            RoomIdentifier.Text = room.DesignationCode;
-            RoomSize.Text = room.SurfaceArea.ToString();
-            RoomType.Text = room.RoomType.Name.ToString();
-        }
-
+        
         protected virtual void OnPropertyChanged(string name)
         {
             if (PropertyChanged != null)
@@ -46,11 +38,54 @@ namespace ZdravoCorp.View.Manager.Rooms
             }
         }
 
+        public float Size
+        {
+            get { return room.SurfaceArea; }
+            set
+            {
+                if (value != room.SurfaceArea)
+                {
+                    room.SurfaceArea = value;
+                    OnPropertyChanged("Size");
+                }
+            }
+        }
+
+        public String Identifier
+        {
+            get { return room.DesignationCode; }
+            set
+            {
+                if (value != room.DesignationCode)
+                {
+                    room.DesignationCode = value;
+                    OnPropertyChanged("Identifier");
+                }
+            }
+        }
+
+        public ChangeRoom(Room room)
+        {
+            InitializeComponent();
+            this.DataContext = this;
+
+            this.room = room;
+
+            roomController = new RoomController();
+            types = roomController.GetAllRoomTypeView();
+            Types.ItemsSource = types;
+            for(int i = 0 ; i < types.Count ; i++)
+            {
+                if(types[i].Name == room.RoomType.Name)
+                {
+                    Types.SelectedIndex = i;
+                }
+            }
+        }
+
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
-            room.DesignationCode = RoomIdentifier.Text;
-            room.SurfaceArea = float.Parse(RoomSize.Text);
-            room.RoomType.Name = RoomType.Text;
+            room.RoomType.Name = types[Types.SelectedIndex].Name;
             if (!roomController.UpdateRoom(room))
             {
                 MessageBox.Show("Nije uspesno izmenjen element", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -59,6 +94,14 @@ namespace ZdravoCorp.View.Manager.Rooms
             {
                 this.Close();
             }
+        }
+
+        private void RoomTypeAdd_Click(object sender, RoutedEventArgs e)
+        {
+            AddRoomType window = new AddRoomType();
+            window.ShowDialog();
+            types = roomController.GetAllRoomTypeView();
+            Types.ItemsSource = types;
         }
     }
 }

@@ -98,5 +98,23 @@ namespace ZdravoCorp.View.Manager.Rooms
         {
             WindowState = WindowState.Minimized;
         }
+
+        private void RenovateRoom_Click(object sender, RoutedEventArgs e)
+        {
+            if (RoomTable.SelectedIndex == -1)
+            {
+                return;
+            }
+            RenovateRoom window = new RenovateRoom(RoomsCollection.ElementAt(RoomTable.SelectedIndex));
+            window.ShowDialog();
+            UpdateTable();
+        }
+
+        private void ChangeRenovation_Click(object sender, RoutedEventArgs e)
+        {
+            ChangeRenovation window = new ChangeRenovation();
+            window.ShowDialog();
+            UpdateTable();
+        }
     }
 }

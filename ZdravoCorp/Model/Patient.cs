@@ -12,9 +12,23 @@ namespace Model
 {
     public class Patient : User, Serializable
     {
-        private Boolean guest = false;
+        private MedicalRecord record;
+        public MedicalRecord Record { get { return record; } set { record = value; } }
+        public Patient(int id, string password, string username, string name, string surname, string jmbg, string email, string address, string phoneNumber, Gender gender, DateTime dateOfBirth, List<Notification> notification, List<Survey> survey) : base(id, password, username, name, surname, jmbg, email, address, phoneNumber, gender, dateOfBirth, notification, survey)
+        {
+            
+        }
 
-        private List<Appointment> appointment;
+        public Patient(int id)
+        {
+            this.id = id;
+        }
+
+        public Patient()
+        {
+        }
+
+        private List<Appointment> appointment = new List<Appointment>();
 
         /// <summary>
         /// Property for collection of Appointment
@@ -140,12 +154,124 @@ namespace Model
 
         public List<String> ToCSV()
         {
-            throw new NotImplementedException();
+            List<String> result = new List<String>();
+            result.Add(Id.ToString());
+            result.Add(password);
+            result.Add(username);
+            result.Add(name);
+            result.Add(surname);
+            result.Add(jmbg);
+            result.Add(email);
+            result.Add(address);
+            result.Add(phoneNumber);
+            result.Add(gender.ToString());
+            result.Add(dateOfBirth.ToString());
+            
+
+            
+
+            int nf = 0;
+            if (notification == null)
+            {
+                result.Add(nf.ToString());
+            }
+            else
+            {
+                result.Add(notification.Count.ToString());
+                foreach (Notification n in notification)
+                {
+                    result.Add(n.DateCreated.ToString());
+                    result.Add(n.Content);
+                    result.Add(n.User.Id.ToString());
+                }
+            }
+
+
+            /*Mozda nije dobro*/
+
+            if(appointment == null)
+            {
+                result.Add(nf.ToString());
+            }
+            else
+            {
+                result.Add(appointment.Count.ToString());
+
+                foreach(Appointment a in appointment)
+                {
+                    result.Add(a.Id.ToString());
+                }
+            }
+
+
+            if (prescription == null)
+
+            {
+                result.Add(nf.ToString());
+            }
+            else
+            {
+                result.Add(prescription.Count.ToString());
+                foreach (Prescription p in prescription)
+                {
+                    result.Add(p.Id.ToString());
+                }
+            }
+            int i = -1;
+            if (record == null) {
+                result.Add(i.ToString());
+            }
+            else
+            {
+                result.Add(record.Id.ToString());
+            }
+            
+            
+            return result;
         }
 
         public void FromCSV(string[] values)
         {
-            throw new NotImplementedException();
+            int i = 0;
+            id = int.Parse(values[i++]);
+            password = values[i++];
+            username = values[i++];
+            name = values[i++];
+            surname = values[i++];
+            jmbg = values[i++];
+            email = values[i++];
+            address = values[i++];
+            phoneNumber = values[i++];
+            if (values[i++] == "Male")
+            {
+                gender = Gender.Male;
+            }
+            else
+            {
+                gender = Gender.Female;
+            }
+            dateOfBirth = DateTime.Parse(values[i++]);
+            int count = int.Parse(values[i++]);
+            /*Mozda nije dobro*/
+            for (int j = 0; j < count; j++)
+            {
+                notification.Add(new Notification(DateTime.Parse(values[i++]), values[i++], int.Parse(values[i++])));
+            }
+
+            int count2 = int.Parse(values[i++]);
+            for(int j = 0; j < count2; j++)
+            {
+                appointment.Add(new Appointment(int.Parse(values[i])));
+                i++;
+                //appointment.Add(new Appointment(int.Parse(values[i++])));
+            }
+
+            int count3 = int.Parse(values[i++]);
+            for (int j = 0; j < count3; j++)
+            {
+                prescription.Add(new Prescription(int.Parse(values[i++])));
+            }
+            record = new MedicalRecord(int.Parse(values[i++]));
         }
 
     }

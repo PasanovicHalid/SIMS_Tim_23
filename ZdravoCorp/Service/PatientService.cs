@@ -5,36 +5,39 @@
 
 using Model;
 using System;
+using Repository;
+using System.Collections.Generic;
 
 namespace Service
 {
     public class PatientService
     {
+        
         private static PatientService instance = null;
 
         public Boolean CreatePatient(Patient newPatient)
         {
-            throw new NotImplementedException();
+            return PatientRepository.Instance.CreatePatient(newPatient);
         }
 
         public Boolean UpdatePatient(Patient patient)
         {
-            throw new NotImplementedException();
+            return PatientRepository.Instance.UpdatePatient(patient);
         }
 
-        public Boolean DeletePatient(Patient patient)
+        public Boolean DeletePatient(int patient)
         {
-            throw new NotImplementedException();
+            return PatientRepository.Instance.DeletePatient(patient);
         }
 
-        public Patient ReadPatient(Patient patient)
+        public Patient ReadPatient(int patient)
         {
-            throw new NotImplementedException();
+            return PatientRepository.Instance.ReadPatient(patient);
         }
 
-        public Array GetAllPatients()
+        public List<Patient> GetAllPatients()
         {
-            throw new NotImplementedException();
+            return PatientRepository.Instance.GetAllPatients();
         }
 
         public PatientService()

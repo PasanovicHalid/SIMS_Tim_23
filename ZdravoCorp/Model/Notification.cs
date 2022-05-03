@@ -12,10 +12,22 @@ namespace Model
 {
     public class Notification : Serializable
     {
+        private int id;
         private DateTime dateCreated;
         private String content;
 
         private User user;
+
+        public int Id { get => id; set => id = value; }
+        public DateTime DateCreated { get { return dateCreated; } set { dateCreated = value; } }    
+        public String Content { get { return content; } set { content = value; } }
+
+        public Notification(DateTime dateCreated, string content, int id)
+        {
+            this.dateCreated = dateCreated;
+            this.content = content;
+            this.user.Id = id;
+        }
 
         /// <summary>
         /// Property for User

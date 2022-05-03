@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ZdravoCorp.View.Manager.Rooms"
-        xmlns:c1="http://schemas.componentone.com/winfx/2006/xaml" x:Class="ZdravoCorp.View.Manager.Rooms.Rooms"
+        xmlns:c1="http://schemas.componentone.com/winfx/2006/xaml" xmlns:syncfusion="http://schemas.syncfusion.com/wpf" x:Class="ZdravoCorp.View.Manager.Rooms.Rooms"
         mc:Ignorable="d"
         Title="Rooms" 
         Height="790" Width="430"
@@ -49,7 +49,7 @@
                         Grid.Row="1"
                         Background="#EEEEEE">
 
-                <Label Content="Manager" 
+                <Label Content="Rooms" 
                        Style="{StaticResource ActionBarLabel}" 
                        Width="362" 
                        Height="41"/>
@@ -68,33 +68,90 @@
 
             </StackPanel>
 
-            <Button Content="+" HorizontalAlignment="Left" Margin="10,19,0,0" VerticalAlignment="Top" Height="28" Width="28" Click="AddRoom_Click" Grid.Row="2"/>
-            <Button Content="-" HorizontalAlignment="Left" Margin="43,19,0,0" VerticalAlignment="Top" Height="28" Width="28" Click="Delete_Click" Grid.Row="2"/>
-            <Button Content="?" HorizontalAlignment="Left" Margin="76,19,0,0" VerticalAlignment="Top" Height="28" Width="28" Click="ChangeRoom_Click" Grid.Row="2"/>
-            <Button Content="/" HorizontalAlignment="Left" Margin="109,19,0,0" VerticalAlignment="Top" Height="28" Width="28" Grid.Row="2"/>
+            <Button Content="+" 
+                    HorizontalAlignment="Left" 
+                    Margin="5,15,0,0" 
+                    VerticalAlignment="Top" 
+                    Height="32" 
+                    Width="32"
+                    Click="AddRoom_Click" 
+                    Grid.Row="2"
+                    Style="{StaticResource ManagerButtons}"/>
+
+            <Button Content="-" 
+                    HorizontalAlignment="Left" 
+                    Margin="42,15,0,0" 
+                    VerticalAlignment="Top" 
+                    Height="32" 
+                    Width="32" 
+                    Click="Delete_Click" 
+                    Grid.Row="2"
+                    Style="{StaticResource ManagerButtons}"/>
+
+            <Button Content="?" 
+                    HorizontalAlignment="Left" 
+                    Margin="79,15,0,0" 
+                    VerticalAlignment="Top" 
+                    Height="32" 
+                    Width="32" 
+                    Click="ChangeRoom_Click" 
+                    Grid.Row="2"
+                    Style="{StaticResource ManagerButtons}"/>
+
+            <Button Content="R" 
+                    HorizontalAlignment="Left" 
+                    Margin="116,15,0,0" 
+                    VerticalAlignment="Top" 
+                    Height="32" 
+                    Width="32"
+                    Click="RenovateRoom_Click" 
+                    Grid.Row="2"
+                    Style="{StaticResource ManagerButtons}"/>
+
+            <Button Content="A" 
+                    HorizontalAlignment="Left" 
+                    Margin="153,15,0,0" 
+                    VerticalAlignment="Top" 
+                    Height="32" 
+                    Width="32"
+                    Click="ChangeRenovation_Click" 
+                    Grid.Row="2"
+                    Style="{StaticResource ManagerButtons}"/>
+
             <DataGrid x:Name="RoomTable" 
                       ItemsSource="{Binding}" 
-                      HorizontalAlignment="Center" 
-                      Height="650" 
-                      Margin="0,56,0,0" 
-                      VerticalAlignment="Top" 
-                      Width="430" 
+                      Margin="0,52,0,58" 
                       AutoGenerateColumns="False"
                       SelectionMode="Single" 
                       IsReadOnly="True" 
-                      
                       Grid.Row="2"
-                      
-                      Background="#393E46" 
-                      CanUserResizeRows="False">
+                      Background="#222831" 
+                      CanUserResizeRows="False"
+                      FontFamily="/Resources/Fonts/#Poppins"
+                      TextBlock.TextAlignment="Left"
+                      FontSize="13"
+                      Style="{DynamicResource ManagerTables}"
+                      BorderThickness="2"
+                      HorizontalGridLinesBrush="Transparent"
+                      VerticalGridLinesBrush="Transparent" 
+                      >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="ID" Binding="{Binding Identifier}"/>
-                    <DataGridTextColumn Header="Designation Code" Binding="{Binding DesignationCode}" Width="*"/>
+                    <DataGridTextColumn Header="Designation" Binding="{Binding DesignationCode}" Width="*"/>
                     <DataGridTextColumn Header="Surface Area" Binding="{Binding SurfaceArea}" Width="*"/>
                     <DataGridTextColumn Header="Room Type" Binding="{Binding RoomTypeString}" Width="*"/>
+                    <DataGridTextColumn Header="Renovated" Binding="{Binding Renovating}" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
 
+            <TextBox HorizontalAlignment="Left"
+                     Margin="270,15,0,0"
+                     Grid.Row="2" 
+                     TextWrapping="Wrap" 
+                     Text="" 
+                     VerticalAlignment="Top" 
+                     Width="155"
+                     Style="{StaticResource ManagerSearch}" 
+                     Name="Search" Height="32"/>
         </Grid>
     </Border>
 </Window>

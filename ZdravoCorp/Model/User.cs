@@ -15,8 +15,10 @@ namespace Model
         protected int id;
         protected String password;
         protected String username;
-        protected String name;
-        protected String surname;
+        /*mora ovako*/
+        public string name { get; set; }
+        public string surname { get; set; }
+        protected String jmbg;
         protected String email;
         protected String address;
         protected String phoneNumber;
@@ -24,6 +26,28 @@ namespace Model
         protected DateTime dateOfBirth;
 
         protected List<Notification> notification;
+        public string nameSurname { get => name + " " + surname; set => name = value; }
+        protected User(int id, string password, string username, string name, string surname, string jmbg, string email, string address, string phoneNumber, Gender gender, DateTime dateOfBirth, List<Notification> notification, List<Survey> survey)
+        {
+            this.id = id;
+            this.password = password;
+            this.username = username;
+            this.name = name;
+            this.surname = surname;
+            this.jmbg = jmbg;
+            this.email = email;
+            this.address = address;
+            this.phoneNumber = phoneNumber;
+            this.gender = gender;
+            this.dateOfBirth = dateOfBirth;
+            this.notification = notification;
+            this.survey = survey;
+        }
+
+        protected User()
+        {
+        }
+
 
         /// <summary>
         /// Property for collection of Notification
@@ -47,6 +71,17 @@ namespace Model
                 }
             }
         }
+        public int Id { get => id; set => id = value; }
+        public String Jmbg { get => jmbg; set => jmbg = value; }
+        public String Username { get => username; set => username = value; }
+        public String Password { get => password; set => password = value; }
+        public String Namee { get => name; set => name = value; }
+        public String Surname { get => surname; set => surname = value; }
+        public String Email { get => email; set => email = value; }
+        public String Address { get => address; set => address = value; }
+        public String PhoneNumber { get => phoneNumber; set => phoneNumber = value; }
+        public Gender Gender { get => gender; set => gender = value; }
+        public DateTime DateOfBirth { get => dateOfBirth; set => dateOfBirth = value; }
 
         /// <summary>
         /// Add a new Notification in the collection

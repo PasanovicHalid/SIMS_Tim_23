@@ -11,33 +11,80 @@ namespace Repository
 {
     public class MedicineRepository
     {
-        private String dbPath;
+        private String dbPath = "..\\..\\Data\\medicineDB.csv";
+        private Serializer<Medication> serializerMedication = new Serializer<Medication>();
 
-        private MedicineRepository instance = null;
+        private static MedicineRepository instance = null;
+
+        public MedicineRepository()
+        {
+        }
 
         public Boolean CreateMedicine(Model.Medication newMedicine)
         {
-            throw new NotImplementedException();
+            List<Medication> medicines = GetAllMedicine();
+            
+            newMedicine.Id = medicines.Count + 1;
+            medicines.Add(newMedicine);
+            serializerMedication.ToCSV(dbPath, medicines);
+            return true ;
         }
 
         public Boolean UpdateMedicine(Model.Medication medicine)
         {
-            throw new NotImplementedException();
+            Boolean success = false;
+            List<Medication> medicines = GetAllMedicine();
+            foreach(Medication m in medicines)
+            {
+                if(medicine.Id == m.Id)
+                {
+                    success = true;
+                    medicines.Remove(m);
+                    break;
+                }
+            }
+            if (success)
+            {
+                medicines.Add(medicine);
+                serializerMedication.ToCSV(dbPath, medicines);
+            }   
+            return success;
+
         }
 
         public Boolean DeleteMedicine(int identificator)
         {
-            throw new NotImplementedException();
+            Boolean success = false;
+            List<Medication> medicines = GetAllMedicine();
+            foreach (Medication m in medicines)
+            {
+                if (identificator == m.Id)
+                {
+                    success = true;
+                    medicines.Remove(m);
+                    serializerMedication.ToCSV(dbPath, medicines);
+                    break;
+                }
+            }
+            return success;
         }
 
         public Model.Medication ReadMedicine(int identificator)
         {
-            throw new NotImplementedException();
+            List<Medication> medicines = GetAllMedicine();
+            foreach(Medication m in medicines)
+            {
+                if(identificator == m.Id)
+                {
+                    return m;
+                }
+            }
+            return null;
         }
 
         public List<Medication> GetAllMedicine()
         {
-            throw new NotImplementedException();
+            return serializerMedication.FromCSV(dbPath);
         }
 
         public Boolean CreateMedicationType(MedicationType newMedicationType)
@@ -63,6 +110,17 @@ namespace Repository
         public List<MedicationType> GetAllMedicationType()
         {
             throw new NotImplementedException();
+        }
+        public static MedicineRepository Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new MedicineRepository();
+                }
+                return instance;
+            }
         }
 
     }

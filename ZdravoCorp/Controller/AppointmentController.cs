@@ -5,6 +5,8 @@
 
 using Model;
 using System;
+using Service;
+using System.Collections.Generic;
 
 namespace Controller
 {
@@ -12,27 +14,32 @@ namespace Controller
     {
         public Boolean CreateAppointment(Appointment newAppointment)
         {
-            throw new NotImplementedException();
+            return AppointmenService.Instance.CreateAppointment(newAppointment);
         }
 
-        public Appointment ReadAppointment(Appointment appointment)
+        public Appointment ReadAppointment(int appointment)
         {
-            throw new NotImplementedException();
+            return AppointmenService.Instance.ReadAppointment(appointment);
         }
 
         public Boolean UpdateAppointment(Appointment appointment)
         {
-            throw new NotImplementedException();
+            return AppointmenService.Instance.UpdateAppointment(appointment);
         }
 
-        public Boolean DeleteAppointment(Appointment appointment)
+        public Boolean DeleteAppointment(int appointment)
         {
-            throw new NotImplementedException();
+            return AppointmenService.Instance.DeleteAppointment(appointment);
         }
 
-        public Array GetAllAppointments()
+        public List<Appointment> GetAllAppointments()
         {
-            throw new NotImplementedException();
+            return AppointmenService.Instance.GetAllAppointments();
+        }
+
+        public List<Appointment> SuggestAppointments(Doctor doctor, DateTime start, DateTime end, bool priority, bool first)
+        {
+            return AppointmenService.Instance.SuggestAppointments(doctor, start, end, priority, first);
         }
     }
 }

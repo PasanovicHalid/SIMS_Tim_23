@@ -17,52 +17,52 @@ namespace Service
 
         public Boolean CreateDoctor(Doctor newDoctor)
         {
-            throw new NotImplementedException();
+            return DoctorRepository.Instance.CreateDoctor(newDoctor);
         }
 
         public Boolean UpdateDoctor(Doctor updatedRoom)
         {
-            throw new NotImplementedException();
+            return DoctorRepository.Instance.UpdateDoctor(updatedRoom);
         }
 
-        public Boolean DeleteDoctor(Doctor doctor)
+        public Boolean DeleteDoctor(int doctor)
         {
-            throw new NotImplementedException();
+            return DoctorRepository.Instance.DeleteDoctor(doctor);
         }
 
-        public Doctor ReadDoctor(Doctor doctor)
+        public Doctor ReadDoctor(int doctor)
         {
-            throw new NotImplementedException();
+            return DoctorRepository.Instance.ReadDoctor(doctor);
         }
 
-        public Array GetAllDoctors()
+        public List<Doctor> GetAllDoctors()
         {
-            throw new NotImplementedException();
+            return DoctorRepository.Instance.GetAllDoctors();
         }
 
         public Boolean CreateDoctorType(DoctorType newDoctorType)
         {
-            throw new NotImplementedException();
+            return DoctorRepository.Instance.CreateDoctorType(newDoctorType);
         }
 
         public Boolean UpdateDoctorType(DoctorType doctorType)
         {
-            throw new NotImplementedException();
+            return DoctorRepository.Instance.UpdateDoctorType(doctorType);
         }
 
-        public Boolean DeleteDoctorType(DoctorType doctorType)
+        public Boolean DeleteDoctorType(String doctorType)
         {
-            throw new NotImplementedException();
+            return DoctorRepository.Instance.DeleteDoctorType(doctorType);
         }
 
-        public DoctorType ReadDoctorType(DoctorType doctorType)
+        public DoctorType ReadDoctorType(String doctorType)
         {
-            throw new NotImplementedException();
+            return DoctorRepository.Instance.ReadDoctorType(doctorType);
         }
 
         public List<DoctorType> GetAllDoctorType()
         {
-            throw new NotImplementedException();
+            return DoctorRepository.Instance.GetAllDoctorType();
         }
 
         public DoctorService()
@@ -80,6 +80,57 @@ namespace Service
                 }
                 return instance ;
             }
+        }
+        public bool IsDoctorFree(int id, DateTime start, DateTime end)
+        {
+            bool isFree = false;
+            
+            Doctor doctor = ReadDoctor(id);
+            List<DateTime> startDates = new List<DateTime>();
+            List<DateTime> endDates = new List<DateTime>();
+            foreach(Appointment a in doctor.Appointment)
+            {
+                startDates.Add(a.startDate);
+                endDates.Add(a.endDate);
+            }
+            if(!(startDates.Contains(start) || endDates.Contains(end)))
+            {
+                isFree = true;
+            }
+            //if(start.Date > doctor.WorkStartTime.Date && end.Date< doctor.WorkEndTime.Date && start.Hour > doctor.WorkStartTime.Hour && end.Hour < doctor.WorkEndTime.Hour)
+            //{
+            //    List<Appointment> appointments = AppointmenService.Instance.doctorsAppointments(doctor.Id); 
+            //    foreach(Appointment app in appointments)
+            //    {
+            //        //if((app.startDate.TimeOfDay <= start.TimeOfDay) && (app.EndDate.TimeOfDay <= end.TimeOfDay)) { isFree = true; }
+                    
+                    
+            //        if(app.StartDate.TimeOfDay < start.TimeOfDay)
+            //        {
+            //            if(app.EndDate.TimeOfDay > start.TimeOfDay && app.EndDate.TimeOfDay < end.TimeOfDay)
+            //            {
+            //                return false;
+            //            }
+            //            if (app.EndDate.TimeOfDay > end.TimeOfDay)
+            //            {
+            //                return false;
+            //            }
+            //        }
+            //        else
+            //        {
+            //            if(app.StartDate < end && app.EndDate > end)
+            //            {
+            //                return false;
+            //            }
+            //            if(app.EndDate < end)
+            //            {
+            //                return false;
+            //            }
+            //        }
+            //    }
+            //}
+
+            return isFree;
         }
     }
 }

@@ -5,38 +5,111 @@
 
 using Model;
 using System;
+using System.Collections.Generic;
 
 namespace Repository
 {
     public class PatientRepository
     {
-        private String dbPath;
+        private String dbPath = "..\\..\\Data\\patientsDB.csv";
+        private Serializer<Patient> serializerPatient = new Serializer<Patient>();
 
         private static PatientRepository instance = null;
 
         public Boolean CreatePatient(Patient newPatient)
         {
-            throw new NotImplementedException();
+            List<Patient> patients = GetAllPatients();
+            bool exists = false;
+            
+            foreach (Patient d in patients)
+            {
+                if (d.Jmbg.Equals(newPatient.Jmbg))
+                {
+                    exists = true;
+                    break;
+                }
+            }
+            if (!exists)
+            {
+                newPatient.Id = patients.Count + 1;
+                patients.Add(newPatient);
+                serializerPatient.ToCSV(dbPath, patients);
+                return true;
+            }
+            return false;
+
         }
 
         public Boolean UpdatePatient(Patient patient)
         {
-            throw new NotImplementedException();
+            Boolean success = false;
+            List<Patient> patients = GetAllPatients();
+
+            for (int i = 0; i < patients.Count; i++)
+
+            {
+                if (patient.Id == patients[i].Id)
+                {
+                    success = true;
+                    patients[i] = patient;
+                    break;
+                }
+            }
+            if (success)
+            {
+                //patients.Add(patient);
+                serializerPatient.ToCSV(dbPath, patients);
+
+            }
+            return success;
         }
 
-        public Boolean DeletePatient(Patient patient)
+        public Boolean DeletePatient(int id)
         {
-            throw new NotImplementedException();
+            Boolean success = false;
+            List<Patient> patients = GetAllPatients();
+            foreach(Patient p in patients)
+            {
+                if(id == p.Id)
+                {
+                    success = true;
+                    patients.Remove(p);
+                    serializerPatient.ToCSV(dbPath, patients);
+                    break;
+                }
+            }
+            return success;
         }
 
-        public Patient ReadPatient(Patient patient)
+        public Patient ReadPatient(int id)
         {
-            throw new NotImplementedException();
+            List<Patient> patients = GetAllPatients();
+            foreach(Patient p in patients)
+            {
+                if(id == p.Id)
+                {
+                    return p;
+                }
+            }
+            return null;
         }
 
-        public Array GetAllPatients()
+        public List<Patient> GetAllPatients()
         {
-            throw new NotImplementedException();
+
+            List<Patient> patients = serializerPatient.FromCSV(dbPath);
+            foreach (Patient d in patients)
+            {
+                List<int> ids = new List<int>();
+                foreach (Appointment a in d.Appointment)
+                {
+                    ids.Add(a.Id);
+                }
+                d.Appointment = AppointmentRepository.Instance.GetAppointmentsById(ids);
+                d.Record = MedicalRecordRepository.Instance.ReadMedicalRecord(d.Record.Id);
+
+            }
+            return patients;
         }
 
         public PatientRepository()

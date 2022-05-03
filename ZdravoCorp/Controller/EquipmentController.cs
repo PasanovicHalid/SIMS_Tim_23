@@ -4,19 +4,22 @@
 // Purpose: Definition of Class EquipmentController
 
 using Model;
+using Service;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using ZdravoCorp.View.ViewModel;
 
 namespace Controller
 {
     public class EquipmentController
     {
-        public Boolean CreateEquipment(Model.Equipment newEquipment)
+        public Boolean CreateEquipment(EquipmentTypeVO type, int count, RoomVO room)
         {
-            throw new NotImplementedException();
+            return EquipmentService.Instance.CreateEquipment(type, count, room);
         }
 
-        public Boolean UpdateEquipment(Model.Equipment equipment)
+        public Boolean UpdateEquipment(Equipment equipment)
         {
             throw new NotImplementedException();
         }
@@ -36,19 +39,20 @@ namespace Controller
             throw new NotImplementedException();
         }
 
-        public Boolean CreateEquipmentType(EquipmentType newEquipmentType)
+        public Boolean CreateEquipmentType(EquipmentTypeVO newEquipmentType)
         {
-            throw new NotImplementedException();
+            EquipmentType result = new EquipmentType(newEquipmentType);
+            return EquipmentService.Instance.CreateEquipmentType(result);
         }
 
         public Boolean UpdateEquipmentType(EquipmentType equipmentType)
         {
-            throw new NotImplementedException();
+            return EquipmentService.Instance.UpdateEquipmentType(equipmentType);
         }
 
         public Boolean DeleteEquipmentType(int id)
         {
-            throw new NotImplementedException();
+            return EquipmentService.Instance.DeleteEquipmentType(id);
         }
 
         public EquipmentType ReadEquipmentType(int id)
@@ -56,14 +60,19 @@ namespace Controller
             throw new NotImplementedException();
         }
 
-        public List<EquipmentType> GetAllEquipmentType()
+        public Boolean ChangePositionOfEquipment(DateTime excecutionDate,int id_from_room,int id_to_room, int id_equipment, int count)
         {
-            throw new NotImplementedException();
+            return EquipmentService.Instance.ChangePositionOfEquipment(excecutionDate, id_from_room, id_to_room, id_equipment, count);
         }
 
-        public EquipmentController GetInstance()
+        public ObservableCollection<EquipmentTypeVO> GetAllEquipmentType()
         {
-            throw new NotImplementedException();
+            return EquipmentService.Instance.GetAllEquipmentType(); ;
+        }
+
+        public ObservableCollection<EquipmentTableVO> GetAllEquipmentTableVO()
+        {
+            return EquipmentService.Instance.GetAllEquipmentTableVO();
         }
     }
 }

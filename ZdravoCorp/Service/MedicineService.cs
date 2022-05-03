@@ -6,36 +6,37 @@
 using Model;
 using System;
 using System.Collections.Generic;
+using Repository;
 
 namespace Service
 {
     public class MedicineService
     {
-        private MedicineService instance = null;
+        private static MedicineService instance = null;
 
         public Boolean CreateMedicine(Model.Medication newMedicine)
         {
-            throw new NotImplementedException();
+            return MedicineRepository.Instance.CreateMedicine(newMedicine);
         }
 
         public Boolean UpdateMedicine(Model.Medication medicine)
         {
-            throw new NotImplementedException();
+            return MedicineRepository.Instance.UpdateMedicine(medicine);
         }
 
         public Boolean DeleteMedicine(int identificator)
         {
-            throw new NotImplementedException();
+            return MedicineRepository.Instance.DeleteMedicine(identificator);
         }
 
         public Model.Medication ReadMedicine(int identificator)
         {
-            throw new NotImplementedException();
+            return MedicineRepository.Instance.ReadMedicine(identificator);
         }
 
         public List<Medication> GetAllMedicine()
         {
-            throw new NotImplementedException();
+            return MedicineRepository.Instance.GetAllMedicine();
         }
 
         public Boolean CreateMedicationType(MedicationType newMedicationType)
@@ -62,6 +63,16 @@ namespace Service
         {
             throw new NotImplementedException();
         }
-
+        public static MedicineService Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new MedicineService();
+                }
+                return instance;
+            }
+        }
     }
 }

@@ -12,7 +12,29 @@ namespace Model
 {
     public class Doctor : Employee, Serializable
     {
-        private List<Appointment> appointment;
+        private List<Appointment> appointment = new List<Appointment>();
+
+
+        public Doctor()
+        {
+        }
+
+        //public Doctor(List<Appointment> appointment, DoctorType doctorType)
+        //{
+        //    this.appointment = appointment;
+        //    this.doctorType = doctorType;
+        //}
+
+        public Doctor(int id)
+        {
+            this.id = id;
+        }
+
+
+
+        public Doctor(int id, string password, string username, string name, string surname, string jmbg, string email, string address, string phoneNumber, Gender gender, DateTime dateOfBirth, List<Notification> notification, List<Survey> survey, float salary, DateTime enrolementdate, DateTime workstarttime, DateTime workendtime, DateTime vacationstarttime, DateTime vacationendtime, int vacationdays) : base(id, password, username, name, surname, jmbg, email, address, phoneNumber, gender, dateOfBirth, notification, survey, salary, enrolementdate, workstarttime, workendtime, vacationstarttime, vacationendtime, vacationdays)
+        {
+        }
 
         /// <summary>
         /// Property for collection of Appointment
@@ -50,7 +72,7 @@ namespace Model
             if (!this.appointment.Contains(newAppointment))
             {
                 this.appointment.Add(newAppointment);
-                newAppointment.AddDoctor(this);
+                
             }
         }
 
@@ -66,7 +88,6 @@ namespace Model
                 if (this.appointment.Contains(oldAppointment))
                 {
                     this.appointment.Remove(oldAppointment);
-                    oldAppointment.RemoveDoctor(this);
                 }
         }
 
@@ -82,8 +103,7 @@ namespace Model
                 foreach (Appointment oldAppointment in appointment)
                     tmpAppointment.Add(oldAppointment);
                 appointment.Clear();
-                foreach (Appointment oldAppointment in tmpAppointment)
-                    oldAppointment.RemoveDoctor(this);
+                
                 tmpAppointment.Clear();
             }
         }
@@ -104,15 +124,98 @@ namespace Model
                 this.doctorType = value;
             }
         }
-
+        
         public List<String> ToCSV()
         {
-            throw new NotImplementedException();
+            List<String> result = new List<String>();
+            result.Add(Id.ToString());
+            result.Add(password);
+            result.Add(username);
+            result.Add(name);
+            result.Add(surname);
+            result.Add(jmbg);
+            result.Add(email);
+            result.Add(address);
+            result.Add(phoneNumber);
+            result.Add(gender.ToString());
+            result.Add(dateOfBirth.ToString());
+            int nf = 0;
+            if(appointment == null)
+            {
+                result.Add(nf.ToString());
+            }
+            else
+            {
+                result.Add(appointment.Count.ToString());
+                foreach(Appointment a in appointment)
+                {
+                    result.Add(a.Id.ToString());
+                }
+            }
+            if (notification == null)
+            {
+                result.Add(nf.ToString());
+            }
+            else
+            {
+                result.Add(notification.Count.ToString());
+                foreach (Notification n in notification)
+                {
+                    result.Add(n.DateCreated.ToString());
+                    result.Add(n.Content);
+                    result.Add(n.User.Id.ToString());
+                }
+            }
+            result.Add(salary.ToString());
+            result.Add(enrolementDate.ToString());
+            result.Add(workStartTime.ToString());
+            result.Add(workEndTime.ToString());
+            result.Add(vacationStartTime.ToString());
+            result.Add(vacationEndTime.ToString());
+            result.Add(vacationDays.ToString());
+            result.AddRange(DoctorType.ToCSV());
+            return result;
         }
 
         public void FromCSV(string[] values)
         {
-            throw new NotImplementedException();
+            int i = 0;
+            id = int.Parse(values[i++]);
+            password = values[i++];
+            username = values[i++];
+            name = values[i++];
+            surname = values[i++];
+            jmbg = values[i++];
+            email = values[i++];
+            address = values[i++];
+            phoneNumber = values[i++];
+            if(values[i++] == "Male")
+            {
+                gender = Gender.Male;
+            }
+            else
+            {
+                gender = Gender.Female;
+            }
+            dateOfBirth = DateTime.Parse(values[i++]);
+            int count = int.Parse(values[i++]);
+            for(int j = 0; j < count; j++)
+            {
+                appointment.Add(new Appointment(int.Parse(values[i++])));
+            }
+            count = int.Parse(values[i++]);
+            for (int j = 0 ; j < count; j++)
+            {
+                notification.Add(new Notification(DateTime.Parse(values[i++]), values[i++], int.Parse(values[i++])));
+            }
+            salary = float.Parse(values[i++]);
+            enrolementDate = DateTime.Parse(values[i++]);
+            workStartTime = DateTime.Parse(values[i++]);
+            workEndTime = DateTime.Parse(values[i++]);
+            vacationStartTime = DateTime.Parse(values[i++]);
+            vacationEndTime = DateTime.Parse(values[i++]);
+            vacationDays = int.Parse(values[i++]);
+            doctorType = new DoctorType(values[i++]);
         }
 
     }

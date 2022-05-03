@@ -12,10 +12,8 @@ namespace Model
 {
     public class Appointment : Serializable
     {
-        private DateTime startDate;
-        private DateTime endDate;
-        private String appointmentId;
-        private int type;
+        public DateTime startDate { get; set; }
+        public DateTime endDate { get; set; }
         private int id;
 
         public Appointment(int id)
@@ -23,93 +21,103 @@ namespace Model
             this.id = id;
         }
 
-        private List<Doctor> doctor;
+        public Appointment()
+        {
+        }
+
+        public Appointment(DateTime startDate, DateTime endDate, int id, Doctor doctor, Room room, Patient patient)
+        {
+            StartDate = startDate;
+            EndDate = endDate;
+            Id = id;
+            this.doctor = doctor;
+            this.room = room;
+            this.patient = patient;
+        }
+
+        
+
+        public Doctor doctor { get; set; }
+        public Room room { get; set; }
 
         /// <summary>
-        /// Property for collection of Doctor
+        /// Property for Room
         /// </summary>
-        /// <pdGenerated>Default opposite class collection property</pdGenerated>
-        public List<Doctor> Doctor
+        /// <pdGenerated>Default opposite class property</pdGenerated>
+        public Room Room
         {
             get
             {
-                if (doctor == null)
-                    doctor = new List<Doctor>();
-                return doctor;
+                return room;
             }
             set
             {
-                RemoveAllDoctor();
-                if (value != null)
+                if (this.room == null || !this.room.Equals(value))
                 {
-                    foreach (Doctor oDoctor in value)
-                        AddDoctor(oDoctor);
+                    if (this.room != null)
+                    {
+                        Room oldRoom = this.room;
+                        this.room = null;
+                        oldRoom.RemoveAppointment(this);
+                    }
+                    if (value != null)
+                    {
+                        this.room = value;
+                        this.room.AddAppointment(this);
+                    }
+                }
+            }
+        }
+        private Patient patient;
+        public Patient Patient
+        {
+            get
+            {
+                return patient;
+            }
+            set
+            {
+                if (this.patient == null || !this.patient.Equals(value))
+                {
+                    if (this.patient != null)
+                    {
+                        Patient oldPatient = this.patient;
+                        this.patient = null;
+                    }
+                    if (value != null)
+                    {
+                        this.patient = value;
+                    }
                 }
             }
         }
 
-        public string AppointmentId { get => appointmentId; set => appointmentId = value; }
         public int Id { get => id; set => id = value; }
-
-        /// <summary>
-        /// Add a new Doctor in the collection
-        /// </summary>
-        /// <pdGenerated>Default Add</pdGenerated>
-        public void AddDoctor(Doctor newDoctor)
-        {
-            if (newDoctor == null)
-                return;
-            if (this.doctor == null)
-                this.doctor = new List<Doctor>();
-            if (!this.doctor.Contains(newDoctor))
-            {
-                this.doctor.Add(newDoctor);
-                newDoctor.AddAppointment(this);
-            }
-        }
-
-        /// <summary>
-        /// Remove an existing Doctor from the collection
-        /// </summary>
-        /// <pdGenerated>Default Remove</pdGenerated>
-        public void RemoveDoctor(Doctor oldDoctor)
-        {
-            if (oldDoctor == null)
-                return;
-            if (this.doctor != null)
-                if (this.doctor.Contains(oldDoctor))
-                {
-                    this.doctor.Remove(oldDoctor);
-                    oldDoctor.RemoveAppointment(this);
-                }
-        }
-
-        /// <summary>
-        /// Remove all instances of Doctor from the collection
-        /// </summary>
-        /// <pdGenerated>Default removeAll</pdGenerated>
-        public void RemoveAllDoctor()
-        {
-            if (doctor != null)
-            {
-                System.Collections.ArrayList tmpDoctor = new System.Collections.ArrayList();
-                foreach (Doctor oldDoctor in doctor)
-                    tmpDoctor.Add(oldDoctor);
-                doctor.Clear();
-                foreach (Doctor oldDoctor in tmpDoctor)
-                    oldDoctor.RemoveAppointment(this);
-                tmpDoctor.Clear();
-            }
-        }
-
+        public DateTime StartDate { get => startDate; set => startDate = value; }
+        public DateTime EndDate { get => endDate; set => endDate = value; }
+        public Doctor Doctor { get => doctor; set => doctor = value; }
+        public String NameSurname { get => doctor.nameSurname; set => doctor.nameSurname = value; }
         public List<String> ToCSV()
         {
-            throw new NotImplementedException();
+            List<String> result = new List<String>();
+            result.Add(Id.ToString());
+            result.Add(StartDate.ToString());
+            result.Add(EndDate.ToString());
+            result.Add(doctor.Id.ToString());
+            result.Add(Room.Identifier.ToString());
+            result.Add(Patient.Id.ToString());
+            return result;
         }
 
         public void FromCSV(string[] values)
         {
-            throw new NotImplementedException();
+            int i = 0;
+            Id = int.Parse(values[i++]);
+            StartDate = DateTime.Parse(values[i++]);
+            EndDate = DateTime.Parse(values[i++]);
+            doctor = new Doctor(int.Parse(values[i++]));
+            Room = new Room(int.Parse(values[i++]));
+            Patient = new Patient(int.Parse(values[i++]));
         }
     }
 }

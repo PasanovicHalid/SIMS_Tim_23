@@ -15,9 +15,15 @@ namespace Model
         private int identifier;
         private String designationCode;
         private float surfaceArea;
+        private bool renovating;
+        private DateTime renovatedUntil;
 
         private List<Appointment> appointment;
-
+        public Room(int id)
+        {
+            this.identifier = id;
+            this.renovating = false;
+        }
         /// <summary>
         /// Property for collection of Appointment
         /// </summary>
@@ -130,6 +136,22 @@ namespace Model
                     this.equipment.Remove(oldEquipment);
         }
 
+        public void EditEquipment(Equipment newEquipment)
+        {
+            if (newEquipment == null)
+                return;
+            if (this.equipment != null)
+                foreach(Equipment oEquipment in this.equipment)
+                {
+                    if(oEquipment.Identifier == newEquipment.Identifier)
+                    {
+                        this.equipment.Remove(oEquipment);
+                        this.equipment.Add(newEquipment);
+                        break;
+                    }
+                }
+        }
+
         /// <summary>
         /// Remove all instances of Equipment from the collection
         /// </summary>
@@ -156,7 +178,7 @@ namespace Model
                 this.roomType = value;
             }
         }
-
+        
         private List<Medication> medication;
 
         /// <summary>
@@ -186,6 +208,8 @@ namespace Model
         public string DesignationCode { get => designationCode; set => designationCode = value; }
         public float SurfaceArea { get => surfaceArea; set => surfaceArea = value; }
         public string RoomTypeString { get => RoomType.Name; set => RoomType.Name = value; }
+        public bool Renovating { get => renovating; set => renovating = value; }
+        public DateTime RenovatedUntil { get => renovatedUntil; set => renovatedUntil = value; }
 
         /// <summary>
         /// Add a new Medication in the collection
@@ -224,15 +248,15 @@ namespace Model
                 medication.Clear();
         }
 
-        public Room(int id ,String designation, float surfaceArea, RoomType roomType, List<Appointment> appointment, List<Equipment> equipment, List<Medication> medication)
+        public Room(String designation, float surfaceArea, RoomType roomType, List<Appointment> appointment, List<Equipment> equipment, List<Medication> medication)
         {
-            Identifier = id;
             DesignationCode = designation;
             this.SurfaceArea = surfaceArea;
             this.roomType = roomType;
             this.appointment = appointment;
             this.equipment = equipment;
             this.medication = medication;
+            this.renovating = false;
         }
 
         public Room()
@@ -247,6 +271,8 @@ namespace Model
             result.Add(DesignationCode);
             result.Add(SurfaceArea.ToString());
             result.AddRange(RoomType.ToCSV());
+            result.Add(renovating.ToString());
+            result.Add(renovatedUntil.ToString());
 
             result.Add(Appointment.Count.ToString());
             foreach(Appointment it in Appointment)
@@ -259,6 +285,7 @@ namespace Model
             {
                 result.Add(it.EquipmentType.Identifier.ToString());
                 result.Add(it.Count.ToString());
+                result.Add(it.Actual_count.ToString());
             }
 
             result.Add(Medication.Count.ToString());
@@ -278,26 +305,35 @@ namespace Model
             DesignationCode = values[i++];
             SurfaceArea = float.Parse(values[i++]);
             roomType = new RoomType(values[i++]);
+            renovating = Boolean.Parse(values[i++]);
+            renovatedUntil = DateTime.Parse(values[i++]);
 
             int count = int.Parse(values[i++]);
             appointment = new List<Appointment>();
-            for (; i < i + count; i++)
+
+            //Multiplies by 1 because it needs to scan 1 item to get Appointment
+            int temp = i + count * 1;
+            for (; i < temp; i++)
             {
                 appointment.Add(new Appointment(int.Parse(values[i])));
             }
 
-            count = int.Parse(values[i++]) * 2;
+            count = int.Parse(values[i++]);
             equipment = new List<Equipment>();
-            for (; i < i + count; i++)
+            //Multiplies by 3 because it needs to scan 3 items to get Equipment
+            temp = i + count * 3;
+            for (; i < temp; i++)
             {
-                equipment.Add(new Equipment(int.Parse(values[i]), int.Parse(values[++i])));
+                equipment.Add(new Equipment(int.Parse(values[i++]), int.Parse(values[i++]), int.Parse(values[i])));
             }
 
-            count = int.Parse(values[i++]) * 2;
+            count = int.Parse(values[i++]);
             medication = new List<Medication>();
-            for (; i < i + count; i++)
+            //Multiplies by 2 because it needs to scan 2 items to get Medication
+            temp = i + count * 2;
+            for (; i < temp; i++)
             {
-                medication.Add(new Medication(int.Parse(values[i]), int.Parse(values[++i])));
+                medication.Add(new Medication(int.Parse(values[i++]), int.Parse(values[i])));
             }
         }
     }

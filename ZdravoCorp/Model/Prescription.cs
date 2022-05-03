@@ -11,79 +11,46 @@ namespace Model
 {
     public class Prescription : Serializable
     {
+        private int id;
         private int timesADay;
         private int durationDays;
+        private int quantity;
 
-        private List<Medication> medication;
+        private Medication medication;
 
-        /// <summary>
-        /// Property for collection of Medication
-        /// </summary>
-        /// <pdGenerated>Default opposite class collection property</pdGenerated>
-        public List<Medication> Medication
+        private Notification notification;
+
+        public int Id { get => id; set => id = value; }
+
+        public Prescription(int id)
         {
-            get
-            {
-                if (medication == null)
-                    medication = new List<Medication>();
-                return medication;
-            }
-            set
-            {
-                RemoveAllMedication();
-                if (value != null)
-                {
-                    foreach (Medication oMedication in value)
-                        AddMedication(oMedication);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Add a new Medication in the collection
-        /// </summary>
-        /// <pdGenerated>Default Add</pdGenerated>
-        public void AddMedication(Medication newMedication)
-        {
-            if (newMedication == null)
-                return;
-            if (this.medication == null)
-                this.medication = new List<Medication>();
-            if (!this.medication.Contains(newMedication))
-                this.medication.Add(newMedication);
-        }
-
-        /// <summary>
-        /// Remove an existing Medication from the collection
-        /// </summary>
-        /// <pdGenerated>Default Remove</pdGenerated>
-        public void RemoveMedication(Medication oldMedication)
-        {
-            if (oldMedication == null)
-                return;
-            if (this.medication != null)
-                if (this.medication.Contains(oldMedication))
-                    this.medication.Remove(oldMedication);
-        }
-
-        /// <summary>
-        /// Remove all instances of Medication from the collection
-        /// </summary>
-        /// <pdGenerated>Default removeAll</pdGenerated>
-        public void RemoveAllMedication()
-        {
-            if (medication != null)
-                medication.Clear();
+            this.id = id;
         }
 
         public List<String> ToCSV()
         {
-            throw new NotImplementedException();
+            List<String> result = new List<String>();
+            result.Add(id.ToString());
+            result.Add(timesADay.ToString());
+            result.Add(durationDays.ToString());
+            result.Add(quantity.ToString());
+            /*Mozda nije dobro*/
+            result.Add(medication.Id.ToString());
+            result.Add(notification.Id.ToString());
+            return result;
         }
 
         public void FromCSV(string[] values)
         {
-            throw new NotImplementedException();
+            int i = 0;
+            id = int.Parse(values[i++]);
+            timesADay = int.Parse(values[i++]);
+            durationDays = int.Parse (values[i++]);
+            quantity = int.Parse(values[i++]);
+            /*Mozda nije dobro*/
+            medication.Id = int.Parse(values[i++]);
+            notification.Id = int.Parse(values[i++]);
+
         }
     }
 }

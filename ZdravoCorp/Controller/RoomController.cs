@@ -8,39 +8,59 @@ using Model;
 using Service;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using ZdravoCorp.View.ViewModel;
 
 namespace Controller
 {
     public class RoomController
     {
+        RoomService roomService = new RoomService();
+
         public Boolean CreateRoom(Room newRoom)
         {
-            return RoomService.Instance.CreateRoom(newRoom);
+            return roomService.CreateRoom(newRoom);
         }
 
-        public Room ReadRoom(String identifier)
+        public Room ReadRoom(int identifier)
         {
-            throw new NotImplementedException();
+            return roomService.ReadRoom(identifier);
         }
 
         public Boolean UpdateRoom(Room updatedRoom)
         {
-            return RoomService.Instance.UpdateRoom(updatedRoom);
+            return roomService.UpdateRoom(updatedRoom);
         }
 
         public Boolean DeleteRoom(int identifier)
         {
-            return RoomService.Instance.DeleteRoom(identifier);
+            return roomService.DeleteRoom(identifier);
+        }
+
+        public Boolean RenovateRoom(int identifier, DateTime start, DateTime end)
+        {
+            return roomService.RenovateRoom(identifier, start, end);
         }
 
         public List<Room> GetAllRooms()
         {
-            return RoomService.Instance.GetAllRooms();
+            return roomService.GetAllRooms();
         }
 
-        public Boolean CreateRoomType(Model.RoomType newRoomType)
+        public ObservableCollection<RoomVO> GetAllRoomsVO()
         {
-            throw new NotImplementedException();
+            List<Room> types = roomService.GetAllRooms();
+            ObservableCollection<RoomVO> result = new ObservableCollection<RoomVO>();
+            foreach (Room it in types)
+            {
+                result.Add(new RoomVO(it.Identifier, it.DesignationCode, it.SurfaceArea, it.Renovating, it.RenovatedUntil, it.RoomTypeString));
+            }
+            return result;
+        }
+
+        public Boolean CreateRoomType(RoomTypeVO newRoomType)
+        {
+            return RoomService.Instance.CreateRoomType(new RoomType(newRoomType));
         }
 
         public Boolean UpdateRoomType(Model.RoomType roomType)
@@ -61,6 +81,23 @@ namespace Controller
         public List<RoomType> GetAllRoomType()
         {
             throw new NotImplementedException();
+        }
+
+
+        public int GetMaxCountForEquipment(int id_room, int id_equipment)
+        {
+            return RoomService.Instance.GetMaxCountForEquipment(id_room, id_equipment);
+        }
+
+        public ObservableCollection<RoomTypeVO> GetAllRoomTypeView()
+        {
+            return roomService.GetAllRoomTypeView();
+
+        }
+        public Room findFreeRoom(DateTime start, DateTime end)
+        {
+            return RoomService.Instance.findFreeRoom(start, end);
+
         }
     }
 }
