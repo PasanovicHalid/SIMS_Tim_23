@@ -76,5 +76,48 @@ namespace ZdravoCorp.View.Secretary
             change.ShowDialog();
             UpdateTable();
         }
+
+        private void AddRecord_Click(object sender, RoutedEventArgs e)
+        {
+            if (PatientTable.SelectedIndex == -1)
+            {
+                return;
+            }
+            AddRecord add = new AddRecord(PatientCollection.ElementAt(PatientTable.SelectedIndex));
+            add.ShowDialog();
+            UpdateTable();
+        }
+
+        private void EditRecord_Click(object sender, RoutedEventArgs e)
+        {
+            if (PatientTable.SelectedIndex == -1)
+            {
+                return;
+            }
+            
+            
+            MedicalRecordController mr = new MedicalRecordController();
+            MedicalRecord record = mr.ReadMedicalRecord(PatientCollection.ElementAt(PatientTable.SelectedIndex).Record.Id);
+            ChangeRecord change = new ChangeRecord(record);
+            change.ShowDialog();
+            UpdateTable();
+            
+            
+        }
+
+        private void DeleteRecord_Click(object sender, RoutedEventArgs e)
+        {
+            if (PatientTable.SelectedIndex == -1)
+            {
+                return;
+            }
+            MedicalRecordController mr = new MedicalRecordController();
+            PatientController pc = new PatientController();
+            Model.Patient pat = pc.ReadPatient(PatientCollection.ElementAt(PatientTable.SelectedIndex).Id);
+
+            mr.DeleteMedicalRecord(pat.Record.Id);
+            pat.Record.Id = -1;
+            UpdateTable();
+        }
     }
 }

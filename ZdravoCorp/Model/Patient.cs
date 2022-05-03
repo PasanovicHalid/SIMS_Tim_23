@@ -12,9 +12,11 @@ namespace Model
 {
     public class Patient : User, Serializable
     {
-
+        private MedicalRecord record;
+        public MedicalRecord Record { get { return record; } set { record = value; } }
         public Patient(int id, string password, string username, string name, string surname, string jmbg, string email, string address, string phoneNumber, Gender gender, DateTime dateOfBirth, List<Notification> notification, List<Survey> survey) : base(id, password, username, name, surname, jmbg, email, address, phoneNumber, gender, dateOfBirth, notification, survey)
         {
+            
         }
 
         public Patient(int id)
@@ -164,6 +166,7 @@ namespace Model
             result.Add(phoneNumber);
             result.Add(gender.ToString());
             result.Add(dateOfBirth.ToString());
+            
 
             
 
@@ -214,6 +217,15 @@ namespace Model
                     result.Add(p.Id.ToString());
                 }
             }
+            int i = -1;
+            if (record == null) {
+                result.Add(i.ToString());
+            }
+            else
+            {
+                result.Add(record.Id.ToString());
+            }
+            
             
             return result;
         }
@@ -259,6 +271,7 @@ namespace Model
             {
                 prescription.Add(new Prescription(int.Parse(values[i++])));
             }
+            record = new MedicalRecord(int.Parse(values[i++]));
         }
 
     }
