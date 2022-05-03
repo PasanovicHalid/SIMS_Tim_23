@@ -121,5 +121,10 @@ namespace ZdravoCorp.View.Patient.Appointments
             this.Close();
 
         }
+
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }
