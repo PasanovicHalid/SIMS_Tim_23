@@ -1,0 +1,43 @@
+﻿<Window x:Class="ZdravoCorp.View.Manager.Equipments.ChangeMoving"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ZdravoCorp.View.Manager.Equipments"
+        mc:Ignorable="d"
+        Title="ChangeMoving"  Height="450" Width="800">
+    <Grid>
+        <DataGrid x:Name="ActionTable" 
+                      ItemsSource="{Binding}" 
+                      Margin="0,52,0,0" 
+                      AutoGenerateColumns="False"
+                      SelectionMode="Single" 
+                      IsReadOnly="True"
+                      Background="#222831" 
+                      CanUserResizeRows="False"
+                      FontFamily="/Resources/Fonts/#Poppins"
+                      TextBlock.TextAlignment="Left"
+                      FontSize="13"
+                      Style="{DynamicResource ManagerTables}"
+                      BorderThickness="2"
+                      HorizontalGridLinesBrush="Transparent"
+                      VerticalGridLinesBrush="Transparent" 
+                      >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Excecution Date" Binding="{Binding DesignationCode}" Width="*"/>
+                <DataGridTextColumn Header="From Room" Binding="{Binding SurfaceArea}" Width="*"/>
+                <DataGridTextColumn Header="To Room" Binding="{Binding RoomTypeString}" Width="*"/>
+                <DataGridTextColumn Header="Amount" Binding="{Binding Renovating}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Remove" 
+                HorizontalAlignment="Left" 
+                Margin="10,22,0,0" 
+                VerticalAlignment="Top" />
+
+        <Button Content="Edit" 
+                HorizontalAlignment="Left" 
+                Margin="81,22,0,0" 
+                VerticalAlignment="Top" />
+    </Grid>
+</Window>

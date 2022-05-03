@@ -98,7 +98,7 @@
                     Grid.Row="2"
                     Style="{StaticResource ManagerButtons}"/>
 
-            <Button Content="/" 
+            <Button Content="R" 
                     HorizontalAlignment="Left" 
                     Margin="116,15,0,0" 
                     VerticalAlignment="Top" 
@@ -108,7 +108,7 @@
                     Grid.Row="2"
                     Style="{StaticResource ManagerButtons}"/>
 
-            <Button Content="R" 
+            <Button Content="A" 
                     HorizontalAlignment="Left" 
                     Margin="153,15,0,0" 
                     VerticalAlignment="Top" 

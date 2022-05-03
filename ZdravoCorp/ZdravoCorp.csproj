@@ -116,8 +116,14 @@
     <Compile Include="View\Manager\Equipments\AddEquipmentType.xaml.cs">
       <DependentUpon>AddEquipmentType.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Manager\Equipments\ChangeMoving.xaml.cs">
+      <DependentUpon>ChangeMoving.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Manager\Equipments\ChangePosition.xaml.cs">
       <DependentUpon>ChangePosition.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Manager\Equipments\EditMoving.xaml.cs">
+      <DependentUpon>EditMoving.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Manager\Equipments\Equipments.xaml.cs">
       <DependentUpon>Equipments.xaml</DependentUpon>
@@ -131,8 +137,17 @@
     <Compile Include="View\Manager\Rooms\AddRoomType.xaml.cs">
       <DependentUpon>AddRoomType.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Manager\Rooms\ChangeFalse.xaml.cs">
+      <DependentUpon>ChangeFalse.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Manager\Rooms\ChangeRenovation.xaml.cs">
+      <DependentUpon>ChangeRenovation.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Manager\Rooms\ChangeRoom.xaml.cs">
       <DependentUpon>ChangeRoom.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Manager\Rooms\ChangeTrue.xaml.cs">
+      <DependentUpon>ChangeTrue.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Manager\Rooms\RenovateRoom.xaml.cs">
       <DependentUpon>RenovateRoom.xaml</DependentUpon>
@@ -186,7 +201,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Manager\Equipments\ChangeMoving.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Manager\Equipments\ChangePosition.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Manager\Equipments\EditMoving.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -206,7 +229,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Manager\Rooms\ChangeFalse.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Manager\Rooms\ChangeRenovation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Manager\Rooms\ChangeRoom.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Manager\Rooms\ChangeTrue.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
