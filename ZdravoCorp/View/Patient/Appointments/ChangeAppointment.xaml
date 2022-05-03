@@ -103,7 +103,8 @@
                 Margin="587,378,0,0" 
                 VerticalAlignment="Top"
                 Height="30"
-                Width="80"/>
+                Width="80"
+                Click="Cancel_Click"/>
         <Button Content="Potvrdi" 
                 HorizontalAlignment="Left" 
                 Margin="695,378,0,0"
