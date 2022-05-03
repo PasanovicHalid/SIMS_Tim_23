@@ -35,10 +35,10 @@ namespace Model
             this.obj = obj;
             this.executionDate = executionDate;
         }
-
+        
         public ActionType Type { get => type; }
-        public DateTime ExecutionDate { get => executionDate; }
-        public object Object { get => obj; }
+        public DateTime ExecutionDate { get => executionDate; set => executionDate = value; }
+        public object Object { get => obj; set => obj = value; }
         public int Id { get => id; set => id = value; }
 
         public void FromCSV(string[] values)

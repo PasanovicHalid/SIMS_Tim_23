@@ -6,6 +6,7 @@
 using System;
 using System.Collections.Generic;
 using ZdravoCorp.Utility;
+using System.Linq;
 
 namespace Repository
 {
@@ -72,6 +73,14 @@ namespace Repository
             }
         }
 
+        private void SortActions(List<Model.Action> actions)
+        {
+            lock (key)
+            {
+                serializerAction.ToCSV(dbPath, actions.OrderBy(a => a.ExecutionDate).ToList());
+            }
+        }
+
         public Boolean UpdateAction(Model.Action action)
         {
             lock (key)
@@ -93,7 +102,7 @@ namespace Repository
                     return false;
                 }
 
-                serializerAction.ToCSV(dbPath, actions);
+                SortActions(actions);
 
                 return true;
             }
@@ -139,7 +148,24 @@ namespace Repository
 
         public Model.Action ReadAction(int identificator)
         {
-            throw new NotImplementedException();
+            lock (key)
+            {
+                if (!idMap.Contains(identificator))
+                {
+                    return null;
+                }
+                List<Model.Action> actions = serializerAction.FromCSV(dbPath);
+
+                for (int i = 0; i < actions.Count; i++)
+                {
+                    if (actions[i].Id == identificator)
+                    {
+                        return actions[i];
+                    }
+                }
+
+                return null;
+            }
         }
 
         public List<Model.Action> GetAllActions()

@@ -30,12 +30,13 @@
         <DatePicker x:Name="EndDate"
             HorizontalAlignment="Center" 
             Margin="0,101,0,0" 
-            VerticalAlignment="Top"/>
+            VerticalAlignment="Top"
+            SelectedDate="{Binding End, UpdateSourceTrigger=PropertyChanged}"/>
 
         <Button Content="Change" 
                 HorizontalAlignment="Left" 
                 Margin="290,137,0,0" VerticalAlignment="Top" 
-                Click="Renovate_Click"
+                Click="Change_Click" 
                 Height="36" 
                 Width="59" />
 

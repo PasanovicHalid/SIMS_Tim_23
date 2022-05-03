@@ -104,6 +104,7 @@
                     Height="32" 
                     Width="32" 
                     Grid.Row="2"
+                    Click="EditPosition_Click"
                     Style="{StaticResource ManagerButtons}"/>
 
             <DataGrid x:Name="EquipmentTable" 

@@ -109,5 +109,12 @@ namespace ZdravoCorp.View.Manager.Rooms
             window.ShowDialog();
             UpdateTable();
         }
+
+        private void ChangeRenovation_Click(object sender, RoutedEventArgs e)
+        {
+            ChangeRenovation window = new ChangeRenovation();
+            window.ShowDialog();
+            UpdateTable();
+        }
     }
 }

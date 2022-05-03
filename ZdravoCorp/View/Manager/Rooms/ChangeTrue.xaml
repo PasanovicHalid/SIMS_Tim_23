@@ -31,7 +31,8 @@
         <DatePicker x:Name="StartDate"
                     HorizontalAlignment="Left" 
                     Margin="137,95,0,0" 
-                    VerticalAlignment="Top"/>
+                    VerticalAlignment="Top"
+                    SelectedDate="{Binding Start, UpdateSourceTrigger=PropertyChanged}"/>
 
         <Label Content="Renovation End" 
             HorizontalAlignment="Left" 
@@ -42,14 +43,14 @@
         <DatePicker x:Name="EndDate"
             HorizontalAlignment="Left" 
             Margin="137,145,0,0" 
-            VerticalAlignment="Top"/>
+            VerticalAlignment="Top"
+            SelectedDate="{Binding End, UpdateSourceTrigger=PropertyChanged}"/>
 
         <Button Content="Change" 
                 HorizontalAlignment="Left" 
                 Margin="290,181,0,0" VerticalAlignment="Top" 
-                Click="Renovate_Click"
                 Height="36" 
-                Width="59" />
+                Width="59" Click="Change_Click" />
 
     </Grid>
 </Window>

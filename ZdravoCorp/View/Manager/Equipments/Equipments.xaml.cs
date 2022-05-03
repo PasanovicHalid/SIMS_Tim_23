@@ -71,5 +71,12 @@ namespace ZdravoCorp.View.Manager.Equipments
             window.ShowDialog();
             UpdateTable();
         }
+
+        private void EditPosition_Click(object sender, RoutedEventArgs e)
+        {
+            ChangeMoving window = new ChangeMoving();
+            window.ShowDialog();
+            UpdateTable();
+        }
     }
 }
