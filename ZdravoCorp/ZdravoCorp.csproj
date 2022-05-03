@@ -71,6 +71,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controller\ActionController.cs" />
     <Compile Include="Controller\AppointmentController.cs" />
     <Compile Include="Controller\DoctorController.cs" />
     <Compile Include="Controller\EquipmentController.cs" />
@@ -176,9 +177,11 @@
     <Compile Include="View\Secretary\Secretary.xaml.cs">
       <DependentUpon>Secretary.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ViewModel\ChangeActionVO.cs" />
     <Compile Include="View\ViewModel\EquipmentTableVO.cs" />
     <Compile Include="View\ViewModel\EquipmentTypeVO.cs" />
     <Compile Include="View\ViewModel\EquipmentVO.cs" />
+    <Compile Include="View\ViewModel\RenovationActionVO.cs" />
     <Compile Include="View\ViewModel\RoomTypeVO.cs" />
     <Compile Include="View\ViewModel\RoomVO.cs" />
     <Page Include="View\MainWindow.xaml">

@@ -115,6 +115,7 @@
                 Margin="332,283,0,0" 
                 VerticalAlignment="Top" 
                 Height="46" 
-                Width="82" Click="Change_Click"/>
+                Width="82"
+                Click="Change_Click"/>
     </Grid>
 </Window>

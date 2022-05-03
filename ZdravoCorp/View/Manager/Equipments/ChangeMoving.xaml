@@ -24,20 +24,21 @@
                       VerticalGridLinesBrush="Transparent" 
                       >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Excecution Date" Binding="{Binding DesignationCode}" Width="*"/>
-                <DataGridTextColumn Header="From Room" Binding="{Binding SurfaceArea}" Width="*"/>
-                <DataGridTextColumn Header="To Room" Binding="{Binding RoomTypeString}" Width="*"/>
-                <DataGridTextColumn Header="Amount" Binding="{Binding Renovating}" Width="*"/>
+                <DataGridTextColumn Header="Excecution Date" Binding="{Binding ExecutionDate}" Width="*"/>
+                <DataGridTextColumn Header="Equipment" Binding="{Binding Equipment}" Width="*"/>
+                <DataGridTextColumn Header="From Room" Binding="{Binding OutgoingRoom}" Width="*"/>
+                <DataGridTextColumn Header="To Room" Binding="{Binding IncomingRoom}" Width="*"/>
+                <DataGridTextColumn Header="Amount" Binding="{Binding Count}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
         <Button Content="Remove" 
                 HorizontalAlignment="Left" 
                 Margin="10,22,0,0" 
-                VerticalAlignment="Top" />
+                VerticalAlignment="Top" Click="Remove_Click" />
 
         <Button Content="Edit" 
                 HorizontalAlignment="Left" 
                 Margin="81,22,0,0" 
-                VerticalAlignment="Top" />
+                VerticalAlignment="Top" Click="Edit_Click" />
     </Grid>
 </Window>

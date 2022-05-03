@@ -114,7 +114,7 @@
                     VerticalAlignment="Top" 
                     Height="32" 
                     Width="32"
-                    Click="RenovateRoom_Click" 
+                    Click="ChangeRenovation_Click" 
                     Grid.Row="2"
                     Style="{StaticResource ManagerButtons}"/>
 

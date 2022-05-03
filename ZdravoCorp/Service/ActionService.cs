@@ -9,6 +9,8 @@ using System.Collections.Generic;
 using Model;
 using ZdravoCorp.Utility;
 using System.Threading;
+using ZdravoCorp.View.ViewModel;
+using System.Collections.ObjectModel;
 
 namespace Service
 {
@@ -72,6 +74,80 @@ namespace Service
             return ActionRepository.Instance.UpdateAction(action);
         }
 
+        public Boolean UpdateRenovationAction(RenovationActionVO action)
+        {
+            Model.Action temp = ReadAction(action.Id);
+
+            temp.ExecutionDate = action.ExecutionDate;
+            RenovationAction renovationAction = new RenovationAction(action.ExpirationDate, action.Id_room, action.Renovation);
+            temp.Object = renovationAction;
+
+
+            return ActionRepository.Instance.UpdateAction(temp);
+        }
+
+        public Boolean UpdateChangeAction(ChangeActionVO action, int count)
+        {
+            Model.Action temp = ReadAction(action.Id);
+            temp.ExecutionDate = action.ExecutionDate;
+            ChangeRoomAction renovationAction = new ChangeRoomAction(action.Id_incoming_room, action.Id_outgoing_room, action.Id_equipment, action.Count);
+            temp.Object = renovationAction;
+
+            Room room = RoomService.Instance.ReadRoom(action.Id_outgoing_room);
+            for (int i = 0; i < room.Equipment.Count; i++)
+            {
+                if (room.Equipment[i].Identifier == action.Id_equipment)
+                {
+                    room.Equipment[i].Actual_count += count;
+                    break;
+                }
+            }
+
+            if (!ActionRepository.Instance.UpdateAction(temp))
+            {
+                return false;
+            }
+            else
+            {
+                return RoomService.Instance.UpdateRoom(room);
+            }
+        }
+
+        public Boolean DeleteRenovationAction(RenovationActionVO action)
+        {
+            if (!DeleteAction(action.Id))
+            {
+                return false;
+            }
+            else
+            {
+                Room room = RoomService.Instance.ReadRoom(action.Id_room);
+                room.Renovating = false;
+                return RoomService.Instance.UpdateRoom(room);
+            }
+        }
+
+        public Boolean DeleteChangeAction(ChangeActionVO action)
+        {
+            if(!DeleteAction(action.Id))
+            {
+                return false;
+            }
+            else
+            {
+                Room room = RoomService.Instance.ReadRoom(action.Id_outgoing_room);
+                for (int i = 0; i < room.Equipment.Count; i++) 
+                { 
+                    if(room.Equipment[i].Identifier == action.Id_equipment)
+                    {
+                        room.Equipment[i].Actual_count += action.Count;
+                        break;
+                    }
+                }
+                return RoomService.Instance.UpdateRoom(room);
+            }
+        }
+
         public Boolean DeleteAction(int identificator)
         {
             return ActionRepository.Instance.DeleteAction(identificator);
@@ -79,12 +155,45 @@ namespace Service
 
         public Model.Action ReadAction(int identificator)
         {
-            throw new NotImplementedException();
+            return ActionRepository.Instance.ReadAction(identificator);
         }
 
         public List<Model.Action> GetAllActions()
         {
             return ActionRepository.Instance.GetAllActions();
+        }
+
+        public ObservableCollection<RenovationActionVO> GetAllRenovationActions()
+        {
+            List<Model.Action> actions = GetAllActions();
+            ObservableCollection<RenovationActionVO> result = new ObservableCollection<RenovationActionVO>();
+            RenovationAction renovation;
+            foreach (Model.Action action in actions)
+            {
+                if(action.Type == ActionType.renovation)
+                {
+                    renovation = (RenovationAction)action.Object;
+                    result.Add(new RenovationActionVO(action.Id, action.ExecutionDate, renovation.ExpirationDate, RoomService.Instance.ReadRoom(renovation.Id_room).DesignationCode,renovation.Id_room, renovation.Renovation));
+                }
+            }
+            return result;
+        }
+
+        public ObservableCollection<ChangeActionVO> GetAllChangeRoomActions()
+        {
+            List<Model.Action> actions = GetAllActions();
+            ObservableCollection<ChangeActionVO> result = new ObservableCollection<ChangeActionVO>();
+            ChangeRoomAction changeRoomAction;
+            foreach(Model.Action action in actions)
+            {
+                if(action.Type == ActionType.changePosition)
+                {
+                    changeRoomAction = (ChangeRoomAction) action.Object;
+                    result.Add(new ChangeActionVO(action.Id, action.ExecutionDate, changeRoomAction.Id_incoming_room, changeRoomAction.Id_outgoing_room, changeRoomAction.Id_equipment, changeRoomAction.Count, RoomService.Instance.ReadRoom(changeRoomAction.Id_incoming_room).DesignationCode, RoomService.Instance.ReadRoom(changeRoomAction.Id_outgoing_room).DesignationCode, EquipmentService.Instance.ReadEquipmentType(changeRoomAction.Id_equipment).Name));
+                }
+            }
+
+            return result;
         }
 
         public void SaveActions(List<Model.Action> actions)
