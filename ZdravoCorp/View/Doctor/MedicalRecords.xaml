@@ -48,13 +48,13 @@
         <DataGrid x:Name="NoviGrid" ItemsSource="{Binding}"
             AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" Margin="413,233,67,20">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding Id}" Width="103"/>
-                <DataGridTextColumn Header="Count" Binding="{Binding TimesADay}" Width="103"/>
-                <DataGridTextColumn Header="Manufacturer" Binding="{Binding DurationDays}" Width="103" />
+                <DataGridTextColumn Header="Medication Id" Binding="{Binding MedicationID}" Width="103"/>
+                <DataGridTextColumn Header="Times A Day" Binding="{Binding TimesADay}" Width="103"/>
+                <DataGridTextColumn Header="Duration In Days" Binding="{Binding DurationDays}" Width="103" />
                 <DataGridTextColumn Header="Description" Binding="{Binding MedicationID}" Width="103"/>
 
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="dodajTerapiju" Content="Dodaj Terapiju" HorizontalAlignment="Left" Margin="204,343,0,0" VerticalAlignment="Top" Height="31" Width="80"/>
+        <Button x:Name="dodajTerapiju" Content="Dodaj Terapiju" HorizontalAlignment="Left" Margin="204,343,0,0" VerticalAlignment="Top" Height="31" Width="80" Click="dodajTerapiju_Click"/>
     </Grid>
 </Window>

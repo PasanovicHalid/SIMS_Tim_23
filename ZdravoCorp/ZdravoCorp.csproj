@@ -80,6 +80,7 @@
     <Compile Include="Controller\MedicalRecordController.cs" />
     <Compile Include="Controller\MedicineController.cs" />
     <Compile Include="Controller\PatientController.cs" />
+    <Compile Include="Controller\PrescriptionController.cs" />
     <Compile Include="Controller\RoomController.cs" />
     <Compile Include="Controller\SecretaryController.cs" />
     <Compile Include="Controller\SurveyController.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="Repository\MedicalRecordRepository.cs" />
     <Compile Include="Repository\MedicineRepository.cs" />
     <Compile Include="Repository\PatientRepository.cs" />
+    <Compile Include="Repository\PrescriptionRepository.cs" />
     <Compile Include="Repository\RoomRepository.cs" />
     <Compile Include="Repository\SecretaryRepository.cs" />
     <Compile Include="Repository\Serializable.cs" />
@@ -112,6 +114,7 @@
     <Compile Include="Service\MedicalRecordService.cs" />
     <Compile Include="Service\MedicineService.cs" />
     <Compile Include="Service\PatientService.cs" />
+    <Compile Include="Service\PrescriptionService.cs" />
     <Compile Include="Service\RoomService.cs" />
     <Compile Include="Service\SecretaryService.cs" />
     <Compile Include="Service\SurveyService.cs" />
@@ -122,6 +125,9 @@
     </Compile>
     <Compile Include="View\Doctor\AddComment.xaml.cs">
       <DependentUpon>AddComment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Doctor\AddTherapy.xaml.cs">
+      <DependentUpon>AddTherapy.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Doctor\Appointments.xaml.cs">
       <DependentUpon>Appointments.xaml</DependentUpon>
@@ -219,6 +225,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Doctor\AddComment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Doctor\AddTherapy.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -288,9 +288,11 @@ namespace Model
             }
 
             int count3 = int.Parse(values[i++]);
+            ZdravoCorp.Controller.PrescriptionController pc= new ZdravoCorp.Controller.PrescriptionController();
+            prescription = new List<Prescription>();
             for (int j = 0; j < count3; j++)
             {
-                prescription.Add(new Prescription(int.Parse(values[i++])));
+                prescription.Add(pc.ReadPrescription(int.Parse(values[i++])));
             }
             record = new MedicalRecord(int.Parse(values[i++]));
         }

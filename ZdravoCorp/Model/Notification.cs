@@ -29,6 +29,8 @@ namespace Model
             this.user.Id = id;
         }
 
+        public Notification() { }
+
         /// <summary>
         /// Property for User
         /// </summary>

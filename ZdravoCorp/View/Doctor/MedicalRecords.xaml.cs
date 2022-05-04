@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ZdravoCorp.Controller;
 
 namespace ZdravoCorp.View.Doctor
 {
@@ -27,6 +28,7 @@ namespace ZdravoCorp.View.Doctor
         PatientController patientController;
         private Model.Doctor currentDoctor;
         private MedicineController medicineController;
+        private PrescriptionController pc;
 
         public ObservableCollection<Model.Comments> comments
         {
@@ -65,9 +67,12 @@ namespace ZdravoCorp.View.Doctor
             medicineController = new MedicineController();
             MedicineCollection = new ObservableCollection<Model.Medication>(medicineController.GetAllMedicine());
 
-            //PrescriptionCollection = new ObservableCollection<Model.Prescription>()
+            pc = new PrescriptionController();
 
-            NoviGrid.DataContext = MedicineCollection;
+            //PrescriptionCollection = new ObservableCollection<Model.Prescription>(pc.GetAllPrescriptions());
+
+
+            
 
 
         }
@@ -79,6 +84,9 @@ namespace ZdravoCorp.View.Doctor
             medicalRecordController = new MedicalRecordController();
 
             List<Model.MedicalRecord> med = medicalRecordController.GetAllRecords();
+
+            PrescriptionCollection = new ObservableCollection<Model.Prescription>();
+
             foreach (Model.MedicalRecord pom in med)
             {
                 if (pomocnip.Record.Id == pom.Id)
@@ -95,6 +103,17 @@ namespace ZdravoCorp.View.Doctor
                     CommentsGrid.DataContext = commentsl;
 
                 }
+            }
+
+            if(pomocnip.Prescription.Count > 0)
+            {
+                foreach(Model.Prescription p in pomocnip.Prescription)
+                {
+                    PrescriptionCollection.Add(p);
+                }
+
+                NoviGrid.DataContext = PrescriptionCollection;
+
             }
 
         }
@@ -130,6 +149,12 @@ namespace ZdravoCorp.View.Doctor
                 //    }
                 //}
             }
+        }
+
+        private void dodajTerapiju_Click(object sender, RoutedEventArgs e)
+        {
+            AddTherapy at = new AddTherapy();
+            at.Show();
         }
     }
 }
