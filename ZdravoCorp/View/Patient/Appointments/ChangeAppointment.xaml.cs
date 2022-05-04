@@ -26,18 +26,18 @@ namespace ZdravoCorp.View.Patient.Appointments
         public DateTime exDate;
         public Appointment app;
         public Appointment exApp;
-        public Doctor doctor { get; set; }
+        public Model.Doctor doctor { get; set; }
         public DoctorController doctorController;
         public AppointmentController appointmentController;
         public int selectedIndex {get; set;}
         public event PropertyChangedEventHandler PropertyChanged;
-        public Doctor SelectedDoctor { get; set; }
+        public Model.Doctor SelectedDoctor { get; set; }
         public ObservableCollection<Appointment> AppointmentsCollection
         {
             get;
             set;
         }
-        public ObservableCollection<Doctor> DoctorsCollection
+        public ObservableCollection<Model.Doctor> DoctorsCollection
         {
             get;
             set;
@@ -50,7 +50,7 @@ namespace ZdravoCorp.View.Patient.Appointments
             doctorController = new DoctorController();
             this.app = appointment;
             exApp = appointment;
-            DoctorsCollection = new ObservableCollection<Doctor>(doctorController.GetAllDoctors());
+            DoctorsCollection = new ObservableCollection<Model.Doctor>(doctorController.GetAllDoctors());
             DoctorsCB.ItemsSource = DoctorsCollection;
             doctor = doctorController.ReadDoctor(appointment.doctor.Id);
             selectedIndex = doctor.Id;
@@ -62,7 +62,7 @@ namespace ZdravoCorp.View.Patient.Appointments
         private void Search_Click(object sender, RoutedEventArgs e)
         {
             DataContext = this;
-            Doctor doctor = (Doctor)DoctorsCB.SelectedValue;
+            Model.Doctor doctor = (Model.Doctor)DoctorsCB.SelectedValue;
             DateTime date = (DateTime)datePicker.SelectedDate;
             List<Appointment> apps = new List<Appointment>();
             TimeSpan lessDays = new TimeSpan(-1, 0, 0, 0);
@@ -110,7 +110,7 @@ namespace ZdravoCorp.View.Patient.Appointments
             r.RemoveAppointment(exApp);
             r.AddAppointment(app);
             rc.UpdateRoom(r);
-            Doctor d = app.doctor;
+            Model.Doctor d = app.doctor;
             d.RemoveAppointment(exApp);
             d.AddAppointment(app);
             doctorController.UpdateDoctor(d);

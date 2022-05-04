@@ -18,6 +18,24 @@ namespace Model
         {
             
         }
+        public Patient(Patient pomocnip)
+        {
+            Id = pomocnip.Id;
+            Password = pomocnip.Password;
+            Username = pomocnip.Username;
+            Name = pomocnip.Name;
+            Surname = pomocnip.Surname;
+            Jmbg = pomocnip.Jmbg;
+            Email = pomocnip.Email;
+            Address = pomocnip.Address;
+            PhoneNumber = pomocnip.PhoneNumber;
+            this.gender = pomocnip.gender;
+            this.dateOfBirth = pomocnip.dateOfBirth;
+            this.Record = pomocnip.Record;
+            this.appointment = pomocnip.appointment;
+            this.notification = pomocnip.notification;
+            this.prescription = pomocnip.prescription;
+        }
 
         public Patient(int id)
         {
@@ -27,6 +45,9 @@ namespace Model
         public Patient()
         {
         }
+
+        public string Name
+        { get { return this.name; } set { this.name = value; } }
 
         private List<Appointment> appointment = new List<Appointment>();
 

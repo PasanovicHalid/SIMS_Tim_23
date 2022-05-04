@@ -22,10 +22,10 @@
                   SelectionMode="Single" 
                   IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Doctor" Binding="{Binding Doctor}" Width="*"/>
+                <DataGridTextColumn Header="Doctor" Binding="{Binding Start}" Width="*"/>
                 <DataGridTextColumn Header="Start" Binding="{Binding Start}" Width="*"/>
                 <DataGridTextColumn Header="End" Binding="{Binding End}" Width="*"/>
-                <DataGridTextColumn Header="Room" Binding="{Binding Room}" Width="*"/>
+                <DataGridTextColumn Header="Room" Binding="{Binding End}" Width="*"/>
 
             </DataGrid.Columns>
         </DataGrid>

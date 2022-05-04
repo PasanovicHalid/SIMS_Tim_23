@@ -97,6 +97,13 @@ namespace Model
         public DateTime EndDate { get => endDate; set => endDate = value; }
         public Doctor Doctor { get => doctor; set => doctor = value; }
         public String NameSurname { get => doctor.nameSurname; set => doctor.nameSurname = value; }
+
+        public int DoctorID { get => doctor.Id; set => doctor.Id = value; }
+
+        public int RoomID { get => room.Identifier; set => room.Identifier = value; }
+
+        public int PatientID { get => patient.Id; set => patient.Id = value; }
+
         public List<String> ToCSV()
         {
             List<String> result = new List<String>();

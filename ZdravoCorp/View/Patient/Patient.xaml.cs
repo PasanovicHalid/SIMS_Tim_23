@@ -25,7 +25,7 @@ namespace ZdravoCorp.View.Patient
     public partial class Patient : Window
     {
         private Appointment app;
-        public Doctor doctor { get; set; }
+        public Model.Doctor doctor { get; set; }
         private DoctorController dc;
         public String NameSurname { get => NameSurname; set => NameSurname = value; }
         public Patient()
@@ -34,7 +34,7 @@ namespace ZdravoCorp.View.Patient
             appointmentController = new AppointmentController();
             dc = new DoctorController();
             AppointmentsCollection = new ObservableCollection<Appointment>();
-            DoctorCollection = new ObservableCollection<Doctor>();
+            DoctorCollection = new ObservableCollection<Model.Doctor>();
             RoomCollection = new ObservableCollection<Room>();
             UpdateTable();
 
@@ -103,7 +103,7 @@ namespace ZdravoCorp.View.Patient
             get;
             set;
         }
-        public ObservableCollection<Doctor> DoctorCollection
+        public ObservableCollection<Model.Doctor> DoctorCollection
         {
             get;
             set;
@@ -115,12 +115,12 @@ namespace ZdravoCorp.View.Patient
             List<Appointment> appointments = appointmentController.GetAllAppointments();
 
             AppointmentsCollection = new ObservableCollection<Appointment>(appointments);
-            List<Doctor> doctors = new List<Doctor>();
+            List<Model.Doctor> doctors = new List<Model.Doctor>();
             foreach(Appointment a in appointments)
             {
                 doctors.Add(a.doctor);
             }
-            DoctorCollection = new ObservableCollection<Doctor>();
+            DoctorCollection = new ObservableCollection<Model.Doctor>();
             PatientAppointmentTable.DataContext = AppointmentsCollection;
         }
         private void Add_Appointment(object sender, RoutedEventArgs e)

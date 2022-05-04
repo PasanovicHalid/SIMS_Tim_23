@@ -1,6 +1,8 @@
-﻿using Service;
+﻿using Controller;
+using Service;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -15,6 +17,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ZdravoCorp.Service;
+using ZdravoCorp.View.Doctor;
 using ZdravoCorp.View.Manager;
 using ZdravoCorp.View.Patient;
 using ZdravoCorp.View.Secretary;
@@ -30,6 +33,11 @@ namespace ZdravoCorp
         private AutoResetEvent autoEvent;
         private bool anotherWindow = false;
 
+        public ObservableCollection<Model.Doctor> DoctorCollection
+        {
+            get;
+            set;
+        }
         public MainWindow()
         {
 
@@ -93,6 +101,29 @@ namespace ZdravoCorp
             Secretary window = new Secretary();
             this.Close();
             window.ShowDialog();
+        }
+
+        private void Doctor_Click(object sender, RoutedEventArgs e)
+        {
+            string username = User.Text;
+            string password = PassBox.Password;
+            DoctorController doctorController = new DoctorController();
+            DoctorCollection = new ObservableCollection<Model.Doctor>();
+            List<Model.Doctor> doctorList = doctorController.GetAllDoctors();
+            foreach (Model.Doctor d in doctorList)
+            {
+                if (d.Username.Equals(username))
+                {
+                    if (d.Password.Equals(password))
+                    {
+                        Appointments appointmentWindow = new Appointments(d);
+                        this.Close();
+                        appointmentWindow.ShowDialog();
+                        return;
+                    }
+                }
+            }
+            MessageBox.Show("Ne postoji ni jedan doktor");
         }
     }   
 }
