@@ -124,7 +124,115 @@ namespace Model
                 this.doctorType = value;
             }
         }
-        
+
+        public int Id
+        {
+            get { return this.id; }
+            set { this.id = value; }
+        }
+
+        public string Name
+        { get { return this.name; } set { this.name = value; } }
+
+        public string Password
+        {
+            get { return this.password; }
+            set { this.password = value; }
+        }
+
+        public string Username
+        {
+            get { return this.username; }
+            set { this.username = value; }
+        }
+
+        public string Surname
+        {
+            get { return this.surname; }
+            set { this.surname = value; }
+        }
+
+        public string Jmbg
+        {
+            get { return this.jmbg; }
+            set { this.jmbg = value; }
+        }
+
+        public string Email
+        {
+            get { return this.email; }
+            set { this.email = value; }
+        }
+
+        public string Address
+        {
+            get { return this.address; }
+            set { this.address = value; }
+        }
+
+        public string PhoneNumber
+        {
+            get { return this.phoneNumber; }
+            set { this.phoneNumber = value; }
+        }
+
+        public Gender Gender
+        {
+            get { return this.gender; }
+            set { this.gender = value; }
+        }
+
+        public DateTime DateOfBirth
+        {
+            get { return this.dateOfBirth; }
+            set { this.dateOfBirth = value; }
+        }
+
+        public List<Notification> Notification
+        {
+            get { return this.notification; }
+            set { this.notification = value; }
+        }
+
+        public float Salary
+        {
+            get { return this.salary; }
+            set { this.salary = value; }
+        }
+
+        public DateTime EnrolementDate
+        {
+            get { return this.enrolementDate; }
+            set { this.enrolementDate = value; }
+        }
+
+        public DateTime WorkStartTime
+        {
+            get { return this.workStartTime; }
+            set { this.workStartTime = value; }
+        }
+
+        public DateTime WorkEndTime
+        {
+            get { return this.workEndTime; }
+            set { this.workEndTime = value; }
+        }
+
+        public DateTime VacationStartTime
+        {
+            get { return this.vacationStartTime; }
+            set { this.vacationStartTime = value; }
+        }
+
+        public DateTime VacationEndTime
+        {
+            get { return this.vacationEndTime; }
+            set { this.vacationEndTime = value; }
+        }
+
+        public String getName() { return name + surname; }
+
+
         public List<String> ToCSV()
         {
             List<String> result = new List<String>();

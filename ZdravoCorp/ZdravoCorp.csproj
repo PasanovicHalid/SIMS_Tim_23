@@ -73,12 +73,14 @@
     </ApplicationDefinition>
     <Compile Include="Controller\ActionController.cs" />
     <Compile Include="Controller\AppointmentController.cs" />
+    <Compile Include="Controller\CommentController.cs" />
     <Compile Include="Controller\DoctorController.cs" />
     <Compile Include="Controller\EquipmentController.cs" />
     <Compile Include="Controller\ManagerController.cs" />
     <Compile Include="Controller\MedicalRecordController.cs" />
     <Compile Include="Controller\MedicineController.cs" />
     <Compile Include="Controller\PatientController.cs" />
+    <Compile Include="Controller\PrescriptionController.cs" />
     <Compile Include="Controller\RoomController.cs" />
     <Compile Include="Controller\SecretaryController.cs" />
     <Compile Include="Controller\SurveyController.cs" />
@@ -89,12 +91,14 @@
     <Compile Include="Model\RenovationAction.cs" />
     <Compile Include="Repository\ActionRepository.cs" />
     <Compile Include="Repository\AppointmentRepository.cs" />
+    <Compile Include="Repository\CommentRepository.cs" />
     <Compile Include="Repository\DoctorRepository.cs" />
     <Compile Include="Repository\EquipmentRepository.cs" />
     <Compile Include="Repository\ManagerRepository.cs" />
     <Compile Include="Repository\MedicalRecordRepository.cs" />
     <Compile Include="Repository\MedicineRepository.cs" />
     <Compile Include="Repository\PatientRepository.cs" />
+    <Compile Include="Repository\PrescriptionRepository.cs" />
     <Compile Include="Repository\RoomRepository.cs" />
     <Compile Include="Repository\SecretaryRepository.cs" />
     <Compile Include="Repository\Serializable.cs" />
@@ -103,17 +107,37 @@
     <Compile Include="Repository\SurveyRepository.cs" />
     <Compile Include="Service\ActionService.cs" />
     <Compile Include="Service\AppointmenService.cs" />
+    <Compile Include="Service\CommentService.cs" />
     <Compile Include="Service\DoctorService.cs" />
     <Compile Include="Service\EquipmentService.cs" />
     <Compile Include="Service\ManagerService.cs" />
     <Compile Include="Service\MedicalRecordService.cs" />
     <Compile Include="Service\MedicineService.cs" />
     <Compile Include="Service\PatientService.cs" />
+    <Compile Include="Service\PrescriptionService.cs" />
     <Compile Include="Service\RoomService.cs" />
     <Compile Include="Service\SecretaryService.cs" />
     <Compile Include="Service\SurveyService.cs" />
     <Compile Include="Service\TimerService.cs" />
     <Compile Include="Utility\DateManipulator.cs" />
+    <Compile Include="View\Doctor\AddAppointment.xaml.cs">
+      <DependentUpon>AddAppointment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Doctor\AddComment.xaml.cs">
+      <DependentUpon>AddComment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Doctor\AddTherapy.xaml.cs">
+      <DependentUpon>AddTherapy.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Doctor\Appointments.xaml.cs">
+      <DependentUpon>Appointments.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Doctor\MedicalRecords.xaml.cs">
+      <DependentUpon>MedicalRecords.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Doctor\UpdateAppointment.xaml.cs">
+      <DependentUpon>UpdateAppointment.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Manager\Equipments\AddEquipment.xaml.cs">
       <DependentUpon>AddEquipment.xaml</DependentUpon>
     </Compile>
@@ -196,6 +220,30 @@
     <Compile Include="View\ViewModel\RenovationActionVO.cs" />
     <Compile Include="View\ViewModel\RoomTypeVO.cs" />
     <Compile Include="View\ViewModel\RoomVO.cs" />
+    <Page Include="View\Doctor\AddAppointment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Doctor\AddComment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Doctor\AddTherapy.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Doctor\Appointments.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Doctor\MedicalRecords.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Doctor\UpdateAppointment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

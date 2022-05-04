@@ -12,43 +12,85 @@ namespace Model
     public class Comments : Serializable
     {
         private String comment;
+
         private int id;
+
+        private Appointment appointment;
+
         private Doctor doctor;
-        public int Id { get { return id; } set { id = value; } }
-        public Comments(int id)
+        public int Id
         {
-            this.id = id;
+            get { return this.id; }
+            set { this.id = value; }
         }
 
-        public Comments()
+        public String Comment
         {
+            get { return this.comment; }
+            set { this.comment = value; }
         }
+
+        public Appointment Appointment
+        {
+            get { return this.appointment; }
+            set { this.appointment = value; }
+        }
+
+        public Doctor Doctor
+        {
+            get { return this.doctor; }
+            set { this.doctor = value; }
+        }
+
+        public string DoctorID
+        {
+            get
+            {
+                return this.doctor.Id.ToString();
+            }
+        }
+
+        public string AppointmentID
+        {
+            get
+            {
+                return this.Appointment.Id.ToString();
+            }
+        }
+        public Comments(Appointment app, string kom, Doctor doktor)
+        {
+            Appointment = app;
+            Comment = kom;
+            Doctor = doktor;
+        }
+
+        public Comments() { }
 
 
         /// <summary>
         /// Property for Doctor
         /// </summary>
         /// <pdGenerated>Default opposite class property</pdGenerated>
-        public Doctor Doctor
-        {
-            get
-            {
-                return doctor;
-            }
-            set
-            {
-                this.doctor = value;
-            }
-        }
 
         public void FromCSV(string[] values)
         {
-            throw new NotImplementedException();
+            int i = 0;
+            Id = Int32.Parse(values[i++]);
+            Comment = values[i++];
+            Controller.AppointmentController ac = new Controller.AppointmentController();
+            Appointment = ac.ReadAppointment(Int32.Parse(values[i++]));
+            Controller.DoctorController dc = new Controller.DoctorController();
+            Doctor = dc.ReadDoctor(Int32.Parse(values[i++]));
         }
 
         public List<String> ToCSV()
         {
-            throw new NotImplementedException();
+            List<String> result = new List<String>();
+            result.Add(Id.ToString());
+            result.Add(Comment);
+            result.Add(Doctor.Id.ToString());
+            result.Add(Appointment.Id.ToString());
+            return result;
         }
     }
 }
