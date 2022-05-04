@@ -26,6 +26,7 @@ namespace ZdravoCorp.View.Doctor
         private Model.Patient pomocnip;
         PatientController patientController;
         private Model.Doctor currentDoctor;
+        private MedicineController medicineController;
 
         public ObservableCollection<Model.Comments> comments
         {
@@ -34,6 +35,18 @@ namespace ZdravoCorp.View.Doctor
         }
 
         public ObservableCollection<Model.Patient> PatientCollection
+        {
+            get;
+            set;
+        }
+
+        public ObservableCollection<Model.Medication> MedicineCollection
+        {
+            get;
+            set;
+        }
+
+        public ObservableCollection<Model.Prescription> PrescriptionCollection
         {
             get;
             set;
@@ -48,6 +61,15 @@ namespace ZdravoCorp.View.Doctor
             patientController = new PatientController();
             PatientCollection = new ObservableCollection<Model.Patient>(patientController.GetAllPatients());
             PatientsCB.ItemsSource = PatientCollection;
+
+            medicineController = new MedicineController();
+            MedicineCollection = new ObservableCollection<Model.Medication>(medicineController.GetAllMedicine());
+
+            //PrescriptionCollection = new ObservableCollection<Model.Prescription>()
+
+            NoviGrid.DataContext = MedicineCollection;
+
+
         }
 
         private void PatientsCB_SelectionChanged(object sender, SelectionChangedEventArgs e)

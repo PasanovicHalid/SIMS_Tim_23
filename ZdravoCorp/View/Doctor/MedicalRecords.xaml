@@ -9,12 +9,12 @@
         WindowStartupLocation="CenterScreen">
     <Grid>
         <DataGrid x:Name="CommentsGrid" ItemsSource="{Binding}"
-            AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" Margin="362,43,118,157">
+            AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" Margin="413,25,67,228">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Comment ID" Binding="{Binding Id}" Width="123"/>
-                <DataGridTextColumn Header="String" Binding="{Binding Comment}" Width="122"/>
-                <DataGridTextColumn Header="Appointment ID" Binding="{Binding AppointmentID}" Width="123" />
-                <DataGridTextColumn Header="Doctor ID" Binding="{Binding DoctorID}" Width="123"/>
+                <DataGridTextColumn Header="Comment ID" Binding="{Binding Id}" Width="103"/>
+                <DataGridTextColumn Header="String" Binding="{Binding Comment}" Width="103"/>
+                <DataGridTextColumn Header="Appointment ID" Binding="{Binding AppointmentID}" Width="103" />
+                <DataGridTextColumn Header="Doctor ID" Binding="{Binding DoctorID}" Width="103"/>
 
             </DataGrid.Columns>
         </DataGrid>
@@ -45,5 +45,16 @@
         <Label Content="Patient:" HorizontalAlignment="Left" Margin="32,43,0,0" VerticalAlignment="Top"/>
         <Button x:Name="commentButton" Content="DodajComment" HorizontalAlignment="Left" Margin="43,343,0,0" VerticalAlignment="Top" Height="31" Width="97" Click="commentButton_Click"/>
 
+        <DataGrid x:Name="NoviGrid" ItemsSource="{Binding}"
+            AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" Margin="413,233,67,20">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Id}" Width="103"/>
+                <DataGridTextColumn Header="Count" Binding="{Binding TimesADay}" Width="103"/>
+                <DataGridTextColumn Header="Manufacturer" Binding="{Binding DurationDays}" Width="103" />
+                <DataGridTextColumn Header="Description" Binding="{Binding MedicationID}" Width="103"/>
+
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="dodajTerapiju" Content="Dodaj Terapiju" HorizontalAlignment="Left" Margin="204,343,0,0" VerticalAlignment="Top" Height="31" Width="80"/>
     </Grid>
 </Window>

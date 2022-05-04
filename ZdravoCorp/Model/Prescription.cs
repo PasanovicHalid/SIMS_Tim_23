@@ -18,9 +18,22 @@ namespace Model
 
         private Medication medication;
 
+        public int MedicationID
+        {
+            get { return medication.Id; }  set { medication.Id = value; } 
+        }
+
         private Notification notification;
 
         public int Id { get => id; set => id = value; }
+
+        public int TimesADay
+        { get => timesADay; set => timesADay = value; } 
+
+        public int DurationDays
+        {
+            get => durationDays; set => durationDays = value;   
+        }
 
         public Prescription(int id)
         {
