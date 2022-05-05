@@ -218,9 +218,10 @@ namespace Model
                 allergens.Add(values[i++]);
             }
             count = int.Parse(values[i++]);
-            for(int j = 0; j < count; j++)
+            ZdravoCorp.Controller.CommentController cc = new ZdravoCorp.Controller.CommentController();
+            for (int j = 0; j < count; j++)
             {
-                comments.Add(new Model.Comments(int.Parse(values[i++])));
+                comments.Add(cc.ReadComment(int.Parse(values[i++])));
             }
         }
     }

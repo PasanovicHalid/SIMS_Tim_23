@@ -16,16 +16,37 @@ namespace Model
         private int durationDays;
         private int quantity;
 
-        private Medication medication;
+        private Medication medication = new Medication();
 
-        private Notification notification;
+        public int MedicationID
+        {
+            get { return medication.Id; } set { medication.Id = value; }
+        }
+
+        public string Name
+        {
+            get { return medication.Name; } set { medication.Name = value;} 
+        }
+
+        private Notification notification = new Notification();
 
         public int Id { get => id; set => id = value; }
+
+        public int TimesADay
+        { get => timesADay; set => timesADay = value; }
+
+        public int DurationDays
+        {
+            get => durationDays; set => durationDays = value;
+        }
 
         public Prescription(int id)
         {
             this.id = id;
         }
+
+        public Prescription()
+        { }
 
         public List<String> ToCSV()
         {
