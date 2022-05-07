@@ -34,6 +34,19 @@ namespace Model
         public int Id { get => id; set => id = value; }
         public int Count { get => count; set => count = value; }
 
+        public string Name
+        {
+            get => medicationType.Name; set => medicationType.Name = value;
+        }
+        public string Manufacturer
+        {
+            get => medicationType.Manufacturer; set => medicationType.Manufacturer = value;
+        }
+        public string Description
+        {
+            get => medicationType.Description; set => medicationType.Description = value;
+        }
+
         public Medication(int id, int count)
         {
             this.medicationType = new MedicationType(id);

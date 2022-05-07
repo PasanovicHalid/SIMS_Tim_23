@@ -37,7 +37,7 @@ namespace ZdravoCorp.View.Patient.Appointments
             get;
             set;
         }
-        public ObservableCollection<Doctor> DoctorsCollection
+        public ObservableCollection<Model.Doctor> DoctorsCollection
         {
             get;
             set;
@@ -58,11 +58,11 @@ namespace ZdravoCorp.View.Patient.Appointments
             DataContext = this;
             doctorController = new DoctorController();
             appointmentController = new AppointmentController();
-            
+
             SuggestionsCollection = new ObservableCollection<Suggestion>(suggestions);
             Suggestion suggestion;
             AppointmentsCollection = new ObservableCollection<Appointment>();
-            DoctorsCollection = new ObservableCollection<Doctor>(doctorController.GetAllDoctors());
+            DoctorsCollection = new ObservableCollection<Model.Doctor>(doctorController.GetAllDoctors());
             DoctorsCB.ItemsSource = DoctorsCollection;
         }
 
@@ -70,16 +70,16 @@ namespace ZdravoCorp.View.Patient.Appointments
         private void Search_Click(object sender, RoutedEventArgs e)
 
         {
-            
+
             DataContext = this;
-            Doctor doctor = doctorController.ReadDoctor(DoctorsCB.SelectedIndex);
-            DateTime date = (DateTime) datePicker.SelectedDate;
-            Appointment app ;
+            Model.Doctor doctor = doctorController.ReadDoctor(DoctorsCB.SelectedIndex);
+            DateTime date = (DateTime)datePicker.SelectedDate;
+            Appointment app;
             List<Appointment> apps = new List<Appointment>();
-            date.AddHours((int) doctor.WorkStartTime.Hour);
+            date.AddHours((int)doctor.WorkStartTime.Hour);
             date.AddMinutes((int)doctor.WorkStartTime.Minute);
             date.AddSeconds((int)doctor.WorkStartTime.Second);
-            if(DateRB.IsChecked == true)
+            if (DateRB.IsChecked == true)
             {
                 apps = appointmentController.SuggestAppointments(doctor, date, date.AddMinutes(45), false, true);
             }
@@ -88,10 +88,10 @@ namespace ZdravoCorp.View.Patient.Appointments
                 apps = appointmentController.SuggestAppointments(doctor, date, date.AddMinutes(45), true, true);
 
             }
-            
+
             AppointmentsCollection = new ObservableCollection<Appointment>(apps);
             TableForSuggestedApp.DataContext = AppointmentsCollection;
-            
+
         }
 
         private void Confirm_Click(object sender, RoutedEventArgs e)
@@ -102,14 +102,14 @@ namespace ZdravoCorp.View.Patient.Appointments
             }
             app = AppointmentsCollection.ElementAt(TableForSuggestedApp.SelectedIndex);
             PatientController pc = new PatientController();
-            
+
             RoomController rc = new RoomController();
-            
+
             appointmentController.CreateAppointment(app);
             Room r = app.Room;
             r.AddAppointment(app);
             rc.UpdateRoom(r);
-            Doctor d = app.doctor;
+            Model.Doctor d = app.doctor;
             d.AddAppointment(app);
             doctorController.UpdateDoctor(d);
             Model.Patient p = app.Patient;
@@ -118,26 +118,11 @@ namespace ZdravoCorp.View.Patient.Appointments
             this.Close();
         }
 
-        private void TableForSuggestedApp_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            //AppointmentsCollection = new ObservableCollection<Appointment>();
-            //SuggestionsCollection = new ObservableCollection<Model.Suggestion>();
-            //Appointment appointment = new Appointment();
+    
 
-            //if (TableForSuggestedApp.SelectedIndex == -1)
-            //{
-            //    return;
-            //}
-            //Suggestion suggestion = SuggestionsCollection.ElementAt(TableForSuggestedApp.SelectedIndex);
-            //appointment.doctor = doctorController.ReadDoctor(suggestion.Doctor.Id);
-            //appointment.startDate = suggestion.StartInterval;
-            //appointment.endDate = appointment.startDate.AddMinutes(45);
-            //PatientController pc = new PatientController();
-            //appointment.Patient = pc.ReadPatient(0);
-            //RoomController rc = new RoomController();
-            //Room r = rc.findFreeRoom(appointment.startDate, appointment.endDate);
-            //appointment.Room = r;
-            //appointmentController.CreateAppointment(appointment);
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

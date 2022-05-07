@@ -28,6 +28,11 @@ namespace Service
             return RoomRepository.Instance.ReadRoom(identifier);
         }
 
+        public Room ReadRoomByIndex(int index)
+        {
+            return RoomRepository.Instance.ReadRoomByIndex(index);
+        }
+
         public Boolean UpdateRoom(Room updatedRoom)
         {
             return RoomRepository.Instance.UpdateRoom(updatedRoom);
@@ -103,6 +108,11 @@ namespace Service
         public Boolean AddEquipment(Equipment equipment, int id)
         {
             return RoomRepository.Instance.AddEquipment(equipment, id);
+        }
+
+        public int GetRoomIndex(Model.Room room)
+        {
+            return RoomRepository.Instance.GetRoomIndex(room);
         }
 
         public RoomService()

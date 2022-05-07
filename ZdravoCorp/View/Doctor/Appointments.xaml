@@ -1,0 +1,30 @@
+﻿<Window x:Class="ZdravoCorp.View.Doctor.Appointments"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ZdravoCorp.View.Doctor"
+        mc:Ignorable="d"
+        Title="Appointments" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Button x:Name="CreateButton" Content="Create" HorizontalAlignment="Left" Margin="63,35,0,0" VerticalAlignment="Top" Width="65" Height="30" Click="CreateButton_Click"/>
+        <Button x:Name="UpdateButton" Content="Update" HorizontalAlignment="Left" Margin="188,35,0,0" VerticalAlignment="Top" Width="65" Height="30" Click="UpdateButton_Click"/>
+        <Button x:Name="DeleteButton" Content="Delete" HorizontalAlignment="Left" Margin="300,35,0,0" VerticalAlignment="Top" Width="65" Height="30" Click="DeleteButton_Click"/>
+        <Button x:Name="PrintButton" Content="Print" HorizontalAlignment="Left" Margin="421,35,0,0" VerticalAlignment="Top" Width="65" Height="30"/>
+        <DataGrid x:Name="AppointmentGrid" ItemsSource="{Binding}"
+                              AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" Margin="0,100,0,10">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Start Date" Binding="{Binding StartDate}" Width="140"/>
+                <DataGridTextColumn Header="End Date" Binding="{Binding EndDate}" Width="140"/>
+                <DataGridTextColumn Header="Appointment ID" Binding="{Binding Id}" Width="140" />
+                <DataGridTextColumn Header="Doctor ID" Binding="{Binding DoctorID}" Width="140"/>
+                <DataGridTextColumn Header="Patient ID" Binding="{Binding PatientID}" Width="100"/>
+                <DataGridTextColumn Header="Room ID" Binding="{Binding RoomID}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <TextBox x:Name="txtIme" HorizontalAlignment="Left" Height="17" Margin="690,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="96" IsEnabled="False" TextAlignment="Right"/>
+        <Button x:Name="kartoniButton" Content="Kartoni" HorizontalAlignment="Left" Margin="711,40,0,0" VerticalAlignment="Top" Width="63" Click="kartoniButton_Click"/>
+
+    </Grid>
+</Window>

@@ -33,9 +33,9 @@ namespace Repository
             {
                 if (id == appointment.Id)
                 {
-                    appointment.doctor = DoctorRepository.Instance.ReadDoctor(appointment.doctor.Id);
-                    appointment.Room = RoomRepository.Instance.ReadRoom(appointment.Room.Identifier);
-                    appointment.Patient = PatientRepository.Instance.ReadPatient(appointment.Patient.Id);
+                    //appointment.doctor = DoctorRepository.Instance.ReadDoctor(appointment.doctor.Id);
+                    //appointment.Room = RoomRepository.Instance.ReadRoom(appointment.Room.Identifier);
+                    //appointment.Patient = PatientRepository.Instance.ReadPatient(appointment.Patient.Id);
                     return appointment;
                 }
             }
@@ -74,7 +74,7 @@ namespace Repository
             }
             if (success)
             {
-                //appointments.Add(appointment);
+                appointments.Add(appointment);
                 serializerAppointment.ToCSV(dbPath, appointments);
                 
             }
@@ -113,10 +113,10 @@ namespace Repository
             List<Appointment> appointments = serializerAppointment.FromCSV(dbPath); 
             foreach (Appointment appointment in appointments)
             {
-                appointment.doctor = DoctorRepository.Instance.ReadDoctor(appointment.doctor.Id);
-                appointment.Room = RoomRepository.Instance.ReadRoom(appointment.Room.Identifier);
-                appointment.Patient = PatientRepository.Instance.ReadPatient(appointment.Patient.Id);
-
+                //appointment.doctor = DoctorRepository.Instance.ReadDoctor(appointment.doctor.Id);
+                //appointment.Room = RoomRepository.Instance.ReadRoom(appointment.Room.Identifier);
+                //appointment.Patient = PatientRepository.Instance.ReadPatient(appointment.Patient.Id);
+            
             }
             return appointments;
             

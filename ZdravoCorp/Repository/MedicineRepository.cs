@@ -11,7 +11,7 @@ namespace Repository
 {
     public class MedicineRepository
     {
-        private String dbPath = "..\\..\\Data\\medicineDB.csv";
+        private String dbPath = "..\\..\\Data\\medicationDB.csv";
         private Serializer<Medication> serializerMedication = new Serializer<Medication>();
 
         private static MedicineRepository instance = null;

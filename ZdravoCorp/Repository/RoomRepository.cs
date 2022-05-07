@@ -82,6 +82,44 @@ namespace Repository
             }
         }
 
+        public Model.Room ReadRoomByIndex(int index)
+        {
+            lock (key)
+            {
+                List<Room> rooms = serializerRoom.FromCSV(dbPath);
+                int i = 0;
+
+                foreach (Room room in rooms)
+                {
+                    if (i == index)
+                    {
+                        return room;
+                    }
+                    i++;
+                }
+                return null;
+            }
+        }
+
+        public int GetRoomIndex(Model.Room room)
+        {
+            lock (key)
+            {
+                List<Room> rooms = serializerRoom.FromCSV(dbPath);
+                int i = 0;
+
+                foreach (Room rom in rooms)
+                {
+                    if (room.Identifier == rom.Identifier)
+                    {
+                        return i;
+                    }
+                    i++;
+                }
+                return -1;
+            }
+        }
+
         public Model.Room ReadRoom(int identifier)
         {
             List<Room> rooms = serializerRoom.FromCSV(dbPath);
