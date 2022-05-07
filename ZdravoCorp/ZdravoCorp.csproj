@@ -38,17 +38,29 @@
   <ItemGroup>
     <Reference Include="presentationframework.aero" />
     <Reference Include="PresentationFramework.Aero2" />
-    <Reference Include="Syncfusion.Data.WPF, Version=20.1460.0.50, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.Data.WPF.20.1.0.50\lib\net46\Syncfusion.Data.WPF.dll</HintPath>
+    <Reference Include="SharpVectors.Converters.Wpf, Version=1.7.7.0, Culture=neutral, PublicKeyToken=b532964b8548be77, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpVectors.1.7.7\lib\net48\SharpVectors.Converters.Wpf.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.Licensing, Version=20.1460.0.50, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.Licensing.20.1.0.50\lib\net46\Syncfusion.Licensing.dll</HintPath>
+    <Reference Include="SharpVectors.Core, Version=1.7.7.0, Culture=neutral, PublicKeyToken=7407205e337c98ef, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpVectors.1.7.7\lib\net48\SharpVectors.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.SfGrid.WPF, Version=20.1460.0.50, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.SfGrid.WPF.20.1.0.50\lib\net46\Syncfusion.SfGrid.WPF.dll</HintPath>
+    <Reference Include="SharpVectors.Css, Version=1.7.7.0, Culture=neutral, PublicKeyToken=7a46e3f532fdb787, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpVectors.1.7.7\lib\net48\SharpVectors.Css.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.Shared.WPF, Version=20.1460.0.50, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.Shared.WPF.20.1.0.50\lib\net46\Syncfusion.Shared.WPF.dll</HintPath>
+    <Reference Include="SharpVectors.Dom, Version=1.7.7.0, Culture=neutral, PublicKeyToken=517340b6277b1a7a, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpVectors.1.7.7\lib\net48\SharpVectors.Dom.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpVectors.Model, Version=1.7.7.0, Culture=neutral, PublicKeyToken=2236cfc76b505845, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpVectors.1.7.7\lib\net48\SharpVectors.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpVectors.Rendering.Gdi, Version=1.7.7.0, Culture=neutral, PublicKeyToken=03902092284347e3, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpVectors.1.7.7\lib\net48\SharpVectors.Rendering.Gdi.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpVectors.Rendering.Wpf, Version=1.7.7.0, Culture=neutral, PublicKeyToken=d0902381100df30e, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpVectors.1.7.7\lib\net48\SharpVectors.Rendering.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpVectors.Runtime.Wpf, Version=1.7.7.0, Culture=neutral, PublicKeyToken=d16e717f0a981fb9, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpVectors.1.7.7\lib\net48\SharpVectors.Runtime.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -120,6 +132,9 @@
     <Compile Include="Service\SurveyService.cs" />
     <Compile Include="Service\TimerService.cs" />
     <Compile Include="Utility\DateManipulator.cs" />
+    <Compile Include="View\Core\ObservableObject.cs" />
+    <Compile Include="View\Core\RelayCommand.cs" />
+    <Compile Include="View\Core\WindowBrowser.cs" />
     <Compile Include="View\Doctor\AddAppointment.xaml.cs">
       <DependentUpon>AddAppointment.xaml</DependentUpon>
     </Compile>
@@ -159,6 +174,9 @@
     <Compile Include="View\Manager\Manager.xaml.cs">
       <DependentUpon>Manager.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Manager\ViewModel\AddEquipmentViewModel.cs" />
+    <Compile Include="View\Manager\ViewModel\EquipmentViewModel.cs" />
+    <Compile Include="View\Manager\ViewModel\ContentViewModel.cs" />
     <Compile Include="View\Manager\Rooms\AddRoom.xaml.cs">
       <DependentUpon>AddRoom.xaml</DependentUpon>
     </Compile>
@@ -181,6 +199,20 @@
       <DependentUpon>RenovateRoom.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Manager\Rooms\Rooms.xaml.cs">
+      <DependentUpon>Rooms.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Manager\ViewModel\MainViewModel.cs" />
+    <Compile Include="View\Manager\ViewModel\RoomsViewModel.cs" />
+    <Compile Include="View\Manager\View\AddEquipment.xaml.cs">
+      <DependentUpon>AddEquipment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Manager\View\Equipment.xaml.cs">
+      <DependentUpon>Equipment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Manager\View\Home.xaml.cs">
+      <DependentUpon>Home.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Manager\View\Rooms.xaml.cs">
       <DependentUpon>Rooms.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Patient\Appointments\AddAppointment.xaml.cs">
@@ -313,6 +345,22 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Manager\Rooms\Rooms.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Manager\View\AddEquipment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Manager\View\Equipment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Manager\View\Home.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Manager\View\Rooms.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -454,6 +502,21 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Fonts\OFL.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\medicine.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\rooms.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\home.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\equipment.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\employees.svg" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

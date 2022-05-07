@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ZdravoCorp.View.Manager.ViewModel;
 
 namespace ZdravoCorp.View.Manager
 {
@@ -23,24 +24,9 @@ namespace ZdravoCorp.View.Manager
         private AutoResetEvent autoEvent;
         public Manager(AutoResetEvent autoEvent)
         {
-            this.autoEvent = autoEvent;
             InitializeComponent();
-        }
-
-        private void Rooms_Click(object sender, RoutedEventArgs e)
-        {
-            ZdravoCorp.View.Manager.Rooms.Rooms rooms = new ZdravoCorp.View.Manager.Rooms.Rooms();
-            this.Hide();
-            rooms.ShowDialog();
-            this.Show();
-        }
-
-        private void Equipment_Click(object sender, RoutedEventArgs e)
-        {
-            Equipments.Equipments window = new Equipments.Equipments();
-            this.Hide();
-            window.ShowDialog();
-            this.Show();
+            this.DataContext = ContentViewModel.Instance;
+            this.autoEvent = autoEvent;
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)

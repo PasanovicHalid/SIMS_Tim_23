@@ -3,21 +3,26 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ZdravoCorp.View.Manager"
+        xmlns:local="clr-namespace:ZdravoCorp.View.Manager" 
+        xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
+        xmlns:viewModel="clr-namespace:ZdravoCorp.View.Manager.ViewModel"
         mc:Ignorable="d"
         Title="Manager" 
         Height="790" Width="430"
         WindowStyle="None"
         ResizeMode="NoResize"
         Background="Transparent"
-        AllowsTransparency="True" Closing="CloseWindow">
+        AllowsTransparency="True" 
+        Closing="CloseWindow">
+
     <Border Background="#222831"
             CornerRadius="10">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="34"/>
                 <RowDefinition Height="40"/>
-                <RowDefinition/>
+                <RowDefinition Height="667*"/>
+                <RowDefinition Height="48"/>
             </Grid.RowDefinitions>
             <Border Grid.Row="0"
                     CornerRadius="10,10,0,0"
@@ -49,7 +54,7 @@
                         Background="#EEEEEE">
 
                 <Label Content="Manager" 
-                       Style="{StaticResource ActionBarLabel}" 
+                       Style="{StaticResource ActionLabels}" 
                        Width="362" 
                        Height="41"/>
 
@@ -67,130 +72,100 @@
 
             </StackPanel>
 
-            <Button Content="Button" 
-                    HorizontalAlignment="Left" 
-                    Margin="23,30,0,0" 
-                    Grid.Row="2" 
-                    VerticalAlignment="Top" 
-                    Style="{DynamicResource WindowButton}" 
-                    Height="140" 
-                    Width="156"
-                    Click="Rooms_Click">
-                <Button.Background>
-                    <ImageBrush/>
-                </Button.Background>
-            </Button>
+            <ContentControl Grid.Row="2"
+                            Content="{Binding CurrentView}"/>
 
-            <Label Content="Rooms" 
-                   HorizontalAlignment="Left" 
-                   Margin="65,162,0,0" 
-                   Grid.Row="2" 
-                   VerticalAlignment="Top" 
-                   FontSize="18"
-                   Style="{DynamicResource ManagerLabels}"/>
+            <Border Grid.Row="3"
+                    CornerRadius="0,0,10,10"
+                    Background="#393E46">
+                <StackPanel Orientation="Horizontal">
+                    <Button Style="{StaticResource ActionButton}"
+                            Foreground="#EEEEEE"
+                            Width="86" 
+                            Height="45">
+                        <StackPanel Height="42" Width="84">
+                            <svgc:SvgViewbox Source="\Resources\Icons\medicine.svg" Width="84" Height="29"/>
+                            <Label Content="Medicine" 
+                                   Style="{DynamicResource ActionBarLabel}" 
+                                   FontSize="10"
+                                   HorizontalContentAlignment="Center"
+                                   VerticalContentAlignment="Top"
+                                   Padding="0,0,0,0"
+                                   Height="13" Width="84"/>
+                        </StackPanel>
 
-            <Button Content="Button" 
-                    HorizontalAlignment="Left" 
-                    Margin="253,30,0,0" 
-                    Grid.Row="2" 
-                    VerticalAlignment="Top" 
-                    Style="{DynamicResource WindowButton}" 
-                    Height="140" 
-                    Width="156" 
-                    Click="Equipment_Click"/>
+                    </Button>
 
-            <Label  Content="Equipment" 
-                    HorizontalAlignment="Left" 
-                    Margin="279,164,0,0" 
-                    Grid.Row="2" 
-                    VerticalAlignment="Top" 
-                    FontSize="18"
-                    Style="{DynamicResource ManagerLabels}"/>
+                    <Button Style="{StaticResource ActionButton}"
+                            Foreground="#EEEEEE"
+                            Width="86" 
+                            Height="45"
+                            Command="{Binding RoomViewCommand}">
+                        <StackPanel Height="42" Width="84">
+                            <svgc:SvgViewbox Source="\Resources\Icons\rooms.svg" Width="84" Height="29"/>
+                            <Label Content="Rooms" 
+                                   Style="{DynamicResource ActionBarLabel}" 
+                                   FontSize="10"
+                                   HorizontalContentAlignment="Center"
+                                   VerticalContentAlignment="Top"
+                                   Padding="0,0,0,0"
+                                   Height="13" Width="84"/>
+                        </StackPanel>
+                    </Button>
 
-            <Button Content="Button" 
-                    HorizontalAlignment="Left" 
-                    Margin="23,206,0,0" 
-                    Grid.Row="2" 
-                    VerticalAlignment="Top" 
-                    Style="{DynamicResource WindowButton}" 
-                    Height="140" 
-                    Width="156"/>
+                    <Button Style="{StaticResource ActionButton}"
+                            Foreground="#EEEEEE"
+                            Width="86" 
+                            Height="45" 
+                            Command="{Binding MainViewCommand}">
+                        <StackPanel Height="42" Width="84">
+                            <svgc:SvgViewbox Source="\Resources\Icons\home.svg" Width="84" Height="29"/>
+                            <Label Content="Home" 
+                                   Style="{DynamicResource ActionBarLabel}" 
+                                   FontSize="10"
+                                   HorizontalContentAlignment="Center"
+                                   VerticalContentAlignment="Top"
+                                   Padding="0,0,0,0"
+                                   Height="13" Width="84"/>
+                        </StackPanel>
+                    </Button>
 
-            <Label  Content="Rooms" 
-                    HorizontalAlignment="Left" 
-                    Margin="65,338,0,0" 
-                    Grid.Row="2" 
-                    VerticalAlignment="Top" 
-                    FontSize="18"
-                    Style="{DynamicResource ManagerLabels}"/>
+                    <Button Style="{StaticResource ActionButton}"
+                            Foreground="#EEEEEE"
+                            Width="86" 
+                            Height="45" 
+                            Command="{Binding EquipmentViewCommand}">
+                        <StackPanel Height="42" Width="84">
+                            <svgc:SvgViewbox Source="\Resources\Icons\equipment.svg" Width="84" Height="29"/>
+                            <Label Content="Equipment" 
+                                   Style="{DynamicResource ActionBarLabel}" 
+                                   FontSize="10"
+                                   HorizontalContentAlignment="Center"
+                                   VerticalContentAlignment="Top"
+                                   Padding="0,0,0,0"
+                                   Height="13" Width="84"/>
+                        </StackPanel>
+                    </Button>
 
-            <Button Content="Button" 
-                    HorizontalAlignment="Left" 
-                    Margin="253,206,0,0" 
-                    Grid.Row="2" 
-                    VerticalAlignment="Top" 
-                    Style="{DynamicResource WindowButton}" 
-                    Height="140" 
-                    Width="156"/>
-
-            <Label  Content="Rooms" 
-                    HorizontalAlignment="Left" 
-                    Margin="295,338,0,0" 
-                    Grid.Row="2" 
-                    VerticalAlignment="Top" 
-                    FontSize="18"
-                    Style="{DynamicResource ManagerLabels}"/>
-
-            <Button Content="Button" 
-                    HorizontalAlignment="Left" 
-                    Margin="23,374,0,0" 
-                    Grid.Row="2" 
-                    VerticalAlignment="Top" 
-                    Style="{DynamicResource WindowButton}" 
-                    Height="140" 
-                    Width="156"/>
-
-            <Label  Content="Rooms" 
-                    HorizontalAlignment="Left" 
-                    Margin="65,506,0,0" 
-                    Grid.Row="2" 
-                    VerticalAlignment="Top" 
-                    FontSize="18"
-                    Style="{DynamicResource ManagerLabels}"/>
-
-            <Button Content="Button" 
-                    HorizontalAlignment="Left" 
-                    Margin="253,374,0,0" 
-                    Grid.Row="2" 
-                    VerticalAlignment="Top" 
-                    Style="{DynamicResource WindowButton}" 
-                    Height="140" 
-                    Width="156"/>
-
-            <Label  Content="Rooms" 
-                    HorizontalAlignment="Left" 
-                    Margin="295,506,0,0" 
-                    Grid.Row="2" 
-                    VerticalAlignment="Top" 
-                    FontSize="18"
-                    Style="{DynamicResource ManagerLabels}"/>
-
-            <Button Content="Button" 
-                    HorizontalAlignment="Center" 
-                    Margin="0,538,0,0" 
-                    Grid.Row="2" 
-                    VerticalAlignment="Top" 
-                    Style="{DynamicResource WindowButton}" 
-                    Height="142" 
-                    Width="156"/>
-
-            <Label  Content="Rooms" 
-                    HorizontalAlignment="Center" 
-                    Margin="0,670,0,0" 
-                    Grid.Row="2" 
-                    VerticalAlignment="Top" 
-                    FontSize="18"
-                    Style="{DynamicResource ManagerLabels}"/>
+                    <Button
+                    Style="{StaticResource ActionButton}"
+                    Foreground="#EEEEEE"
+                    Width="86" 
+                    Height="45" >
+                        <StackPanel Height="42" Width="84">
+                            <svgc:SvgViewbox Source="\Resources\Icons\employees.svg" Width="84" Height="29"/>
+                            <Label Content="Employess" 
+                                   Style="{DynamicResource ActionBarLabel}" 
+                                   FontSize="10"
+                                   HorizontalContentAlignment="Center"
+                                   VerticalContentAlignment="Top"
+                                   Padding="0,0,0,0"
+                                   Height="13" Width="84"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </Border>
         </Grid>
+
     </Border>
 </Window>
