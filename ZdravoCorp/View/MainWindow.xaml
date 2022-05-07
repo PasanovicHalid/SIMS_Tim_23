@@ -132,14 +132,14 @@
                 Style="{StaticResource LoginButton}"
                 Click="Secretary_Click"/>
 
-            <Button Content="Doctor" 
+            <Button x:Name="Doctor" Content="Doctor" 
                 HorizontalAlignment="Left" 
                 Margin="654,506,0,0" 
                 Grid.Row="1" 
                 VerticalAlignment="Top" 
                 Height="41" 
                 Width="175"
-                Style="{StaticResource LoginButton}"/>
+                Style="{StaticResource LoginButton}" Click="Doctor_Click"/>
         </Grid>
     </Border>
 </Window>

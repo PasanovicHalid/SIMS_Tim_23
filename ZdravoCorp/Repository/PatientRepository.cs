@@ -44,7 +44,9 @@ namespace Repository
         {
             Boolean success = false;
             List<Patient> patients = GetAllPatients();
-            for(int i = 0; i < patients.Count; i++)
+
+            for (int i = 0; i < patients.Count; i++)
+
             {
                 if (patient.Id == patients[i].Id)
                 {
@@ -57,7 +59,7 @@ namespace Repository
             {
                 //patients.Add(patient);
                 serializerPatient.ToCSV(dbPath, patients);
-                
+
             }
             return success;
         }
@@ -94,6 +96,7 @@ namespace Repository
 
         public List<Patient> GetAllPatients()
         {
+
             List<Patient> patients = serializerPatient.FromCSV(dbPath);
             foreach (Patient d in patients)
             {
@@ -103,6 +106,7 @@ namespace Repository
                     ids.Add(a.Id);
                 }
                 d.Appointment = AppointmentRepository.Instance.GetAppointmentsById(ids);
+                d.Record = MedicalRecordRepository.Instance.ReadMedicalRecord(d.Record.Id);
 
             }
             return patients;
