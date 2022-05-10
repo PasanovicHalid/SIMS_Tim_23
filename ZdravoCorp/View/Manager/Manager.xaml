@@ -53,7 +53,7 @@
                         Grid.Row="1"
                         Background="#EEEEEE">
 
-                <Label Content="Manager" 
+                <Label Content="{Binding Path=Title, UpdateSourceTrigger=PropertyChanged}" 
                        Style="{StaticResource ActionLabels}" 
                        Width="362" 
                        Height="41"/>
@@ -62,7 +62,8 @@
                     Style="{StaticResource MinimiseButton}"
                     Foreground="#393E46" 
                     Width="34" 
-                    Height="44" />
+                    Height="44" 
+                    Command="{Binding BackViewCommand}"/>
 
                 <Button Content="≡"
                     Style="{StaticResource MinimiseButton}"
@@ -84,7 +85,7 @@
                             Width="86" 
                             Height="45">
                         <StackPanel Height="42" Width="84">
-                            <svgc:SvgViewbox Source="\Resources\Icons\medicine.svg" Width="84" Height="29"/>
+                            <svgc:SvgViewbox Source="\Resources\Icons\medicine.svg" Width="84" Height="28"/>
                             <Label Content="Medicine" 
                                    Style="{DynamicResource ActionBarLabel}" 
                                    FontSize="10"
@@ -102,7 +103,7 @@
                             Height="45"
                             Command="{Binding RoomViewCommand}">
                         <StackPanel Height="42" Width="84">
-                            <svgc:SvgViewbox Source="\Resources\Icons\rooms.svg" Width="84" Height="29"/>
+                            <svgc:SvgViewbox Source="\Resources\Icons\rooms.svg" Width="84" Height="28"/>
                             <Label Content="Rooms" 
                                    Style="{DynamicResource ActionBarLabel}" 
                                    FontSize="10"
@@ -119,7 +120,7 @@
                             Height="45" 
                             Command="{Binding MainViewCommand}">
                         <StackPanel Height="42" Width="84">
-                            <svgc:SvgViewbox Source="\Resources\Icons\home.svg" Width="84" Height="29"/>
+                            <svgc:SvgViewbox Source="\Resources\Icons\home.svg" Width="84" Height="28"/>
                             <Label Content="Home" 
                                    Style="{DynamicResource ActionBarLabel}" 
                                    FontSize="10"
@@ -136,7 +137,7 @@
                             Height="45" 
                             Command="{Binding EquipmentViewCommand}">
                         <StackPanel Height="42" Width="84">
-                            <svgc:SvgViewbox Source="\Resources\Icons\equipment.svg" Width="84" Height="29"/>
+                            <svgc:SvgViewbox Source="\Resources\Icons\equipment.svg" Width="84" Height="28"/>
                             <Label Content="Equipment" 
                                    Style="{DynamicResource ActionBarLabel}" 
                                    FontSize="10"
@@ -153,7 +154,7 @@
                     Width="86" 
                     Height="45" >
                         <StackPanel Height="42" Width="84">
-                            <svgc:SvgViewbox Source="\Resources\Icons\employees.svg" Width="84" Height="29"/>
+                            <svgc:SvgViewbox Source="\Resources\Icons\employees.svg" Width="84" Height="28"/>
                             <Label Content="Employess" 
                                    Style="{DynamicResource ActionBarLabel}" 
                                    FontSize="10"

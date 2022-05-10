@@ -6,21 +6,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ZdravoCorp.View.Core;
+using ZdravoCorp.View.Manager.View;
 using ZdravoCorp.View.ViewModel;
 
 namespace ZdravoCorp.View.Manager.ViewModel
 {
-    public class EquipmentViewModel : ObservableObject
+    public class EquipmentViewModel : ObservableObject, WindowInterface
     {
         private ObservableCollection<EquipmentTableVO> equipmentTable;
         private EquipmentController controller;
-
+        private EquipmentTableVO selectedEquipment;
+        private int selectedIndex;
 
         public RelayCommand AddEquipmentViewCommand { get; set; }
 
-        public AddEquipmentViewModel AddEquipmentVM { get; set; }
+        public RelayCommand ViewEquipmentCommand { get; set; }
 
-        public object CurrentView
+        public WindowInterface CurrentView
         {
             get => ContentViewModel.Instance.CurrentView;
             set
@@ -36,15 +38,23 @@ namespace ZdravoCorp.View.Manager.ViewModel
 
         public EquipmentViewModel()
         {
+            SelectedIndex = -1;
             controller = new EquipmentController();
+
+            updateViewModel();
 
             AddEquipmentViewCommand = new RelayCommand(o =>
             {
-                AddEquipmentVM = new AddEquipmentViewModel();
-                CurrentView = AddEquipmentVM;
+                CurrentView = new AddEquipment(new AddEquipmentViewModel());
             });
-            EquipmentTable = controller.GetAllEquipmentTableVO();
-            updateControl();
+
+            ViewEquipmentCommand = new RelayCommand(o =>
+            {
+                if(SelectedIndex != -1)
+                {
+                    CurrentView = new ViewEquipment(new ViewEquipmentViewModel(SelectedEquipment, this));
+                }
+            });
         }
 
         public ObservableCollection<EquipmentTableVO> EquipmentTable 
@@ -59,9 +69,41 @@ namespace ZdravoCorp.View.Manager.ViewModel
                 }
             }
         }
-        public void updateControl()
+
+        public EquipmentTableVO SelectedEquipment
         {
-            //EquipmentTable = controller.GetAllEquipmentTableVO();
+            get => selectedEquipment;
+            set
+            {
+                if (value != selectedEquipment)
+                {
+                    selectedEquipment = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public int SelectedIndex
+        {
+            get => selectedIndex;
+            set
+            {
+                if (value != selectedIndex)
+                {
+                    selectedIndex = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public string getTitle()
+        {
+            return "Equipment";
+        }
+
+        public void updateViewModel()
+        {
+            EquipmentTable = controller.GetAllEquipmentTableVO();
         }
     }
 }

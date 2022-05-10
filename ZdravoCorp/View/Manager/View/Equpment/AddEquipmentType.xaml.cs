@@ -12,17 +12,27 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ZdravoCorp.View.Core;
+using ZdravoCorp.View.Manager.ViewModel;
 
 namespace ZdravoCorp.View.Manager.View
 {
     /// <summary>
-    /// Interaction logic for Rooms.xaml
+    /// Interaction logic for AddEquipmentType.xaml
     /// </summary>
-    public partial class Rooms : UserControl
+    public partial class AddEquipmentType : UserControl, WindowInterface
     {
-        public Rooms()
+        private AddEquipmentTypeViewModel viewModel;
+        public AddEquipmentType(AddEquipmentTypeViewModel model)
         {
             InitializeComponent();
+            this.viewModel = model;
+            this.DataContext = viewModel;
+        }
+
+        public string getTitle()
+        {
+            return "Add Equipment Type";
         }
     }
 }

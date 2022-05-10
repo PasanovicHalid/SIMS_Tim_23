@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace ZdravoCorp.View.Manager.View
 {
     /// <summary>
-    /// Interaction logic for Equipment.xaml
+    /// Interaction logic for AddRoomType.xaml
     /// </summary>
-    public partial class Equipment : UserControl
+    public partial class AddRoomType : UserControl
     {
-        public Equipment()
+        public AddRoomType()
         {
             InitializeComponent();
         }

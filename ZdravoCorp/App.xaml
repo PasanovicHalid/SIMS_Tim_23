@@ -12,11 +12,11 @@
                 <ResourceDictionary Source="View/Styles/Styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
-            <DataTemplate DataType="{x:Type managerViewModel:MainViewModel}">
+            <!--<DataTemplate DataType="{x:Type managerViewModel:MainViewModel}">
                 <managerView:Home/>
-            </DataTemplate>
+            </DataTemplate>-->
 
-            <DataTemplate DataType="{x:Type managerViewModel:RoomsViewModel}">
+            <!--<DataTemplate DataType="{x:Type managerViewModel:RoomsViewModel}">
                 <managerView:Rooms/>
             </DataTemplate>
 
@@ -27,6 +27,10 @@
             <DataTemplate DataType="{x:Type managerViewModel:AddEquipmentViewModel}">
                 <managerView:AddEquipment/>
             </DataTemplate>
+
+            <DataTemplate DataType="{x:Type managerViewModel:AddEquipmentTypeViewModel}">
+                <managerView:AddEquipmentType/>
+            </DataTemplate>-->
 
         </ResourceDictionary>
     </Application.Resources>

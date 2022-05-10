@@ -7,10 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ZdravoCorp.View.Core;
+using ZdravoCorp.View.Manager.View;
 
 namespace ZdravoCorp.View.Manager.ViewModel
 {
-    public class RoomsViewModel : ObservableObject
+    public class RoomsViewModel : ObservableObject, WindowInterface
     {
         public RoomController roomController;
 
@@ -20,22 +21,48 @@ namespace ZdravoCorp.View.Manager.ViewModel
             set;
         }
 
+        public RelayCommand AddViewCommand { get; set; }
+
+        public WindowInterface CurrentView
+        {
+            get => ContentViewModel.Instance.CurrentView;
+            set
+            {
+                if (value != ContentViewModel.Instance.CurrentView)
+                {
+                    ContentViewModel.Instance.WindowBrowser.AddWindow(value);
+                    ContentViewModel.Instance.CurrentView = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         public RoomsViewModel()
         {
             roomController = new RoomController();
             RoomsCollection = new ObservableCollection<Room>();
-            //UpdateTable();
+
+            AddViewCommand = new RelayCommand(o =>
+            {
+                CurrentView = new ViewRoom();
+            });
+
+            UpdateTable();
         }
 
-        //private void UpdateTable()
-        //{
-        //    RoomsCollection = new ObservableCollection<Room>();
-        //    List<Room> rooms = roomController.GetAllRooms();
-        //    foreach (Room room in rooms)
-        //    {
-        //        RoomsCollection.Add(room);
-        //    }
-        //    //RoomTable.DataContext = RoomsCollection;
-        //}
+        public string getTitle()
+        {
+            return "Rooms";
+        }
+
+        private void UpdateTable()
+        {
+            RoomsCollection = new ObservableCollection<Room>();
+            List<Room> rooms = roomController.GetAllRooms();
+            foreach (Room room in rooms)
+            {
+                RoomsCollection.Add(room);
+            }
+        }
     }
 }

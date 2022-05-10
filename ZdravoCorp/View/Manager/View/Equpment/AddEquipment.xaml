@@ -7,10 +7,6 @@
              xmlns:viewModel="clr-namespace:ZdravoCorp.View.Manager.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="667" d:DesignWidth="430">
-    <UserControl.DataContext>
-        <viewModel:AddEquipmentViewModel/>
-    </UserControl.DataContext>
-
     <Grid>
         <Label Content="Count" 
             HorizontalAlignment="Center" 
@@ -26,7 +22,8 @@
                  VerticalAlignment="Top" 
                  Width="274"
                  Style="{StaticResource ManagerTextBox}" 
-                 Name="Count" 
+                 Name="Count"
+                 Tag="Count"
                  Height="45"/>
 
         <Label Content="Equipment Type" 
@@ -38,12 +35,15 @@
 
         <ComboBox x:Name="Types" 
                   HorizontalAlignment="Left" 
+                  Style="{DynamicResource ManagerComboBox}"
                   Margin="80,195,0,0" 
                   VerticalAlignment="Top" 
-                  Width="265"
+                  Width="222"
                   ItemsSource="{Binding EquipmentList}"
                   SelectedIndex="{Binding SelectedEquipment}"
-                  Height="45">
+                  FontFamily="/Resources/Fonts/#Poppins"
+                  Height="45"
+                  ItemContainerStyle="{DynamicResource ManagerComboBoxItem}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Background="Transparent" Text="{Binding Name}"/>
@@ -53,10 +53,11 @@
 
         <Button Content="Add" 
                 HorizontalAlignment="Left" 
-                Margin="360,195,0,0" 
+                Margin="307,195,0,0" 
                 VerticalAlignment="Top" 
                 Height="45" 
-                Style="{StaticResource ManagerButtons}" 
+                Style="{StaticResource ManagerButtons}"
+                Command="{Binding AddEquipmentTypeViewCommand}"
                 Width="47"/>
 
         <Label Content="Room" 
@@ -69,11 +70,15 @@
         <ComboBox x:Name="Rooms" 
                   HorizontalAlignment="Left" 
                   Margin="80,275,0,0" 
+                  Style="{DynamicResource ManagerComboBox}"
                   VerticalAlignment="Top" 
-                  Width="265"
+                  Width="274"
                   ItemsSource="{Binding RoomsList}"
                   SelectedIndex="{Binding SelectedRoom}"
-                  Height="45">
+                  FontFamily="/Resources/Fonts/#Poppins"
+                  Height="45" 
+                  SelectionChanged="Rooms_SelectionChanged"
+                  ItemContainerStyle="{DynamicResource ManagerComboBoxItem}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Background="Transparent" Text="{Binding DesignationCode}"/>
@@ -83,7 +88,7 @@
 
         <Button Content="Add" 
                 HorizontalAlignment="Left" 
-                Margin="348,559,0,0" 
+                Margin="371,563,0,0" 
                 VerticalAlignment="Top" 
                 Height="47" 
                 Width="46"

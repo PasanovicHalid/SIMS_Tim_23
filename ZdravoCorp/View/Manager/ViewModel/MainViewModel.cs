@@ -7,16 +7,16 @@ using ZdravoCorp.View.Core;
 
 namespace ZdravoCorp.View.Manager.ViewModel
 {
-    public class MainViewModel: ObservableObject
+    public class MainViewModel: ObservableObject, WindowInterface
     {
         public MainViewModel()
         {
 
         }
 
-        public void updateControl()
+        public string getTitle()
         {
-            
+            return "Main";
         }
     }
 }

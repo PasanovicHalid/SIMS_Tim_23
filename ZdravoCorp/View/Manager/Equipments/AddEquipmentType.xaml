@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ZdravoCorp.View.Manager.Equipments"
         mc:Ignorable="d"
-        Title="AddEquipmentType" Height="255" Width="397">
-
+        Title="AddEquipmentType" Height="479" Width="409"
+    xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
     <Grid>
         <Label Content="Name" HorizontalAlignment="Left" Margin="19,41,0,0" VerticalAlignment="Top"/>
         <Label Content="Description" HorizontalAlignment="Left" Margin="19,94,0,0" VerticalAlignment="Top" Width="75"/>

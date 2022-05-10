@@ -8,19 +8,19 @@ namespace ZdravoCorp.View.Core
 {
     public class WindowBrowser
     {
-        private List<object> _navigable;
+        private List<WindowInterface> _navigable;
         private int _position;
 
         public WindowBrowser()
         {
-            Navigable = new List<object>();
+            Navigable = new List<WindowInterface>();
             Position = Navigable.Count;
         }
 
-        public List<object> Navigable { get => _navigable; set => _navigable = value; }
+        public List<WindowInterface> Navigable { get => _navigable; set => _navigable = value; }
         public int Position { get => _position; set => _position = value; }
 
-        public void AddWindow(object window)
+        public void AddWindow(WindowInterface window)
         {
             if(window == null)
             {
@@ -42,7 +42,7 @@ namespace ZdravoCorp.View.Core
             }
         }
 
-        public object BackWindow()
+        public WindowInterface BackWindow()
         {
             if(Position == 1)
             {
@@ -55,7 +55,7 @@ namespace ZdravoCorp.View.Core
             }
         }
 
-        public object ForwardWindow()
+        public WindowInterface ForwardWindow()
         {
             if (Position == Navigable.Count)
             {
@@ -68,7 +68,7 @@ namespace ZdravoCorp.View.Core
             }
         }
 
-        public object CurrentWindow()
+        public WindowInterface CurrentWindow()
         {
             return Navigable[Position - 1];
         }

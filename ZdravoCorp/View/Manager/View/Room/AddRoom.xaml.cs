@@ -12,17 +12,23 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ZdravoCorp.View.Core;
 
 namespace ZdravoCorp.View.Manager.View
 {
     /// <summary>
-    /// Interaction logic for AddEquipment.xaml
+    /// Interaction logic for AddRoom.xaml
     /// </summary>
-    public partial class AddEquipment : UserControl
+    public partial class AddRoom : UserControl, WindowInterface
     {
-        public AddEquipment()
+        public AddRoom()
         {
             InitializeComponent();
+        }
+
+        public string getTitle()
+        {
+            return "Add Room";
         }
     }
 }

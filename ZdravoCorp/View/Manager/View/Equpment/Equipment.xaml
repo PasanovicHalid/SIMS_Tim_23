@@ -7,10 +7,6 @@
              xmlns:viewModel="clr-namespace:ZdravoCorp.View.Manager.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="667" d:DesignWidth="430">
-    <UserControl.DataContext>
-        <viewModel:EquipmentViewModel/>
-    </UserControl.DataContext>
-    
     <Grid>
         <Button Content="+" 
                     HorizontalAlignment="Left" 
@@ -58,12 +54,15 @@
                       AutoGenerateColumns="False"
                       SelectionMode="Single" 
                       IsReadOnly="True"
-                      Background="#222831" 
+                      Background="Transparent" 
                       CanUserResizeRows="False"
                       FontFamily="/Resources/Fonts/#Poppins"
                       TextBlock.TextAlignment="Left"
                       FontSize="13"
+                      SelectedItem="{Binding SelectedEquipment, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedIndex="{Binding SelectedIndex, UpdateSourceTrigger=PropertyChanged}"
                       Style="{DynamicResource ManagerTables}"
+                      
                       BorderThickness="2"
                       HorizontalGridLinesBrush="Transparent"
                       VerticalGridLinesBrush="Transparent" 
@@ -73,6 +72,9 @@
                 <DataGridTextColumn Header="Location" Binding="{Binding DesignationCode}" Width="*"/>
                 <DataGridTextColumn Header="Count" Binding="{Binding Count}" Width="*"/>
             </DataGrid.Columns>
+            <DataGrid.InputBindings>
+                <MouseBinding Gesture="LeftDoubleClick" Command="{Binding ViewEquipmentCommand}"/>
+            </DataGrid.InputBindings>
         </DataGrid>
 
         <TextBox HorizontalAlignment="Left"
@@ -82,7 +84,9 @@
                      Text="" 
                      VerticalAlignment="Top" 
                      Width="155"
-                     Style="{StaticResource ManagerSearch}" 
-                     Name="Search" Height="32"/>
+                     Style="{StaticResource ManagerSearch}"
+                     Tag="Search"
+                     Name="Search" 
+                     Height="32"/>
     </Grid>
 </UserControl>

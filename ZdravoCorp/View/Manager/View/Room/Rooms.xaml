@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ZdravoCorp.View.Manager.View"
+             xmlns:viewModel="clr-namespace:ZdravoCorp.View.Manager.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="667" d:DesignWidth="430">
     <Grid>
@@ -13,7 +14,7 @@
                     VerticalAlignment="Top" 
                     Height="32" 
                     Width="32"
-                    
+                    Command="{Binding AddViewCommand}"
                     Grid.Row="2"
                     Style="{StaticResource ManagerButtons}"/>
 
@@ -58,12 +59,12 @@
                     Style="{StaticResource ManagerButtons}"/>
 
         <DataGrid x:Name="RoomTable" 
-                      ItemsSource="{Binding}" 
+                      ItemsSource="{Binding RoomsCollection}" 
                       Margin="0,52,0,0" 
                       AutoGenerateColumns="False"
                       SelectionMode="Single" 
                       IsReadOnly="True"
-                      Background="#222831" 
+                      Background="Transparent" 
                       CanUserResizeRows="False"
                       FontFamily="/Resources/Fonts/#Poppins"
                       TextBlock.TextAlignment="Left"
@@ -89,6 +90,8 @@
                      VerticalAlignment="Top" 
                      Width="155"
                      Style="{StaticResource ManagerSearch}" 
-                     Name="Search" Height="32"/>
+                     Name="Search"
+                     Tag="Search"
+                     Height="32"/>
     </Grid>
 </UserControl>

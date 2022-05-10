@@ -97,7 +97,7 @@ namespace Service
             {
                 foreach(Equipment it in room.Equipment)
                 {
-                    result.Add(new EquipmentTableVO(it.Count, it.Actual_count,it.EquipmentType.Name, room.DesignationCode, it.EquipmentType.Disposable ,room.Identifier, it.Identifier));
+                    result.Add(new EquipmentTableVO(it.Count, it.Actual_count,it.EquipmentType.Name, room.DesignationCode, it.EquipmentType.Description, it.EquipmentType.Disposable ,room.Identifier, it.Identifier));
                 }
                 
             }

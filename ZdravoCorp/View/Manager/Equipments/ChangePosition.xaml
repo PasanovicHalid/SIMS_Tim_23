@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:ZdravoCorp.View.Manager.Equipments"
         xmlns:Syncfusion="http://schemas.syncfusion.com/wpf" x:Class="ZdravoCorp.View.Manager.Equipments.ChangePosition"
         mc:Ignorable="d"
-        Title="ChangePosition" Height="387" Width="452">
+        Title="ChangePosition" Height="579" Width="464"
+        Background="Transparent">
     <Grid>
 
         <Label Content="Equipment Type" 
@@ -117,5 +118,12 @@
                 VerticalAlignment="Top" 
                 Height="46" 
                 Width="82" Click="Change_Click"/>
+
+        <Calendar CalendarButtonStyle="{DynamicResource ManagerCalendarButtonStyle}" 
+                  CalendarDayButtonStyle="{DynamicResource ManagerCalendarDayButtonStyle}" 
+                  Style="{DynamicResource ManagerCalendar}"
+                  HorizontalAlignment="Left" 
+                  Margin="154,282,0,0" 
+                  VerticalAlignment="Top"/>
     </Grid>
 </Window>

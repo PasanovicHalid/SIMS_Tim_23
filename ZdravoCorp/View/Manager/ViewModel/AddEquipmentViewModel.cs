@@ -7,11 +7,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using ZdravoCorp.View.Core;
+using ZdravoCorp.View.Manager.View;
 using ZdravoCorp.View.ViewModel;
 
 namespace ZdravoCorp.View.Manager.ViewModel
 {
-    public class AddEquipmentViewModel : ObservableObject
+    public class AddEquipmentViewModel : ObservableObject, WindowInterface
     {
         private ObservableCollection<EquipmentTypeVO> equipmentList;
         private ObservableCollection<RoomVO> roomsList;
@@ -23,8 +24,10 @@ namespace ZdravoCorp.View.Manager.ViewModel
 
         public RelayCommand AddViewCommand { get; set; }
 
+        public RelayCommand AddEquipmentTypeViewCommand { get; set; }
 
-        public object CurrentView
+
+        public WindowInterface CurrentView
         {
             get => ContentViewModel.Instance.CurrentView;
             set
@@ -89,11 +92,16 @@ namespace ZdravoCorp.View.Manager.ViewModel
                 }
                 else
                 {
-                    CurrentView = new EquipmentViewModel();
+                    CurrentView = new Equipment(new EquipmentViewModel());
                 }
             });
 
-            UpdateTable();
+            AddEquipmentTypeViewCommand = new RelayCommand(o =>
+            {
+                CurrentView = new AddEquipmentType(new AddEquipmentTypeViewModel(this));
+            });
+
+            UpdateViewModel();
         }
 
         public ObservableCollection<EquipmentTypeVO> EquipmentList
@@ -122,10 +130,15 @@ namespace ZdravoCorp.View.Manager.ViewModel
             }
         }
 
-        private void UpdateTable()
+        public void UpdateViewModel()
         {
             EquipmentList = equipmentController.GetAllEquipmentType();
             RoomsList = roomController.GetAllRoomsVO();
+        }
+
+        public string getTitle()
+        {
+            return "Add Equipment";
         }
     }
 }

@@ -135,6 +135,7 @@
     <Compile Include="View\Core\ObservableObject.cs" />
     <Compile Include="View\Core\RelayCommand.cs" />
     <Compile Include="View\Core\WindowBrowser.cs" />
+    <Compile Include="View\Core\WindowInterface.cs" />
     <Compile Include="View\Doctor\AddAppointment.xaml.cs">
       <DependentUpon>AddAppointment.xaml</DependentUpon>
     </Compile>
@@ -174,6 +175,7 @@
     <Compile Include="View\Manager\Manager.xaml.cs">
       <DependentUpon>Manager.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Manager\ViewModel\AddEquipmentTypeViewModel.cs" />
     <Compile Include="View\Manager\ViewModel\AddEquipmentViewModel.cs" />
     <Compile Include="View\Manager\ViewModel\EquipmentViewModel.cs" />
     <Compile Include="View\Manager\ViewModel\ContentViewModel.cs" />
@@ -203,17 +205,39 @@
     </Compile>
     <Compile Include="View\Manager\ViewModel\MainViewModel.cs" />
     <Compile Include="View\Manager\ViewModel\RoomsViewModel.cs" />
-    <Compile Include="View\Manager\View\AddEquipment.xaml.cs">
+    <Compile Include="View\Manager\ViewModel\ViewEquipmentViewModel.cs" />
+    <Compile Include="View\Manager\View\Equpment\AddEquipment.xaml.cs">
       <DependentUpon>AddEquipment.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Manager\View\Equipment.xaml.cs">
+    <Compile Include="View\Manager\View\Equpment\AddEquipmentType.xaml.cs">
+      <DependentUpon>AddEquipmentType.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Manager\View\Room\AddRoom.xaml.cs">
+      <DependentUpon>AddRoom.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Manager\View\Room\AddRoomType.xaml.cs">
+      <DependentUpon>AddRoomType.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Manager\View\Equpment\ChangeEquipmentPosition.xaml.cs">
+      <DependentUpon>ChangeEquipmentPosition.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Manager\View\Equpment\Equipment.xaml.cs">
       <DependentUpon>Equipment.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Manager\View\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Manager\View\Rooms.xaml.cs">
+    <Compile Include="View\Manager\View\Room\RenovateRoom.xaml.cs">
+      <DependentUpon>RenovateRoom.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Manager\View\Equpment\ViewEquipment.xaml.cs">
+      <DependentUpon>ViewEquipment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Manager\View\Room\Rooms.xaml.cs">
       <DependentUpon>Rooms.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Manager\View\Room\ViewRoom.xaml.cs">
+      <DependentUpon>ViewRoom.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Patient\Appointments\AddAppointment.xaml.cs">
       <DependentUpon>AddAppointment.xaml</DependentUpon>
@@ -348,19 +372,47 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Manager\View\AddEquipment.xaml">
+    <Page Include="View\Manager\View\Equpment\AddEquipment.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Manager\View\Equpment\AddEquipmentType.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Manager\View\Equipment.xaml">
+    <Page Include="View\Manager\View\Room\AddRoom.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Manager\View\Room\AddRoomType.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Manager\View\Equpment\ChangeEquipmentPosition.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Manager\View\Equpment\Equipment.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Manager\View\Home.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Manager\View\Rooms.xaml">
+    <Page Include="View\Manager\View\Room\RenovateRoom.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Manager\View\Equpment\ViewEquipment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Manager\View\Room\Rooms.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Manager\View\Room\ViewRoom.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -415,6 +467,10 @@
     <Page Include="View\Styles\Styles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Styles\StylishScrollBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -518,6 +574,8 @@
   <ItemGroup>
     <Resource Include="Resources\Icons\employees.svg" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="View\Manager\ViewModel\Equipment\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

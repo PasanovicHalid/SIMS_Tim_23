@@ -3,5 +3,6 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="ManagerStyles.xaml"/>
         <ResourceDictionary Source="LoginStyles.xaml"/>
+        <ResourceDictionary Source="StylishScrollBar.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

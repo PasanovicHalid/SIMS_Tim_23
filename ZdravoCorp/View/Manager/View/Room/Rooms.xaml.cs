@@ -18,33 +18,21 @@ using ZdravoCorp.View.Manager.ViewModel;
 namespace ZdravoCorp.View.Manager.View
 {
     /// <summary>
-    /// Interaction logic for ManagerMain.xaml
+    /// Interaction logic for Rooms.xaml
     /// </summary>
-    public partial class Home : UserControl, WindowInterface
+    public partial class Rooms : UserControl, WindowInterface
     {
-        private MainViewModel viewModel;
-        public Home(MainViewModel model)
+        private RoomsViewModel viewModel;
+        public Rooms(RoomsViewModel model)
         {
             InitializeComponent();
             this.viewModel = model;
             this.DataContext = viewModel;
         }
 
-        private void Rooms_Click(object sender, RoutedEventArgs e)
-        {
-            ZdravoCorp.View.Manager.Rooms.Rooms rooms = new ZdravoCorp.View.Manager.Rooms.Rooms();
-            rooms.ShowDialog();
-        }
-
-        private void Equipment_Click(object sender, RoutedEventArgs e)
-        {
-            Equipments.Equipments window = new Equipments.Equipments();
-            window.ShowDialog();
-        }
-
         public string getTitle()
         {
-            return "Main";
+            return "Rooms";
         }
     }
 }
