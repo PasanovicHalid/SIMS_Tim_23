@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ZdravoCorp.View.Core;
 
-namespace ZdravoCorp.View.Manager.View
+namespace ZdravoCorp.View.Manager.View.Room
 {
     /// <summary>
     /// Interaction logic for ViewRoom.xaml

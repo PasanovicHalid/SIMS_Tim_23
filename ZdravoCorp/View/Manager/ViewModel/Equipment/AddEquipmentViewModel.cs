@@ -8,9 +8,10 @@ using System.Threading.Tasks;
 using System.Windows;
 using ZdravoCorp.View.Core;
 using ZdravoCorp.View.Manager.View;
+using ZdravoCorp.View.Manager.View.Equipment;
 using ZdravoCorp.View.ViewModel;
 
-namespace ZdravoCorp.View.Manager.ViewModel
+namespace ZdravoCorp.View.Manager.ViewModel.Equipment
 {
     public class AddEquipmentViewModel : ObservableObject, WindowInterface
     {
@@ -92,7 +93,7 @@ namespace ZdravoCorp.View.Manager.ViewModel
                 }
                 else
                 {
-                    CurrentView = new Equipment(new EquipmentViewModel());
+                    CurrentView = new View.Equipment.Equipment(new EquipmentViewModel());
                 }
             });
 

@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ZdravoCorp.View.Core;
 
-namespace ZdravoCorp.View.Manager.View
+namespace ZdravoCorp.View.Manager.View.Equipment
 {
     /// <summary>
     /// Interaction logic for ChangeEquipmentPosition.xaml

@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ZdravoCorp.View.Manager.View
+namespace ZdravoCorp.View.Manager.View.Room
 {
     /// <summary>
     /// Interaction logic for RenovateRoom.xaml

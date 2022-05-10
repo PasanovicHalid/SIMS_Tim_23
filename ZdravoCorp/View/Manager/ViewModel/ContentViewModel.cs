@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using ZdravoCorp.View.Core;
 using ZdravoCorp.View.Manager.View;
+using ZdravoCorp.View.Manager.ViewModel.Equipment;
+using ZdravoCorp.View.Manager.ViewModel.Rooms;
 
 namespace ZdravoCorp.View.Manager.ViewModel
 {
@@ -70,13 +72,13 @@ namespace ZdravoCorp.View.Manager.ViewModel
 
             RoomViewCommand = new RelayCommand(o =>
             {
-                CurrentView = new View.Rooms(new RoomsViewModel());
+                CurrentView = new View.Room.Rooms(new RoomsViewModel());
                 WindowBrowser.AddWindow(CurrentView);
             });
 
             EquipmentViewCommand = new RelayCommand(o =>
             {
-                CurrentView = new Equipment(new EquipmentViewModel());
+                CurrentView = new View.Equipment.Equipment(new EquipmentViewModel());
                 WindowBrowser.AddWindow(CurrentView);
             });
 

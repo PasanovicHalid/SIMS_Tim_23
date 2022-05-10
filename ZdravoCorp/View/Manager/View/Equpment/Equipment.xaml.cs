@@ -13,9 +13,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ZdravoCorp.View.Core;
-using ZdravoCorp.View.Manager.ViewModel;
+using ZdravoCorp.View.Manager.ViewModel.Equipment;
 
-namespace ZdravoCorp.View.Manager.View
+namespace ZdravoCorp.View.Manager.View.Equipment
 {
     /// <summary>
     /// Interaction logic for Equipment.xaml

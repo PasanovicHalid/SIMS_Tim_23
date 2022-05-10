@@ -7,15 +7,16 @@ using System.Threading.Tasks;
 using System.Windows;
 using ZdravoCorp.View.Core;
 using ZdravoCorp.View.Manager.View;
+using ZdravoCorp.View.Manager.View.Equipment;
 using ZdravoCorp.View.ViewModel;
 
-namespace ZdravoCorp.View.Manager.ViewModel
+namespace ZdravoCorp.View.Manager.ViewModel.Equipment
 {
     public class AddEquipmentTypeViewModel : ObservableObject, WindowInterface
     {
-        private String _name;
-        private String _description;
-        private Boolean _disposable;
+        private string _name;
+        private string _description;
+        private bool _disposable;
         private EquipmentController equipmentController;
         private AddEquipmentViewModel _parentViewModel;
 

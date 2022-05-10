@@ -7,9 +7,10 @@ using System.Text;
 using System.Threading.Tasks;
 using ZdravoCorp.View.Core;
 using ZdravoCorp.View.Manager.View;
+using ZdravoCorp.View.Manager.View.Equipment;
 using ZdravoCorp.View.ViewModel;
 
-namespace ZdravoCorp.View.Manager.ViewModel
+namespace ZdravoCorp.View.Manager.ViewModel.Equipment
 {
     public class EquipmentViewModel : ObservableObject, WindowInterface
     {
@@ -50,15 +51,15 @@ namespace ZdravoCorp.View.Manager.ViewModel
 
             ViewEquipmentCommand = new RelayCommand(o =>
             {
-                if(SelectedIndex != -1)
+                if (SelectedIndex != -1)
                 {
                     CurrentView = new ViewEquipment(new ViewEquipmentViewModel(SelectedEquipment, this));
                 }
             });
         }
 
-        public ObservableCollection<EquipmentTableVO> EquipmentTable 
-        { 
+        public ObservableCollection<EquipmentTableVO> EquipmentTable
+        {
             get => equipmentTable;
             set
             {

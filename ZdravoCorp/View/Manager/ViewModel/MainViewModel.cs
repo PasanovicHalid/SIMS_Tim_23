@@ -16,7 +16,7 @@ namespace ZdravoCorp.View.Manager.ViewModel
 
         public string getTitle()
         {
-            return "Main";
+            return "Home";
         }
     }
 }

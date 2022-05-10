@@ -8,8 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using ZdravoCorp.View.Core;
 using ZdravoCorp.View.Manager.View;
+using ZdravoCorp.View.Manager.View.Room;
 
-namespace ZdravoCorp.View.Manager.ViewModel
+namespace ZdravoCorp.View.Manager.ViewModel.Rooms
 {
     public class RoomsViewModel : ObservableObject, WindowInterface
     {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using ZdravoCorp.View.Core;
 using ZdravoCorp.View.ViewModel;
 
-namespace ZdravoCorp.View.Manager.ViewModel
+namespace ZdravoCorp.View.Manager.ViewModel.Equipment
 {
     public class ViewEquipmentViewModel : ObservableObject
     {

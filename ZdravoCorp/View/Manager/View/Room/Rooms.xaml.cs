@@ -13,9 +13,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ZdravoCorp.View.Core;
-using ZdravoCorp.View.Manager.ViewModel;
+using ZdravoCorp.View.Manager.ViewModel.Rooms;
 
-namespace ZdravoCorp.View.Manager.View
+namespace ZdravoCorp.View.Manager.View.Room
 {
     /// <summary>
     /// Interaction logic for Rooms.xaml
