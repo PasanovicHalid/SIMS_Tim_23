@@ -5,21 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ZdravoCorp.View.Patient"
         mc:Ignorable="d"
-        Title="Patient" Height="500" Width="1000">
+        Title="{Binding}" Height="500" Width="1000">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="607*"/>
-            <ColumnDefinition Width="387*"/>
-            <ColumnDefinition Width="206*"/>
-        </Grid.ColumnDefinitions>
-        <TabControl SelectionChanged="TabControl_SelectionChanged" Grid.ColumnSpan="3" Margin="50,40,10,0">
+        <TabControl SelectionChanged="TabControl_SelectionChanged" Grid.ColumnSpan="3" Margin="30,30,30,30">
             <TabItem Header="Osnovni podaci">
                 <Grid 
-                    Background="#FFE5E5E5"
-                    Margin="30,30,30,30" 
+                    Background="#FFFFFF"
+                    Margin="30,10,30,0" 
                 >
-                    <Label x:Name ="Name"  Margin="49,26,613,300"/>
 
+                    <Image HorizontalAlignment="Left" Height="168" Margin="30,26,0,0" VerticalAlignment="Top" Width="130"/>
+                    <Button Content="Postavi sliku" Margin="45,208,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Height="35"/>
+                    <Label x:Name ="Name" Content="Ime"  Margin="204,26,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <Label x:Name="Surname" Content="Prezime" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="204,61,0,0"/>
+                    <Label x:Name="DateOfBirth" Content="Datum rodjenja" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="204,94,0,0"/>
+                    <Label x:Name="Gender" Content="Pol " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="204,126,0,0"/>
+                    <Label x:Name="JMBG" Content="JMBG " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="204,161,0,0"/>
+                    <Label x:Name="Telephone" Content="Kontakt telefon " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="204,194,0,0"/>
+                    <Label x:Name="Email" Content="Email " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="204,226,0,0"/>
+                    <TextBox TextWrapping="Wrap" Text="TextBox" Width="200"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="360,30,0,0"/>
+                    <TextBox TextWrapping="Wrap" Text="TextBox" Width="200"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="360,65,0,0"/>
+                    <TextBox TextWrapping="Wrap" Text="TextBox" Width="200"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="360,98,0,0"/>
+                    <TextBox TextWrapping="Wrap" Text="TextBox" Width="200"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="360,165,0,0"/>
+                    <TextBox TextWrapping="Wrap" Text="TextBox" Width="200"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="360,198,0,0"/>
+                    <TextBox TextWrapping="Wrap" Text="TextBox" Width="200"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="360,230,0,0"/>
+                    <RadioButton Content="Muško" Margin="360,132,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <RadioButton Content="Žensko" Margin="450,132,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <Button Content="Oceni bolnicu" Margin="30,302,714,31" Width="130" Height="40"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Pregledi">
@@ -27,11 +39,6 @@
                     Background="#FFE5E5E5" 
                     Margin="30,10,30,10" Height="385" >
                     <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="384*"/>
-                            <ColumnDefinition Width="15*"/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
                         <DataGrid x:Name ="PatientAppointmentTable"
                             HorizontalAlignment="Left"
                             Height="268"
@@ -130,6 +137,13 @@
 
             </TabItem>
         </TabControl>
+        <Menu HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="20" Width="1000">
+            <MenuItem Header="File" Width="50"/>
+            <MenuItem Header="Open" Width="50"/>
+            <MenuItem Header="Odjavite se" Width="100" HorizontalAlignment="Right" Margin="800,0,0,0"/>
+
+        </Menu>
+
 
 
 
