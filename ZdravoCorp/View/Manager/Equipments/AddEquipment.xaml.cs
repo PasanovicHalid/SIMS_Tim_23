@@ -14,7 +14,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using ZdravoCorp.View.ViewModel;
+using ZdravoCorp.View.Manager.Model.Equipment;
+using ZdravoCorp.View.Manager.Model.Room;
 
 namespace ZdravoCorp.View.Manager.Equipments
 {
@@ -23,8 +24,8 @@ namespace ZdravoCorp.View.Manager.Equipments
     /// </summary>
     public partial class AddEquipment : Window, INotifyPropertyChanged
     {
-        private ObservableCollection<EquipmentTypeVO> equipmentList;
-        private ObservableCollection<RoomVO> roomsList;
+        private ObservableCollection<EquipmentTypeModel> equipmentList;
+        private ObservableCollection<RoomModel> roomsList;
         private EquipmentController equipmentController;
         private RoomController roomController;
         private int count;

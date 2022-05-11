@@ -16,7 +16,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ZdravoCorp.Utility;
-using ZdravoCorp.View.ViewModel;
+using ZdravoCorp.View.Manager.Model.Equipment;
+using ZdravoCorp.View.Manager.Model.Room;
 
 namespace ZdravoCorp.View.Manager.Equipments
 {
@@ -25,8 +26,8 @@ namespace ZdravoCorp.View.Manager.Equipments
     /// </summary>
     public partial class EditMoving : Window, INotifyPropertyChanged
     {
-        private ObservableCollection<RoomVO> roomsList;
-        private ChangeActionVO action;
+        private ObservableCollection<RoomModel> roomsList;
+        private ChangeActionModel action;
         private RoomController roomController;
         private ActionController actionController;
         private int count;
@@ -108,7 +109,7 @@ namespace ZdravoCorp.View.Manager.Equipments
             }
         }
 
-        public EditMoving(ChangeActionVO action)
+        public EditMoving(ChangeActionModel action)
         {
             InitializeComponent();
             this.DataContext = this;
@@ -128,7 +129,7 @@ namespace ZdravoCorp.View.Manager.Equipments
             count = action.Count;
             Rooms.ItemsSource = roomsList;
             TimeTxt = action.ExecutionDate.TimeOfDay;
-            foreach(RoomVO it in roomsList)
+            foreach(RoomModel it in roomsList)
             {
                 if(it.DesignationCode == action.IncomingRoom)
                 {

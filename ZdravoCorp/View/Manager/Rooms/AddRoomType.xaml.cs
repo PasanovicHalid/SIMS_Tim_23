@@ -13,7 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using ZdravoCorp.View.ViewModel;
+using ZdravoCorp.View.Manager.Model.Room;
 
 namespace ZdravoCorp.View.Manager.Rooms
 {
@@ -56,7 +56,7 @@ namespace ZdravoCorp.View.Manager.Rooms
 
         private void Create_Click(object sender, RoutedEventArgs e)
         {
-            if (!controller.CreateRoomType(new RoomTypeVO(name)))
+            if (!controller.CreateRoomType(new RoomTypeModel(name)))
             {
                 MessageBox.Show("Nije uspesno dodat element", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
             }

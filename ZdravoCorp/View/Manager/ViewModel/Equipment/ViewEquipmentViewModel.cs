@@ -4,16 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ZdravoCorp.View.Core;
-using ZdravoCorp.View.ViewModel;
+using ZdravoCorp.View.Manager.Model.Equipment;
 
 namespace ZdravoCorp.View.Manager.ViewModel.Equipment
 {
     public class ViewEquipmentViewModel : ObservableObject
     {
-        private EquipmentTableVO equipment;
+        private EquipmentModel equipment;
         private EquipmentViewModel _parent;
 
-        public EquipmentTableVO Equipment { get => equipment; set => equipment = value; }
+        public EquipmentModel Equipment { get => equipment; set => equipment = value; }
 
         public RelayCommand ChangeViewCommand { get; set; }
 
@@ -100,7 +100,7 @@ namespace ZdravoCorp.View.Manager.ViewModel.Equipment
                 }
             }
         }
-        public ViewEquipmentViewModel(EquipmentTableVO selected, EquipmentViewModel parent)
+        public ViewEquipmentViewModel(EquipmentModel selected, EquipmentViewModel parent)
         {
             _parent = parent;
             Equipment = selected;

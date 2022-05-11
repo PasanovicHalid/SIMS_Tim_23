@@ -7,7 +7,7 @@
 using Repository;
 using System;
 using System.Collections.Generic;
-using ZdravoCorp.View.ViewModel;
+using ZdravoCorp.View.Manager.Model.Equipment;
 
 namespace Model
 {
@@ -24,7 +24,7 @@ namespace Model
         {
         }
 
-        public EquipmentType(EquipmentTypeVO type)
+        public EquipmentType(EquipmentTypeModel type)
         {
             if (type != null)
             {

@@ -9,7 +9,7 @@ using Service;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using ZdravoCorp.View.ViewModel;
+using ZdravoCorp.View.Manager.Model.Room;
 
 namespace Controller
 {
@@ -57,18 +57,18 @@ namespace Controller
             return roomService.GetAllRooms();
         }
 
-        public ObservableCollection<RoomVO> GetAllRoomsVO()
+        public ObservableCollection<RoomModel> GetAllRoomsVO()
         {
             List<Room> types = roomService.GetAllRooms();
-            ObservableCollection<RoomVO> result = new ObservableCollection<RoomVO>();
+            ObservableCollection<RoomModel> result = new ObservableCollection<RoomModel>();
             foreach (Room it in types)
             {
-                result.Add(new RoomVO(it.Identifier, it.DesignationCode, it.SurfaceArea, it.Renovating, it.RenovatedUntil, it.RoomTypeString));
+                result.Add(new RoomModel(it.Identifier, it.DesignationCode, it.SurfaceArea, it.Renovating, it.RenovatedUntil, it.RoomTypeString));
             }
             return result;
         }
 
-        public Boolean CreateRoomType(RoomTypeVO newRoomType)
+        public Boolean CreateRoomType(RoomTypeModel newRoomType)
         {
             return RoomService.Instance.CreateRoomType(new RoomType(newRoomType));
         }
@@ -99,7 +99,7 @@ namespace Controller
             return RoomService.Instance.GetMaxCountForEquipment(id_room, id_equipment);
         }
 
-        public ObservableCollection<RoomTypeVO> GetAllRoomTypeView()
+        public ObservableCollection<RoomTypeModel> GetAllRoomTypeView()
         {
             return roomService.GetAllRoomTypeView();
 

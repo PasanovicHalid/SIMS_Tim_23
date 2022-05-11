@@ -15,7 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using ZdravoCorp.View.ViewModel;
+using ZdravoCorp.View.Manager.Model.Room;
 
 namespace ZdravoCorp.View.Manager.Rooms
 {
@@ -25,7 +25,7 @@ namespace ZdravoCorp.View.Manager.Rooms
     public partial class ChangeRoom : Window, INotifyPropertyChanged
     {
         private RoomController roomController;
-        private ObservableCollection<RoomTypeVO> types;
+        private ObservableCollection<RoomTypeModel> types;
         private Room room;
 
         public event PropertyChangedEventHandler PropertyChanged;

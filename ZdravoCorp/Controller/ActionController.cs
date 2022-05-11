@@ -5,7 +5,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ZdravoCorp.View.ViewModel;
+using ZdravoCorp.View.Manager.Model.Equipment;
+using ZdravoCorp.View.Manager.Model.Room;
 
 namespace Controller
 {
@@ -17,22 +18,22 @@ namespace Controller
             return actionService.CreateAction(newAction);
         }
 
-        public Boolean UpdateRenovationAction(RenovationActionVO action)
+        public Boolean UpdateRenovationAction(RenovationActionModel action)
         {
             return actionService.UpdateRenovationAction(action);
         }
 
-        public Boolean DeleteRenovationAction(RenovationActionVO action)
+        public Boolean DeleteRenovationAction(RenovationActionModel action)
         {
             return actionService.DeleteRenovationAction(action);
         }
 
-        public Boolean DeleteChangeAction(ChangeActionVO action)
+        public Boolean DeleteChangeAction(ChangeActionModel action)
         {
             return actionService.DeleteChangeAction(action);
         }
 
-        public Boolean UpdateChangeAction(ChangeActionVO action, int count)
+        public Boolean UpdateChangeAction(ChangeActionModel action, int count)
         {
             return actionService.UpdateChangeAction(action, count);
         }
@@ -47,12 +48,12 @@ namespace Controller
             throw new NotImplementedException();
         }
 
-        public ObservableCollection<RenovationActionVO> GetAllRenovationActions()
+        public ObservableCollection<RenovationActionModel> GetAllRenovationActions()
         {
             return actionService.GetAllRenovationActions();
         }
 
-        public ObservableCollection<ChangeActionVO> GetAllChangeRoomActions()
+        public ObservableCollection<ChangeActionModel> GetAllChangeRoomActions()
         {
             return actionService.GetAllChangeRoomActions();
         }

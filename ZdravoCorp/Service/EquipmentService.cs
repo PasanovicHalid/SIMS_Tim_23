@@ -8,7 +8,8 @@ using Repository;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using ZdravoCorp.View.ViewModel;
+using ZdravoCorp.View.Manager.Model.Equipment;
+using ZdravoCorp.View.Manager.Model.Room;
 
 namespace Service
 {
@@ -17,7 +18,7 @@ namespace Service
         private static EquipmentService instance = null;
         private ActionService actionService;
 
-        public Boolean CreateEquipment(EquipmentTypeVO type, int count, RoomVO room)
+        public Boolean CreateEquipment(EquipmentTypeModel type, int count, RoomModel room)
         {
             Equipment equipment = new Equipment(count, count,FindEquipmentTypeByName(type.Name));
             return RoomService.Instance.AddEquipment(equipment, room.Identifier);
@@ -78,26 +79,26 @@ namespace Service
             return RoomService.Instance.ChangeActualCountOfEquipment(id_from_room, id_equipment, -count);
         }
 
-        public ObservableCollection<EquipmentTypeVO> GetAllEquipmentType()
+        public ObservableCollection<EquipmentTypeModel> GetAllEquipmentType()
         {
             List<EquipmentType> types = EquipmentRepository.Instance.GetAllEquipmentType();
-            ObservableCollection<EquipmentTypeVO> result = new ObservableCollection<EquipmentTypeVO>();
+            ObservableCollection<EquipmentTypeModel> result = new ObservableCollection<EquipmentTypeModel>();
             foreach(EquipmentType it in types)
             {
-                result.Add(new EquipmentTypeVO(it.Name, it.Description, it.Disposable));
+                result.Add(new EquipmentTypeModel(it.Name, it.Description, it.Disposable));
             }
             return result;
         }
 
-        public ObservableCollection<EquipmentTableVO> GetAllEquipmentTableVO()
+        public ObservableCollection<EquipmentModel> GetAllEquipmentTableVO()
         {
-            ObservableCollection<EquipmentTableVO> result = new ObservableCollection<EquipmentTableVO>();
+            ObservableCollection<EquipmentModel> result = new ObservableCollection<EquipmentModel>();
             List<Room> rooms = RoomService.Instance.GetAllRooms();
             foreach(Room room in rooms)
             {
                 foreach(Equipment it in room.Equipment)
                 {
-                    result.Add(new EquipmentTableVO(it.Count, it.Actual_count,it.EquipmentType.Name, room.DesignationCode, it.EquipmentType.Description, it.EquipmentType.Disposable ,room.Identifier, it.Identifier));
+                    result.Add(new EquipmentModel(it.Count, it.Actual_count,it.EquipmentType.Name, room.DesignationCode, it.EquipmentType.Description, it.EquipmentType.Disposable ,room.Identifier, it.Identifier));
                 }
                 
             }

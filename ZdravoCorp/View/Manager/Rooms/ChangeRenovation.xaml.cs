@@ -13,7 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using ZdravoCorp.View.ViewModel;
+using ZdravoCorp.View.Manager.Model.Room;
 
 namespace ZdravoCorp.View.Manager.Rooms
 {
@@ -22,7 +22,7 @@ namespace ZdravoCorp.View.Manager.Rooms
     /// </summary>
     public partial class ChangeRenovation : Window
     {
-        private ObservableCollection<RenovationActionVO> actionTable;
+        private ObservableCollection<RenovationActionModel> actionTable;
         private ActionController controller;
         public ChangeRenovation()
         {

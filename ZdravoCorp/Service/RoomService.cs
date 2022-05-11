@@ -9,7 +9,7 @@ using Repository;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using ZdravoCorp.View.ViewModel;
+using ZdravoCorp.View.Manager.Model.Room;
 
 namespace Service
 {
@@ -94,13 +94,13 @@ namespace Service
         }
 
 
-        public ObservableCollection<RoomTypeVO> GetAllRoomTypeView()
+        public ObservableCollection<RoomTypeModel> GetAllRoomTypeView()
         {
             List<RoomType> types = RoomRepository.Instance.GetAllRoomType();
-            ObservableCollection<RoomTypeVO> result = new ObservableCollection<RoomTypeVO>();
+            ObservableCollection<RoomTypeModel> result = new ObservableCollection<RoomTypeModel>();
             foreach(RoomType roomType in types)
             {
-                result.Add(new RoomTypeVO(roomType.Name));
+                result.Add(new RoomTypeModel(roomType.Name));
             }
             return result;
         }

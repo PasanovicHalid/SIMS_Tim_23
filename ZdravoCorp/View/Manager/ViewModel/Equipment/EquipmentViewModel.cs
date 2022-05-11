@@ -6,17 +6,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ZdravoCorp.View.Core;
+using ZdravoCorp.View.Manager.Model.Equipment;
 using ZdravoCorp.View.Manager.View;
 using ZdravoCorp.View.Manager.View.Equipment;
-using ZdravoCorp.View.ViewModel;
 
 namespace ZdravoCorp.View.Manager.ViewModel.Equipment
 {
     public class EquipmentViewModel : ObservableObject, WindowInterface
     {
-        private ObservableCollection<EquipmentTableVO> equipmentTable;
+        private ObservableCollection<EquipmentModel> equipmentTable;
         private EquipmentController controller;
-        private EquipmentTableVO selectedEquipment;
+        private EquipmentModel selectedEquipment;
         private int selectedIndex;
 
         public RelayCommand AddEquipmentViewCommand { get; set; }
@@ -58,7 +58,7 @@ namespace ZdravoCorp.View.Manager.ViewModel.Equipment
             });
         }
 
-        public ObservableCollection<EquipmentTableVO> EquipmentTable
+        public ObservableCollection<EquipmentModel> EquipmentTable
         {
             get => equipmentTable;
             set
@@ -71,7 +71,7 @@ namespace ZdravoCorp.View.Manager.ViewModel.Equipment
             }
         }
 
-        public EquipmentTableVO SelectedEquipment
+        public EquipmentModel SelectedEquipment
         {
             get => selectedEquipment;
             set

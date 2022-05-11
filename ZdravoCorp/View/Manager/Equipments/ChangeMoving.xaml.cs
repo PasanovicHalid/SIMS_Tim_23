@@ -13,7 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using ZdravoCorp.View.ViewModel;
+using ZdravoCorp.View.Manager.Model.Equipment;
 
 namespace ZdravoCorp.View.Manager.Equipments
 {
@@ -23,7 +23,7 @@ namespace ZdravoCorp.View.Manager.Equipments
     public partial class ChangeMoving : Window
     {
         private ActionController controller;
-        private ObservableCollection<ChangeActionVO> actionTable;
+        private ObservableCollection<ChangeActionModel> actionTable;
         public ChangeMoving()
         {
             InitializeComponent();

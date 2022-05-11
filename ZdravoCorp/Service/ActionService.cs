@@ -9,12 +9,13 @@ using System.Collections.Generic;
 using Model;
 using ZdravoCorp.Utility;
 using System.Threading;
-using ZdravoCorp.View.ViewModel;
 using System.Collections.ObjectModel;
+using ZdravoCorp.View.Manager.Model.Equipment;
+using ZdravoCorp.View.Manager.Model.Room;
 
 namespace Service
 {
-    
+
     public class ActionService
     {
         public void CheckActions(Object stateInfo)
@@ -74,7 +75,7 @@ namespace Service
             return ActionRepository.Instance.UpdateAction(action);
         }
 
-        public Boolean UpdateRenovationAction(RenovationActionVO action)
+        public Boolean UpdateRenovationAction(RenovationActionModel action)
         {
             Model.Action temp = ReadAction(action.Id);
 
@@ -86,7 +87,7 @@ namespace Service
             return ActionRepository.Instance.UpdateAction(temp);
         }
 
-        public Boolean UpdateChangeAction(ChangeActionVO action, int count)
+        public Boolean UpdateChangeAction(ChangeActionModel action, int count)
         {
             Model.Action temp = ReadAction(action.Id);
             temp.ExecutionDate = action.ExecutionDate;
@@ -113,7 +114,7 @@ namespace Service
             }
         }
 
-        public Boolean DeleteRenovationAction(RenovationActionVO action)
+        public Boolean DeleteRenovationAction(RenovationActionModel action)
         {
             if (!DeleteAction(action.Id))
             {
@@ -127,7 +128,7 @@ namespace Service
             }
         }
 
-        public Boolean DeleteChangeAction(ChangeActionVO action)
+        public Boolean DeleteChangeAction(ChangeActionModel action)
         {
             if(!DeleteAction(action.Id))
             {
@@ -163,33 +164,33 @@ namespace Service
             return ActionRepository.Instance.GetAllActions();
         }
 
-        public ObservableCollection<RenovationActionVO> GetAllRenovationActions()
+        public ObservableCollection<RenovationActionModel> GetAllRenovationActions()
         {
             List<Model.Action> actions = GetAllActions();
-            ObservableCollection<RenovationActionVO> result = new ObservableCollection<RenovationActionVO>();
+            ObservableCollection<RenovationActionModel> result = new ObservableCollection<RenovationActionModel>();
             RenovationAction renovation;
             foreach (Model.Action action in actions)
             {
                 if(action.Type == ActionType.renovation)
                 {
                     renovation = (RenovationAction)action.Object;
-                    result.Add(new RenovationActionVO(action.Id, action.ExecutionDate, renovation.ExpirationDate, RoomService.Instance.ReadRoom(renovation.Id_room).DesignationCode,renovation.Id_room, renovation.Renovation));
+                    result.Add(new RenovationActionModel(action.Id, action.ExecutionDate, renovation.ExpirationDate, RoomService.Instance.ReadRoom(renovation.Id_room).DesignationCode,renovation.Id_room, renovation.Renovation));
                 }
             }
             return result;
         }
 
-        public ObservableCollection<ChangeActionVO> GetAllChangeRoomActions()
+        public ObservableCollection<ChangeActionModel> GetAllChangeRoomActions()
         {
             List<Model.Action> actions = GetAllActions();
-            ObservableCollection<ChangeActionVO> result = new ObservableCollection<ChangeActionVO>();
+            ObservableCollection<ChangeActionModel> result = new ObservableCollection<ChangeActionModel>();
             ChangeRoomAction changeRoomAction;
             foreach(Model.Action action in actions)
             {
                 if(action.Type == ActionType.changePosition)
                 {
                     changeRoomAction = (ChangeRoomAction) action.Object;
-                    result.Add(new ChangeActionVO(action.Id, action.ExecutionDate, changeRoomAction.Id_incoming_room, changeRoomAction.Id_outgoing_room, changeRoomAction.Id_equipment, changeRoomAction.Count, RoomService.Instance.ReadRoom(changeRoomAction.Id_incoming_room).DesignationCode, RoomService.Instance.ReadRoom(changeRoomAction.Id_outgoing_room).DesignationCode, EquipmentService.Instance.ReadEquipmentType(changeRoomAction.Id_equipment).Name));
+                    result.Add(new ChangeActionModel(action.Id, action.ExecutionDate, changeRoomAction.Id_incoming_room, changeRoomAction.Id_outgoing_room, changeRoomAction.Id_equipment, changeRoomAction.Count, RoomService.Instance.ReadRoom(changeRoomAction.Id_incoming_room).DesignationCode, RoomService.Instance.ReadRoom(changeRoomAction.Id_outgoing_room).DesignationCode, EquipmentService.Instance.ReadEquipmentType(changeRoomAction.Id_equipment).Name));
                 }
             }
 

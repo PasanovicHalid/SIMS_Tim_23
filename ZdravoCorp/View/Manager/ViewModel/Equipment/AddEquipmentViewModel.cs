@@ -7,16 +7,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using ZdravoCorp.View.Core;
+using ZdravoCorp.View.Manager.Model.Equipment;
+using ZdravoCorp.View.Manager.Model.Room;
 using ZdravoCorp.View.Manager.View;
 using ZdravoCorp.View.Manager.View.Equipment;
-using ZdravoCorp.View.ViewModel;
 
 namespace ZdravoCorp.View.Manager.ViewModel.Equipment
 {
     public class AddEquipmentViewModel : ObservableObject, WindowInterface
     {
-        private ObservableCollection<EquipmentTypeVO> equipmentList;
-        private ObservableCollection<RoomVO> roomsList;
+        private ObservableCollection<EquipmentTypeModel> equipmentList;
+        private ObservableCollection<RoomModel> roomsList;
         private EquipmentController equipmentController;
         private RoomController roomController;
         private int count;
@@ -105,7 +106,7 @@ namespace ZdravoCorp.View.Manager.ViewModel.Equipment
             UpdateViewModel();
         }
 
-        public ObservableCollection<EquipmentTypeVO> EquipmentList
+        public ObservableCollection<EquipmentTypeModel> EquipmentList
         {
             get => equipmentList;
             set
@@ -118,7 +119,7 @@ namespace ZdravoCorp.View.Manager.ViewModel.Equipment
             }
         }
 
-        public ObservableCollection<RoomVO> RoomsList
+        public ObservableCollection<RoomModel> RoomsList
         {
             get => roomsList;
             set

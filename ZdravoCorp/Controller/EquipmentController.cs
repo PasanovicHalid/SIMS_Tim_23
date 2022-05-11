@@ -8,13 +8,14 @@ using Service;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using ZdravoCorp.View.ViewModel;
+using ZdravoCorp.View.Manager.Model.Equipment;
+using ZdravoCorp.View.Manager.Model.Room;
 
 namespace Controller
 {
     public class EquipmentController
     {
-        public Boolean CreateEquipment(EquipmentTypeVO type, int count, RoomVO room)
+        public Boolean CreateEquipment(EquipmentTypeModel type, int count, RoomModel room)
         {
             return EquipmentService.Instance.CreateEquipment(type, count, room);
         }
@@ -39,7 +40,7 @@ namespace Controller
             throw new NotImplementedException();
         }
 
-        public Boolean CreateEquipmentType(EquipmentTypeVO newEquipmentType)
+        public Boolean CreateEquipmentType(EquipmentTypeModel newEquipmentType)
         {
             EquipmentType result = new EquipmentType(newEquipmentType);
             return EquipmentService.Instance.CreateEquipmentType(result);
@@ -65,12 +66,12 @@ namespace Controller
             return EquipmentService.Instance.ChangePositionOfEquipment(excecutionDate, id_from_room, id_to_room, id_equipment, count);
         }
 
-        public ObservableCollection<EquipmentTypeVO> GetAllEquipmentType()
+        public ObservableCollection<EquipmentTypeModel> GetAllEquipmentType()
         {
             return EquipmentService.Instance.GetAllEquipmentType(); ;
         }
 
-        public ObservableCollection<EquipmentTableVO> GetAllEquipmentTableVO()
+        public ObservableCollection<EquipmentModel> GetAllEquipmentTableVO()
         {
             return EquipmentService.Instance.GetAllEquipmentTableVO();
         }

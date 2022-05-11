@@ -15,7 +15,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ZdravoCorp.Utility;
-using ZdravoCorp.View.ViewModel;
+using ZdravoCorp.View.Manager.Model.Equipment;
+using ZdravoCorp.View.Manager.Model.Room;
 
 namespace ZdravoCorp.View.Manager.Equipments
 {
@@ -24,8 +25,8 @@ namespace ZdravoCorp.View.Manager.Equipments
     /// </summary>
     public partial class ChangePosition : Window, INotifyPropertyChanged
     {
-        private ObservableCollection<RoomVO> roomsList;
-        private EquipmentTableVO equipmentType;
+        private ObservableCollection<RoomModel> roomsList;
+        private EquipmentModel equipmentType;
         private RoomController roomController;
         private EquipmentController equipmentController;
         private int count;
@@ -107,7 +108,7 @@ namespace ZdravoCorp.View.Manager.Equipments
             }
         }
 
-        public ChangePosition(EquipmentTableVO type)
+        public ChangePosition(EquipmentModel type)
         {
             InitializeComponent();
             this.DataContext = this;

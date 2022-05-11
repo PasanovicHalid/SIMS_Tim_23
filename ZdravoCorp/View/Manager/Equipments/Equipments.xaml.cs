@@ -13,7 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using ZdravoCorp.View.ViewModel;
+using ZdravoCorp.View.Manager.Model.Equipment;
 
 namespace ZdravoCorp.View.Manager.Equipments
 {
@@ -22,7 +22,7 @@ namespace ZdravoCorp.View.Manager.Equipments
     /// </summary>
     public partial class Equipments : Window
     {
-        private ObservableCollection<EquipmentTableVO> table;
+        private ObservableCollection<EquipmentModel> table;
         private EquipmentController controller;
         public Equipments()
         {

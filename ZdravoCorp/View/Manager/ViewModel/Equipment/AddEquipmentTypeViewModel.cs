@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using ZdravoCorp.View.Core;
+using ZdravoCorp.View.Manager.Model.Equipment;
 using ZdravoCorp.View.Manager.View;
 using ZdravoCorp.View.Manager.View.Equipment;
-using ZdravoCorp.View.ViewModel;
 
 namespace ZdravoCorp.View.Manager.ViewModel.Equipment
 {
@@ -83,7 +83,7 @@ namespace ZdravoCorp.View.Manager.ViewModel.Equipment
 
             AddViewCommand = new RelayCommand(o =>
             {
-                if (!equipmentController.CreateEquipmentType(new EquipmentTypeVO(Name, Description, Disposable)))
+                if (!equipmentController.CreateEquipmentType(new EquipmentTypeModel(Name, Description, Disposable)))
                 {
                     MessageBox.Show("Nije uspesno dodat element", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
                 }

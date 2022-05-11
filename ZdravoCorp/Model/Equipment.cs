@@ -8,7 +8,7 @@ using Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using ZdravoCorp.View.ViewModel;
+using ZdravoCorp.View.Manager.Model.Equipment;
 
 namespace Model
 {
@@ -53,7 +53,7 @@ namespace Model
             this.equipmentType = equipmentType;
         }
 
-        public Equipment(int count, int actual_count, EquipmentTypeVO equipmentType)
+        public Equipment(int count, int actual_count, EquipmentTypeModel equipmentType)
         {
             this.count = count;
             this.Actual_count = actual_count;

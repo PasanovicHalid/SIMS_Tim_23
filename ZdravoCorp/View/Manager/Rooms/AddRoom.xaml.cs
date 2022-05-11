@@ -16,7 +16,7 @@ using System.Windows.Shapes;
 using Model;
 using Controller;
 using System.Collections.ObjectModel;
-using ZdravoCorp.View.ViewModel;
+using ZdravoCorp.View.Manager.Model.Room;
 
 namespace ZdravoCorp.View.Manager.Rooms
 {
@@ -30,7 +30,7 @@ namespace ZdravoCorp.View.Manager.Rooms
         private String identifier;
         private float size;
         private String roomType;
-        private ObservableCollection<RoomTypeVO> types;
+        private ObservableCollection<RoomTypeModel> types;
         private RoomController roomController;
         public AddRoom()
         {

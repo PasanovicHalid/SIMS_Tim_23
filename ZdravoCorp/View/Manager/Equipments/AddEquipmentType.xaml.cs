@@ -13,7 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using ZdravoCorp.View.ViewModel;
+using ZdravoCorp.View.Manager.Model.Equipment;
 
 namespace ZdravoCorp.View.Manager.Equipments
 {
@@ -83,7 +83,7 @@ namespace ZdravoCorp.View.Manager.Equipments
 
         private void Create_Click(object sender, RoutedEventArgs e)
         {
-            if (!controller.CreateEquipmentType(new EquipmentTypeVO(name, description, disposable)))
+            if (!controller.CreateEquipmentType(new EquipmentTypeModel(name, description, disposable)))
             {
                 MessageBox.Show("Nije uspesno dodat element", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
             }

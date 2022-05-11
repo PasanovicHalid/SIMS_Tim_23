@@ -269,13 +269,13 @@
     <Compile Include="View\Secretary\Secretary.xaml.cs">
       <DependentUpon>Secretary.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ViewModel\ChangeActionVO.cs" />
-    <Compile Include="View\ViewModel\EquipmentTableVO.cs" />
-    <Compile Include="View\ViewModel\EquipmentTypeVO.cs" />
-    <Compile Include="View\ViewModel\EquipmentVO.cs" />
-    <Compile Include="View\ViewModel\RenovationActionVO.cs" />
-    <Compile Include="View\ViewModel\RoomTypeVO.cs" />
-    <Compile Include="View\ViewModel\RoomVO.cs" />
+    <Compile Include="View\Manager\Model\Equipment\ChangeActionModel.cs" />
+    <Compile Include="View\Manager\Model\Equipment\EquipmentModel.cs" />
+    <Compile Include="View\Manager\Model\Equipment\EquipmentTypeModel.cs" />
+    <Compile Include="View\Manager\Model\Room\RenovationActionModel.cs" />
+    <Compile Include="View\Manager\Model\Room\RoomTypeModel.cs" />
+    <Compile Include="View\Manager\Model\Room\RoomModel.cs" />
+    <Compile Include="View\ViewModel\Class1.cs" />
     <Page Include="View\Doctor\AddAppointment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -574,9 +574,6 @@
   <ItemGroup>
     <Resource Include="Resources\Icons\employees.svg" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="View\Manager\Model\Equipment\" />
-    <Folder Include="View\Manager\Model\Room\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
