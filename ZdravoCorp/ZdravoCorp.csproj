@@ -85,6 +85,7 @@
     </ApplicationDefinition>
     <Compile Include="Controller\ActionController.cs" />
     <Compile Include="Controller\AppointmentController.cs" />
+    <Compile Include="Controller\AppointmentSurveyController.cs" />
     <Compile Include="Controller\CommentController.cs" />
     <Compile Include="Controller\DoctorController.cs" />
     <Compile Include="Controller\EquipmentController.cs" />
@@ -95,13 +96,13 @@
     <Compile Include="Controller\PrescriptionController.cs" />
     <Compile Include="Controller\RoomController.cs" />
     <Compile Include="Controller\SecretaryController.cs" />
-    <Compile Include="Controller\SurveyController.cs" />
     <Compile Include="Model\Action.cs" />
     <Compile Include="Model\ActionType.cs" />
     <Compile Include="Model\ChangeRoomAction.cs" />
     <Compile Include="Model\Suggestion.cs" />
     <Compile Include="Model\RenovationAction.cs" />
     <Compile Include="Repository\ActionRepository.cs" />
+    <Compile Include="Repository\AppointmentSurveyRepository.cs" />
     <Compile Include="Repository\AppointmentRepository.cs" />
     <Compile Include="Repository\CommentRepository.cs" />
     <Compile Include="Repository\DoctorRepository.cs" />
@@ -116,8 +117,8 @@
     <Compile Include="Repository\Serializable.cs" />
     <Compile Include="Repository\Serializer.cs" />
     <Compile Include="Repository\SuggestionsRepository.cs" />
-    <Compile Include="Repository\SurveyRepository.cs" />
     <Compile Include="Service\ActionService.cs" />
+    <Compile Include="Service\AppointmentSurveyService.cs" />
     <Compile Include="Service\AppointmenService.cs" />
     <Compile Include="Service\CommentService.cs" />
     <Compile Include="Service\DoctorService.cs" />
@@ -129,7 +130,6 @@
     <Compile Include="Service\PrescriptionService.cs" />
     <Compile Include="Service\RoomService.cs" />
     <Compile Include="Service\SecretaryService.cs" />
-    <Compile Include="Service\SurveyService.cs" />
     <Compile Include="Service\TimerService.cs" />
     <Compile Include="Utility\DateManipulator.cs" />
     <Compile Include="View\Core\ObservableObject.cs" />
@@ -494,7 +494,7 @@
     <Compile Include="Model\Room.cs" />
     <Compile Include="Model\RoomType.cs" />
     <Compile Include="Model\Secretary.cs" />
-    <Compile Include="Model\Survey.cs" />
+    <Compile Include="Model\AppointmentSurvey.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
