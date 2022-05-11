@@ -7,6 +7,7 @@
 using Repository;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace Model
 {
@@ -35,7 +36,7 @@ namespace Model
             this.patient = patient;
         }
 
-        
+
 
         public Doctor doctor { get; set; }
         public Room room { get; set; }
@@ -106,10 +107,11 @@ namespace Model
 
         public List<String> ToCSV()
         {
+            CultureInfo dateTimeFormat = new CultureInfo("en-GB");
             List<String> result = new List<String>();
             result.Add(Id.ToString());
-            result.Add(StartDate.ToString());
-            result.Add(EndDate.ToString());
+            result.Add(StartDate.ToString(dateTimeFormat));
+            result.Add(EndDate.ToString(dateTimeFormat));
             result.Add(doctor.Id.ToString());
             result.Add(Room.Identifier.ToString());
             result.Add(Patient.Id.ToString());
@@ -118,10 +120,11 @@ namespace Model
 
         public void FromCSV(string[] values)
         {
+            CultureInfo dateTimeFormat = new CultureInfo("en-GB");
             int i = 0;
             Id = int.Parse(values[i++]);
-            StartDate = DateTime.Parse(values[i++]);
-            EndDate = DateTime.Parse(values[i++]);
+            StartDate = DateTime.Parse(values[i++], dateTimeFormat);
+            EndDate = DateTime.Parse(values[i++], dateTimeFormat);
             doctor = new Doctor(int.Parse(values[i++]));
             Room = new Room(int.Parse(values[i++]));
             Patient = new Patient(int.Parse(values[i++]));

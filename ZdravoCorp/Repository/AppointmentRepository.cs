@@ -22,7 +22,7 @@ namespace Repository
             int id = appointments.Count;
             newAppointment.Id = id;
             appointments.Add(newAppointment);
-            serializerAppointment.ToCSV(dbPath,appointments);
+            serializerAppointment.ToCSV(dbPath, appointments);
             return true;
         }
 
@@ -48,9 +48,9 @@ namespace Repository
             List<Appointment> appById = new List<Appointment>();
             foreach (Appointment appointment in appointments)
             {
-               foreach (int i in id)
+                foreach (int i in id)
                 {
-                    if(appointment.Id == i)
+                    if (appointment.Id == i)
                     {
                         appById.Add(appointment);
                     }
@@ -63,20 +63,21 @@ namespace Repository
         {
             Boolean success = false;
             List<Appointment> appointments = GetAllAppointments();
-            for (int i = 0; i< appointments.Count; i++)
+            for (int i = 0; i < appointments.Count; i++)
             {
-                if (appointment.Id== appointments[i].Id) 
+                if (appointment.Id == appointments[i].Id)
                 {
                     success = true;
-                    appointments[i] = appointment;
+                    DeleteAppointment(appointment.Id);
+                    //appointments[i] = appointment;
                     break;
                 }
             }
             if (success)
             {
+                appointments = GetAllAppointments();
                 appointments.Add(appointment);
                 serializerAppointment.ToCSV(dbPath, appointments);
-                
             }
             return success;
 
@@ -110,32 +111,32 @@ namespace Repository
 
         public List<Appointment> GetAllAppointments()
         {
-            List<Appointment> appointments = serializerAppointment.FromCSV(dbPath); 
+            List<Appointment> appointments = serializerAppointment.FromCSV(dbPath);
             foreach (Appointment appointment in appointments)
             {
                 //appointment.doctor = DoctorRepository.Instance.ReadDoctor(appointment.doctor.Id);
                 //appointment.Room = RoomRepository.Instance.ReadRoom(appointment.Room.Identifier);
                 //appointment.Patient = PatientRepository.Instance.ReadPatient(appointment.Patient.Id);
-            
+
             }
             return appointments;
-            
+
         }
 
         public AppointmentRepository()
         {
-            
+
         }
 
         public static AppointmentRepository Instance
         {
-            get 
+            get
             {
                 if (instance == null)
                 {
                     instance = new AppointmentRepository();
                 }
-                return instance ;
+                return instance;
             }
         }
     }
