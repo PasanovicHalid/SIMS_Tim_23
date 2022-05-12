@@ -51,13 +51,14 @@ namespace Repository
                 if (patient.Id == patients[i].Id)
                 {
                     success = true;
-                    patients[i] = patient;
+                    DeletePatient(patient.Id);
                     break;
                 }
             }
             if (success)
             {
-                //patients.Add(patient);
+                patients = GetAllPatients();
+                patients.Add(patient);
                 serializerPatient.ToCSV(dbPath, patients);
 
             }
@@ -110,6 +111,21 @@ namespace Repository
 
             }
             return patients;
+        }
+
+        public Boolean AddPrescription(Model.Patient patient, Model.Prescription newPrescription)
+        {
+            List<Patient> patients = GetAllPatients();
+            foreach (Patient temp in patients)
+            {
+                if(temp.Id == patient.Id)
+                {
+                    patient.AddPrescription(newPrescription);
+                    UpdatePatient(patient);
+                    return true;
+                }
+            }
+            return false;
         }
 
         public PatientRepository()

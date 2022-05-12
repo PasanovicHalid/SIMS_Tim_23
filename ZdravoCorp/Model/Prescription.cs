@@ -6,6 +6,7 @@
 using Repository;
 using System;
 using System.Collections.Generic;
+using Controller;
 
 namespace Model
 {
@@ -15,13 +16,20 @@ namespace Model
         private int timesADay;
         private int durationDays;
         private int quantity;
+        private string description;
 
         private Medication medication = new Medication();
+
+        public Medication Medication { get { return medication; } set { medication = value; } }
+
+        public int Quantity { get { return quantity; } set { quantity = value; } }  
 
         public int MedicationID
         {
             get { return medication.Id; } set { medication.Id = value; }
         }
+
+        public string Description { get { return description; } set { description = value; } }  
 
         public string Name
         {
@@ -45,6 +53,16 @@ namespace Model
             this.id = id;
         }
 
+        public Prescription(int medicationId, int timesADay, int numberOfDays,string description)
+        {
+            MedicineController medicineController = new MedicineController();
+            Medication = medicineController.ReadMedicine(medicationId);
+            TimesADay = timesADay;
+            DurationDays = numberOfDays;
+            Quantity = timesADay * numberOfDays;
+            Description = description;
+        }
+
         public Prescription()
         { }
 
@@ -55,6 +73,7 @@ namespace Model
             result.Add(timesADay.ToString());
             result.Add(durationDays.ToString());
             result.Add(quantity.ToString());
+            result.Add(description);
             /*Mozda nije dobro*/
             result.Add(medication.Id.ToString());
             result.Add(notification.Id.ToString());
@@ -68,6 +87,7 @@ namespace Model
             timesADay = int.Parse(values[i++]);
             durationDays = int.Parse (values[i++]);
             quantity = int.Parse(values[i++]);
+            description = values[i++];
             /*Mozda nije dobro*/
             medication.Id = int.Parse(values[i++]);
             notification.Id = int.Parse(values[i++]);

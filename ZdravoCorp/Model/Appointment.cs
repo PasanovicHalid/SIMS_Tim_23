@@ -13,6 +13,8 @@ namespace Model
 {
     public class Appointment : Serializable
     {
+        CultureInfo dateTimeFormat = new CultureInfo("en-GB");
+
         public DateTime startDate { get; set; }
         public DateTime endDate { get; set; }
         private int id;

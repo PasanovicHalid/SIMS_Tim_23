@@ -9,7 +9,7 @@ namespace ZdravoCorp.Controller
 {
     internal class PrescriptionController
     {
-        public Boolean CreatePrescription(Model.Prescription newPrescription)
+        public int CreatePrescription(Model.Prescription newPrescription)
         {
             return PrescriptionService.Instance.CreatePrescription(newPrescription);
         }

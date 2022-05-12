@@ -19,13 +19,14 @@ namespace ZdravoCorp.Repository
         {
         }
 
-        public Boolean CreatePrescription(Model.Prescription newMedicine)
+        public int CreatePrescription(Model.Prescription newMedicine)
         {
             List<Prescription> medicines = GetAllPrescriptions();
-
+            
+            newMedicine.Id = medicines.Count + 1;
             medicines.Add(newMedicine);
             serializerPrescription.ToCSV(dbPath, medicines);
-            return true;
+            return newMedicine.Id;
         }
 
         public Boolean UpdatePrescription(Model.Prescription medicine)

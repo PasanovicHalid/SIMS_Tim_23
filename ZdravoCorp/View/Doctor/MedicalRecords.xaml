@@ -51,7 +51,7 @@
                 <DataGridTextColumn Header="Medication Id" Binding="{Binding MedicationID}" Width="103"/>
                 <DataGridTextColumn Header="Times A Day" Binding="{Binding TimesADay}" Width="103"/>
                 <DataGridTextColumn Header="Duration In Days" Binding="{Binding DurationDays}" Width="103" />
-                <DataGridTextColumn Header="Description" Binding="{Binding MedicationID}" Width="103"/>
+                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="103"/>
 
             </DataGrid.Columns>
         </DataGrid>
