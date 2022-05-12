@@ -41,7 +41,10 @@ namespace Service
         {
             return AppointmentSurveyRepository.Instance.GetAllAppointmentSurveys();
         }
-
+        public List<int> getAllAppointmentSurveyIds()
+        {
+            return AppointmentSurveyRepository.Instance.getAllAppointmentSurveyIds();
+        }
         public AppointmentSurveyService()
         {
 
@@ -58,6 +61,23 @@ namespace Service
                 return instance;
             }
         }
-       
+        public Boolean DoneSurvey(Appointment appointment)
+        {
+            Boolean done = false;
+            if (GetAllAppointmentsIds().Contains(appointment.Id))
+            {
+                done = true;
+            }
+            return done;
+        }
+        public List<int> GetAllAppointmentsIds()
+        {
+            List<int> ids = new List<int>();
+            foreach(Appointment appointment in AppointmenService.Instance.GetAllAppointments())
+            {
+                ids.Add(appointment.Id);
+            }
+            return ids;
+        }
     }
 }

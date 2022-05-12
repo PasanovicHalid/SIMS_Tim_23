@@ -6,10 +6,13 @@
 using Repository;
 using System;
 using System.Collections.Generic;
+using ZdravoCorp.View.Core;
+using System.ComponentModel;
+
 
 namespace Model
 {
-    public class AppointmentSurvey : Serializable
+    public class AppointmentSurvey : ObservableObject ,Serializable, INotifyPropertyChanged
     {
         private int id;
         private int profesionalism;
@@ -19,6 +22,16 @@ namespace Model
         private int waitingTime;
         private int roomComfort;
         private int overallExperience;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
         //private String questionAboutProfesionalism = "Ocenite profesionalnost lekara";
         //private String questionAboutComfort = "Ocenite udobnost";
         //private String questionAboutKindness = "Ocenite ljubaznost lekara";
@@ -39,14 +52,26 @@ namespace Model
             //questions.Add(key++, questionAboutOverallExperience);
         }
 
+        public AppointmentSurvey(int profesionalism, int kindness, int comfort, int tidiness, int waitingTime, int roomComfort, int overallExperience, Appointment appointment)
+        {
+            this.profesionalism = profesionalism;
+            this.kindness = kindness;
+            this.comfort = comfort;
+            this.tidiness = tidiness;
+            this.waitingTime = waitingTime;
+            this.roomComfort = roomComfort;
+            this.overallExperience = overallExperience;
+            this.appointment = appointment;
+        }
+
         public int Id { get => id; set => id = value; }
-        public int Profesionalism { get => profesionalism; set => profesionalism = value; }
-        public int Kindnes { get => kindness; set => kindness = value; }
-        public int Comfort { get => comfort; set => comfort = value; }
-        public int Tidiness { get => tidiness; set => tidiness = value; }
-        public int WaitingTime { get => waitingTime; set => waitingTime = value; }
-        public int RoomComfort { get => roomComfort; set => roomComfort = value; }
-        public int OverallExperience { get => overallExperience; set => overallExperience = value; }
+        //public int Profesionalism { get => profesionalism; set => profesionalism = value; }
+        //public int Kindnes { get => kindness; set => kindness = value; }
+        //public int Comfort { get => comfort; set => comfort = value; }
+        //public int Tidiness { get => tidiness; set => tidiness = value; }
+        //public int WaitingTime { get => waitingTime; set => waitingTime = value; }
+        //public int RoomComfort { get => roomComfort; set => roomComfort = value; }
+        //public int OverallExperience { get => overallExperience; set => overallExperience = value; }
         public Appointment Appointment { get => appointment; set => appointment = value; }
 
         public List<String> ToCSV()
@@ -78,5 +103,90 @@ namespace Model
             appointment = new Appointment(int.Parse(values[i++]));
         }
 
+        public int Profesionalism
+        {
+            get => profesionalism;
+            set
+            {
+                if (value != profesionalism)
+                {
+                    profesionalism = value;
+                    OnPropertyChanged("Profesionalism");
+                }
+            }
+        }
+        public int Kindness
+        {
+            get => kindness;
+            set
+            {
+                if (value != kindness)
+                {
+                    kindness = value;
+                    OnPropertyChanged("Kindness");
+                }
+            }
+        }
+        public int Comfort
+        {
+            get => comfort;
+            set
+            {
+                if (value != comfort)
+                {
+                    comfort = value;
+                    OnPropertyChanged("Comfort");
+                }
+            }
+        }
+        public int Tidiness
+        {
+            get => tidiness;
+            set
+            {
+                if (value != tidiness)
+                {
+                    tidiness = value;
+                    OnPropertyChanged("Tidiness");
+                }
+            }
+        }
+        public int WaitingTime
+        {
+            get => waitingTime;
+            set
+            {
+                if (value != waitingTime)
+                {
+                    waitingTime = value;
+                    OnPropertyChanged("WaitingTime");
+                }
+            }
+        }
+        public int RoomComfort
+        {
+            get => roomComfort;
+            set
+            {
+                if (value != roomComfort)
+                {
+                    roomComfort = value;
+                    OnPropertyChanged("RoomComfort");
+                }
+            }
+        }
+
+        public int OverallExperience
+        {
+            get => overallExperience;
+            set
+            {
+                if (value != overallExperience)
+                {
+                    overallExperience = value;
+                    OnPropertyChanged("OverallExperience");
+                }
+            }
+        }
     }
 }

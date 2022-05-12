@@ -16,7 +16,7 @@ namespace Repository
 
         private static AppointmentSurveyRepository instance = null;
 
-        public List<int> getAllSurveyIds() {
+        public List<int> getAllAppointmentSurveyIds() {
             List<AppointmentSurvey> surveys = GetAllAppointmentSurveys();
             List<int> ids = new List<int>();
             foreach(AppointmentSurvey survey in surveys)
@@ -27,7 +27,7 @@ namespace Repository
         }
         public void generateId(AppointmentSurvey newSurvey)
         {
-            List<int> allSurveyIds = getAllSurveyIds();
+            List<int> allSurveyIds = getAllAppointmentSurveyIds();
             Random random = new Random();
             do
             {

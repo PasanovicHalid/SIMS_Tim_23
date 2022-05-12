@@ -7,9 +7,9 @@ using Model;
 using Repository;
 using System;
 using System.Collections.Generic;
+using Service;
 
-
-namespace Service
+namespace Controller
 {
     public class AppointmentSurveyController
     {
@@ -39,5 +39,9 @@ namespace Service
             return AppointmentSurveyService.Instance.GetAllAppointmentSurveys();
         }
        
+        public Boolean DoneSurvey(Appointment appointment)
+        {
+            return AppointmentSurveyService.Instance.DoneSurvey(appointment);
+        }
     }
 }
