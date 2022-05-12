@@ -28,11 +28,20 @@ namespace Model
         {
         }
 
-        public Appointment(DateTime startDate, DateTime endDate, int id, Doctor doctor, Room room, Patient patient)
+        public Appointment(DateTime startDate, DateTime endDate,int id, Doctor doctor, Room room, Patient patient)
         {
             StartDate = startDate;
             EndDate = endDate;
             Id = id;
+            this.doctor = doctor;
+            this.room = room;
+            this.patient = patient;
+        }
+
+        public Appointment(DateTime startDate, DateTime endDate, Doctor doctor, Room room, Patient patient)
+        {
+            StartDate = startDate;
+            EndDate = endDate;
             this.doctor = doctor;
             this.room = room;
             this.patient = patient;

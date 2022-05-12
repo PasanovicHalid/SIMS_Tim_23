@@ -1,5 +1,4 @@
-﻿using Controller;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -15,18 +14,22 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Controller;
+using Model;
 
 namespace ZdravoCorp.View.Doctor
 {
     /// <summary>
-    /// Interaction logic for AddAppointment.xaml
+    /// Interaction logic for AddAppointmentToDoctor.xaml
     /// </summary>
-    public partial class AddAppointment : Window
+    public partial class AddAppointmentToDoctor : Window
     {
+
         PatientController patientController;
         RoomController roomController;
         AppointmentController appointmentController;
         DoctorController doctorController;
+        Model.Patient tempPatient;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -35,12 +38,14 @@ namespace ZdravoCorp.View.Doctor
             get;
             set;
         }
-        public ObservableCollection<Model.Patient> PatientCollection
+
+        public ObservableCollection<Model.Doctor> DoctorCollection
         {
             get;
             set;
         }
-        public AddAppointment()
+
+        public AddAppointmentToDoctor(Model.Patient pomocnip, Model.Doctor doc)
         {
             InitializeComponent();
             DataContext = this;
@@ -48,31 +53,26 @@ namespace ZdravoCorp.View.Doctor
             roomController = new RoomController();
             doctorController = new DoctorController();
             appointmentController = new AppointmentController();
+            tempPatient = pomocnip;
 
-
-            PatientCollection = new ObservableCollection<Model.Patient>(patientController.GetAllPatients());
+            DoctorCollection = new ObservableCollection<Model.Doctor>(doctorController.GetAllDoctors());
+            Model.Doctor pomocniDoctor = doctorController.ReadDoctor(doc.Id);
             RoomCollection = new ObservableCollection<Model.Room>(roomController.GetAllRooms());
-            PatientsCB.ItemsSource = PatientCollection;
+            DoctorsCB.ItemsSource = DoctorCollection;
             RoomsCB.ItemsSource = RoomCollection;
+            InitializeComponent();
         }
 
         private void DodajButton_Click(object sender, RoutedEventArgs e)
-        {
+        {   
+            Model.Doctor tempDoctor = (Model.Doctor)DoctorsCB.SelectedItem;
+            Model.Room tempRoom = (Model.Room)RoomsCB.SelectedItem;
             CultureInfo dateTimeFormat = new CultureInfo("en-GB");
-            DateTime date = DateTime.Parse(textBox1.Text,dateTimeFormat);
-            DateTime date2 = DateTime.Parse(textBox2.Text,dateTimeFormat);
-            Model.Patient newPatient = patientController.ReadPatient(PatientsCB.SelectedIndex);
-            Model.Room newRoom = roomController.ReadRoomByIndex(RoomsCB.SelectedIndex);
-            Model.Doctor newDoctor = doctorController.ReadDoctor(0);
-
-            Model.Appointment newAppointment = new Model.Appointment(date, date2, newDoctor, newRoom, newPatient);
+            DateTime date = DateTime.Parse(textBox1.Text, dateTimeFormat);
+            DateTime date2 = DateTime.Parse(textBox2.Text, dateTimeFormat);
+            bool isEmergency = (bool)CheckBox1.IsChecked;
+            Model.Appointment newAppointment = new Model.Appointment(date, date2, 0, tempDoctor, tempRoom, tempPatient);
             appointmentController.CreateAppointment(newAppointment);
-            this.Close();
-
-        }
-
-        private void OdustaniButton_Click(object sender, RoutedEventArgs e)
-        {
             this.Close();
         }
     }

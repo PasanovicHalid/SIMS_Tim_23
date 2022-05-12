@@ -11,8 +11,8 @@
         <DataGrid x:Name="CommentsGrid" ItemsSource="{Binding}"
             AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" Margin="413,25,67,228">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Comment ID" Binding="{Binding Id}" Width="103"/>
-                <DataGridTextColumn Header="String" Binding="{Binding Comment}" Width="103"/>
+                <DataGridTextColumn Header="Appointment ID" Binding="{Binding Id}" Width="103"/>
+                <DataGridTextColumn Header="Comment" Binding="{Binding Comment}" Width="103"/>
                 <DataGridTextColumn Header="Appointment ID" Binding="{Binding AppointmentID}" Width="103" />
                 <DataGridTextColumn Header="Doctor ID" Binding="{Binding DoctorID}" Width="103"/>
 
@@ -21,7 +21,7 @@
         <ComboBox 
             x:Name ="PatientsCB"
             HorizontalAlignment="Left" 
-            Margin="116,43,0,0" 
+            Margin="151,58,0,0" 
             VerticalAlignment="Top" 
             Width="206"
             ItemsSource="{Binding}" SelectionChanged="PatientsCB_SelectionChanged" >
@@ -34,16 +34,16 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="22" Margin="116,105,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="206"/>
-        <TextBox x:Name="textBox2" HorizontalAlignment="Left" Height="22" Margin="116,152,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="206"/>
-        <TextBox x:Name="textBox3" HorizontalAlignment="Left" Height="22" Margin="116,205,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="206"/>
-        <TextBox x:Name="textBox4" HorizontalAlignment="Left" Height="22" Margin="116,258,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="206"/>
-        <Label Content="ID:" HorizontalAlignment="Left" Margin="31,103,0,0" VerticalAlignment="Top"/>
-        <Label Content="Weight:" HorizontalAlignment="Left" Margin="31,145,0,0" VerticalAlignment="Top"/>
-        <Label Content="Height:" HorizontalAlignment="Left" Margin="31,198,0,0" VerticalAlignment="Top"/>
-        <Label Content="Blood Type" HorizontalAlignment="Left" Margin="31,251,0,0" VerticalAlignment="Top"/>
-        <Label Content="Patient:" HorizontalAlignment="Left" Margin="32,43,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="commentButton" Content="DodajComment" HorizontalAlignment="Left" Margin="43,343,0,0" VerticalAlignment="Top" Height="31" Width="97" Click="commentButton_Click"/>
+        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="22" Margin="151,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="206"/>
+        <TextBox x:Name="textBox2" HorizontalAlignment="Left" Height="22" Margin="151,167,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="206"/>
+        <TextBox x:Name="textBox3" HorizontalAlignment="Left" Height="22" Margin="151,220,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="206"/>
+        <TextBox x:Name="textBox4" HorizontalAlignment="Left" Height="22" Margin="151,273,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="206"/>
+        <Label Content="ID:" HorizontalAlignment="Left" Margin="66,118,0,0" VerticalAlignment="Top"/>
+        <Label Content="Weight:" HorizontalAlignment="Left" Margin="66,160,0,0" VerticalAlignment="Top"/>
+        <Label Content="Height:" HorizontalAlignment="Left" Margin="66,213,0,0" VerticalAlignment="Top"/>
+        <Label Content="Blood Type" HorizontalAlignment="Left" Margin="66,266,0,0" VerticalAlignment="Top"/>
+        <Label Content="Patient:" HorizontalAlignment="Left" Margin="67,58,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="commentButton" Content="Dodaj Pregled" HorizontalAlignment="Left" Margin="78,343,0,0" VerticalAlignment="Top" Height="53" Width="113" Click="commentButton_Click"/>
 
         <DataGrid x:Name="NoviGrid" ItemsSource="{Binding}"
             AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" Margin="413,233,67,20">
@@ -55,6 +55,6 @@
 
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="dodajTerapiju" Content="Dodaj Terapiju" HorizontalAlignment="Left" Margin="204,343,0,0" VerticalAlignment="Top" Height="31" Width="80" Click="dodajTerapiju_Click"/>
+        <Button x:Name="dodajTerapiju" Content="Dodaj Terapiju" HorizontalAlignment="Left" Margin="244,343,0,0" VerticalAlignment="Top" Height="53" Width="113" Click="dodajTerapiju_Click"/>
     </Grid>
 </Window>

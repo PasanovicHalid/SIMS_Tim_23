@@ -139,6 +139,9 @@
     <Compile Include="View\Doctor\AddAppointment.xaml.cs">
       <DependentUpon>AddAppointment.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Doctor\AddAppointmentToDoctor.xaml.cs">
+      <DependentUpon>AddAppointmentToDoctor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Doctor\AddComment.xaml.cs">
       <DependentUpon>AddComment.xaml</DependentUpon>
     </Compile>
@@ -282,6 +285,10 @@
     <Compile Include="View\Manager\Model\Room\RoomModel.cs" />
     <Compile Include="View\ViewModel\Class1.cs" />
     <Page Include="View\Doctor\AddAppointment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Doctor\AddAppointmentToDoctor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
