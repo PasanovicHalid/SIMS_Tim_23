@@ -25,7 +25,7 @@ namespace ZdravoCorp.View.Patient
     public partial class Patient : Window
     {
         private Appointment app;
-        public Model.Doctor doctor { get; set; }
+        public  Model.Doctor doctor { get; set; }
         private DoctorController dc;
         public String NameSurname { get => NameSurname; set => NameSurname = value; }
         public Patient()
@@ -37,6 +37,7 @@ namespace ZdravoCorp.View.Patient
             DoctorCollection = new ObservableCollection<Model.Doctor>();
             RoomCollection = new ObservableCollection<Room>();
             UpdateTable();
+            PastAppointments();
 
         }
         public event PropertyChangedEventHandler PropertyChanged;
@@ -112,13 +113,14 @@ namespace ZdravoCorp.View.Patient
         private void UpdateTable()
         {
             
-            List<Appointment> appointments = appointmentController.GetAllAppointments();
-
+            List<Appointment> appointments = appointmentController.GetPastAppointments();
+            RoomController roomController = new RoomController();
             AppointmentsCollection = new ObservableCollection<Appointment>(appointments);
             List<Model.Doctor> doctors = new List<Model.Doctor>();
             foreach(Appointment a in appointments)
             {
-                doctors.Add(a.doctor);
+                a.doctor = dc.ReadDoctor(a.doctor.Id);
+                a.room = roomController.ReadRoom(a.room.Identifier);
             }
             DoctorCollection = new ObservableCollection<Model.Doctor>();
             PatientAppointmentTable.DataContext = AppointmentsCollection;
@@ -157,6 +159,37 @@ namespace ZdravoCorp.View.Patient
             }
             
             UpdateTable();
+        }
+
+        private void Survey_Click(object sender, RoutedEventArgs e)
+        {
+            AppointmentSurveyController appointmentSurveyController = new AppointmentSurveyController();
+            if (DoneAppointments.SelectedIndex == -1)
+            {
+                return;
+            }
+            else if (appointmentSurveyController.DoneSurvey(AppointmentsCollection.ElementAt(DoneAppointments.SelectedIndex)))
+            {
+                MessageBox.Show("Vec ste popunili anketu za ovaj pregled", "Pregled ocenjen", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+            ZdravoCorp.View.Patient.View.Survey.AppointmentSurveyView window = new ZdravoCorp.View.Patient.View.Survey.AppointmentSurveyView(AppointmentsCollection.ElementAt(DoneAppointments.SelectedIndex));
+            window.ShowDialog();
+        }
+
+        public void PastAppointments()
+        {
+            List<Appointment> appointments = appointmentController.GetPastAppointments();
+            RoomController roomController = new RoomController();
+            AppointmentsCollection = new ObservableCollection<Appointment>(appointments);
+            List<Model.Doctor> doctors = new List<Model.Doctor>();
+            foreach (Appointment a in appointments)
+            {
+                a.doctor = dc.ReadDoctor(a.doctor.Id);
+                a.room = roomController.ReadRoom(a.room.Identifier);
+            }
+            DoctorCollection = new ObservableCollection<Model.Doctor>();
+            DoneAppointments.DataContext = AppointmentsCollection;
         }
     }
 }

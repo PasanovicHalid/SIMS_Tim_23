@@ -5,21 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ZdravoCorp.View.Patient"
         mc:Ignorable="d"
-        Title="Patient" Height="500" Width="1000">
+        Title="{Binding}" Height="500" Width="1000">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="607*"/>
-            <ColumnDefinition Width="387*"/>
-            <ColumnDefinition Width="206*"/>
-        </Grid.ColumnDefinitions>
-        <TabControl SelectionChanged="TabControl_SelectionChanged" Grid.ColumnSpan="3" Margin="50,40,10,0">
+        <TabControl SelectionChanged="TabControl_SelectionChanged" Grid.ColumnSpan="3" Margin="30,30,30,30">
             <TabItem Header="Osnovni podaci">
                 <Grid 
-                    Background="#FFE5E5E5"
-                    Margin="30,30,30,30" 
+                    Background="#FFFFFF"
+                    Margin="30,10,30,0" 
                 >
-                    <Label x:Name ="Name"  Margin="49,26,613,300"/>
 
+                    <Image HorizontalAlignment="Left" Height="168" Margin="30,26,0,0" VerticalAlignment="Top" Width="130"/>
+                    <Button Content="Postavi sliku" Margin="45,208,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Height="35"/>
+                    <Label x:Name ="Name" Content="Ime"  Margin="204,26,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <Label x:Name="Surname" Content="Prezime" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="204,61,0,0"/>
+                    <Label x:Name="DateOfBirth" Content="Datum rodjenja" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="204,94,0,0"/>
+                    <Label x:Name="Gender" Content="Pol " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="204,126,0,0"/>
+                    <Label x:Name="JMBG" Content="JMBG " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="204,161,0,0"/>
+                    <Label x:Name="Telephone" Content="Kontakt telefon " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="204,194,0,0"/>
+                    <Label x:Name="Email" Content="Email " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="204,226,0,0"/>
+                    <TextBox TextWrapping="Wrap" Text="TextBox" Width="200"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="360,30,0,0"/>
+                    <TextBox TextWrapping="Wrap" Text="TextBox" Width="200"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="360,65,0,0"/>
+                    <TextBox TextWrapping="Wrap" Text="TextBox" Width="200"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="360,98,0,0"/>
+                    <TextBox TextWrapping="Wrap" Text="TextBox" Width="200"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="360,165,0,0"/>
+                    <TextBox TextWrapping="Wrap" Text="TextBox" Width="200"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="360,198,0,0"/>
+                    <TextBox TextWrapping="Wrap" Text="TextBox" Width="200"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="360,230,0,0"/>
+                    <RadioButton Content="Muško" Margin="360,132,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <RadioButton Content="Žensko" Margin="450,132,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <Button Content="Oceni bolnicu" Margin="30,302,0,0" Width="130" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Pregledi">
@@ -27,11 +39,6 @@
                     Background="#FFE5E5E5" 
                     Margin="30,10,30,10" Height="385" >
                     <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="384*"/>
-                            <ColumnDefinition Width="15*"/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
                         <DataGrid x:Name ="PatientAppointmentTable"
                             HorizontalAlignment="Left"
                             Height="268"
@@ -84,7 +91,7 @@
             </TabItem>
             <TabItem Header="Karton">
                 <Grid 
-                    Background="#FFE5E5E5" 
+                    Background="#FFFFFF" 
                     Margin="30,30,30,30" 
                 >
                     <Label 
@@ -117,19 +124,78 @@
                         Content="Krvna grupa"
                         Height="30" 
                         HorizontalAlignment="Left" 
-                        VerticalAlignment="Top" Margin="24,100,0,0"/>
-                    <ComboBox Margin="132,115,564,217"/>
+                        VerticalAlignment="Top" Margin="40,102,0,0"/>
+                    <ComboBox Margin="132,104,0,0" HorizontalAlignment="Left" 
+                        VerticalAlignment="Top" Width="120"/>
+                    <Label Content="Obavljeni pregledi" HorizontalAlignment="Left" 
+                        VerticalAlignment="Center" Margin="40,0,0,0"/>
+                    <DataGrid x:Name ="DoneAppointments"
+                            HorizontalAlignment="Left"
+                            Height="140"
+                            Margin="40,186,0,0" 
+                            VerticalAlignment="Top" 
+                            Width="604"
+                            ItemsSource="{Binding}"
+                            AutoGenerateColumns="False"
+                            SelectionMode="Single" 
+                            IsReadOnly="True">
+
+                        <DataGrid.Columns >
+                            <DataGridTextColumn Header="Doktor" Binding="{Binding NameSurname}" Width="*"/>
+                            <DataGridTextColumn Header="Pocetak" Binding="{Binding startDate}" Width="*"/>
+                            <DataGridTextColumn Header="Kraj" Binding="{Binding endDate}" Width="*"/>
+                            <DataGridTextColumn Header="Soba" Binding="{Binding Room.DesignationCode}" Width="*"/>
+
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button Content="Alergeni" HorizontalAlignment="Left" Margin="479,28,0,0" VerticalAlignment="Top"
+                            Width="100" Height="30"/>
+                    <Button Content="Istorija bolesti" HorizontalAlignment="Left" Margin="479,68,0,0" VerticalAlignment="Top"
+                        Width="100" Height="30"/>
+                    <Button Content="Prikaz izvestaja" HorizontalAlignment="Left" Margin="479,117,0,0" VerticalAlignment="Top"
+                        Width="100" Height="30"/>
+                    <Button Click="Survey_Click" Content="Anketa" HorizontalAlignment="Left" Height="30" Margin="698,28,0,0" VerticalAlignment="Top" Width="91"/>
                 </Grid>
 
             </TabItem>
-            <TabItem Header="Stagod2">
+            <TabItem Header="Terapije">
                 <Grid 
-                    Background="#FFE5E5E5" 
+                    Background="#FFFFFF" 
                     Margin="30,30,30,30" 
-                />
+                >
+                    <Label Content="Trenutne terapije" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.995,2.18" Margin="10,27,0,0"/>
+                    <DataGrid x:Name ="CurrentTherapies"
+                            HorizontalAlignment="Center"
+                            Height="201"
+                            Margin="0,81,0,0" 
+                            VerticalAlignment="Top" 
+                            Width="854"
+                            ItemsSource="{Binding}"
+                            AutoGenerateColumns="False"
+                            SelectionMode="Single" 
+                            IsReadOnly="True">
+
+                        <DataGrid.Columns >
+                            <DataGridTextColumn Header="Doktor" Binding="{Binding NameSurname}" Width="*"/>
+                            <DataGridTextColumn Header="Pocetak" Binding="{Binding startDate}" Width="*"/>
+                            <DataGridTextColumn Header="Kraj" Binding="{Binding endDate}" Width="*"/>
+                            <DataGridTextColumn Header="Soba" Binding="{Binding Room.DesignationCode}" Width="*"/>
+
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <TextBox HorizontalAlignment="Left" Height="25" Margin="744,28,0,0" TextWrapping="Wrap" Text="Pretraga" VerticalAlignment="Top" Width="120"/>
+                    <Button Content="Nedeljni izvestaj" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="744,306,0,0" Width="120" Height="30"/>
+
+                </Grid>
 
             </TabItem>
         </TabControl>
+        <Menu  VerticalAlignment="Top" Height="20" Width="1000">
+            <MenuItem Header="File" Width="50"/>
+            <MenuItem Header="Open" Width="50"/>
+            <Button Content="Odjavite se" Width="90"  Margin="796,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        </Menu>
+
 
 
 

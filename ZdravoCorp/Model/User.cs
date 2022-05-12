@@ -27,7 +27,7 @@ namespace Model
 
         protected List<Notification> notification;
         public string nameSurname { get => name + " " + surname; set => name = value; }
-        protected User(int id, string password, string username, string name, string surname, string jmbg, string email, string address, string phoneNumber, Gender gender, DateTime dateOfBirth, List<Notification> notification, List<Survey> survey)
+        protected User(int id, string password, string username, string name, string surname, string jmbg, string email, string address, string phoneNumber, Gender gender, DateTime dateOfBirth, List<Notification> notification, List<AppointmentSurvey> survey)
         {
             this.id = id;
             this.password = password;
@@ -41,7 +41,6 @@ namespace Model
             this.gender = gender;
             this.dateOfBirth = dateOfBirth;
             this.notification = notification;
-            this.survey = survey;
         }
 
         protected User()
@@ -133,81 +132,7 @@ namespace Model
                 tmpNotification.Clear();
             }
         }
-        protected List<Survey> survey;
-
-        /// <summary>
-        /// Property for collection of Survey
-        /// </summary>
-        /// <pdGenerated>Default opposite class collection property</pdGenerated>
-        public List<Survey> Survey
-        {
-            get
-            {
-                if (survey == null)
-                    survey = new List<Survey>();
-                return survey;
-            }
-            set
-            {
-                RemoveAllSurvey();
-                if (value != null)
-                {
-                    foreach (Survey oSurvey in value)
-                        AddSurvey(oSurvey);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Add a new Survey in the collection
-        /// </summary>
-        /// <pdGenerated>Default Add</pdGenerated>
-        public void AddSurvey(Survey newSurvey)
-        {
-            if (newSurvey == null)
-                return;
-            if (this.survey == null)
-                this.survey = new List<Survey>();
-            if (!this.survey.Contains(newSurvey))
-            {
-                this.survey.Add(newSurvey);
-                newSurvey.User = this;
-            }
-        }
-
-        /// <summary>
-        /// Remove an existing Survey from the collection
-        /// </summary>
-        /// <pdGenerated>Default Remove</pdGenerated>
-        public void RemoveSurvey(Survey oldSurvey)
-        {
-            if (oldSurvey == null)
-                return;
-            if (this.survey != null)
-                if (this.survey.Contains(oldSurvey))
-                {
-                    this.survey.Remove(oldSurvey);
-                    oldSurvey.User = null;
-                }
-        }
-
-        /// <summary>
-        /// Remove all instances of Survey from the collection
-        /// </summary>
-        /// <pdGenerated>Default removeAll</pdGenerated>
-        public void RemoveAllSurvey()
-        {
-            if (survey != null)
-            {
-                System.Collections.ArrayList tmpSurvey = new System.Collections.ArrayList();
-                foreach (Survey oldSurvey in survey)
-                    tmpSurvey.Add(oldSurvey);
-                survey.Clear();
-                foreach (Survey oldSurvey in tmpSurvey)
-                    oldSurvey.User = null;
-                tmpSurvey.Clear();
-            }
-        }
+        
 
         public List<String> ToCSV()
         {
