@@ -73,9 +73,9 @@ namespace Service
         public List<int> GetAllAppointmentsIds()
         {
             List<int> ids = new List<int>();
-            foreach(Appointment appointment in AppointmenService.Instance.GetAllAppointments())
+            foreach(AppointmentSurvey appointmentSurvey in GetAllAppointmentSurveys())
             {
-                ids.Add(appointment.Id);
+                ids.Add(appointmentSurvey.Appointment.Id);
             }
             return ids;
         }
