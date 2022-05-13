@@ -19,8 +19,7 @@ namespace Repository
         public Boolean CreateAppointment(Appointment newAppointment)
         {
             List<Appointment> appointments = GetAllAppointments();
-            int id = appointments.Count;
-            newAppointment.Id = id;
+            newAppointment.Id = appointments.Count + 1;
             appointments.Add(newAppointment);
             serializerAppointment.ToCSV(dbPath, appointments);
             return true;
@@ -33,9 +32,6 @@ namespace Repository
             {
                 if (id == appointment.Id)
                 {
-                    //appointment.doctor = DoctorRepository.Instance.ReadDoctor(appointment.doctor.Id);
-                    //appointment.Room = RoomRepository.Instance.ReadRoom(appointment.Room.Identifier);
-                    //appointment.Patient = PatientRepository.Instance.ReadPatient(appointment.Patient.Id);
                     return appointment;
                 }
             }
@@ -112,13 +108,6 @@ namespace Repository
         public List<Appointment> GetAllAppointments()
         {
             List<Appointment> appointments = serializerAppointment.FromCSV(dbPath);
-            foreach (Appointment appointment in appointments)
-            {
-                //appointment.doctor = DoctorRepository.Instance.ReadDoctor(appointment.doctor.Id);
-                //appointment.Room = RoomRepository.Instance.ReadRoom(appointment.Room.Identifier);
-                //appointment.Patient = PatientRepository.Instance.ReadPatient(appointment.Patient.Id);
-
-            }
             return appointments;
 
         }
