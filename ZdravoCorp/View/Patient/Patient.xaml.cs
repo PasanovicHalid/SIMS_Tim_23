@@ -161,7 +161,7 @@ namespace ZdravoCorp.View.Patient
             UpdateTable();
         }
 
-        private void Survey_Click(object sender, RoutedEventArgs e)
+        private void AppointmentSurvey_Click(object sender, RoutedEventArgs e)
         {
             AppointmentSurveyController appointmentSurveyController = new AppointmentSurveyController();
             if (DoneAppointments.SelectedIndex == -1)
@@ -190,6 +190,12 @@ namespace ZdravoCorp.View.Patient
             }
             DoctorCollection = new ObservableCollection<Model.Doctor>();
             DoneAppointments.DataContext = AppointmentsCollection;
+        }
+
+        private void HospitalSurvey_Click(object sender, RoutedEventArgs e)
+        {
+            ZdravoCorp.View.Patient.View.Survey.HospitalSurveyView window = new ZdravoCorp.View.Patient.View.Survey.HospitalSurveyView();
+            window.ShowDialog();
         }
     }
 }

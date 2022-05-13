@@ -15,11 +15,31 @@ namespace Repository
         private Serializer<Appointment> serializerAppointment = new Serializer<Appointment>();
 
         private static AppointmentRepository instance = null;
+        public List<int> GetAllAppointmentIds()
+        {
+            List<Appointment> appointemnts = GetAllAppointments();
+            List<int> ids = new List<int>();
+            foreach (Appointment survey in appointemnts)
+            {
+                ids.Add(survey.Id);
+            }
+            return ids;
+        }
+        public void GenerateId(Appointment newSurvey)
+        {
+            List<int> allAppointmentsIds = GetAllAppointmentIds();
+            Random random = new Random();
+            do
+            {
+                newSurvey.Id = random.Next();
+            }
+            while (allAppointmentsIds.Contains(newSurvey.Id));
 
+        }
         public Boolean CreateAppointment(Appointment newAppointment)
         {
             List<Appointment> appointments = GetAllAppointments();
-            newAppointment.Id = appointments.Count + 1;
+            GenerateId(newAppointment);
             appointments.Add(newAppointment);
             serializerAppointment.ToCSV(dbPath, appointments);
             return true;
@@ -28,14 +48,15 @@ namespace Repository
         public Appointment ReadAppointment(int id)
         {
             List<Appointment> appointments = GetAllAppointments();
-            foreach (Appointment appointment in appointments)
+            Appointment appointment = null;
+            foreach (Appointment app in appointments)
             {
-                if (id == appointment.Id)
+                if (id == app.Id)
                 {
-                    return appointment;
+                    appointment = app;
                 }
             }
-            return null;
+            return appointment;
         }
 
         public List<Appointment> GetAppointmentsById(List<int> id)
