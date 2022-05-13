@@ -134,6 +134,7 @@
     <Compile Include="Utility\DateManipulator.cs" />
     <Compile Include="View\Core\ObservableObject.cs" />
     <Compile Include="View\Core\RelayCommand.cs" />
+    <Compile Include="View\Core\ViewModelInterface.cs" />
     <Compile Include="View\Core\WindowBrowser.cs" />
     <Compile Include="View\Core\WindowInterface.cs" />
     <Compile Include="View\Doctor\AddAppointment.xaml.cs">
@@ -175,7 +176,7 @@
     <Compile Include="View\Manager\Manager.xaml.cs">
       <DependentUpon>Manager.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Manager\ViewModel\Equipment\AddEquipmentTypeViewModel.cs" />
+    <Compile Include="View\Manager\ViewModel\Equipments\AddEquipmentTypeViewModel.cs" />
     <Compile Include="View\Manager\ViewModel\ContentViewModel.cs" />
     <Compile Include="View\Manager\Rooms\AddRoom.xaml.cs">
       <DependentUpon>AddRoom.xaml</DependentUpon>
@@ -201,42 +202,71 @@
     <Compile Include="View\Manager\Rooms\Rooms.xaml.cs">
       <DependentUpon>Rooms.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Manager\ViewModel\Equipment\AddEquipmentViewModel.cs" />
-    <Compile Include="View\Manager\ViewModel\Equipment\EquipmentViewModel.cs" />
-    <Compile Include="View\Manager\ViewModel\Equipment\ViewEquipmentViewModel.cs" />
+    <Compile Include="View\Manager\ViewModel\Equipments\AddEquipmentViewModel.cs" />
+    <Compile Include="View\Manager\ViewModel\Equipments\ChangeEquipmentPositionViewModel.cs" />
+    <Compile Include="View\Manager\ViewModel\Equipments\ViewReservedEquipmentViewModel.cs" />
+    <Compile Include="View\Manager\ViewModel\Equipments\EquipmentViewModel.cs" />
+    <Compile Include="View\Manager\ViewModel\Equipments\ReservedEquipmentViewModel.cs" />
+    <Compile Include="View\Manager\ViewModel\Equipments\ViewEquipmentViewModel.cs" />
     <Compile Include="View\Manager\ViewModel\MainViewModel.cs" />
+    <Compile Include="View\Manager\ViewModel\Rooms\AddRoomViewModel.cs" />
+    <Compile Include="View\Manager\ViewModel\Rooms\AddRoomTypeViewModel.cs" />
+    <Compile Include="View\Manager\ViewModel\Rooms\ViewRenovationTrueViewModel.cs" />
+    <Compile Include="View\Manager\ViewModel\Rooms\ViewRenovationFalseViewModel.cs" />
+    <Compile Include="View\Manager\ViewModel\Rooms\RenovatingRoomsViewModel.cs" />
+    <Compile Include="View\Manager\ViewModel\Rooms\RenovateRoomViewModel.cs" />
     <Compile Include="View\Manager\ViewModel\Rooms\RoomsViewModel.cs" />
-    <Compile Include="View\Manager\View\Equpment\AddEquipment.xaml.cs">
+    <Compile Include="View\Manager\ViewModel\Rooms\Framework.cs" />
+    <Compile Include="View\Manager\ViewModel\Rooms\ViewRoomViewModel.cs" />
+    <Compile Include="View\Manager\View\Equipments\AddEquipment.xaml.cs">
       <DependentUpon>AddEquipment.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Manager\View\Equpment\AddEquipmentType.xaml.cs">
+    <Compile Include="View\Manager\View\Equipments\ReservedEquipment.xaml.cs">
+      <DependentUpon>ReservedEquipment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Manager\View\Equipments\ViewEquipmentType.xaml.cs">
+      <DependentUpon>ViewEquipmentType.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Manager\View\Equipments\AddEquipmentType.xaml.cs">
       <DependentUpon>AddEquipmentType.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Manager\View\Room\AddRoom.xaml.cs">
+    <Compile Include="View\Manager\View\Equipments\ViewReservedEquipment.xaml.cs">
+      <DependentUpon>ViewReservedEquipment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Manager\View\Rooms\AddRoom.xaml.cs">
       <DependentUpon>AddRoom.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Manager\View\Room\AddRoomType.xaml.cs">
+    <Compile Include="View\Manager\View\Rooms\AddRoomType.xaml.cs">
       <DependentUpon>AddRoomType.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Manager\View\Equpment\ChangeEquipmentPosition.xaml.cs">
+    <Compile Include="View\Manager\View\Equipments\ChangeEquipmentPosition.xaml.cs">
       <DependentUpon>ChangeEquipmentPosition.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Manager\View\Equpment\Equipment.xaml.cs">
+    <Compile Include="View\Manager\View\Equipments\Equipment.xaml.cs">
       <DependentUpon>Equipment.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Manager\View\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Manager\View\Room\RenovateRoom.xaml.cs">
+    <Compile Include="View\Manager\View\Rooms\RenovateRoom.xaml.cs">
       <DependentUpon>RenovateRoom.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Manager\View\Equpment\ViewEquipment.xaml.cs">
+    <Compile Include="View\Manager\View\Equipments\ViewEquipment.xaml.cs">
       <DependentUpon>ViewEquipment.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Manager\View\Room\Rooms.xaml.cs">
+    <Compile Include="View\Manager\View\Rooms\RenovatingRooms.xaml.cs">
+      <DependentUpon>RenovatingRooms.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Manager\View\Rooms\Rooms.xaml.cs">
       <DependentUpon>Rooms.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Manager\View\Room\ViewRoom.xaml.cs">
+    <Compile Include="View\Manager\View\Rooms\ViewRenovationFalse.xaml.cs">
+      <DependentUpon>ViewRenovationFalse.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Manager\View\Rooms\ViewRenovationTrue.xaml.cs">
+      <DependentUpon>ViewRenovationTrue.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Manager\View\Rooms\ViewRoom.xaml.cs">
       <DependentUpon>ViewRoom.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Patient\Appointments\AddAppointment.xaml.cs">
@@ -269,13 +299,12 @@
     <Compile Include="View\Secretary\Secretary.xaml.cs">
       <DependentUpon>Secretary.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Manager\Model\Equipment\ChangeActionModel.cs" />
-    <Compile Include="View\Manager\Model\Equipment\EquipmentModel.cs" />
-    <Compile Include="View\Manager\Model\Equipment\EquipmentTypeModel.cs" />
-    <Compile Include="View\Manager\Model\Room\RenovationActionModel.cs" />
-    <Compile Include="View\Manager\Model\Room\RoomTypeModel.cs" />
-    <Compile Include="View\Manager\Model\Room\RoomModel.cs" />
-    <Compile Include="View\ViewModel\Class1.cs" />
+    <Compile Include="View\Manager\Model\Equipments\ChangeActionModel.cs" />
+    <Compile Include="View\Manager\Model\Equipments\EquipmentModel.cs" />
+    <Compile Include="View\Manager\Model\Equipments\EquipmentTypeModel.cs" />
+    <Compile Include="View\Manager\Model\Rooms\RenovationActionModel.cs" />
+    <Compile Include="View\Manager\Model\Rooms\RoomTypeModel.cs" />
+    <Compile Include="View\Manager\Model\Rooms\RoomModel.cs" />
     <Page Include="View\Doctor\AddAppointment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -372,27 +401,39 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Manager\View\Equpment\AddEquipment.xaml">
+    <Page Include="View\Manager\View\Equipments\AddEquipment.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Manager\View\Equpment\AddEquipmentType.xaml">
+    <Page Include="View\Manager\View\Equipments\ReservedEquipment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Manager\View\Room\AddRoom.xaml">
+    <Page Include="View\Manager\View\Equipments\ViewEquipmentType.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Manager\View\Equipments\AddEquipmentType.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Manager\View\Room\AddRoomType.xaml">
+    <Page Include="View\Manager\View\Equipments\ViewReservedEquipment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Manager\View\Equpment\ChangeEquipmentPosition.xaml">
+    <Page Include="View\Manager\View\Rooms\AddRoom.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Manager\View\Equpment\Equipment.xaml">
+    <Page Include="View\Manager\View\Rooms\AddRoomType.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Manager\View\Equipments\ChangeEquipmentPosition.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Manager\View\Equipments\Equipment.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -400,19 +441,31 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Manager\View\Room\RenovateRoom.xaml">
+    <Page Include="View\Manager\View\Rooms\RenovateRoom.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Manager\View\Equpment\ViewEquipment.xaml">
+    <Page Include="View\Manager\View\Equipments\ViewEquipment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Manager\View\Room\Rooms.xaml">
+    <Page Include="View\Manager\View\Rooms\RenovatingRooms.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Manager\View\Rooms\Rooms.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Manager\View\Room\ViewRoom.xaml">
+    <Page Include="View\Manager\View\Rooms\ViewRenovationFalse.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Manager\View\Rooms\ViewRenovationTrue.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Manager\View\Rooms\ViewRoom.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -560,20 +613,19 @@
     <Resource Include="Resources\Fonts\OFL.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\Icons\employees.svg" />
+    <Resource Include="Resources\Icons\equipment.svg" />
+    <Resource Include="Resources\Icons\home.svg" />
     <Resource Include="Resources\Icons\medicine.svg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\Icons\rooms.svg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Icons\home.svg" />
+    <Resource Include="Resources\Icons\add-all.svg" />
+    <Resource Include="Resources\Icons\booking-pending.svg" />
+    <Resource Include="Resources\Icons\timecard.svg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Icons\equipment.svg" />
+    <Resource Include="Resources\Icons\category.svg" />
   </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Icons\employees.svg" />
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

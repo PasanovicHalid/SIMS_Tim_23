@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 using ZdravoCorp.View.Core;
 using ZdravoCorp.View.Manager.View;
-using ZdravoCorp.View.Manager.ViewModel.Equipment;
+using ZdravoCorp.View.Manager.View.Equipments;
+using ZdravoCorp.View.Manager.ViewModel.Equipments;
 using ZdravoCorp.View.Manager.ViewModel.Rooms;
 
 namespace ZdravoCorp.View.Manager.ViewModel
@@ -18,16 +21,18 @@ namespace ZdravoCorp.View.Manager.ViewModel
         private WindowBrowser _windowBrowser;
         private String _title;
 
-        private WindowInterface _currentView;
+        private UserControl _currentView;
 
-        public WindowInterface CurrentView
+        public UserControl CurrentView
         {
             get => _currentView;
             set
             {
                 if (value != _currentView)
                 {
-                    Title = value.getTitle();
+                    ViewModelInterface context = (ViewModelInterface)value.DataContext;
+                    Title = context.GetTitle();
+                    context.Update();
                     _currentView = value;
                     OnPropertyChanged();
                 }
@@ -72,13 +77,13 @@ namespace ZdravoCorp.View.Manager.ViewModel
 
             RoomViewCommand = new RelayCommand(o =>
             {
-                CurrentView = new View.Room.Rooms(new RoomsViewModel());
+                CurrentView = new View.Rooms.Rooms(new RoomsViewModel());
                 WindowBrowser.AddWindow(CurrentView);
             });
 
             EquipmentViewCommand = new RelayCommand(o =>
             {
-                CurrentView = new View.Equipment.Equipment(new EquipmentViewModel());
+                CurrentView = new Equipment(new EquipmentViewModel());
                 WindowBrowser.AddWindow(CurrentView);
             });
 

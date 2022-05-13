@@ -7,7 +7,7 @@
 using Repository;
 using System;
 using System.Collections.Generic;
-using ZdravoCorp.View.Manager.Model.Equipment;
+using ZdravoCorp.View.Manager.Model.Equipments;
 
 namespace Model
 {

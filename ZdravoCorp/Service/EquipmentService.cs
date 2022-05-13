@@ -8,8 +8,8 @@ using Repository;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using ZdravoCorp.View.Manager.Model.Equipment;
-using ZdravoCorp.View.Manager.Model.Room;
+using ZdravoCorp.View.Manager.Model.Equipments;
+using ZdravoCorp.View.Manager.Model.Rooms;
 
 namespace Service
 {

@@ -1,0 +1,125 @@
+﻿<UserControl x:Class="ZdravoCorp.View.Manager.View.Equipments.Equipment"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
+             mc:Ignorable="d" 
+             d:DesignHeight="667" d:DesignWidth="430">
+    <Grid>
+        <Button HorizontalAlignment="Left" 
+                Margin="8,16,0,0" 
+                VerticalAlignment="Top" 
+                Height="42" 
+                Width="48"
+                Command="{Binding AddEquipmentViewCommand}"
+                Style="{StaticResource ManagerButtons}">
+            <StackPanel>
+                <svgc:SvgViewbox Source="\Resources\Icons\add-all.svg" Width="28" Height="25"/>
+                <Label  Content="Add" 
+                        Style="{DynamicResource ButtonLabel}" 
+                        FontSize="8"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Top"
+                        Padding="0,0,0,0"
+                        Height="13" Width="40"/>
+            </StackPanel>
+        </Button>
+
+        <Button HorizontalAlignment="Left" 
+                Margin="61,16,0,0"
+                VerticalAlignment="Top" 
+                Height="42" 
+                Width="48"
+                Style="{StaticResource ManagerButtons}">
+            <StackPanel>
+                <svgc:SvgViewbox Source="\Resources\Icons\category.svg" Width="28" Height="25"/>
+                <Label  Content="Types" 
+                        Style="{DynamicResource ButtonLabel}" 
+                        FontSize="8"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Top"
+                        Padding="0,0,0,0"
+                        Height="13" Width="40"/>
+            </StackPanel>
+        </Button>
+
+        <Button HorizontalAlignment="Left" 
+                Margin="114,16,0,0" 
+                VerticalAlignment="Top" 
+                Height="42" 
+                Width="48"
+                Style="{StaticResource ManagerButtons}"
+                Command="{Binding ChangePositionCommand}">
+            <StackPanel>
+                <svgc:SvgViewbox Source="\Resources\Icons\timecard.svg" Width="28" Height="25"/>
+                <Label  Content="Move" 
+                        Style="{DynamicResource ButtonLabel}" 
+                        FontSize="8"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Top"
+                        Padding="0,0,0,0"
+                        Height="13" Width="40"/>
+            </StackPanel>
+        </Button>
+
+        <Button HorizontalAlignment="Left" 
+                Margin="167,16,0,0" 
+                VerticalAlignment="Top" 
+                Height="42" 
+                Width="48"
+                Style="{StaticResource ManagerButtons}"
+                Command="{Binding ReservedCommand}">
+            <StackPanel>
+                <svgc:SvgViewbox Source="\Resources\Icons\booking-pending.svg" Width="28" Height="25"/>
+                <Label  Content="Reserved" 
+                        Style="{DynamicResource ButtonLabel}" 
+                        FontSize="8"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Top"
+                        Padding="0,0,0,0"
+                        Height="13" Width="40"/>
+            </StackPanel>
+        </Button>
+
+        <DataGrid x:Name="EquipmentTable" 
+                      ItemsSource="{Binding EquipmentTable}" 
+                      Margin="0,70,0,0" 
+                      AutoGenerateColumns="False"
+                      SelectionMode="Single" 
+                      IsReadOnly="True"
+                      Background="Transparent" 
+                      CanUserResizeRows="False"
+                      FontFamily="/Resources/Fonts/#Poppins"
+                      TextBlock.TextAlignment="Left"
+                      FontSize="13"
+                      SelectedItem="{Binding SelectedEquipment, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedIndex="{Binding SelectedIndex, UpdateSourceTrigger=PropertyChanged}"
+                      Style="{DynamicResource ManagerTables}"
+                      
+                      BorderThickness="2"
+                      HorizontalGridLinesBrush="Transparent"
+                      VerticalGridLinesBrush="Transparent" 
+                      >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
+                <DataGridTextColumn Header="Location" Binding="{Binding DesignationCode}" Width="*"/>
+                <DataGridTextColumn Header="Count" Binding="{Binding Count}" Width="*"/>
+            </DataGrid.Columns>
+            <DataGrid.InputBindings>
+                <MouseBinding Gesture="LeftDoubleClick" Command="{Binding ViewEquipmentCommand}"/>
+            </DataGrid.InputBindings>
+        </DataGrid>
+
+        <TextBox HorizontalAlignment="Left"
+                     Margin="265,16,0,0" 
+                     TextWrapping="Wrap" 
+                     Text="" 
+                     VerticalAlignment="Top" 
+                     Width="155"
+                     Style="{StaticResource ManagerSearch}"
+                     Tag="Search"
+                     Name="Search" 
+                     Height="42"/>
+    </Grid>
+</UserControl>

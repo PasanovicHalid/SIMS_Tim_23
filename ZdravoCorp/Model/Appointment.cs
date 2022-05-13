@@ -7,6 +7,7 @@
 using Repository;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace Model
 {
@@ -92,11 +93,30 @@ namespace Model
             }
         }
 
+
+
         public int Id { get => id; set => id = value; }
         public DateTime StartDate { get => startDate; set => startDate = value; }
         public DateTime EndDate { get => endDate; set => endDate = value; }
         public Doctor Doctor { get => doctor; set => doctor = value; }
         public String NameSurname { get => doctor.nameSurname; set => doctor.nameSurname = value; }
+
+        public string StartDateString
+        {
+            get => StartDate.ToString("g", CultureInfo.GetCultureInfo("en-GB"));
+            set
+            {
+                    StartDate = DateTime.Parse(value);
+            }
+        }
+
+        public TimeSpan Duration
+        {
+            get
+            {
+                return EndDate - StartDate;
+            }
+        }
 
         public int DoctorID { get => doctor.Id; set => doctor.Id = value; }
 

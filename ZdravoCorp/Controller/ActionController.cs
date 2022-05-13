@@ -5,8 +5,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ZdravoCorp.View.Manager.Model.Equipment;
-using ZdravoCorp.View.Manager.Model.Room;
+using ZdravoCorp.View.Manager.Model.Equipments;
+using ZdravoCorp.View.Manager.Model.Rooms;
 
 namespace Controller
 {

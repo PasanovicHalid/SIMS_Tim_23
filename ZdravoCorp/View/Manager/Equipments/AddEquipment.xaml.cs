@@ -14,8 +14,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using ZdravoCorp.View.Manager.Model.Equipment;
-using ZdravoCorp.View.Manager.Model.Room;
+using ZdravoCorp.View.Manager.Model.Equipments;
+using ZdravoCorp.View.Manager.Model.Rooms;
 
 namespace ZdravoCorp.View.Manager.Equipments
 {

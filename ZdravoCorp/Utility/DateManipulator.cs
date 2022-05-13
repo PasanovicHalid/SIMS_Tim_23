@@ -20,5 +20,10 @@ namespace ZdravoCorp.Utility
             return date.Add(time);
         }
 
+        public static TimeSpan Duration(DateTime start, DateTime end)
+        {
+            return end.Subtract(start);
+        }
+
     }
 }

@@ -263,6 +263,19 @@ namespace Model
         {
         }
 
+        public Room(Room room)
+        {
+            this.identifier = room.identifier;
+            this.designationCode = room.designationCode;
+            this.surfaceArea = room.surfaceArea;
+            this.renovating = room.renovating;
+            this.renovatedUntil = room.renovatedUntil;
+            Appointment = room.appointment;
+            Equipment = room.equipment;
+            RoomType = room.roomType;
+            Medication = room.medication;
+        }
+
         public List<String> ToCSV()
         {
             List<String> result = new List<String>();

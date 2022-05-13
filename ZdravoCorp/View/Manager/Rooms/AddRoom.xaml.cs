@@ -16,7 +16,7 @@ using System.Windows.Shapes;
 using Model;
 using Controller;
 using System.Collections.ObjectModel;
-using ZdravoCorp.View.Manager.Model.Room;
+using ZdravoCorp.View.Manager.Model.Rooms;
 
 namespace ZdravoCorp.View.Manager.Rooms
 {

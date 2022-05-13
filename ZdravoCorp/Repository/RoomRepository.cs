@@ -125,7 +125,7 @@ namespace Repository
             List<Room> rooms = serializerRoom.FromCSV(dbPath);
 
             Dictionary<int, EquipmentType> types = EquipmentRepository.Instance.GetAllEquipmentType().ToDictionary(keySelector: m => m.Identifier, elementSelector: m => m);
-
+            List<Appointment> appointments = new List<Appointment>();
             foreach (Room room in rooms)
             {
                 if (identifier ==(room.Identifier))
@@ -137,6 +137,11 @@ namespace Repository
                             equipment.EquipmentType = types[equipment.Identifier];
                         }
                     }
+                    foreach (Appointment app in room.Appointment)
+                    {
+                        appointments.Add(AppointmentRepository.Instance.ReadAppointment(app.Id));
+                    }
+                    room.Appointment = appointments;
                     return room;
                 }
             }
@@ -284,6 +289,7 @@ namespace Repository
                         appointments.Add(AppointmentRepository.Instance.ReadAppointment(app.Id));
                     }
                     room.Appointment = appointments;
+                    appointments = new List<Appointment>();
                 }
                 return result;
             }

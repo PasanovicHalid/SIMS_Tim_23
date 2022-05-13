@@ -7,7 +7,7 @@
 using Repository;
 using System;
 using System.Collections.Generic;
-using ZdravoCorp.View.Manager.Model.Room;
+using ZdravoCorp.View.Manager.Model.Rooms;
 
 namespace Model
 {

@@ -6,15 +6,18 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using ZdravoCorp.View.Core;
 using ZdravoCorp.View.Manager.View;
-using ZdravoCorp.View.Manager.View.Room;
+using ZdravoCorp.View.Manager.View.Rooms;
 
 namespace ZdravoCorp.View.Manager.ViewModel.Rooms
 {
-    public class RoomsViewModel : ObservableObject, WindowInterface
+    public class RoomsViewModel : ObservableObject, ViewModelInterface
     {
         public RoomController roomController;
+        private Room selectedRoom;
+        private int selectedIndex;
 
         public ObservableCollection<Room> RoomsCollection
         {
@@ -22,9 +25,13 @@ namespace ZdravoCorp.View.Manager.ViewModel.Rooms
             set;
         }
 
-        public RelayCommand AddViewCommand { get; set; }
+        public RelayCommand ViewRoomCommand { get; set; }
 
-        public WindowInterface CurrentView
+        public RelayCommand AddRoomCommand { get; set; }
+
+        public RelayCommand RenovationsCommand { get; set; }
+
+        public UserControl CurrentView
         {
             get => ContentViewModel.Instance.CurrentView;
             set
@@ -38,32 +45,70 @@ namespace ZdravoCorp.View.Manager.ViewModel.Rooms
             }
         }
 
+        public Room SelectedRoom
+        {
+            get => selectedRoom;
+            set
+            {
+                if (value != selectedRoom)
+                {
+                    selectedRoom = value;
+                    OnPropertyChanged();
+                }
+            }
+
+        }
+
+        public int SelectedIndex
+        {
+            get => selectedIndex;
+            set
+            {
+                if (value != selectedIndex)
+                {
+                    selectedIndex = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         public RoomsViewModel()
         {
             roomController = new RoomController();
             RoomsCollection = new ObservableCollection<Room>();
 
-            AddViewCommand = new RelayCommand(o =>
+            ViewRoomCommand = new RelayCommand(o =>
             {
-                CurrentView = new ViewRoom();
+                CurrentView = new ViewRoom(new ViewRoomViewModel(SelectedRoom));
+            }, checkIfTableRowSelected);
+
+            AddRoomCommand = new RelayCommand(o =>
+            {
+                CurrentView = new AddRoom(new AddRoomViewModel());
             });
 
-            UpdateTable();
+            RenovationsCommand = new RelayCommand(o =>
+            {
+                CurrentView = new RenovatingRooms(new RenovatingRoomsViewModel());
+            });
+
+            Update();
         }
 
-        public string getTitle()
+        private bool checkIfTableRowSelected(object arg)
+        {
+            return SelectedIndex != -1;
+        }
+
+        public string GetTitle()
         {
             return "Rooms";
         }
 
-        private void UpdateTable()
+        public void Update()
         {
-            RoomsCollection = new ObservableCollection<Room>();
             List<Room> rooms = roomController.GetAllRooms();
-            foreach (Room room in rooms)
-            {
-                RoomsCollection.Add(room);
-            }
+            RoomsCollection = new ObservableCollection<Room>(rooms);
         }
     }
 }

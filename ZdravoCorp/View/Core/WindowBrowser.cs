@@ -3,24 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace ZdravoCorp.View.Core
 {
     public class WindowBrowser
     {
-        private List<WindowInterface> _navigable;
+        private List<UserControl> _navigable;
         private int _position;
 
         public WindowBrowser()
         {
-            Navigable = new List<WindowInterface>();
+            Navigable = new List<UserControl>();
             Position = Navigable.Count;
         }
 
-        public List<WindowInterface> Navigable { get => _navigable; set => _navigable = value; }
+        public List<UserControl> Navigable { get => _navigable; set => _navigable = value; }
         public int Position { get => _position; set => _position = value; }
 
-        public void AddWindow(WindowInterface window)
+        public void AddWindow(UserControl window)
         {
             if(window == null)
             {
@@ -42,7 +44,7 @@ namespace ZdravoCorp.View.Core
             }
         }
 
-        public WindowInterface BackWindow()
+        public UserControl BackWindow()
         {
             if(Position == 1)
             {
@@ -55,7 +57,7 @@ namespace ZdravoCorp.View.Core
             }
         }
 
-        public WindowInterface ForwardWindow()
+        public UserControl ForwardWindow()
         {
             if (Position == Navigable.Count)
             {
@@ -68,7 +70,7 @@ namespace ZdravoCorp.View.Core
             }
         }
 
-        public WindowInterface CurrentWindow()
+        public UserControl CurrentWindow()
         {
             return Navigable[Position - 1];
         }

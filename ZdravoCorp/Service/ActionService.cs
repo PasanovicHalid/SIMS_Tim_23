@@ -10,8 +10,8 @@ using Model;
 using ZdravoCorp.Utility;
 using System.Threading;
 using System.Collections.ObjectModel;
-using ZdravoCorp.View.Manager.Model.Equipment;
-using ZdravoCorp.View.Manager.Model.Room;
+using ZdravoCorp.View.Manager.Model.Equipments;
+using ZdravoCorp.View.Manager.Model.Rooms;
 
 namespace Service
 {

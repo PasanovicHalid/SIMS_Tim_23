@@ -8,7 +8,7 @@ using Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using ZdravoCorp.View.Manager.Model.Equipment;
+using ZdravoCorp.View.Manager.Model.Equipments;
 
 namespace Model
 {
@@ -38,6 +38,8 @@ namespace Model
         public int Identifier { get => equipmentType.Identifier; set => equipmentType.Identifier = value; }
         public int Count { get => count; set => count = value; }
         public int Actual_count { get => actual_count; set => actual_count = value; }
+
+        public string Name { get => equipmentType.Name; set => equipmentType.Name = value; }
 
         public Equipment(int identifier, int count, int actual_count)
         {

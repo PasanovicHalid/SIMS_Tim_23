@@ -13,7 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using ZdravoCorp.View.Manager.Model.Equipment;
+using ZdravoCorp.View.Manager.Model.Equipments;
 
 namespace ZdravoCorp.View.Manager.Equipments
 {

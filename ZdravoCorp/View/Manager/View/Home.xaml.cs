@@ -38,7 +38,7 @@ namespace ZdravoCorp.View.Manager.View
 
         private void Equipment_Click(object sender, RoutedEventArgs e)
         {
-            Equipments.Equipments window = new Equipments.Equipments();
+            ZdravoCorp.View.Manager.Equipments.Equipments window = new ZdravoCorp.View.Manager.Equipments.Equipments();
             window.ShowDialog();
         }
 

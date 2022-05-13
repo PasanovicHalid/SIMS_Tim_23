@@ -2,7 +2,6 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:ZdravoCorp"
-             xmlns:viewModel="clr-namespace:ZdravoCorp.View.ViewModel"
              xmlns:managerViewModel="clr-namespace:ZdravoCorp.View.Manager.ViewModel"
              xmlns:managerView="clr-namespace:ZdravoCorp.View.Manager.View"
              StartupUri="View/MainWindow.xaml">
@@ -11,27 +10,6 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="View/Styles/Styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-
-            <!--<DataTemplate DataType="{x:Type managerViewModel:MainViewModel}">
-                <managerView:Home/>
-            </DataTemplate>-->
-
-            <!--<DataTemplate DataType="{x:Type managerViewModel:RoomsViewModel}">
-                <managerView:Rooms/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type managerViewModel:EquipmentViewModel}">
-                <managerView:Equipment/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type managerViewModel:AddEquipmentViewModel}">
-                <managerView:AddEquipment/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type managerViewModel:AddEquipmentTypeViewModel}">
-                <managerView:AddEquipmentType/>
-            </DataTemplate>-->
-
         </ResourceDictionary>
     </Application.Resources>
 </Application>
