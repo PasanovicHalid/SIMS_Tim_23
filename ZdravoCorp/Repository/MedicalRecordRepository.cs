@@ -14,6 +14,27 @@ namespace Repository
 
         private static MedicalRecordRepository instance = null;
 
+        public List<int> GetAllMedicalRecordIds()
+        {
+            List<MedicalRecord> medicalRecords = GetAllRecords();
+            List<int> ids = new List<int>();
+            foreach (MedicalRecord medicalRecord in medicalRecords)
+            {
+                ids.Add(medicalRecord.Id);
+            }
+            return ids;
+        }
+        public void GenerateId(MedicalRecord newMedicalRecord)
+        {
+            List<int> allMedicalRecordsIds = GetAllMedicalRecordIds();
+            Random random = new Random();
+            do
+            {
+                newMedicalRecord.Id = random.Next();
+            }
+            while (allMedicalRecordsIds.Contains(newMedicalRecord.Id));
+        }
+
         public Boolean CreateMedicalRecord(MedicalRecord newRecord)
         {
             List<MedicalRecord> records = GetAllRecords();
@@ -22,7 +43,7 @@ namespace Repository
 
             if (!exists)
             {
-                newRecord.Id = records.Count + 1;
+                GenerateId(newRecord);
                 records.Add(newRecord);
                 serializerRecord.ToCSV(dbPath, records);
                 return true;

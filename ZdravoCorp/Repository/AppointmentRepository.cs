@@ -19,22 +19,21 @@ namespace Repository
         {
             List<Appointment> appointemnts = GetAllAppointments();
             List<int> ids = new List<int>();
-            foreach (Appointment survey in appointemnts)
+            foreach (Appointment appointment in appointemnts)
             {
-                ids.Add(survey.Id);
+                ids.Add(appointment.Id);
             }
             return ids;
         }
-        public void GenerateId(Appointment newSurvey)
+        public void GenerateId(Appointment newAppointment)
         {
             List<int> allAppointmentsIds = GetAllAppointmentIds();
             Random random = new Random();
             do
             {
-                newSurvey.Id = random.Next();
+                newAppointment.Id = random.Next();
             }
-            while (allAppointmentsIds.Contains(newSurvey.Id));
-
+            while (allAppointmentsIds.Contains(newAppointment.Id));
         }
         public Boolean CreateAppointment(Appointment newAppointment)
         {
@@ -85,15 +84,15 @@ namespace Repository
                 if (appointment.Id == appointments[i].Id)
                 {
                     success = true;
-                    DeleteAppointment(appointment.Id);
-                    //appointments[i] = appointment;
+                    //DeleteAppointment(appointment.Id);
+                    appointments[i] = appointment;
                     break;
                 }
             }
             if (success)
             {
-                appointments = GetAllAppointments();
-                appointments.Add(appointment);
+                //appointments = GetAllAppointments();
+                //appointments.Add(appointment);
                 serializerAppointment.ToCSV(dbPath, appointments);
             }
             return success;

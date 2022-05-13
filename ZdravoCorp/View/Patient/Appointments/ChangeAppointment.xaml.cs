@@ -55,7 +55,10 @@ namespace ZdravoCorp.View.Patient.Appointments
             doctor = doctorController.ReadDoctor(appointment.doctor.Id);
             selectedIndex = doctor.Id;
             DoctorsCB.SelectedIndex = selectedIndex;
-            selectedDate = appointment.startDate;
+            DateTime dt = appointment.StartDate;
+            String s = dt.ToString();
+            datePicker.SelectedDate = appointment.StartDate;
+            //selectedDate = appointment.startDate;
             this.exDate = appointment.StartDate;
         }
 

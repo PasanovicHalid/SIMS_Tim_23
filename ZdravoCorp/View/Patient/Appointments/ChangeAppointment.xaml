@@ -39,8 +39,10 @@
             SelectedDateFormat="Short"
             FirstDayOfWeek="Monday"
             IsTodayHighlighted="True"
-            Name="datePicker"
-            SelectedDate="{Binding selectedDate}">
+            x:Name="datePicker"
+            >
+            <!--SelectedDate="{Binding selectedDate}"-->
+            
             <DatePicker.BlackoutDates>
                 <CalendarDateRange End="{x:Static sys:DateTime.Today}" Start="{x:Static sys:DateTime.MinValue}" />
             </DatePicker.BlackoutDates>

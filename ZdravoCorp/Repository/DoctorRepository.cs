@@ -18,6 +18,26 @@ namespace Repository
 
         private static DoctorRepository instance = null;
 
+        public List<int> GetAllDoctorIds()
+        {
+            List<Doctor> doctors = GetAllDoctors();
+            List<int> ids = new List<int>();
+            foreach (Doctor doctor in doctors)
+            {
+                ids.Add(doctor.Id);
+            }
+            return ids;
+        }
+        public void GenerateId(Doctor newDoctor)
+        {
+            List<int> allDoctorsIds = GetAllDoctorIds();
+            Random random = new Random();
+            do
+            {
+                newDoctor.Id = random.Next();
+            }
+            while (allDoctorsIds.Contains(newDoctor.Id));
+        }
         public Boolean CreateDoctor(Model.Doctor newDoctor)
         {
             List<Doctor> doctors = GetAllDoctors();
@@ -33,7 +53,7 @@ namespace Repository
             }
             if (!exists)
             {
-                newDoctor.Id = doctors.Count + 1;
+                GenerateId(newDoctor);
                 doctors.Add(newDoctor);
                 serializerDoctor.ToCSV(dbPath, doctors);
                 return true;

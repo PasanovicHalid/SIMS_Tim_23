@@ -33,7 +33,8 @@ namespace ZdravoCorp.View.Patient
             InitializeComponent();
             appointmentController = new AppointmentController();
             dc = new DoctorController();
-            AppointmentsCollection = new ObservableCollection<Appointment>();
+            FutureAppointmentsCollection = new ObservableCollection<Appointment>();
+            PastAppointmentsCollection = new ObservableCollection<Appointment>();
             DoctorCollection = new ObservableCollection<Model.Doctor>();
             RoomCollection = new ObservableCollection<Room>();
             UpdateTable();
@@ -93,7 +94,12 @@ namespace ZdravoCorp.View.Patient
         }
         public AppointmentController appointmentController;
 
-        public ObservableCollection<Appointment> AppointmentsCollection
+        public ObservableCollection<Appointment> FutureAppointmentsCollection
+        {
+            get;
+            set;
+        }
+        public ObservableCollection<Appointment> PastAppointmentsCollection
         {
             get;
             set;
@@ -113,17 +119,15 @@ namespace ZdravoCorp.View.Patient
         private void UpdateTable()
         {
             
-            List<Appointment> appointments = appointmentController.GetPastAppointments();
+            List<Appointment> appointments = appointmentController.GetFutureAppointments();
             RoomController roomController = new RoomController();
-            AppointmentsCollection = new ObservableCollection<Appointment>(appointments);
-            List<Model.Doctor> doctors = new List<Model.Doctor>();
+            FutureAppointmentsCollection = new ObservableCollection<Appointment>(appointments);
             foreach(Appointment a in appointments)
             {
                 a.doctor = dc.ReadDoctor(a.doctor.Id);
                 a.room = roomController.ReadRoom(a.room.Identifier);
             }
-            DoctorCollection = new ObservableCollection<Model.Doctor>();
-            PatientAppointmentTable.DataContext = AppointmentsCollection;
+            PatientAppointmentTable.DataContext = FutureAppointmentsCollection;
         }
         private void Add_Appointment(object sender, RoutedEventArgs e)
         {
@@ -139,8 +143,15 @@ namespace ZdravoCorp.View.Patient
             {
                 return;
             }
-
-            ChangeAppointment change = new ChangeAppointment(AppointmentsCollection.ElementAt(PatientAppointmentTable.SelectedIndex));
+            //List<Appointment> appointments = appointmentController.GetFutureAppointments();
+            //AppointmentsCollection = new ObservableCollection<Appointment>(appointments);
+            ////PatientAppointmentTable.DataContext = AppointmentsCollection;
+            //int i = PatientAppointmentTable.SelectedIndex;
+            DateTime dt = FutureAppointmentsCollection.ElementAt(PatientAppointmentTable.SelectedIndex).startDate;
+            int year = dt.Year;
+            int month = dt.Month;
+            int day = dt.Day;
+            ChangeAppointment change = new ChangeAppointment((Appointment)PatientAppointmentTable.SelectedItem);
             change.ShowDialog();
             UpdateTable();
 
@@ -152,7 +163,7 @@ namespace ZdravoCorp.View.Patient
             {
                 return;
             }
-            if (!appointmentController.DeleteAppointment(AppointmentsCollection.ElementAt(PatientAppointmentTable.SelectedIndex).Id))
+            if (!appointmentController.DeleteAppointment(FutureAppointmentsCollection.ElementAt(PatientAppointmentTable.SelectedIndex).Id))
             {
                 MessageBox.Show("Element ne postoji u bazi podataka", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
@@ -168,12 +179,12 @@ namespace ZdravoCorp.View.Patient
             {
                 return;
             }
-            else if (appointmentSurveyController.DoneSurvey(AppointmentsCollection.ElementAt(DoneAppointments.SelectedIndex)))
+            else if (appointmentSurveyController.DoneSurvey(PastAppointmentsCollection.ElementAt(DoneAppointments.SelectedIndex)))
             {
                 MessageBox.Show("Vec ste popunili anketu za ovaj pregled", "Pregled ocenjen", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
-            ZdravoCorp.View.Patient.View.Survey.AppointmentSurveyView window = new ZdravoCorp.View.Patient.View.Survey.AppointmentSurveyView(AppointmentsCollection.ElementAt(DoneAppointments.SelectedIndex));
+            ZdravoCorp.View.Patient.View.Survey.AppointmentSurveyView window = new ZdravoCorp.View.Patient.View.Survey.AppointmentSurveyView(PastAppointmentsCollection.ElementAt(DoneAppointments.SelectedIndex));
             window.ShowDialog();
         }
 
@@ -181,7 +192,7 @@ namespace ZdravoCorp.View.Patient
         {
             List<Appointment> appointments = appointmentController.GetPastAppointments();
             RoomController roomController = new RoomController();
-            AppointmentsCollection = new ObservableCollection<Appointment>(appointments);
+            PastAppointmentsCollection = new ObservableCollection<Appointment>(appointments);
             List<Model.Doctor> doctors = new List<Model.Doctor>();
             foreach (Appointment a in appointments)
             {
@@ -189,7 +200,7 @@ namespace ZdravoCorp.View.Patient
                 a.room = roomController.ReadRoom(a.room.Identifier);
             }
             DoctorCollection = new ObservableCollection<Model.Doctor>();
-            DoneAppointments.DataContext = AppointmentsCollection;
+            DoneAppointments.DataContext = PastAppointmentsCollection;
         }
 
         private void HospitalSurvey_Click(object sender, RoutedEventArgs e)
