@@ -119,7 +119,6 @@
     <Compile Include="Repository\SecretaryRepository.cs" />
     <Compile Include="Repository\Serializable.cs" />
     <Compile Include="Repository\Serializer.cs" />
-    <Compile Include="Repository\SuggestionsRepository.cs" />
     <Compile Include="Service\ActionService.cs" />
     <Compile Include="Service\HospitalSurveyService.cs" />
     <Compile Include="Service\AppointmentSurveyService.cs" />
