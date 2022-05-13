@@ -8,7 +8,7 @@
         Title="{Binding}" Height="500" Width="1000">
     <Grid>
         <TabControl SelectionChanged="TabControl_SelectionChanged" Grid.ColumnSpan="3" Margin="30,30,30,30">
-            <TabItem Header="Osnovni podaci">
+            <TabItem Header="Osnovni podaci" Style="{DynamicResource TabsStyle}">
                 <Grid 
                     Background="#FFFFFF"
                     Margin="30,10,30,0" 
@@ -35,15 +35,17 @@
                     <TextBox TextWrapping="Wrap" Text="TextBox" Width="200"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="215,230,0,0" Grid.Column="1"/>
                     <RadioButton Content="Muško" Margin="215,132,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1"/>
                     <RadioButton Content="Žensko" Margin="305,132,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1"/>
-                    <Button Content="Oceni bolnicu" Click="HospitalSurvey_Click" Margin="30,302,0,0" Width="130" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+                    <Button Style="{DynamicResource BlueButton}" Content="Oceni bolnicu" Click="HospitalSurvey_Click" Margin="30,302,0,0" Width="130" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Pregledi">
+            <TabItem Header="Pregledi" Style="{DynamicResource TabsStyle}">
                 <Grid 
-                    Background="#FFE5E5E5" 
+                    Background="#FFFFFF" 
                     Margin="30,10,30,10" Height="385" >
                     <Grid>
                         <DataGrid x:Name ="PatientAppointmentTable"
+                            Style="{DynamicResource PatientTables}"
+                            AlternationCount="2"
                             HorizontalAlignment="Left"
                             Height="268"
                             Margin="14,82,0,0" 
@@ -64,14 +66,18 @@
 
                             </DataGrid.Columns>
                         </DataGrid>
-                        <Button Content="Dodaj" 
+                        <Button 
+                            Style="{DynamicResource BlueButton}"
+                            Content="Dodaj" 
                             HorizontalAlignment="Left" 
                             Margin="52,30,0,0" 
                             VerticalAlignment="Top"
                             Click="Add_Appointment" 
                                 Height="30" 
                                 Width="80"/>
-                        <Button Content="Izmeni" 
+                        <Button
+                            Style="{DynamicResource BlueButton}"
+                            Content="Izmeni" 
                             HorizontalAlignment="Left" 
                             Margin="237,30,0,0" 
                             VerticalAlignment="Top"
@@ -79,7 +85,9 @@
                             Width="80"
                             Height="30"
                                 />
-                        <Button Content="Obriši" 
+                        <Button 
+                            Style="{DynamicResource CancelButton}"
+                            Content="Obriši" 
                             HorizontalAlignment="Left" 
                             Margin="420,30,0,0" 
                             VerticalAlignment="Top" 
@@ -93,7 +101,7 @@
                 </Grid>
 
             </TabItem>
-            <TabItem Header="Karton">
+            <TabItem Header="Karton" Style="{DynamicResource TabsStyle}">
                 <Grid 
                     Background="#FFFFFF" 
                     Margin="30,30,30,30" 
@@ -134,6 +142,8 @@
                     <Label Content="Obavljeni pregledi" HorizontalAlignment="Left" 
                         VerticalAlignment="Center" Margin="40,0,0,0"/>
                     <DataGrid x:Name ="DoneAppointments"
+                            Style="{DynamicResource PatientTables}"
+                            AlternationCount="2"
                             HorizontalAlignment="Left"
                             Height="140"
                             Margin="40,186,0,0" 
@@ -143,7 +153,6 @@
                             AutoGenerateColumns="False"
                             SelectionMode="Single" 
                             IsReadOnly="True">
-
                         <DataGrid.Columns >
                             <DataGridTextColumn Header="Doktor" Binding="{Binding NameSurname}" Width="*"/>
                             <DataGridTextColumn Header="Pocetak" Binding="{Binding startDate}" Width="*"/>
@@ -152,17 +161,25 @@
 
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Button Content="Alergeni" HorizontalAlignment="Left" Margin="479,28,0,0" VerticalAlignment="Top"
+                    <Button 
+                        Style="{DynamicResource BlueButton}"
+                        Content="Alergeni" HorizontalAlignment="Left" Margin="479,28,0,0" VerticalAlignment="Top"
                             Width="100" Height="30"/>
-                    <Button Content="Istorija bolesti" HorizontalAlignment="Left" Margin="479,68,0,0" VerticalAlignment="Top"
+                    <Button 
+                        Style="{DynamicResource BlueButton}"
+                        Content="Istorija bolesti" HorizontalAlignment="Left" Margin="479,68,0,0" VerticalAlignment="Top"
                         Width="100" Height="30"/>
-                    <Button Content="Prikaz izvestaja" HorizontalAlignment="Left" Margin="479,117,0,0" VerticalAlignment="Top"
+                    <Button 
+                        Style="{DynamicResource BlueButton}"
+                        Content="Prikaz izvestaja" HorizontalAlignment="Left" Margin="479,117,0,0" VerticalAlignment="Top"
                         Width="100" Height="30"/>
-                    <Button Click="AppointmentSurvey_Click" Content="Anketa" HorizontalAlignment="Left" Height="30" Margin="698,28,0,0" VerticalAlignment="Top" Width="91"/>
+                    <Button  
+                        Style="{DynamicResource BlueButton}"
+                        Click="AppointmentSurvey_Click" Content="Anketa" HorizontalAlignment="Left" Height="30" Margin="698,28,0,0" VerticalAlignment="Top" Width="91"/>
                 </Grid>
 
             </TabItem>
-            <TabItem Header="Terapije">
+            <TabItem Header="Terapije"  Style="{DynamicResource TabsStyle}">
                 <Grid 
                     Background="#FFFFFF" 
                     Margin="30,30,30,30" 
