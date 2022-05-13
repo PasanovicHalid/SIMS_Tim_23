@@ -11,7 +11,7 @@ namespace ZdravoCorp.Service
     {
         private static PrescriptionService instance = null;
 
-        public Boolean CreatePrescription(Model.Prescription newPrescription)
+        public int CreatePrescription(Model.Prescription newPrescription)
         {
             return PrescriptionRepository.Instance.CreatePrescription(newPrescription);
         }

@@ -183,5 +183,31 @@ namespace Service
             }
             return result;
         }
+        public List<Appointment> GetFutureAppointments()
+        {
+            List<Appointment> appointments = GetAllAppointments();
+            List<Appointment> futureAppointments = new List<Appointment>();
+            foreach(Appointment appointment in appointments)
+            {
+                if(appointment.StartDate >= DateTime.Now)
+                {
+                    futureAppointments.Add(appointment);
+                }
+            }
+            return futureAppointments;
+        }
+        public List<Appointment> GetPastAppointments()
+        {
+            List<Appointment> appointments = GetAllAppointments();
+            List<Appointment> pastAppointments = new List<Appointment>();
+            foreach (Appointment appointment in appointments)
+            {
+                if (appointment.EndDate <= DateTime.Now)
+                {
+                    pastAppointments.Add(appointment);
+                }
+            }
+            return pastAppointments;
+        }
     }
 }

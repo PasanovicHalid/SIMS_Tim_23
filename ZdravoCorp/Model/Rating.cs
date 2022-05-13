@@ -9,18 +9,12 @@ using System.Collections.Generic;
 
 namespace Model
 {
-    public class Rating : Serializable
+    public enum Rating
     {
-        private int rating;
-
-        public void FromCSV(string[] values)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<String> ToCSV()
-        {
-            throw new NotImplementedException();
-        }
-    }
+        one = 1,
+        two,
+        three,
+        four,
+        five
+    };
 }

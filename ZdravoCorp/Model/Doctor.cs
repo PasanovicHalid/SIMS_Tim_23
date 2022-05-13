@@ -32,7 +32,7 @@ namespace Model
 
 
 
-        public Doctor(int id, string password, string username, string name, string surname, string jmbg, string email, string address, string phoneNumber, Gender gender, DateTime dateOfBirth, List<Notification> notification, List<Survey> survey, float salary, DateTime enrolementdate, DateTime workstarttime, DateTime workendtime, DateTime vacationstarttime, DateTime vacationendtime, int vacationdays) : base(id, password, username, name, surname, jmbg, email, address, phoneNumber, gender, dateOfBirth, notification, survey, salary, enrolementdate, workstarttime, workendtime, vacationstarttime, vacationendtime, vacationdays)
+        public Doctor(int id, string password, string username, string name, string surname, string jmbg, string email, string address, string phoneNumber, Gender gender, DateTime dateOfBirth, List<Notification> notification, List<AppointmentSurvey> survey, float salary, DateTime enrolementdate, DateTime workstarttime, DateTime workendtime, DateTime vacationstarttime, DateTime vacationendtime, int vacationdays) : base(id, password, username, name, surname, jmbg, email, address, phoneNumber, gender, dateOfBirth, notification, survey, salary, enrolementdate, workstarttime, workendtime, vacationstarttime, vacationendtime, vacationdays)
         {
         }
 

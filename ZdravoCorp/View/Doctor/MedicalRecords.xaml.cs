@@ -153,7 +153,7 @@ namespace ZdravoCorp.View.Doctor
 
         private void dodajTerapiju_Click(object sender, RoutedEventArgs e)
         {
-            AddTherapy at = new AddTherapy();
+            AddTherapy at = new AddTherapy((Model.Patient)PatientsCB.SelectedItem);
             at.Show();
         }
     }

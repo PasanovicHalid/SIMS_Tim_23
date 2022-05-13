@@ -9,20 +9,25 @@
         WindowStartupLocation="CenterScreen">
     <Grid>
         <DataGrid x:Name="MedicineGrid" ItemsSource="{Binding}"
-            AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" Margin="282,44,24,43">
+            AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" Margin="282,44,24,43" SelectedCellsChanged="MedicineGrid_SelectedCellsChanged">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Comment ID" Binding="{Binding Id}" Width="103"/>
-                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="103"/>
-                <DataGridTextColumn Header="Manufacturer ID" Binding="{Binding Manufacturer}" Width="103" />
-                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="103"/>
+                <DataGridTextColumn Header="Comment ID" Binding="{Binding Id}" Width="80"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="80"/>
+                <DataGridTextColumn Header="Count" Binding="{Binding Count}" Width="60"/>
+                <DataGridTextColumn Header="Manufacturer ID" Binding="{Binding Manufacturer}" Width="115" />
+                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="80"/>
 
             </DataGrid.Columns>
         </DataGrid>
-        <TextBox HorizontalAlignment="Left" Margin="109,90,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Margin="109,144,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Margin="109,214,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Margin="109,284,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <Button Content="Dodaj" HorizontalAlignment="Left" Margin="38,369,0,0" VerticalAlignment="Top" Height="50" Width="60"/>
-        <Button Content="Odustani" HorizontalAlignment="Left" Margin="144,369,0,0" VerticalAlignment="Top" Height="50" Width="71" Click="Button_Click"/>
+        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Margin="145,55,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="textBox2" HorizontalAlignment="Left" Margin="145,109,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="textBox3" HorizontalAlignment="Left" Margin="145,166,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="DodajButton" Content="Dodaj" HorizontalAlignment="Left" Margin="52,382,0,0" VerticalAlignment="Top" Height="50" Width="70" Click="DodajButton_Click"/>
+        <Button x:Name="OdustaniButton" Content="Odustani" HorizontalAlignment="Left" Margin="170,382,0,0" VerticalAlignment="Top" Height="50" Width="70" Click="Button_Click"/>
+        <Label Content="Medication Id:" HorizontalAlignment="Left" Margin="38,51,0,0" VerticalAlignment="Top"/>
+        <Label Content="Times A Day:" HorizontalAlignment="Left" Margin="38,105,0,0" VerticalAlignment="Top"/>
+        <Label Content="Number of Days:" HorizontalAlignment="Left" Margin="38,162,0,0" VerticalAlignment="Top"/>
+        <Label Content="Description:" HorizontalAlignment="Left" Margin="38,207,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBlock" HorizontalAlignment="Left" Margin="38,240,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="227" Height="121"/>
     </Grid>
 </Window>

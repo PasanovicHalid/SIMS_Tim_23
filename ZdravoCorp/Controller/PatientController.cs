@@ -36,5 +36,10 @@ namespace Controller
         {
             return PatientService.Instance.GetAllPatients();
         }
+
+        public Boolean AddPrescription(Model.Patient patient,Model.Prescription newPrescription)
+        {
+            return PatientService.Instance.AddPrescription(patient,newPrescription);
+        }
     }
 }

@@ -21,23 +21,23 @@ namespace ZdravoCorp.View.Doctor
     /// </summary>
     public partial class AddComment : Window
     {
-        Model.Patient p;
+        Model.Patient currentPatient;
         AppointmentController ac = new AppointmentController();
         Controller.CommentController cc = new Controller.CommentController();
         PatientController pc = new PatientController();
-        Model.Doctor d;
+        Model.Doctor currentDoctor;
 
         public AddComment(Model.Patient pomocnip, Model.Doctor doc)
         {
             InitializeComponent();
 
-            p = new Model.Patient(pomocnip);
-            d = doc;
+            currentPatient = new Model.Patient(pomocnip);
+            currentDoctor = doc;
             List<Model.Appointment> lista = ac.GetAllAppointments();
             List<Model.Appointment> pomocna = new List<Model.Appointment>();
             foreach (Appointment app in lista)
             {
-                if (app.Patient.Id == p.Id && app.doctor.Id == d.Id)
+                if (app.Patient.Id == currentPatient.Id && app.doctor.Id == currentDoctor.Id)
                 {
                     pomocna.Add(app);
                 }
@@ -55,14 +55,20 @@ namespace ZdravoCorp.View.Doctor
         {
             string komentar = textBpx1.Text;
             Appointment apo = (Appointment)AppointmentCB.SelectedItem;
-            Comments c = new Comments(apo, komentar, d);
+            Comments c = new Comments(apo, komentar, currentDoctor);
             MessageBox.Show(c.AppointmentID);
             cc.CreateComment(c);
-            p.Record.Comments.Add(c);
+            currentPatient.Record.Comments.Add(c);
             MedicalRecordController mcc = new MedicalRecordController();
-            mcc.UpdateMedicalRecord(p.Record);
-            pc.UpdatePatient(p);
+            mcc.UpdateMedicalRecord(currentPatient.Record);
+            pc.UpdatePatient(currentPatient);
             this.Close();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            AddAppointmentToDoctor addAppointmentToDoctorWindow = new AddAppointmentToDoctor(currentPatient, currentDoctor);
+            addAppointmentToDoctorWindow.Show();
         }
     }
 }
