@@ -62,12 +62,31 @@ namespace Model
 
         public void FromCSV(string[] values)
         {
-            throw new NotImplementedException();
+            int i = 0;
+            Id = int.Parse(values[i++]);
+            DateCreated = DateTime.Parse(values[i++]);
+            Content = values[i++];
+            User = new User(int.Parse(values[i++]));
+        }
+
+        private void NotificationInfoToString(List<String> result)
+        {
+            result.Add(id.ToString());
+            result.Add(dateCreated.ToString());
+            result.Add(content);
+        }
+
+        private void CreatorToString(List<String> result)
+        {
+            result.Add(User.Id.ToString());
         }
 
         public List<String> ToCSV()
         {
-            throw new NotImplementedException();
+            List<String> result = new List<String>();
+            NotificationInfoToString(result);
+            CreatorToString(result);
+            return result;
         }
     }
 }

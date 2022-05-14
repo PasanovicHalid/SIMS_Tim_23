@@ -13,7 +13,8 @@
         ResizeMode="NoResize"
         Background="Transparent"
         AllowsTransparency="True" 
-        Closing="CloseWindow">
+        Closing="CloseWindow"
+        WindowStartupLocation="CenterScreen">
 
     <Border Background="#222831"
             CornerRadius="10">

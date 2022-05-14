@@ -7,10 +7,11 @@
 using Repository;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Model
 {
-    public abstract class User : Serializable
+    public class User : Serializable
     {
         protected int id;
         protected String password;
@@ -27,7 +28,7 @@ namespace Model
 
         protected List<Notification> notification;
         public string nameSurname { get => name + " " + surname; set => name = value; }
-        protected User(int id, string password, string username, string name, string surname, string jmbg, string email, string address, string phoneNumber, Gender gender, DateTime dateOfBirth, List<Notification> notification, List<AppointmentSurvey> survey)
+        public User(int id, string password, string username, string name, string surname, string jmbg, string email, string address, string phoneNumber, Gender gender, DateTime dateOfBirth, List<Notification> notification, List<AppointmentSurvey> survey)
         {
             this.id = id;
             this.password = password;
@@ -43,8 +44,29 @@ namespace Model
             this.notification = notification;
         }
 
-        protected User()
+        public User()
         {
+        }
+
+        public User(User user)
+        {
+            this.id = user.id;
+            this.password = user.password;
+            this.username = user.username;
+            this.name = user.name;
+            this.surname = user.surname;
+            this.jmbg = user.jmbg;
+            this.email = user.email;
+            this.address = user.address;
+            this.phoneNumber = user.phoneNumber;
+            this.gender = user.gender;
+            this.dateOfBirth = user.dateOfBirth;
+            this.notification = user.notification;
+        }
+
+        public User(int id)
+        {
+            this.id = id;
         }
 
 
@@ -132,16 +154,72 @@ namespace Model
                 tmpNotification.Clear();
             }
         }
-        
+
+        private void UserInfoToListString(List<string> result)
+        {
+            result.Add(id.ToString());
+            result.Add(password);
+            result.Add(username);
+            result.Add(name);
+            result.Add(surname);
+            result.Add(jmbg);
+            result.Add(email);
+            result.Add(address);
+            result.Add(phoneNumber);
+            result.Add(gender.ToString());
+            result.Add(dateOfBirth.ToString());
+        }
+
+        private void UserNotificationsToListString(List<string> result)
+        {
+            result.Add(Notification.Count.ToString());
+            foreach(Notification it in Notification)
+            {
+                result.AddRange(it.ToCSV());
+            }
+        }
+        private string[] ReadUserInformation(string[] values)
+        {
+            int i = 0;
+            Id = int.Parse(values[i++]);
+            Password = values[i++];
+            Username = values[i++];
+            name = values[i++];
+            surname = values[i++];
+            jmbg = values[i++];
+            email = values[i++];
+            address = values[i++];
+            phoneNumber = values[i++];
+            gender = (Gender)Enum.Parse(typeof(Gender), values[i++]);
+            dateOfBirth = DateTime.Parse(values[i++]);
+            return values.Skip(i).ToArray();
+        }
+
+        private void ReadUserNotifications(string[] values)
+        {
+            int i = 0;
+            int count = int.Parse(values[i++]) + i;
+            for(; i < count ; i++)
+            {
+                Notification notification = new Notification();
+                notification.FromCSV(values);
+                AddNotification(notification);
+                values = values.Skip(4).ToArray();
+            }
+        }
 
         public List<String> ToCSV()
         {
-            throw new NotImplementedException();
+            List<string> result = new List<string>();
+            UserInfoToListString(result);
+            UserNotificationsToListString(result);
+            return result;
         }
 
         public void FromCSV(string[] values)
         {
-            throw new NotImplementedException();
+            values = ReadUserInformation(values);
+            ReadUserNotifications(values);
         }
     }
 }

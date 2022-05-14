@@ -32,14 +32,11 @@ namespace ZdravoCorp.View.Manager.View
 
         private void Rooms_Click(object sender, RoutedEventArgs e)
         {
-            ZdravoCorp.View.Manager.Rooms.Rooms rooms = new ZdravoCorp.View.Manager.Rooms.Rooms();
-            rooms.ShowDialog();
+
         }
 
         private void Equipment_Click(object sender, RoutedEventArgs e)
         {
-            ZdravoCorp.View.Manager.Equipments.Equipments window = new ZdravoCorp.View.Manager.Equipments.Equipments();
-            window.ShowDialog();
         }
 
         public string getTitle()

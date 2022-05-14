@@ -16,6 +16,8 @@ namespace Repository
         private Serializer<Doctor> serializerDoctor = new Serializer<Doctor>();
         private Serializer<DoctorType> serializerDoctorType = new Serializer<DoctorType>();
 
+        private Dictionary<string, string> userMap = new Dictionary<string, string>();
+
         private static DoctorRepository instance = null;
 
         public Boolean CreateDoctor(Model.Doctor newDoctor)
@@ -173,9 +175,23 @@ namespace Repository
             return serializerDoctorType.FromCSV(dbDoctorType);
         }
 
+        private void InstantiateHashSets()
+        {
+            List<Doctor> doctors = GetAllDoctors();
+            foreach(Doctor doctor in doctors)
+            {
+                userMap.Add(doctor.Username, doctor.Password);
+            }
+        }
+
+        public Dictionary<string, string> GetUsernameHashSet()
+        {
+            return userMap;
+        }
+
         public DoctorRepository()
         {
-            
+            InstantiateHashSets();
         }
 
         public static DoctorRepository Instance

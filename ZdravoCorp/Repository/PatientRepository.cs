@@ -16,6 +16,22 @@ namespace Repository
 
         private static PatientRepository instance = null;
 
+        private Dictionary<string, string> userMap = new Dictionary<string, string>();
+
+        public PatientRepository()
+        {
+            List<Patient> patients = GetAllPatients();
+            InstantiateHashSets(patients);
+        }
+
+        private void InstantiateHashSets(List<Patient> secretaries)
+        {
+            foreach (Patient secretary in secretaries)
+            {
+                userMap.Add(secretary.Username, secretary.Password);
+            }
+        }
+
         public Boolean CreatePatient(Patient newPatient)
         {
             List<Patient> patients = GetAllPatients();
@@ -128,9 +144,9 @@ namespace Repository
             return false;
         }
 
-        public PatientRepository()
+        public Dictionary<string, string> GetUsernameHashSet()
         {
-            
+            return userMap;
         }
 
         public static PatientRepository Instance

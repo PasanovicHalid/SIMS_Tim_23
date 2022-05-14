@@ -11,14 +11,23 @@ namespace Model
 {
     public class Secretary : Employee, Serializable
     {
+        public Secretary()
+        {
+        }
+
+        public Secretary(Employee employee) : base(employee)
+        {
+
+        }
+
         public List<String> ToCSV()
         {
-            throw new NotImplementedException();
+            return base.ToCSV();
         }
 
         public void FromCSV(string[] values)
         {
-            throw new NotImplementedException();
+            base.FromCSV(values);
         }
     }
 }

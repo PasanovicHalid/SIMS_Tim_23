@@ -40,7 +40,6 @@ namespace ZdravoCorp
         }
         public MainWindow()
         {
-
             InitializeComponent();
             autoEvent = new AutoResetEvent(false);
             timerService = new TimerService(autoEvent);
@@ -64,14 +63,6 @@ namespace ZdravoCorp
             WindowState = WindowState.Minimized;
         }
 
-        private void Manager_Click(object sender, RoutedEventArgs e)
-        {
-            Manager window = new Manager(autoEvent);
-            anotherWindow = true;
-            this.Close();
-            window.ShowDialog();
-        }
-
         private void OnPasswordChanged(object sender, RoutedEventArgs e)
         {
             PasswordBox pb = sender as PasswordBox;
@@ -87,43 +78,57 @@ namespace ZdravoCorp
             }
         }
 
-        private void Patient_Click(object sender, RoutedEventArgs e)
-        {
-            Patient window = new Patient();
-            this.Close();
-            window.ShowDialog();
-
-
-        }
-
-        private void Secretary_Click(object sender, RoutedEventArgs e)
-        {
-            Secretary window = new Secretary();
-            this.Close();
-            window.ShowDialog();
-        }
-
-        private void Doctor_Click(object sender, RoutedEventArgs e)
+        private void Login_Click(object sender, RoutedEventArgs e)
         {
             string username = User.Text;
             string password = PassBox.Password;
-            DoctorController doctorController = new DoctorController();
-            DoctorCollection = new ObservableCollection<Model.Doctor>();
-            List<Model.Doctor> doctorList = doctorController.GetAllDoctors();
-            foreach (Model.Doctor d in doctorList)
+
+            if(LoginService.Instance.Login(username, password))
             {
-                if (d.Username.Equals(username))
+                if (LoginService.Instance.IsPatient(username))
                 {
-                    if (d.Password.Equals(password))
+                    Patient window = new Patient();
+                    this.Close();
+                    window.ShowDialog();
+                }
+
+                if (LoginService.Instance.IsManager(username))
+                {
+                    Manager window = new Manager(autoEvent);
+                    anotherWindow = true;
+                    this.Close();
+                    window.ShowDialog();
+                }
+
+                if (LoginService.Instance.IsManager(username))
+                {
+                    Manager window = new Manager(autoEvent);
+                    anotherWindow = true;
+                    this.Close();
+                    window.ShowDialog();
+                }
+                if (LoginService.Instance.IsDoctor(username))
+                {
+                    DoctorController doctorController = new DoctorController();
+                    DoctorCollection = new ObservableCollection<Model.Doctor>();
+                    List<Model.Doctor> doctorList = doctorController.GetAllDoctors();
+                    foreach (Model.Doctor d in doctorList)
                     {
-                        Appointments appointmentWindow = new Appointments(d);
-                        this.Close();
-                        appointmentWindow.ShowDialog();
-                        return;
+                        if (d.Username.Equals(username))
+                        {
+                            if (d.Password.Equals(password))
+                            {
+                                Appointments appointmentWindow = new Appointments(d);
+                                this.Close();
+                                appointmentWindow.ShowDialog();
+                                return;
+                            }
+                        }
                     }
+                    MessageBox.Show("Ne postoji ni jedan doktor");
                 }
             }
-            MessageBox.Show("Ne postoji ni jedan doktor");
+
         }
     }   
 }
