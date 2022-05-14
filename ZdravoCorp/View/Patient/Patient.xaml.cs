@@ -143,15 +143,18 @@ namespace ZdravoCorp.View.Patient
             {
                 return;
             }
-            //List<Appointment> appointments = appointmentController.GetFutureAppointments();
-            //AppointmentsCollection = new ObservableCollection<Appointment>(appointments);
-            ////PatientAppointmentTable.DataContext = AppointmentsCollection;
-            //int i = PatientAppointmentTable.SelectedIndex;
-            DateTime dt = FutureAppointmentsCollection.ElementAt(PatientAppointmentTable.SelectedIndex).startDate;
-            int year = dt.Year;
-            int month = dt.Month;
-            int day = dt.Day;
-            ChangeAppointment change = new ChangeAppointment((Appointment)PatientAppointmentTable.SelectedItem);
+            Appointment appointment = (Appointment)PatientAppointmentTable.SelectedItem;
+            PatientController patientController = new PatientController();
+            Model.Patient patient = patientController.ReadPatient(appointment.Patient.Id);
+            patientController.RemoveFromChangedOrCanceledList(patient);
+            if (appointmentController.IsTroll(appointment))
+            {
+                MessageBox.Show("Sad cete biti blokirani jer ste trol", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
+                MainWindow window = new MainWindow();
+                this.Close();
+                window.ShowDialog();
+            }
+            ChangeAppointment change = new ChangeAppointment(appointment);
             change.ShowDialog();
             UpdateTable();
 
@@ -163,12 +166,38 @@ namespace ZdravoCorp.View.Patient
             {
                 return;
             }
-            if (!appointmentController.DeleteAppointment(FutureAppointmentsCollection.ElementAt(PatientAppointmentTable.SelectedIndex).Id))
+            Appointment appointment = (Appointment)PatientAppointmentTable.SelectedItem;
+            PatientController patientController = new PatientController();
+            Model.Patient patient = patientController.ReadPatient(appointment.Patient.Id);
+            patientController.RemoveFromChangedOrCanceledList(patient);
+            if (appointmentController.IsTroll(appointment))
+            {
+                MessageBox.Show("Sad cete biti blokirani jer ste trol", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
+                MainWindow window = new MainWindow();
+                this.Close();
+                window.ShowDialog();
+                
+            }
+            if (!appointmentController.DeleteAppointment(appointment.Id))
             {
                 MessageBox.Show("Element ne postoji u bazi podataka", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            
+            if (patient.ChangedOrCanceledAppointmentsDates == null)
+            {
+                patient.ChangedOrCanceledAppointmentsDates = new List<DateTime>();
+            }
+            DoctorController doctorController = new DoctorController();
+            Model.Doctor doctor = doctorController.ReadDoctor(appointment.Doctor.Id);
+            doctor.RemoveAppointment(appointment);
+            doctorController.UpdateDoctor(doctor);
+            RoomController roomController = new RoomController();
+            Model.Room room = roomController.ReadRoom(appointment.Room.Identifier);
+            room.RemoveAppointment(appointment);
+            roomController.UpdateRoom(room);
+            patient.RemoveAppointment(appointment);
+            patient.ChangedOrCanceledAppointmentsDates.Add(DateTime.Now);
+            patientController.UpdatePatient(patient);
             UpdateTable();
         }
 
@@ -207,6 +236,14 @@ namespace ZdravoCorp.View.Patient
         {
             ZdravoCorp.View.Patient.View.Survey.HospitalSurveyView window = new ZdravoCorp.View.Patient.View.Survey.HospitalSurveyView();
             window.ShowDialog();
+        }
+
+        private void LogOut_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow window = new MainWindow();
+            this.Close();
+            window.ShowDialog();
+           
         }
     }
 }

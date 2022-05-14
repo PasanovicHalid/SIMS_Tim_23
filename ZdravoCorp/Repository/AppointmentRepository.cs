@@ -83,6 +83,8 @@ namespace Repository
             {
                 if (appointment.Id == appointments[i].Id)
                 {
+                    int id = appointment.Id;
+                    int id2 = appointments[i].Id;
                     success = true;
                     DeleteAppointment(appointment.Id);
                     //appointments[i] = appointment;

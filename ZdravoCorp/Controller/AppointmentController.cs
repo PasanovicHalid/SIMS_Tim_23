@@ -49,5 +49,10 @@ namespace Controller
         {
             return AppointmentService.Instance.GetPastAppointments();
         }
+
+        public Boolean IsTroll(Appointment appointment)
+        {
+            return AppointmentService.Instance.IsTroll(appointment);
+        }
     }
 }

@@ -212,10 +212,10 @@
 
             </TabItem>
         </TabControl>
-        <Menu  VerticalAlignment="Top" Height="20" Width="1000">
+        <Menu  VerticalAlignment="Top" Height="25" Width="1000">
             <MenuItem Header="File" Width="50"/>
             <MenuItem Header="Open" Width="50"/>
-            <Button Content="Odjavite se" Width="90"  Margin="796,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Button Style="{DynamicResource BlueButton}" Click="LogOut_Click" Content="Odjavite se" Width="90"  Margin="796,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         </Menu>
 
 

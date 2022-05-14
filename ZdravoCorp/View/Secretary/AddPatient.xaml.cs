@@ -201,7 +201,7 @@ namespace ZdravoCorp.View.Secretary
             {
                 gender = Gender.Female;
             }
-            if (!patientController.CreatePatient(new Model.Patient(0, password, username, name, surname, jmbg, email, address, phoneNumber, gender, dateOfBirth, null, null)))
+            if (!patientController.CreatePatient(new Model.Patient(0, password, username, name, surname, jmbg, email, address, phoneNumber, gender, dateOfBirth, null, null, new List<DateTime>())))
             {
                 MessageBox.Show("Nije uspesno dodat element", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
