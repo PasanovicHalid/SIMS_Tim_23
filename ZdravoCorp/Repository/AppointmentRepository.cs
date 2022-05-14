@@ -84,15 +84,15 @@ namespace Repository
                 if (appointment.Id == appointments[i].Id)
                 {
                     success = true;
-                    //DeleteAppointment(appointment.Id);
-                    appointments[i] = appointment;
+                    DeleteAppointment(appointment.Id);
+                    //appointments[i] = appointment;
                     break;
                 }
             }
             if (success)
             {
-                //appointments = GetAllAppointments();
-                //appointments.Add(appointment);
+                appointments = GetAllAppointments();
+                appointments.Add(appointment);
                 serializerAppointment.ToCSV(dbPath, appointments);
             }
             return success;

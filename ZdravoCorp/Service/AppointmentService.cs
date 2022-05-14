@@ -11,10 +11,10 @@ using System.Collections.Generic;
 
 namespace Service
 {
-    public class AppointmenService
+    public class AppointmentService
     {
         public const int MAX_SUGGESTIONS = 30;
-        private static AppointmenService instance = null;
+        private static AppointmentService instance = null;
         List<Appointment> appointments = new List<Appointment>();
         
         public Boolean CreateAppointment(Appointment newAppointment)
@@ -42,18 +42,18 @@ namespace Service
             return AppointmentRepository.Instance.GetAllAppointments();
         }
 
-        public AppointmenService()
+        public AppointmentService()
         {
 
         }
 
-        public static AppointmenService Instance
+        public static AppointmentService Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = new AppointmenService();
+                    instance = new AppointmentService();
                 }
                 return instance;
             }
