@@ -150,7 +150,9 @@ namespace ZdravoCorp.View.Patient
             if (appointmentController.IsTroll(appointment))
             {
                 MessageBox.Show("Sad cete biti blokirani jer ste trol", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
+                MainWindow window = new MainWindow();
+                this.Close();
+                window.ShowDialog();
             }
             ChangeAppointment change = new ChangeAppointment(appointment);
             change.ShowDialog();
@@ -171,7 +173,10 @@ namespace ZdravoCorp.View.Patient
             if (appointmentController.IsTroll(appointment))
             {
                 MessageBox.Show("Sad cete biti blokirani jer ste trol", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
+                MainWindow window = new MainWindow();
+                this.Close();
+                window.ShowDialog();
+                
             }
             if (!appointmentController.DeleteAppointment(appointment.Id))
             {
@@ -231,6 +236,14 @@ namespace ZdravoCorp.View.Patient
         {
             ZdravoCorp.View.Patient.View.Survey.HospitalSurveyView window = new ZdravoCorp.View.Patient.View.Survey.HospitalSurveyView();
             window.ShowDialog();
+        }
+
+        private void LogOut_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow window = new MainWindow();
+            this.Close();
+            window.ShowDialog();
+           
         }
     }
 }

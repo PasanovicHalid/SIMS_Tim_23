@@ -68,6 +68,8 @@
             Margin="153,268,0,0" 
             VerticalAlignment="Top"/>
         <DataGrid
+            Style="{DynamicResource PatientTables}"
+            AlternationCount="2"
             Name ="TableForSuggestedApp"
             ItemsSource="{Binding}" 
             Margin="400,58,26,118"
