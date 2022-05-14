@@ -41,5 +41,10 @@ namespace Controller
         {
             return PatientService.Instance.AddPrescription(patient,newPrescription);
         }
+
+        public void RemoveFromChangedOrCanceledList(Patient patient)
+        {
+            PatientService.Instance.RemoveFromChangedOrCanceledList(patient);
+        }
     }
 }

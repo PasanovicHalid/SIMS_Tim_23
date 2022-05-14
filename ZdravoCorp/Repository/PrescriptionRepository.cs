@@ -18,12 +18,30 @@ namespace ZdravoCorp.Repository
         public PrescriptionRepository()
         {
         }
-
+        public List<int> GetAllPrescriptionIds()
+        {
+            List<Prescription> prescriptions = GetAllPrescriptions();
+            List<int> ids = new List<int>();
+            foreach (Prescription prescription in prescriptions)
+            {
+                ids.Add(prescription.Id);
+            }
+            return ids;
+        }
+        public void GenerateId(Prescription newPrescription)
+        {
+            List<int> allPrescriptionsIds = GetAllPrescriptionIds();
+            Random random = new Random();
+            do
+            {
+                newPrescription.Id = random.Next();
+            }
+            while (allPrescriptionsIds.Contains(newPrescription.Id));
+        }
         public int CreatePrescription(Model.Prescription newMedicine)
         {
             List<Prescription> medicines = GetAllPrescriptions();
-            
-            newMedicine.Id = medicines.Count + 1;
+            GenerateId(newMedicine);
             medicines.Add(newMedicine);
             serializerPrescription.ToCSV(dbPath, medicines);
             return newMedicine.Id;

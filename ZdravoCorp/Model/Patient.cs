@@ -14,9 +14,10 @@ namespace Model
     {
         private MedicalRecord record;
         public MedicalRecord Record { get { return record; } set { record = value; } }
-        public Patient(int id, string password, string username, string name, string surname, string jmbg, string email, string address, string phoneNumber, Gender gender, DateTime dateOfBirth, List<Notification> notification, List<AppointmentSurvey> survey) : base(id, password, username, name, surname, jmbg, email, address, phoneNumber, gender, dateOfBirth, notification, survey)
+        public Patient(int id, string password, string username, string name, string surname, string jmbg, string email, string address, string phoneNumber, Gender gender, DateTime dateOfBirth, List<Notification> notification, List<AppointmentSurvey> survey,List<DateTime> changedOrCanceled) : base(id, password, username, name, surname, jmbg, email, address, phoneNumber, gender, dateOfBirth, notification, survey)
         {
-            
+            this.changedOrCanceledAppointmnetsDates = changedOrCanceled;
+            this.canLog = true;
         }
         public Patient(Patient pomocnip)
         {
@@ -35,6 +36,8 @@ namespace Model
             this.appointment = pomocnip.appointment;
             this.notification = pomocnip.notification;
             this.prescription = pomocnip.prescription;
+            this.changedOrCanceledAppointmnetsDates = new List<DateTime>();
+            this.canLog = true;
         }
 
         public Patient(int id)
@@ -246,8 +249,19 @@ namespace Model
             {
                 result.Add(record.Id.ToString());
             }
-            
-            
+            if (changedOrCanceledAppointmnetsDates == null)
+            {
+                result.Add(nf.ToString());
+            }
+            else
+            {
+                result.Add(changedOrCanceledAppointmnetsDates.Count.ToString());
+                foreach (DateTime date in changedOrCanceledAppointmnetsDates)
+                {
+                    result.Add(date.ToString());
+                }
+            }
+            result.Add(canLog.ToString());
             return result;
         }
 
@@ -295,7 +309,17 @@ namespace Model
                 prescription.Add(pc.ReadPrescription(int.Parse(values[i++])));
             }
             record = new MedicalRecord(int.Parse(values[i++]));
+            int numberOfElementsInList = int.Parse(values[i++]);
+            for (int j = 0; j < numberOfElementsInList; j++)
+            {
+                changedOrCanceledAppointmnetsDates.Add(DateTime.Parse(values[i++]));
+            }
+            canLog = Boolean.Parse(values[i++]);
         }
 
+        private List<DateTime> changedOrCanceledAppointmnetsDates = new List<DateTime>();
+        public List<DateTime> ChangedOrCanceledAppointmentsDates { get => changedOrCanceledAppointmnetsDates; set => changedOrCanceledAppointmnetsDates = value; }
+        private Boolean canLog;
+        public Boolean CanLog { get => canLog; set => canLog = value; }
     }
 }

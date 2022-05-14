@@ -39,8 +39,10 @@
             SelectedDateFormat="Short"
             FirstDayOfWeek="Monday"
             IsTodayHighlighted="True"
-            Name="datePicker"
-            SelectedDate="{Binding selectedDate}">
+            x:Name="datePicker"
+            >
+            <!--SelectedDate="{Binding selectedDate}"-->
+            
             <DatePicker.BlackoutDates>
                 <CalendarDateRange End="{x:Static sys:DateTime.Today}" Start="{x:Static sys:DateTime.MinValue}" />
             </DatePicker.BlackoutDates>
@@ -70,6 +72,8 @@
             Margin="153,268,0,0" 
             VerticalAlignment="Top"/>
         <DataGrid
+            Style="{DynamicResource PatientTables}"
+            AlternationCount="2"
             Name ="TableForSuggestedApp"
             ItemsSource="{Binding}" 
             Margin="400,58,26,118"
@@ -85,7 +89,9 @@
                 <DataGridTextColumn x:Name ="End" Header="Kraj" Binding="{Binding endDate}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Prikaži" 
+        <Button 
+                Style="{DynamicResource BlueButton}"
+                Content="Prikaži" 
                 HorizontalAlignment="Left" 
                 Margin="153,335,0,0" 
                 VerticalAlignment="Top"
@@ -98,14 +104,18 @@
                   Margin="695,335,0,0" 
                   VerticalAlignment="Top"
                   IsChecked="True"/>
-        <Button Content="Odustani" 
+        <Button 
+                Style="{DynamicResource CancelButton}"
+                Content="Odustani" 
                 HorizontalAlignment="Left"
                 Margin="587,378,0,0" 
                 VerticalAlignment="Top"
                 Height="30"
                 Width="80"
                 Click="Cancel_Click"/>
-        <Button Content="Potvrdi" 
+        <Button 
+                Style="{DynamicResource BlueButton}"
+                Content="Potvrdi" 
                 HorizontalAlignment="Left" 
                 Margin="695,378,0,0"
                 VerticalAlignment="Top"

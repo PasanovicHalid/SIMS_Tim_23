@@ -15,15 +15,15 @@ using System.Collections.ObjectModel;
 using Controller;
 using Model;
 using System.ComponentModel;
+
 namespace ZdravoCorp.View.Patient.View.Survey
 {
     /// <summary>
-    /// Interaction logic for AppointmentSurveyView.xaml
+    /// Interaction logic for HospitalSurveyView.xaml
     /// </summary>
-    public partial class AppointmentSurveyView : Window, INotifyPropertyChanged
+    public partial class HospitalSurveyView : Window, INotifyPropertyChanged
     {
-        private Appointment appointment;
-        public AppointmentSurveyView(Appointment selectedAppointmnet)
+        public HospitalSurveyView()
         {
             InitializeComponent();
             this.DataContext = this;
@@ -34,35 +34,22 @@ namespace ZdravoCorp.View.Patient.View.Survey
             ComfortCB.ItemsSource = grades;
             KindnessCB.ItemsSource = grades;
             TidinessCB.ItemsSource = grades;
-            RoomComfortCB.ItemsSource = grades;
-            WaitingTimeCB.ItemsSource = grades;
-            appointment = selectedAppointmnet;
+            HygieneCB.ItemsSource = grades;
+            ModernityCB.ItemsSource = grades;
+            EquippedCB.ItemsSource = grades;
         }
+
+        private int id;
         private int profesionalism;
-        private int kindness;
         private int comfort;
         private int tidiness;
-        private int waitingTime;
-        private int roomComfort;
+        private int kindness;
+        private int hygiene;
+        private int modernity;
+        private int equipped;
         private int overallExperience;
-        public event PropertyChangedEventHandler PropertyChanged;
+        private Patient patient;
 
-        protected virtual void OnPropertyChanged(string name)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
-            }
-        }
-        public ObservableCollection<int> SetGrades(ObservableCollection<int> grades)
-        {
-            grades.Add(1);
-            grades.Add(2);
-            grades.Add(3);
-            grades.Add(4);
-            grades.Add(5);
-            return grades;
-        }
         public int Profesionalism
         {
             get => profesionalism;
@@ -111,27 +98,27 @@ namespace ZdravoCorp.View.Patient.View.Survey
                 }
             }
         }
-        public int WaitingTime
+        public int Modernity
         {
-            get => waitingTime;
+            get => modernity;
             set
             {
-                if (value != waitingTime)
+                if (value != modernity)
                 {
-                    waitingTime = value;
-                    OnPropertyChanged("WaitingTime");
+                    modernity = value;
+                    OnPropertyChanged("Modernity");
                 }
             }
         }
-        public int RoomComfort
+        public int Hygiene
         {
-            get => roomComfort;
+            get => hygiene;
             set
             {
-                if (value != roomComfort)
+                if (value != hygiene)
                 {
-                    roomComfort = value;
-                    OnPropertyChanged("RoomComfort");
+                    hygiene = value;
+                    OnPropertyChanged("Hygiene");
                 }
             }
         }
@@ -148,11 +135,41 @@ namespace ZdravoCorp.View.Patient.View.Survey
                 }
             }
         }
+        public int Equipped
+        {
+            get => equipped;
+            set
+            {
+                if (value != equipped)
+                {
+                    equipped = value;
+                    OnPropertyChanged("Equipped");
+                }
+            }
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
 
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
+        public ObservableCollection<int> SetGrades(ObservableCollection<int> grades)
+        {
+            grades.Add(1);
+            grades.Add(2);
+            grades.Add(3);
+            grades.Add(4);
+            grades.Add(5);
+            return grades;
+        }
         private void Confirm_Click(object sender, RoutedEventArgs e)
         {
-            AppointmentSurveyController appointmentSurveyController = new AppointmentSurveyController();
-            appointmentSurveyController.CreateAppointmentSurvey(new AppointmentSurvey(Profesionalism, Kindness, Comfort, Tidiness, WaitingTime, RoomComfort, OverallExperience, appointment));
+            HospitalSurveyController hospitalSurveyController = new HospitalSurveyController();
+            HospitalSurvey hospitalSurvey = new HospitalSurvey(Profesionalism, Comfort, Tidiness, Kindness, Hygiene, Modernity, Equipped, OverallExperience, new Model.Patient(1234560));
+            hospitalSurveyController.CreateHospitalSurvey(hospitalSurvey);
             this.Close();
         }
 
@@ -160,6 +177,5 @@ namespace ZdravoCorp.View.Patient.View.Survey
         {
             this.Close();
         }
-
     }
 }

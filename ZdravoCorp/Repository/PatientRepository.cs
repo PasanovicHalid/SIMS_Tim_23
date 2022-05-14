@@ -32,6 +32,26 @@ namespace Repository
             }
         }
 
+        public List<int> GetAllPatientIds()
+        {
+            List<Patient> patients = GetAllPatients();
+            List<int> ids = new List<int>();
+            foreach (Patient patient in patients)
+            {
+                ids.Add(patient.Id);
+            }
+            return ids;
+        }
+        public void GenerateId(Patient newPatient)
+        {
+            List<int> allPatientsIds = GetAllPatientIds();
+            Random random = new Random();
+            do
+            {
+                newPatient.Id = random.Next();
+            }
+            while (allPatientsIds.Contains(newPatient.Id));
+        }
         public Boolean CreatePatient(Patient newPatient)
         {
             List<Patient> patients = GetAllPatients();
@@ -47,7 +67,7 @@ namespace Repository
             }
             if (!exists)
             {
-                newPatient.Id = patients.Count + 1;
+                GenerateId(newPatient);
                 patients.Add(newPatient);
                 serializerPatient.ToCSV(dbPath, patients);
                 return true;
@@ -160,6 +180,6 @@ namespace Repository
                 return instance ;
             }
         }
-
+        
     }
 }

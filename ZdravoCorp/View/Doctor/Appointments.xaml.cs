@@ -121,7 +121,10 @@ namespace ZdravoCorp.View.Doctor
             List<Appointment> apps = appointmentController.GetAllAppointments();
             foreach (Appointment temp in apps)
             {
-                appointments.Add(temp);
+                if(temp.DoctorID == currentDoctor.Id)
+                {
+                    appointments.Add(temp);
+                }
             }
             AppointmentGrid.DataContext = appointments;
         }

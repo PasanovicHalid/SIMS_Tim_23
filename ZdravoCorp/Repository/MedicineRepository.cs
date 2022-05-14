@@ -19,12 +19,31 @@ namespace Repository
         public MedicineRepository()
         {
         }
+        public List<int> GetAllMedicationIds()
+        {
+            List<Medication> medicine = GetAllMedicine();
+            List<int> ids = new List<int>();
+            foreach (Medication medication in medicine)
+            {
+                ids.Add(medication.Id);
+            }
+            return ids;
+        }
+        public void GenerateId(Medication newMedication)
+        {
+            List<int> allMedicationIds = GetAllMedicationIds();
+            Random random = new Random();
+            do
+            {
+                newMedication.Id = random.Next();
+            }
+            while (allMedicationIds.Contains(newMedication.Id));
+        }
 
         public Boolean CreateMedicine(Model.Medication newMedicine)
         {
             List<Medication> medicines = GetAllMedicine();
-            
-            newMedicine.Id = medicines.Count + 1;
+            GenerateId(newMedicine);
             medicines.Add(newMedicine);
             serializerMedication.ToCSV(dbPath, medicines);
             return true ;

@@ -11,10 +11,10 @@ using System.Collections.Generic;
 
 namespace Service
 {
-    public class AppointmenService
+    public class AppointmentService
     {
         public const int MAX_SUGGESTIONS = 30;
-        private static AppointmenService instance = null;
+        private static AppointmentService instance = null;
         List<Appointment> appointments = new List<Appointment>();
         
         public Boolean CreateAppointment(Appointment newAppointment)
@@ -42,18 +42,18 @@ namespace Service
             return AppointmentRepository.Instance.GetAllAppointments();
         }
 
-        public AppointmenService()
+        public AppointmentService()
         {
 
         }
 
-        public static AppointmenService Instance
+        public static AppointmentService Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = new AppointmenService();
+                    instance = new AppointmentService();
                 }
                 return instance;
             }
@@ -87,7 +87,7 @@ namespace Service
                             appointment.endDate = thisEnd;
                             appointment.Room = r;
 
-                            appointment.Patient = PatientService.Instance.ReadPatient(0);
+                            appointment.Patient = PatientService.Instance.ReadPatient(1174846169);
 
                             appointments.Add(appointment);
 
@@ -140,7 +140,7 @@ namespace Service
                                 appointment.endDate = thisEnd;
                                 appointment.Room = r;
 
-                                appointment.Patient = PatientService.Instance.ReadPatient(0);
+                                appointment.Patient = PatientService.Instance.ReadPatient(1174846169);
 
                                 appointments.Add(appointment);
 
@@ -209,5 +209,25 @@ namespace Service
             }
             return pastAppointments;
         }
+
+        public Boolean IsTroll(Appointment appointment)
+        {
+            Patient patient = PatientRepository.Instance.ReadPatient(appointment.Patient.Id);
+            if(patient.ChangedOrCanceledAppointmentsDates == null)
+            {
+                patient.ChangedOrCanceledAppointmentsDates = new List<DateTime>();
+            }
+            /*Stavljena dvojka jer me mrzi da menjnam 5 puta, puno posla
+              Posle treba izmeniti
+             */
+            if(patient.ChangedOrCanceledAppointmentsDates.Count >= 2)
+            {
+                patient.CanLog = false;
+                PatientRepository.Instance.UpdatePatient(patient);
+            }
+            return !patient.CanLog;
+        }
+        
+        
     }
 }

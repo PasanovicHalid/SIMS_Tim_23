@@ -82,7 +82,6 @@ namespace ZdravoCorp.View.Doctor
             Model.Patient newPatient = patientController.ReadPatient(PatientsCB.SelectedIndex);
             Model.Room newRoom = roomController.ReadRoomByIndex(RoomsCB.SelectedIndex);
             Model.Doctor newDoctor = doctorController.ReadDoctor(0);
-
             Model.Appointment newAppointment = new Model.Appointment(date, date2, id, newDoctor, newRoom, newPatient);
             appointmentController.UpdateAppointment(newAppointment);
             this.Close();

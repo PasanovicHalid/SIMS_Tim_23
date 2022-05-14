@@ -15,12 +15,30 @@ namespace Repository
         private Serializer<Appointment> serializerAppointment = new Serializer<Appointment>();
 
         private static AppointmentRepository instance = null;
-
+        public List<int> GetAllAppointmentIds()
+        {
+            List<Appointment> appointemnts = GetAllAppointments();
+            List<int> ids = new List<int>();
+            foreach (Appointment appointment in appointemnts)
+            {
+                ids.Add(appointment.Id);
+            }
+            return ids;
+        }
+        public void GenerateId(Appointment newAppointment)
+        {
+            List<int> allAppointmentsIds = GetAllAppointmentIds();
+            Random random = new Random();
+            do
+            {
+                newAppointment.Id = random.Next();
+            }
+            while (allAppointmentsIds.Contains(newAppointment.Id));
+        }
         public Boolean CreateAppointment(Appointment newAppointment)
         {
             List<Appointment> appointments = GetAllAppointments();
-            int id = appointments.Count;
-            newAppointment.Id = id;
+            GenerateId(newAppointment);
             appointments.Add(newAppointment);
             serializerAppointment.ToCSV(dbPath, appointments);
             return true;
@@ -29,17 +47,15 @@ namespace Repository
         public Appointment ReadAppointment(int id)
         {
             List<Appointment> appointments = GetAllAppointments();
-            foreach (Appointment appointment in appointments)
+            Appointment appointment = null;
+            foreach (Appointment app in appointments)
             {
-                if (id == appointment.Id)
+                if (id == app.Id)
                 {
-                    //appointment.doctor = DoctorRepository.Instance.ReadDoctor(appointment.doctor.Id);
-                    //appointment.Room = RoomRepository.Instance.ReadRoom(appointment.Room.Identifier);
-                    //appointment.Patient = PatientRepository.Instance.ReadPatient(appointment.Patient.Id);
-                    return appointment;
+                    appointment = app;
                 }
             }
-            return null;
+            return appointment;
         }
 
         public List<Appointment> GetAppointmentsById(List<int> id)
@@ -68,16 +84,10 @@ namespace Repository
                 if (appointment.Id == appointments[i].Id)
                 {
                     success = true;
-                    DeleteAppointment(appointment.Id);
-                    //appointments[i] = appointment;
+                    appointments[i] = appointment;
+                    serializerAppointment.ToCSV(dbPath, appointments);
                     break;
                 }
-            }
-            if (success)
-            {
-                appointments = GetAllAppointments();
-                appointments.Add(appointment);
-                serializerAppointment.ToCSV(dbPath, appointments);
             }
             return success;
 
@@ -112,13 +122,6 @@ namespace Repository
         public List<Appointment> GetAllAppointments()
         {
             List<Appointment> appointments = serializerAppointment.FromCSV(dbPath);
-            foreach (Appointment appointment in appointments)
-            {
-                //appointment.doctor = DoctorRepository.Instance.ReadDoctor(appointment.doctor.Id);
-                //appointment.Room = RoomRepository.Instance.ReadRoom(appointment.Room.Identifier);
-                //appointment.Patient = PatientRepository.Instance.ReadPatient(appointment.Patient.Id);
-
-            }
             return appointments;
 
         }

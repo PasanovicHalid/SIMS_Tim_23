@@ -14,40 +14,45 @@ namespace Controller
     {
         public Boolean CreateAppointment(Appointment newAppointment)
         {
-            return AppointmenService.Instance.CreateAppointment(newAppointment);
+            return AppointmentService.Instance.CreateAppointment(newAppointment);
         }
 
         public Appointment ReadAppointment(int appointment)
         {
-            return AppointmenService.Instance.ReadAppointment(appointment);
+            return AppointmentService.Instance.ReadAppointment(appointment);
         }
 
         public Boolean UpdateAppointment(Appointment appointment)
         {
-            return AppointmenService.Instance.UpdateAppointment(appointment);
+            return AppointmentService.Instance.UpdateAppointment(appointment);
         }
 
         public Boolean DeleteAppointment(int appointment)
         {
-            return AppointmenService.Instance.DeleteAppointment(appointment);
+            return AppointmentService.Instance.DeleteAppointment(appointment);
         }
 
         public List<Appointment> GetAllAppointments()
         {
-            return AppointmenService.Instance.GetAllAppointments();
+            return AppointmentService.Instance.GetAllAppointments();
         }
 
         public List<Appointment> SuggestAppointments(Doctor doctor, DateTime start, DateTime end, bool priority, bool first)
         {
-            return AppointmenService.Instance.SuggestAppointments(doctor, start, end, priority, first);
+            return AppointmentService.Instance.SuggestAppointments(doctor, start, end, priority, first);
         }
         public List<Appointment> GetFutureAppointments()
         {
-            return AppointmenService.Instance.GetFutureAppointments();
+            return AppointmentService.Instance.GetFutureAppointments();
         }
         public List<Appointment> GetPastAppointments()
         {
-            return AppointmenService.Instance.GetPastAppointments();
+            return AppointmentService.Instance.GetPastAppointments();
+        }
+
+        public Boolean IsTroll(Appointment appointment)
+        {
+            return AppointmentService.Instance.IsTroll(appointment);
         }
     }
 }

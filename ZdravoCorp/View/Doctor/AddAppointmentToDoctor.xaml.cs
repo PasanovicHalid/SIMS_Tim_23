@@ -64,16 +64,42 @@ namespace ZdravoCorp.View.Doctor
         }
 
         private void DodajButton_Click(object sender, RoutedEventArgs e)
-        {   
+        {
+            bool valid = true;
             Model.Doctor tempDoctor = (Model.Doctor)DoctorsCB.SelectedItem;
             Model.Room tempRoom = (Model.Room)RoomsCB.SelectedItem;
             CultureInfo dateTimeFormat = new CultureInfo("en-GB");
             DateTime date = DateTime.Parse(textBox1.Text, dateTimeFormat);
             DateTime date2 = DateTime.Parse(textBox2.Text, dateTimeFormat);
             bool isEmergency = (bool)CheckBox1.IsChecked;
-            Model.Appointment newAppointment = new Model.Appointment(date, date2, 0, tempDoctor, tempRoom, tempPatient);
+            List<Appointment> appointmentList = new List<Appointment>();
+            appointmentList = appointmentController.GetAllAppointments();
+            Model.Appointment newAppointment = new Model.Appointment(date, date2, tempDoctor, tempRoom, tempPatient);
             appointmentController.CreateAppointment(newAppointment);
-            this.Close();
+            foreach (Appointment tempAppointment in appointmentList)
+            {
+                if((DateTime.Compare(tempAppointment.StartDate,date) < 0 && DateTime.Compare(tempAppointment.EndDate,date) > 0) || (DateTime.Compare(tempAppointment.StartDate, date2) < 0 && DateTime.Compare(tempAppointment.EndDate, date2) > 0) || (DateTime.Compare(tempAppointment.StartDate,date) < 0 && DateTime.Compare(tempAppointment.EndDate, date2) > 0) || (DateTime.Compare(tempAppointment.StartDate, date) > 0 && DateTime.Compare(tempAppointment.EndDate, date2) < 0))
+                {
+                    if(tempAppointment.DoctorID == tempDoctor.Id || tempRoom.Identifier == tempAppointment.RoomID || tempPatient.Id == tempAppointment.PatientID)
+                    {
+                        if(isEmergency)
+                        {
+                            appointmentController.DeleteAppointment(tempAppointment.Id);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Termini se preklapaju!");
+                            appointmentController.DeleteAppointment(newAppointment.Id);
+                            valid = false;
+                        }
+                        
+                    }
+                }
+            }
+            if(valid)
+            {
+                this.Close();
+            }
         }
     }
 }

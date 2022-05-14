@@ -4,5 +4,6 @@
         <ResourceDictionary Source="ManagerStyles.xaml"/>
         <ResourceDictionary Source="LoginStyles.xaml"/>
         <ResourceDictionary Source="StylishScrollBar.xaml"/>
+        <ResourceDictionary Source="PatientStyles.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>
