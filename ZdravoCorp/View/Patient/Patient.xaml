@@ -186,6 +186,7 @@
                 >
                     <Label Content="Trenutne terapije" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.995,2.18" Margin="10,27,0,0"/>
                     <DataGrid x:Name ="CurrentTherapies"
+                            Style="{DynamicResource PatientTables}"
                             HorizontalAlignment="Center"
                             Height="201"
                             Margin="0,81,0,0" 
