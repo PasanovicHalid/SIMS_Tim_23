@@ -25,14 +25,14 @@ namespace Service
             return PatientRepository.Instance.UpdatePatient(patient);
         }
 
-        public Boolean DeletePatient(int patient)
+        public Boolean DeletePatient(int id)
         {
-            return PatientRepository.Instance.DeletePatient(patient);
+            return PatientRepository.Instance.DeletePatient(id);
         }
 
-        public Patient ReadPatient(int patient)
+        public Patient ReadPatient(int id)
         {
-            return PatientRepository.Instance.ReadPatient(patient);
+            return PatientRepository.Instance.ReadPatient(id);
         }
 
         public List<Patient> GetAllPatients()
@@ -61,5 +61,22 @@ namespace Service
                 return instance ;
             }
         }
+        public void RemoveFromChangedOrCanceledList(Patient patient)
+        {
+            if(patient.ChangedOrCanceledAppointmentsDates == null)
+            {
+                patient.ChangedOrCanceledAppointmentsDates = new List<DateTime>();
+            }
+            foreach (DateTime date in patient.ChangedOrCanceledAppointmentsDates)
+            {
+                if (date < DateTime.Now.AddMonths(-1))
+                {
+                    patient.ChangedOrCanceledAppointmentsDates.Remove(date);
+                    UpdatePatient(patient);
+                }
+            }
+        }
+
+
     }
 }

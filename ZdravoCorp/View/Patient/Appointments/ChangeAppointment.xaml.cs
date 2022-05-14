@@ -103,26 +103,29 @@ namespace ZdravoCorp.View.Patient.Appointments
             {
                 return;
             }
-            app = AppointmentsCollection.ElementAt(TableForSuggestedApp.SelectedIndex);
-            PatientController pc = new PatientController();
-
-            RoomController rc = new RoomController();
-            app.Id = exApp.Id;
+            Appointment appointment = AppointmentsCollection.ElementAt(TableForSuggestedApp.SelectedIndex);
+            PatientController patientController = new PatientController();
+            Model.Patient patient = patientController.ReadPatient(appointment.Patient.Id);
+            
+            appointment.Id = exApp.Id;
             appointmentController.UpdateAppointment(app);
-            Room r = app.Room;
-            r.RemoveAppointment(exApp);
-            r.AddAppointment(app);
-            rc.UpdateRoom(r);
-            Model.Doctor d = app.doctor;
-            d.RemoveAppointment(exApp);
-            d.AddAppointment(app);
-            doctorController.UpdateDoctor(d);
-            Model.Patient p = app.Patient;
-            p.RemoveAppointment(exApp);
-            p.AddAppointment(app);
-            pc.UpdatePatient(p);
+            
+            //DoctorController doctorController = new DoctorController();
+            //Model.Doctor doctor = doctorController.ReadDoctor(appointment.Doctor.Id);
+            //doctor.RemoveAppointment(exApp);
+            //doctor.AddAppointment(appointment);
+            //doctorController.UpdateDoctor(doctor);
+            //RoomController roomController = new RoomController();
+            //Model.Room room = roomController.ReadRoom(appointment.Room.Identifier);
+            //room.RemoveAppointment(exApp);
+            //room.AddAppointment(appointment);
+            //roomController.UpdateRoom(room);
+            //patient.RemoveAppointment(exApp);
+            //patient.AddAppointment(appointment);
+            patient.ChangedOrCanceledAppointmentsDates.Add(DateTime.Now);
+            patientController.UpdatePatient(patient);
             this.Close();
-
+            
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
