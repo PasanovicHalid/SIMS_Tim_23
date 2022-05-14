@@ -101,6 +101,7 @@
     <Compile Include="Model\Action.cs" />
     <Compile Include="Model\ActionType.cs" />
     <Compile Include="Model\ChangeRoomAction.cs" />
+    <Compile Include="Model\LoginUserEnumeration.cs" />
     <Compile Include="Model\HospitalSurvey.cs" />
     <Compile Include="Model\NewMedicationRequest.cs" />
     <Compile Include="Model\Status.cs" />

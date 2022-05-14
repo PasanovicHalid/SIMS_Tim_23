@@ -83,32 +83,20 @@ namespace ZdravoCorp
             string username = User.Text;
             string password = PassBox.Password;
 
-            if(LoginService.Instance.Login(username, password))
+            switch(LoginService.Instance.Login(username, password))
             {
-                if (LoginService.Instance.IsPatient(username))
-                {
-                    Patient window = new Patient();
-                    this.Close();
-                    window.ShowDialog();
-                }
-
-                if (LoginService.Instance.IsManager(username))
-                {
-                    Manager window = new Manager(autoEvent);
+                case Model.LoginUserEnumeration.Manager:
+                    Manager managerWindow = new Manager(autoEvent);
                     anotherWindow = true;
                     this.Close();
-                    window.ShowDialog();
-                }
-
-                if (LoginService.Instance.IsManager(username))
-                {
-                    Manager window = new Manager(autoEvent);
-                    anotherWindow = true;
+                    managerWindow.ShowDialog();
+                    break;
+                case Model.LoginUserEnumeration.Patient:
+                    Patient patientWindow = new Patient();
                     this.Close();
-                    window.ShowDialog();
-                }
-                if (LoginService.Instance.IsDoctor(username))
-                {
+                    patientWindow.ShowDialog();
+                    break;
+                case Model.LoginUserEnumeration.Doctor:
                     DoctorController doctorController = new DoctorController();
                     DoctorCollection = new ObservableCollection<Model.Doctor>();
                     List<Model.Doctor> doctorList = doctorController.GetAllDoctors();
@@ -126,9 +114,15 @@ namespace ZdravoCorp
                         }
                     }
                     MessageBox.Show("Ne postoji ni jedan doktor");
-                }
+                    break;
+                case Model.LoginUserEnumeration.Secretary:
+                    Secretary secretaryWindow = new Secretary();
+                    this.Close();
+                    secretaryWindow.ShowDialog();
+                    break;
+                default:
+                    break;
             }
-
         }
     }   
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Model;
 
 namespace ZdravoCorp.Service
 {
@@ -12,7 +13,6 @@ namespace ZdravoCorp.Service
         private static readonly object key = new object();
         private static LoginService instance = null;
 
-        private Dictionary<string, string> userMap = new Dictionary<string, string>();
         private Dictionary<string, string> managerMap = new Dictionary<string, string>();
         private Dictionary<string, string> doctorMap = new Dictionary<string, string>();
         private Dictionary<string, string> patientMap = new Dictionary<string, string>();
@@ -24,15 +24,6 @@ namespace ZdravoCorp.Service
             doctorMap = DoctorRepository.Instance.GetUsernameHashSet();
             patientMap = PatientRepository.Instance.GetUsernameHashSet();
             secretaryMap = SecretaryRepository.Instance.GetUsernameHashSet();
-            MergeIntoUserAllDictionaries();
-        }
-
-        private void MergeIntoUserAllDictionaries()
-        {
-            userMap = managerMap;
-            MergeDictionaries(userMap, doctorMap);
-            MergeDictionaries(userMap, patientMap);
-            MergeDictionaries(userMap, secretaryMap);
         }
 
         private void MergeDictionaries(Dictionary<string, string> mergedInto, Dictionary<string, string> dictionary)
@@ -43,36 +34,76 @@ namespace ZdravoCorp.Service
             }
         }
 
-        public bool Login(string username, string password)
+        public LoginUserEnumeration Login(string username, string password)
         {
-            if (userMap.ContainsKey(username))
+            if(IsPatient(username, password))
             {
-                return userMap[username] == password;
+                return LoginUserEnumeration.Patient;
+            }
+            else if(IsDoctor(username, password))
+            {
+                return LoginUserEnumeration.Doctor;
+            }
+            else if (IsManager(username, password))
+            {
+                return LoginUserEnumeration.Manager;
+            }
+            else if (IsSecretary(username, password))
+            {
+                return LoginUserEnumeration.Secretary;
             }
             else
             {
-                return false;
+                return LoginUserEnumeration.None;
             }
         }
 
-        public bool IsPatient(string username)
+        public bool IsPatient(string username, string password)
         {
-            return patientMap.ContainsKey(username);
+            if (patientMap.ContainsKey(username))
+            {
+                if(patientMap[username] == password)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
-        public bool IsManager(string username)
+        public bool IsManager(string username, string password)
         {
-            return managerMap.ContainsKey(username);
+            if (managerMap.ContainsKey(username))
+            {
+                if (managerMap[username] == password)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
-        public bool IsDoctor(string username)
+        public bool IsDoctor(string username, string password)
         {
-            return doctorMap.ContainsKey(username);
+            if (doctorMap.ContainsKey(username))
+            {
+                if (doctorMap[username] == password)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
-        public bool IsSecretary(string username)
+        public bool IsSecretary(string username, string password)
         {
-            return secretaryMap.ContainsKey(username);
+            if (secretaryMap.ContainsKey(username))
+            {
+                if (secretaryMap[username] == password)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public LoginService()
