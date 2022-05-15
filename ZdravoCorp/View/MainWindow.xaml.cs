@@ -92,9 +92,29 @@ namespace ZdravoCorp
                     managerWindow.ShowDialog();
                     break;
                 case Model.LoginUserEnumeration.Patient:
-                    Patient patientWindow = new Patient();
-                    this.Close();
-                    patientWindow.ShowDialog();
+                    PatientController patientController = new PatientController();
+                    List<Model.Patient> patients = patientController.GetAllPatients();
+                    foreach(Model.Patient p in patients)
+                    {
+                        if(p.Username.Equals(username) && p.Password.Equals(password))
+                        {
+                            if (p.CanLog)
+                            {
+                                Patient patientWindow = new Patient(p);
+                                this.Close();
+                                patientWindow.ShowDialog();
+                                return;
+                            }
+                            else
+                            {
+                                MessageBox.Show("Zabranjen pristup nalogu. \nZa vraćanje pristupa, molimo da se obratite sekretaru.", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
+                                return;
+                            }
+
+                        }
+                    }
+                    
+                    
                     break;
                 case Model.LoginUserEnumeration.Doctor:
                     DoctorController doctorController = new DoctorController();
