@@ -54,7 +54,7 @@ namespace Model
         {
             get
             {
-                return this.Appointment.Id.ToString();
+                return Appointment.Id.ToString();
             }
         }
         public Comments(Appointment app, string kom, Doctor doktor)
@@ -77,10 +77,10 @@ namespace Model
             int i = 0;
             Id = Int32.Parse(values[i++]);
             Comment = values[i++];
-            Controller.AppointmentController ac = new Controller.AppointmentController();
-            Appointment = ac.ReadAppointment(Int32.Parse(values[i++]));
             Controller.DoctorController dc = new Controller.DoctorController();
             Doctor = dc.ReadDoctor(Int32.Parse(values[i++]));
+            Controller.AppointmentController ac = new Controller.AppointmentController();
+            Appointment = ac.ReadAppointment(Int32.Parse(values[i++]));
         }
 
         public List<String> ToCSV()

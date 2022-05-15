@@ -11,7 +11,7 @@
         <DataGrid x:Name="CommentsGrid" ItemsSource="{Binding}"
             AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" Margin="413,25,67,228">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Appointment ID" Binding="{Binding Id}" Width="103"/>
+                <DataGridTextColumn Header="Comment ID" Binding="{Binding Id}" Width="103"/>
                 <DataGridTextColumn Header="Comment" Binding="{Binding Comment}" Width="103"/>
                 <DataGridTextColumn Header="Appointment ID" Binding="{Binding AppointmentID}" Width="103" />
                 <DataGridTextColumn Header="Doctor ID" Binding="{Binding DoctorID}" Width="103"/>
