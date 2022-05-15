@@ -28,7 +28,7 @@ namespace ZdravoCorp.View.Patient
         public  Model.Doctor doctor { get; set; }
         private DoctorController dc;
         public String NameSurname { get => NameSurname; set => NameSurname = value; }
-        public Patient()
+        public Patient(Model.Patient patient)
         {
             InitializeComponent();
             appointmentController = new AppointmentController();
