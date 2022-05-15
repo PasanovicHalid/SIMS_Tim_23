@@ -6,6 +6,7 @@
 using Repository;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Model
 {
@@ -57,12 +58,20 @@ namespace Model
         {
         }
 
+        public Medication(int count, MedicationType medicationType)
+        {
+            this.count = count;
+            this.medicationType = medicationType;
+        }
+
         public void FromCSV(string[] values)
         {
             int i = 0;
             id = int.Parse(values[i++]);
             count = int.Parse(values[i++]);
-            medicationType = new MedicationType(int.Parse(values[i++]), values[i++], values[i++], values[i++]);
+            values = values.Skip(i).ToArray();
+            medicationType = new MedicationType();
+            medicationType.FromCSV(values);
         }
 
         public List<String> ToCSV()
@@ -70,11 +79,7 @@ namespace Model
             List<String> result = new List<String>();
             result.Add(id.ToString());
             result.Add(count.ToString());
-            result.Add(medicationType.Id.ToString());
-            result.Add(medicationType.Name);
-            result.Add(medicationType.Manufacturer);
-            result.Add(medicationType.Description);
-
+            result.AddRange(medicationType.ToCSV());
             return result;
         }
     }

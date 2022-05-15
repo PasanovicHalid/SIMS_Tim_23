@@ -552,6 +552,8 @@
     <None Include="Data\appointmentSurveysDB.csv" />
     <None Include="Data\equipmentTypeDB.csv" />
     <None Include="Data\actionsDB.csv" />
+    <None Include="Data\medicationTypeDB.csv" />
+    <None Include="Data\medicationDB.csv" />
     <None Include="Data\secretariesDB.csv" />
     <None Include="Data\medicalRecordDB.csv" />
     <None Include="Data\patientsDB.csv" />

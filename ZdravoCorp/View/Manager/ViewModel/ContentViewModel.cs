@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Model;
+using Repository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -83,7 +85,7 @@ namespace ZdravoCorp.View.Manager.ViewModel
 
             EquipmentViewCommand = new RelayCommand(o =>
             {
-                CurrentView = new Equipment(new EquipmentViewModel());
+                CurrentView = new View.Equipments.Equipment(new EquipmentViewModel());
                 WindowBrowser.AddWindow(CurrentView);
             });
 

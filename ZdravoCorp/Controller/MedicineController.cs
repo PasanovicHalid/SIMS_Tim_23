@@ -39,27 +39,27 @@ namespace Controller
 
         public Boolean CreateMedicationType(MedicationType newMedicationType)
         {
-            throw new NotImplementedException();
+            return MedicineService.Instance.CreateMedicationType(newMedicationType);
         }
 
         public Boolean UpdateMedicationType(MedicationType medicationType)
         {
-            throw new NotImplementedException();
+            return MedicineService.Instance.UpdateMedicationType(medicationType);
         }
 
         public Boolean DeleteMedicationType(int id)
         {
-            throw new NotImplementedException();
+            return MedicineService.Instance.DeleteMedicationType(id);
         }
 
         public MedicationType ReadMedicationType(int id)
         {
-            throw new NotImplementedException();
+            return MedicineService.Instance.ReadMedicationType(id);
         }
 
         public List<MedicationType> GetAllMedicationType()
         {
-            throw new NotImplementedException();
+            return MedicineService.Instance.GetAllMedicationType();
         }
 
     }

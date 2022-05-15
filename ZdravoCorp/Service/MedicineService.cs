@@ -41,27 +41,27 @@ namespace Service
 
         public Boolean CreateMedicationType(MedicationType newMedicationType)
         {
-            throw new NotImplementedException();
+            return MedicineRepository.Instance.CreateMedicationType(newMedicationType);
         }
 
         public Boolean UpdateMedicationType(MedicationType medicationType)
         {
-            throw new NotImplementedException();
+            return MedicineRepository.Instance.UpdateMedicationType(medicationType);
         }
 
         public Boolean DeleteMedicationType(int id)
         {
-            throw new NotImplementedException();
+            return MedicineRepository.Instance.DeleteMedicationType(id);
         }
 
         public MedicationType ReadMedicationType(int id)
         {
-            throw new NotImplementedException();
+            return MedicineRepository.Instance.ReadMedicationType(id);
         }
 
         public List<MedicationType> GetAllMedicationType()
         {
-            throw new NotImplementedException();
+            return MedicineRepository.Instance.GetAllMedicationType();
         }
         public static MedicineService Instance
         {
