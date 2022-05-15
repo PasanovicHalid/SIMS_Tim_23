@@ -17,7 +17,18 @@ namespace Model
         private Status status;
 
         private String comment;
-        public int Id { get => id; set => id = value; }
+        public int Id 
+        {
+            get => id;
+            set
+            {
+                if (value != id)
+                {
+                    id = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         public string Name
         {
