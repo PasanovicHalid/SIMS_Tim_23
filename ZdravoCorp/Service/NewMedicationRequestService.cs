@@ -37,6 +37,16 @@ namespace Service
             return NewMedicationRequestRepository.Instance.GetAllNewMedicationRequests();
         }
 
+        public Boolean AcceptNewMedicationRequest(NewMedicationRequest newMedicationRequest)
+        {
+            return NewMedicationRequestRepository.Instance.AcceptNewMedicationRequest(newMedicationRequest);
+        }
+
+        public Boolean RejectNewMedicationRequest(NewMedicationRequest newMedicationRequest, String comment)
+        {
+            return NewMedicationRequestRepository.Instance.RejectNewMedicationRequest(newMedicationRequest, comment);
+        }
+
         public static NewMedicationRequestService Instance
         {
             get
