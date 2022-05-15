@@ -27,6 +27,7 @@ namespace ZdravoCorp.View.Doctor
         AppointmentController appointmentController;
         DoctorController doctorController;
 
+        Model.Doctor pomocniDoktor;
         int id;
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -68,6 +69,7 @@ namespace ZdravoCorp.View.Doctor
             int index = roomController.GetRoomIndex(pomocna.Room);
             RoomsCB.SelectedIndex = index;
             id = pomocna.Id;
+            pomocniDoktor = pomocna.Doctor;
         }
 
         private void OdustaniButton_Click(object sender, RoutedEventArgs e)
@@ -79,10 +81,10 @@ namespace ZdravoCorp.View.Doctor
         {
             DateTime date = DateTime.Parse(textBox1.Text);
             DateTime date2 = DateTime.Parse(textBox2.Text);
-            Model.Patient newPatient = patientController.ReadPatient(PatientsCB.SelectedIndex);
-            Model.Room newRoom = roomController.ReadRoomByIndex(RoomsCB.SelectedIndex);
-            Model.Doctor newDoctor = doctorController.ReadDoctor(0);
-            Model.Appointment newAppointment = new Model.Appointment(date, date2, id, newDoctor, newRoom, newPatient);
+            Model.Patient newPatient = (Model.Patient)PatientsCB.SelectedItem;
+            Model.Room newRoom = (Model.Room)RoomsCB.SelectedItem;
+            //Model.Doctor newDoctor = doctorController.ReadDoctor(0);
+            Model.Appointment newAppointment = new Model.Appointment(date, date2, id, pomocniDoktor, newRoom, newPatient);
             appointmentController.UpdateAppointment(newAppointment);
             this.Close();
         }
