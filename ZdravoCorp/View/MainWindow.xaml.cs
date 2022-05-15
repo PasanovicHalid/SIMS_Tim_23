@@ -103,7 +103,9 @@ namespace ZdravoCorp
 
                                 Patient patientWindow = new Patient(patient);
                                 this.Close();
+                                //patientWindow.ResizeMode = ResizeMode.NoResize;
                                 patientWindow.ShowDialog();
+                                
                             }
                             else
                             {

@@ -187,10 +187,27 @@ namespace ZdravoCorp.View.Patient
             PastAppointmentsCollection = new ObservableCollection<Appointment>();
             DoctorCollection = new ObservableCollection<Model.Doctor>();
             RoomCollection = new ObservableCollection<Room>();
-            NameTextBox.Text = patient.Name;
+            SetPatientInfo(patient);
             UpdateTable();
             PastAppointments();
 
+        }
+        public void SetPatientInfo(Model.Patient patient)
+        {
+            NameTextBox.Text = patient.Name;
+            SurnameTextBox.Text = patient.Surname;
+            BirthTextBox.Text = patient.DateOfBirth.ToLongDateString();
+            PhoneTextBox.Text = patient.PhoneNumber;
+            EmailTextBox.Text = patient.Email;
+            JMBGTextBox.Text = patient.Jmbg;
+            if (patient.Gender == Gender.Male)
+            {
+                MaleButton.IsChecked = true;
+            }
+            else
+            {
+                FemaleButton.IsChecked = true;
+            }
         }
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string name)
