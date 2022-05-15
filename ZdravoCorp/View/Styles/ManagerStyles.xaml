@@ -45,6 +45,11 @@
         <Setter Property="FontWeight" Value="Thin"/>
     </Style>
 
+    <Style TargetType="{x:Type TextBlock}" x:Key="WrapText">
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="TextAlignment" Value="Center"/>
+    </Style>
+
     <Style x:Key="ManagerTables" TargetType="{x:Type DataGrid}">
         <Setter Property="BorderBrush" Value="#222831" />
         <Setter Property="HorizontalGridLinesBrush" Value="Transparent" />
@@ -59,6 +64,7 @@
         <Setter Property="ColumnHeaderStyle">
             <Setter.Value>
                 <Style TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
@@ -66,7 +72,7 @@
                                             CornerRadius="10,10,0,0"
                                             Padding="3"
                                             BorderBrush="Transparent"
-                                            BorderThickness="2"
+                                            BorderThickness="0"
                                             Grid.Column="0">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
@@ -132,7 +138,7 @@
                                         BorderThickness="{TemplateBinding BorderThickness}"
                                         Background="{TemplateBinding Background}"
                                         CornerRadius="10">
-                                    <ContentPresenter />
+                                    <ContentPresenter/>
                                 </Border>
                             </ControlTemplate>
                         </Setter.Value>

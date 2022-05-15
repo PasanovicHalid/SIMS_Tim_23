@@ -3,11 +3,13 @@
 // Created: Sunday, 17 April 2022 01:56:20
 // Purpose: Definition of Class MedicationType
 
+using Repository;
 using System;
+using System.Collections.Generic;
 
 namespace Model
 {
-    public class MedicationType
+    public class MedicationType : Serializable
     {
         private int id;
 
@@ -18,6 +20,7 @@ namespace Model
         private String name;
         private String manufacturer;
         private String description;
+        private List<MedicationType> replacement;
 
         public int Id { get => id; set => id = value; }
         public String Name { get => name; set => name = value; }    
@@ -29,6 +32,16 @@ namespace Model
             this.name = name;
             this.manufacturer = manufacturer;
             this.description = description;
+        }
+
+        public List<string> ToCSV()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void FromCSV(string[] values)
+        {
+            throw new NotImplementedException();
         }
     }
 }

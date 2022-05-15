@@ -36,10 +36,10 @@
                       VerticalGridLinesBrush="Transparent" 
                       >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Start" Binding="{Binding ExecutionDateTable}" Width="*"/>
-                <DataGridTextColumn Header="End" Binding="{Binding ExpirationDateTable}" Width="*"/>
-                <DataGridTextColumn Header="Room" Binding="{Binding DesignationCode}" Width="*"/>
-                <DataGridTextColumn Header="Is Renovating Now" Binding="{Binding RenovationTable}" Width="135"/>
+                <DataGridTextColumn Header="Start" Binding="{Binding ExecutionDate}" ElementStyle="{StaticResource WrapText}" Width="*"/>
+                <DataGridTextColumn Header="End" Binding="{Binding ExpirationDate}" ElementStyle="{StaticResource WrapText}" Width="*"/>
+                <DataGridTextColumn Header="Room" Binding="{Binding DesignationCode}" ElementStyle="{StaticResource WrapText}" Width="*"/>
+                <DataGridTextColumn Header="Is Renovating Now" Binding="{Binding RenovationTable}" ElementStyle="{StaticResource WrapText}" Width="135"/>
             </DataGrid.Columns>
             <DataGrid.InputBindings>
                 <MouseBinding Gesture="LeftDoubleClick" Command="{Binding ViewCommand}"/>

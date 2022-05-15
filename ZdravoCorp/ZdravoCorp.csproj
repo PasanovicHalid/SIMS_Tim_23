@@ -204,6 +204,24 @@
     <Compile Include="View\Manager\View\Equipments\ViewReservedEquipment.xaml.cs">
       <DependentUpon>ViewReservedEquipment.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Manager\View\Medications\AddMedication.xaml.cs">
+      <DependentUpon>AddMedication.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Manager\View\Medications\Medications.xaml.cs">
+      <DependentUpon>Medications.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Manager\View\Medications\RequestsMedication.xaml.cs">
+      <DependentUpon>RequestsMedication.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Manager\View\Medications\ViewMedicine.xaml.cs">
+      <DependentUpon>ViewMedicine.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Manager\View\Medications\ViewPending.xaml.cs">
+      <DependentUpon>ViewPending.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Manager\View\Medications\ViewRejected.xaml.cs">
+      <DependentUpon>ViewRejected.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Manager\View\Rooms\AddRoom.xaml.cs">
       <DependentUpon>AddRoom.xaml</DependentUpon>
     </Compile>
@@ -345,6 +363,30 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Manager\View\Equipments\ViewReservedEquipment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Manager\View\Medications\AddMedication.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Manager\View\Medications\Medications.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Manager\View\Medications\RequestsMedication.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Manager\View\Medications\ViewMedicine.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Manager\View\Medications\ViewPending.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Manager\View\Medications\ViewRejected.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

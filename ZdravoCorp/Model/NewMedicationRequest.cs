@@ -78,7 +78,12 @@ namespace Model
             String pom = values[i++];
             if (pom.Equals("REJECTED"))
             {
+                Status = Status.REJECTED;
                 Comment = values[i++];
+            }
+            else
+            {
+                Status = Status.PENDING;
             }
         }
 
