@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Repository;
+using ZdravoCorp.View.Core;
 
 namespace Model
 {
-    public class NewMedicationRequest : Serializable
+    public class NewMedicationRequest : ObservableObject, Serializable
     {
         private int id;
 
@@ -20,42 +21,75 @@ namespace Model
 
         public string Name
         {
-            get => medicationType.Name; set => medicationType.Name = value;
+            get => medicationType.Name;
+            set
+            {
+                if (value != medicationType.Name)
+                {
+                    medicationType.Name = value;
+                    OnPropertyChanged();
+                }
+            }
         }
         public string Manufacturer
         {
-            get => medicationType.Manufacturer; set => medicationType.Manufacturer = value;
+            get => medicationType.Manufacturer;
+            set
+            {
+                if (value != medicationType.Manufacturer)
+                {
+                    medicationType.Manufacturer = value;
+                    OnPropertyChanged();
+                }
+            }
         }
         public string Description
         {
-            get => medicationType.Description; set => medicationType.Description = value;
+            get => medicationType.Manufacturer;
+            set
+            {
+                if (value != medicationType.Manufacturer)
+                {
+                    medicationType.Manufacturer = value;
+                    OnPropertyChanged();
+                }
+            }
         }
         public MedicationType MedicationType
         {
-            get
-            {
-                return medicationType;
-            }
+            get => medicationType;
             set
             {
-                this.medicationType = value;
+                if (value != medicationType)
+                {
+                    medicationType = value;
+                    OnPropertyChanged();
+                }
             }
         }
-        public Status Status { get => status; set => status = value; }
+        public Status Status
+        {
+            get => status;
+            set
+            {
+                if (value != status)
+                {
+                    status = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         public String Comment
         {
-            get
-            {
-                if (comment == null)
-                {
-                    return "";
-                }
-                return comment;
-            }
+            get => comment;
             set
             {
-                comment = value;
+                if (value != comment)
+                {
+                    comment = value;
+                    OnPropertyChanged();
+                }
             }
         }
 

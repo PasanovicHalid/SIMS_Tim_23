@@ -7,10 +7,11 @@ using Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ZdravoCorp.View.Core;
 
 namespace Model
 {
-    public class MedicationType : Serializable
+    public class MedicationType : ObservableObject, Serializable
     {
         private int id;
         private String name;
@@ -18,11 +19,66 @@ namespace Model
         private String description;
         private List<MedicationType> replacement;
 
-        public int Id { get => id; set => id = value; }
-        public String Name { get => name; set => name = value; }    
-        public String Manufacturer { get => manufacturer; set => manufacturer = value; }    
-        public String Description { get => description; set => description = value; }
-        public List<MedicationType> Replacement { get => replacement; set => replacement = value; }
+        public int Id
+        {
+            get => id;
+            set
+            {
+                if (value != id)
+                {
+                    id = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public String Name
+        {
+            get => name;
+            set
+            {
+                if (value != name)
+                {
+                    name = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public String Manufacturer
+        {
+            get => manufacturer;
+            set
+            {
+                if (value != manufacturer)
+                {
+                    manufacturer = value;
+                    OnPropertyChanged();
+                }
+            }
+        }    
+        public String Description
+        {
+            get => description;
+            set
+            {
+                if (value != description)
+                {
+                    description = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public List<MedicationType> Replacement
+        {
+            get => replacement;
+            set
+            {
+                if (value != replacement)
+                {
+                    replacement = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         public MedicationType(int id)
         {
