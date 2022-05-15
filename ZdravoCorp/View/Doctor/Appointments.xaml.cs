@@ -134,5 +134,11 @@ namespace ZdravoCorp.View.Doctor
             MedicalRecords meds = new MedicalRecords(currentDoctor);
             meds.Show();
         }
+
+        private void requestsButton_Click(object sender, RoutedEventArgs e)
+        {
+            MedicationRequests medicationRequests = new MedicationRequests();
+            medicationRequests.Show();
+        }
     }
 }

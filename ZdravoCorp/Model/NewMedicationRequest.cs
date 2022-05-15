@@ -56,10 +56,10 @@ namespace Model
         }
         public string Description
         {
-            get => medicationType.Manufacturer;
+            get => medicationType.Description;
             set
             {
-                if (value != medicationType.Manufacturer)
+                if (value != medicationType.Description)
                 {
                     medicationType.Manufacturer = value;
                     OnPropertyChanged();

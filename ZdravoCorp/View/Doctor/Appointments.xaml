@@ -25,6 +25,7 @@
         </DataGrid>
         <TextBox x:Name="txtIme" HorizontalAlignment="Left" Height="17" Margin="690,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="96" IsEnabled="False" TextAlignment="Right"/>
         <Button x:Name="kartoniButton" Content="Kartoni" HorizontalAlignment="Left" Margin="711,40,0,0" VerticalAlignment="Top" Width="63" Click="kartoniButton_Click"/>
+        <Button x:Name="requestsButton" Content="Medical Request" HorizontalAlignment="Left" Margin="547,32,0,0" VerticalAlignment="Top" Height="45" Width="104" Click="requestsButton_Click"/>
 
     </Grid>
 </Window>
