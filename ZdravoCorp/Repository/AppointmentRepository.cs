@@ -77,19 +77,17 @@ namespace Repository
 
         public Boolean UpdateAppointment(Appointment appointment)
         {
-            Boolean success = false;
             List<Appointment> appointments = GetAllAppointments();
             for (int i = 0; i < appointments.Count; i++)
             {
                 if (appointment.Id == appointments[i].Id)
                 {
-                    success = true;
                     appointments[i] = appointment;
                     serializerAppointment.ToCSV(dbPath, appointments);
-                    break;
+                    return true;
                 }
             }
-            return success;
+            return false;
 
         }
 

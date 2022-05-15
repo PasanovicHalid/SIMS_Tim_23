@@ -8,10 +8,10 @@
         Title="Appointments" Height="450" Width="800"
         WindowStartupLocation="CenterScreen">
     <Grid>
-        <Button x:Name="CreateButton" Content="Create" HorizontalAlignment="Left" Margin="63,35,0,0" VerticalAlignment="Top" Width="65" Height="30" Click="CreateButton_Click"/>
-        <Button x:Name="UpdateButton" Content="Update" HorizontalAlignment="Left" Margin="188,35,0,0" VerticalAlignment="Top" Width="65" Height="30" Click="UpdateButton_Click"/>
-        <Button x:Name="DeleteButton" Content="Delete" HorizontalAlignment="Left" Margin="300,35,0,0" VerticalAlignment="Top" Width="65" Height="30" Click="DeleteButton_Click"/>
-        <Button x:Name="PrintButton" Content="Print" HorizontalAlignment="Left" Margin="421,35,0,0" VerticalAlignment="Top" Width="65" Height="30"/>
+        <Button x:Name="CreateButton" Content="Create" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Width="64" Height="30" Click="CreateButton_Click"/>
+        <Button x:Name="UpdateButton" Content="Update" HorizontalAlignment="Left" Margin="134,40,0,0" VerticalAlignment="Top" Width="66" Height="30" Click="UpdateButton_Click"/>
+        <Button x:Name="DeleteButton" Content="Delete" HorizontalAlignment="Left" Margin="246,40,0,0" VerticalAlignment="Top" Width="66" Height="30" Click="DeleteButton_Click"/>
+        <Button x:Name="PrintButton" Content="Print" HorizontalAlignment="Center" Margin="0,40,0,0" VerticalAlignment="Top" Width="64" Height="30"/>
         <DataGrid x:Name="AppointmentGrid" ItemsSource="{Binding}"
                               AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" Margin="0,100,0,10">
             <DataGrid.Columns>
@@ -25,7 +25,8 @@
         </DataGrid>
         <TextBox x:Name="txtIme" HorizontalAlignment="Left" Height="17" Margin="690,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="96" IsEnabled="False" TextAlignment="Right"/>
         <Button x:Name="kartoniButton" Content="Kartoni" HorizontalAlignment="Left" Margin="711,40,0,0" VerticalAlignment="Top" Width="63" Click="kartoniButton_Click"/>
-        <Button x:Name="requestsButton" Content="Medical Request" HorizontalAlignment="Left" Margin="547,32,0,0" VerticalAlignment="Top" Height="45" Width="104" Click="requestsButton_Click"/>
+        <Button x:Name="requestsButton" Content="Medical Request" HorizontalAlignment="Left" Margin="578,27,0,0" VerticalAlignment="Top" Height="45" Width="104" Click="requestsButton_Click"/>
+        <Button x:Name="vacationRequestButton" Content="Vacation Request" HorizontalAlignment="Left" Margin="454,33,0,0" VerticalAlignment="Top" Height="45" Width="99" Click="vacationRequestButton_Click"/>
 
     </Grid>
 </Window>

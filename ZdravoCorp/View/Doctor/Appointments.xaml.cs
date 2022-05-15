@@ -140,5 +140,11 @@ namespace ZdravoCorp.View.Doctor
             MedicationRequests medicationRequests = new MedicationRequests();
             medicationRequests.Show();
         }
+
+        private void vacationRequestButton_Click(object sender, RoutedEventArgs e)
+        {
+            VacationRequest vacationRequest = new VacationRequest(currentDoctor);
+            vacationRequest.Show();
+        }
     }
 }
