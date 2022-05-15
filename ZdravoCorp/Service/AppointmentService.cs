@@ -58,7 +58,7 @@ namespace Service
                 return instance;
             }
         }
-        public List<Appointment> SuggestAppointments(Doctor doctor, DateTime start, DateTime end, bool priority, bool firstTime)
+        public List<Appointment> SuggestAppointments(Doctor doctor, DateTime start, DateTime end, bool priority, bool firstTime, Patient patient)
         {
 
             if (firstTime)
@@ -87,7 +87,7 @@ namespace Service
                             appointment.endDate = thisEnd;
                             appointment.Room = r;
 
-                            appointment.Patient = PatientService.Instance.ReadPatient(1174846169);
+                            appointment.Patient = patient;
 
                             appointments.Add(appointment);
 
@@ -106,7 +106,7 @@ namespace Service
                     start = start.Date + ts2;
                     end = end.Date + ts3;
                     
-                    SuggestAppointments(doctor, start, end, true, false);
+                    SuggestAppointments(doctor, start, end, true, false, patient);
 
                 }
             }
@@ -140,7 +140,7 @@ namespace Service
                                 appointment.endDate = thisEnd;
                                 appointment.Room = r;
 
-                                appointment.Patient = PatientService.Instance.ReadPatient(1174846169);
+                                appointment.Patient = patient;
 
                                 appointments.Add(appointment);
 
@@ -160,9 +160,7 @@ namespace Service
                     start = start.Date + ts2;
                     end = end.Date + ts3;
                     
-                    SuggestAppointments(doctor, start, end, false, false);
-
-
+                    SuggestAppointments(doctor, start, end, false, false, patient);
                 }
             }
             return appointments;
@@ -228,6 +226,32 @@ namespace Service
             return !patient.CanLog;
         }
         
-        
+        public List<Appointment> GetFutureAppointmentsForPatient(Patient patient)
+        {
+            List<Appointment> allFutureAppointments = GetFutureAppointments();
+            List<Appointment> futureAppointmentsForPatient = new List<Appointment>();
+            foreach(Appointment appointment in allFutureAppointments)
+            {
+                if(appointment.Patient.Id == patient.Id)
+                {
+                    futureAppointmentsForPatient.Add(appointment);
+                }
+            }
+            return futureAppointmentsForPatient;
+        }
+
+        public List<Appointment> GetPastAppointmentsForPatient(Patient patient)
+        {
+            List<Appointment> allPastAppointments = GetPastAppointments();
+            List<Appointment> pastAppointmentsForPatient = new List<Appointment>();
+            foreach (Appointment appointment in allPastAppointments)
+            {
+                if (appointment.Patient.Id == patient.Id)
+                {
+                    pastAppointmentsForPatient.Add(appointment);
+                }
+            }
+            return pastAppointmentsForPatient;
+        }
     }
 }

@@ -20,21 +20,22 @@
 
                     <Image HorizontalAlignment="Left" Height="168" Margin="30,26,0,0" VerticalAlignment="Top" Width="130" Grid.ColumnSpan="2"/>
                     <Button Content="Postavi sliku" Margin="45,208,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Height="35"/>
-                    <Label x:Name ="Name" Content="Ime"  Margin="59,26,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1"/>
-                    <Label x:Name="Surname" Content="Prezime" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="59,61,0,0" Grid.Column="1"/>
-                    <Label x:Name="DateOfBirth" Content="Datum rodjenja" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="59,94,0,0" Grid.Column="1"/>
-                    <Label x:Name="Gender" Content="Pol " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="59,126,0,0" Grid.Column="1"/>
-                    <Label x:Name="JMBG" Content="JMBG " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="59,161,0,0" Grid.Column="1"/>
-                    <Label x:Name="Telephone" Content="Kontakt telefon " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="59,194,0,0" Grid.Column="1"/>
-                    <Label x:Name="Email" Content="Email " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="59,226,0,0" Grid.Column="1"/>
-                    <TextBox TextWrapping="Wrap" Text="TextBox" Width="200"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="215,30,0,0" Grid.Column="1"/>
+                    <Label x:Name ="NameLabel" Content="Ime"  Margin="59,26,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1"/>
+                    <Label x:Name="SurnameLabel" Content="Prezime" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="59,61,0,0" Grid.Column="1"/>
+                    <Label x:Name="DateOfBirthLabel" Content="Datum rodjenja" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="59,94,0,0" Grid.Column="1"/>
+                    <Label x:Name="GenderLabel" Content="Pol " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="59,126,0,0" Grid.Column="1"/>
+                    <Label x:Name="JMBGLabel" Content="JMBG " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="59,161,0,0" Grid.Column="1"/>
+                    <Label x:Name="TelephoneLabel" Content="Kontakt telefon " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="59,194,0,0" Grid.Column="1"/>
+                    <Label x:Name="EmailLabel" Content="Email " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="59,226,0,0" Grid.Column="1" />
+
+                    <TextBox x:Name="NameTextBox" IsReadOnly="True" TextWrapping="NoWrap" Width="200"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="215,30,0,0" Grid.Column="1"/>
                     <TextBox TextWrapping="Wrap" Text="TextBox" Width="200"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="215,65,0,0" Grid.Column="1"/>
                     <TextBox TextWrapping="Wrap" Text="TextBox" Width="200"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="215,98,0,0" Grid.Column="1"/>
                     <TextBox TextWrapping="Wrap" Text="TextBox" Width="200"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="215,165,0,0" Grid.Column="1"/>
                     <TextBox TextWrapping="Wrap" Text="TextBox" Width="200"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="215,198,0,0" Grid.Column="1"/>
                     <TextBox TextWrapping="Wrap" Text="TextBox" Width="200"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="215,230,0,0" Grid.Column="1"/>
-                    <RadioButton Content="Muško" Margin="215,132,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1"/>
-                    <RadioButton Content="Žensko" Margin="305,132,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1"/>
+                    <RadioButton x:Name="MaleButton" Content="Muško" Margin="215,132,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1"/>
+                    <RadioButton x:Name="FemaleButton" Content="Žensko" Margin="305,132,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1"/>
                     <Button Style="{DynamicResource BlueButton}" Content="Oceni bolnicu" Click="HospitalSurvey_Click" Margin="30,302,0,0" Width="130" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
                 </Grid>
             </TabItem>

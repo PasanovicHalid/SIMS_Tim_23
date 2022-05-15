@@ -6,12 +6,13 @@
 using Model;
 using System;
 using System.Collections.Generic;
+using Repository;
 
 namespace Service
 {
    public class SecretaryService
    {
-      private SecretaryService instance;
+      private static SecretaryService instance = null;
       
       public Boolean CreateSecretary(Secretary newSecretary)
       {
@@ -35,8 +36,23 @@ namespace Service
       
       public List<Secretary> GetAllSecretaries()
       {
-         throw new NotImplementedException();
+            return SecretaryRepository.Instance.GetAllSecretaries();
       }
-   
-   }
+        public SecretaryService()
+        {
+
+        }
+
+        public static SecretaryService Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new SecretaryService();
+                }
+                return instance;
+            }
+        }
+    }
 }

@@ -94,27 +94,24 @@ namespace ZdravoCorp
                 case Model.LoginUserEnumeration.Patient:
                     PatientController patientController = new PatientController();
                     List<Model.Patient> patients = patientController.GetAllPatients();
-                    foreach(Model.Patient p in patients)
+                    foreach(Model.Patient patient in patients)
                     {
-                        if(p.Username.Equals(username) && p.Password.Equals(password))
+                        if(patient.Username.Equals(username) && patient.Password.Equals(password))
                         {
-                            if (p.CanLog)
+                            if (patient.CanLog)
                             {
-                                Patient patientWindow = new Patient(p);
+
+                                Patient patientWindow = new Patient(patient);
                                 this.Close();
                                 patientWindow.ShowDialog();
-                                return;
                             }
                             else
                             {
                                 MessageBox.Show("Zabranjen pristup nalogu. \nZa vraćanje pristupa, molimo da se obratite sekretaru.", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
                                 return;
                             }
-
-                        }
+                        } 
                     }
-                    
-                    
                     break;
                 case Model.LoginUserEnumeration.Doctor:
                     DoctorController doctorController = new DoctorController();
@@ -136,11 +133,21 @@ namespace ZdravoCorp
                     MessageBox.Show("Ne postoji ni jedan doktor");
                     break;
                 case Model.LoginUserEnumeration.Secretary:
-                    Secretary secretaryWindow = new Secretary();
-                    this.Close();
-                    secretaryWindow.ShowDialog();
+                    SecretaryController secretaryController = new SecretaryController();
+                    List<Model.Secretary> secretaries = secretaryController.GetAllSecretaries();
+                    foreach(Model.Secretary secretary in secretaries)
+                    {
+                        if(secretary.Username.Equals(username) && secretary.Password.Equals(password))
+                        {
+                            Secretary secretaryWindow = new Secretary(secretary);
+                            this.Close();
+                            secretaryWindow.ShowDialog();
+                            return;
+                        }
+                    }
                     break;
                 default:
+                    MessageBox.Show("Pogrešan username ili password.\nPokušajte opet.", "Greska", MessageBoxButton.OK, MessageBoxImage.Error);
                     break;
             }
         }

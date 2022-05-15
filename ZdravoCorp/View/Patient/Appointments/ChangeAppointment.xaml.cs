@@ -72,6 +72,8 @@ namespace ZdravoCorp.View.Patient.Appointments
             TimeSpan moreDays = new TimeSpan(2, 0, 0, 0);
             DateTime less = exDate.Date + lessDays;
             DateTime more = exDate.Date + moreDays;
+            PatientController patientController = new PatientController();
+            Model.Patient patient = patientController.ReadPatient(exApp.Patient.Id);
             if (date < less)
             {
                 MessageBox.Show("Prvobitan datum mozete pomeriti najvise 1 dan uznazad.\nPrvobitan datum :\t" + exDate.ToString(), "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -85,11 +87,11 @@ namespace ZdravoCorp.View.Patient.Appointments
             {
                 if (DateRB.IsChecked == true)
                 {
-                    apps = appointmentController.SuggestAppointments(doctor, date, date.AddMinutes(45), false, true);
+                    apps = appointmentController.SuggestAppointments(doctor, date, date.AddMinutes(45), false, true, patient);
                 }
                 else
                 {
-                    apps = appointmentController.SuggestAppointments(doctor, date, date.AddMinutes(45), true, true);
+                    apps = appointmentController.SuggestAppointments(doctor, date, date.AddMinutes(45), true, true, patient);
 
                 }
                 AppointmentsCollection = new ObservableCollection<Appointment>(apps);

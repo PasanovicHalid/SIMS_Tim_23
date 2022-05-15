@@ -37,9 +37,9 @@ namespace Controller
             return AppointmentService.Instance.GetAllAppointments();
         }
 
-        public List<Appointment> SuggestAppointments(Doctor doctor, DateTime start, DateTime end, bool priority, bool first)
+        public List<Appointment> SuggestAppointments(Doctor doctor, DateTime start, DateTime end, bool priority, bool first, Patient patient)
         {
-            return AppointmentService.Instance.SuggestAppointments(doctor, start, end, priority, first);
+            return AppointmentService.Instance.SuggestAppointments(doctor, start, end, priority, first, patient);
         }
         public List<Appointment> GetFutureAppointments()
         {
@@ -54,5 +54,14 @@ namespace Controller
         {
             return AppointmentService.Instance.IsTroll(appointment);
         }
+        public List<Appointment> GetFutureAppointmentsForPatient(Patient patient)
+        {
+            return AppointmentService.Instance.GetFutureAppointmentsForPatient(patient);
+        }
+        public List<Appointment> GetPastAppointmentsForPatient(Patient patient)
+        {
+            return AppointmentService.Instance.GetPastAppointmentsForPatient(patient);
+        }
+
     }
 }
