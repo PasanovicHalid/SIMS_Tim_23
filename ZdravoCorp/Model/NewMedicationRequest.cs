@@ -70,36 +70,29 @@ namespace Model
         public NewMedicationRequest()
         { }
 
-        public void FromCSV(string[] values)
+        private string[] ReadInfo(string[] values)
         {
             int i = 0;
             Id = int.Parse(values[i++]);
-            medicationType = new MedicationType(int.Parse(values[i++]), values[i++], values[i++], values[i++]);
-            String pom = values[i++];
-            if (pom.Equals("REJECTED"))
-            {
-                Status = Status.REJECTED;
-                Comment = values[i++];
-            }
-            else
-            {
-                Status = Status.PENDING;
-            }
+            Status = (Status)Enum.Parse(typeof(Status), values[i++]);
+            Comment = values[i++];
+            return values.Skip(i).ToArray();
+        }
+        public void FromCSV(string[] values)
+        {
+            int i = 0;
+            values = ReadInfo(values);
+            MedicationType = new MedicationType();
+            MedicationType.FromCSV(values);
         }
 
         public List<String> ToCSV()
         {
             List<String> result = new List<String>();
             result.Add(id.ToString());
-            result.Add(medicationType.Id.ToString());
-            result.Add(medicationType.Name);
-            result.Add(medicationType.Manufacturer);
-            result.Add(medicationType.Description);
             result.Add(Status.ToString());
-            if (Status.ToString().Equals("REJECTED"))
-            {
-                result.Add(Comment);
-            }
+            result.Add(Comment);
+            result.AddRange(MedicationType.ToCSV());
             return result;
         }
     }

@@ -11,75 +11,129 @@ namespace Repository
     {
         private static NewMedicationRequestRepository instance = null;
 
-        private String dbPath = "..\\..\\Data\\newMedicationRequest.csv";
+        private String dbPath = "..\\..\\Data\\newMedicationRequestDB.csv";
         private Serializer<NewMedicationRequest> serializerNewMedicationRequest = new Serializer<NewMedicationRequest>();
+
+        private HashSet<int> idMap = new HashSet<int>();
+
+        public NewMedicationRequestRepository()
+        {
+            List<NewMedicationRequest> requests = GetAllNewMedicationRequests();
+            InstantiateHashSets(requests);
+        }
+
+        private int GenerateID()
+        {
+            int id;
+            Random random = new Random();
+            do
+            {
+                id = random.Next();
+            }
+            while (idMap.Contains(id));
+            idMap.Add(id);
+            return id;
+        }
+
+        private void InstantiateHashSets(List<NewMedicationRequest> requests)
+        {
+            foreach (NewMedicationRequest request in requests)
+            {
+                idMap.Add(request.Id);
+            }
+        }
+
+        private bool CheckIfIDExists(int id)
+        {
+            return idMap.Contains(id);
+        }
 
         public Boolean CreateNewMedicationRequest(NewMedicationRequest newMedicationRequest)
         {
-            List<NewMedicationRequest> requests = GetAllNewMedicationRequests();
-            newMedicationRequest.Id = requests.Count() + 1;
-            requests.Add(newMedicationRequest);
-            serializerNewMedicationRequest.ToCSV(dbPath, requests);
+            newMedicationRequest.Id = GenerateID();
+            serializerNewMedicationRequest.ToCSVAppend(dbPath,new List<NewMedicationRequest>() { newMedicationRequest });
             return true;
         }
 
         public NewMedicationRequest ReadNewMedicationRequest(int id)
         {
             List<NewMedicationRequest> requests= GetAllNewMedicationRequests();
-            NewMedicationRequest newMedicationRequest = null;
             foreach (NewMedicationRequest temp in requests)
             {
                 if (id == temp.Id)
                 {
-                    newMedicationRequest = temp;
+                    return temp;
                 }
             }
-            return newMedicationRequest;
+            return null;
+        }
+
+        private void SwapRequestByID(List<NewMedicationRequest> requests, NewMedicationRequest request)
+        {
+            for (int i = 0; i < requests.Count; i++)
+            {
+                if (requests[i].Id == request.Id)
+                {
+                    requests[i] = request;
+                    break;
+                }
+            }
         }
 
         public Boolean UpdateNewMedicationRequest(NewMedicationRequest newMedicationRequest)
         {
-            Boolean success = false;
-            List<NewMedicationRequest> requests = GetAllNewMedicationRequests();
+            if (CheckIfIDExists(newMedicationRequest.Id))
+            {
+                List<NewMedicationRequest> requests = GetAllNewMedicationRequests();
+                SwapRequestByID(requests, newMedicationRequest);
+                serializerNewMedicationRequest.ToCSV(dbPath, requests);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+
+        private void DeleteRequestByID(List<NewMedicationRequest> requests, int id)
+        {
             for (int i = 0; i < requests.Count; i++)
             {
-                if (newMedicationRequest.Id == requests[i].Id)
+                if (requests[i].Id == id)
                 {
-                    success = true;
-                    DeleteNewMedicationRequest(newMedicationRequest.Id);
+                    requests.RemoveAt(i);
                     break;
                 }
             }
-            if (success)
-            {
-                requests = GetAllNewMedicationRequests();
-                requests.Add(newMedicationRequest);
-                serializerNewMedicationRequest.ToCSV(dbPath, requests);
-            }
-            return success;
-
         }
 
         public Boolean DeleteNewMedicationRequest(int id)
         {
-            Boolean success = false;
-            List<NewMedicationRequest> requests = GetAllNewMedicationRequests();
-            foreach (NewMedicationRequest newMedicationRequest in requests)
+            if (CheckIfIDExists(id))
             {
-                if (id == newMedicationRequest.Id)
-                {
-                    success = true;
-                    requests.Remove(newMedicationRequest);
-                    serializerNewMedicationRequest.ToCSV(dbPath, requests);
-                    break;
-                }
+                List<NewMedicationRequest> requests = GetAllNewMedicationRequests();
+                DeleteRequestByID(requests, id);
+                serializerNewMedicationRequest.ToCSV(dbPath, requests);
+                return true;
             }
-            return success;
+            else
+            {
+                return false;
+            }
         }
 
         public List<NewMedicationRequest> GetAllNewMedicationRequests()
         {
-            List<NewMedicationRequest> requests = new List<NewMedicationRequest>();
+            List<NewMedicationRequest> requests = serializerNewMedicationRequest.FromCSV(dbPath);
+            Dictionary<int, MedicationType> types = MedicineRepository.Instance.GetAllMedicationType().ToDictionary(keySelector: m => m.Id, elementSelector: m => m);
+            foreach(NewMedicationRequest request in requests)
+            {
+                if (types.ContainsKey(request.MedicationType.Id))
+                {
+                    request.MedicationType = types[request.MedicationType.Id];
+                }
+            }
             return requests;
         }
 
