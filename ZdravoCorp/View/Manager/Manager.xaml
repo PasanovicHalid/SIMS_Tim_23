@@ -13,7 +13,7 @@
         ResizeMode="NoResize"
         Background="Transparent"
         AllowsTransparency="True" 
-        Closing="CloseWindow"
+        Closing="CloseManager"
         WindowStartupLocation="CenterScreen">
 
     <Border Background="#222831"
@@ -70,7 +70,8 @@
                     Style="{StaticResource MinimiseButton}"
                     Foreground="#393E46" 
                     Width="34" 
-                    Height="40" />
+                    Height="40" 
+                    Click="Logout_Click" />
 
             </StackPanel>
 

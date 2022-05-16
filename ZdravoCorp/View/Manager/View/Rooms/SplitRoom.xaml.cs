@@ -12,25 +12,19 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ZdravoCorp.View.Core;
-using ZdravoCorp.View.Manager.ViewModel;
+using ZdravoCorp.View.Manager.ViewModel.Rooms;
 
-namespace ZdravoCorp.View.Manager.View
+namespace ZdravoCorp.View.Manager.View.Rooms
 {
     /// <summary>
-    /// Interaction logic for ManagerMain.xaml
+    /// Interaction logic for SplitRoom.xaml
     /// </summary>
-    public partial class Home : UserControl, WindowInterface
+    public partial class SplitRoom : UserControl
     {
-        public Home(MainViewModel model)
+        public SplitRoom(SplitRoomViewModel model)
         {
             InitializeComponent();
             this.DataContext = model;
-        }
-
-        public string getTitle()
-        {
-            return "Main";
         }
     }
 }

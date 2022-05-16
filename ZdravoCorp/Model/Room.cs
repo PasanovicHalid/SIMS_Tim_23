@@ -14,6 +14,7 @@ namespace Model
     {
         private int identifier;
         private String designationCode;
+        private int floor;
         private float surfaceArea;
         private bool renovating;
         private DateTime renovatedUntil;
@@ -210,6 +211,7 @@ namespace Model
         public string RoomTypeString { get => RoomType.Name; set => RoomType.Name = value; }
         public bool Renovating { get => renovating; set => renovating = value; }
         public DateTime RenovatedUntil { get => renovatedUntil; set => renovatedUntil = value; }
+        public int Floor { get => floor; set => floor = value; }
 
         /// <summary>
         /// Add a new Medication in the collection
@@ -248,14 +250,27 @@ namespace Model
                 medication.Clear();
         }
 
-        public Room(String designation, float surfaceArea, RoomType roomType, List<Appointment> appointment, List<Equipment> equipment, List<Medication> medication)
+        public Room(String designation, int floor, float surfaceArea, RoomType roomType, List<Appointment> appointment, List<Equipment> equipment, List<Medication> medication)
         {
             DesignationCode = designation;
             this.SurfaceArea = surfaceArea;
+            this.Floor = floor;
             this.roomType = roomType;
             this.appointment = appointment;
             this.equipment = equipment;
             this.medication = medication;
+            this.renovating = false;
+        }
+
+        public Room(String designation, int floor, float surfaceArea, RoomType roomType)
+        {
+            DesignationCode = designation;
+            this.SurfaceArea = surfaceArea;
+            this.Floor = floor;
+            this.roomType = roomType;
+            this.appointment = new List<Appointment>();
+            this.equipment = new List<Equipment>();
+            this.medication = new List<Medication>();
             this.renovating = false;
         }
 
@@ -267,6 +282,7 @@ namespace Model
         {
             this.identifier = room.identifier;
             this.designationCode = room.designationCode;
+            this.Floor = room.Floor;
             this.surfaceArea = room.surfaceArea;
             this.renovating = room.renovating;
             this.renovatedUntil = room.renovatedUntil;
@@ -282,6 +298,7 @@ namespace Model
 
             result.Add(Identifier.ToString());
             result.Add(DesignationCode);
+            result.Add(Floor.ToString());
             result.Add(SurfaceArea.ToString());
             result.AddRange(RoomType.ToCSV());
             result.Add(renovating.ToString());
@@ -316,6 +333,7 @@ namespace Model
             int i = 0;
             Identifier = int.Parse(values[i++]);
             DesignationCode = values[i++];
+            Floor = int.Parse(values[i++]);
             SurfaceArea = float.Parse(values[i++]);
             roomType = new RoomType(values[i++]);
             renovating = Boolean.Parse(values[i++]);

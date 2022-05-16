@@ -47,6 +47,19 @@ namespace ZdravoCorp.View.Manager.ViewModel.Rooms
             }
         }
 
+        public int Floor
+        {
+            get { return selectedRoom.Floor; }
+            set
+            {
+                if (value != selectedRoom.Floor)
+                {
+                    selectedRoom.Floor = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         public String Identifier
         {
             get { return selectedRoom.DesignationCode; }

@@ -45,7 +45,14 @@ namespace ZdravoCorp.View.Manager
             WindowState = WindowState.Minimized;
         }
 
-        private void CloseWindow(object sender, System.ComponentModel.CancelEventArgs e)
+        private void Logout_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+            this.Close();
+        }
+
+        private void CloseManager(object sender, System.ComponentModel.CancelEventArgs e)
         {
             autoEvent.Set();
         }
