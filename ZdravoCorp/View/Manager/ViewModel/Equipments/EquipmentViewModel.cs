@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using ZdravoCorp.View.Core;
@@ -16,6 +17,11 @@ namespace ZdravoCorp.View.Manager.ViewModel.Equipments
     public class EquipmentViewModel : ObservableObject, ViewModelInterface
     {
         private ObservableCollection<EquipmentModel> equipmentTable;
+        private ObservableCollection<EquipmentModel> equipmentTableSaved;
+        private ObservableCollection<EquipmentModel> equipmentTableSearch;
+        private ObservableCollection<String> dropDownCollection;
+        private String selectedOption;
+        private String searchBox;
         private EquipmentController controller;
         private EquipmentModel selectedEquipment;
         private int selectedIndex;
@@ -48,8 +54,10 @@ namespace ZdravoCorp.View.Manager.ViewModel.Equipments
         {
             SelectedIndex = -1;
             controller = new EquipmentController();
-
-            Update();
+            DropDownCollection = new ObservableCollection<string>() { "Both", "Disposable", "Reusable" };
+            EquipmentTable = controller.GetAllEquipmentTableVO();
+            EquipmentTableSaved = controller.GetAllEquipmentTableVO();
+            SelectedOption = DropDownCollection[0];
 
             AddEquipmentViewCommand = new RelayCommand(o =>
             {
@@ -116,6 +124,111 @@ namespace ZdravoCorp.View.Manager.ViewModel.Equipments
                 if (value != selectedIndex)
                 {
                     selectedIndex = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public ObservableCollection<string> DropDownCollection
+        {
+            get => dropDownCollection;
+            set
+            {
+                if (value != dropDownCollection)
+                {
+                    dropDownCollection = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public string SearchBoxText
+        {
+            get => searchBox;
+            set
+            {
+                if (value != searchBox)
+                {
+                    ChangeTableSearch(value);
+                    searchBox = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private void ChangeTableSearch(string value)
+        {
+            if (value == null)
+            {
+                return;
+            }
+            else if(value.Length > 0)
+            {
+                value = "(" + value + ")+";
+                EquipmentTable = new ObservableCollection<EquipmentModel>(EquipmentTableSearch.Where(equipment => Regex.IsMatch(equipment.Name, value)));
+            }
+            else
+            {
+                EquipmentTable = new ObservableCollection<EquipmentModel>(EquipmentTableSearch);
+            }
+        }
+
+        public string SelectedOption
+        {
+            get => selectedOption;
+            set
+            {
+                if (value != selectedOption)
+                {
+                    ChangeTable(value);
+                    selectedOption = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private void ChangeTable(string value)
+        {
+            if (value == null)
+            {
+                return;
+            }
+            else if (value == "Both")
+            {
+                EquipmentTable = new ObservableCollection<EquipmentModel>(EquipmentTableSaved);
+            }
+            else if (value == "Disposable")
+            {
+                EquipmentTable = new ObservableCollection<EquipmentModel>(EquipmentTableSaved.Where(equipment => equipment.Disposable == true));
+            } 
+            else if(value == "Reusable")
+            {
+                EquipmentTable = new ObservableCollection<EquipmentModel>(EquipmentTableSaved.Where(equipment => equipment.Disposable == false));
+            }
+            EquipmentTableSearch = new ObservableCollection<EquipmentModel>(EquipmentTable);
+        }
+
+        public ObservableCollection<EquipmentModel> EquipmentTableSaved
+        {
+            get => equipmentTableSaved;
+            set
+            {
+                if (value != equipmentTableSaved)
+                {
+                    equipmentTableSaved = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public ObservableCollection<EquipmentModel> EquipmentTableSearch
+        {
+            get => equipmentTableSearch;
+            set
+            {
+                if (value != equipmentTableSearch)
+                {
+                    equipmentTableSearch = value;
                     OnPropertyChanged();
                 }
             }

@@ -15,16 +15,10 @@ namespace ZdravoCorp.View.Manager.ViewModel.Rooms
 {
     public class RoomsViewModel : ObservableObject, ViewModelInterface
     {
-        public RoomController roomController;
+        private RoomController roomController;
         private Room selectedRoom;
         private int selectedIndex;
-
-        public ObservableCollection<Room> RoomsCollection
-        {
-            get;
-            set;
-        }
-
+        private ObservableCollection<Room> roomsCollection;
         public RelayCommand ViewRoomCommand { get; set; }
 
         public RelayCommand AddRoomCommand { get; set; }
@@ -71,11 +65,25 @@ namespace ZdravoCorp.View.Manager.ViewModel.Rooms
                 }
             }
         }
+        public ObservableCollection<Room> RoomsCollection
+        {
+            get => roomsCollection;
+            set
+            {
+                if (value != roomsCollection)
+                {
+                    roomsCollection = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         public RoomsViewModel()
         {
             roomController = new RoomController();
             RoomsCollection = new ObservableCollection<Room>();
+            List<Room> rooms = roomController.GetAllRooms();
+            RoomsCollection = new ObservableCollection<Room>(rooms);
 
             ViewRoomCommand = new RelayCommand(o =>
             {
@@ -91,8 +99,6 @@ namespace ZdravoCorp.View.Manager.ViewModel.Rooms
             {
                 CurrentView = new RenovatingRooms(new RenovatingRoomsViewModel());
             });
-
-            Update();
         }
 
         private bool checkIfTableRowSelected(object arg)
