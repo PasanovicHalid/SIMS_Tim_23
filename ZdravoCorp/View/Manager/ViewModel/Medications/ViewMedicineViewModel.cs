@@ -181,7 +181,7 @@ namespace ZdravoCorp.View.Manager.ViewModel.Medications
             controller = new MedicineController();
             controllerRequest = new NewMedicationRequestController();
             MedicationTypes = new ObservableCollection<MedicationType>(controller.GetAllMedicationType());
-            ReplacementTypes = new ObservableCollection<MedicationType>();
+            ReplacementTypes = new ObservableCollection<MedicationType>(selectedType.Replacement);
             this.selectedType = selectedType;
 
             ChangeCommand = new RelayCommand(o =>
