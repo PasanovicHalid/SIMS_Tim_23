@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ZdravoCorp.View.Manager.ViewModel.Medications;
 
 namespace ZdravoCorp.View.Manager.View.Medications
 {
@@ -20,9 +21,10 @@ namespace ZdravoCorp.View.Manager.View.Medications
     /// </summary>
     public partial class ViewPending : UserControl
     {
-        public ViewPending()
+        public ViewPending(ViewPendingViewModel model)
         {
             InitializeComponent();
+            this.DataContext = model;
         }
     }
 }

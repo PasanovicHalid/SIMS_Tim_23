@@ -11,6 +11,7 @@ using ZdravoCorp.View.Core;
 using ZdravoCorp.View.Manager.View;
 using ZdravoCorp.View.Manager.View.Equipments;
 using ZdravoCorp.View.Manager.ViewModel.Equipments;
+using ZdravoCorp.View.Manager.ViewModel.Medications;
 using ZdravoCorp.View.Manager.ViewModel.Rooms;
 
 namespace ZdravoCorp.View.Manager.ViewModel
@@ -62,6 +63,8 @@ namespace ZdravoCorp.View.Manager.ViewModel
 
         public RelayCommand EquipmentViewCommand { get; set; }
 
+        public RelayCommand MedicineViewCommand { get; set; }
+
         public RelayCommand BackViewCommand { get; set; }
 
         public ContentViewModel()
@@ -86,6 +89,12 @@ namespace ZdravoCorp.View.Manager.ViewModel
             EquipmentViewCommand = new RelayCommand(o =>
             {
                 CurrentView = new View.Equipments.Equipment(new EquipmentViewModel());
+                WindowBrowser.AddWindow(CurrentView);
+            });
+
+            MedicineViewCommand = new RelayCommand(o =>
+            {
+                CurrentView = new View.Medications.Medications(new MedicationsViewModel());
                 WindowBrowser.AddWindow(CurrentView);
             });
 

@@ -180,6 +180,12 @@
     <Compile Include="View\Manager\ViewModel\Equipments\ReservedEquipmentViewModel.cs" />
     <Compile Include="View\Manager\ViewModel\Equipments\ViewEquipmentViewModel.cs" />
     <Compile Include="View\Manager\ViewModel\MainViewModel.cs" />
+    <Compile Include="View\Manager\ViewModel\Medications\ViewPendingViewModel.cs" />
+    <Compile Include="View\Manager\ViewModel\Medications\ViewRejectedViewModel.cs" />
+    <Compile Include="View\Manager\ViewModel\Medications\RequestsMedicationViewModel.cs" />
+    <Compile Include="View\Manager\ViewModel\Medications\ViewMedicineViewModel.cs" />
+    <Compile Include="View\Manager\ViewModel\Medications\AddMedicationViewModel.cs" />
+    <Compile Include="View\Manager\ViewModel\Medications\Framework.cs" />
     <Compile Include="View\Manager\ViewModel\Medications\MedicationsViewModel.cs" />
     <Compile Include="View\Manager\ViewModel\Rooms\AddRoomViewModel.cs" />
     <Compile Include="View\Manager\ViewModel\Rooms\AddRoomTypeViewModel.cs" />
@@ -188,7 +194,6 @@
     <Compile Include="View\Manager\ViewModel\Rooms\RenovatingRoomsViewModel.cs" />
     <Compile Include="View\Manager\ViewModel\Rooms\RenovateRoomViewModel.cs" />
     <Compile Include="View\Manager\ViewModel\Rooms\RoomsViewModel.cs" />
-    <Compile Include="View\Manager\ViewModel\Rooms\Framework.cs" />
     <Compile Include="View\Manager\ViewModel\Rooms\ViewRoomViewModel.cs" />
     <Compile Include="View\Manager\View\Equipments\AddEquipment.xaml.cs">
       <DependentUpon>AddEquipment.xaml</DependentUpon>

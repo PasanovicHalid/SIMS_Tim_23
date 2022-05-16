@@ -129,9 +129,12 @@ namespace Repository
             Dictionary<int, MedicationType> types = MedicineRepository.Instance.GetAllMedicationType().ToDictionary(keySelector: m => m.Id, elementSelector: m => m);
             foreach(NewMedicationRequest request in requests)
             {
-                if (types.ContainsKey(request.MedicationType.Id))
+                for(int i = 0; i < request.MedicationType.Replacement.Count; i++)
                 {
-                    request.MedicationType = types[request.MedicationType.Id];
+                    if (types.ContainsKey(request.MedicationType.Replacement[i].Id))
+                    {
+                        request.MedicationType.Replacement[i] = types[request.MedicationType.Replacement[i].Id];
+                    }
                 }
             }
             return requests;

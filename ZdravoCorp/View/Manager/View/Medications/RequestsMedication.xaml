@@ -10,7 +10,7 @@
     <Grid>
 
         <DataGrid x:Name="RoomTable" 
-                      ItemsSource="{Binding RoomsCollection}" 
+                      ItemsSource="{Binding MedicationRequests}" 
                       Margin="0,70,0,0" 
                       AutoGenerateColumns="False"
                       SelectionMode="Single" 
@@ -24,15 +24,14 @@
                       BorderThickness="2"
                       HorizontalGridLinesBrush="Transparent"
                       VerticalGridLinesBrush="Transparent" 
-                      SelectedIndex="{Binding SelectedIndex}"
-                      SelectedItem="{Binding SelectedRoom}"
+                      SelectedItem="{Binding SelectedRequest}"
                       >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding DesignationCode}" ElementStyle="{StaticResource WrapText}" Width="*"/>
-                <DataGridTextColumn Header="Status" Binding="{Binding SurfaceArea}" ElementStyle="{StaticResource WrapText}" Width="*"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" ElementStyle="{StaticResource WrapText}" Width="*"/>
+                <DataGridTextColumn Header="Status" Binding="{Binding Status}" ElementStyle="{StaticResource WrapText}" Width="*"/>
             </DataGrid.Columns>
             <DataGrid.InputBindings>
-                <MouseBinding Gesture="LeftDoubleClick" Command="{Binding ViewRoomCommand}"/>
+                <MouseBinding Gesture="LeftDoubleClick" Command="{Binding ViewCommand}"/>
             </DataGrid.InputBindings>
         </DataGrid>
 

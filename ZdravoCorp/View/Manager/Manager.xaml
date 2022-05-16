@@ -84,7 +84,8 @@
                     <Button Style="{StaticResource ActionButton}"
                             Foreground="#EEEEEE"
                             Width="86" 
-                            Height="45">
+                            Height="45"
+                            Command="{Binding MedicineViewCommand}">
                         <StackPanel Height="42" Width="84">
                             <svgc:SvgViewbox Source="\Resources\Icons\medicine.svg" Width="84" Height="28"/>
                             <Label Content="Medicine" 

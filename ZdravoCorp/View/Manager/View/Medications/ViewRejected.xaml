@@ -19,7 +19,7 @@
             <TextBox HorizontalAlignment="Left"
                 Margin="30,66,0,0" 
                 TextWrapping="Wrap" 
-                Text="{Binding Count, UpdateSourceTrigger=PropertyChanged}"
+                Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}"
                 VerticalAlignment="Top" 
                 Width="364"
                 Style="{StaticResource ManagerTextBox}" 
@@ -36,7 +36,7 @@
             <TextBox HorizontalAlignment="Left"
                      Margin="30,216,0,0" 
                      TextWrapping="Wrap" 
-                     Text="{Binding Path=Count, UpdateSourceTrigger=PropertyChanged}"
+                     Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}"
                      VerticalAlignment="Top" 
                      Width="364"
                      Style="{StaticResource ManagerTextBox}" 
@@ -54,7 +54,7 @@
             <TextBox HorizontalAlignment="Left"
                      Margin="30,304,0,0" 
                      TextWrapping="Wrap" 
-                     Text="{Binding Path=Count, UpdateSourceTrigger=PropertyChanged}"
+                     Text="{Binding Path=Manufacturer, UpdateSourceTrigger=PropertyChanged}"
                      VerticalAlignment="Top" 
                      Width="364"
                      Style="{StaticResource ManagerTextBox}" 
@@ -71,7 +71,7 @@
             <TextBox HorizontalAlignment="Left"
                      Margin="30,394,0,0" 
                      TextWrapping="Wrap" 
-                     Text="{Binding Path=Count, UpdateSourceTrigger=PropertyChanged}"
+                     Text="{Binding Path=Description, UpdateSourceTrigger=PropertyChanged}"
                      VerticalAlignment="Top" 
                      Width="364"
                      Style="{StaticResource ManagerTextBox}" 
@@ -91,20 +91,20 @@
                       Style="{DynamicResource ManagerComboBox}"
                       VerticalAlignment="Top" 
                       Width="366"
-                      ItemsSource="{Binding RoomsList}"
-                      SelectedIndex="{Binding SelectedRoom}"
+                      ItemsSource="{Binding MedicationTypes}"
+                      SelectedItem="{Binding SelectedReplacement}"
                       FontFamily="/Resources/Fonts/#Poppins"
                       Height="46" 
                       ItemContainerStyle="{DynamicResource ManagerComboBoxItem}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Background="Transparent" Text="{Binding DesignationCode}"/>
+                        <TextBlock Background="Transparent" Text="{Binding Name}"/>
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
 
             <DataGrid x:Name="EquipmentTable" 
-                          ItemsSource="{Binding Equipments}" 
+                          ItemsSource="{Binding ReplacementTypes}" 
                           Margin="33,604,31,272"
                           AutoGenerateColumns="False"
                           SelectionMode="Single" 
@@ -117,6 +117,7 @@
                           HorizontalContentAlignment="Center"
                           FontSize="13"
                           Style="{DynamicResource ManagerTables}"
+                          SelectedItem="{Binding SelectedReplacement}"
                           BorderThickness="2"
                           HorizontalGridLinesBrush="Transparent"
                           VerticalGridLinesBrush="Transparent" 
@@ -132,7 +133,7 @@
                     VerticalAlignment="Top" 
                     Height="46" 
                     Width="166"
-                    Command="{Binding AddViewCommand}"
+                    Command="{Binding ChangeCommand}"
                     Style="{StaticResource ManagerButtons}"/>
 
             <Button Content="Delete Replacement" 
@@ -141,7 +142,7 @@
                     VerticalAlignment="Top" 
                     Height="46" 
                     Width="166"
-                    Command="{Binding AddViewCommand}"
+                    Command="{Binding DeleteReplacementCommand}"
                     Style="{StaticResource ManagerButtons}"/>
         </Grid>
     </ScrollViewer>

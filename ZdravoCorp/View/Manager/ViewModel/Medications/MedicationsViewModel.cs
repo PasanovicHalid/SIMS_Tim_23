@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using ZdravoCorp.View.Core;
+using ZdravoCorp.View.Manager.View.Medications;
 
 namespace ZdravoCorp.View.Manager.ViewModel.Medications
 {
@@ -16,10 +17,26 @@ namespace ZdravoCorp.View.Manager.ViewModel.Medications
 
         private ObservableCollection<MedicationType> medicationTypes;
         private MedicineController controller;
+        private MedicationType selectedType;
 
         public RelayCommand AddCommand { get; set; }
 
+        public RelayCommand ViewCommand { get; set; }
+
         public RelayCommand RequestsCommand { get; set; }
+
+        public MedicationType SelectedType
+        {
+            get => selectedType;
+            set
+            {
+                if (value != selectedType)
+                {
+                    selectedType = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         public UserControl CurrentView
         {
@@ -52,6 +69,26 @@ namespace ZdravoCorp.View.Manager.ViewModel.Medications
         {
             controller = new MedicineController();
             MedicationTypes = new ObservableCollection<MedicationType>(controller.GetAllMedicationType());
+
+            ViewCommand = new RelayCommand(o =>
+            {
+                CurrentView = new ViewMedicine(new ViewMedicineViewModel(new MedicationType(SelectedType)));
+            }, CheckIfSelected);
+
+            AddCommand = new RelayCommand(o =>
+            {
+                CurrentView = new AddMedication(new AddMedicationViewModel());
+            });
+
+            RequestsCommand = new RelayCommand(o =>
+            {
+                CurrentView = new RequestsMedication(new RequestsMedicationViewModel());
+            });
+        }
+
+        private bool CheckIfSelected(object obj)
+        {
+            return SelectedType != null;
         }
 
         public string GetTitle()

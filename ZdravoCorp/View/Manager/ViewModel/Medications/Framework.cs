@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using ZdravoCorp.View.Core;
 
-namespace ZdravoCorp.View.Manager.ViewModel.Rooms
+namespace ZdravoCorp.View.Manager.ViewModel.Medications
 {
     public class Framework : ObservableObject, ViewModelInterface
     {

@@ -80,6 +80,26 @@ namespace Model
             }
         }
 
+        public String ReplacementTable
+        {
+            get 
+            {
+                string result = "";
+                foreach(MedicationType item in replacement)
+                {
+                    if(item.Name != null)
+                    {
+                        result += item.Name + ", ";
+                    }
+                }
+                if(result.Length > 0)
+                {
+                    result = result.Remove(result.Length - 2);
+                }
+                return result; 
+            }
+        }
+
         public MedicationType(int id)
         {
             this.Id = id;
@@ -93,8 +113,24 @@ namespace Model
             Replacement = new List<MedicationType>();
         }
 
+        public MedicationType(MedicationType type)
+        {
+            this.Id = type.Id;
+            this.name = type.Name;
+            this.manufacturer = type.Manufacturer;
+            this.description = type.Description;
+            Replacement = type.Replacement;
+        }
+
         public MedicationType()
         {
+        }
+
+        public MedicationType(string name, string manufacturer, string description)
+        {
+            this.name = name;
+            this.manufacturer = manufacturer;
+            this.description = description;
         }
 
         private void InfoToListString(List<string> result)

@@ -17,7 +17,7 @@
         <TextBox HorizontalAlignment="Center"
                  Margin="0,45,0,0" 
                  TextWrapping="Wrap" 
-                 Text="{Binding Path=Count, UpdateSourceTrigger=PropertyChanged}"
+                 Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}"
                  VerticalAlignment="Top" 
                  Width="364"
                  Style="{StaticResource ManagerTextBox}" 
@@ -35,7 +35,7 @@
         <TextBox HorizontalAlignment="Center"
                  Margin="0,133,0,0" 
                  TextWrapping="Wrap" 
-                 Text="{Binding Path=Count, UpdateSourceTrigger=PropertyChanged}"
+                 Text="{Binding Path=Manufacturer, UpdateSourceTrigger=PropertyChanged}"
                  VerticalAlignment="Top" 
                  Width="364"
                  Style="{StaticResource ManagerTextBox}" 
@@ -52,7 +52,7 @@
         <TextBox HorizontalAlignment="Center"
                  Margin="0,223,0,0" 
                  TextWrapping="Wrap" 
-                 Text="{Binding Path=Count, UpdateSourceTrigger=PropertyChanged}"
+                 Text="{Binding Path=Description, UpdateSourceTrigger=PropertyChanged}"
                  VerticalAlignment="Top" 
                  Width="364"
                  Style="{StaticResource ManagerTextBox}" 
@@ -72,20 +72,20 @@
                   Style="{DynamicResource ManagerComboBox}"
                   VerticalAlignment="Top" 
                   Width="366"
-                  ItemsSource="{Binding RoomsList}"
-                  SelectedIndex="{Binding SelectedRoom}"
+                  ItemsSource="{Binding MedicationTypes}"
+                  SelectedItem="{Binding SelectedReplacement}"
                   FontFamily="/Resources/Fonts/#Poppins"
                   Height="46" 
                   ItemContainerStyle="{DynamicResource ManagerComboBoxItem}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Background="Transparent" Text="{Binding DesignationCode}"/>
+                    <TextBlock Background="Transparent" Text="{Binding Name}"/>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
 
         <DataGrid x:Name="EquipmentTable" 
-                      ItemsSource="{Binding Equipments}" 
+                      ItemsSource="{Binding ReplacementTypes}" 
                       Margin="30,434,19,79"
                       AutoGenerateColumns="False"
                       SelectionMode="Single" 
@@ -98,6 +98,7 @@
                       HorizontalContentAlignment="Center"
                       FontSize="13"
                       Style="{DynamicResource ManagerTables}"
+                      SelectedItem="{Binding SelectedTable}"
                       BorderThickness="2"
                       HorizontalGridLinesBrush="Transparent"
                       VerticalGridLinesBrush="Transparent" 
@@ -113,7 +114,7 @@
                 VerticalAlignment="Top" 
                 Height="47" 
                 Width="166"
-                Command="{Binding AddViewCommand}"
+                Command="{Binding AddCommand}"
                 Style="{StaticResource ManagerButtons}"/>
 
         <Button Content="Delete Replacement" 
@@ -122,7 +123,7 @@
                 VerticalAlignment="Top" 
                 Height="47" 
                 Width="166"
-                Command="{Binding AddViewCommand}"
+                Command="{Binding DeleteReplacementCommand}"
                 Style="{StaticResource ManagerButtons}"/>
 
 

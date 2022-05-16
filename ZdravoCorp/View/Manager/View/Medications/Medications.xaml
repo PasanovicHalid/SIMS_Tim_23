@@ -13,7 +13,7 @@
                 VerticalAlignment="Top" 
                 Height="42" 
                 Width="48"
-                Command="{Binding AddRoomCommand}"
+                Command="{Binding AddCommand}"
                 Style="{StaticResource ManagerButtons}">
             <StackPanel>
                 <svgc:SvgViewbox Source="\Resources\Icons\add-all.svg" Width="28" Height="25"/>
@@ -33,7 +33,7 @@
                 Height="42" 
                 Width="48"
                 Style="{StaticResource ManagerButtons}"
-                Command="{Binding RenovationsCommand}">
+                Command="{Binding RequestsCommand}">
             <StackPanel>
                 <svgc:SvgViewbox Source="\Resources\Icons\timecard.svg" Width="28" Height="25"/>
                 <Label  Content="Requests" 
@@ -47,7 +47,7 @@
         </Button>
 
         <DataGrid x:Name="RoomTable" 
-                      ItemsSource="{Binding RoomsCollection}" 
+                      ItemsSource="{Binding MedicationTypes}" 
                       Margin="0,70,0,0" 
                       AutoGenerateColumns="False"
                       SelectionMode="Single" 
@@ -61,17 +61,16 @@
                       BorderThickness="2"
                       HorizontalGridLinesBrush="Transparent"
                       VerticalGridLinesBrush="Transparent" 
-                      SelectedIndex="{Binding SelectedIndex}"
-                      SelectedItem="{Binding SelectedRoom}"
+                      SelectedItem="{Binding SelectedType}"
                       >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding DesignationCode}" ElementStyle="{StaticResource WrapText}" Width="70"/>
-                <DataGridTextColumn Header="Manifacturer" Binding="{Binding SurfaceArea}" ElementStyle="{StaticResource WrapText}" Width="*"/>
-                <DataGridTextColumn Header="Replacement" Binding="{Binding RoomTypeString}" ElementStyle="{StaticResource WrapText}" Width="*"/>
-                <DataGridTextColumn Header="Description" Binding="{Binding Renovating}" ElementStyle="{StaticResource WrapText}" Width="*"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" ElementStyle="{StaticResource WrapText}" Width="70"/>
+                <DataGridTextColumn Header="Manifacturer" Binding="{Binding Manufacturer}" ElementStyle="{StaticResource WrapText}" Width="*"/>
+                <DataGridTextColumn Header="Replacement" Binding="{Binding ReplacementTable}" ElementStyle="{StaticResource WrapText}" Width="*"/>
+                <DataGridTextColumn Header="Description" Binding="{Binding Description}" ElementStyle="{StaticResource WrapText}" Width="*"/>
             </DataGrid.Columns>
             <DataGrid.InputBindings>
-                <MouseBinding Gesture="LeftDoubleClick" Command="{Binding ViewRoomCommand}"/>
+                <MouseBinding Gesture="LeftDoubleClick" Command="{Binding ViewCommand}"/>
             </DataGrid.InputBindings>
         </DataGrid>
 
