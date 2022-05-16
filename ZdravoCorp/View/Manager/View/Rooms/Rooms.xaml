@@ -93,7 +93,7 @@
                       Background="Transparent" 
                       CanUserResizeRows="False"
                       FontFamily="/Resources/Fonts/#Poppins"
-                      TextBlock.TextAlignment="Left"
+                      TextBlock.TextAlignment="Justify"
                       FontSize="13"
                       Style="{DynamicResource ManagerTables}"
                       BorderThickness="2"
@@ -102,10 +102,11 @@
                       SelectedIndex="{Binding SelectedIndex}"
                       SelectedItem="{Binding SelectedRoom}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Designation" Binding="{Binding DesignationCode}" Width="*"/>
-                <DataGridTextColumn Header="Surface Area" Binding="{Binding SurfaceArea}" Width="*"/>
-                <DataGridTextColumn Header="Room Type" Binding="{Binding RoomTypeString}" Width="*"/>
-                <DataGridTextColumn Header="Renovated" Binding="{Binding Renovating}" Width="*"/>
+                <DataGridTextColumn Header="Floor" Binding="{Binding Floor}" ElementStyle="{StaticResource WrapText}" Width="55"/>
+                <DataGridTextColumn Header="Designation" Binding="{Binding DesignationCode}" ElementStyle="{StaticResource WrapText}" Width="*"/>
+                <DataGridTextColumn Header="Size" Binding="{Binding SurfaceArea}" ElementStyle="{StaticResource WrapText}" Width="60"/>
+                <DataGridTextColumn Header="Room Type" Binding="{Binding RoomTypeString}" ElementStyle="{StaticResource WrapText}" Width="*"/>
+                <DataGridTextColumn Header="Renovated" Binding="{Binding Renovating}" ElementStyle="{StaticResource WrapText}" Width="*"/>
             </DataGrid.Columns>
             <DataGrid.InputBindings>
                 <MouseBinding Gesture="LeftDoubleClick" Command="{Binding ViewRoomCommand}"/>

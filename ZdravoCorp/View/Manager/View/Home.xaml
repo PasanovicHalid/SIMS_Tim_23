@@ -3,11 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:ZdravoCorp.View.Manager.View"
+             xmlns:local="clr-namespace:ZdravoCorp.View.Manager.View" 
+             xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
              mc:Ignorable="d" 
              d:DesignHeight="667" d:DesignWidth="430">
     <Grid>
-        <Button Content="Button" 
+        <Button 
                     HorizontalAlignment="Left" 
                     Margin="23,30,0,0" 
                     Grid.Row="2" 
@@ -15,10 +16,8 @@
                     Style="{DynamicResource WindowButton}" 
                     Height="130" 
                     Width="152"
-                    Click="Rooms_Click">
-            <Button.Background>
-                <ImageBrush/>
-            </Button.Background>
+                    Command="{Binding RoomsCommand}">
+            <svgc:SvgViewbox Source="\Resources\Icons\rooms.svg" Width="107" Height="107"/>
         </Button>
 
         <Label Content="Rooms" 
@@ -29,7 +28,7 @@
                    FontSize="18"
                    Style="{DynamicResource ManagerLabels}" Height="35" Width="76"/>
 
-        <Button Content="Button" 
+        <Button  
                     HorizontalAlignment="Left" 
                     Margin="247,30,0,0" 
                     Grid.Row="2" 
@@ -37,7 +36,9 @@
                     Style="{DynamicResource WindowButton}" 
                     Height="130" 
                     Width="151" 
-                    Click="Equipment_Click"/>
+                    Command="{Binding EquipmentsCommand}">
+            <svgc:SvgViewbox Source="\Resources\Icons\equipment.svg" Width="107" Height="107"/>
+        </Button>
 
         <Label  Content="Equipment" 
                     HorizontalAlignment="Left" 
@@ -47,31 +48,35 @@
                     FontSize="18"
                     Style="{DynamicResource ManagerLabels}" Height="34" Width="105"/>
 
-        <Button Content="Button" 
+        <Button 
                     HorizontalAlignment="Left" 
                     Margin="23,193,0,0" 
                     Grid.Row="2" 
                     VerticalAlignment="Top" 
                     Style="{DynamicResource WindowButton}" 
                     Height="130" 
-                    Width="152"/>
+                    Width="152"
+                    Command="{Binding MedicationsCommand}">
+            <svgc:SvgViewbox Source="\Resources\Icons\medicine.svg" Width="107" Height="107"/>
+        </Button>
 
-        <Label  Content="Rooms" 
+        <Label  Content="Medications" 
                     HorizontalAlignment="Left" 
-                    Margin="64,0,0,0" 
-                    Grid.Row="2" 
+                    Margin="48,0,0,0" 
                     VerticalAlignment="Center" 
                     FontSize="18"
-                    Style="{DynamicResource ManagerLabels}" Height="34" Width="76"/>
+                    Style="{DynamicResource ManagerLabels}" Height="34" Width="106"/>
 
-        <Button Content="Button" 
+        <Button 
                     HorizontalAlignment="Left" 
                     Margin="247,193,0,0" 
                     Grid.Row="2" 
                     VerticalAlignment="Top" 
                     Style="{DynamicResource WindowButton}" 
                     Height="130" 
-                    Width="151"/>
+                    Width="151">
+            
+        </Button>
 
         <Label  Content="Rooms" 
                     HorizontalAlignment="Left" 

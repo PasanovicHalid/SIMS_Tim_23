@@ -52,6 +52,11 @@ namespace Controller
             return roomService.RenovateRoom(identifier, start, end);
         }
 
+        public Boolean CombineRooms(Room combineInto, Room selectedRoom)
+        {
+            return roomService.CombineRooms(combineInto, selectedRoom);
+        }
+
         public List<Room> GetAllRooms()
         {
             return roomService.GetAllRooms();
@@ -63,7 +68,7 @@ namespace Controller
             ObservableCollection<RoomModel> result = new ObservableCollection<RoomModel>();
             foreach (Room it in types)
             {
-                result.Add(new RoomModel(it.Identifier, it.DesignationCode, it.SurfaceArea, it.Renovating, it.RenovatedUntil, it.RoomTypeString));
+                result.Add(new RoomModel(it.Identifier, it.DesignationCode, it.Floor, it.SurfaceArea, it.Renovating, it.RenovatedUntil, it.RoomTypeString));
             }
             return result;
         }

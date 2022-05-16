@@ -7,44 +7,77 @@
              mc:Ignorable="d" 
              d:DesignHeight="667" d:DesignWidth="430">
     <Grid>
+        <Label Content="Designation Code" 
+            HorizontalAlignment="Center" 
+            Margin="0,12,0,0" 
+            VerticalAlignment="Top" 
+            Width="116"
+            Style="{StaticResource ManagerLabels}"/>
 
-        <TextBox HorizontalAlignment="Left"
-                 Margin="80,103,0,0" 
+        <TextBox HorizontalAlignment="Center"
+                 Margin="0,40,0,0" 
                  TextWrapping="Wrap" 
                  Text="{Binding Path=Identifier, UpdateSourceTrigger=PropertyChanged}"
                  VerticalAlignment="Top" 
-                 Width="274"
+                 Width="388"
                  Style="{StaticResource ManagerTextBox}" 
                  Name="Designation"
                  Tag="Designation"
-                 Height="45"/>
+                 Height="46"
+                 />
+
+        <Label Content="Surface Area" 
+            HorizontalAlignment="Left" 
+            Margin="68,105,0,0" 
+            VerticalAlignment="Top" 
+            Width="86"
+            Style="{StaticResource ManagerLabels}"/>
 
         <TextBox HorizontalAlignment="Left"
-                 Margin="80,178,0,0" 
-                 TextWrapping="Wrap" 
-                 Text="{Binding Path=Size, UpdateSourceTrigger=PropertyChanged}"
-                 VerticalAlignment="Top" 
-                 Width="274"
-                 Style="{StaticResource ManagerTextBox}" 
-                 Name="Size"
-                 Tag="Size"
-                 Height="45"/>
+            Margin="21,138,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding Size, UpdateSourceTrigger=PropertyChanged}"
+            VerticalAlignment="Top" 
+            Width="173"
+            Style="{StaticResource ManagerTextBox}" 
+            x:Name="Size"
+            Tag="Size"
+            Height="46"
+            />
 
+        <Label Content="Floor" 
+            HorizontalAlignment="Left" 
+            Margin="304,105,0,0" 
+            VerticalAlignment="Top" 
+            Width="40"
+            Style="{StaticResource ManagerLabels}"/>
+
+        <TextBox HorizontalAlignment="Left"
+            Margin="235,138,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding Floor, UpdateSourceTrigger=PropertyChanged}"
+            VerticalAlignment="Top" 
+            Width="173"
+            Style="{StaticResource ManagerTextBox}" 
+            x:Name="Size_Copy"
+            Tag="Floor"
+            Height="46"
+            />
 
 
         <Label Content="Room Type" 
-               HorizontalAlignment="Left" 
-               Margin="152,242,0,0" 
+               HorizontalAlignment="Center" 
+               Margin="0,203,0,0" 
                VerticalAlignment="Top" 
                Width="78"
                Style="{StaticResource ManagerLabels}"/>
 
         <ComboBox x:Name="RoomTypes" 
                   HorizontalAlignment="Left" 
-                  Margin="80,270,0,0" 
+                  Margin="21,231,0,0" 
                   Style="{DynamicResource ManagerComboBox}"
                   VerticalAlignment="Top" 
-                  Width="222"
+                  Width="337"
                   ItemsSource="{Binding Types}"
                   SelectedItem="{Binding SelectedRoomType}"
                   FontFamily="/Resources/Fonts/#Poppins"
@@ -59,12 +92,12 @@
 
         <Button Content="Add" 
                 HorizontalAlignment="Left" 
-                Margin="307,270,0,0" 
+                Margin="363,231,0,0" 
                 VerticalAlignment="Top" 
                 Height="45" 
                 Style="{StaticResource ManagerButtons}"
                 Command="{Binding CreateRoomTypeCommand}"
-                Width="47"/>
+                Width="46"/>
 
         <Button Content="Add" 
                 HorizontalAlignment="Left" 

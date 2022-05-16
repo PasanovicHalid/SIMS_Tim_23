@@ -62,6 +62,19 @@ namespace ZdravoCorp.View.Manager.ViewModel.Rooms
             }
         }
 
+        public int Floor
+        {
+            get { return selectedRoom.Floor; }
+            set
+            {
+                if (value != selectedRoom.Floor)
+                {
+                    selectedRoom.Floor = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         public String Identifier
         {
             get { return SelectedRoom.DesignationCode; }
@@ -140,6 +153,10 @@ namespace ZdravoCorp.View.Manager.ViewModel.Rooms
 
         public RelayCommand RenovateCommand { get; set; }
 
+        public RelayCommand SplitCommand { get; set; }
+
+        public RelayCommand CombineCommand { get; set; }
+
         public ViewRoomViewModel(Room selectedRoom)
         {
             SelectedRoom = new Room(selectedRoom);
@@ -161,6 +178,16 @@ namespace ZdravoCorp.View.Manager.ViewModel.Rooms
             RenovateCommand = new RelayCommand(o =>
             {
                 CurrentView = new RenovateRoom(new RenovateRoomViewModel(selectedRoom));
+            });
+
+            SplitCommand = new RelayCommand(o =>
+            {
+                CurrentView = new SplitRoom(new SplitRoomViewModel(selectedRoom));
+            });
+
+            CombineCommand = new RelayCommand(o =>
+            {
+                CurrentView = new CombineRooms(new CombineRoomsViewModel(selectedRoom));
             });
 
         }

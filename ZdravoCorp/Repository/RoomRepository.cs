@@ -295,6 +295,39 @@ namespace Repository
             }
         }
 
+        private void MoveEquipment(Room into, Room from)
+        {
+            foreach(Equipment equipment in from.Equipment)
+            {
+                into.Equipment.Add(equipment);
+            }
+        }
+
+        private void MoveAppointements(Room into, Room from)
+        {
+            foreach (Appointment appointment in from.Appointment)
+            {
+                into.Appointment.Add(appointment);
+            }
+        }
+
+        private void MoveMedications(Room into, Room from)
+        {
+            foreach (Medication medication in from.Medication)
+            {
+                into.Medication.Add(medication);
+            }
+        }
+
+        public Boolean CombineRooms(Room combineInto, Room selectedRoom)
+        {
+            MoveEquipment(combineInto, selectedRoom);
+            MoveAppointements(combineInto, selectedRoom);
+            MoveMedications(combineInto, selectedRoom);
+            combineInto.SurfaceArea += selectedRoom.SurfaceArea;
+            return DeleteRoom(selectedRoom.Identifier) && UpdateRoom(combineInto);
+        }
+
         public Boolean CreateRoomType(Model.RoomType newRoomType)
         {
             lock (key)

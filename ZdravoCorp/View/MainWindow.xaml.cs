@@ -141,6 +141,7 @@ namespace ZdravoCorp
                     secretaryWindow.ShowDialog();
                     break;
                 default:
+                    MessageBox.Show("Invalid Username,Password");
                     break;
             }
         }

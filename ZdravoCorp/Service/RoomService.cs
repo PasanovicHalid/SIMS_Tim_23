@@ -48,6 +48,11 @@ namespace Service
             return actionService.CreateAction(new Model.Action(ActionType.renovation, start, new RenovationAction(end, identifier, true)));
         }
 
+        public Boolean CombineRooms(Room combineInto, Room selectedRoom)
+        {
+            return RoomRepository.Instance.CombineRooms(combineInto, selectedRoom);
+        }
+
         public List<Room> GetRoomsByInternalID(HashSet<int> identifiers)
         {
             return RoomRepository.Instance.GetRoomsByInternalID(identifiers);

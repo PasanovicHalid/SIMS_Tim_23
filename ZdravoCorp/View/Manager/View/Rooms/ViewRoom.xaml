@@ -10,40 +10,61 @@
         <Grid Height="1028" Width="430" >
 
             <Label Content="Designation Code" 
-                HorizontalAlignment="Center" 
-                Margin="0,38,0,0" 
-                VerticalAlignment="Top" 
-                Width="114"
-                Style="{StaticResource ManagerLabels}"/>
+            HorizontalAlignment="Center" 
+            Margin="0,15,0,0" 
+            VerticalAlignment="Top" 
+            Width="116"
+            Style="{StaticResource ManagerLabels}"/>
 
             <TextBox HorizontalAlignment="Center"
-                     Margin="0,66,0,0" 
-                     TextWrapping="Wrap" 
-                     Text="{Binding Path=Identifier, UpdateSourceTrigger=PropertyChanged}"
-                     VerticalAlignment="Top" 
-                     Width="348"
-                     Style="{StaticResource ManagerTextBox}" 
-                     Name="Designation_Code"
-                     Tag="Designation Code"
-                     Height="46"/>
+                 Margin="0,43,0,0" 
+                 TextWrapping="Wrap" 
+                 Text="{Binding Path=Identifier, UpdateSourceTrigger=PropertyChanged}"
+                 VerticalAlignment="Top" 
+                 Width="348"
+                 Style="{StaticResource ManagerTextBox}" 
+                 Name="Designation"
+                 Tag="Designation"
+                 Height="46"
+                 />
 
             <Label Content="Surface Area" 
-                HorizontalAlignment="Center" 
-                Margin="0,117,0,0" 
-                VerticalAlignment="Top" 
-                Width="86"
-                Style="{StaticResource ManagerLabels}"/>
+            HorizontalAlignment="Left" 
+            Margin="76,110,0,0" 
+            VerticalAlignment="Top" 
+            Width="84"
+            Style="{StaticResource ManagerLabels}"/>
 
-            <TextBox HorizontalAlignment="Center"
-                Margin="0,145,0,0" 
-                TextWrapping="Wrap" 
-                Text="{Binding Size, UpdateSourceTrigger=PropertyChanged}"
-                VerticalAlignment="Top" 
-                Width="348"
-                Style="{StaticResource ManagerTextBox}" 
-                x:Name="Surface_Area"
-                Tag="Surface Area"
-                Height="46"/>
+            <TextBox HorizontalAlignment="Left"
+            Margin="41,138,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding Size, UpdateSourceTrigger=PropertyChanged}"
+            VerticalAlignment="Top" 
+            Width="153"
+            Style="{StaticResource ManagerTextBox}" 
+            x:Name="Size"
+            Tag="Size"
+            Height="46"
+            />
+
+            <Label Content="Floor" 
+            HorizontalAlignment="Left" 
+            Margin="292,110,0,0" 
+            VerticalAlignment="Top" 
+            Width="40"
+            Style="{StaticResource ManagerLabels}"/>
+
+            <TextBox HorizontalAlignment="Left"
+            Margin="235,138,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding Floor, UpdateSourceTrigger=PropertyChanged}"
+            VerticalAlignment="Top" 
+            Width="154"
+            Style="{StaticResource ManagerTextBox}" 
+            x:Name="Size_Copy"
+            Tag="Floor"
+            Height="46"
+            />
 
             <Label Content="Room Type" 
                    HorizontalAlignment="Center" 
@@ -71,18 +92,18 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
 
-            <Button Content="Change Information" 
-                    HorizontalAlignment="Center" 
-                    Margin="0,295,0,0" 
+            <Button Content="Change" 
+                    HorizontalAlignment="Left" 
+                    Margin="219,295,0,0" 
                     VerticalAlignment="Top" 
                     Height="47" 
-                    Width="156"
+                    Width="170"
                     Command="{Binding AddViewCommand}"
                     Style="{StaticResource ManagerButtons}"/>
 
             <Label Content="Equipment" 
                    HorizontalAlignment="Center" 
-                   Margin="0,354,0,0" 
+                   Margin="0,404,0,0" 
                    VerticalAlignment="Top"
                    FontSize="20"
                    Width="114"
@@ -90,7 +111,7 @@
 
             <DataGrid x:Name="EquipmentTable" 
                       ItemsSource="{Binding Equipments}" 
-                      Margin="32,389,33,463" 
+                      Margin="32,438,33,414" 
                       AutoGenerateColumns="False"
                       SelectionMode="Single" 
                       IsReadOnly="True"
@@ -115,11 +136,11 @@
                    VerticalAlignment="Top"
                    FontSize="20"
                    Width="128"
-                   Style="{StaticResource ManagerLabels}" Margin="0,570,0,0"/>
+                   Style="{StaticResource ManagerLabels}" Margin="0,620,0,0"/>
 
             <DataGrid x:Name="AppointmentTable" 
                       ItemsSource="{Binding Appointments}" 
-                      Margin="32,610,33,242" 
+                      Margin="32,660,33,192" 
                       AutoGenerateColumns="False"
                       SelectionMode="Single" 
                       IsReadOnly="True"
@@ -145,11 +166,11 @@
                    VerticalAlignment="Top"
                    FontSize="20"
                    Width="96"
-                   Style="{StaticResource ManagerLabels}" Margin="0,788,0,0"/>
+                   Style="{StaticResource ManagerLabels}" Margin="0,838,0,0"/>
 
             <DataGrid x:Name="MedicineTable" 
                       ItemsSource="{Binding Medications}" 
-                      Margin="32,828,33,26" 
+                      Margin="32,878,33,-24" 
                       AutoGenerateColumns="False"
                       SelectionMode="Single" 
                       IsReadOnly="True"
@@ -175,18 +196,36 @@
                     Margin="41,295,0,0" 
                     VerticalAlignment="Top" 
                     Height="47" 
-                    Width="80"
+                    Width="169"
                     Command="{Binding AddViewCommand}"
                     Style="{StaticResource ManagerButtons}"/>
 
             <Button Content="Renovate" 
-                    HorizontalAlignment="Left" 
-                    Margin="309,295,0,0" 
+                    HorizontalAlignment="Center" 
+                    Margin="0,357,0,0" 
                     VerticalAlignment="Top" 
                     Height="47" 
-                    Width="80"
+                    Width="90"
                     Command="{Binding RenovateCommand}"
                     Style="{StaticResource ManagerButtons}"/>
+
+            <Button Content="Split Room" 
+                HorizontalAlignment="Left" 
+                Margin="41,357,0,0" 
+                VerticalAlignment="Top" 
+                Height="47" 
+                Width="124"
+                Command="{Binding SplitCommand}"
+                Style="{StaticResource ManagerButtons}"/>
+
+            <Button Content="Combine Rooms" 
+                HorizontalAlignment="Left" 
+                Margin="265,357,0,0" 
+                VerticalAlignment="Top"
+                Height="47" 
+                Width="124"
+                Command="{Binding CombineCommand}"
+                Style="{StaticResource ManagerButtons}"/>
 
         </Grid>
     </ScrollViewer>

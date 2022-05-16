@@ -9,18 +9,18 @@
     <Grid>
 
         <Label Content="Designation Code" 
-            HorizontalAlignment="Left" 
-            Margin="10,49,0,0" 
+            HorizontalAlignment="Center" 
+            Margin="0,12,0,0" 
             VerticalAlignment="Top" 
             Width="116"
             Style="{StaticResource ManagerLabels}"/>
 
-        <TextBox HorizontalAlignment="Left"
-                 Margin="131,40,0,0" 
+        <TextBox HorizontalAlignment="Center"
+                 Margin="0,40,0,0" 
                  TextWrapping="Wrap" 
                  Text="{Binding Path=Identifier, UpdateSourceTrigger=PropertyChanged}"
                  VerticalAlignment="Top" 
-                 Width="283"
+                 Width="386"
                  Style="{StaticResource ManagerTextBox}" 
                  Name="Designation"
                  Tag="Designation"
@@ -29,20 +29,39 @@
 
         <Label Content="Surface Area" 
             HorizontalAlignment="Left" 
-            Margin="10,151,0,0" 
+            Margin="68,105,0,0" 
             VerticalAlignment="Top" 
-            Width="85"
+            Width="84"
             Style="{StaticResource ManagerLabels}"/>
 
         <TextBox HorizontalAlignment="Left"
-            Margin="131,142,0,0" 
+            Margin="21,138,0,0" 
             TextWrapping="Wrap" 
             Text="{Binding Size, UpdateSourceTrigger=PropertyChanged}"
             VerticalAlignment="Top" 
-            Width="283"
+            Width="173"
             Style="{StaticResource ManagerTextBox}" 
             x:Name="Size"
             Tag="Size"
+            Height="46"
+            IsReadOnly="True"/>
+
+        <Label Content="Floor" 
+            HorizontalAlignment="Left" 
+            Margin="304,105,0,0" 
+            VerticalAlignment="Top" 
+            Width="40"
+            Style="{StaticResource ManagerLabels}"/>
+
+        <TextBox HorizontalAlignment="Left"
+            Margin="235,138,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding Floor, UpdateSourceTrigger=PropertyChanged}"
+            VerticalAlignment="Top" 
+            Width="173"
+            Style="{StaticResource ManagerTextBox}" 
+            x:Name="Size_Copy"
+            Tag="Floor"
             Height="46"
             IsReadOnly="True"/>
 
@@ -84,6 +103,8 @@
                 Width="80"
                 Command="{Binding RenovateCommand}"
                 Style="{StaticResource ManagerButtons}"/>
+
+
 
     </Grid>
 </UserControl>

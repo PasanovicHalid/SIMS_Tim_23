@@ -32,5 +32,6 @@ namespace ZdravoCorp.View.Manager.View.Rooms
         {
             return "Room";
         }
+
     }
 }

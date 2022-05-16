@@ -11,6 +11,7 @@ namespace ZdravoCorp.View.Manager.Model.Rooms
     {
         private int identifier;
         private string designationCode;
+        private int floor;
         private float surfaceArea;
         private bool renovating;
         private DateTime renovatedUntil;
@@ -20,10 +21,11 @@ namespace ZdravoCorp.View.Manager.Model.Rooms
         {
         }
 
-        public RoomModel(int identifier, string designationCode, float surfaceArea, bool renovating, DateTime renovatedUntil, string type)
+        public RoomModel(int identifier, string designationCode, int floor, float surfaceArea, bool renovating, DateTime renovatedUntil, string type)
         {
             Identifier = identifier;
             DesignationCode = designationCode;
+            Floor = floor;
             SurfaceArea = surfaceArea;
             Renovating = renovating;
             RenovatedUntil = renovatedUntil;
@@ -98,6 +100,19 @@ namespace ZdravoCorp.View.Manager.Model.Rooms
                 if (value != type)
                 {
                     type = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public int Floor
+        {
+            get => floor;
+            set
+            {
+                if (value != floor)
+                {
+                    floor = value;
                     OnPropertyChanged();
                 }
             }

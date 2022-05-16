@@ -20,6 +20,7 @@ namespace ZdravoCorp.View.Manager.ViewModel.Rooms
     {
         private string identifier;
         private float size;
+        private int floor;
         private ObservableCollection<RoomTypeModel> types;
         private RoomTypeModel selectedRoomType;
         private RoomController controller;
@@ -46,6 +47,19 @@ namespace ZdravoCorp.View.Manager.ViewModel.Rooms
                 if (value != size)
                 {
                     size = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public int Floor
+        {
+            get { return floor; }
+            set
+            {
+                if (value != floor)
+                {
+                    floor = value;
                     OnPropertyChanged();
                 }
             }
@@ -91,7 +105,7 @@ namespace ZdravoCorp.View.Manager.ViewModel.Rooms
             CreateCommand = new RelayCommand(o =>
             {
 
-                if(!controller.CreateRoom(new Room(Identifier, Size, new RoomType(SelectedRoomType), new List<Appointment>(), new List<Equipment>(), new List<Medication>())))
+                if(!controller.CreateRoom(new Room(Identifier, Floor, Size, new RoomType(SelectedRoomType), new List<Appointment>(), new List<Equipment>(), new List<Medication>())))
                 {
                     MessageBox.Show("Nije uspesno dodat element", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
                 }

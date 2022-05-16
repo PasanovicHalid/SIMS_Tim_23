@@ -195,10 +195,11 @@
     <Compile Include="View\Manager\ViewModel\Medications\RequestsMedicationViewModel.cs" />
     <Compile Include="View\Manager\ViewModel\Medications\ViewMedicineViewModel.cs" />
     <Compile Include="View\Manager\ViewModel\Medications\AddMedicationViewModel.cs" />
-    <Compile Include="View\Manager\ViewModel\Medications\Framework.cs" />
     <Compile Include="View\Manager\ViewModel\Medications\MedicationsViewModel.cs" />
     <Compile Include="View\Manager\ViewModel\Rooms\AddRoomViewModel.cs" />
     <Compile Include="View\Manager\ViewModel\Rooms\AddRoomTypeViewModel.cs" />
+    <Compile Include="View\Manager\ViewModel\Rooms\CombineRoomsViewModel.cs" />
+    <Compile Include="View\Manager\ViewModel\Rooms\SplitRoomViewModel.cs" />
     <Compile Include="View\Manager\ViewModel\Rooms\ViewRenovationTrueViewModel.cs" />
     <Compile Include="View\Manager\ViewModel\Rooms\ViewRenovationFalseViewModel.cs" />
     <Compile Include="View\Manager\ViewModel\Rooms\RenovatingRoomsViewModel.cs" />
@@ -253,6 +254,9 @@
     <Compile Include="View\Manager\View\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Manager\View\Rooms\CombineRooms.xaml.cs">
+      <DependentUpon>CombineRooms.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Manager\View\Rooms\RenovateRoom.xaml.cs">
       <DependentUpon>RenovateRoom.xaml</DependentUpon>
     </Compile>
@@ -264,6 +268,9 @@
     </Compile>
     <Compile Include="View\Manager\View\Rooms\Rooms.xaml.cs">
       <DependentUpon>Rooms.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Manager\View\Rooms\SplitRoom.xaml.cs">
+      <DependentUpon>SplitRoom.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Manager\View\Rooms\ViewRenovationFalse.xaml.cs">
       <DependentUpon>ViewRenovationFalse.xaml</DependentUpon>
@@ -434,6 +441,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Manager\View\Rooms\CombineRooms.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Manager\View\Rooms\RenovateRoom.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -449,6 +460,10 @@
     <Page Include="View\Manager\View\Rooms\Rooms.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Manager\View\Rooms\SplitRoom.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Manager\View\Rooms\ViewRenovationFalse.xaml">
       <SubType>Designer</SubType>
