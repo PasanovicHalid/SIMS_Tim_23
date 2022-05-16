@@ -172,6 +172,9 @@
     <Compile Include="View\Doctor\MedicationRequests.xaml.cs">
       <DependentUpon>MedicationRequests.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Doctor\MedicationsView.xaml.cs">
+      <DependentUpon>MedicationsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Doctor\UpdateAppointment.xaml.cs">
       <DependentUpon>UpdateAppointment.xaml</DependentUpon>
     </Compile>
@@ -343,6 +346,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Doctor\MedicationRequests.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Doctor\MedicationsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
