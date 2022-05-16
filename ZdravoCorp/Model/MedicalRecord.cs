@@ -209,8 +209,38 @@ namespace Model
             id = int.Parse(values[i++]);
             height = float.Parse(values[i++]);
             weight = float.Parse(values[i++]);
-            bloodType = BloodType.aPlus;
-            i++;
+            switch (values[i++])
+            {
+                case "aPlus":
+                    bloodType = BloodType.aPlus;
+                    break;
+                case "aMinus":
+                    bloodType = BloodType.aMinus;
+                    break;
+                case "bPlus":
+                    bloodType = BloodType.bPlus;
+                    break;
+                case "bMinus":
+                    bloodType = BloodType.bMinus;
+                    break;
+                case "aBPlus":
+                    bloodType = BloodType.aBPlus;
+                    break;
+                case "aBMinus":
+                    bloodType = BloodType.aBMinus;
+                    break;
+                case "oPlus":
+                    bloodType = BloodType.oPlus;
+                    break;
+                case "oMinus":
+                    bloodType = BloodType.oMinus;
+                    break;
+                default:
+                    break;
+
+            }
+            //bloodType = BloodType.aPlus;
+            //i++;
             patient = new Patient(int.Parse(values[i++]));
             int count = int.Parse(values[i++]);
             for(int j = 0; j < count; j++)
