@@ -30,7 +30,7 @@ namespace Repository
             {
                 id = random.Next();
             }
-            while (idMap.Contains(id));
+            while (CheckIfIDExists(id));
             idMap.Add(id);
             return id;
         }
@@ -50,15 +50,8 @@ namespace Repository
 
         public Boolean CreateNewMedicationRequest(NewMedicationRequest newMedicationRequest)
         {
-            if(newMedicationRequest.Change)
-            {
-                UpdateNewMedicationRequest(newMedicationRequest);
-            }
-            else
-            {
-                newMedicationRequest.Id = GenerateID();
-                serializerNewMedicationRequest.ToCSVAppend(dbPath, new List<NewMedicationRequest>() { newMedicationRequest });
-            }
+            newMedicationRequest.Id = GenerateID();
+            serializerNewMedicationRequest.ToCSVAppend(dbPath, new List<NewMedicationRequest>() { newMedicationRequest });
             return true;
         }
 
@@ -155,7 +148,7 @@ namespace Repository
                 if (request.Id == newMedicationRequest.Id)
                 {
                     Controller.MedicineController medicationController = new Controller.MedicineController();
-                    medicationController.CreateMedicationType(new MedicationType(newMedicationRequest.Name,newMedicationRequest.Manufacturer,newMedicationRequest.Description));
+                    medicationController.CreateMedicationType(newMedicationRequest.MedicationType);
                     requests.Remove(request);
                     serializerNewMedicationRequest.ToCSV(dbPath, requests);
                     return true;

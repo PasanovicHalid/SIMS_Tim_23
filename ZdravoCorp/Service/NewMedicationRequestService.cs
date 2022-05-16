@@ -37,9 +37,40 @@ namespace Service
             return NewMedicationRequestRepository.Instance.GetAllNewMedicationRequests();
         }
 
+        private bool ExecuteUpdate(NewMedicationRequest newMedicationRequest)
+        {
+            if (MedicineRepository.Instance.UpdateMedicationType(newMedicationRequest.MedicationType))
+            {
+                return NewMedicationRequestRepository.Instance.DeleteNewMedicationRequest(newMedicationRequest.Id);
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private bool ExecuteCreation(NewMedicationRequest newMedicationRequest)
+        {
+            if (MedicineRepository.Instance.CreateMedicationType(newMedicationRequest.MedicationType))
+            {
+                return NewMedicationRequestRepository.Instance.DeleteNewMedicationRequest(newMedicationRequest.Id);
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public Boolean AcceptNewMedicationRequest(NewMedicationRequest newMedicationRequest)
         {
-            return NewMedicationRequestRepository.Instance.AcceptNewMedicationRequest(newMedicationRequest);
+            if (newMedicationRequest.Change)
+            {
+                return ExecuteUpdate(newMedicationRequest);
+            }
+            else
+            {
+                return ExecuteCreation(newMedicationRequest);
+            }
         }
 
         public Boolean RejectNewMedicationRequest(NewMedicationRequest newMedicationRequest, String comment)

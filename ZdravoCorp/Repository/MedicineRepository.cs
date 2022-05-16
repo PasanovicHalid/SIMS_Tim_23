@@ -148,12 +148,11 @@ namespace Repository
 
         public Boolean CreateMedicationType(MedicationType newMedicationType)
         {
-            List<MedicationType> types = GetAllMedicationType();
             if (!CheckIfNameExists(newMedicationType.Name))
             {
                 newMedicationType.Id = GenerateTypeID();
-                types.Add(newMedicationType);
-                serializerType.ToCSV(dbPathTypes, types);
+                typeNameMap.Add(newMedicationType.Name);
+                serializerType.ToCSVAppend(dbPathTypes, new List<MedicationType>() { newMedicationType });
                 return true;
             }
             else
