@@ -34,5 +34,15 @@ namespace Controller
         {
             return NewMedicationRequestService.Instance.GetAllNewMedicationRequests();
         }
+
+        public Boolean AcceptNewMedicationRequest(NewMedicationRequest newMedicationRequest)
+        {
+            return NewMedicationRequestService.Instance.AcceptNewMedicationRequest(newMedicationRequest);
+        }
+
+        public Boolean RejectNewMedicationRequest(NewMedicationRequest newMedicationRequest, String comment)
+        {
+            return NewMedicationRequestService.Instance.RejectNewMedicationRequest(newMedicationRequest, comment);
+        }
     }
 }

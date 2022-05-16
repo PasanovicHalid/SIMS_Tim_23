@@ -140,6 +140,31 @@ namespace Repository
             return requests;
         }
 
+        public Boolean AcceptNewMedicationRequest(NewMedicationRequest newMedicationRequest)
+        {
+            List<NewMedicationRequest> requests = serializerNewMedicationRequest.FromCSV(dbPath);
+            foreach (NewMedicationRequest request in requests)
+            {
+                if (request.Id == newMedicationRequest.Id)
+                {
+                    Controller.MedicineController medicationController = new Controller.MedicineController();
+                    medicationController.CreateMedicine(new Medication(0, newMedicationRequest.MedicationType));
+                    requests.Remove(request);
+                    serializerNewMedicationRequest.ToCSV(dbPath, requests);
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public Boolean RejectNewMedicationRequest(NewMedicationRequest newMedicationRequest, String comment)
+        {
+            newMedicationRequest.Status = Status.REJECTED;
+            newMedicationRequest.Comment = comment;
+            UpdateNewMedicationRequest(newMedicationRequest);
+            return true;
+        }
+
         public static NewMedicationRequestRepository Instance
         {
             get

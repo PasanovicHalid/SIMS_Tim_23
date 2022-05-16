@@ -98,6 +98,7 @@
     <Compile Include="Controller\PrescriptionController.cs" />
     <Compile Include="Controller\RoomController.cs" />
     <Compile Include="Controller\SecretaryController.cs" />
+    <Compile Include="Controller\VacationController.cs" />
     <Compile Include="Model\Action.cs" />
     <Compile Include="Model\ActionType.cs" />
     <Compile Include="Model\ChangeRoomAction.cs" />
@@ -107,6 +108,7 @@
     <Compile Include="Model\Status.cs" />
     <Compile Include="Model\Suggestion.cs" />
     <Compile Include="Model\RenovationAction.cs" />
+    <Compile Include="Model\Vacation.cs" />
     <Compile Include="Repository\ActionRepository.cs" />
     <Compile Include="Repository\HospitalSurveyRepository.cs" />
     <Compile Include="Repository\AppointmentSurveyRepository.cs" />
@@ -124,6 +126,7 @@
     <Compile Include="Repository\SecretaryRepository.cs" />
     <Compile Include="Repository\Serializable.cs" />
     <Compile Include="Repository\Serializer.cs" />
+    <Compile Include="Repository\VacationRepository.cs" />
     <Compile Include="Service\ActionService.cs" />
     <Compile Include="Service\HospitalSurveyService.cs" />
     <Compile Include="Service\AppointmentSurveyService.cs" />
@@ -141,6 +144,7 @@
     <Compile Include="Service\RoomService.cs" />
     <Compile Include="Service\SecretaryService.cs" />
     <Compile Include="Service\TimerService.cs" />
+    <Compile Include="Service\VacationService.cs" />
     <Compile Include="Utility\DateManipulator.cs" />
     <Compile Include="View\Core\ObservableObject.cs" />
     <Compile Include="View\Core\RelayCommand.cs" />
@@ -165,8 +169,14 @@
     <Compile Include="View\Doctor\MedicalRecords.xaml.cs">
       <DependentUpon>MedicalRecords.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Doctor\MedicationRequests.xaml.cs">
+      <DependentUpon>MedicationRequests.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Doctor\UpdateAppointment.xaml.cs">
       <DependentUpon>UpdateAppointment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Doctor\VacationRequest.xaml.cs">
+      <DependentUpon>VacationRequest.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Manager\Manager.xaml.cs">
       <DependentUpon>Manager.xaml</DependentUpon>
@@ -332,7 +342,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Doctor\MedicationRequests.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Doctor\UpdateAppointment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Doctor\VacationRequest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
