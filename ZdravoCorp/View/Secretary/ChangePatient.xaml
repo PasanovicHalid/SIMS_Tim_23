@@ -5,31 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ZdravoCorp.View.Secretary"
         mc:Ignorable="d"
-        Title="ChangePatient" Height="500" Width="800" >
+        Title="ChangePatient" Height="550" Width="850" >
     <Grid>
-        <Label Content="Username:" Margin="83,10,0,0" />
-        <Label Content="Password:" Margin="83,43,0,0"/>
-        <Label Content="Name:" Margin="83,73,0,0"/>
-        <Label Content="Surname:" Margin="83,103,0,0"/>
-        <Label Content="JMBG:" Margin="83,133,0,0"/>
-        <Label Content="Email:" Margin="83,168,0,0"/>
-        <Label Content="Phone number:" Margin="83,199,0,0"/>
-        <Label Content="Address:" Margin="83,234,0,0"/>
-        <Label Content="Gender:" Margin="83,269,0,0"/>
-        <Label Content="Date of birth:" Margin="83,304,0,0"/>
-        <TextBox TextWrapping="Wrap" Margin="210,10,0,0" Height="27" Width="350" VerticalAlignment="Top" HorizontalAlignment="Left" Text="{Binding Path=Username, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox TextWrapping="Wrap" Margin="210,46,0,0" Height="27" Width="350" VerticalAlignment="Top" HorizontalAlignment="Left" Text="{Binding Path=Password, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox TextWrapping="Wrap" Margin="210,78,0,0" Height="27" Width="350" VerticalAlignment="Top" HorizontalAlignment="Left" Text="{Binding Path=Namee, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox TextWrapping="Wrap" Margin="210,103,0,0" Height="27" Width="350" VerticalAlignment="Top" HorizontalAlignment="Left" Text="{Binding Path=Surname, UpdateSourceTrigger=PropertyChanged}" />
-        <TextBox TextWrapping="Wrap" Margin="210,134,0,0" Height="27" Width="350" VerticalAlignment="Top" HorizontalAlignment="Left" Text="{Binding Path=Jmbg, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox TextWrapping="Wrap" Margin="210,164,0,0" Height="27" Width="350" VerticalAlignment="Top" HorizontalAlignment="Left" Text="{Binding Path=Email, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox TextWrapping="Wrap" Margin="210,199,0,0" Height="27" Width="350" VerticalAlignment="Top" HorizontalAlignment="Left" Text="{Binding Path=PhoneNumber, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox TextWrapping="Wrap" Margin="210,234,0,0" Height="27" Width="350" VerticalAlignment="Top" HorizontalAlignment="Left" Text="{Binding Path=Address, UpdateSourceTrigger=PropertyChanged}"/>
-        <RadioButton Name="MaleButton" Content="Male" Margin="210,272,0,0"  />
-        <RadioButton Name="FemaleButton" Content="Female" Margin="326,272,0,0"/>
-        <DatePicker Margin="210,304,0,0" Height="27" Width="350" VerticalAlignment="Top" HorizontalAlignment="Left" SelectedDate="{Binding Path=DateOfBirth, UpdateSourceTrigger=PropertyChanged}"/>
-        <Button Content="Cancel" Margin="130,348,0,0" Height="30" Width="80" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-        <Button Content="Change" Margin="385,347,0,0" Height="30" Width="80" VerticalAlignment="Top" HorizontalAlignment="Left" Click="Change_Click"/>
+        <Label Content="Username:" Margin="150,20,0,0"  HorizontalAlignment="Left" VerticalAlignment="Top" />
+        <Label Content="Password:" Margin="150,55,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label Content="Name:" Margin="150,90,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label Content="Surname:" Margin="150,125,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label Content="JMBG:" Margin="150,160,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label Content="Email:" Margin="150,195,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label Content="Phone number:" Margin="150,230,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label Content="Address:" Margin="150,265,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label Content="Gender:" Margin="150,300,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label Content="Date of birth:" Margin="150,335,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBox TextWrapping="Wrap" Margin="350,20,0,0" Height="27" Width="350" VerticalAlignment="Top" HorizontalAlignment="Left" Text="{Binding Path=Username, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox TextWrapping="Wrap" Margin="350,55,0,0" Height="27" Width="350" VerticalAlignment="Top" HorizontalAlignment="Left" Text="{Binding Path=Password, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox TextWrapping="Wrap" Margin="350,90,0,0" Height="27" Width="350" VerticalAlignment="Top" HorizontalAlignment="Left" Text="{Binding Path=Namee, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox TextWrapping="Wrap" Margin="350,125,0,0" Height="27" Width="350" VerticalAlignment="Top" HorizontalAlignment="Left" Text="{Binding Path=Surname, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox TextWrapping="Wrap" Margin="350,160,0,0" Height="27" Width="350" VerticalAlignment="Top" HorizontalAlignment="Left" Text="{Binding Path=Jmbg, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox TextWrapping="Wrap" Margin="350,195,0,0" Height="27" Width="350" VerticalAlignment="Top" HorizontalAlignment="Left" Text="{Binding Path=Email, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox TextWrapping="Wrap" Margin="350,230,0,0" Height="27" Width="350" VerticalAlignment="Top" HorizontalAlignment="Left" Text="{Binding Path=PhoneNumber, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox TextWrapping="Wrap" Margin="350,265,0,0" Height="27" Width="350" VerticalAlignment="Top" HorizontalAlignment="Left" Text="{Binding Path=Address, UpdateSourceTrigger=PropertyChanged}"/>
+        <RadioButton Name="MaleButton" Content="Male" Margin="350,300,0,0" IsChecked="True" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <RadioButton Name="FemaleButton" Content="Female" Margin="450,300,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <DatePicker Margin="350,335,0,0" Height="27" Width="350" VerticalAlignment="Top" HorizontalAlignment="Left" SelectedDate="{Binding Path=DateOfBirth, UpdateSourceTrigger=PropertyChanged}"/>
+        <Button Content="Odustani" Margin="250,415,0,0"  Height="40" Width="120" VerticalAlignment="Top" HorizontalAlignment="Left" Click="CancelChange_Click"/>
+        <Button Content="Izmni karton" Margin="500,415,0,0" Height="40" Width="120" VerticalAlignment="Top" HorizontalAlignment="Left" Click="MedicalRecordChange_Click"/>
 
     </Grid>
 </Window>

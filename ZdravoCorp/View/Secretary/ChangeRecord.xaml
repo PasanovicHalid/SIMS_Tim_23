@@ -7,14 +7,14 @@
         mc:Ignorable="d"
         Title="ChangeRecord" Height="450" Width="800">
     <Grid Margin="0,0,0,0">
-        <Label Content="Visina:" Margin="81,35,0,0"/>
-        <Label Content="Tezina:" Margin="81,69,0,0"/>
-        <Label Content="Krvna grupa:" Margin="81,106,0,0"/>
-        <Label Content="Alergeni:" Margin="81,147,0,0"/>
-        <Label Content="Komentar:" Margin="81,270,0,0"/>
-        <TextBox TextWrapping="Wrap" Margin="197,39,0,0" Height="25" Width="350" VerticalAlignment="Top" HorizontalAlignment="Left" Text="{Binding Path=Heightt, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox TextWrapping="Wrap" Margin="197,69,0,0" Height="25" Width="350" VerticalAlignment="Top" HorizontalAlignment="Left" Text="{Binding Path=Weight, UpdateSourceTrigger=PropertyChanged}"/>
-        <ComboBox x:Name="BloodTypes" Margin="197,106,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200" ItemsSource="{Binding}" SelectedValue="{Binding Path=BloodType, UpdateSourceTrigger=PropertyChanged}">
+        <Label Content="Visina:" Margin="81,35,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label Content="Tezina:" Margin="81,75,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label Content="Krvna grupa:" Margin="81,116,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label Content="Alergeni:" Margin="81,174,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label Content="Komentari:" Margin="86,304,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBox TextWrapping="Wrap" Margin="197,24,0,0" Height="37" Width="350" VerticalAlignment="Top" HorizontalAlignment="Left" Text="{Binding Path=Heightt, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox TextWrapping="Wrap" Margin="197,69,0,0" Height="37" Width="350" VerticalAlignment="Top" HorizontalAlignment="Left" Text="{Binding Path=Weight, UpdateSourceTrigger=PropertyChanged}"/>
+        <ComboBox x:Name="BloodTypes" Margin="197,116,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200" ItemsSource="{Binding}">
 
         </ComboBox>
         <DataGrid x:Name="AllergensTable" ItemsSource="{Binding }" AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" Margin="197,147,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="350" Height="105">
@@ -27,11 +27,13 @@
                 <DataGridTextColumn Header="Komentar" Binding="{Binding Comment}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Izmeni karton" Margin="322,380,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="100" Click="EditRecord_Click"/>
-        <TextBox TextWrapping="Wrap" Margin="563,147,10,251" Text="{Binding Path=Description, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox TextWrapping="Wrap" Margin="563,272,10,125" Text="{Binding Path=Comment, UpdateSourceTrigger=PropertyChanged}"/>
-        <Button Content="Dodaj alergen" Margin="676,189,20,199" Click="AllergenAdd_Click"/>
-        <Button Content="Dodaj komentar" Margin="624,322,72,66" />
-        <Button Content="Ukloni alergen" Margin="563,189,133,199" Click="AllergenDelete_Click" />
+        <Button Content="Potvrdi izmene" Height="40"  Margin="468,404,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="120" Click="EditRecord_Click"/>
+        <TextBox TextWrapping="Wrap" Margin="563,147,0,0" Text="{Binding Path=Description, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" HorizontalAlignment="Left" Width="225" Height="37"/>
+        <TextBox TextWrapping="Wrap" Margin="563,272,10,125" Text="{Binding Path=Comment, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" HorizontalAlignment="Left" Width="225" Height="37"/>
+        <Button Content="Dodaj alergen" Margin="688,189,0,0" Click="AllergenAdd_Click" Height="50" Width="100" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <Button Content="Dodaj komentar" Margin="616,322,0,0"  Height="50" Width="100" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <Button Content="Odustani" Height="40"  Margin="252,404,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="120" Click="Cancel_Click"/>
+
+        <Button Content="Ukloni alergen" Margin="563,189,0,0" Click="AllergenDelete_Click" VerticalAlignment="Top" HorizontalAlignment="Left" Width="100" Height="50"/>
     </Grid>
 </Window>

@@ -205,14 +205,30 @@ namespace ZdravoCorp.View.Secretary
             {
                 patient.Gender = Gender.Female;
             }
-            if (!patientController.UpdatePatient(patient))
-            {
-                MessageBox.Show("Nije uspesno izmenjen element", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            else
-            {
+            
+            //if (!patientController.UpdatePatient(patient))
+            //{
+            //    MessageBox.Show("Nije uspesno izmenjen element", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
+            //}
+            //else
+            //{
                 this.Close();
-            }
+            //}
+        }
+
+        private void MedicalRecordChange_Click(object sender, RoutedEventArgs e)
+        {
+            
+            ZdravoCorp.View.Secretary.ChangeRecord window = new ChangeRecord(patient.Record);
+            window.ShowDialog();
+            
+            this.Close();
+            patientController.UpdatePatient(patient);
+        }
+
+        private void CancelChange_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
