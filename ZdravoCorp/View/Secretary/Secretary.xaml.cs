@@ -24,15 +24,26 @@ namespace ZdravoCorp.View.Secretary
     {
         public ObservableCollection<Model.Patient> PatientCollection { get; set; }
         public PatientController patientController;
+
         private Model.Secretary secretary;
+
+        public ObservableCollection<Model.Guest> GuestCollection { get; set; }
+        public GuestController guestController;
+
 
         public Secretary(Model.Secretary logedSecretary)
         {
             InitializeComponent();
             PatientCollection = new ObservableCollection<Model.Patient>();
             patientController = new PatientController();
+
             secretary = logedSecretary;
+
+            GuestCollection = new ObservableCollection<Model.Guest>();
+            guestController = new GuestController();
+
             UpdateTable();
+            UpdateGuestTable();
         }
 
         private void UpdateTable()
@@ -119,6 +130,43 @@ namespace ZdravoCorp.View.Secretary
             mr.DeleteMedicalRecord(pat.Record.Id);
             pat.Record.Id = -1;
             UpdateTable();
+        }
+
+        private void UpdateGuestTable()
+        {
+            GuestCollection = new ObservableCollection<Model.Guest>();
+            List<Model.Guest> guests = guestController.GetAllGuests();
+            foreach (Model.Guest guest in guests)
+            {
+                GuestCollection.Add(guest);
+            }
+            GuestTable.DataContext = GuestCollection;
+        }
+
+        private void AddGuest_Click(object sender, RoutedEventArgs e)
+        {
+            AddGuest window = new AddGuest();
+            window.ShowDialog();
+            UpdateGuestTable();
+        }
+
+        private void DeleteGuest_Click(object sender, RoutedEventArgs e)
+        {
+            if (GuestTable.SelectedIndex == -1)
+            {
+                return;
+            }
+            if (!guestController.DeleteGuest(GuestCollection.ElementAt(GuestTable.SelectedIndex).Id))
+            {
+                MessageBox.Show("Element ne postoji u bazi podataka", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            UpdateGuestTable();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
