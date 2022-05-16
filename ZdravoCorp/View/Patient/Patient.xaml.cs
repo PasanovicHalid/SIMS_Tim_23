@@ -22,24 +22,192 @@ namespace ZdravoCorp.View.Patient
     /// <summary>
     /// Interaction logic for Patient.xaml
     /// </summary>
-    public partial class Patient : Window
+    public partial class Patient : Window, INotifyPropertyChanged
     {
         private Appointment app;
+        private Model.Patient patient;
         public  Model.Doctor doctor { get; set; }
         private DoctorController dc;
         public String NameSurname { get => NameSurname; set => NameSurname = value; }
-        public Patient(Model.Patient patient)
+        private String password;
+        private String username;
+        private String name;
+        private String surname;
+        private String jmbg;
+        private String email;
+        private String address;
+        private String phoneNumber;
+        private Gender gender;
+        private DateTime dateOfBirth;
+
+        public String Username
+        {
+            get { return username; }
+            set
+            {
+                if (value != username)
+                {
+                    username = value;
+                    OnPropertyChanged("Username");
+                }
+            }
+        }
+
+        public String Password
+        {
+            get { return password; }
+            set
+            {
+                if (value != password)
+                {
+                    password = value;
+                    OnPropertyChanged("Password");
+                }
+            }
+        }
+
+        public String Namee
+        {
+            get { return name; }
+            set
+            {
+                if (value != name)
+                {
+                    name = value;
+                    OnPropertyChanged("Namee");
+                }
+            }
+        }
+
+        public String Surname
+        {
+            get { return surname; }
+            set
+            {
+                if (value != surname)
+                {
+                    surname = value;
+                    OnPropertyChanged("Surname");
+                }
+            }
+        }
+
+        public String Jmbg
+        {
+            get { return jmbg; }
+            set
+            {
+                if (value != jmbg)
+                {
+                    jmbg = value;
+                    OnPropertyChanged("Jmbg");
+                }
+            }
+        }
+
+        public String Email
+        {
+            get { return email; }
+            set
+            {
+                if (value != email)
+                {
+                    email = value;
+                    OnPropertyChanged("Email");
+                }
+            }
+        }
+
+        public String Address
+        {
+            get { return address; }
+            set
+            {
+                if (value != address)
+                {
+                    address = value;
+                    OnPropertyChanged("Address");
+                }
+            }
+        }
+
+        public String PhoneNumber
+        {
+            get { return phoneNumber; }
+            set
+            {
+                if (value != phoneNumber)
+                {
+                    phoneNumber = value;
+                    OnPropertyChanged("PhoneNumber");
+                }
+            }
+        }
+
+        public Gender Gender
+        {
+            get { return gender; }
+            set
+            {
+                if (value != gender)
+                {
+                    if (MaleButton.IsChecked == true)
+                    {
+                        gender = Gender.Male;
+                    }
+                    else
+                    {
+                        gender = Gender.Female;
+                    }
+                    OnPropertyChanged("Gender");
+                }
+
+            }
+        }
+
+        public DateTime DateOfBirth
+        {
+            get { return dateOfBirth; }
+            set
+            {
+                if (value != dateOfBirth)
+                {
+                    dateOfBirth = value;
+                    OnPropertyChanged("DateOfBirth");
+                }
+            }
+        }
+        public Patient(Model.Patient logedPatient)
         {
             InitializeComponent();
+            patient = logedPatient;
             appointmentController = new AppointmentController();
             dc = new DoctorController();
             FutureAppointmentsCollection = new ObservableCollection<Appointment>();
             PastAppointmentsCollection = new ObservableCollection<Appointment>();
             DoctorCollection = new ObservableCollection<Model.Doctor>();
             RoomCollection = new ObservableCollection<Room>();
+            SetPatientInfo(patient);
             UpdateTable();
             PastAppointments();
 
+        }
+        public void SetPatientInfo(Model.Patient patient)
+        {
+            NameTextBox.Text = patient.Name;
+            SurnameTextBox.Text = patient.Surname;
+            BirthTextBox.Text = patient.DateOfBirth.ToLongDateString();
+            PhoneTextBox.Text = patient.PhoneNumber;
+            EmailTextBox.Text = patient.Email;
+            JMBGTextBox.Text = patient.Jmbg;
+            if (patient.Gender == Gender.Male)
+            {
+                MaleButton.IsChecked = true;
+            }
+            else
+            {
+                FemaleButton.IsChecked = true;
+            }
         }
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string name)
@@ -119,7 +287,7 @@ namespace ZdravoCorp.View.Patient
         private void UpdateTable()
         {
             
-            List<Appointment> appointments = appointmentController.GetFutureAppointments();
+            List<Appointment> appointments = appointmentController.GetFutureAppointmentsForPatient(patient);
             RoomController roomController = new RoomController();
             FutureAppointmentsCollection = new ObservableCollection<Appointment>(appointments);
             foreach(Appointment a in appointments)
@@ -131,7 +299,7 @@ namespace ZdravoCorp.View.Patient
         }
         private void Add_Appointment(object sender, RoutedEventArgs e)
         {
-            AddAppointment window = new AddAppointment();
+            AddAppointment window = new AddAppointment(patient);
             window.Owner = this;
             window.ShowDialog();
             UpdateTable();
@@ -145,7 +313,7 @@ namespace ZdravoCorp.View.Patient
             }
             Appointment appointment = (Appointment)PatientAppointmentTable.SelectedItem;
             PatientController patientController = new PatientController();
-            Model.Patient patient = patientController.ReadPatient(appointment.Patient.Id);
+            //Model.Patient patient = patientController.ReadPatient(appointment.Patient.Id);
             patientController.RemoveFromChangedOrCanceledList(patient);
             if (appointmentController.IsTroll(appointment))
             {
@@ -168,7 +336,7 @@ namespace ZdravoCorp.View.Patient
             }
             Appointment appointment = (Appointment)PatientAppointmentTable.SelectedItem;
             PatientController patientController = new PatientController();
-            Model.Patient patient = patientController.ReadPatient(appointment.Patient.Id);
+            //Model.Patient patient = patientController.ReadPatient(appointment.Patient.Id);
             patientController.RemoveFromChangedOrCanceledList(patient);
             if (appointmentController.IsTroll(appointment))
             {
@@ -219,7 +387,7 @@ namespace ZdravoCorp.View.Patient
 
         public void PastAppointments()
         {
-            List<Appointment> appointments = appointmentController.GetPastAppointments();
+            List<Appointment> appointments = appointmentController.GetPastAppointmentsForPatient(patient);
             RoomController roomController = new RoomController();
             PastAppointmentsCollection = new ObservableCollection<Appointment>(appointments);
             List<Model.Doctor> doctors = new List<Model.Doctor>();
@@ -234,7 +402,7 @@ namespace ZdravoCorp.View.Patient
 
         private void HospitalSurvey_Click(object sender, RoutedEventArgs e)
         {
-            ZdravoCorp.View.Patient.View.Survey.HospitalSurveyView window = new ZdravoCorp.View.Patient.View.Survey.HospitalSurveyView();
+            ZdravoCorp.View.Patient.View.Survey.HospitalSurveyView window = new ZdravoCorp.View.Patient.View.Survey.HospitalSurveyView(patient);
             window.ShowDialog();
         }
 

@@ -24,13 +24,14 @@ namespace ZdravoCorp.View.Secretary
     {
         public ObservableCollection<Model.Patient> PatientCollection { get; set; }
         public PatientController patientController;
+        private Model.Secretary secretary;
 
-
-        public Secretary()
+        public Secretary(Model.Secretary logedSecretary)
         {
             InitializeComponent();
             PatientCollection = new ObservableCollection<Model.Patient>();
-            patientController = new PatientController();            
+            patientController = new PatientController();
+            secretary = logedSecretary;
             UpdateTable();
         }
 

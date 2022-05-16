@@ -29,7 +29,7 @@ namespace ZdravoCorp.View.Patient.Appointments
         public DoctorController doctorController;
         public AppointmentController appointmentController;
         List<Model.Suggestion> suggestions = new List<Model.Suggestion>();
-
+        Model.Patient patient;
         public event PropertyChangedEventHandler PropertyChanged;
 
         public ObservableCollection<Appointment> AppointmentsCollection
@@ -52,13 +52,13 @@ namespace ZdravoCorp.View.Patient.Appointments
             get;
             set;
         }
-        public AddAppointment()
+        public AddAppointment(Model.Patient logedPatient)
         {
             InitializeComponent();
             DataContext = this;
             doctorController = new DoctorController();
             appointmentController = new AppointmentController();
-
+            patient = logedPatient;
             SuggestionsCollection = new ObservableCollection<Suggestion>(suggestions);
             Suggestion suggestion;
             AppointmentsCollection = new ObservableCollection<Appointment>();
@@ -72,7 +72,8 @@ namespace ZdravoCorp.View.Patient.Appointments
         {
 
             DataContext = this;
-            Model.Doctor doctor = doctorController.ReadDoctor(DoctorsCB.SelectedIndex);
+            Model.Doctor d = (Model.Doctor)DoctorsCB.SelectedItem;
+            Model.Doctor doctor = doctorController.ReadDoctor(d.Id);
             DateTime date = (DateTime)datePicker.SelectedDate;
             Appointment app;
             List<Appointment> apps = new List<Appointment>();
@@ -81,11 +82,11 @@ namespace ZdravoCorp.View.Patient.Appointments
             date.AddSeconds((int)doctor.WorkStartTime.Second);
             if (DateRB.IsChecked == true)
             {
-                apps = appointmentController.SuggestAppointments(doctor, date, date.AddMinutes(45), false, true);
+                apps = appointmentController.SuggestAppointments(doctor, date, date.AddMinutes(45), false, true, patient);
             }
             else
             {
-                apps = appointmentController.SuggestAppointments(doctor, date, date.AddMinutes(45), true, true);
+                apps = appointmentController.SuggestAppointments(doctor, date, date.AddMinutes(45), true, true, patient);
 
             }
 

@@ -30,7 +30,22 @@
     <Style x:Key="ComboBox" TargetType="{x:Type ComboBox}">
         
     </Style>
-    
+    <Style x:Key="InfoTextBox" TargetType="{x:Type TextBox}">
+        <Setter Property="Foreground" Value="#063637"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="BorderBrush" Value="#0F8587"/>
+        <Setter Property="IsReadOnly" Value="True"/>
+        <Setter Property="FontFamily" Value="/Resources/Fonts/#Poppins"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="BorderBrush" Value="Red"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="Label" TargetType="{x:Type Label}">
+        <Setter Property="FontFamily" Value="/Resources/Fonts/#Poppins"/>
+        <Setter Property="Foreground" Value="#063637"/>
+    </Style>
     <Style x:Key="ComboBoxItemTemplate" TargetType="{x:Type StackPanel}">
         <Setter Property="Background" Value="#0F8587"/>
     </Style>
@@ -105,7 +120,7 @@
 
     <Style x:Key="TabsStyle" TargetType="{x:Type TabItem}">
         <Setter Property="Margin" Value="15,0,0,0"/>
-        <Setter Property="Width" Value="120"/>
+        <Setter Property="Width" Value="140"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
         <Setter Property="FontFamily" Value="/Resources/Fonts/#Poppins"/>
@@ -113,9 +128,14 @@
         <Setter Property="Foreground" Value="#063637"/>
         <Style.Triggers>
             <Trigger Property="IsSelected" Value="True">
-                <Setter Property="Foreground" Value="Red"/>
-                <Setter  Property="Background" Value="Black"/>
+                <Setter Property="Foreground" Value="#063637"/>
+                <Setter Property="BorderBrush" Value="Red"/>
             </Trigger>
         </Style.Triggers>
+    </Style>
+    <Style x:Key="RadioButton" TargetType="{x:Type RadioButton}">
+        <Setter Property="FontFamily" Value="/Resources/Fonts/#Poppins"/>
+        <Setter Property="Foreground" Value="#063637"/>
+        <Setter Property="IsHitTestVisible" Value="False"/>
     </Style>
 </ResourceDictionary>

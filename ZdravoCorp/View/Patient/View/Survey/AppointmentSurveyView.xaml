@@ -22,7 +22,7 @@
         <ComboBox x:Name="TidinessCB" Width="120" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="313,202,0,0" ItemsSource="{Binding}" SelectedValue="{Binding Path=Tidiness, UpdateSourceTrigger=PropertyChanged}"/>
         <ComboBox x:Name="WaitingTimeCB" Width="120" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="313,233,0,0" ItemsSource="{Binding}" SelectedValue="{Binding Path=WaitingTime, UpdateSourceTrigger=PropertyChanged}"/>
         <ComboBox x:Name="OverallExperienceCB" Width="120" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="313,264,0,0" ItemsSource="{Binding}" SelectedValue="{Binding Path=OverallExperience, UpdateSourceTrigger=PropertyChanged}"/>
-        <Button Content="Potvrdi" Click="Confirm_Click" HorizontalAlignment="Left" Height="40" Margin="293,319,0,0" VerticalAlignment="Top" Width="80"/>
-        <Button Content="Odustani" Click="Cancel_Click" HorizontalAlignment="Left" Height="40" Margin="148,319,0,0" VerticalAlignment="Top" Width="80"/>
+        <Button Style="{DynamicResource BlueButton}" Content="Potvrdi" Click="Confirm_Click" HorizontalAlignment="Left" Height="40" Margin="293,319,0,0" VerticalAlignment="Top" Width="80"/>
+        <Button Style="{DynamicResource CancelButton}" Content="Odustani" Click="Cancel_Click" HorizontalAlignment="Left" Height="40" Margin="148,319,0,0" VerticalAlignment="Top" Width="80"/>
     </Grid>
 </Window>

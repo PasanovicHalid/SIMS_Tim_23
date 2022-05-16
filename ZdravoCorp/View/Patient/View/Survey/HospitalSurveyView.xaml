@@ -7,15 +7,15 @@
         mc:Ignorable="d"
         Title="HospitalSurveyView" Height="430" Width="550">
     <Grid>
-        <Label Content="Molimo da ocenite sledeće stavke ocenama od 1 do 5, gde je 1 najlošija ocena, a 5 najbolja" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,26,0,0"/>
-        <Label Content="Profesionalnost osoblja" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="90,74,0,0"/>
-        <Label Content="Ljubaznost osoblja" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="90,105,0,0"/>
-        <Label Content="Udobnost boravka" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="90,136,0,0"/>
-        <Label Content="Urednost bolnice" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="90,167,0,0"/>
-        <Label Content="Higijena bolnice" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="90,198,0,0"/>
-        <Label Content="Savremenost bolnice" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="90,229,0,0"/>
-        <Label Content="Opremljenost bolnice" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="90,260,0,0"/>
-        <Label Content="Opšti utisak" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="90,291,0,0"/>
+        <Label Style="{DynamicResource Label}" Content="Molimo da ocenite sledeće stavke ocenama od 1 do 5, &#10;            gde je 1 najlošija ocena, a 5 najbolja" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,20,0,0" HorizontalContentAlignment="Center"/>
+        <Label Style="{DynamicResource Label}" Content="Profesionalnost osoblja" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="90,74,0,0"/>
+        <Label Style="{DynamicResource Label}" Content="Ljubaznost osoblja" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="90,105,0,0"/>
+        <Label Style="{DynamicResource Label}" Content="Udobnost boravka" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="90,136,0,0"/>
+        <Label Style="{DynamicResource Label}" Content="Urednost bolnice" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="90,167,0,0"/>
+        <Label Style="{DynamicResource Label}" Content="Higijena bolnice" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="90,198,0,0"/>
+        <Label Style="{DynamicResource Label}" Content="Savremenost bolnice" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="90,229,0,0"/>
+        <Label Style="{DynamicResource Label}" Content="Opremljenost bolnice" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="90,260,0,0"/>
+        <Label Style="{DynamicResource Label}" Content="Opšti utisak" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="90,291,0,0"/>
         <ComboBox x:Name="ProfesionalismCB" Width="120" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="313,78,0,0" ItemsSource="{Binding}" SelectedValue="{Binding Path=Profesionalism, UpdateSourceTrigger=PropertyChanged}"/>
         <ComboBox x:Name="KindnessCB" Width="120" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="313,109,0,0" ItemsSource="{Binding}" SelectedValue="{Binding Path=Kindness, UpdateSourceTrigger=PropertyChanged}"/>
         <ComboBox x:Name="ComfortCB" Width="120" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="313,140,0,0" ItemsSource="{Binding}" SelectedValue="{Binding Path=Comfort, UpdateSourceTrigger=PropertyChanged}"/>
@@ -23,8 +23,8 @@
         <ComboBox x:Name="HygieneCB" Width="120" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="313,202,0,0" ItemsSource="{Binding}" SelectedValue="{Binding Path=Hygiene, UpdateSourceTrigger=PropertyChanged}"/>
         <ComboBox x:Name="ModernityCB" Width="120" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="313,233,0,0" ItemsSource="{Binding}" SelectedValue="{Binding Path=Modernity, UpdateSourceTrigger=PropertyChanged}"/>
         <ComboBox x:Name="EquippedCB" Width="120" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="313,264,0,0" ItemsSource="{Binding}" SelectedValue="{Binding Path=Equipped, UpdateSourceTrigger=PropertyChanged}"/>
-        <Button Content="Potvrdi" Click="Confirm_Click" HorizontalAlignment="Left" Height="40" Margin="293,352,0,0" VerticalAlignment="Top" Width="80"/>
-        <Button Content="Odustani" Click="Cancel_Click" HorizontalAlignment="Left" Height="40" Margin="150,352,0,0" VerticalAlignment="Top" Width="80"/>
+        <Button Style="{DynamicResource BlueButton}" Content="Potvrdi" Click="Confirm_Click" HorizontalAlignment="Left" Height="40" Margin="293,352,0,0" VerticalAlignment="Top" Width="80"/>
+        <Button Style="{DynamicResource CancelButton}" Content="Odustani" Click="Cancel_Click" HorizontalAlignment="Left" Height="40" Margin="150,352,0,0" VerticalAlignment="Top" Width="80"/>
         <ComboBox x:Name="OverallExperienceCB" Width="120" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="313,295,0,0" ItemsSource="{Binding}" SelectedValue="{Binding Path=OverallExperience, UpdateSourceTrigger=PropertyChanged}"/>
 
     </Grid>

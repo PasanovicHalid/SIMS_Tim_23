@@ -23,7 +23,8 @@ namespace ZdravoCorp.View.Patient.View.Survey
     /// </summary>
     public partial class HospitalSurveyView : Window, INotifyPropertyChanged
     {
-        public HospitalSurveyView()
+        private Model.Patient patient;
+        public HospitalSurveyView(Model.Patient logedPatient)
         {
             InitializeComponent();
             this.DataContext = this;
@@ -37,6 +38,7 @@ namespace ZdravoCorp.View.Patient.View.Survey
             HygieneCB.ItemsSource = grades;
             ModernityCB.ItemsSource = grades;
             EquippedCB.ItemsSource = grades;
+            patient = logedPatient;
         }
 
         private int id;
@@ -48,7 +50,7 @@ namespace ZdravoCorp.View.Patient.View.Survey
         private int modernity;
         private int equipped;
         private int overallExperience;
-        private Patient patient;
+
 
         public int Profesionalism
         {
@@ -168,7 +170,7 @@ namespace ZdravoCorp.View.Patient.View.Survey
         private void Confirm_Click(object sender, RoutedEventArgs e)
         {
             HospitalSurveyController hospitalSurveyController = new HospitalSurveyController();
-            HospitalSurvey hospitalSurvey = new HospitalSurvey(Profesionalism, Comfort, Tidiness, Kindness, Hygiene, Modernity, Equipped, OverallExperience, new Model.Patient(1234560));
+            HospitalSurvey hospitalSurvey = new HospitalSurvey(Profesionalism, Comfort, Tidiness, Kindness, Hygiene, Modernity, Equipped, OverallExperience, patient);
             hospitalSurveyController.CreateHospitalSurvey(hospitalSurvey);
             this.Close();
         }

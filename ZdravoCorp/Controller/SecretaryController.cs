@@ -6,6 +6,7 @@
 using Model;
 using System;
 using System.Collections.Generic;
+using Service;
 
 namespace Controller
 {
@@ -33,7 +34,7 @@ namespace Controller
       
       public List<Secretary> GetAllSecretaries()
       {
-         throw new NotImplementedException();
+            return SecretaryService.Instance.GetAllSecretaries();
       }
    
    }

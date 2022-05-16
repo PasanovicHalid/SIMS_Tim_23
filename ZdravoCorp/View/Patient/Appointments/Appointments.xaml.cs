@@ -48,9 +48,7 @@ namespace ZdravoCorp.View.Patient.Appointments
         }
         private void Add_Appointment(object sender, RoutedEventArgs e)
         {
-            AddAppointment window = new AddAppointment();
-            this.Hide();
-            window.ShowDialog();
+            
         }
 
         private void Change_Appointment(object sender, RoutedEventArgs e)
