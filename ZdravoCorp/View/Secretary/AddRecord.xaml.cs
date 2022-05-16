@@ -187,6 +187,8 @@ namespace ZdravoCorp.View.Secretary
         private void AddRecord_Click(object sender, RoutedEventArgs e)
         {
             DataContext = this;
+            PatientController patientController = new PatientController();
+            patientController.CreatePatient(record.Patient);
             MedicalRecord mr = new MedicalRecord(height, weight, BloodType, allergens, null, record.Patient);
             mrcontroller = new MedicalRecordController();
             mrcontroller.CreateMedicalRecord(mr);
@@ -196,5 +198,11 @@ namespace ZdravoCorp.View.Secretary
             this.Close();
         }
 
+        private void MedicalRecordCancel_Click(object sender, RoutedEventArgs e)
+        {
+            PatientController patientController = new PatientController();
+            patientController.DeletePatient(record.Patient.Id);
+            this.Close();
+        }
     }
 }
