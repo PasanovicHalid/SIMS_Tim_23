@@ -40,7 +40,6 @@ namespace ZdravoCorp.View.Doctor
             appointments = new ObservableCollection<Appointment>();
 
             currentDoctor = dd;
-            txtIme.Text = currentDoctor.name + " " + currentDoctor.surname;
 
             List<Appointment> apps = appointmentController.GetAllAppointments();
             foreach (Appointment temp in apps)
@@ -151,6 +150,12 @@ namespace ZdravoCorp.View.Doctor
         {
             MedicationsView medicationsView = new MedicationsView();
             medicationsView.Show();
+        }
+
+        private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            UserWindow userWindow = new UserWindow();
+            userWindow.Show();
         }
     }
 }

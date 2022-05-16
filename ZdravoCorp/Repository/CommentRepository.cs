@@ -18,7 +18,7 @@ namespace ZdravoCorp.Repository
         public Boolean CreateComment(Model.Comments newComment)
         {
             List<Comments> comments = GetAllComments();
-            int id = comments.Count;
+            int id = comments.Count + 1;
             newComment.Id = id;
             comments.Add(newComment);
             serializerComments.ToCSV(dbPath, comments);
