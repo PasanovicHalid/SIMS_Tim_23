@@ -131,6 +131,7 @@ namespace Model
             this.name = name;
             this.manufacturer = manufacturer;
             this.description = description;
+            Replacement = new List<MedicationType>();
         }
 
         private void InfoToListString(List<string> result)

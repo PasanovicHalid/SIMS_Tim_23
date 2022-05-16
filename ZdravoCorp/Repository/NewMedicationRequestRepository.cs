@@ -50,8 +50,15 @@ namespace Repository
 
         public Boolean CreateNewMedicationRequest(NewMedicationRequest newMedicationRequest)
         {
-            newMedicationRequest.Id = GenerateID();
-            serializerNewMedicationRequest.ToCSVAppend(dbPath,new List<NewMedicationRequest>() { newMedicationRequest });
+            if(newMedicationRequest.Change)
+            {
+                UpdateNewMedicationRequest(newMedicationRequest);
+            }
+            else
+            {
+                newMedicationRequest.Id = GenerateID();
+                serializerNewMedicationRequest.ToCSVAppend(dbPath, new List<NewMedicationRequest>() { newMedicationRequest });
+            }
             return true;
         }
 
@@ -148,7 +155,7 @@ namespace Repository
                 if (request.Id == newMedicationRequest.Id)
                 {
                     Controller.MedicineController medicationController = new Controller.MedicineController();
-                    medicationController.CreateMedicine(new Medication(0, newMedicationRequest.MedicationType));
+                    medicationController.CreateMedicationType(new MedicationType(newMedicationRequest.Name,newMedicationRequest.Manufacturer,newMedicationRequest.Description));
                     requests.Remove(request);
                     serializerNewMedicationRequest.ToCSV(dbPath, requests);
                     return true;

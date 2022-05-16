@@ -69,6 +69,11 @@ namespace ZdravoCorp.View.Doctor
         private void acceptButton_Click(object sender, RoutedEventArgs e)
         {
             Model.NewMedicationRequest newMedicationRequest = (Model.NewMedicationRequest)MedicineGrid.SelectedItem;
+            if(newMedicationRequest.Status == Model.Status.REJECTED)
+            {
+                MessageBox.Show("This Medication is REJECTED!");
+                return;
+            }
             newMedicationRequestController.AcceptNewMedicationRequest(newMedicationRequest);
             requests = new ObservableCollection<Model.NewMedicationRequest>();
             List<Model.NewMedicationRequest> listNewMedicationRequests = newMedicationRequestController.GetAllNewMedicationRequests();
