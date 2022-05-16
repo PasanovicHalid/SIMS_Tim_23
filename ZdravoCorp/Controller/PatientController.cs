@@ -32,6 +32,11 @@ namespace Controller
             return PatientService.Instance.ReadPatient(patient);
         }
 
+        public Patient ReadPatientByJmbg(string jmbg)
+        {
+            return PatientService.Instance.ReadPatientByJmbg(jmbg);
+        }
+
         public List<Patient> GetAllPatients()
         {
             return PatientService.Instance.GetAllPatients();

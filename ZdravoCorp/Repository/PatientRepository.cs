@@ -131,6 +131,20 @@ namespace Repository
             return null;
         }
 
+        public Patient ReadPatientByJmbg(string jmbg)
+        {
+            Patient patient = null;
+            List<Patient> patients = GetAllPatients();
+            foreach (Patient p in patients)
+            {
+                if (jmbg.Equals(p.Jmbg))
+                {
+                    patient = p;
+                }
+            }
+            return patient;
+        }
+
         public List<Patient> GetAllPatients()
         {
 

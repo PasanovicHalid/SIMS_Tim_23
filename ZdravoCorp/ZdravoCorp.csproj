@@ -304,11 +304,17 @@
     <Compile Include="View\Patient\View\Survey\HospitalSurveyView.xaml.cs">
       <DependentUpon>HospitalSurveyView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Secretary\AddAppointment.xaml.cs">
+      <DependentUpon>AddAppointment.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Secretary\AddGuest.xaml.cs">
       <DependentUpon>AddGuest.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Secretary\AddRecord.xaml.cs">
       <DependentUpon>AddRecord.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Secretary\AppointmentSuggest.xaml.cs">
+      <DependentUpon>AppointmentSuggest.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Secretary\ChangePatient.xaml.cs">
       <DependentUpon>ChangePatient.xaml</DependentUpon>
@@ -504,11 +510,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Secretary\AddAppointment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Secretary\AddGuest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Secretary\AddRecord.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Secretary\AppointmentSuggest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

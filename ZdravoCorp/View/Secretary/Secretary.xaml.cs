@@ -164,9 +164,25 @@ namespace ZdravoCorp.View.Secretary
             UpdateGuestTable();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void UpdateAppointmentTable()
         {
+            //List<Appointment> appointments = appointmentController.GetFutureAppointmentsForPatient(patient);
+            //RoomController roomController = new RoomController();
+            //FutureAppointmentsCollection = new ObservableCollection<Appointment>(appointments);
+            //foreach (Appointment a in appointments)
+            //{
+            //    a.doctor = dc.ReadDoctor(a.doctor.Id);
+            //    a.room = roomController.ReadRoom(a.room.Identifier);
+            //}
+            //PatientAppointmentTable.DataContext = FutureAppointmentsCollection;
+        }
 
+
+        private void AddAppointment_Click(object sender, RoutedEventArgs e)
+        {
+            AddAppointment window = new AddAppointment();
+            window.ShowDialog();
+            UpdateAppointmentTable();
         }
     }
 }
