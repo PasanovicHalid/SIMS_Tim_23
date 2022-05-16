@@ -89,6 +89,7 @@
     <Compile Include="Controller\CommentController.cs" />
     <Compile Include="Controller\DoctorController.cs" />
     <Compile Include="Controller\EquipmentController.cs" />
+    <Compile Include="Controller\GuestController.cs" />
     <Compile Include="Controller\HospitalSurveyController.cs" />
     <Compile Include="Controller\ManagerController.cs" />
     <Compile Include="Controller\MedicalRecordController.cs" />
@@ -102,6 +103,7 @@
     <Compile Include="Model\Action.cs" />
     <Compile Include="Model\ActionType.cs" />
     <Compile Include="Model\ChangeRoomAction.cs" />
+    <Compile Include="Model\Guest.cs" />
     <Compile Include="Model\LoginUserEnumeration.cs" />
     <Compile Include="Model\HospitalSurvey.cs" />
     <Compile Include="Model\NewMedicationRequest.cs" />
@@ -110,6 +112,7 @@
     <Compile Include="Model\RenovationAction.cs" />
     <Compile Include="Model\Vacation.cs" />
     <Compile Include="Repository\ActionRepository.cs" />
+    <Compile Include="Repository\GuestRepository.cs" />
     <Compile Include="Repository\HospitalSurveyRepository.cs" />
     <Compile Include="Repository\AppointmentSurveyRepository.cs" />
     <Compile Include="Repository\AppointmentRepository.cs" />
@@ -128,6 +131,7 @@
     <Compile Include="Repository\Serializer.cs" />
     <Compile Include="Repository\VacationRepository.cs" />
     <Compile Include="Service\ActionService.cs" />
+    <Compile Include="Service\GuestService.cs" />
     <Compile Include="Service\HospitalSurveyService.cs" />
     <Compile Include="Service\AppointmentSurveyService.cs" />
     <Compile Include="Service\AppointmentService.cs" />
@@ -302,6 +306,9 @@
     </Compile>
     <Compile Include="View\Patient\View\Survey\HospitalSurveyView.xaml.cs">
       <DependentUpon>HospitalSurveyView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Secretary\AddGuest.xaml.cs">
+      <DependentUpon>AddGuest.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Secretary\AddRecord.xaml.cs">
       <DependentUpon>AddRecord.xaml</DependentUpon>
@@ -504,6 +511,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Secretary\AddGuest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Secretary\AddRecord.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -586,6 +597,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Data\guestsDB.csv" />
     <None Include="Data\hospitalSurveysDB.csv" />
     <None Include="Data\appointmentSurveysDB.csv" />
     <None Include="Data\equipmentTypeDB.csv" />
