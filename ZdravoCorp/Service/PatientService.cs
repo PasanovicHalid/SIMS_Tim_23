@@ -35,6 +35,11 @@ namespace Service
             return PatientRepository.Instance.ReadPatient(id);
         }
 
+        public Patient ReadPatientByJmbg(string jmbg)
+        {
+            return PatientRepository.Instance.ReadPatientByJmbg(jmbg);
+        }
+
         public List<Patient> GetAllPatients()
         {
             return PatientRepository.Instance.GetAllPatients();

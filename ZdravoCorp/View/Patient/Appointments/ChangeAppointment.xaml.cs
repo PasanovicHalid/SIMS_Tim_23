@@ -50,11 +50,20 @@ namespace ZdravoCorp.View.Patient.Appointments
             doctorController = new DoctorController();
             this.app = appointment;
             exApp = appointment;
+           
+            Model.Doctor doctorr = doctorController.ReadDoctor(appointment.doctor.Id);
+            int i = 0;
+            foreach (Model.Doctor d in doctorController.GetAllDoctors())
+            {
+                if (d.Id == doctorr.Id)
+                {
+                    DoctorsCB.SelectedIndex = i;
+                    break;
+                }
+                i++;
+            }
             DoctorsCollection = new ObservableCollection<Model.Doctor>(doctorController.GetAllDoctors());
             DoctorsCB.ItemsSource = DoctorsCollection;
-            doctor = doctorController.ReadDoctor(appointment.doctor.Id);
-            selectedIndex = doctor.Id;
-            DoctorsCB.SelectedIndex = selectedIndex;
             DateTime dt = appointment.StartDate;
             String s = dt.ToString();
             datePicker.SelectedDate = appointment.StartDate;

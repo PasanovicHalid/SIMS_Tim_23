@@ -51,6 +51,7 @@ namespace Model
 
         public Doctor doctor { get; set; }
         public Room room { get; set; }
+        public Patient patient { get; set; }
 
         /// <summary>
         /// Property for Room
@@ -80,7 +81,7 @@ namespace Model
                 }
             }
         }
-        private Patient patient;
+        //private Patient patient;
         public Patient Patient
         {
             get
@@ -111,6 +112,7 @@ namespace Model
         public DateTime EndDate { get => endDate; set => endDate = value; }
         public Doctor Doctor { get => doctor; set => doctor = value; }
         public String NameSurname { get => doctor.nameSurname; set => doctor.nameSurname = value; }
+        public String PatNameSurname { get => patient.nameSurname; set => patient.nameSurname = value; }
 
         public string StartDateString
         {
