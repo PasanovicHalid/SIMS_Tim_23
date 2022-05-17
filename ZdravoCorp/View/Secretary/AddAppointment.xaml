@@ -8,11 +8,11 @@
         mc:Ignorable="d"
         Title="AddAppointment" Height="450" Width="800">
     <Grid>
-        <Label Content="JMBG:" Margin="80,26,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-        <Label Content="Ime pacijenta:" Margin="80,73,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-        <Label Content="Prezime pacijenta:" Margin="80,120,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-        <Label Content="Lekar:" Margin="80,170,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-        <Label Content="Datum:" Margin="80,217,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <Label Content="JMBG:" Style="{DynamicResource SecretaryLabel}" Margin="60,26,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <Label Content="Ime pacijenta:" Style="{DynamicResource SecretaryLabel}" Margin="60,73,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <Label Content="Prezime pacijenta:" Style="{DynamicResource SecretaryLabel}" Margin="60,120,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <Label Content="Lekar:" Margin="60,170,0,0" Style="{DynamicResource SecretaryLabel}" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <Label Content="Datum:" Margin="60,222,0,0" Style="{DynamicResource SecretaryLabel}" VerticalAlignment="Top" HorizontalAlignment="Left"/>
         <TextBox x:Name="JMBG" TextWrapping="Wrap" Margin="210,26,0,0" Height="27" Width="350" VerticalAlignment="Top" HorizontalAlignment="Left" Text="{Binding Path=Jmbg, UpdateSourceTrigger=PropertyChanged}"/>
         <TextBox x:Name="NAME" TextWrapping="Wrap" Margin="210,69,0,0" Height="27" Width="350" VerticalAlignment="Top" HorizontalAlignment="Left" Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}"/>
         <TextBox x:Name="SURNAME" TextWrapping="Wrap" Margin="210,120,0,0" Height="27" Width="350" VerticalAlignment="Top" HorizontalAlignment="Left" Text="{Binding Path=Surname, UpdateSourceTrigger=PropertyChanged}"/>
@@ -28,14 +28,14 @@
         </ComboBox>
         <DatePicker x:Name="DATE" Margin="210,217,0,0" Height="27" Width="350" VerticalAlignment="Top" HorizontalAlignment="Left" FirstDayOfWeek="Monday"
             IsTodayHighlighted="True">
-            
+
         </DatePicker>
-        <Button Content="Pretrazi" Margin="603,26,0,0" Height="30" Width="80" VerticalAlignment="Top" HorizontalAlignment="Left" Click="SearchPatient_Click"/>
-        <Button Content="Otkazi" Margin="183,311,0,0" Height="30" Width="80" VerticalAlignment="Top" HorizontalAlignment="Left" Click="CancelAddAppointment_Click"/>
-        <Button Content="Ponudi termin" Margin="440,306,0,0" Height="30" Width="80" VerticalAlignment="Top" HorizontalAlignment="Left" Click="SuggestAppointments_Click"/>
-        <Label Content="Prioritet pretrage:" Margin="80,259,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-        <RadioButton Name="DoctorButton" Content="Lekar" Margin="210,265,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" IsChecked="True"/>
-        <RadioButton Name="DateButton" Content="Datum" Margin="280,265,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" />
+        <Button Content="Pretrazi" Margin="603,26,0,0" Height="30" Width="140" Style="{DynamicResource SecretaryButtons}" VerticalAlignment="Top" HorizontalAlignment="Left" Click="SearchPatient_Click"/>
+        <Button Content="Otkazi" Style="{DynamicResource SecretaryCancelButton}" Margin="210,311,0,0" Height="50" Width="140" VerticalAlignment="Top" HorizontalAlignment="Left" Click="CancelAddAppointment_Click"/>
+        <Button Content="Ponudi termin" Margin="420,311,0,0" Style="{DynamicResource SecretaryButtons}" Height="50" Width="140" VerticalAlignment="Top" HorizontalAlignment="Left" Click="SuggestAppointments_Click"/>
+        <Label Content="Prioritet pretrage:" Style="{DynamicResource SecretaryLabel}" Margin="60,265,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <RadioButton Name="DoctorButton" Style="{DynamicResource SecretaryRadioButton}" Content="Lekar" Margin="242,270,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" IsChecked="True"/>
+        <RadioButton Name="DateButton" Style="{DynamicResource SecretaryRadioButton}" Content="Datum" Margin="0,270,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" />
 
     </Grid>
 </Window>

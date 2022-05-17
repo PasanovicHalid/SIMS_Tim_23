@@ -119,20 +119,21 @@ namespace ZdravoCorp.View.Patient.Appointments
             Model.Patient patient = patientController.ReadPatient(appointment.Patient.Id);
             
             appointment.Id = exApp.Id;
-            appointmentController.UpdateAppointment(app);
-            
-            //DoctorController doctorController = new DoctorController();
-            //Model.Doctor doctor = doctorController.ReadDoctor(appointment.Doctor.Id);
-            //doctor.RemoveAppointment(exApp);
-            //doctor.AddAppointment(appointment);
-            //doctorController.UpdateDoctor(doctor);
-            //RoomController roomController = new RoomController();
-            //Model.Room room = roomController.ReadRoom(appointment.Room.Identifier);
-            //room.RemoveAppointment(exApp);
-            //room.AddAppointment(appointment);
-            //roomController.UpdateRoom(room);
-            //patient.RemoveAppointment(exApp);
-            //patient.AddAppointment(appointment);
+            int i = appointment.Id;
+            appointmentController.UpdateAppointment(appointment);
+
+            DoctorController doctorController = new DoctorController();
+            Model.Doctor doctor = doctorController.ReadDoctor(appointment.Doctor.Id);
+            doctor.RemoveAppointment(exApp);
+            doctor.AddAppointment(appointment);
+            doctorController.UpdateDoctor(doctor);
+            RoomController roomController = new RoomController();
+            Model.Room room = roomController.ReadRoom(appointment.Room.Identifier);
+            room.RemoveAppointment(exApp);
+            room.AddAppointment(appointment);
+            roomController.UpdateRoom(room);
+            patient.RemoveAppointment(exApp);
+            patient.AddAppointment(appointment);
             patient.ChangedOrCanceledAppointmentsDates.Add(DateTime.Now);
             patientController.UpdatePatient(patient);
             this.Close();

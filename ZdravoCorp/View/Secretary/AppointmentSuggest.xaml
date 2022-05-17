@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="AppointmentSuggest" Height="450" Width="800">
     <Grid>
-        <DataGrid x:Name="SuggestionTable" ItemsSource="{Binding}" Margin="0,25,0,94" 
+        <DataGrid x:Name="SuggestionTable" ItemsSource="{Binding}" Margin="0,25,0,94"  Style="{DynamicResource SecretaryTables}"
                               AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Vreme" Binding="{Binding startDate}" Width="*"/>
@@ -15,7 +15,7 @@
 
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Otkazi zakazivanje" Margin="166,364,0,0" Height="30" Width="130" VerticalAlignment="Top" HorizontalAlignment="Left" Click="CancelSuggestion_Click"/>
-        <Button Content="Zakazi termin" Margin="370,364,0,0" Height="30" Width="130" VerticalAlignment="Top" HorizontalAlignment="Left" Click="AddAppointment_Click"/>
+        <Button Content="Otkazi zakazivanje" Margin="201,364,0,0" Style="{DynamicResource SecretaryCancelButton}" Height="50" Width="140" VerticalAlignment="Top" HorizontalAlignment="Left" Click="CancelSuggestion_Click"/>
+        <Button Content="Zakazi termin" Style="{DynamicResource SecretaryButtons}" Margin="471,364,0,0" Height="50" Width="140" VerticalAlignment="Top" HorizontalAlignment="Left" Click="AddAppointment_Click"/>
     </Grid>
 </Window>

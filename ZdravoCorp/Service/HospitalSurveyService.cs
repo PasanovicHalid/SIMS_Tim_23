@@ -13,9 +13,7 @@ namespace Service
 {
     public class HospitalSurveyService
     {
-        public const int MAX_SUGGESTIONS = 30;
         private static HospitalSurveyService instance = null;
-        List<HospitalSurvey> appointments = new List<HospitalSurvey>();
         
         public Boolean CreateHospitalSurvey(HospitalSurvey newSurvey)
         {

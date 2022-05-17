@@ -215,10 +215,7 @@ namespace Service
             {
                 patient.ChangedOrCanceledAppointmentsDates = new List<DateTime>();
             }
-            /*Stavljena dvojka jer me mrzi da menjnam 5 puta, puno posla
-              Posle treba izmeniti
-             */
-            if(patient.ChangedOrCanceledAppointmentsDates.Count >= 2)
+            if(patient.ChangedOrCanceledAppointmentsDates.Count >= 5)
             {
                 patient.CanLog = false;
                 PatientRepository.Instance.UpdatePatient(patient);

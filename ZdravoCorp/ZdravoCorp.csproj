@@ -644,6 +644,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Data\appointmentsDB - Copy.csv" />
     <None Include="Data\guestsDB.csv" />
     <None Include="Data\hospitalSurveysDB.csv" />
     <None Include="Data\appointmentSurveysDB.csv" />

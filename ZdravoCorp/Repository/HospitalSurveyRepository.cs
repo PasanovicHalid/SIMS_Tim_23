@@ -53,9 +53,6 @@ namespace Repository
             {
                 if (id == survey.Id)
                 {
-                    //appointment.doctor = DoctorRepository.Instance.ReadDoctor(appointment.doctor.Id);
-                    //appointment.Room = RoomRepository.Instance.ReadRoom(appointment.Room.Identifier);
-                    //appointment.Patient = PatientRepository.Instance.ReadPatient(appointment.Patient.Id);
                     appointmentSurvey = survey;
                     break;
                 }
@@ -82,63 +79,18 @@ namespace Repository
 
         public Boolean UpdateHospitalSurvey(HospitalSurvey appointment)
         {
-            Boolean success = false;
-            List<HospitalSurvey> surveys = GetAllHospitalSurveys();
-            for (int i = 0; i< surveys.Count; i++)
-            {
-                if (appointment.Id== surveys[i].Id) 
-                {
-                    success = true;
-                    surveys[i] = appointment;
-                    break;
-                }
-            }
-            if (success)
-            {
-                surveys.Add(appointment);
-                serializerAppointment.ToCSV(dbPath, surveys);
-                
-            }
-            return success;
+            throw new NotImplementedException();
 
         }
 
         public Boolean DeleteHospitalSurvey(int id)
         {
-            Boolean success = false;
-            List<HospitalSurvey> appointments = GetAllHospitalSurveys();
-            foreach (HospitalSurvey temp in appointments)
-            {
-                if (temp.Id == id)
-                {
-                    //success = true;
-                    //appointments.Remove(temp);
-                    //Doctor d = DoctorRepository.Instance.ReadDoctor(temp.doctor.Id);
-                    //d.RemoveAppointment(temp);
-                    //DoctorRepository.Instance.UpdateDoctor(d);
-                    //Room r = RoomRepository.Instance.ReadRoom(temp.Room.Identifier);
-                    //r.RemoveAppointment(temp);
-                    //RoomRepository.Instance.UpdateRoom(r);
-                    //Patient p = PatientRepository.Instance.ReadPatient(temp.Patient.Id);
-                    //p.RemoveAppointment(temp);
-                    //PatientRepository.Instance.UpdatePatient(p);
-                    //serializerAppointment.ToCSV(dbPath, appointments);
-                    //break;
-                }
-            }
-            return success;
+            throw new NotImplementedException();
         }
 
         public List<HospitalSurvey> GetAllHospitalSurveys()
         {
             List<HospitalSurvey> surveys = serializerAppointment.FromCSV(dbPath); 
-            //foreach (AppointmentSurvey survey in surveys)
-            //{
-            //    //appointment.doctor = DoctorRepository.Instance.ReadDoctor(appointment.doctor.Id);
-            //    //appointment.Room = RoomRepository.Instance.ReadRoom(appointment.Room.Identifier);
-            //    //appointment.Patient = PatientRepository.Instance.ReadPatient(appointment.Patient.Id);
-            
-            //}
             return surveys;
             
         }

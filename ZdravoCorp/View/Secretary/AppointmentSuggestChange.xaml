@@ -8,14 +8,14 @@
         Title="AppointmentSuggestChange" Height="450" Width="800">
     <Grid>
         <DataGrid x:Name="SuggestionTable" ItemsSource="{Binding}" Margin="0,25,0,94" 
-                              AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True">
+                              AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" Style="{DynamicResource SecretaryTables}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Vreme" Binding="{Binding startDate}" Width="*"/>
                 <DataGridTextColumn Header="Soba" Binding="{Binding Room.DesignationCode}" Width="*"/>
 
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Otkazi izmenu" Margin="166,364,0,0" Height="30" Width="130" VerticalAlignment="Top" HorizontalAlignment="Left" Click="CancelSuggestionEdit_Click"/>
-        <Button Content="Prihvati izmene" Margin="370,364,0,0" Height="30" Width="130" VerticalAlignment="Top" HorizontalAlignment="Left" Click="ChangeAppointment_Click"/>
+        <Button Content="Otkazi izmenu" Style="{DynamicResource SecretaryCancelButton}" Margin="166,364,0,0" Height="50" Width="140" VerticalAlignment="Top" HorizontalAlignment="Left" Click="CancelSuggestionEdit_Click"/>
+        <Button Content="Prihvati izmene" Style="{DynamicResource SecretaryButtons}"  Margin="452,364,0,0" Height="50" Width="140" VerticalAlignment="Top" HorizontalAlignment="Left" Click="ChangeAppointment_Click"/>
     </Grid>
 </Window>
