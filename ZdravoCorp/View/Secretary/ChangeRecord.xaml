@@ -17,12 +17,12 @@
         <ComboBox x:Name="BloodTypes" Margin="197,116,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200" ItemsSource="{Binding}">
 
         </ComboBox>
-        <DataGrid x:Name="AllergensTable" Style="{DynamicResource SecretaryTables}" ItemsSource="{Binding }" AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" Margin="197,147,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="350" Height="105">
+        <DataGrid x:Name="AllergensTable" Style="{DynamicResource SecretaryTables}" ItemsSource="{Binding }" AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" Margin="197,147,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="350" Height="105" AlternationCount="2">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Opis" Binding="{Binding }" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid x:Name="CommentsTable" Style="{DynamicResource SecretaryTables}" ItemsSource="{Binding Path=CommentList, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True"  Margin="197,270,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="350" Height="105">
+        <DataGrid x:Name="CommentsTable" Style="{DynamicResource SecretaryTables}" AlternationCount="2" ItemsSource="{Binding Path=CommentList, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True"  Margin="197,270,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="350" Height="105">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Komentar" Binding="{Binding Comment}" Width="*"/>
             </DataGrid.Columns>

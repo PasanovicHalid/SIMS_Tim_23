@@ -8,7 +8,7 @@
         Title="AppointmentSuggest" Height="450" Width="800">
     <Grid>
         <DataGrid x:Name="SuggestionTable" ItemsSource="{Binding}" Margin="0,25,0,94"  Style="{DynamicResource SecretaryTables}"
-                              AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True">
+                              AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" AlternationCount="2">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Vreme" Binding="{Binding startDate}" Width="*"/>
                 <DataGridTextColumn Header="Soba" Binding="{Binding Room.DesignationCode}" Width="*"/>
