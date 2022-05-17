@@ -28,6 +28,7 @@ namespace Model
 
         protected List<Notification> notification;
         public string nameSurname { get => name + " " + surname; set => name = value; }
+        public string PatNameSurname { get => name + " " + surname; set => name = value; }
         public User(int id, string password, string username, string name, string surname, string jmbg, string email, string address, string phoneNumber, Gender gender, DateTime dateOfBirth, List<Notification> notification, List<AppointmentSurvey> survey)
         {
             this.id = id;

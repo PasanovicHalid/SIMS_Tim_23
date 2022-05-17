@@ -19,13 +19,14 @@ using System.ComponentModel;
 namespace ZdravoCorp.View.Secretary
 {
     /// <summary>
-    /// Interaction logic for AddAppointment.xaml
+    /// Interaction logic for ChangeAppointment.xaml
     /// </summary>
-    public partial class AddAppointment : Window, INotifyPropertyChanged
+    public partial class ChangeAppointment : Window, INotifyPropertyChanged
     {
         public DoctorController doctorController;
         public PatientController patientController;
         public AppointmentController appointmentController;
+        public Model.Appointment appointment;   
         public ObservableCollection<Model.Doctor> DoctorsCollection
         {
             get;
@@ -42,10 +43,25 @@ namespace ZdravoCorp.View.Secretary
             set;
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
+
         private string jmbg;
         private string name;
         private string surname;
+        private Model.Doctor doctor { get; set; }
         private DateTime date;
+        private Model.Room exRoom { get; set; }
+        private Model.Appointment exApp { get; set; }
+
+
 
         public String Jmbg
         {
@@ -99,72 +115,67 @@ namespace ZdravoCorp.View.Secretary
             }
         }
 
-        public AddAppointment()
+        
+        public ChangeAppointment(Model.Appointment appointment)
         {
             InitializeComponent();
             doctorController = new DoctorController();
             patientController = new PatientController();
             appointmentController = new AppointmentController();
+            DataContext = this;
+            this.appointment = appointment;
+            this.name = appointment.Patient.Name;
+            this.surname = appointment.Patient.Surname;
+            this.doctor = doctorController.ReadDoctor(appointment.doctor.Id);
+            this.jmbg = appointment.Patient.Jmbg;
+            int i = 0;
+            foreach(Model.Doctor d in doctorController.GetAllDoctors())
+            {
+                if(d.Id == doctor.Id) 
+                {
+                    Doctors.SelectedIndex = i;
+                }
+                i++;
+            }
+            exRoom = appointment.room;
+            exApp = appointment;
+
+            this.date = appointment.startDate.Date;
+            //DATE.SelectedDate = date;
+
+
+
             DoctorsCollection = new ObservableCollection<Model.Doctor>(doctorController.GetAllDoctors());
             PatientsCollection = new ObservableCollection<Model.Patient>(patientController.GetAllPatients());
-           
+
             Doctors.ItemsSource = DoctorsCollection;
-
-        }
-        
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged(string name)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
-            }
         }
 
-        private void SearchPatient_Click(object sender, RoutedEventArgs e)
+        private void CancelChangeAppointment_Click(object sender, RoutedEventArgs e)
         {
-            jmbg = JMBG.Text;
-            Model.Patient patient = patientController.ReadPatientByJmbg(jmbg);
-            NAME.Text = patient.Name;
-            SURNAME.Text = patient.Surname;
+            this.Close();
         }
 
         private void SuggestAppointments_Click(object sender, RoutedEventArgs e)
         {
             DataContext = this;
             Model.Doctor d = (Model.Doctor)Doctors.SelectedItem;
-            Model.Doctor doctor = doctorController.ReadDoctor(d.Id);
-            DateTime date = (DateTime) DATE.SelectedDate;
-            if(date < DateTime.Today)
+            Model.Doctor doctorr = doctorController.ReadDoctor(d.Id);
+            DateTime date = (DateTime)DATE.SelectedDate;
+            if (date < DateTime.Today)
             {
                 MessageBox.Show("Nije moguce izabrati datum u proslosti", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             List<Appointment> apps = new List<Appointment>();
-            date.AddHours((int)doctor.WorkStartTime.Hour);
-            date.AddMinutes((int)doctor.WorkStartTime.Minute);
-            date.AddSeconds((int)doctor.WorkStartTime.Second);
+            date.AddHours((int)doctorr.WorkStartTime.Hour);
+            date.AddMinutes((int)doctorr.WorkStartTime.Minute);
+            date.AddSeconds((int)doctorr.WorkStartTime.Second);
             Model.Patient patient = patientController.ReadPatientByJmbg(jmbg);
-            if (DateButton.IsChecked == true)
-            {
-                apps = appointmentController.SuggestAppointments(doctor, date, date.AddMinutes(45), false, true, patient);
-            }
-            else
-            {
-                apps = appointmentController.SuggestAppointments(doctor, date, date.AddMinutes(45), true, true, patient);
+            apps = appointmentController.SuggestAppointments(doctorr, date, date.AddMinutes(45), true, true, patient);
 
-            }
-
-            
-            AppointmentSuggest window = new AppointmentSuggest(apps);
+            AppointmentSuggestChange window = new AppointmentSuggestChange(apps, exRoom, exApp);
             window.ShowDialog();
-        }
-
-        private void CancelAddAppointment_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
         }
     }
 }

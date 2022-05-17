@@ -11,9 +11,11 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.ComponentModel;
 using System.Collections.ObjectModel;
 using Model;
 using Controller;
+
 
 namespace ZdravoCorp.View.Secretary
 {
@@ -23,13 +25,16 @@ namespace ZdravoCorp.View.Secretary
     public partial class Secretary : Window
     {
         public ObservableCollection<Model.Patient> PatientCollection { get; set; }
+        public ObservableCollection<Model.Appointment> AppointmentsCollection { get; set; }
         public PatientController patientController;
+        public AppointmentController appointmentController;
+        Model.Patient patient;
 
         private Model.Secretary secretary;
 
         public ObservableCollection<Model.Guest> GuestCollection { get; set; }
         public GuestController guestController;
-
+        
 
         public Secretary(Model.Secretary logedSecretary)
         {
@@ -44,8 +49,10 @@ namespace ZdravoCorp.View.Secretary
 
             UpdateTable();
             UpdateGuestTable();
+            UpdateAppointmentTable();
         }
 
+        
         private void UpdateTable()
         {
             PatientCollection = new ObservableCollection<Model.Patient>();
@@ -166,21 +173,67 @@ namespace ZdravoCorp.View.Secretary
 
         private void UpdateAppointmentTable()
         {
-            //List<Appointment> appointments = appointmentController.GetFutureAppointmentsForPatient(patient);
-            //RoomController roomController = new RoomController();
-            //FutureAppointmentsCollection = new ObservableCollection<Appointment>(appointments);
-            //foreach (Appointment a in appointments)
-            //{
-            //    a.doctor = dc.ReadDoctor(a.doctor.Id);
-            //    a.room = roomController.ReadRoom(a.room.Identifier);
-            //}
-            //PatientAppointmentTable.DataContext = FutureAppointmentsCollection;
+            DoctorController doctorController = new DoctorController();
+            AppointmentController appointmentController = new AppointmentController();
+            RoomController roomController = new RoomController();
+            patientController = new PatientController();
+
+            List<Appointment> appointments = appointmentController.GetAllAppointments();
+            
+            AppointmentsCollection = new ObservableCollection<Appointment>(appointments);
+            foreach (Appointment a in appointments)
+            {
+                a.doctor = doctorController.ReadDoctor(a.doctor.Id);
+                a.room = roomController.ReadRoom(a.room.Identifier);
+                a.Patient = patientController.ReadPatient(a.Patient.Id);
+            }
+            AppointmentTable.DataContext = AppointmentsCollection;
         }
 
 
         private void AddAppointment_Click(object sender, RoutedEventArgs e)
         {
             AddAppointment window = new AddAppointment();
+            window.ShowDialog();
+            UpdateAppointmentTable();
+        }
+
+        private void DeleteAppointment_Click(object sender, RoutedEventArgs e)
+        {
+            if (AppointmentTable.SelectedIndex == -1)
+            {
+                return;
+            }
+            Appointment appointment = (Appointment) AppointmentTable.SelectedItem;
+            appointmentController = new AppointmentController();
+            if (!appointmentController.DeleteAppointment(appointment.Id))
+            {
+                MessageBox.Show("Element ne postoji u bazi podataka", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            DoctorController doctorController = new DoctorController();
+            Model.Doctor doctor = doctorController.ReadDoctor(appointment.Doctor.Id);
+            doctor.RemoveAppointment(appointment);
+            doctorController.UpdateDoctor(doctor);
+            RoomController roomController = new RoomController();
+            Model.Room room = roomController.ReadRoom(appointment.Room.Identifier);
+            room.RemoveAppointment(appointment);
+            roomController.UpdateRoom(room);
+            Model.Patient patient = patientController.ReadPatient(appointment.Patient.Id);
+            patient.RemoveAppointment(appointment);
+            patientController.UpdatePatient(patient);
+            
+            UpdateAppointmentTable();
+        }
+
+        private void EditAppointment_Click(object sender, RoutedEventArgs e)
+        {
+            if (AppointmentTable.SelectedIndex == -1)
+            {
+                return;
+            }
+            ChangeAppointment window = new ChangeAppointment(AppointmentsCollection.ElementAt(AppointmentTable.SelectedIndex));
             window.ShowDialog();
             UpdateAppointmentTable();
         }

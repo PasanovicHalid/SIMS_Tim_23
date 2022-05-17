@@ -19,31 +19,36 @@ using System.ComponentModel;
 namespace ZdravoCorp.View.Secretary
 {
     /// <summary>
-    /// Interaction logic for AppointmentSuggest.xaml
+    /// Interaction logic for AppointmentsSuggestChange.xaml
     /// </summary>
-    public partial class AppointmentSuggest : Window
+    public partial class AppointmentSuggestChange : Window
     {
         AppointmentController appointmentController;
+        private Model.Room exRoom { get; set; }
+        private Model.Appointment exApp { get; set; }
         public ObservableCollection<Model.Appointment> AppointmentsCollection
         {
             get;
             set;
         }
-        public AppointmentSuggest(List<Model.Appointment> appointments)
+        public AppointmentSuggestChange(List<Model.Appointment> appointments, Model.Room exRoom, Model.Appointment exApp)
         {
             InitializeComponent();
             AppointmentsCollection = new ObservableCollection<Appointment>(appointments);
             SuggestionTable.DataContext = AppointmentsCollection;
+            this.exRoom = exRoom;
+            this.exApp = exApp;
         }
 
-        private void CancelSuggestion_Click(object sender, RoutedEventArgs e)
+        private void CancelSuggestionEdit_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
-        private void AddAppointment_Click(object sender, RoutedEventArgs e)
+        private void ChangeAppointment_Click(object sender, RoutedEventArgs e)
         {
             appointmentController = new AppointmentController();
+            
             if (SuggestionTable.SelectedIndex == -1)
             {
                 return;
@@ -54,19 +59,20 @@ namespace ZdravoCorp.View.Secretary
             RoomController rc = new RoomController();
 
             DoctorController doctorController = new DoctorController();
-
-            appointmentController.CreateAppointment(app);
+            DateTime date = app.startDate;
+            app.Id = exApp.Id;
+            exRoom.RemoveAppointment(exApp);
+            rc.UpdateRoom(exRoom);
+            
+            appointmentController.UpdateAppointment(app);
             Room r = app.Room;
             r.AddAppointment(app);
             rc.UpdateRoom(r);
-            Model.Doctor d = app.doctor;
-            d.AddAppointment(app);
-            doctorController.UpdateDoctor(d);
-            Model.Patient p = app.Patient;
-            p.AddAppointment(app);
-            pc.UpdatePatient(p);
-            this.Close();
             
+            this.Close();
+
         }
+
+        
     }
 }

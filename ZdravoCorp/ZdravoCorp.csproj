@@ -313,8 +313,14 @@
     <Compile Include="View\Secretary\AddRecord.xaml.cs">
       <DependentUpon>AddRecord.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Secretary\AppointmentSuggestChange.xaml.cs">
+      <DependentUpon>AppointmentSuggestChange.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Secretary\AppointmentSuggest.xaml.cs">
       <DependentUpon>AppointmentSuggest.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Secretary\ChangeAppointment.xaml.cs">
+      <DependentUpon>ChangeAppointment.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Secretary\ChangePatient.xaml.cs">
       <DependentUpon>ChangePatient.xaml</DependentUpon>
@@ -522,7 +528,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Secretary\AppointmentSuggestChange.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Secretary\AppointmentSuggest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Secretary\ChangeAppointment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

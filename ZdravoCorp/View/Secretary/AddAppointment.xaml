@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ZdravoCorp.View.Secretary"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         Title="AddAppointment" Height="450" Width="800">
     <Grid>
@@ -25,9 +26,12 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <DatePicker x:Name="DATE" Margin="210,217,0,0" Height="27" Width="350" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <DatePicker x:Name="DATE" Margin="210,217,0,0" Height="27" Width="350" VerticalAlignment="Top" HorizontalAlignment="Left" FirstDayOfWeek="Monday"
+            IsTodayHighlighted="True">
+            
+        </DatePicker>
         <Button Content="Pretrazi" Margin="603,26,0,0" Height="30" Width="80" VerticalAlignment="Top" HorizontalAlignment="Left" Click="SearchPatient_Click"/>
-        <Button Content="Otkazi" Margin="183,311,0,0" Height="30" Width="80" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <Button Content="Otkazi" Margin="183,311,0,0" Height="30" Width="80" VerticalAlignment="Top" HorizontalAlignment="Left" Click="CancelAddAppointment_Click"/>
         <Button Content="Ponudi termin" Margin="440,306,0,0" Height="30" Width="80" VerticalAlignment="Top" HorizontalAlignment="Left" Click="SuggestAppointments_Click"/>
         <Label Content="Prioritet pretrage:" Margin="80,259,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
         <RadioButton Name="DoctorButton" Content="Lekar" Margin="210,265,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" IsChecked="True"/>

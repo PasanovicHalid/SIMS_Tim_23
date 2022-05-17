@@ -15,9 +15,6 @@
             VerticalAlignment="Top" 
             Width="171"
             ItemsSource="{Binding}" 
-            SelectedItem="{Binding doctor}"
-            SelectedValue="{Binding doctor}"
-            SelectedIndex="{Binding selectedIndex}"
             >
             
             <ComboBox.ItemTemplate>
