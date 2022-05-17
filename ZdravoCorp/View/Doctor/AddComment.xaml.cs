@@ -24,6 +24,7 @@ namespace ZdravoCorp.View.Doctor
         Model.Patient currentPatient;
         AppointmentController ac = new AppointmentController();
         Controller.CommentController cc = new Controller.CommentController();
+        MedicalRecordController mcc = new MedicalRecordController();
         PatientController pc = new PatientController();
         Model.Doctor currentDoctor;
 
@@ -56,10 +57,8 @@ namespace ZdravoCorp.View.Doctor
             string komentar = textBpx1.Text;
             Appointment apo = (Appointment)AppointmentCB.SelectedItem;
             Comments c = new Comments(apo, komentar, currentDoctor);
-            MessageBox.Show(c.AppointmentID);
             cc.CreateComment(c);
             currentPatient.Record.Comments.Add(c);
-            MedicalRecordController mcc = new MedicalRecordController();
             mcc.UpdateMedicalRecord(currentPatient.Record);
             pc.UpdatePatient(currentPatient);
             this.Close();
@@ -69,6 +68,12 @@ namespace ZdravoCorp.View.Doctor
         {
             AddAppointmentToDoctor addAppointmentToDoctorWindow = new AddAppointmentToDoctor(currentPatient, currentDoctor);
             addAppointmentToDoctorWindow.Show();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            AddTherapy addTherapy = new AddTherapy(currentPatient);
+            addTherapy.ShowDialog();
         }
     }
 }

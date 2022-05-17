@@ -43,7 +43,7 @@ namespace ZdravoCorp.View.Doctor
             List<Appointment> apps = appointmentController.GetAllAppointments();
             foreach (Appointment temp in apps)
             {
-                if (temp.doctor.Id == dd.Id)
+                if (temp.doctor.Id == currentDoctor.Id)
                 {
                     appointments.Add(temp);
                 }
@@ -92,39 +92,52 @@ namespace ZdravoCorp.View.Doctor
 
         private void CreateButton_Click(object sender, RoutedEventArgs e)
         {
-            AddAppointment add = new AddAppointment();
+            AddAppointment add = new AddAppointment(currentDoctor);
             add.ShowDialog();
 
             this.DataContext = this;
             appointmentController = new AppointmentController();
             appointments = new ObservableCollection<Appointment>();
 
+
             List<Appointment> apps = appointmentController.GetAllAppointments();
             foreach (Appointment temp in apps)
             {
-                appointments.Add(temp);
+                if (temp.doctor.Id == currentDoctor.Id)
+                {
+                    appointments.Add(temp);
+                }
             }
             AppointmentGrid.DataContext = appointments;
         }
 
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
-            UpdateAppointment upd = new UpdateAppointment((Appointment)AppointmentGrid.SelectedItem);
-            upd.ShowDialog();
-
-            this.DataContext = this;
-            appointmentController = new AppointmentController();
-            appointments = new ObservableCollection<Appointment>();
-
-            List<Appointment> apps = appointmentController.GetAllAppointments();
-            foreach (Appointment temp in apps)
+            if(AppointmentGrid.SelectedItem == null)
             {
-                if(temp.DoctorID == currentDoctor.Id)
-                {
-                    appointments.Add(temp);
-                }
+                MessageBox.Show("Nije oznacen ni jedan appointment!");
             }
-            AppointmentGrid.DataContext = appointments;
+            else
+            {
+                UpdateAppointment upd = new UpdateAppointment((Appointment)AppointmentGrid.SelectedItem);
+                upd.ShowDialog();
+
+                this.DataContext = this;
+                appointmentController = new AppointmentController();
+                appointments = new ObservableCollection<Appointment>();
+
+                List<Appointment> apps = appointmentController.GetAllAppointments();
+                foreach (Appointment temp in apps)
+                {
+                    if (temp.DoctorID == currentDoctor.Id)
+                    {
+                        appointments.Add(temp);
+                    }
+                }
+                AppointmentGrid.DataContext = appointments;
+
+            }
+            
         }
 
         private void kartoniButton_Click(object sender, RoutedEventArgs e)

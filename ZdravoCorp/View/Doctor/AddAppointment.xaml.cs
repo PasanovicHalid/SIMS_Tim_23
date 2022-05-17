@@ -27,7 +27,7 @@ namespace ZdravoCorp.View.Doctor
         RoomController roomController;
         AppointmentController appointmentController;
         DoctorController doctorController;
-
+        Model.Doctor currentDoctor;
         public event PropertyChangedEventHandler PropertyChanged;
 
         public ObservableCollection<Model.Room> RoomCollection
@@ -40,7 +40,7 @@ namespace ZdravoCorp.View.Doctor
             get;
             set;
         }
-        public AddAppointment()
+        public AddAppointment(Model.Doctor temp)
         {
             InitializeComponent();
             DataContext = this;
@@ -54,6 +54,7 @@ namespace ZdravoCorp.View.Doctor
             RoomCollection = new ObservableCollection<Model.Room>(roomController.GetAllRooms());
             PatientsCB.ItemsSource = PatientCollection;
             RoomsCB.ItemsSource = RoomCollection;
+            this.currentDoctor = temp;
         }
 
         private void DodajButton_Click(object sender, RoutedEventArgs e)
@@ -63,9 +64,8 @@ namespace ZdravoCorp.View.Doctor
             DateTime date2 = DateTime.Parse(textBox2.Text,dateTimeFormat);
             Model.Patient newPatient = patientController.ReadPatient(PatientsCB.SelectedIndex);
             Model.Room newRoom = roomController.ReadRoomByIndex(RoomsCB.SelectedIndex);
-            Model.Doctor newDoctor = doctorController.ReadDoctor(0);
 
-            Model.Appointment newAppointment = new Model.Appointment(date, date2, newDoctor, newRoom, newPatient);
+            Model.Appointment newAppointment = new Model.Appointment(date, date2, currentDoctor, newRoom, newPatient);
             appointmentController.CreateAppointment(newAppointment);
             this.Close();
 

@@ -124,10 +124,5 @@ namespace ZdravoCorp.View.Doctor
             UserWindow user = new UserWindow(currentDoctor);
             user.ShowDialog();
         }
-
-        private void Window_Closed(object sender, EventArgs e)
-        {
-            Application.Current.Shutdown();
-        }
     }
 }

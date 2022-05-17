@@ -127,27 +127,33 @@ namespace ZdravoCorp.View.Doctor
             else
             {
                 AddComment add = new AddComment(pomocnip, currentDoctor);
-                this.Close();
                 add.Show();
 
-                //List<MedicalRecord> med = medicalRecordController.GetAllMedicalRecords();
-                //foreach (MedicalRecord pom in med)
-                //{
-                //    if (pomocnip.MedicalRecord.Id == pom.Id)
-                //    {
-                //        textBox1.Text = pom.Id;
-                //        textBox2.Text = pom.Weight.ToString();
-                //
-                //        textBox3.Text = pom.Height.ToString();
-                //
-                //        textBox4.Text = pom.BloodType.ToString();
-                //
-                //        List<Comments> commentsl = pom.Comments;
-                //
-                //        CommentsGrid.DataContext = commentsl;
-                //
-                //    }
-                //}
+                pomocnip = (Model.Patient)PatientsCB.SelectedItem;
+
+                medicalRecordController = new MedicalRecordController();
+
+                List<Model.MedicalRecord> med = medicalRecordController.GetAllRecords();
+
+                PrescriptionCollection = new ObservableCollection<Model.Prescription>();
+
+                foreach (Model.MedicalRecord pom in med)
+                {
+                    if (pomocnip.Record.Id == pom.Id)
+                    {
+                        textBox1.Text = pom.Id.ToString();
+                        textBox2.Text = pom.Weight.ToString();
+
+                        textBox3.Text = pom.Height.ToString();
+
+                        textBox4.Text = pom.BloodType.ToString();
+
+                        List<Model.Comments> commentsl = pom.Comments;
+
+                        CommentsGrid.DataContext = commentsl;
+
+                    }
+                }
             }
         }
 
@@ -155,6 +161,52 @@ namespace ZdravoCorp.View.Doctor
         {
             AddTherapy at = new AddTherapy((Model.Patient)PatientsCB.SelectedItem);
             at.Show();
+        }
+
+        private void appointmentsButton_Click(object sender, RoutedEventArgs e)
+        {
+            Appointments appointmentsWindow = new Appointments();
+            this.Close();
+            appointmentsWindow.Show();
+        }
+
+        private void requestsButton_Click(object sender, RoutedEventArgs e)
+        {
+            MedicationRequests medicationRequests = new MedicationRequests(currentDoctor);
+            this.Close();
+            medicationRequests.Show();
+        }
+
+        private void medsButton_Click(object sender, RoutedEventArgs e)
+        {
+            MedicationsView medicationsView = new MedicationsView(currentDoctor);
+            this.Close();
+            medicationsView.Show();
+        }
+
+        private void vacationRequestButton_Click(object sender, RoutedEventArgs e)
+        {
+            VacationRequest vacationRequest = new VacationRequest(currentDoctor);
+            this.Close();
+            vacationRequest.Show();
+        }
+
+        private void kartoniButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            UserWindow user = new UserWindow(currentDoctor);
+            user.ShowDialog();
+        }
+
+        private void requestsButton_Click_1(object sender, RoutedEventArgs e)
+        {
+            MedicationRequests medicationRequests = new MedicationRequests(currentDoctor);
+            this.Close();
+            medicationRequests.Show();
         }
     }
 }

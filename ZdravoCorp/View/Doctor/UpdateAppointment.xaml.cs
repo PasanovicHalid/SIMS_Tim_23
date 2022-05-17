@@ -70,6 +70,7 @@ namespace ZdravoCorp.View.Doctor
             RoomsCB.SelectedIndex = index;
             id = pomocna.Id;
             pomocniDoktor = pomocna.Doctor;
+
         }
 
         private void OdustaniButton_Click(object sender, RoutedEventArgs e)

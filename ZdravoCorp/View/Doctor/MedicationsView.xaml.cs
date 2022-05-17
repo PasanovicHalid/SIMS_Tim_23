@@ -43,7 +43,7 @@ namespace ZdravoCorp.View.Doctor
 
         private void appointmentsButton_Click(object sender, RoutedEventArgs e)
         {
-            Appointments appointments = new Appointments();
+            Appointments appointments = new Appointments(currentDoctor);
             this.Close();
             appointments.Show();
         }

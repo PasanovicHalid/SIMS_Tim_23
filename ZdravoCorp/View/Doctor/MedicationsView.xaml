@@ -20,7 +20,7 @@
             </DataGrid.Columns>
         </DataGrid>
         <Border BorderThickness="1" HorizontalAlignment="Right" Height="27" VerticalAlignment="Top" Width="875" BorderBrush="Black" Background="#FFA79F9F" Margin="0,0,-1,0">
-            <Image HorizontalAlignment="Left" Height="24" VerticalAlignment="Center" Width="22" Source="/Resources/user.png" MouseLeftButtonDown="Image_MouseLeftButtonDown" Margin="841,0,0,0" RenderTransformOrigin="0.818,0.509"/>
+            <Image HorizontalAlignment="Left" Height="24" VerticalAlignment="Center" Width="22" Source="/Resources/user.png" MouseLeftButtonDown="Image_MouseLeftButtonDown" Margin="844,0,0,0" RenderTransformOrigin="0.818,0.509"/>
         </Border>
         <Button x:Name="requestsButton" Content="Medical Request" HorizontalAlignment="Left" Margin="99,0,0,0" VerticalAlignment="Top" Height="27" Width="104" Click="requestsButton_Click"/>
         <Button x:Name="appointmentsButton" Content="Appointments" HorizontalAlignment="Left" VerticalAlignment="Top" Height="27" Width="100" Click="appointmentsButton_Click"/>
