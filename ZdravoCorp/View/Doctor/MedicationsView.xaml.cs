@@ -23,19 +23,60 @@ namespace ZdravoCorp.View.Doctor
     {
         private MedicineController medicineController;
 
+        Model.Doctor currentDoctor;
+
         public ObservableCollection<Model.Medication> MedicineCollection
         {
             get;
             set;
         }
 
-        public MedicationsView()
+        public MedicationsView(Model.Doctor temp)
         {
             InitializeComponent();
             medicineController = new MedicineController();
             MedicineCollection = new ObservableCollection<Model.Medication>(medicineController.GetAllMedicine());
 
             MedicineGrid.DataContext = MedicineCollection;
+            this.currentDoctor = temp;
+        }
+
+        private void appointmentsButton_Click(object sender, RoutedEventArgs e)
+        {
+            Appointments appointments = new Appointments();
+            this.Close();
+            appointments.Show();
+        }
+
+        private void requestsButton_Click(object sender, RoutedEventArgs e)
+        {
+            MedicationRequests medicationRequests = new MedicationRequests(currentDoctor);
+            this.Close();
+            medicationRequests.Show();
+        }
+
+        private void vacationRequestButton_Click(object sender, RoutedEventArgs e)
+        {
+            VacationRequest vacationRequest = new VacationRequest(currentDoctor);
+            this.Close();
+            vacationRequest.Show();
+        }
+
+        private void kartoniButton_Click(object sender, RoutedEventArgs e)
+        {
+            MedicalRecords meds = new MedicalRecords(currentDoctor);
+            this.Close();
+            meds.Show();
+        }
+
+        private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            UserWindow user = new UserWindow(currentDoctor);
+            user.ShowDialog();
+        }
+
+        private void medsButton_Click(object sender, RoutedEventArgs e)
+        {
         }
     }
 }

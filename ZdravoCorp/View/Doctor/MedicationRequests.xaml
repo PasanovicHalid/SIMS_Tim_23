@@ -5,10 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ZdravoCorp.View.Doctor"
         mc:Ignorable="d"
-        Title="MedicationRequests" Height="450" Width="800">
+        Title="MedicationRequests" Height="494" Width="883"
+        WindowStartupLocation="CenterScreen" Closed="Window_Closed">
     <Grid>
         <DataGrid x:Name="MedicineGrid" ItemsSource="{Binding}"
-            AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" Margin="332,24,28,36">
+            AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" Margin="388,59,35,23">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Medication ID" Binding="{Binding Id}" Width="90"/>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="80"/>
@@ -19,20 +20,28 @@
 
             </DataGrid.Columns>
         </DataGrid>
-        <TextBox x:Name="textBlock" HorizontalAlignment="Left" Margin="22,70,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="293" Height="243" RenderTransformOrigin="0.5,0.5" TextChanged="textBlock_TextChanged">
+        <TextBox x:Name="textBlock" HorizontalAlignment="Left" Margin="39,107,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="320" Height="267" RenderTransformOrigin="0.5,0.5" TextChanged="textBlock_TextChanged">
             <TextBox.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-0.547"/>
+                    <SkewTransform AngleX="0.044"/>
+                    <RotateTransform Angle="-0.525"/>
                     <TranslateTransform/>
                 </TransformGroup>
             </TextBox.RenderTransform>
         </TextBox>
-        <Label Content="Komentar:" HorizontalAlignment="Left" Margin="18,24,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="acceptButton" Content="Accept" HorizontalAlignment="Left" Margin="28,342,0,0" VerticalAlignment="Top" Height="37" Width="72" Click="acceptButton_Click"/>
-        <Button x:Name="cancelButton" Content="Cancel" HorizontalAlignment="Left" Margin="237,342,0,0" VerticalAlignment="Top" Height="37" Width="72" Click="cancelButton_Click"/>
-        <Button x:Name="rejectButton" Content="Reject" HorizontalAlignment="Left" Margin="130,343,0,0" VerticalAlignment="Top" Height="37" Width="72" Click="rejectButton_Click"/>
+        <Label Content="Komentar:" HorizontalAlignment="Left" Margin="39,59,0,0" VerticalAlignment="Top" Height="25"/>
+        <Button x:Name="acceptButton" Content="Accept" HorizontalAlignment="Left" Margin="39,402,0,0" VerticalAlignment="Top" Height="35" Width="91" Click="acceptButton_Click"/>
+        <Button x:Name="cancelButton" Content="Cancel" HorizontalAlignment="Left" Margin="268,402,0,0" VerticalAlignment="Top" Height="35" Width="91" Click="cancelButton_Click"/>
+        <Button x:Name="rejectButton" Content="Reject" HorizontalAlignment="Left" Margin="151,402,0,0" VerticalAlignment="Top" Height="36" Width="91" Click="rejectButton_Click"/>
+        <Border BorderThickness="1" HorizontalAlignment="Right" Height="27" VerticalAlignment="Top" Width="875" BorderBrush="Black" Background="#FFA79F9F" Margin="0,0,-1,0">
+            <Image HorizontalAlignment="Left" Height="24" VerticalAlignment="Bottom" Width="22" Source="/Resources/user.png" Margin="841,0,0,0" RenderTransformOrigin="0.818,0.509" MouseLeftButtonDown="Image_MouseLeftButtonDown"/>
+        </Border>
+        <Button x:Name="requestsButton" Content="Medical Request" HorizontalAlignment="Left" Margin="99,0,0,0" VerticalAlignment="Top" Height="27" Width="104" Click="requestsButton_Click_1"/>
+        <Button x:Name="appointmentsButton" Content="Appointments" HorizontalAlignment="Left" VerticalAlignment="Top" Height="27" Width="100" Click="appointmentsButton_Click"/>
+        <Button x:Name="medsButton" Content="Medications List" HorizontalAlignment="Left" Margin="202,0,0,0" VerticalAlignment="Top" Height="27" Width="100" Click="medsButton_Click_1"/>
+        <Button x:Name="vacationRequestButton" Content="Vacation Request" HorizontalAlignment="Left" Margin="301,0,0,0" VerticalAlignment="Top" Height="27" Width="99" Click="vacationRequestButton_Click_1"/>
+        <Button x:Name="kartoniButton" Content="Kartoni" HorizontalAlignment="Left" Margin="399,0,0,0" VerticalAlignment="Top" Width="82" Height="27" Click="kartoniButton_Click_1"/>
 
     </Grid>
 </Window>

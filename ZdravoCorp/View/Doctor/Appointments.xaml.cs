@@ -24,8 +24,7 @@ namespace ZdravoCorp.View.Doctor
     {
 
         private AppointmentController appointmentController;
-
-        private Model.Doctor currentDoctor;
+        Model.Doctor currentDoctor;
 
         public ObservableCollection<Appointment> appointments
         {
@@ -131,31 +130,40 @@ namespace ZdravoCorp.View.Doctor
         private void kartoniButton_Click(object sender, RoutedEventArgs e)
         {
             MedicalRecords meds = new MedicalRecords(currentDoctor);
+            this.Close();
             meds.Show();
         }
 
         private void requestsButton_Click(object sender, RoutedEventArgs e)
         {
-            MedicationRequests medicationRequests = new MedicationRequests();
+            MedicationRequests medicationRequests = new MedicationRequests(currentDoctor);
+            this.Close();
             medicationRequests.Show();
         }
 
         private void vacationRequestButton_Click(object sender, RoutedEventArgs e)
         {
             VacationRequest vacationRequest = new VacationRequest(currentDoctor);
+            this.Close();
             vacationRequest.Show();
         }
 
         private void medsButton_Click(object sender, RoutedEventArgs e)
         {
-            MedicationsView medicationsView = new MedicationsView();
+            MedicationsView medicationsView = new MedicationsView(currentDoctor);
+            this.Close();
             medicationsView.Show();
         }
 
         private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            UserWindow userWindow = new UserWindow();
-            userWindow.Show();
+            UserWindow user = new UserWindow(currentDoctor);
+            user.ShowDialog();
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+
         }
     }
 }
