@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ZdravoCorp.View.Doctor"
         mc:Ignorable="d"
-        Title="VacationRequest" Height="507" Width="449"
+        Title="VacationRequest" Height="390" Width="883"
         WindowStartupLocation="CenterScreen">
     <Grid Margin="0,0,0,-6">
-        <DatePicker x:Name="datePicker1" HorizontalAlignment="Left" Margin="174,34,0,0" VerticalAlignment="Top" Width="214" Height="36">
+        <DatePicker x:Name="datePicker1" HorizontalAlignment="Left" Margin="182,83,0,0" VerticalAlignment="Top" Width="214" Height="36">
         </DatePicker>
-        <DatePicker x:Name="datePicker2" HorizontalAlignment="Left" Margin="174,100,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="36" Width="214" FirstDayOfWeek="Monday" IsTodayHighlighted="True">
+        <DatePicker x:Name="datePicker2" HorizontalAlignment="Left" Margin="182,148,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="36" Width="214" FirstDayOfWeek="Monday" IsTodayHighlighted="True">
             <DatePicker.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -19,13 +19,21 @@
                 </TransformGroup>
             </DatePicker.RenderTransform>
         </DatePicker>
-        <CheckBox x:Name="checkBox" Content="Emergency" HorizontalAlignment="Left" Margin="291,351,0,0" VerticalAlignment="Top" Height="30" Width="119" FontSize="16" RenderTransformOrigin="0.311,0.568"/>
-        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Margin="174,157,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="214" Height="169"/>
-        <Button x:Name="posaljiButton" Content="Posalji" HorizontalAlignment="Left" Margin="174,402,0,0" VerticalAlignment="Top" Width="97" Height="44" Click="posaljiButton_Click"/>
-        <Button x:Name="odustaniButton" Content="Odustani" HorizontalAlignment="Left" Margin="291,402,0,0" VerticalAlignment="Top" Height="44" Width="97" Click="odustaniButton_Click"/>
-        <Label Content="Vacation Start Date:" HorizontalAlignment="Left" Margin="34,39,0,0" VerticalAlignment="Top"/>
-        <Label Content="Vacation End Date:" HorizontalAlignment="Left" Margin="34,105,0,0" VerticalAlignment="Top"/>
-        <Label Content="Vacation Cause:" HorizontalAlignment="Left" Margin="34,157,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="checkBox" Content="Emergency" HorizontalAlignment="Left" Margin="292,211,0,0" VerticalAlignment="Top" Height="30" Width="119" FontSize="16" RenderTransformOrigin="0.311,0.568"/>
+        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Margin="464,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="274" Height="186"/>
+        <Button x:Name="posaljiButton" Content="Posalji" HorizontalAlignment="Left" Margin="155,268,0,0" VerticalAlignment="Top" Width="97" Height="44" Click="posaljiButton_Click"/>
+        <Button x:Name="odustaniButton" Content="Odustani" HorizontalAlignment="Left" Margin="303,268,0,0" VerticalAlignment="Top" Height="44" Width="97" Click="odustaniButton_Click"/>
+        <Label Content="Vacation Start Date:" HorizontalAlignment="Left" Margin="42,88,0,0" VerticalAlignment="Top"/>
+        <Label Content="Vacation End Date:" HorizontalAlignment="Left" Margin="42,153,0,0" VerticalAlignment="Top"/>
+        <Label Content="Vacation Cause:" HorizontalAlignment="Left" Margin="464,83,0,0" VerticalAlignment="Top"/>
+        <Border BorderThickness="1" HorizontalAlignment="Center" Height="27" VerticalAlignment="Top" Width="884" BorderBrush="Black" Background="#FFA79F9F">
+            <Image HorizontalAlignment="Left" Height="24" VerticalAlignment="Center" Width="22" Source="/Resources/user.png" MouseLeftButtonDown="Image_MouseLeftButtonDown" Margin="841,0,0,0" RenderTransformOrigin="0.818,0.509"/>
+        </Border>
+        <Button x:Name="requestsButton" Content="Medical Request" HorizontalAlignment="Left" Margin="99,0,0,0" VerticalAlignment="Top" Height="27" Width="104" Click="requestsButton_Click"/>
+        <Button x:Name="appointmentsButton" Content="Appointments" HorizontalAlignment="Left" VerticalAlignment="Top" Height="27" Width="100" Click="appointmentsButton_Click"/>
+        <Button x:Name="medsButton" Content="Medications List" HorizontalAlignment="Left" Margin="202,0,0,0" VerticalAlignment="Top" Height="27" Width="100" Click="medsButton_Click"/>
+        <Button x:Name="vacationRequestButton" Content="Vacation Request" HorizontalAlignment="Left" Margin="301,0,0,0" VerticalAlignment="Top" Height="27" Width="99" Click="vacationRequestButton_Click"/>
+        <Button x:Name="kartoniButton" Content="Medical Records" HorizontalAlignment="Left" Margin="399,0,0,0" VerticalAlignment="Top" Width="103" Click="kartoniButton_Click" Height="27"/>
 
     </Grid>
 </Window>

@@ -149,7 +149,7 @@ namespace Model
         }
 
         public void FromCSV(string[] values)
-        {
+        { 
             CultureInfo dateTimeFormat = new CultureInfo("en-GB");
             int i = 0;
             Id = int.Parse(values[i++]);

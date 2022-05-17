@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ZdravoCorp.View.Doctor"
         mc:Ignorable="d"
         Title="Appointments" Height="494" Width="883"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen" Closed="Window_Closed">
     <Grid Margin="0,0,0,-6">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -27,14 +27,15 @@
                 <DataGridTextColumn Header="Room ID" Binding="{Binding RoomID}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Border BorderThickness="1" HorizontalAlignment="Right" Height="27" VerticalAlignment="Top" Width="874" BorderBrush="Black" Background="#FFA79F9F">
-            <Image HorizontalAlignment="Left" Height="24" VerticalAlignment="Center" Width="22" Source="/Resources/user.png" MouseLeftButtonDown="Image_MouseLeftButtonDown" Margin="841,0,0,0" RenderTransformOrigin="0.818,0.509"/>
+        <Border BorderThickness="1" HorizontalAlignment="Center" Height="27" VerticalAlignment="Top" Width="884" BorderBrush="Black" Background="#FFA79F9F">
+            <Image HorizontalAlignment="Left" Height="24" VerticalAlignment="Center" Width="22" Source="/Resources/user.png" MouseLeftButtonDown="Image_MouseLeftButtonDown" Margin="842,0,0,0" RenderTransformOrigin="0.818,0.509"/>
         </Border>
         <Button x:Name="requestsButton" Content="Medical Request" HorizontalAlignment="Left" Margin="99,0,0,0" VerticalAlignment="Top" Height="27" Width="104" Click="requestsButton_Click"/>
         <Button x:Name="appointmentsButton" Content="Appointments" HorizontalAlignment="Left" VerticalAlignment="Top" Height="27" Width="100"/>
         <Button x:Name="medsButton" Content="Medications List" HorizontalAlignment="Left" Margin="202,0,0,0" VerticalAlignment="Top" Height="27" Width="100" Click="medsButton_Click"/>
         <Button x:Name="vacationRequestButton" Content="Vacation Request" HorizontalAlignment="Left" Margin="301,0,0,0" VerticalAlignment="Top" Height="27" Width="99" Click="vacationRequestButton_Click"/>
-        <Button x:Name="kartoniButton" Content="Kartoni" HorizontalAlignment="Left" Margin="399,0,0,0" VerticalAlignment="Top" Width="82" Click="kartoniButton_Click" Height="27"/>
+        <Button x:Name="kartoniButton" Content="Medical Records" HorizontalAlignment="Left" Margin="399,0,0,0" VerticalAlignment="Top" Width="103" Click="kartoniButton_Click" Height="27"/>
+        <TextBox x:Name="searchTextBox" HorizontalAlignment="Left" Margin="668,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="164" Height="30"/>
 
     </Grid>
 </Window>

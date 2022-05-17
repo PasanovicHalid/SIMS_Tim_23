@@ -22,15 +22,18 @@ namespace ZdravoCorp.View.Doctor
     public partial class MedicationRequests : Window
     {
         NewMedicationRequestController newMedicationRequestController = new NewMedicationRequestController();
+        Model.Doctor currentDoctor;
+
         public ObservableCollection<Model.NewMedicationRequest> requests
         {
             get;
             set;
         }
-        public MedicationRequests()
+        public MedicationRequests(Model.Doctor temp)
         {
             InitializeComponent();
             this.DataContext = this;
+            currentDoctor = temp;
             NewMedicationRequestController newMedicationRequestController = new NewMedicationRequestController();
             requests = new ObservableCollection<Model.NewMedicationRequest>();
             List<Model.NewMedicationRequest> listNewMedicationRequests = newMedicationRequestController.GetAllNewMedicationRequests();
@@ -56,7 +59,9 @@ namespace ZdravoCorp.View.Doctor
 
         private void cancelButton_Click(object sender, RoutedEventArgs e)
         {
+            Appointments appointments = new Appointments(currentDoctor);
             this.Close();
+            appointments.Show();
         }
 
         private void rejectButton_Click(object sender, RoutedEventArgs e)
@@ -82,6 +87,44 @@ namespace ZdravoCorp.View.Doctor
                 requests.Add(request);
             }
             MedicineGrid.DataContext = requests;
+        }
+
+        private void appointmentsButton_Click(object sender, RoutedEventArgs e)
+        {
+            Appointments appointments = new Appointments(currentDoctor);
+            this.Close();
+            appointments.Show();
+        }
+
+        private void requestsButton_Click_1(object sender, RoutedEventArgs e)
+        {
+        }
+
+        private void medsButton_Click_1(object sender, RoutedEventArgs e)
+        {
+            MedicationsView medicationsView = new MedicationsView(currentDoctor);
+            this.Close();
+            medicationsView.Show();
+        }
+
+        private void vacationRequestButton_Click_1(object sender, RoutedEventArgs e)
+        {
+            VacationRequest vacationRequest = new VacationRequest(currentDoctor);
+            this.Close();
+            vacationRequest.Show();
+        }
+
+        private void kartoniButton_Click_1(object sender, RoutedEventArgs e)
+        {
+            MedicalRecords meds = new MedicalRecords(currentDoctor);
+            this.Close();
+            meds.Show();
+        }
+
+        private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            UserWindow user = new UserWindow(currentDoctor);
+            user.ShowDialog();
         }
     }
 }

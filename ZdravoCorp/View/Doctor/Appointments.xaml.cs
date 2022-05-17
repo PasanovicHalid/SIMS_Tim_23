@@ -24,8 +24,7 @@ namespace ZdravoCorp.View.Doctor
     {
 
         private AppointmentController appointmentController;
-
-        private Model.Doctor currentDoctor;
+        Model.Doctor currentDoctor;
 
         public ObservableCollection<Appointment> appointments
         {
@@ -44,7 +43,7 @@ namespace ZdravoCorp.View.Doctor
             List<Appointment> apps = appointmentController.GetAllAppointments();
             foreach (Appointment temp in apps)
             {
-                if (temp.doctor.Id == dd.Id)
+                if (temp.doctor.Id == currentDoctor.Id)
                 {
                     appointments.Add(temp);
                 }
@@ -82,45 +81,37 @@ namespace ZdravoCorp.View.Doctor
                 if (appointmentController.DeleteAppointment(temp.Id))
                 {
                     MessageBox.Show("Deleted successfully!");
-                    this.Close();
                 }
                 else
                 {
                     MessageBox.Show("Not deleted!");
                 }
             }
+            List<Appointment> apps = appointmentController.GetAllAppointments();
+            foreach (Appointment app in apps)
+            {
+                if (app.doctor.Id == currentDoctor.Id)
+                {
+                    appointments.Add(app);
+                }
+            }
+            AppointmentGrid.DataContext = appointments;
         }
 
         private void CreateButton_Click(object sender, RoutedEventArgs e)
         {
-            AddAppointment add = new AddAppointment();
+            AddAppointment add = new AddAppointment(currentDoctor);
             add.ShowDialog();
 
             this.DataContext = this;
             appointmentController = new AppointmentController();
             appointments = new ObservableCollection<Appointment>();
 
-            List<Appointment> apps = appointmentController.GetAllAppointments();
-            foreach (Appointment temp in apps)
-            {
-                appointments.Add(temp);
-            }
-            AppointmentGrid.DataContext = appointments;
-        }
-
-        private void UpdateButton_Click(object sender, RoutedEventArgs e)
-        {
-            UpdateAppointment upd = new UpdateAppointment((Appointment)AppointmentGrid.SelectedItem);
-            upd.ShowDialog();
-
-            this.DataContext = this;
-            appointmentController = new AppointmentController();
-            appointments = new ObservableCollection<Appointment>();
 
             List<Appointment> apps = appointmentController.GetAllAppointments();
             foreach (Appointment temp in apps)
             {
-                if(temp.DoctorID == currentDoctor.Id)
+                if (temp.doctor.Id == currentDoctor.Id)
                 {
                     appointments.Add(temp);
                 }
@@ -128,34 +119,72 @@ namespace ZdravoCorp.View.Doctor
             AppointmentGrid.DataContext = appointments;
         }
 
+        private void UpdateButton_Click(object sender, RoutedEventArgs e)
+        {
+            if(AppointmentGrid.SelectedItem == null)
+            {
+                MessageBox.Show("Nije oznacen ni jedan appointment!");
+            }
+            else
+            {
+                UpdateAppointment upd = new UpdateAppointment((Appointment)AppointmentGrid.SelectedItem);
+                upd.ShowDialog();
+
+                this.DataContext = this;
+                appointmentController = new AppointmentController();
+                appointments = new ObservableCollection<Appointment>();
+
+                List<Appointment> apps = appointmentController.GetAllAppointments();
+                foreach (Appointment temp in apps)
+                {
+                    if (temp.DoctorID == currentDoctor.Id)
+                    {
+                        appointments.Add(temp);
+                    }
+                }
+                AppointmentGrid.DataContext = appointments;
+
+            }
+            
+        }
+
         private void kartoniButton_Click(object sender, RoutedEventArgs e)
         {
             MedicalRecords meds = new MedicalRecords(currentDoctor);
+            this.Close();
             meds.Show();
         }
 
         private void requestsButton_Click(object sender, RoutedEventArgs e)
         {
-            MedicationRequests medicationRequests = new MedicationRequests();
+            MedicationRequests medicationRequests = new MedicationRequests(currentDoctor);
+            this.Close();
             medicationRequests.Show();
         }
 
         private void vacationRequestButton_Click(object sender, RoutedEventArgs e)
         {
             VacationRequest vacationRequest = new VacationRequest(currentDoctor);
+            this.Close();
             vacationRequest.Show();
         }
 
         private void medsButton_Click(object sender, RoutedEventArgs e)
         {
-            MedicationsView medicationsView = new MedicationsView();
+            MedicationsView medicationsView = new MedicationsView(currentDoctor);
+            this.Close();
             medicationsView.Show();
         }
 
         private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            UserWindow userWindow = new UserWindow();
-            userWindow.Show();
+            UserWindow user = new UserWindow(currentDoctor);
+            user.ShowDialog();
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+
         }
     }
 }

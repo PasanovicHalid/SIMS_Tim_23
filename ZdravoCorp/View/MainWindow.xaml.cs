@@ -49,7 +49,7 @@ namespace ZdravoCorp
 
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Application.Current.Shutdown();
         }
 
         private void Drag_MouseDown(object sender, MouseButtonEventArgs e)

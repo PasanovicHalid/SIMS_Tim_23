@@ -105,5 +105,44 @@ namespace ZdravoCorp.View.Doctor
             }
             return true;
         }
+
+        private void appointmentsButton_Click(object sender, RoutedEventArgs e)
+        {
+            Appointments appointmentWindow = new Appointments(currentDoctor);
+            this.Close();
+            appointmentWindow.Show();
+        }
+
+        private void requestsButton_Click(object sender, RoutedEventArgs e)
+        {
+            MedicationRequests medicationRequests = new MedicationRequests(currentDoctor);
+            this.Close();
+            medicationRequests.Show();
+        }
+
+        private void medsButton_Click(object sender, RoutedEventArgs e)
+        {
+            MedicationsView medicationsView = new MedicationsView(currentDoctor);
+            this.Close();
+            medicationsView.Show();
+        }
+
+        private void kartoniButton_Click(object sender, RoutedEventArgs e)
+        {
+            MedicalRecords meds = new MedicalRecords(currentDoctor);
+            this.Close();
+            meds.Show();
+        }
+
+        private void vacationRequestButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            UserWindow user = new UserWindow(currentDoctor);
+            user.ShowDialog();
+        }
     }
 }
