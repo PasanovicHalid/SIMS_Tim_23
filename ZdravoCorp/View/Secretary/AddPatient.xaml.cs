@@ -35,7 +35,7 @@ namespace ZdravoCorp.View.Secretary
         private String phoneNumber;
         private Gender gender;
         private DateTime dateOfBirth;
-
+        private Model.Patient patient;
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged(string name)
@@ -190,6 +190,7 @@ namespace ZdravoCorp.View.Secretary
             }
         }
 
+
         private void Add_Click(object sender, RoutedEventArgs e)
         {
             PatientController patientController = new PatientController();
@@ -201,14 +202,24 @@ namespace ZdravoCorp.View.Secretary
             {
                 gender = Gender.Female;
             }
-            if (!patientController.CreatePatient(new Model.Patient(0, password, username, name, surname, jmbg, email, address, phoneNumber, gender, dateOfBirth, null, null, new List<DateTime>())))
-            {
-                MessageBox.Show("Nije uspesno dodat element", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            else
-            {
-                this.Close();
-            }
+            patient = new Model.Patient(0, password, username, name, surname, jmbg, email, address, phoneNumber, gender, dateOfBirth, null, null, new List<DateTime>());
+            //if (!patientController.CreatePatient(new Model.Patient(0, password, username, name, surname, jmbg, email, address, phoneNumber, gender, dateOfBirth, null, null, new List<DateTime>())))
+            //{
+            //    MessageBox.Show("Nije uspesno dodat element", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
+            //}
+            //else
+            //{
+            this.Close();
+        }
+
+        private void CreateMedicalRecord_Click(object sender, RoutedEventArgs e)
+        {
+            patient = new Model.Patient(0, password, username, name, surname, jmbg, email, address, phoneNumber, gender, dateOfBirth, null, null, new List<DateTime>());
+            ZdravoCorp.View.Secretary.AddRecord window = new ZdravoCorp.View.Secretary.AddRecord(patient);
+            window.ShowDialog();
+            this.Close();
+            
+            
         }
     }
 }
