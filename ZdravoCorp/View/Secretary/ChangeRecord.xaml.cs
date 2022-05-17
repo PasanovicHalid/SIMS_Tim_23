@@ -181,6 +181,9 @@ namespace ZdravoCorp.View.Secretary
         private void EditRecord_Click(object sender, RoutedEventArgs e)
         {
             DataContext = this;
+            PatientController patientController = new PatientController();
+            //Model.Patient p = patientController.ReadPatient(record.Patient.Id);
+            //patientController.UpdatePatient(p);
             MedicalRecord rec = new MedicalRecord(height, weight, BloodType, allergens, null, record.Patient);
             rec.Id = record.Id;
             if(!mrcontroller.UpdateMedicalRecord(rec))
@@ -191,6 +194,11 @@ namespace ZdravoCorp.View.Secretary
             {
                 this.Close();
             }
+        }
+
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
