@@ -81,13 +81,21 @@ namespace ZdravoCorp.View.Doctor
                 if (appointmentController.DeleteAppointment(temp.Id))
                 {
                     MessageBox.Show("Deleted successfully!");
-                    this.Close();
                 }
                 else
                 {
                     MessageBox.Show("Not deleted!");
                 }
             }
+            List<Appointment> apps = appointmentController.GetAllAppointments();
+            foreach (Appointment app in apps)
+            {
+                if (app.doctor.Id == currentDoctor.Id)
+                {
+                    appointments.Add(app);
+                }
+            }
+            AppointmentGrid.DataContext = appointments;
         }
 
         private void CreateButton_Click(object sender, RoutedEventArgs e)

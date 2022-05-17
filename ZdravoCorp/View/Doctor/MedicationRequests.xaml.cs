@@ -59,7 +59,9 @@ namespace ZdravoCorp.View.Doctor
 
         private void cancelButton_Click(object sender, RoutedEventArgs e)
         {
+            Appointments appointments = new Appointments(currentDoctor);
             this.Close();
+            appointments.Show();
         }
 
         private void rejectButton_Click(object sender, RoutedEventArgs e)

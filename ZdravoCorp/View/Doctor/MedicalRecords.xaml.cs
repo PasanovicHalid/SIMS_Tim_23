@@ -165,7 +165,7 @@ namespace ZdravoCorp.View.Doctor
 
         private void appointmentsButton_Click(object sender, RoutedEventArgs e)
         {
-            Appointments appointmentsWindow = new Appointments();
+            Appointments appointmentsWindow = new Appointments(currentDoctor);
             this.Close();
             appointmentsWindow.Show();
         }
