@@ -26,7 +26,7 @@
                  Tag="{x:Static p:Resources.Name}"
                  Height="46"/>
 
-        <Label Content="Manifacturer" 
+        <Label Content="{x:Static p:Resources.Manufacturer}" 
                HorizontalAlignment="Left" 
                Margin="174,105,0,0" 
                VerticalAlignment="Top" 

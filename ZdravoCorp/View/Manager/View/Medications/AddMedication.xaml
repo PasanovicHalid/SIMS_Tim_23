@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="667" d:DesignWidth="430">
     <Grid>
-        <Label Content="{x:Static p:Resources.name}" 
+        <Label Content="{x:Static p:Resources.Name}" 
             HorizontalAlignment="Center" 
             Margin="0,13,0,0" 
             VerticalAlignment="Top" 
