@@ -4,10 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ZdravoCorp.View.Manager.View"
+             xmlns:p="clr-namespace:ZdravoCorp.Properties"
              mc:Ignorable="d" 
              d:DesignHeight="667" d:DesignWidth="430">
     <Grid>
-        <Label Content="Designation Code" 
+        <Label Content="{x:Static p:Resources.Designation_Code}" 
             HorizontalAlignment="Center" 
             Margin="0,12,0,0" 
             VerticalAlignment="Top" 
@@ -22,11 +23,11 @@
                  Width="388"
                  Style="{StaticResource ManagerTextBox}" 
                  Name="Designation"
-                 Tag="Designation"
+                 Tag="{x:Static p:Resources.Designation_Code}"
                  Height="46"
                  />
 
-        <Label Content="Surface Area" 
+        <Label Content="{x:Static p:Resources.Surface_Area}" 
             HorizontalAlignment="Left" 
             Margin="68,105,0,0" 
             VerticalAlignment="Top" 
@@ -41,11 +42,11 @@
             Width="173"
             Style="{StaticResource ManagerTextBox}" 
             x:Name="Size"
-            Tag="Size"
+            Tag="{x:Static p:Resources.Size}"
             Height="46"
             />
 
-        <Label Content="Floor" 
+        <Label Content="{x:Static p:Resources.Floor}" 
             HorizontalAlignment="Left" 
             Margin="304,105,0,0" 
             VerticalAlignment="Top" 
@@ -60,12 +61,12 @@
             Width="173"
             Style="{StaticResource ManagerTextBox}" 
             x:Name="Size_Copy"
-            Tag="Floor"
+            Tag="{x:Static p:Resources.Floor}"
             Height="46"
             />
 
 
-        <Label Content="Room Type" 
+        <Label Content="{x:Static p:Resources.Room_Type}" 
                HorizontalAlignment="Center" 
                Margin="0,203,0,0" 
                VerticalAlignment="Top" 
@@ -90,7 +91,7 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
 
-        <Button Content="Add" 
+        <Button Content="{x:Static p:Resources.Add}" 
                 HorizontalAlignment="Left" 
                 Margin="363,231,0,0" 
                 VerticalAlignment="Top" 
@@ -99,7 +100,7 @@
                 Command="{Binding CreateRoomTypeCommand}"
                 Width="46"/>
 
-        <Button Content="Add" 
+        <Button Content="{x:Static p:Resources.Add}" 
                 HorizontalAlignment="Left" 
                 Margin="360,587,0,0" 
                 VerticalAlignment="Top" 

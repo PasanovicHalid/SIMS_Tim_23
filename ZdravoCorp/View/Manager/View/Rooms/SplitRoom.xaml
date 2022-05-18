@@ -4,11 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ZdravoCorp.View.Manager.View.Rooms"
+             xmlns:p="clr-namespace:ZdravoCorp.Properties"
              mc:Ignorable="d" 
             d:DesignHeight="667" d:DesignWidth="430">
     <Grid>
 
-        <Label Content="Selected Room" 
+        <Label Content="{x:Static p:Resources.Selected_Room}"
             HorizontalAlignment="Center" 
             Margin="0,25,0,0" 
             VerticalAlignment="Top" 
@@ -23,11 +24,11 @@
                  Width="338"
                  Style="{StaticResource ManagerTextBox}" 
                  Name="Designation"
-                 Tag="Designation"
+                 Tag="{x:Static p:Resources.Designation}"
                  Height="46"
                  />
 
-        <Label Content="Floor" 
+        <Label Content="{x:Static p:Resources.Floor}" 
             HorizontalAlignment="Center" 
             Margin="0,113,0,0" 
             VerticalAlignment="Top" 
@@ -42,11 +43,11 @@
             Width="338"
             Style="{StaticResource ManagerTextBox}" 
             x:Name="Size_Copy1"
-            Tag="Floor"
+            Tag="{x:Static p:Resources.Floor}"
             Height="46"
             />
 
-        <Label Content="Designation for new Room" 
+        <Label Content="{x:Static p:Resources.Designation_for_new_Room}" 
             HorizontalAlignment="Center" 
             Margin="0,200,0,0" 
             VerticalAlignment="Top" 
@@ -61,11 +62,11 @@
             Width="338"
             Style="{StaticResource ManagerTextBox}" 
             x:Name="Designation_Copy"
-            Tag="Designation"
+            Tag="{x:Static p:Resources.Designation}"
             Height="46"
                  />
 
-        <Label Content="Surface Area" 
+        <Label Content="{x:Static p:Resources.Surface_Area}" 
             HorizontalAlignment="Left" 
             Margin="78,306,0,0" 
             VerticalAlignment="Top" 
@@ -80,11 +81,11 @@
             Width="149"
             Style="{StaticResource ManagerTextBox}" 
             x:Name="Size"
-            Tag="Size"
+            Tag="{x:Static p:Resources.Size}"
             Height="46"
             />
 
-        <Label Content="Max Surface" 
+        <Label Content="{x:Static p:Resources.Max_surface}" 
             HorizontalAlignment="Left" 
             Margin="270,306,0,0" 
             VerticalAlignment="Top" 
@@ -99,11 +100,11 @@
             Width="148"
             Style="{StaticResource ManagerTextBox}" 
             x:Name="Size_Copy"
-            Tag="Max"
+            Tag="{x:Static p:Resources.Max}"
             Height="46"
             />
 
-        <Button Content="Split" 
+        <Button Content="{x:Static p:Resources.Split}" 
                 HorizontalAlignment="Left" 
                 Margin="323,587,0,0" 
                 VerticalAlignment="Top" 

@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
+             xmlns:p="clr-namespace:ZdravoCorp.Properties"
              mc:Ignorable="d" 
              d:DesignHeight="667" d:DesignWidth="430">
     <Grid>
@@ -16,7 +17,7 @@
                 Style="{StaticResource ManagerButtons}">
             <StackPanel>
                 <svgc:SvgViewbox Source="\Resources\Icons\add-all.svg" Width="28" Height="25"/>
-                <Label  Content="Add" 
+                <Label  Content="{x:Static p:Resources.Add}" 
                         Style="{DynamicResource ButtonLabel}" 
                         FontSize="8"
                         HorizontalContentAlignment="Center"
@@ -34,7 +35,7 @@
                 Style="{StaticResource ManagerButtons}">
             <StackPanel>
                 <svgc:SvgViewbox Source="\Resources\Icons\category.svg" Width="28" Height="25"/>
-                <Label  Content="Types" 
+                <Label  Content="{x:Static p:Resources.Types}" 
                         Style="{DynamicResource ButtonLabel}" 
                         FontSize="8"
                         HorizontalContentAlignment="Center"
@@ -53,7 +54,7 @@
                 Command="{Binding ChangePositionCommand}">
             <StackPanel>
                 <svgc:SvgViewbox Source="\Resources\Icons\timecard.svg" Width="28" Height="25"/>
-                <Label  Content="Move" 
+                <Label  Content="{x:Static p:Resources.Move}" 
                         Style="{DynamicResource ButtonLabel}" 
                         FontSize="8"
                         HorizontalContentAlignment="Center"
@@ -72,7 +73,7 @@
                 Command="{Binding ReservedCommand}">
             <StackPanel>
                 <svgc:SvgViewbox Source="\Resources\Icons\booking-pending.svg" Width="28" Height="25"/>
-                <Label  Content="Reserved" 
+                <Label  Content="{x:Static p:Resources.Reserved}" 
                         Style="{DynamicResource ButtonLabel}" 
                         FontSize="8"
                         HorizontalContentAlignment="Center"
@@ -102,9 +103,9 @@
                       VerticalGridLinesBrush="Transparent" 
                       >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
-                <DataGridTextColumn Header="Location" Binding="{Binding DesignationCode}" Width="*"/>
-                <DataGridTextColumn Header="Count" Binding="{Binding Count}" Width="*"/>
+                <DataGridTextColumn Header="{x:Static p:Resources.Name}" Binding="{Binding Name}" Width="*"/>
+                <DataGridTextColumn Header="{x:Static p:Resources.Location}" Binding="{Binding DesignationCode}" Width="*"/>
+                <DataGridTextColumn Header="{x:Static p:Resources.Count}" Binding="{Binding Count}" Width="*"/>
             </DataGrid.Columns>
             <DataGrid.InputBindings>
                 <MouseBinding Gesture="LeftDoubleClick" Command="{Binding ViewEquipmentCommand}"/>
@@ -118,7 +119,7 @@
                      VerticalAlignment="Top" 
                      Width="155"
                      Style="{StaticResource ManagerSearch}"
-                     Tag="Search"
+                     Tag="{x:Static p:Resources.Search}"
                      Name="Search" 
                      Height="42"/>
 

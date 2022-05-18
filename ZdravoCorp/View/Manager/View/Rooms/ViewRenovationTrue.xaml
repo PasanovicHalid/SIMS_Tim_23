@@ -4,11 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ZdravoCorp.View.Manager.View.Rooms"
+             xmlns:p="clr-namespace:ZdravoCorp.Properties"
              mc:Ignorable="d" 
              d:DesignHeight="667" d:DesignWidth="430">
     <Grid>
 
-        <Label Content="Designation Code" 
+        <Label Content="{x:Static p:Resources.Designation_Code}" 
             HorizontalAlignment="Left" 
             Margin="10,49,0,0" 
             VerticalAlignment="Top" 
@@ -23,11 +24,11 @@
                  Width="283"
                  Style="{StaticResource ManagerTextBox}" 
                  Name="Designation"
-                 Tag="Designation"
+                 Tag="{x:Static p:Resources.Designation}"
                  Height="46"
                  IsReadOnly="True"/>
 
-        <Label Content="Start Date" 
+        <Label Content="{x:Static p:Resources.Start_Date}" 
             HorizontalAlignment="Left" 
             Margin="78,124,0,0" 
             VerticalAlignment="Top" 
@@ -42,7 +43,7 @@
                   VerticalAlignment="Top"
                   SelectedDate="{Binding StartDate}"/>
 
-        <Label Content="End date" 
+        <Label Content="{x:Static p:Resources.End_Date}" 
             HorizontalAlignment="Left" 
             Margin="295,124,0,0" 
             VerticalAlignment="Top" 
@@ -57,7 +58,7 @@
                   VerticalAlignment="Top"
                   SelectedDate="{Binding EndDate}"/>
 
-        <Button Content="Change" 
+        <Button Content="{x:Static p:Resources.Change}" 
                 HorizontalAlignment="Left" 
                 Margin="334,581,0,0" 
                 VerticalAlignment="Top" 
@@ -66,7 +67,7 @@
                 Command="{Binding ChangeCommand}"
                 Style="{StaticResource ManagerButtons}"/>
 
-        <Button Content="Delete" 
+        <Button Content="{x:Static p:Resources.Delete}" 
                 HorizontalAlignment="Left" 
                 Margin="28,581,0,0" 
                 VerticalAlignment="Top" 

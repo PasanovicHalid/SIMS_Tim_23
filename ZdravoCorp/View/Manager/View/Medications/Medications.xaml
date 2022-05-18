@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ZdravoCorp.View.Manager.View.Medications" 
              xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
+             xmlns:p="clr-namespace:ZdravoCorp.Properties"
              mc:Ignorable="d" 
              d:DesignHeight="667" d:DesignWidth="430">
     <Grid>
@@ -17,7 +18,7 @@
                 Style="{StaticResource ManagerButtons}">
             <StackPanel>
                 <svgc:SvgViewbox Source="\Resources\Icons\add-all.svg" Width="28" Height="25"/>
-                <Label  Content="Add" 
+                <Label  Content="{x:Static p:Resources.Add}" 
                         Style="{DynamicResource ButtonLabel}" 
                         FontSize="8"
                         HorizontalContentAlignment="Center"
@@ -36,7 +37,7 @@
                 Command="{Binding RequestsCommand}">
             <StackPanel>
                 <svgc:SvgViewbox Source="\Resources\Icons\timecard.svg" Width="28" Height="25"/>
-                <Label  Content="Requests" 
+                <Label  Content="{x:Static p:Resources.Requests}" 
                         Style="{DynamicResource ButtonLabel}" 
                         FontSize="8"
                         HorizontalContentAlignment="Center"
@@ -64,10 +65,10 @@
                       SelectedItem="{Binding SelectedType}"
                       >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding Name}" ElementStyle="{StaticResource WrapText}" Width="70"/>
-                <DataGridTextColumn Header="Manifacturer" Binding="{Binding Manufacturer}" ElementStyle="{StaticResource WrapText}" Width="*"/>
-                <DataGridTextColumn Header="Replacement" Binding="{Binding ReplacementTable}" ElementStyle="{StaticResource WrapText}" Width="*"/>
-                <DataGridTextColumn Header="Description" Binding="{Binding Description}" ElementStyle="{StaticResource WrapText}" Width="*"/>
+                <DataGridTextColumn Header="{x:Static p:Resources.Name}" Binding="{Binding Name}" ElementStyle="{StaticResource WrapText}" Width="70"/>
+                <DataGridTextColumn Header="{x:Static p:Resources.Manufacturer}" Binding="{Binding Manufacturer}" ElementStyle="{StaticResource WrapText}" Width="*"/>
+                <DataGridTextColumn Header="{x:Static p:Resources.Replacement}" Binding="{Binding ReplacementTable}" ElementStyle="{StaticResource WrapText}" Width="*"/>
+                <DataGridTextColumn Header="{x:Static p:Resources.Description}" Binding="{Binding Description}" ElementStyle="{StaticResource WrapText}" Width="*"/>
             </DataGrid.Columns>
             <DataGrid.InputBindings>
                 <MouseBinding Gesture="LeftDoubleClick" Command="{Binding ViewCommand}"/>
@@ -82,7 +83,7 @@
                      Width="155"
                      Style="{StaticResource ManagerSearch}" 
                      Name="Search"
-                     Tag="Search"
+                     Tag="{x:Static p:Resources.Search}"
                      Height="42"/>
     </Grid>
 </UserControl>

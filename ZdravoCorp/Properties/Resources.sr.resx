@@ -118,183 +118,183 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Add" xml:space="preserve">
-    <value>Add</value>
+    <value>Dodaj</value>
   </data>
   <data name="Add Medication" xml:space="preserve">
-    <value>Add Medication</value>
+    <value>Dodaj lek</value>
   </data>
   <data name="Amount" xml:space="preserve">
-    <value>Amount</value>
+    <value>Kolicina</value>
   </data>
   <data name="Appointments" xml:space="preserve">
-    <value>Appointments</value>
+    <value>Termini</value>
   </data>
   <data name="Change" xml:space="preserve">
-    <value>Change</value>
+    <value>Izmeni</value>
   </data>
   <data name="Change Medication" xml:space="preserve">
-    <value>Change Medication</value>
+    <value>Izmeni lek</value>
   </data>
   <data name="Combine" xml:space="preserve">
-    <value>Combine</value>
+    <value>Spoj</value>
   </data>
   <data name="Combine Rooms" xml:space="preserve">
-    <value>Combine Rooms</value>
+    <value>Spoj soba</value>
   </data>
   <data name="Combine with" xml:space="preserve">
-    <value>Combine with</value>
+    <value>Spoj sa</value>
   </data>
   <data name="Count" xml:space="preserve">
-    <value>Count</value>
+    <value>Kolicina</value>
   </data>
   <data name="Current Room" xml:space="preserve">
-    <value>Current Room</value>
+    <value>Trenutna soba</value>
   </data>
   <data name="Date" xml:space="preserve">
-    <value>Date</value>
+    <value>Datum</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>Delete</value>
+    <value>Izbrisi</value>
   </data>
   <data name="Delete Replacement" xml:space="preserve">
-    <value>Delete Replacement</value>
+    <value>Obrisi zamenu</value>
   </data>
   <data name="Description" xml:space="preserve">
-    <value>Description</value>
+    <value>Opis</value>
   </data>
   <data name="Designation" xml:space="preserve">
-    <value>Designation</value>
+    <value>Sifra</value>
   </data>
   <data name="Designation Code" xml:space="preserve">
-    <value>Designation Code</value>
+    <value>Sifra</value>
   </data>
   <data name="Designation for new Room" xml:space="preserve">
-    <value>Designation for new Room</value>
+    <value>Sifra za novu sobu</value>
   </data>
   <data name="Disposable" xml:space="preserve">
-    <value>Disposable</value>
+    <value>Potrosna</value>
   </data>
   <data name="Doctor" xml:space="preserve">
     <value>Doctor</value>
   </data>
   <data name="Duration" xml:space="preserve">
-    <value>Duration</value>
+    <value>Trajanje</value>
   </data>
   <data name="Employess" xml:space="preserve">
-    <value>Employess</value>
+    <value>Zaposleni</value>
   </data>
   <data name="End" xml:space="preserve">
-    <value>End</value>
+    <value>Kraj</value>
   </data>
   <data name="End Date" xml:space="preserve">
-    <value>End Date</value>
+    <value>Kranji datum</value>
   </data>
   <data name="Equipment" xml:space="preserve">
-    <value>Equipment</value>
+    <value>Oprema</value>
   </data>
   <data name="Equipment Type" xml:space="preserve">
-    <value>Equipment Type</value>
+    <value>Tip Opreme</value>
   </data>
   <data name="Error" xml:space="preserve">
-    <value>Error</value>
+    <value>Greska</value>
   </data>
   <data name="Floor" xml:space="preserve">
-    <value>Floor</value>
+    <value>Sprat</value>
   </data>
   <data name="From" xml:space="preserve">
-    <value>From</value>
+    <value>Od</value>
   </data>
   <data name="Home" xml:space="preserve">
-    <value>Home</value>
+    <value>Pocetna</value>
   </data>
   <data name="Is Renovating Now" xml:space="preserve">
-    <value>Is Renovating Now</value>
+    <value>Renovira se trenutno</value>
   </data>
   <data name="Location" xml:space="preserve">
-    <value>Location</value>
+    <value>Lokacija</value>
   </data>
   <data name="Manufacturer" xml:space="preserve">
-    <value>Manufacturer</value>
+    <value>Proizvodjac</value>
   </data>
   <data name="Max" xml:space="preserve">
     <value>Max</value>
   </data>
   <data name="Max surface" xml:space="preserve">
-    <value>Max surface</value>
+    <value>Maksimalna povrsina</value>
   </data>
   <data name="Medication" xml:space="preserve">
-    <value>Medication</value>
+    <value>Lek</value>
   </data>
   <data name="Medicine" xml:space="preserve">
-    <value>Medicine</value>
+    <value>Lek</value>
   </data>
   <data name="Move" xml:space="preserve">
-    <value>Move</value>
+    <value>Pomeri</value>
   </data>
   <data name="Name" xml:space="preserve">
-    <value>Name</value>
+    <value>Ime</value>
   </data>
   <data name="Renovate" xml:space="preserve">
-    <value>Renovate</value>
+    <value>Renoviraj</value>
   </data>
   <data name="Renovated" xml:space="preserve">
-    <value>Renovated</value>
+    <value>Renoviran</value>
   </data>
   <data name="Replacement" xml:space="preserve">
-    <value>Replacement</value>
+    <value>Zamena</value>
   </data>
   <data name="Requests" xml:space="preserve">
-    <value>Requests</value>
+    <value>Zahtev</value>
   </data>
   <data name="Reserved" xml:space="preserve">
-    <value>Reserved</value>
+    <value>Zakazan</value>
   </data>
   <data name="Room" xml:space="preserve">
-    <value>Room</value>
+    <value>Soba</value>
   </data>
   <data name="Room Type" xml:space="preserve">
-    <value>Room Type</value>
+    <value>Tip sobe</value>
   </data>
   <data name="Rooms" xml:space="preserve">
-    <value>Rooms</value>
+    <value>Sobe</value>
   </data>
   <data name="Search" xml:space="preserve">
-    <value>Search</value>
+    <value>Pretrazi</value>
   </data>
   <data name="Selected Room" xml:space="preserve">
-    <value>Selected Room</value>
+    <value>Izabrana soba</value>
   </data>
   <data name="Size" xml:space="preserve">
-    <value>Size</value>
+    <value>Velicina</value>
   </data>
   <data name="Split" xml:space="preserve">
-    <value>Split</value>
+    <value>Podeli</value>
   </data>
   <data name="Split Room" xml:space="preserve">
-    <value>Split Room</value>
+    <value>Podeli sobu</value>
   </data>
   <data name="Start" xml:space="preserve">
-    <value>Start</value>
+    <value>Pocetak</value>
   </data>
   <data name="Start Date" xml:space="preserve">
-    <value>Start Date</value>
+    <value>Pocetni datum</value>
   </data>
   <data name="Start Time" xml:space="preserve">
-    <value>Start Time</value>
+    <value>Pocetno vreme</value>
   </data>
   <data name="Status" xml:space="preserve">
     <value>Status</value>
   </data>
   <data name="Surface Area" xml:space="preserve">
-    <value>Surface Area</value>
+    <value>Povrsina</value>
   </data>
   <data name="Time" xml:space="preserve">
-    <value>Time</value>
+    <value>Vreme</value>
   </data>
   <data name="To" xml:space="preserve">
-    <value>To</value>
+    <value>Do</value>
   </data>
   <data name="Types" xml:space="preserve">
-    <value>Types</value>
+    <value>Tipovi</value>
   </data>
 </root>

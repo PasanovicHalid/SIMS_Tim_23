@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ZdravoCorp.View.Manager.View.Rooms"
+             xmlns:p="clr-namespace:ZdravoCorp.Properties"
              mc:Ignorable="d" 
              d:DesignHeight="667" d:DesignWidth="430">
     <Grid>
@@ -14,8 +15,7 @@
                      VerticalAlignment="Top" 
                      Width="162"
                      Style="{StaticResource ManagerSearch}"
-                     Tag="Search"
-                     Name="Search" 
+                     Tag="{x:Static p:Resources.Search}"
                      Height="42"/>
 
         <DataGrid x:Name="ActionTable" 
@@ -36,10 +36,10 @@
                       VerticalGridLinesBrush="Transparent" 
                       >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Start" Binding="{Binding ExecutionDate}" ElementStyle="{StaticResource WrapText}" Width="*"/>
-                <DataGridTextColumn Header="End" Binding="{Binding ExpirationDate}" ElementStyle="{StaticResource WrapText}" Width="*"/>
-                <DataGridTextColumn Header="Room" Binding="{Binding DesignationCode}" ElementStyle="{StaticResource WrapText}" Width="*"/>
-                <DataGridTextColumn Header="Is Renovating Now" Binding="{Binding RenovationTable}" ElementStyle="{StaticResource WrapText}" Width="135"/>
+                <DataGridTextColumn Header="{x:Static p:Resources.Start}" Binding="{Binding ExecutionDate}" ElementStyle="{StaticResource WrapText}" Width="*"/>
+                <DataGridTextColumn Header="{x:Static p:Resources.End}" Binding="{Binding ExpirationDate}" ElementStyle="{StaticResource WrapText}" Width="*"/>
+                <DataGridTextColumn Header="{x:Static p:Resources.Room}" Binding="{Binding DesignationCode}" ElementStyle="{StaticResource WrapText}" Width="*"/>
+                <DataGridTextColumn Header="{x:Static p:Resources.Is_Renovating_Now}" Binding="{Binding RenovationTable}" ElementStyle="{StaticResource WrapText}" Width="135"/>
             </DataGrid.Columns>
             <DataGrid.InputBindings>
                 <MouseBinding Gesture="LeftDoubleClick" Command="{Binding ViewCommand}"/>

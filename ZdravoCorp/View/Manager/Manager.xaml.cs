@@ -22,11 +22,13 @@ namespace ZdravoCorp.View.Manager
     public partial class Manager : Window
     {
         private AutoResetEvent autoEvent;
+        private bool changed;
         public Manager(AutoResetEvent autoEvent)
         {
             InitializeComponent();
             this.DataContext = ContentViewModel.Instance;
             this.autoEvent = autoEvent;
+            changed = false;
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)
@@ -55,6 +57,20 @@ namespace ZdravoCorp.View.Manager
         private void CloseManager(object sender, System.ComponentModel.CancelEventArgs e)
         {
             autoEvent.Set();
+        }
+
+        private void Employess_Click(object sender, RoutedEventArgs e)
+        {
+            if (changed)
+            {
+                App.ChangeLanguage("en");
+                changed = false;
+            }
+            else
+            {
+                App.ChangeLanguage("sr");
+                changed = true;
+            }
         }
     }
 }

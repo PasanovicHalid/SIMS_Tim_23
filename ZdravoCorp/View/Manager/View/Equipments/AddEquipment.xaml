@@ -3,10 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
+             xmlns:p="clr-namespace:ZdravoCorp.Properties"
              d:DesignHeight="667" d:DesignWidth="430">
     <Grid>
-        <Label Content="Count" 
+        <Label Content="{x:Static p:Resources.Count}" 
             HorizontalAlignment="Center" 
             Margin="0,70,0,0" 
             VerticalAlignment="Top" 
@@ -21,10 +22,10 @@
                  Width="274"
                  Style="{StaticResource ManagerTextBox}" 
                  Name="Count"
-                 Tag="Count"
+                 Tag="{x:Static p:Resources.Count}"
                  Height="45"/>
 
-        <Label Content="Equipment Type" 
+        <Label Content="{x:Static p:Resources.Equipment_Type}" 
                HorizontalAlignment="Left" 
                Margin="164,162,0,0" 
                VerticalAlignment="Top" 
@@ -49,7 +50,7 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
 
-        <Button Content="Add" 
+        <Button Content="{x:Static p:Resources.Add}" 
                 HorizontalAlignment="Left" 
                 Margin="307,195,0,0" 
                 VerticalAlignment="Top" 
@@ -58,7 +59,7 @@
                 Command="{Binding AddEquipmentTypeViewCommand}"
                 Width="47"/>
 
-        <Label Content="Room" 
+        <Label Content="{x:Static p:Resources.Room}" 
                HorizontalAlignment="Left" 
                Margin="193,247,0,0" 
                VerticalAlignment="Top" 
@@ -84,7 +85,7 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
 
-        <Button Content="Add" 
+        <Button Content="{x:Static p:Resources.Add}" 
                 HorizontalAlignment="Left" 
                 Margin="371,563,0,0" 
                 VerticalAlignment="Top" 

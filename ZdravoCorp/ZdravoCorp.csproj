@@ -111,6 +111,16 @@
     <Compile Include="Model\Suggestion.cs" />
     <Compile Include="Model\RenovationAction.cs" />
     <Compile Include="Model\Vacation.cs" />
+    <Compile Include="Properties\Resources.sr.Designer.cs">
+      <DependentUpon>Resources.sr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Properties\Resources.en.Designer.cs">
+      <DependentUpon>Resources.en.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Repository\ActionRepository.cs" />
     <Compile Include="Repository\GuestRepository.cs" />
     <Compile Include="Repository\HospitalSurveyRepository.cs" />
@@ -640,8 +650,16 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <EmbeddedResource Include="Properties\Licenses.licx" />
+    <EmbeddedResource Include="Properties\Resources.sr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.sr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.en.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Data\appointmentsDB - Copy.csv" />

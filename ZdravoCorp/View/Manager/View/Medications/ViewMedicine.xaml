@@ -4,10 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ZdravoCorp.View.Manager.View.Medications"
+             xmlns:p="clr-namespace:ZdravoCorp.Properties"
              mc:Ignorable="d" 
              d:DesignHeight="667" d:DesignWidth="430">
     <Grid>
-        <Label Content="Name" 
+        <Label Content="{x:Static p:Resources.Name}" 
             HorizontalAlignment="Center" 
             Margin="0,13,0,0" 
             VerticalAlignment="Top" 
@@ -22,7 +23,7 @@
                  Width="364"
                  Style="{StaticResource ManagerTextBox}" 
                  Name="Count"
-                 Tag="Name"
+                 Tag="{x:Static p:Resources.Name}"
                  Height="46"/>
 
         <Label Content="Manifacturer" 
@@ -39,10 +40,10 @@
                  VerticalAlignment="Top" 
                  Width="364"
                  Style="{StaticResource ManagerTextBox}" 
-                 Tag="Manifacturer"
+                 Tag="{x:Static p:Resources.Manufacturer}"
                  Height="44"/>
 
-        <Label Content="Description" 
+        <Label Content="{x:Static p:Resources.Description}" 
                HorizontalAlignment="Left" 
                Margin="180,189,0,0" 
                VerticalAlignment="Top" 
@@ -56,10 +57,10 @@
                  VerticalAlignment="Top" 
                  Width="364"
                  Style="{StaticResource ManagerTextBox}" 
-                 Tag="Description"
+                 Tag="{x:Static p:Resources.Description}"
                  Height="102"/>
 
-        <Label Content="Replacement" 
+        <Label Content="{x:Static p:Resources.Replacement}" 
                HorizontalAlignment="Left" 
                Margin="168,341,0,0" 
                VerticalAlignment="Top" 
@@ -104,11 +105,11 @@
                       VerticalGridLinesBrush="Transparent" 
                       >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding Name}" TextBlock.TextAlignment="Center" Width="*"/>
+                <DataGridTextColumn Header="{x:Static p:Resources.Name}" Binding="{Binding Name}" TextBlock.TextAlignment="Center" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
 
-        <Button Content="Change Medication" 
+        <Button Content="{x:Static p:Resources.Change_Medication}" 
                 HorizontalAlignment="Left" 
                 Margin="265,610,0,0" 
                 VerticalAlignment="Top" 
@@ -117,7 +118,7 @@
                 Command="{Binding ChangeCommand}"
                 Style="{StaticResource ManagerButtons}"/>
 
-        <Button Content="Delete Replacement" 
+        <Button Content="{x:Static p:Resources.Delete_Replacement}" 
                 HorizontalAlignment="Left" 
                 Margin="30,610,0,0" 
                 VerticalAlignment="Top" 
@@ -126,7 +127,7 @@
                 Command="{Binding DeleteReplacementCommand}"
                 Style="{StaticResource ManagerButtons}"/>
 
-        <Button Content="Delete" 
+        <Button Content="{x:Static p:Resources.Delete}" 
                 HorizontalAlignment="Left" 
                 Margin="193,610,0,0" 
                 VerticalAlignment="Top" 

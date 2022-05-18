@@ -4,12 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ZdravoCorp.View.Manager.View"
+             xmlns:p="clr-namespace:ZdravoCorp.Properties"
              mc:Ignorable="d"
              d:DesignHeight="667" d:DesignWidth="430">
     <ScrollViewer>
         <Grid Height="1028" Width="430" >
 
-            <Label Content="Designation Code" 
+            <Label Content="{x:Static p:Resources.Designation_Code}" 
             HorizontalAlignment="Center" 
             Margin="0,15,0,0" 
             VerticalAlignment="Top" 
@@ -24,11 +25,11 @@
                  Width="348"
                  Style="{StaticResource ManagerTextBox}" 
                  Name="Designation"
-                 Tag="Designation"
+                 Tag="{x:Static p:Resources.Designation}"
                  Height="46"
                  />
 
-            <Label Content="Surface Area" 
+            <Label Content="{x:Static p:Resources.Surface_Area}" 
             HorizontalAlignment="Left" 
             Margin="76,110,0,0" 
             VerticalAlignment="Top" 
@@ -43,11 +44,11 @@
             Width="153"
             Style="{StaticResource ManagerTextBox}" 
             x:Name="Size"
-            Tag="Size"
+            Tag="{x:Static p:Resources.Size}"
             Height="46"
             />
 
-            <Label Content="Floor" 
+            <Label Content="{x:Static p:Resources.Floor}" 
             HorizontalAlignment="Left" 
             Margin="292,110,0,0" 
             VerticalAlignment="Top" 
@@ -62,11 +63,11 @@
             Width="154"
             Style="{StaticResource ManagerTextBox}" 
             x:Name="Size_Copy"
-            Tag="Floor"
+            Tag="{x:Static p:Resources.Floor}"
             Height="46"
             />
 
-            <Label Content="Room Type" 
+            <Label Content="{x:Static p:Resources.Room_Type}" 
                    HorizontalAlignment="Center" 
                    Margin="0,204,0,0" 
                    VerticalAlignment="Top" 
@@ -92,7 +93,7 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
 
-            <Button Content="Change" 
+            <Button Content="{x:Static p:Resources.Change}" 
                     HorizontalAlignment="Left" 
                     Margin="219,295,0,0" 
                     VerticalAlignment="Top" 
@@ -101,7 +102,7 @@
                     Command="{Binding AddViewCommand}"
                     Style="{StaticResource ManagerButtons}"/>
 
-            <Label Content="Equipment" 
+            <Label Content="{x:Static p:Resources.Equipment}" 
                    HorizontalAlignment="Center" 
                    Margin="0,404,0,0" 
                    VerticalAlignment="Top"
@@ -126,12 +127,12 @@
                       VerticalGridLinesBrush="Transparent" 
                       >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
-                    <DataGridTextColumn Header="Count" Binding="{Binding Count}" Width="*"/>
+                    <DataGridTextColumn Header="{x:Static p:Resources.Name}" Binding="{Binding Name}" Width="*"/>
+                    <DataGridTextColumn Header="{x:Static p:Resources.Count}" Binding="{Binding Count}" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
 
-            <Label Content="Appointents" 
+            <Label Content="{x:Static p:Resources.Appointments}" 
                    HorizontalAlignment="Center" 
                    VerticalAlignment="Top"
                    FontSize="20"
@@ -155,13 +156,13 @@
                       VerticalGridLinesBrush="Transparent" 
                       >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Start Time" Binding="{Binding StartDateString}" Width="125"/>
-                    <DataGridTextColumn Header="Doctor" Binding="{Binding NameSurname}" Width="*"/>
-                    <DataGridTextColumn Header="Duration" Binding="{Binding Duration}" Width="*"/>
+                    <DataGridTextColumn Header="{x:Static p:Resources.Start_Time}" Binding="{Binding StartDateString}" Width="125"/>
+                    <DataGridTextColumn Header="{x:Static p:Resources.Doctor}" Binding="{Binding NameSurname}" Width="*"/>
+                    <DataGridTextColumn Header="{x:Static p:Resources.Duration}" Binding="{Binding Duration}" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
 
-            <Label Content="Medicine" 
+            <Label Content="{x:Static p:Resources.Medicine}" 
                    HorizontalAlignment="Center" 
                    VerticalAlignment="Top"
                    FontSize="20"
@@ -185,13 +186,13 @@
                       VerticalGridLinesBrush="Transparent" 
                       >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
-                    <DataGridTextColumn Header="Manufacturer" Binding="{Binding Manufacturer}" Width="*"/>
-                    <DataGridTextColumn Header="Count" Binding="{Binding Count}" Width="*"/>
+                    <DataGridTextColumn Header="{x:Static p:Resources.Name}" Binding="{Binding Name}" Width="*"/>
+                    <DataGridTextColumn Header="{x:Static p:Resources.Manufacturer}" Binding="{Binding Manufacturer}" Width="*"/>
+                    <DataGridTextColumn Header="{x:Static p:Resources.Count}" Binding="{Binding Count}" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
 
-            <Button Content="Delete" 
+            <Button Content="{x:Static p:Resources.Delete}" 
                     HorizontalAlignment="Left" 
                     Margin="41,295,0,0" 
                     VerticalAlignment="Top" 
@@ -200,7 +201,7 @@
                     Command="{Binding AddViewCommand}"
                     Style="{StaticResource ManagerButtons}"/>
 
-            <Button Content="Renovate" 
+            <Button Content="{x:Static p:Resources.Renovate}" 
                     HorizontalAlignment="Center" 
                     Margin="0,357,0,0" 
                     VerticalAlignment="Top" 
@@ -209,7 +210,7 @@
                     Command="{Binding RenovateCommand}"
                     Style="{StaticResource ManagerButtons}"/>
 
-            <Button Content="Split Room" 
+            <Button Content="{x:Static p:Resources.Split_Room}" 
                 HorizontalAlignment="Left" 
                 Margin="41,357,0,0" 
                 VerticalAlignment="Top" 
@@ -218,7 +219,7 @@
                 Command="{Binding SplitCommand}"
                 Style="{StaticResource ManagerButtons}"/>
 
-            <Button Content="Combine Rooms" 
+            <Button Content="{x:Static p:Resources.Combine_Rooms}" 
                 HorizontalAlignment="Left" 
                 Margin="265,357,0,0" 
                 VerticalAlignment="Top"

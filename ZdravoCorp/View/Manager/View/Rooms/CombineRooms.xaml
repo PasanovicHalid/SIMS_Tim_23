@@ -4,11 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ZdravoCorp.View.Manager.View.Rooms"
+             xmlns:p="clr-namespace:ZdravoCorp.Properties"
              mc:Ignorable="d" 
              d:DesignHeight="667" d:DesignWidth="430">
     <Grid>
 
-        <Label Content="Selected Room" 
+        <Label Content="{x:Static p:Resources.Selected_Room}" 
             HorizontalAlignment="Center" 
             Margin="0,25,0,0" 
             VerticalAlignment="Top" 
@@ -23,11 +24,11 @@
                  Width="338"
                  Style="{StaticResource ManagerTextBox}" 
                  Name="Designation"
-                 Tag="Designation"
+                 Tag="{x:Static p:Resources.Designation}"
                  Height="46"
                  />
 
-        <Label Content="Combine with" 
+        <Label Content="{x:Static p:Resources.Combine_with}" 
             HorizontalAlignment="Center" 
             Margin="0,123,0,0" 
             VerticalAlignment="Top" 
@@ -52,7 +53,7 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
 
-        <Button Content="Combine" 
+        <Button Content="{x:Static p:Resources.Combine}" 
                 HorizontalAlignment="Left" 
                 Margin="323,587,0,0" 
                 VerticalAlignment="Top" 

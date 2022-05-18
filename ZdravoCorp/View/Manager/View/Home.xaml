@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:ZdravoCorp.View.Manager.View" 
+             xmlns:local="clr-namespace:ZdravoCorp.View.Manager.View"
+             xmlns:p="clr-namespace:ZdravoCorp.Properties"
              xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
              mc:Ignorable="d" 
              d:DesignHeight="667" d:DesignWidth="430">
@@ -20,7 +21,7 @@
             <svgc:SvgViewbox Source="\Resources\Icons\rooms.svg" Width="107" Height="107"/>
         </Button>
 
-        <Label Content="Rooms" 
+        <Label Content="{x:Static p:Resources.Rooms}" 
                    HorizontalAlignment="Left" 
                    Margin="64,152,0,0" 
                    Grid.Row="2" 
@@ -40,7 +41,7 @@
             <svgc:SvgViewbox Source="\Resources\Icons\equipment.svg" Width="107" Height="107"/>
         </Button>
 
-        <Label  Content="Equipment" 
+        <Label  Content="{x:Static p:Resources.Equipment}" 
                     HorizontalAlignment="Left" 
                     Margin="272,154,0,0" 
                     Grid.Row="2" 
@@ -60,7 +61,7 @@
             <svgc:SvgViewbox Source="\Resources\Icons\medicine.svg" Width="107" Height="107"/>
         </Button>
 
-        <Label  Content="Medications" 
+        <Label  Content="{x:Static p:Resources.Medication}" 
                     HorizontalAlignment="Left" 
                     Margin="48,0,0,0" 
                     VerticalAlignment="Center" 
