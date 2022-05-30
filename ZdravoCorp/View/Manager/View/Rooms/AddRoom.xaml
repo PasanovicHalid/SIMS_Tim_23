@@ -4,14 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ZdravoCorp.View.Manager.View"
-             xmlns:p="clr-namespace:ZdravoCorp.Properties"
+             xmlns:p="clr-namespace:ZdravoCorp.View.Core"
              mc:Ignorable="d" 
              d:DesignHeight="667" d:DesignWidth="430">
     <Grid>
-        <Label Content="{x:Static p:Resources.Designation_Code}" 
+        <Label Content="{p:Loc Designation Code}" 
             HorizontalAlignment="Center" 
             Margin="0,12,0,0" 
             VerticalAlignment="Top" 
+            HorizontalContentAlignment="Center" 
             Width="116"
             Style="{StaticResource ManagerLabels}"/>
 
@@ -23,14 +24,15 @@
                  Width="388"
                  Style="{StaticResource ManagerTextBox}" 
                  Name="Designation"
-                 Tag="{x:Static p:Resources.Designation_Code}"
+                 Tag="{p:Loc Designation_Code}"
                  Height="46"
                  />
 
-        <Label Content="{x:Static p:Resources.Surface_Area}" 
+        <Label Content="{p:Loc Surface Area}" 
             HorizontalAlignment="Left" 
             Margin="68,105,0,0" 
             VerticalAlignment="Top" 
+            HorizontalContentAlignment="Center" 
             Width="86"
             Style="{StaticResource ManagerLabels}"/>
 
@@ -42,14 +44,15 @@
             Width="173"
             Style="{StaticResource ManagerTextBox}" 
             x:Name="Size"
-            Tag="{x:Static p:Resources.Size}"
+            Tag="{p:Loc Size}"
             Height="46"
             />
 
-        <Label Content="{x:Static p:Resources.Floor}" 
+        <Label Content="{p:Loc Floor}" 
             HorizontalAlignment="Left" 
             Margin="304,105,0,0" 
             VerticalAlignment="Top" 
+            HorizontalContentAlignment="Center" 
             Width="40"
             Style="{StaticResource ManagerLabels}"/>
 
@@ -61,15 +64,16 @@
             Width="173"
             Style="{StaticResource ManagerTextBox}" 
             x:Name="Size_Copy"
-            Tag="{x:Static p:Resources.Floor}"
+            Tag="{p:Loc Floor}"
             Height="46"
             />
 
 
-        <Label Content="{x:Static p:Resources.Room_Type}" 
+        <Label Content="{p:Loc Room Type}" 
                HorizontalAlignment="Center" 
                Margin="0,203,0,0" 
                VerticalAlignment="Top" 
+               HorizontalContentAlignment="Center" 
                Width="78"
                Style="{StaticResource ManagerLabels}"/>
 
@@ -91,7 +95,7 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
 
-        <Button Content="{x:Static p:Resources.Add}" 
+        <Button Content="{p:Loc Add}" 
                 HorizontalAlignment="Left" 
                 Margin="363,231,0,0" 
                 VerticalAlignment="Top" 
@@ -100,7 +104,7 @@
                 Command="{Binding CreateRoomTypeCommand}"
                 Width="46"/>
 
-        <Button Content="{x:Static p:Resources.Add}" 
+        <Button Content="{p:Loc Add}" 
                 HorizontalAlignment="Left" 
                 Margin="360,587,0,0" 
                 VerticalAlignment="Top" 

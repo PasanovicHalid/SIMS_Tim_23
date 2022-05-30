@@ -17,9 +17,9 @@ namespace Controller
     {
         RoomService roomService = new RoomService();
 
-        public Boolean CreateRoom(Room newRoom)
+        public void CreateRoom(Room newRoom)
         {
-            return roomService.CreateRoom(newRoom);
+            roomService.CreateRoom(newRoom);
         }
 
         public Room ReadRoom(int identifier)
@@ -37,24 +37,24 @@ namespace Controller
             return RoomService.Instance.GetRoomIndex(room);
         }
 
-        public Boolean UpdateRoom(Room updatedRoom)
+        public void UpdateRoom(Room updatedRoom)
         {
-            return roomService.UpdateRoom(updatedRoom);
+            roomService.UpdateRoom(updatedRoom);
         }
 
-        public Boolean DeleteRoom(int identifier)
+        public void DeleteRoom(int identifier)
         {
-            return roomService.DeleteRoom(identifier);
+            roomService.DeleteRoom(identifier);
         }
 
-        public Boolean RenovateRoom(int identifier, DateTime start, DateTime end)
+        public void RenovateRoom(int identifier, DateTime start, DateTime end)
         {
-            return roomService.RenovateRoom(identifier, start, end);
+            roomService.RenovateRoom(identifier, start, end);
         }
 
-        public Boolean CombineRooms(Room combineInto, Room selectedRoom)
+        public void CombineRooms(Room combineInto, Room selectedRoom)
         {
-            return roomService.CombineRooms(combineInto, selectedRoom);
+            roomService.CombineRooms(combineInto, selectedRoom);
         }
 
         public List<Room> GetAllRooms()
@@ -73,9 +73,9 @@ namespace Controller
             return result;
         }
 
-        public Boolean CreateRoomType(RoomTypeModel newRoomType)
+        public void CreateRoomType(RoomTypeModel newRoomType)
         {
-            return RoomService.Instance.CreateRoomType(new RoomType(newRoomType));
+            RoomService.Instance.CreateRoomType(new RoomType(newRoomType));
         }
 
         public Boolean UpdateRoomType(Model.RoomType roomType)
@@ -97,7 +97,6 @@ namespace Controller
         {
             throw new NotImplementedException();
         }
-
 
         public int GetMaxCountForEquipment(int id_room, int id_equipment)
         {

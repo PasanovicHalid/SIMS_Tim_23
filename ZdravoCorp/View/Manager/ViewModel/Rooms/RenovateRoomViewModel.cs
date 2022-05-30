@@ -105,13 +105,14 @@ namespace ZdravoCorp.View.Manager.ViewModel.Rooms
 
             RenovateCommand = new RelayCommand(o =>
             {
-                if (!controller.RenovateRoom(selectedRoom.Identifier, StartDate, EndDate))
+                try
                 {
-                    MessageBox.Show("Nije uspesno izvrsen zadatak", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                else
-                {
+                    controller.RenovateRoom(selectedRoom.Identifier, StartDate, EndDate);
                     CurrentView = new View.Rooms.Rooms(new RoomsViewModel());
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             });
         }

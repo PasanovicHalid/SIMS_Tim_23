@@ -120,8 +120,23 @@
   <data name="Add" xml:space="preserve">
     <value>Dodaj</value>
   </data>
+  <data name="Add Equipment" xml:space="preserve">
+    <value>Dodaj Opremu</value>
+  </data>
+  <data name="Add Equipment Type" xml:space="preserve">
+    <value>Dodaj Tip Opreme</value>
+  </data>
   <data name="Add Medication" xml:space="preserve">
     <value>Dodaj lek</value>
+  </data>
+  <data name="Add Medication Type" xml:space="preserve">
+    <value>Dodaj tip leka</value>
+  </data>
+  <data name="Add Room" xml:space="preserve">
+    <value>Dodaj sobu</value>
+  </data>
+  <data name="Add Room Type" xml:space="preserve">
+    <value>Dodaj tip sobe</value>
   </data>
   <data name="Amount" xml:space="preserve">
     <value>Kolicina</value>
@@ -134,6 +149,12 @@
   </data>
   <data name="Change Medication" xml:space="preserve">
     <value>Izmeni lek</value>
+  </data>
+  <data name="Change Renovation" xml:space="preserve">
+    <value>Izmena renovacije</value>
+  </data>
+  <data name="Change Reservation" xml:space="preserve">
+    <value>Izmena rezervacije</value>
   </data>
   <data name="Combine" xml:space="preserve">
     <value>Spoj</value>
@@ -195,6 +216,9 @@
   <data name="Equipment Type" xml:space="preserve">
     <value>Tip Opreme</value>
   </data>
+  <data name="EquipmentDoesntExist" xml:space="preserve">
+    <value>Oprema ne postoji u bazi</value>
+  </data>
   <data name="Error" xml:space="preserve">
     <value>Greska</value>
   </data>
@@ -225,6 +249,12 @@
   <data name="Medication" xml:space="preserve">
     <value>Lek</value>
   </data>
+  <data name="Medication Type" xml:space="preserve">
+    <value>Tip leka</value>
+  </data>
+  <data name="Medication Types" xml:space="preserve">
+    <value>Tipovi lekova</value>
+  </data>
   <data name="Medicine" xml:space="preserve">
     <value>Lek</value>
   </data>
@@ -234,17 +264,35 @@
   <data name="Name" xml:space="preserve">
     <value>Ime</value>
   </data>
+  <data name="Pending Request" xml:space="preserve">
+    <value>Neobradjen zahtev</value>
+  </data>
+  <data name="Rejected Request" xml:space="preserve">
+    <value>Obijen zahtev</value>
+  </data>
   <data name="Renovate" xml:space="preserve">
     <value>Renoviraj</value>
   </data>
+  <data name="Renovate Room" xml:space="preserve">
+    <value>Renoviraj sobu</value>
+  </data>
   <data name="Renovated" xml:space="preserve">
     <value>Renoviran</value>
+  </data>
+  <data name="Renovations" xml:space="preserve">
+    <value>Renovacije</value>
   </data>
   <data name="Replacement" xml:space="preserve">
     <value>Zamena</value>
   </data>
   <data name="Requests" xml:space="preserve">
     <value>Zahtev</value>
+  </data>
+  <data name="Reservation" xml:space="preserve">
+    <value>Reservacija</value>
+  </data>
+  <data name="Reservations" xml:space="preserve">
+    <value>Rezervacije</value>
   </data>
   <data name="Reserved" xml:space="preserve">
     <value>Zakazan</value>
@@ -255,8 +303,20 @@
   <data name="Room Type" xml:space="preserve">
     <value>Tip sobe</value>
   </data>
+  <data name="RoomDesignationExists" xml:space="preserve">
+    <value>Sifra sobe vec postoji</value>
+  </data>
+  <data name="RoomIdDoesntExist" xml:space="preserve">
+    <value>Soba ne postoji u bazi</value>
+  </data>
   <data name="Rooms" xml:space="preserve">
     <value>Sobe</value>
+  </data>
+  <data name="RoomTypeAlreadyExists" xml:space="preserve">
+    <value>Tip sobe vec postoji</value>
+  </data>
+  <data name="RoomTypeDoesntExists" xml:space="preserve">
+    <value>Tip sobe ne postoji u bazi</value>
   </data>
   <data name="Search" xml:space="preserve">
     <value>Pretrazi</value>

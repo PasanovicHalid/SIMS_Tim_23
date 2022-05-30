@@ -4,16 +4,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ZdravoCorp.View.Manager.View.Medications"
-             xmlns:p="clr-namespace:ZdravoCorp.Properties"
+             xmlns:p="clr-namespace:ZdravoCorp.View.Core"
              mc:Ignorable="d" 
              d:DesignHeight="667" d:DesignWidth="430">
     <ScrollViewer>
         <Grid Height="1028" Width="430">
 
-            <Label Content="{x:Static p:Resources.Error}" 
+            <Label Content="{p:Loc Error}" 
                 HorizontalAlignment="Center" 
                 Margin="0,32,0,0" 
                 VerticalAlignment="Top" 
+                HorizontalContentAlignment="Center" 
                 Width="35"
                 Style="{StaticResource ManagerLabels}"/>
 
@@ -24,13 +25,14 @@
                 VerticalAlignment="Top" 
                 Width="364"
                 Style="{StaticResource ManagerTextBox}" 
-                Tag="{x:Static p:Resources.Error}"
+                Tag="{p:Loc Error}"
                 Height="102"/>
 
-            <Label Content="{x:Static p:Resources.Name}" 
+            <Label Content="{p:Loc Name}" 
                 HorizontalAlignment="Center" 
                 Margin="0,184,0,0" 
                 VerticalAlignment="Top" 
+                HorizontalContentAlignment="Center" 
                 Width="46"
                 Style="{StaticResource ManagerLabels}"/>
 
@@ -42,13 +44,14 @@
                      Width="364"
                      Style="{StaticResource ManagerTextBox}" 
                      Name="Count"
-                     Tag="{x:Static p:Resources.Name}"
+                     Tag="{p:Loc Name}"
                      Height="46"/>
 
-            <Label Content="{x:Static p:Resources.Manufacturer}" 
+            <Label Content="{p:Loc Manufacturer}" 
                    HorizontalAlignment="Left" 
                    Margin="175,276,0,0" 
                    VerticalAlignment="Top" 
+                   HorizontalContentAlignment="Center" 
                    Width="86"
                    Style="{StaticResource ManagerLabels}"/>
 
@@ -59,13 +62,14 @@
                      VerticalAlignment="Top" 
                      Width="364"
                      Style="{StaticResource ManagerTextBox}" 
-                     Tag="{x:Static p:Resources.Manufacturer}"
+                     Tag="{p:Loc Manufacturer}"
                      Height="44"/>
 
-            <Label Content="{x:Static p:Resources.Description}" 
+            <Label Content="{p:Loc Description}" 
                    HorizontalAlignment="Left" 
                    Margin="181,360,0,0" 
                    VerticalAlignment="Top" 
+                   HorizontalContentAlignment="Center" 
                    Width="76"
                    Style="{StaticResource ManagerLabels}"/>
 
@@ -76,13 +80,14 @@
                      VerticalAlignment="Top" 
                      Width="364"
                      Style="{StaticResource ManagerTextBox}" 
-                     Tag="{x:Static p:Resources.Description}"
+                     Tag="{p:Loc Description}"
                      Height="102"/>
 
-            <Label Content="{x:Static p:Resources.Replacement}" 
+            <Label Content="{p:Loc Replacement}" 
                    HorizontalAlignment="Center" 
                    Margin="0,511,0,0" 
                    VerticalAlignment="Top" 
+                   HorizontalContentAlignment="Center" 
                    Width="90"
                    Style="{StaticResource ManagerLabels}"/>
 
@@ -124,11 +129,11 @@
                           VerticalGridLinesBrush="Transparent" 
                           >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="{x:Static p:Resources.Name}" Binding="{Binding Name}" TextBlock.TextAlignment="Center" Width="*"/>
+                    <DataGridTextColumn Header="{p:Loc Name}" Binding="{Binding Name}" TextBlock.TextAlignment="Center" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
 
-            <Button Content="{x:Static p:Resources.Change_Medication}" 
+            <Button Content="{p:Loc Change Medication}" 
                     HorizontalAlignment="Left" 
                     Margin="233,780,0,0" 
                     VerticalAlignment="Top" 
@@ -137,7 +142,7 @@
                     Command="{Binding ChangeCommand}"
                     Style="{StaticResource ManagerButtons}"/>
 
-            <Button Content="{x:Static p:Resources.Delete_Replacement}" 
+            <Button Content="{p:Loc Delete Replacement}" 
                     HorizontalAlignment="Left" 
                     Margin="33,780,0,0" 
                     VerticalAlignment="Top" 

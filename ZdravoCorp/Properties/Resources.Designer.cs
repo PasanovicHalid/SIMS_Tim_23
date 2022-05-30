@@ -70,11 +70,56 @@ namespace ZdravoCorp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add Equipment.
+        /// </summary>
+        public static string Add_Equipment {
+            get {
+                return ResourceManager.GetString("Add Equipment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add Equipment Type.
+        /// </summary>
+        public static string Add_Equipment_Type {
+            get {
+                return ResourceManager.GetString("Add Equipment Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add Medication.
         /// </summary>
         public static string Add_Medication {
             get {
                 return ResourceManager.GetString("Add Medication", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add Medication Type.
+        /// </summary>
+        public static string Add_Medication_Type {
+            get {
+                return ResourceManager.GetString("Add Medication Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add Room.
+        /// </summary>
+        public static string Add_Room {
+            get {
+                return ResourceManager.GetString("Add Room", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add Room Type.
+        /// </summary>
+        public static string Add_Room_Type {
+            get {
+                return ResourceManager.GetString("Add Room Type", resourceCulture);
             }
         }
         
@@ -111,6 +156,24 @@ namespace ZdravoCorp.Properties {
         public static string Change_Medication {
             get {
                 return ResourceManager.GetString("Change Medication", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change Renovation.
+        /// </summary>
+        public static string Change_Renovation {
+            get {
+                return ResourceManager.GetString("Change Renovation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change Reservation.
+        /// </summary>
+        public static string Change_Reservation {
+            get {
+                return ResourceManager.GetString("Change Reservation", resourceCulture);
             }
         }
         
@@ -295,6 +358,15 @@ namespace ZdravoCorp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Equipment doesnt exist in database.
+        /// </summary>
+        public static string EquipmentDoesntExist {
+            get {
+                return ResourceManager.GetString("EquipmentDoesntExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
         public static string Error {
@@ -385,6 +457,24 @@ namespace ZdravoCorp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Medication Type.
+        /// </summary>
+        public static string Medication_Type {
+            get {
+                return ResourceManager.GetString("Medication Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Medication Types.
+        /// </summary>
+        public static string Medication_Types {
+            get {
+                return ResourceManager.GetString("Medication Types", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Medicine.
         /// </summary>
         public static string Medicine {
@@ -412,6 +502,24 @@ namespace ZdravoCorp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Pending Request.
+        /// </summary>
+        public static string Pending_Request {
+            get {
+                return ResourceManager.GetString("Pending Request", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rejected Request.
+        /// </summary>
+        public static string Rejected_Request {
+            get {
+                return ResourceManager.GetString("Rejected Request", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Renovate.
         /// </summary>
         public static string Renovate {
@@ -421,11 +529,29 @@ namespace ZdravoCorp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Renovate Room.
+        /// </summary>
+        public static string Renovate_Room {
+            get {
+                return ResourceManager.GetString("Renovate Room", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Renovated.
         /// </summary>
         public static string Renovated {
             get {
                 return ResourceManager.GetString("Renovated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Renovations.
+        /// </summary>
+        public static string Renovations {
+            get {
+                return ResourceManager.GetString("Renovations", resourceCulture);
             }
         }
         
@@ -444,6 +570,24 @@ namespace ZdravoCorp.Properties {
         public static string Requests {
             get {
                 return ResourceManager.GetString("Requests", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reservation.
+        /// </summary>
+        public static string Reservation {
+            get {
+                return ResourceManager.GetString("Reservation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reservations.
+        /// </summary>
+        public static string Reservations {
+            get {
+                return ResourceManager.GetString("Reservations", resourceCulture);
             }
         }
         
@@ -475,11 +619,47 @@ namespace ZdravoCorp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Room Designation Code already exists.
+        /// </summary>
+        public static string RoomDesignationExists {
+            get {
+                return ResourceManager.GetString("RoomDesignationExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Room doesnt exist in database.
+        /// </summary>
+        public static string RoomIdDoesntExist {
+            get {
+                return ResourceManager.GetString("RoomIdDoesntExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Rooms.
         /// </summary>
         public static string Rooms {
             get {
                 return ResourceManager.GetString("Rooms", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Room Type already exists.
+        /// </summary>
+        public static string RoomTypeAlreadyExists {
+            get {
+                return ResourceManager.GetString("RoomTypeAlreadyExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Room Type doesnt exist in database.
+        /// </summary>
+        public static string RoomTypeDoesntExists {
+            get {
+                return ResourceManager.GetString("RoomTypeDoesntExists", resourceCulture);
             }
         }
         

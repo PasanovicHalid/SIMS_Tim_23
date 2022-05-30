@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
-             xmlns:p="clr-namespace:ZdravoCorp.Properties"
+             xmlns:p="clr-namespace:ZdravoCorp.View.Core"
              mc:Ignorable="d" 
              d:DesignHeight="667" d:DesignWidth="430">
     <Grid>
@@ -14,10 +14,10 @@
                 Height="42" 
                 Width="48"
                 Command="{Binding AddEquipmentViewCommand}"
-                Style="{StaticResource ManagerButtons}">
+                Style="{DynamicResource ManagerButtons}">
             <StackPanel>
                 <svgc:SvgViewbox Source="\Resources\Icons\add-all.svg" Width="28" Height="25"/>
-                <Label  Content="{x:Static p:Resources.Add}" 
+                <Label  Content="{p:Loc Add}" 
                         Style="{DynamicResource ButtonLabel}" 
                         FontSize="8"
                         HorizontalContentAlignment="Center"
@@ -32,10 +32,10 @@
                 VerticalAlignment="Top" 
                 Height="42" 
                 Width="48"
-                Style="{StaticResource ManagerButtons}">
+                Style="{DynamicResource ManagerButtons}">
             <StackPanel>
                 <svgc:SvgViewbox Source="\Resources\Icons\category.svg" Width="28" Height="25"/>
-                <Label  Content="{x:Static p:Resources.Types}" 
+                <Label  Content="{p:Loc Types}" 
                         Style="{DynamicResource ButtonLabel}" 
                         FontSize="8"
                         HorizontalContentAlignment="Center"
@@ -54,7 +54,7 @@
                 Command="{Binding ChangePositionCommand}">
             <StackPanel>
                 <svgc:SvgViewbox Source="\Resources\Icons\timecard.svg" Width="28" Height="25"/>
-                <Label  Content="{x:Static p:Resources.Move}" 
+                <Label  Content="{p:Loc Move}" 
                         Style="{DynamicResource ButtonLabel}" 
                         FontSize="8"
                         HorizontalContentAlignment="Center"
@@ -69,11 +69,11 @@
                 VerticalAlignment="Top" 
                 Height="42" 
                 Width="48"
-                Style="{StaticResource ManagerButtons}"
+                Style="{DynamicResource ManagerButtons}"
                 Command="{Binding ReservedCommand}">
             <StackPanel>
                 <svgc:SvgViewbox Source="\Resources\Icons\booking-pending.svg" Width="28" Height="25"/>
-                <Label  Content="{x:Static p:Resources.Reserved}" 
+                <Label  Content="{p:Loc Reserved}" 
                         Style="{DynamicResource ButtonLabel}" 
                         FontSize="8"
                         HorizontalContentAlignment="Center"
@@ -97,15 +97,14 @@
                       SelectedItem="{Binding SelectedEquipment, UpdateSourceTrigger=PropertyChanged}"
                       SelectedIndex="{Binding SelectedIndex, UpdateSourceTrigger=PropertyChanged}"
                       Style="{DynamicResource ManagerTables}"
-                      
                       BorderThickness="2"
                       HorizontalGridLinesBrush="Transparent"
                       VerticalGridLinesBrush="Transparent" 
                       >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="{x:Static p:Resources.Name}" Binding="{Binding Name}" Width="*"/>
-                <DataGridTextColumn Header="{x:Static p:Resources.Location}" Binding="{Binding DesignationCode}" Width="*"/>
-                <DataGridTextColumn Header="{x:Static p:Resources.Count}" Binding="{Binding Count}" Width="*"/>
+                <DataGridTextColumn Header="{p:Loc Name}" Binding="{Binding Name}" Width="*"/>
+                <DataGridTextColumn Header="{p:Loc Location}" Binding="{Binding DesignationCode}" Width="*"/>
+                <DataGridTextColumn Header="{p:Loc Count}" Binding="{Binding Count}" Width="*"/>
             </DataGrid.Columns>
             <DataGrid.InputBindings>
                 <MouseBinding Gesture="LeftDoubleClick" Command="{Binding ViewEquipmentCommand}"/>
@@ -118,8 +117,8 @@
                      Text="{Binding Path=SearchBoxText, UpdateSourceTrigger=PropertyChanged}" 
                      VerticalAlignment="Top" 
                      Width="155"
-                     Style="{StaticResource ManagerSearch}"
-                     Tag="{x:Static p:Resources.Search}"
+                     Style="{DynamicResource ManagerSearch}"
+                     Tag="{p:Loc Search}"
                      Name="Search" 
                      Height="42"/>
 

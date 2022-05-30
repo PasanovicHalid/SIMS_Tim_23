@@ -4,15 +4,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ZdravoCorp.View.Manager.View"
-             xmlns:p="clr-namespace:ZdravoCorp.Properties"
+             xmlns:p="clr-namespace:ZdravoCorp.View.Core"
              mc:Ignorable="d" 
              d:DesignHeight="667" d:DesignWidth="430">
     <Grid>
 
-        <Label Content="{x:Static p:Resources.Designation_Code}"
+        <Label Content="{p:Loc Designation Code}"
             HorizontalAlignment="Center" 
             Margin="0,12,0,0" 
             VerticalAlignment="Top" 
+            HorizontalContentAlignment="Center" 
             Width="116"
             Style="{StaticResource ManagerLabels}"/>
 
@@ -24,14 +25,15 @@
                  Width="386"
                  Style="{StaticResource ManagerTextBox}" 
                  Name="Designation"
-                 Tag="{x:Static p:Resources.Designation}"
+                 Tag="{p:Loc Designation}"
                  Height="46"
                  IsReadOnly="True"/>
 
-        <Label Content="{x:Static p:Resources.Surface_Area}" 
+        <Label Content="{p:Loc Surface Area}" 
             HorizontalAlignment="Left" 
             Margin="68,105,0,0" 
             VerticalAlignment="Top" 
+            HorizontalContentAlignment="Center" 
             Width="84"
             Style="{StaticResource ManagerLabels}"/>
 
@@ -43,14 +45,15 @@
             Width="173"
             Style="{StaticResource ManagerTextBox}" 
             x:Name="Size"
-            Tag="{x:Static p:Resources.Size}"
+            Tag="{p:Loc Size}"
             Height="46"
             IsReadOnly="True"/>
 
-        <Label Content="{x:Static p:Resources.Floor}" 
+        <Label Content="{p:Loc Floor}" 
             HorizontalAlignment="Left" 
             Margin="304,105,0,0" 
             VerticalAlignment="Top" 
+            HorizontalContentAlignment="Center" 
             Width="40"
             Style="{StaticResource ManagerLabels}"/>
 
@@ -62,14 +65,15 @@
             Width="173"
             Style="{StaticResource ManagerTextBox}" 
             x:Name="Size_Copy"
-            Tag="{x:Static p:Resources.Floor}"
+            Tag="{p:Loc Floor}"
             Height="46"
             IsReadOnly="True"/>
 
-        <Label Content="{x:Static p:Resources.Start_Date}" 
+        <Label Content="{p:Loc Start Date}" 
             HorizontalAlignment="Left" 
             Margin="76,209,0,0" 
             VerticalAlignment="Top" 
+            HorizontalContentAlignment="Center" 
             Width="68"
             Style="{StaticResource ManagerLabels}" RenderTransformOrigin="0.452,1.071"/>
 
@@ -81,10 +85,11 @@
                   VerticalAlignment="Top"
                   SelectedDate="{Binding StartDate}"/>
 
-        <Label Content="{x:Static p:Resources.End_Date}" 
+        <Label Content="{p:Loc End Date}" 
             HorizontalAlignment="Left" 
             Margin="293,209,0,0" 
             VerticalAlignment="Top" 
+            HorizontalContentAlignment="Center" 
             Width="63"
             Style="{StaticResource ManagerLabels}" RenderTransformOrigin="0.452,1.071"/>
 
@@ -96,7 +101,7 @@
                   VerticalAlignment="Top"
                   SelectedDate="{Binding EndDate}"/>
 
-        <Button Content="{x:Static p:Resources.Renovate}" 
+        <Button Content="{p:Loc Renovate}" 
                 HorizontalAlignment="Left" 
                 Margin="334,581,0,0" 
                 VerticalAlignment="Top" 

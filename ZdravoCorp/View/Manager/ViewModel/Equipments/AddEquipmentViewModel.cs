@@ -133,11 +133,6 @@ namespace ZdravoCorp.View.Manager.ViewModel.Equipments
             }
         }
 
-        public string getTitle()
-        {
-            return "Add Equipment";
-        }
-
         public string GetTitle()
         {
             return "Add Equipment";

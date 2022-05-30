@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using ZdravoCorp.Service;
+using ZdravoCorp.View.Core;
 
 namespace ZdravoCorp
 {
@@ -17,15 +18,16 @@ namespace ZdravoCorp
     /// </summary>
     public partial class App : Application
     {
-        public App()
+        public void ChangeLanguage(string currLang)
         {
-            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en");
-        }
-
-        public static void ChangeLanguage(string language)
-        {
-            CultureInfo lang = new System.Globalization.CultureInfo(language);
-            Thread.CurrentThread.CurrentUICulture = lang;
+            if (currLang.Equals("sr"))
+            {
+                TranslationSource.Instance.CurrentCulture = new System.Globalization.CultureInfo("sr");
+            }
+            else
+            {
+                TranslationSource.Instance.CurrentCulture = new System.Globalization.CultureInfo("en");
+            }
         }
     }
 }

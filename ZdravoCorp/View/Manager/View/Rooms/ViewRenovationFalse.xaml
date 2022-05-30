@@ -4,15 +4,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ZdravoCorp.View.Manager.View.Rooms"
-             xmlns:p="clr-namespace:ZdravoCorp.Properties"
+             xmlns:p="clr-namespace:ZdravoCorp.View.Core"
              mc:Ignorable="d" 
              d:DesignHeight="667" d:DesignWidth="430">
     <Grid>
 
-        <Label Content="{x:Static p:Resources.Designation_Code}" 
+        <Label Content="{p:Loc Designation Code}" 
             HorizontalAlignment="Left" 
             Margin="10,49,0,0" 
             VerticalAlignment="Top" 
+            HorizontalContentAlignment="Center" 
             Width="116"
             Style="{StaticResource ManagerLabels}"/>
 
@@ -24,14 +25,15 @@
                  Width="283"
                  Style="{StaticResource ManagerTextBox}" 
                  Name="Designation"
-                 Tag="{x:Static p:Resources.Designation}"
+                 Tag="{p:Loc Designation}"
                  Height="46"
                  IsReadOnly="True"/>
 
-        <Label Content="{x:Static p:Resources.End_Date}" 
+        <Label Content="{p:Loc End Date}" 
             HorizontalAlignment="Left" 
             Margin="10,202,0,0" 
             VerticalAlignment="Top" 
+            HorizontalContentAlignment="Center" 
             Width="62"
             Style="{StaticResource ManagerLabels}" RenderTransformOrigin="0.452,1.071"/>
 
@@ -43,7 +45,7 @@
                   VerticalAlignment="Top"
                   SelectedDate="{Binding EndDate}"/>
 
-        <Button Content="{x:Static p:Resources.Change}" 
+        <Button Content="{p:Loc Change}" 
                 HorizontalAlignment="Left" 
                 Margin="334,581,0,0" 
                 VerticalAlignment="Top" 
@@ -52,7 +54,7 @@
                 Command="{Binding ChangeCommand}"
                 Style="{StaticResource ManagerButtons}"/>
 
-        <Button Content="{x:Static p:Resources.Delete}" 
+        <Button Content="{p:Loc Delete}" 
                 HorizontalAlignment="Left" 
                 Margin="28,581,0,0" 
                 VerticalAlignment="Top" 

@@ -21,7 +21,8 @@ namespace Service
         public Boolean CreateEquipment(EquipmentTypeModel type, int count, RoomModel room)
         {
             Equipment equipment = new Equipment(count, count,FindEquipmentTypeByName(type.Name));
-            return RoomService.Instance.AddEquipment(equipment, room.Identifier);
+            RoomService.Instance.AddEquipment(equipment, room.Identifier);
+            return true;
         }
 
         public Boolean UpdateEquipment(Equipment equipment)
@@ -75,8 +76,8 @@ namespace Service
             {
                 return false;
             }
-            
-            return RoomService.Instance.ChangeActualCountOfEquipment(id_from_room, id_equipment, -count);
+            RoomService.Instance.ChangeActualCountOfEquipment(id_from_room, id_equipment, -count);
+            return true;
         }
 
         public ObservableCollection<EquipmentTypeModel> GetAllEquipmentType()

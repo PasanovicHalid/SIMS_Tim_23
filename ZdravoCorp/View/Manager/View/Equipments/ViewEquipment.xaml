@@ -3,15 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:p="clr-namespace:ZdravoCorp.Properties"
+             xmlns:p="clr-namespace:ZdravoCorp.View.Core"
              mc:Ignorable="d" 
              d:DesignHeight="667" d:DesignWidth="430">
     <Grid>
 
-        <Label Content="{x:Static p:Resources.Equipment_Type}" 
+        <Label Content="{p:Loc Equipment Type}" 
             HorizontalAlignment="Center" 
             Margin="0,29,0,0" 
-            VerticalAlignment="Top" 
+            VerticalAlignment="Top"  
+            HorizontalContentAlignment="Center" 
             Width="105"
             Style="{StaticResource ManagerLabels}"/>
 
@@ -23,14 +24,15 @@
                  Width="348"
                  Style="{StaticResource ManagerTextBox}" 
                  Name="Equipment_Type"
-                 Tag="{x:Static p:Resources.Equipment_Type}"
+                 Tag="{p:Loc Equipment_Type}"
                  Height="46"
                  IsReadOnly="True"/>
 
-        <Label Content="{x:Static p:Resources.Description}" 
+        <Label Content="{p:Loc Description}" 
             HorizontalAlignment="Center" 
             Margin="0,130,0,0" 
-            VerticalAlignment="Top" 
+            VerticalAlignment="Top"  
+            HorizontalContentAlignment="Center" 
             Width="75"
             Style="{StaticResource ManagerLabels}"/>
 
@@ -42,11 +44,11 @@
             Width="348"
             Style="{StaticResource ManagerTextBox}" 
             x:Name="Description"
-            Tag="{x:Static p:Resources.Description}"
+            Tag="{p:Loc Description}"
             Height="99"
             IsReadOnly="True"/>
 
-        <CheckBox Content="{x:Static p:Resources.Disposable}" 
+        <CheckBox Content="{p:Loc Disposable}" 
                   HorizontalAlignment="Left" 
                   Margin="41,290,0,0" 
                   VerticalAlignment="Top"
@@ -57,10 +59,11 @@
                   FontFamily="/Resources/Fonts/#Poppins"
                   />
 
-        <Label Content="{x:Static p:Resources.Count}" 
+        <Label Content="{p:Loc Count}" 
             HorizontalAlignment="Center" 
             Margin="0,323,0,0" 
-            VerticalAlignment="Top" 
+            VerticalAlignment="Top"  
+            HorizontalContentAlignment="Center" 
             Width="46"
             Style="{StaticResource ManagerLabels}"/>
 
@@ -72,13 +75,14 @@
             Width="272"
             Style="{StaticResource ManagerTextBox}" 
             x:Name="Count"
-            Tag="{x:Static p:Resources.Count}"
+            Tag="{p:Loc Count}"
             Height="46"/>
 
-        <Label Content="{x:Static p:Resources.Room}" 
+        <Label Content="{p:Loc Room}" 
                HorizontalAlignment="Center" 
                Margin="0,427,0,0" 
-               VerticalAlignment="Top" 
+               VerticalAlignment="Top"  
+               HorizontalContentAlignment="Center" 
                Width="43"
                Style="{StaticResource ManagerLabels}"/>
 
@@ -90,10 +94,10 @@
             Width="348"
             Style="{StaticResource ManagerTextBox}" 
             x:Name="Room"
-            Tag="{x:Static p:Resources.Room}"
+            Tag="{p:Loc Room}"
             Height="46"/>
 
-        <Button Content="{x:Static p:Resources.Change}" 
+        <Button Content="{p:Loc Change}" 
                 HorizontalAlignment="Left" 
                 Margin="318,351,0,0" 
                 VerticalAlignment="Top" 
@@ -102,7 +106,7 @@
                 Command="{Binding ChangeViewCommand}"
                 Style="{StaticResource ManagerButtons}"/>
 
-        <Button Content="{x:Static p:Resources.Delete}" 
+        <Button Content="{p:Loc Delete}" 
                 HorizontalAlignment="Left" 
                 Margin="115,601,0,0" 
                 VerticalAlignment="Top" 
@@ -111,7 +115,7 @@
                 Command="{Binding DeleteCommand}"
                 Style="{StaticResource ManagerButtons}"/>
 
-        <Button Content="{x:Static p:Resources.Move}" 
+        <Button Content="{p:Loc Move}" 
                 HorizontalAlignment="Left" 
                 Margin="235,601,0,0" 
                 VerticalAlignment="Top" 

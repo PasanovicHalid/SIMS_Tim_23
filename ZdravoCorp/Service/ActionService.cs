@@ -110,7 +110,8 @@ namespace Service
             }
             else
             {
-                return RoomService.Instance.UpdateRoom(room);
+                RoomService.Instance.UpdateRoom(room);
+                return true;
             }
         }
 
@@ -124,7 +125,8 @@ namespace Service
             {
                 Room room = RoomService.Instance.ReadRoom(action.Id_room);
                 room.Renovating = false;
-                return RoomService.Instance.UpdateRoom(room);
+                RoomService.Instance.UpdateRoom(room);
+                return true;
             }
         }
 
@@ -145,7 +147,8 @@ namespace Service
                         break;
                     }
                 }
-                return RoomService.Instance.UpdateRoom(room);
+                RoomService.Instance.UpdateRoom(room);
+                return true;
             }
         }
 
@@ -267,15 +270,8 @@ namespace Service
             {
                 incoming_room.AddEquipment(new Equipment(action.Count, action.Count, EquipmentService.Instance.ReadEquipmentType(action.Id_equipment)));
             }
-
-            if (!RoomService.Instance.UpdateRoom(incoming_room))
-            {
-                return false;
-            }
-            if (!RoomService.Instance.UpdateRoom(outgoing_room))
-            {
-                return false;
-            }
+            RoomService.Instance.UpdateRoom(incoming_room);
+            RoomService.Instance.UpdateRoom(outgoing_room);
             return true;
         }
 
@@ -295,16 +291,14 @@ namespace Service
             {
                 rooms[0].Renovating = true;
                 rooms[0].RenovatedUntil = action.ExpirationDate;
-                if (!RoomService.Instance.UpdateRoom(rooms[0]))
-                {
-                    return false;
-                }
+                RoomService.Instance.UpdateRoom(rooms[0]);
                 return CreateAction(new Model.Action(ActionType.renovation, action.ExpirationDate, new RenovationAction(new DateTime(), action.Id_room, false)));
             }
             else
             {
                 rooms[0].Renovating = false;
-                return RoomService.Instance.UpdateRoom(rooms[0]);
+                RoomService.Instance.UpdateRoom(rooms[0]);
+                return true;
             }
         }
 

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ZdravoCorp.View.Manager" 
         xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
         xmlns:viewModel="clr-namespace:ZdravoCorp.View.Manager.ViewModel"
-        xmlns:p="clr-namespace:ZdravoCorp.Properties"
+        xmlns:p="clr-namespace:ZdravoCorp.View.Core"
         mc:Ignorable="d"
         Title="Manager" 
         Height="790" Width="430"
@@ -90,7 +90,7 @@
                             Command="{Binding MedicineViewCommand}">
                         <StackPanel Height="42" Width="84">
                             <svgc:SvgViewbox Source="\Resources\Icons\medicine.svg" Width="84" Height="28"/>
-                            <Label Content="{x:Static p:Resources.Medicine}" 
+                            <Label Content="{p:Loc Medicine}" 
                                    Style="{DynamicResource ActionBarLabel}" 
                                    FontSize="10"
                                    HorizontalContentAlignment="Center"
@@ -108,7 +108,7 @@
                             Command="{Binding RoomViewCommand}">
                         <StackPanel Height="42" Width="84">
                             <svgc:SvgViewbox Source="\Resources\Icons\rooms.svg" Width="84" Height="28"/>
-                            <Label Content="{x:Static p:Resources.Rooms}" 
+                            <Label Content="{p:Loc Rooms}" 
                                    Style="{DynamicResource ActionBarLabel}" 
                                    FontSize="10"
                                    HorizontalContentAlignment="Center"
@@ -125,7 +125,7 @@
                             Command="{Binding MainViewCommand}">
                         <StackPanel Height="42" Width="84">
                             <svgc:SvgViewbox Source="\Resources\Icons\home.svg" Width="84" Height="28"/>
-                            <Label Content="{x:Static p:Resources.Home}" 
+                            <Label Content="{p:Loc Home}" 
                                    Style="{DynamicResource ActionBarLabel}" 
                                    FontSize="10"
                                    HorizontalContentAlignment="Center"
@@ -142,7 +142,7 @@
                             Command="{Binding EquipmentViewCommand}">
                         <StackPanel Height="42" Width="84">
                             <svgc:SvgViewbox Source="\Resources\Icons\equipment.svg" Width="84" Height="28"/>
-                            <Label Content="{x:Static p:Resources.Equipment}" 
+                            <Label Content="{p:Loc Equipment}" 
                                    Style="{DynamicResource ActionBarLabel}" 
                                    FontSize="10"
                                    HorizontalContentAlignment="Center"
@@ -159,7 +159,7 @@
                     Height="45" Click="Employess_Click" >
                         <StackPanel Height="42" Width="84">
                             <svgc:SvgViewbox Source="\Resources\Icons\employees.svg" Width="84" Height="28"/>
-                            <Label Content="{x:Static p:Resources.Employess}" 
+                            <Label Content="{p:Loc Employess}" 
                                    Style="{DynamicResource ActionBarLabel}" 
                                    FontSize="10"
                                    HorizontalContentAlignment="Center"

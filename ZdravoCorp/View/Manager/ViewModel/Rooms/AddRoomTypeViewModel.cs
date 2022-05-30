@@ -51,13 +51,15 @@ namespace ZdravoCorp.View.Manager.ViewModel.Rooms
 
             AddRoomTypeCommand = new RelayCommand(o =>
             {
-                if (!controller.CreateRoomType(new RoomTypeModel(name)))
+                try
                 {
-                    MessageBox.Show("Nije uspesno dodat element", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    controller.CreateRoomType(new RoomTypeModel(name));
+                    CurrentView = new AddRoom(new AddRoomViewModel());
                 }
-
-                CurrentView = new AddRoom(new AddRoomViewModel());
-
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }, checkIfReady);
         }
 

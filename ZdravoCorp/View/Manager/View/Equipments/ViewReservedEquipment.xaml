@@ -3,15 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:p="clr-namespace:ZdravoCorp.Properties"
+             xmlns:p="clr-namespace:ZdravoCorp.View.Core"
              mc:Ignorable="d" 
              d:DesignHeight="667" d:DesignWidth="430">
     <Grid>
 
-        <Label Content="{x:Static p:Resources.Equipment_Type}" 
+        <Label Content="{p:Loc Equipment Type}" 
             HorizontalAlignment="Left" 
             Margin="10,49,0,0" 
-            VerticalAlignment="Top" 
+            VerticalAlignment="Top"  
+            HorizontalContentAlignment="Center" 
             Width="110"
             Style="{StaticResource ManagerLabels}"/>
 
@@ -23,13 +24,14 @@
                  Width="289"
                  Style="{StaticResource ManagerTextBox}" 
                  Name="Equipment_Type" 
-                 Tag="{x:Static p:Resources.Equipment_Type}"
+                 Tag="{p:Loc Equipment Type}"
                  Height="46"/>
 
-        <Label Content="{x:Static p:Resources.Count}" 
+        <Label Content="{p:Loc Count}" 
             HorizontalAlignment="Left" 
             Margin="17,151,0,0" 
-            VerticalAlignment="Top" 
+            VerticalAlignment="Top"  
+            HorizontalContentAlignment="Center" 
             Width="48"
             Style="{StaticResource ManagerLabels}"/>
 
@@ -41,13 +43,14 @@
             Width="119"
             Style="{StaticResource ManagerTextBox}" 
             x:Name="Count"
-            Tag="{x:Static p:Resources.Count}"
+            Tag="{p:Loc Count}"
             Height="46"/>
 
-        <Label Content="{x:Static p:Resources.Max}" 
+        <Label Content="{p:Loc Max}" 
             HorizontalAlignment="Left" 
             Margin="248,151,0,0" 
-            VerticalAlignment="Top" 
+            VerticalAlignment="Top"  
+            HorizontalContentAlignment="Center" 
             Width="46"
             Style="{StaticResource ManagerLabels}"/>
 
@@ -59,13 +62,14 @@
             Width="120"
             Style="{StaticResource ManagerTextBox}" 
             x:Name="Max"
-            Tag="{x:Static p:Resources.Max}"
+            Tag="{p:Loc Max}"
             Height="46"/>
 
-        <Label Content="{x:Static p:Resources.Date}" 
+        <Label Content="{p:Loc Date}" 
             HorizontalAlignment="Left" 
             Margin="90,209,0,0" 
-            VerticalAlignment="Top" 
+            VerticalAlignment="Top"  
+            HorizontalContentAlignment="Center" 
             Width="42"
             Style="{StaticResource ManagerLabels}" RenderTransformOrigin="0.452,1.071"/>
 
@@ -77,10 +81,11 @@
                   VerticalAlignment="Top"
                   SelectedDate="{Binding SelectedDate}"/>
 
-        <Label Content="{x:Static p:Resources.Time}" 
+        <Label Content="{p:Loc Time}" 
             HorizontalAlignment="Left" 
             Margin="310,207,0,0" 
-            VerticalAlignment="Top" 
+            VerticalAlignment="Top"  
+            HorizontalContentAlignment="Center" 
             Width="42"
             Style="{StaticResource ManagerLabels}"/>
 
@@ -95,10 +100,11 @@
             Tag="00:00"
             Height="46"/>
 
-        <Label Content="{x:Static p:Resources.Current_Room}" 
+        <Label Content="{p:Loc Current Room}" 
             HorizontalAlignment="Left" 
             Margin="286,326,0,0" 
-            VerticalAlignment="Top" 
+            VerticalAlignment="Top"  
+            HorizontalContentAlignment="Center" 
             Width="96"
             Style="{StaticResource ManagerLabels}"/>
 
@@ -110,13 +116,14 @@
             Width="166"
             Style="{StaticResource ManagerTextBox}" 
             x:Name="Currrent_Room"
-            Tag="Current Room"
+            Tag="{p:Loc Current Room}"
             Height="46"/>
 
-        <Label Content="{x:Static p:Resources.Room}" 
+        <Label Content="{p:Loc Room}" 
                HorizontalAlignment="Left" 
                Margin="21,463,0,0" 
-               VerticalAlignment="Top" 
+               VerticalAlignment="Top"  
+               HorizontalContentAlignment="Center" 
                Width="48"
                Style="{StaticResource ManagerLabels}"/>
 
@@ -138,7 +145,7 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
 
-        <Button Content="{x:Static p:Resources.Change}" 
+        <Button Content="{p:Loc Change}" 
                 HorizontalAlignment="Left" 
                 Margin="250,600,0,0" 
                 VerticalAlignment="Top" 
@@ -147,7 +154,7 @@
                 Command="{Binding ChangeCommand}"
                 Style="{StaticResource ManagerButtons}"/>
 
-        <Button Content="{x:Static p:Resources.Delete}" 
+        <Button Content="{p:Loc Delete}" 
                 HorizontalAlignment="Left" 
                 Margin="50,600,0,0" 
                 VerticalAlignment="Top" 

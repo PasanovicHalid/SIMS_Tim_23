@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ZdravoCorp.View.Manager.View.Medications" 
              xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
-             xmlns:p="clr-namespace:ZdravoCorp.Properties"
+             xmlns:p="clr-namespace:ZdravoCorp.View.Core"
              mc:Ignorable="d" 
              d:DesignHeight="667" d:DesignWidth="430">
     <Grid>
@@ -28,8 +28,8 @@
                       SelectedItem="{Binding SelectedRequest}"
                       >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="{x:Static p:Resources.Name}" Binding="{Binding Name}" ElementStyle="{StaticResource WrapText}" Width="*"/>
-                <DataGridTextColumn Header="{x:Static p:Resources.Status}" Binding="{Binding Status}" ElementStyle="{StaticResource WrapText}" Width="*"/>
+                <DataGridTextColumn Header="{p:Loc Name}" Binding="{Binding Name}" ElementStyle="{StaticResource WrapText}" Width="*"/>
+                <DataGridTextColumn Header="{p:Loc Status}" Binding="{Binding Status}" ElementStyle="{StaticResource WrapText}" Width="*"/>
             </DataGrid.Columns>
             <DataGrid.InputBindings>
                 <MouseBinding Gesture="LeftDoubleClick" Command="{Binding ViewCommand}"/>
@@ -44,7 +44,7 @@
                      Width="260"
                      Style="{StaticResource ManagerSearch}" 
                      Name="Search"
-                     Tag="{x:Static p:Resources.Search}"
+                     Tag="{p:Loc Search}"
                      Height="42"/>
     </Grid>
 </UserControl>

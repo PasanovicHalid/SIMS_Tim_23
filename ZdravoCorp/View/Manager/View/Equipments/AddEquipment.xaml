@@ -4,13 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d"
-             xmlns:p="clr-namespace:ZdravoCorp.Properties"
+             xmlns:p="clr-namespace:ZdravoCorp.View.Core"
              d:DesignHeight="667" d:DesignWidth="430">
     <Grid>
-        <Label Content="{x:Static p:Resources.Count}" 
+        <Label Content="{p:Loc Count}" 
             HorizontalAlignment="Center" 
             Margin="0,70,0,0" 
-            VerticalAlignment="Top" 
+            VerticalAlignment="Top"  
+            HorizontalContentAlignment="Center" 
             Width="52"
             Style="{StaticResource ManagerLabels}"/>
 
@@ -22,13 +23,14 @@
                  Width="274"
                  Style="{StaticResource ManagerTextBox}" 
                  Name="Count"
-                 Tag="{x:Static p:Resources.Count}"
+                 Tag="{p:Loc Count}"
                  Height="45"/>
 
-        <Label Content="{x:Static p:Resources.Equipment_Type}" 
+        <Label Content="{p:Loc Equipment Type}" 
                HorizontalAlignment="Left" 
                Margin="164,162,0,0" 
-               VerticalAlignment="Top" 
+               VerticalAlignment="Top"  
+               HorizontalContentAlignment="Center" 
                Width="106"
                Style="{StaticResource ManagerLabels}"/>
 
@@ -50,7 +52,7 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
 
-        <Button Content="{x:Static p:Resources.Add}" 
+        <Button Content="{p:Loc Add}" 
                 HorizontalAlignment="Left" 
                 Margin="307,195,0,0" 
                 VerticalAlignment="Top" 
@@ -59,10 +61,11 @@
                 Command="{Binding AddEquipmentTypeViewCommand}"
                 Width="47"/>
 
-        <Label Content="{x:Static p:Resources.Room}" 
+        <Label Content="{p:Loc Room}" 
                HorizontalAlignment="Left" 
                Margin="193,247,0,0" 
-               VerticalAlignment="Top" 
+               VerticalAlignment="Top"  
+               HorizontalContentAlignment="Center" 
                Width="48"
                Style="{StaticResource ManagerLabels}"/>
 
@@ -85,7 +88,7 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
 
-        <Button Content="{x:Static p:Resources.Add}" 
+        <Button Content="{p:Loc Add}" 
                 HorizontalAlignment="Left" 
                 Margin="371,563,0,0" 
                 VerticalAlignment="Top" 

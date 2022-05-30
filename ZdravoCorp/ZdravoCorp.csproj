@@ -100,6 +100,7 @@
     <Compile Include="Controller\RoomController.cs" />
     <Compile Include="Controller\SecretaryController.cs" />
     <Compile Include="Controller\VacationController.cs" />
+    <Compile Include="Exceptions\LocalisedException.cs" />
     <Compile Include="Model\Action.cs" />
     <Compile Include="Model\ActionType.cs" />
     <Compile Include="Model\ChangeRoomAction.cs" />
@@ -159,9 +160,11 @@
     <Compile Include="Service\SecretaryService.cs" />
     <Compile Include="Service\TimerService.cs" />
     <Compile Include="Service\VacationService.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="Utility\DateManipulator.cs" />
     <Compile Include="View\Core\ObservableObject.cs" />
     <Compile Include="View\Core\RelayCommand.cs" />
+    <Compile Include="View\Core\TranslationSource.cs" />
     <Compile Include="View\Core\ViewModelInterface.cs" />
     <Compile Include="View\Core\WindowBrowser.cs" />
     <Compile Include="View\Core\WindowInterface.cs" />
@@ -662,7 +665,6 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Data\appointmentsDB - Copy.csv" />
     <None Include="Data\guestsDB.csv" />
     <None Include="Data\hospitalSurveysDB.csv" />
     <None Include="Data\appointmentSurveysDB.csv" />

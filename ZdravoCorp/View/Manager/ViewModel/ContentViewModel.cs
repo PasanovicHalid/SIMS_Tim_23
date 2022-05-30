@@ -49,9 +49,10 @@ namespace ZdravoCorp.View.Manager.ViewModel
             get => _title;
             set
             {
-                if (value != _title)
+                string title = TranslationSource.Instance[value];
+                if (title != _title)
                 {
-                    _title = value;
+                    _title = title;
                     OnPropertyChanged();
                 }
             }

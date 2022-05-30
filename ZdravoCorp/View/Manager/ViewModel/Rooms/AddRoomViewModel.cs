@@ -104,12 +104,15 @@ namespace ZdravoCorp.View.Manager.ViewModel.Rooms
 
             CreateCommand = new RelayCommand(o =>
             {
-
-                if(!controller.CreateRoom(new Room(Identifier, Floor, Size, new RoomType(SelectedRoomType), new List<Appointment>(), new List<Equipment>(), new List<Medication>())))
+                try
                 {
-                    MessageBox.Show("Nije uspesno dodat element", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    controller.CreateRoom(new Room(Identifier, Floor, Size, new RoomType(SelectedRoomType), new List<Appointment>(), new List<Equipment>(), new List<Medication>()));
+                    CurrentView = new View.Rooms.Rooms(new RoomsViewModel());
                 }
-                CurrentView = new View.Rooms.Rooms(new RoomsViewModel());
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }, checkIfReady);
 
             CreateRoomTypeCommand = new RelayCommand(o =>

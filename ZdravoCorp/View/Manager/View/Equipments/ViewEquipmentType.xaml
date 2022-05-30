@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:p="clr-namespace:ZdravoCorp.Properties"
+             xmlns:p="clr-namespace:ZdravoCorp.View.Core"
              mc:Ignorable="d" 
              d:DesignHeight="667" d:DesignWidth="430">
     <Grid>
@@ -16,7 +16,7 @@
                  Width="274"
                  Style="{StaticResource ManagerTextBox}" 
                  Name="Name"
-                 Tag="{x:Static p:Resources.Name}"
+                 Tag="{p:Loc Name}"
                  Height="45"/>
 
         <TextBox HorizontalAlignment="Center"
@@ -26,11 +26,11 @@
             VerticalAlignment="Top" 
             Width="274"
             Style="{StaticResource ManagerTextBlock}"
-            Tag="{x:Static p:Resources.Description}"
+            Tag="{p:Loc Description}"
             x:Name="Description" 
             Height="137"/>
 
-        <CheckBox Content="{x:Static p:Resources.Disposable}" 
+        <CheckBox Content="{p:Loc Disposable}" 
                   HorizontalAlignment="Left" 
                   Margin="80,354,0,0" 
                   VerticalAlignment="Top"
@@ -41,7 +41,7 @@
                   />
 
 
-        <Button Content="{x:Static p:Resources.Add}" 
+        <Button Content="{p:Loc Add}" 
                 HorizontalAlignment="Left" 
                 Margin="348,559,0,0" 
                 VerticalAlignment="Top" 

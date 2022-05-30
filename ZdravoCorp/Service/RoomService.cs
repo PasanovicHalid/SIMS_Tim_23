@@ -18,9 +18,9 @@ namespace Service
         private static RoomService instance = null;
         private ActionService actionService;
         private static readonly object key = new object();
-        public Boolean CreateRoom(Room newRoom)
+        public void CreateRoom(Room newRoom)
         {
-            return RoomRepository.Instance.CreateRoom(newRoom);
+            RoomRepository.Instance.CreateRoom(newRoom);
         }
 
         public Room ReadRoom(int identifier)
@@ -33,24 +33,24 @@ namespace Service
             return RoomRepository.Instance.ReadRoomByIndex(index);
         }
 
-        public Boolean UpdateRoom(Room updatedRoom)
+        public void UpdateRoom(Room updatedRoom)
         {
-            return RoomRepository.Instance.UpdateRoom(updatedRoom);
+            RoomRepository.Instance.UpdateRoom(updatedRoom);
         }
 
-        public Boolean DeleteRoom(int identifier)
+        public void DeleteRoom(int identifier)
         {
-            return RoomRepository.Instance.DeleteRoom(identifier);
+            RoomRepository.Instance.DeleteRoom(identifier);
         }
 
-        public Boolean RenovateRoom(int identifier, DateTime start, DateTime end)
+        public void RenovateRoom(int identifier, DateTime start, DateTime end)
         {
-            return actionService.CreateAction(new Model.Action(ActionType.renovation, start, new RenovationAction(end, identifier, true)));
+            actionService.CreateAction(new Model.Action(ActionType.renovation, start, new RenovationAction(end, identifier, true)));
         }
 
-        public Boolean CombineRooms(Room combineInto, Room selectedRoom)
+        public void CombineRooms(Room combineInto, Room selectedRoom)
         {
-            return RoomRepository.Instance.CombineRooms(combineInto, selectedRoom);
+            RoomRepository.Instance.CombineRooms(combineInto, selectedRoom);
         }
 
         public List<Room> GetRoomsByInternalID(HashSet<int> identifiers)
@@ -63,19 +63,19 @@ namespace Service
             return RoomRepository.Instance.GetAllRooms();
         }
 
-        public Boolean CreateRoomType(Model.RoomType newRoomType)
+        public void CreateRoomType(Model.RoomType newRoomType)
         {
-            return RoomRepository.Instance.CreateRoomType(newRoomType);
+            RoomRepository.Instance.CreateRoomType(newRoomType);
         }
 
-        public Boolean UpdateRoomType(Model.RoomType roomType)
+        public void UpdateRoomType(Model.RoomType roomType)
         {
-            return RoomRepository.Instance.UpdateRoomType(roomType);
+            RoomRepository.Instance.UpdateRoomType(roomType);
         }
 
-        public Boolean DeleteRoomType(Model.RoomType roomType)
+        public void DeleteRoomType(Model.RoomType roomType)
         {
-            return RoomRepository.Instance.DeleteRoomType(roomType);
+            RoomRepository.Instance.DeleteRoomType(roomType);
         }
 
         public int GetMaxCountForEquipment(int id_room, int id_equipment)
@@ -83,9 +83,9 @@ namespace Service
             return RoomRepository.Instance.GetMaxCountForEquipment(id_room, id_equipment);
         }
 
-        public Boolean ChangeActualCountOfEquipment(int id_from_room, int id_equipment,int count)
+        public void ChangeActualCountOfEquipment(int id_from_room, int id_equipment,int count)
         {
-            return RoomRepository.Instance.ChangeActualCountOfEquipment(id_from_room, id_equipment, count);
+            RoomRepository.Instance.ChangeActualCountOfEquipment(id_from_room, id_equipment, count);
         }
 
         public Model.RoomType ReadRoomType(Model.RoomType roomType)
@@ -110,9 +110,9 @@ namespace Service
             return result;
         }
 
-        public Boolean AddEquipment(Equipment equipment, int id)
+        public void AddEquipment(Equipment equipment, int id)
         {
-            return RoomRepository.Instance.AddEquipment(equipment, id);
+            RoomRepository.Instance.AddEquipment(equipment, id);
         }
 
         public int GetRoomIndex(Model.Room room)

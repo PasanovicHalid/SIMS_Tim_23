@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:p="clr-namespace:ZdravoCorp.Properties"
+             xmlns:p="clr-namespace:ZdravoCorp.View.Core"
              mc:Ignorable="d" 
              d:DesignHeight="667" d:DesignWidth="430">
     <Grid>
@@ -14,7 +14,7 @@
                      VerticalAlignment="Top" 
                      Width="162"
                      Style="{StaticResource ManagerSearch}"
-                     Tag="{x:Static p:Resources.Search}"
+                     Tag="{p:Loc Search}"
                      Name="Search" 
                      Height="42"/>
         
@@ -36,11 +36,11 @@
                       VerticalGridLinesBrush="Transparent" 
                       >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="{x:Static p:Resources.Date}" Binding="{Binding ExecutionDateString}" Width="135"/>
-                <DataGridTextColumn Header="{x:Static p:Resources.Equipment}" Binding="{Binding Equipment}" Width="100"/>
-                <DataGridTextColumn Header="{x:Static p:Resources.From}" Binding="{Binding OutgoingRoom}" Width="*"/>
-                <DataGridTextColumn Header="{x:Static p:Resources.To}" Binding="{Binding IncomingRoom}" Width="*"/>
-                <DataGridTextColumn Header="{x:Static p:Resources.Amount}" Binding="{Binding Count}" Width="75"/>
+                <DataGridTextColumn Header="{p:Loc Date}" Binding="{Binding ExecutionDateString}" Width="135"/>
+                <DataGridTextColumn Header="{p:Loc Equipment}" Binding="{Binding Equipment}" Width="100"/>
+                <DataGridTextColumn Header="{p:Loc From}" Binding="{Binding OutgoingRoom}" Width="*"/>
+                <DataGridTextColumn Header="{p:Loc To}" Binding="{Binding IncomingRoom}" Width="*"/>
+                <DataGridTextColumn Header="{p:Loc Amount}" Binding="{Binding Count}" Width="75"/>
             </DataGrid.Columns>
             <DataGrid.InputBindings>
                 <MouseBinding Gesture="LeftDoubleClick" Command="{Binding ViewReservedCommand}"/>

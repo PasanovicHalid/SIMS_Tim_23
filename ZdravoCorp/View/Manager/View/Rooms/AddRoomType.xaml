@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ZdravoCorp.View.Manager.View"
-             xmlns:p="clr-namespace:ZdravoCorp.Properties"
+             xmlns:p="clr-namespace:ZdravoCorp.View.Core"
              mc:Ignorable="d" 
              d:DesignHeight="667" d:DesignWidth="430">
     <Grid>
@@ -17,10 +17,10 @@
                  Width="274"
                  Style="{StaticResource ManagerTextBox}" 
                  Name="Name"
-                 Tag="{x:Static p:Resources.Name}"
+                 Tag="{p:Loc Name}"
                  Height="45"/>
 
-        <Button Content="{x:Static p:Resources.Add}" 
+        <Button Content="{p:Loc Add}" 
                 HorizontalAlignment="Left" 
                 Margin="360,587,0,0" 
                 VerticalAlignment="Top" 

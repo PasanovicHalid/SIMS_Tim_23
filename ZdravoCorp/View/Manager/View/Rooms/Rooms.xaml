@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:ZdravoCorp.View.Manager.View"
              xmlns:viewModel="clr-namespace:ZdravoCorp.View.Manager.ViewModel" 
              xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
-             xmlns:p="clr-namespace:ZdravoCorp.Properties"
+             xmlns:p="clr-namespace:ZdravoCorp.View.Core"
              mc:Ignorable="d" 
              d:DesignHeight="667" d:DesignWidth="430">
     <Grid>
@@ -19,7 +19,7 @@
                 Style="{StaticResource ManagerButtons}">
             <StackPanel>
                 <svgc:SvgViewbox Source="\Resources\Icons\add-all.svg" Width="28" Height="25"/>
-                <Label  Content="{x:Static p:Resources.Add}" 
+                <Label  Content="{p:Loc Add}" 
                         Style="{DynamicResource ButtonLabel}" 
                         FontSize="8"
                         HorizontalContentAlignment="Center"
@@ -37,7 +37,7 @@
                 Style="{StaticResource ManagerButtons}">
             <StackPanel>
                 <svgc:SvgViewbox Source="\Resources\Icons\category.svg" Width="28" Height="25"/>
-                <Label  Content="{x:Static p:Resources.Types}" 
+                <Label  Content="{p:Loc Types}" 
                         Style="{DynamicResource ButtonLabel}" 
                         FontSize="8"
                         HorizontalContentAlignment="Center"
@@ -56,7 +56,7 @@
                 Command="{Binding RenovationsCommand}">
             <StackPanel>
                 <svgc:SvgViewbox Source="\Resources\Icons\timecard.svg" Width="28" Height="25"/>
-                <Label  Content="{x:Static p:Resources.Renovate}" 
+                <Label  Content="{p:Loc Renovate}" 
                         Style="{DynamicResource ButtonLabel}" 
                         FontSize="8"
                         HorizontalContentAlignment="Center"
@@ -75,7 +75,7 @@
                 Command="{Binding ReservedCommand}">
             <StackPanel>
                 <svgc:SvgViewbox Source="\Resources\Icons\booking-pending.svg" Width="28" Height="25"/>
-                <Label  Content="{x:Static p:Resources.Combine}" 
+                <Label  Content="{p:Loc Combine}" 
                         Style="{DynamicResource ButtonLabel}" 
                         FontSize="8"
                         HorizontalContentAlignment="Center"
@@ -103,11 +103,11 @@
                       SelectedIndex="{Binding SelectedIndex}"
                       SelectedItem="{Binding SelectedRoom}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="{x:Static p:Resources.Floor}" Binding="{Binding Floor}" ElementStyle="{StaticResource WrapText}" Width="55"/>
-                <DataGridTextColumn Header="{x:Static p:Resources.Designation}" Binding="{Binding DesignationCode}" ElementStyle="{StaticResource WrapText}" Width="*"/>
-                <DataGridTextColumn Header="{x:Static p:Resources.Size}" Binding="{Binding SurfaceArea}" ElementStyle="{StaticResource WrapText}" Width="60"/>
-                <DataGridTextColumn Header="{x:Static p:Resources.Room_Type}" Binding="{Binding RoomTypeString}" ElementStyle="{StaticResource WrapText}" Width="*"/>
-                <DataGridTextColumn Header="{x:Static p:Resources.Renovated}" Binding="{Binding Renovating}" ElementStyle="{StaticResource WrapText}" Width="*"/>
+                <DataGridTextColumn Header="{p:Loc Floor}" Binding="{Binding Floor}" ElementStyle="{StaticResource WrapText}" Width="55"/>
+                <DataGridTextColumn Header="{p:Loc Designation}" Binding="{Binding DesignationCode}" ElementStyle="{StaticResource WrapText}" Width="*"/>
+                <DataGridTextColumn Header="{p:Loc Size}" Binding="{Binding SurfaceArea}" ElementStyle="{StaticResource WrapText}" Width="60"/>
+                <DataGridTextColumn Header="{p:Loc Room Type}" Binding="{Binding RoomTypeString}" ElementStyle="{StaticResource WrapText}" Width="*"/>
+                <DataGridTextColumn Header="{p:Loc Renovated}" Binding="{Binding Renovating}" ElementStyle="{StaticResource WrapText}" Width="*"/>
             </DataGrid.Columns>
             <DataGrid.InputBindings>
                 <MouseBinding Gesture="LeftDoubleClick" Command="{Binding ViewRoomCommand}"/>
@@ -122,7 +122,7 @@
                      Width="155"
                      Style="{StaticResource ManagerSearch}" 
                      Name="Search"
-                     Tag="{x:Static p:Resources.Search}"
+                     Tag="{p:Loc Search}"
                      Height="42"/>
     </Grid>
 </UserControl>

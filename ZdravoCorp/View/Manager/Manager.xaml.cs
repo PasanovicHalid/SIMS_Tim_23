@@ -23,9 +23,20 @@ namespace ZdravoCorp.View.Manager
     {
         private AutoResetEvent autoEvent;
         private bool changed;
+        private string currentLanguage;
+
+        public string CurrentLanguage
+        {
+            get { return currentLanguage; }
+            set
+            {
+                currentLanguage = value;
+            }
+        }
         public Manager(AutoResetEvent autoEvent)
         {
             InitializeComponent();
+            this.CurrentLanguage = "en";
             this.DataContext = ContentViewModel.Instance;
             this.autoEvent = autoEvent;
             changed = false;
@@ -61,16 +72,16 @@ namespace ZdravoCorp.View.Manager
 
         private void Employess_Click(object sender, RoutedEventArgs e)
         {
-            if (changed)
+            var app = (App)Application.Current;
+            if (CurrentLanguage.Equals("en"))
             {
-                App.ChangeLanguage("en");
-                changed = false;
+                CurrentLanguage = "sr";
             }
             else
             {
-                App.ChangeLanguage("sr");
-                changed = true;
+                CurrentLanguage = "en";
             }
+            app.ChangeLanguage(CurrentLanguage);
         }
     }
 }
