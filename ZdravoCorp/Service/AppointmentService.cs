@@ -165,7 +165,112 @@ namespace Service
             }
             return appointments;
         }
+        public List<Appointment> sugAppointments(WantedAppointment wantedAppointment)
+        {
+            if (wantedAppointment.FirstTime)
+            {
+                appointments = new List<Appointment>();
+            }
+            //doktor ima prioritet
+            if (wantedAppointment.Priority)
+            {
+                FindAppointmentsWithDoctorPriority(wantedAppointment);
+            }
+            else
+            {
+                FindAppointmentsWithDatePriority(wantedAppointment);
+            }
+            return appointments;
+        }
+        public void FindAppointmentsWithDoctorPriority(WantedAppointment wantedAppointment)
+        {
+            DateTime correctStart = SetStartTime(wantedAppointment);
+            DateTime correctEnd = correctStart.Date + new TimeSpan(correctStart.Hour, correctStart.Minute + 45, correctStart.Second);
+            SuggestAppointmentsForOneWorkingDay(wantedAppointment, correctStart);
+            if (appointments.Count < MAX_SUGGESTIONS)
+            {
+                SetDateTimeForNextDay(wantedAppointment);
+                wantedAppointment.FirstTime = false;
+                sugAppointments(wantedAppointment);
+            }
+        }
+        public void FindAppointmentsWithDatePriority(WantedAppointment wantedAppointment)
+        {
+            DateTime resetStart = wantedAppointment.Start;
+            GoThroughAllDoctors(wantedAppointment, resetStart);
+            if (appointments.Count < MAX_SUGGESTIONS)
+            {
+                SetDateTimeForNextDay(wantedAppointment);
+                wantedAppointment.FirstTime = false;
+                sugAppointments(wantedAppointment);
+            }
 
+        }
+        public void GoThroughAllDoctors(WantedAppointment wantedAppointment, DateTime resetStart)
+        {
+            List<Doctor> doctors = DoctorService.Instance.GetAllDoctors();
+            foreach (Doctor d in doctors)
+            {
+                DateTime correctStart = SetStartTimeForDatePriority(resetStart, d);
+                DateTime correctEnd = correctStart.Date + new TimeSpan(correctStart.Hour, correctStart.Minute + 45, correctStart.Second);
+                SuggestAppointmentsForOneWorkingDay(wantedAppointment, correctStart, d);
+            }
+        }
+        public void SuggestAppointmentsForOneWorkingDay(WantedAppointment wantedAppointment, DateTime correctStart, Doctor d = null)
+        {
+            d = d == null ? d = wantedAppointment.Doctor : d;
+            while ((correctStart.TimeOfDay >= d.workStartTime.TimeOfDay) && (correctStart.AddMinutes(45).TimeOfDay <= d.workEndTime.TimeOfDay))
+            {
+                if (DoctorService.Instance.IsDoctorFree(wantedAppointment.Doctor.Id, correctStart, correctStart.AddMinutes(45)))
+                {
+                    Room room = RoomService.Instance.findFreeRoom(correctStart, correctStart.AddMinutes(45));
+                    if (room != null)
+                    {
+                        wantedAppointment.Doctor = d;
+                        AddAppointmentToSuggestedAppointments(correctStart, room, wantedAppointment);
+                    }
+                }
+                correctStart = SetTimeForNextAppointment(correctStart, correctStart.AddMinutes(45));
+            }
+        }
+        public DateTime SetStartTimeForDatePriority(DateTime resetStart, Doctor doctor)
+        {
+            TimeSpan ts = new TimeSpan(doctor.workStartTime.Hour, doctor.workStartTime.Minute, doctor.workStartTime.Second);
+            DateTime correctStartTime = resetStart.Date + ts;
+            return correctStartTime;
+        }
+        public DateTime SetStartTime(WantedAppointment wantedAppointment)
+        {
+            DateTime correctStartTime = wantedAppointment.Start;
+            TimeSpan ts = new TimeSpan(wantedAppointment.Doctor.workStartTime.Hour, wantedAppointment.Doctor.workStartTime.Minute, wantedAppointment.Doctor.workStartTime.Second);
+            correctStartTime = correctStartTime.Date + ts;
+            return correctStartTime;
+        }
+        public void AddAppointmentToSuggestedAppointments(DateTime start, Room room, WantedAppointment wantedAppointment)
+        {
+            Appointment appointment = new Appointment();
+            appointment.Doctor = wantedAppointment.Doctor;
+            appointment.StartDate = start;
+            appointment.EndDate = start.AddMinutes(45);
+            appointment.Room = room;
+            appointment.Patient = wantedAppointment.Patient;
+            appointments.Add(appointment);
+        }
+        public DateTime SetTimeForNextAppointment(DateTime start, DateTime end)
+        {
+            TimeSpan ts2 = new TimeSpan(start.Hour, start.Minute + 45, start.Second);
+            TimeSpan ts3 = new TimeSpan(end.Hour, end.Minute + 45, end.Second);
+            start = start.Date + ts2;
+            end = end.Date + ts3;
+            return start;
+        }
+        public void SetDateTimeForNextDay(WantedAppointment wantedAppointment)
+        {
+            TimeSpan ts2 = new TimeSpan(1, 0, 0, 0);
+            TimeSpan ts3 = new TimeSpan(1, 0, 0, 0);
+            wantedAppointment.Start = wantedAppointment.Start.Date + ts2;
+            wantedAppointment.End = wantedAppointment.End.Date + ts3;
+        }
         public List<Appointment> doctorsAppointments(int id)
         {
             List<Appointment> result = new List<Appointment>();

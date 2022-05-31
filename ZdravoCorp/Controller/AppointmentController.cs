@@ -62,6 +62,9 @@ namespace Controller
         {
             return AppointmentService.Instance.GetPastAppointmentsForPatient(patient);
         }
-
+        public List<Appointment> sugAppointment(WantedAppointment wantedAppointment)
+        {
+            return AppointmentService.Instance.sugAppointments(wantedAppointment);
+        }
     }
 }
