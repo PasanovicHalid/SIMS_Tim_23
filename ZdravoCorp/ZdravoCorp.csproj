@@ -112,6 +112,7 @@
     <Compile Include="Model\Suggestion.cs" />
     <Compile Include="Model\RenovationAction.cs" />
     <Compile Include="Model\Vacation.cs" />
+    <Compile Include="Model\WantedAppointment.cs" />
     <Compile Include="Properties\Resources.sr.Designer.cs">
       <DependentUpon>Resources.sr.resx</DependentUpon>
       <AutoGen>True</AutoGen>
