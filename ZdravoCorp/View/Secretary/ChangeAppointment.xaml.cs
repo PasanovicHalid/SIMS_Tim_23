@@ -172,7 +172,7 @@ namespace ZdravoCorp.View.Secretary
             date.AddMinutes((int)doctorr.WorkStartTime.Minute);
             date.AddSeconds((int)doctorr.WorkStartTime.Second);
             Model.Patient patient = patientController.ReadPatientByJmbg(jmbg);
-            apps = appointmentController.SuggestAppointments(doctorr, date, date.AddMinutes(45), true, true, patient);
+            apps = appointmentController.sugAppointment(new WantedAppointment(doctor, date, date.AddMinutes(45), true, true, patient));
 
             AppointmentSuggestChange window = new AppointmentSuggestChange(apps, exRoom, exApp);
             window.ShowDialog();

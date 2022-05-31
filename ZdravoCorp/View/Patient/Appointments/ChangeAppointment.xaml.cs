@@ -96,11 +96,13 @@ namespace ZdravoCorp.View.Patient.Appointments
             {
                 if (DateRB.IsChecked == true)
                 {
-                    apps = appointmentController.SuggestAppointments(doctor, date, date.AddMinutes(45), false, true, patient);
+                    apps = appointmentController.sugAppointment(new WantedAppointment(doctor, date, date.AddMinutes(45), false, true, patient));
+                    //apps = appointmentController.SuggestAppointments(doctor, date, date.AddMinutes(45), false, true, patient);
                 }
                 else
                 {
-                    apps = appointmentController.SuggestAppointments(doctor, date, date.AddMinutes(45), true, true, patient);
+                    apps = appointmentController.sugAppointment(new WantedAppointment(doctor, date, date.AddMinutes(45), true, true, patient));
+                    //apps = appointmentController.SuggestAppointments(doctor, date, date.AddMinutes(45), true, true, patient);
 
                 }
                 AppointmentsCollection = new ObservableCollection<Appointment>(apps);
