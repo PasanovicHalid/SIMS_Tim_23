@@ -140,10 +140,13 @@ namespace Service
         {
             Room freeRoom = null;
 
-            
             List<Room> rooms = GetAllRooms();
             foreach (Room room in rooms)
             {
+                if(room.RoomType.Equals("Storage Room") || room.RoomType.Equals("Waiting Room") || room.RoomType.Equals("Meeting Room"))
+                {
+                    break;
+                }
                 List<DateTime> datesStart = new List<DateTime>();
                 List<DateTime> datesEnd = new List<DateTime>();
 
@@ -151,18 +154,6 @@ namespace Service
                 Boolean renovationOk = false;
                 foreach (Appointment a in room.Appointment)
                 {
-                    //if ((start < a.StartDate) && (end < a.StartDate))
-                    //{
-                    //    freeRoom = room;
-                    //    appOk = true;
-                    //    break;
-                    //}
-                    //else if ((start > a.EndDate))
-                    //{
-                    //    freeRoom = room;
-                    //    appOk = true;
-                    //    break;
-                    //}
                     datesStart.Add(a.StartDate);
                     datesEnd.Add(a.endDate);
                 }
@@ -182,6 +173,6 @@ namespace Service
             
             return freeRoom;
         }
-        
+     
     }
 }
