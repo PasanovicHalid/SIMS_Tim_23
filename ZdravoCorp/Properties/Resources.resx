@@ -219,6 +219,12 @@
   <data name="EquipmentDoesntExist" xml:space="preserve">
     <value>Equipment doesnt exist in database</value>
   </data>
+  <data name="EquipmentDoesntExists" xml:space="preserve">
+    <value>Equipment Type doesnt exist in database</value>
+  </data>
+  <data name="EquipmentNameExists" xml:space="preserve">
+    <value>Equipment name already exists</value>
+  </data>
   <data name="Error" xml:space="preserve">
     <value>Error</value>
   </data>

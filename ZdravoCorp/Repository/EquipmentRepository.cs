@@ -7,6 +7,7 @@ using Controller;
 using Model;
 using System;
 using System.Collections.Generic;
+using ZdravoCorp.Exceptions;
 
 namespace Repository
 {
@@ -50,119 +51,38 @@ namespace Repository
             throw new NotImplementedException();
         }
 
-        public Boolean CreateEquipmentType(EquipmentType newEquipmentType)
+        public void CreateEquipmentType(EquipmentType newEquipmentType)
         {
             lock (key)
             {
-                Random random = new Random();
-                do
-                {
-                    newEquipmentType.Identifier = random.Next();
-                }
-                while (idMap.Contains(newEquipmentType.Identifier));
-
                 List<EquipmentType> equipmentTypes = serializer.FromCSV(dbPath);
-
-                //Checking if Name of EquipmentType already exists
-                bool exists = false;
-                foreach (EquipmentType type in equipmentTypes)
-                {
-                    if (newEquipmentType.Name.Equals(type.Name))
-                    {
-                        exists = true;
-                        break;
-                    }
-                }
-
-                if (!exists)
-                {
-                    equipmentTypes.Add(newEquipmentType);
-                    serializer.ToCSV(dbPath, equipmentTypes);
-                    idMap.Add(newEquipmentType.Identifier);
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                newEquipmentType.Identifier = GenerateID();
+                CheckIfEquipmentNameExists(newEquipmentType.Name, equipmentTypes);
+                serializer.ToCSVAppend(dbPath,new List<EquipmentType> { newEquipmentType });
+                idMap.Add(newEquipmentType.Identifier);
             }
         }
 
-        public Boolean UpdateEquipmentType(EquipmentType equipmentType)
+        public void UpdateEquipmentType(EquipmentType equipmentType)
         {
             lock (key)
             {
                 List<EquipmentType> equipmentTypes = serializer.FromCSV(dbPath);
-
-                //Checking if Name of EquipmentType already exists
-                bool exists = false;
-                foreach (EquipmentType type in equipmentTypes)
-                {
-                    if (equipmentType.Name.Equals(type.Name) && equipmentType.Identifier != type.Identifier)
-                    {
-                        exists = true;
-                        break;
-                    }
-                }
-
-                if (!exists)
-                {
-                    bool found = false;
-                    foreach (EquipmentType type in equipmentTypes)
-                    {
-                        if (type.Identifier == equipmentType.Identifier)
-                        {
-                            equipmentTypes.Remove(type);
-                            found = true;
-                            break;
-                        }
-                    }
-                    if (found)
-                    {
-                        //Publishing changes to DB
-                        equipmentTypes.Add(equipmentType);
-                        serializer.ToCSV(dbPath, equipmentTypes);
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
-                else
-                {
-                    return false;
-                }
+                CheckIfNameOfChangedEquipmentTypeExists(equipmentType, equipmentTypes);
+                SwapEquipmentByID(equipmentType, equipmentTypes);
+                equipmentTypes.Add(equipmentType);
+                serializer.ToCSV(dbPath, equipmentTypes);
             }
         }
 
-        public Boolean DeleteEquipmentType(int id)
+        public void DeleteEquipmentType(int id)
         {
             lock (key)
             {
                 List<EquipmentType> equipmentTypes = serializer.FromCSV(dbPath);
-
-                bool deleted = false;
-                foreach (EquipmentType type in equipmentTypes)
-                {
-                    if (type.Identifier == id)
-                    {
-                        equipmentTypes.Remove(type);
-                        deleted = true;
-                        break;
-                    }
-                }
-
-                if (!deleted)
-                {
-                    serializer.ToCSVAppend(dbPath, equipmentTypes);
-                    idMap.Remove(id);
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                RemoveEquipmentType(id, equipmentTypes);
+                serializer.ToCSV(dbPath, equipmentTypes);
+                idMap.Remove(id);
             }
         }
 
@@ -171,7 +91,6 @@ namespace Repository
             lock (key)
             {
                 List<EquipmentType> equipmentTypes = serializer.FromCSV(dbPath);
-
                 foreach (EquipmentType type in equipmentTypes)
                 {
                     if (type.Identifier == id)
@@ -179,7 +98,7 @@ namespace Repository
                         return type;
                     }
                 }
-                return null;
+                throw new LocalisedException("EquipmentDoesntExists");
             }
         }
 
@@ -188,7 +107,6 @@ namespace Repository
             lock (key)
             {
                 List<EquipmentType> equipmentTypes = serializer.FromCSV(dbPath);
-
                 foreach (EquipmentType type in equipmentTypes)
                 {
                     if (type.Name == name)
@@ -196,7 +114,7 @@ namespace Repository
                         return type;
                     }
                 }
-                return null;
+                throw new LocalisedException("EquipmentDoesntExists");
             }
         }
 
@@ -208,11 +126,70 @@ namespace Repository
             }
         }
 
+        private void RemoveEquipmentType(int id, List<EquipmentType> types)
+        {
+            foreach (EquipmentType type in types)
+            {
+                if (type.Identifier == id)
+                {
+                    types.Remove(type);
+                    return;
+                }
+            }
+            throw new LocalisedException("EquipmentDoesntExists");
+        }
+
+        private int GenerateID()
+        {
+            Random random = new Random();
+            int id;
+            do
+            {
+                id = random.Next();
+            }
+            while (idMap.Contains(id));
+            return id;
+        }
+
+        private void CheckIfEquipmentNameExists(string name, List<EquipmentType> types)
+        {
+            foreach (EquipmentType type in types)
+            {
+                if (type.Name == name)
+                {
+                    throw new LocalisedException("EquipmentNameExists");
+                }
+            }
+        }
+
+        private void CheckIfNameOfChangedEquipmentTypeExists(EquipmentType type, List<EquipmentType> types)
+        {
+            foreach (EquipmentType it in types)
+            {
+                if (type.Name.Equals(type.Name) && type.Identifier != type.Identifier)
+                {
+                    throw new LocalisedException("EquipmentNameExists");
+                }
+            }
+        }
+
+        private void SwapEquipmentByID(EquipmentType type, List<EquipmentType> types)
+        {
+            for (int i = 0; i < types.Count; i++)
+            {
+                if (types[i].Identifier == type.Identifier)
+                {
+                    types[i] = type;
+                    return;
+                }
+            }
+            throw new LocalisedException("EquipmentDoesntExists");
+        }
+
         public EquipmentRepository()
         {
             idMap = new HashSet<int>();
             List<EquipmentType> rooms = serializer.FromCSV(dbPath);
-
             foreach (EquipmentType it in rooms)
             {
                 idMap.Add(it.Identifier);
