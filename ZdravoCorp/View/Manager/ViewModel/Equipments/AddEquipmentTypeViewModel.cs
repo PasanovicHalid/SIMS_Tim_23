@@ -84,14 +84,15 @@ namespace ZdravoCorp.View.Manager.ViewModel.Equipments
 
             AddViewCommand = new RelayCommand(o =>
             {
-                if (!equipmentController.CreateEquipmentType(new EquipmentTypeModel(Name, Description, Disposable)))
+                try
                 {
-                    MessageBox.Show("Nije uspesno dodat element", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                else
-                {
+                    equipmentController.CreateEquipmentType(new EquipmentTypeModel(Name, Description, Disposable));
                     parent.Update();
                     CurrentView = new AddEquipment(parent);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             });
         }
