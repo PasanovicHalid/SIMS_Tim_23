@@ -66,7 +66,7 @@ namespace ZdravoCorp.View.Doctor
             textBox1.Text = pomocna.startDate.ToString();
             textBox2.Text = pomocna.endDate.ToString();
             PatientsCB.SelectedIndex = pomocna.DoctorID;
-            int index = roomController.GetRoomIndex(pomocna.Room);
+            int index = pomocna.Room.Identifier;
             RoomsCB.SelectedIndex = index;
             id = pomocna.Id;
             pomocniDoktor = pomocna.Doctor;

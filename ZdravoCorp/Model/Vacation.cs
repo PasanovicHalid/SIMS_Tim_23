@@ -17,6 +17,7 @@ namespace Model
         private String vacationCause;
         private Doctor doctor;
         private Status status;
+        private String comment;
 
         public int Id { get { return id; } set { id = value; } } 
 
@@ -29,6 +30,8 @@ namespace Model
         public Doctor Doctor { get { return doctor; } set { doctor = value; } }
 
         public int DoctorID { get { return doctor.Id; } }
+
+        public string Comment { get { return comment; } set { comment = value; } }
 
         public Status Status
         {
@@ -49,6 +52,7 @@ namespace Model
             VacationCause = vacationCause;
             Doctor = doctor;
             Status = Status.PENDING;
+            Comment = "";
         }
 
         public Vacation()
@@ -66,6 +70,8 @@ namespace Model
             result.Add(vacationCause);
             result.Add(DoctorID.ToString());
             result.Add(Status.ToString());
+            if(Status == Status.REJECTED)
+                result.Add(Comment);
             return result;
         }
 
@@ -80,6 +86,10 @@ namespace Model
             Controller.DoctorController doctorController = new Controller.DoctorController();
             Doctor = doctorController.ReadDoctor(int.Parse(values[i++]));
             Status = (Status)Enum.Parse(typeof(Status), values[i++]);
+            if (Status == Status.REJECTED)
+            {
+                Comment = values[i++];  
+            }
         }
     }
 }

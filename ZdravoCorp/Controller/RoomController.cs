@@ -27,11 +27,6 @@ namespace Controller
             return roomService.ReadRoom(identifier);
         }
 
-        public int GetRoomIndex(Model.Room room)
-        {
-            return RoomService.Instance.GetRoomIndex(room);
-        }
-
         public void UpdateRoom(Room updatedRoom)
         {
             roomService.UpdateRoom(updatedRoom);

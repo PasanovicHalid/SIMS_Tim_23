@@ -30,7 +30,7 @@ namespace Service
 
         public Room ReadRoomByIndex(int index)
         {
-            return RoomRepository.Instance.ReadRoomByIndex(index);
+            return RoomRepository.Instance.ReadRoom(index);
         }
 
         public void UpdateRoom(Room updatedRoom)
