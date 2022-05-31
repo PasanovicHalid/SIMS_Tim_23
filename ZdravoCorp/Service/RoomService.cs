@@ -115,11 +115,6 @@ namespace Service
             RoomRepository.Instance.AddEquipment(equipment, id);
         }
 
-        public int GetRoomIndex(Model.Room room)
-        {
-            return RoomRepository.Instance.GetRoomIndex(room);
-        }
-
         public RoomService()
         {
             actionService = new ActionService();

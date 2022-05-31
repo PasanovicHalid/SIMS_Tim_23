@@ -54,42 +54,6 @@ namespace Repository
             }
         }
 
-        public Model.Room ReadRoomByIndex(int index)
-        {
-            lock (key)
-            {
-                List<Room> rooms = serializerRoom.FromCSV(dbPath);
-                int i = 0;
-                foreach (Room room in rooms)
-                {
-                    if (i == index)
-                    {
-                        return room;
-                    }
-                    i++;
-                }
-                return null;
-            }
-        }
-
-        public int GetRoomIndex(Model.Room room)
-        {
-            lock (key)
-            {
-                List<Room> rooms = serializerRoom.FromCSV(dbPath);
-                int i = 0;
-                foreach (Room rom in rooms)
-                {
-                    if (room.Identifier == rom.Identifier)
-                    {
-                        return i;
-                    }
-                    i++;
-                }
-                return -1;
-            }
-        }
-
         public Model.Room ReadRoom(int identifier)
         {
             lock (key)
@@ -118,26 +82,6 @@ namespace Repository
                 serializerRoom.ToCSV(dbPath, rooms);
             }
         }
-
-        private void AddEquipmentToRoom(Room room, Equipment equipment)
-        {
-            bool exists = false;
-            for (int i = 0; i < room.Equipment.Count; i++)
-            {
-                if (room.Equipment[i].Identifier == equipment.Identifier)
-                {
-                    room.Equipment[i].Count += equipment.Count;
-                    room.Equipment[i].Actual_count += equipment.Actual_count;
-                    exists = true;
-                    break;
-                }
-            }
-            if (!exists)
-            {
-                room.Equipment.Add(equipment);
-            }
-        }
-
         public void AddEquipment(Equipment equipment, int room_id)
         {
             lock (key)
@@ -193,11 +137,11 @@ namespace Repository
 
         private void SwapRoomTypes(RoomType swappedInto, RoomType type)
         {
-
+            throw new NotImplementedException();
         }
 
         //Ova funckija ima logicku gresku ne koristiti
-        //Greska je to sto roomType samo sadryi izmenjeno ime
+        //Greska je to sto roomType samo sadrzi izmenjeno ime
         //a ne mozemo da nadjemo prethodno ime u bazi jer nemamo taj podatak
         public Boolean UpdateRoomType(Model.RoomType roomType)
         {
@@ -271,6 +215,17 @@ namespace Repository
             lock (key)
             {
                 return serializerRoomType.FromCSV(dbRoomTypePath);
+            }
+        }
+
+        public void DeleteRoom(int id)
+        {
+            lock (key)
+            {
+                List<Room> rooms = serializerRoom.FromCSV(dbPath);
+                FindAndDeleteRoomByID(id, rooms);
+                serializerRoom.ToCSV(dbPath, rooms);
+                idMap.Remove(id);
             }
         }
 
@@ -356,17 +311,6 @@ namespace Repository
             throw new LocalisedException("RoomIdDoesntExist");
         }
 
-        public void DeleteRoom(int id)
-        {
-            lock (key)
-            {
-                List<Room> rooms = serializerRoom.FromCSV(dbPath);
-                FindAndDeleteRoomByID(id, rooms);
-                serializerRoom.ToCSV(dbPath, rooms);
-                idMap.Remove(id);
-            }
-        }
-
         private Room FindRoomByID(int id, List<Room> rooms)
         {
             for (int i = 0; i < rooms.Count; i++)
@@ -439,6 +383,25 @@ namespace Repository
                 }
             }
             throw new LocalisedException("EquipmentDoesntExist");
+        }
+
+        private void AddEquipmentToRoom(Room room, Equipment equipment)
+        {
+            bool exists = false;
+            for (int i = 0; i < room.Equipment.Count; i++)
+            {
+                if (room.Equipment[i].Identifier == equipment.Identifier)
+                {
+                    room.Equipment[i].Count += equipment.Count;
+                    room.Equipment[i].Actual_count += equipment.Actual_count;
+                    exists = true;
+                    break;
+                }
+            }
+            if (!exists)
+            {
+                room.Equipment.Add(equipment);
+            }
         }
 
         public RoomRepository()

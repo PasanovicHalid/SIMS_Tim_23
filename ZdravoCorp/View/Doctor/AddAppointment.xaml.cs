@@ -63,7 +63,7 @@ namespace ZdravoCorp.View.Doctor
             DateTime date = DateTime.Parse(textBox1.Text,dateTimeFormat);
             DateTime date2 = DateTime.Parse(textBox2.Text,dateTimeFormat);
             Model.Patient newPatient = patientController.ReadPatient(PatientsCB.SelectedIndex);
-            Model.Room newRoom = roomController.ReadRoomByIndex(RoomsCB.SelectedIndex);
+            Model.Room newRoom = roomController.ReadRoom(RoomsCB.SelectedIndex);
 
             Model.Appointment newAppointment = new Model.Appointment(date, date2, currentDoctor, newRoom, newPatient);
             appointmentController.CreateAppointment(newAppointment);
