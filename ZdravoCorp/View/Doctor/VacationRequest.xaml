@@ -34,14 +34,13 @@
         <Button x:Name="medsButton" Content="Medications List" HorizontalAlignment="Left" Margin="202,0,0,0" VerticalAlignment="Top" Height="27" Width="100" Click="medsButton_Click"/>
         <Button x:Name="vacationRequestButton" Content="Vacation Request" HorizontalAlignment="Left" Margin="301,0,0,0" VerticalAlignment="Top" Height="27" Width="99" Click="vacationRequestButton_Click"/>
         <Button x:Name="kartoniButton" Content="Medical Records" HorizontalAlignment="Left" Margin="399,0,0,0" VerticalAlignment="Top" Width="103" Click="kartoniButton_Click" Height="27"/>
-        <DataGrid x:Name="CommentsGrid" ItemsSource="{Binding}"
+        <DataGrid x:Name="vacationsGrid" ItemsSource="{Binding}"
             AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" Margin="462,82,47,66">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Comment ID" Binding="{Binding Id}" Width="103"/>
-                <DataGridTextColumn Header="Comment" Binding="{Binding Comment}" Width="103"/>
-                <DataGridTextColumn Header="Appointment ID" Binding="{Binding AppointmentID}" Width="103" />
-                <DataGridTextColumn Header="Doctor ID" Binding="{Binding DoctorID}" Width="103"/>
-
+                <DataGridTextColumn Header="Start Date" Binding="{Binding VacationStartDate}" Width="103"/>
+                <DataGridTextColumn Header="End Date" Binding="{Binding VacationEndDate}" Width="103"/>
+                <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="103" />
+                <DataGridTextColumn Header="Comment" Binding="{Binding Comment}" Width="103" />
             </DataGrid.Columns>
         </DataGrid>
 

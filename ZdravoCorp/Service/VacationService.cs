@@ -37,6 +37,16 @@ namespace Service
             return VacationRepository.Instance.DeleteVacation(id);
         }
 
+        public Boolean AcceptVacation(Doctor doctor, Vacation vacation)
+        {
+            return VacationRepository.Instance.AcceptVacation(doctor, vacation);
+        }
+
+        public Boolean RejectVacation(Doctor doctor, Vacation vacation,String comment)
+        {
+            return VacationRepository.Instance.RejectVacation(doctor, vacation,comment);
+        }
+
         public VacationService()
         { }
 

@@ -96,6 +96,20 @@ namespace Repository
             return false;
         }
 
+        public Boolean AcceptVacation(Doctor doctor,Vacation vacation)
+        {
+            vacation.Status = Status.ACCEPTED;
+            vacation.Comment = "/";
+            return UpdateVacation(vacation);
+        }
+
+        public Boolean RejectVacation(Doctor doctor,Vacation vacation, String comment)
+        {
+            vacation.Status = Status.REJECTED;
+            vacation.Comment = comment;
+            return UpdateVacation(vacation);
+        }
+
         public VacationRepository()
         { }
 
