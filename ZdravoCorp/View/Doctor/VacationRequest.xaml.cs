@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Model;
 using Controller;
+using System.Collections.ObjectModel;
 
 namespace ZdravoCorp.View.Doctor
 {
@@ -23,10 +24,18 @@ namespace ZdravoCorp.View.Doctor
     {
         Model.Doctor currentDoctor;
         VacationController vacationController = new VacationController();
+
+        public ObservableCollection<Model.Vacation> vacations
+        {
+            get;
+            set;
+        }
+
         public VacationRequest(Model.Doctor temp)
         {
             InitializeComponent();
             currentDoctor = temp;
+            vacationsGrid.DataContext = currentDoctor.Vacations;
         }
 
         private void odustaniButton_Click(object sender, RoutedEventArgs e)

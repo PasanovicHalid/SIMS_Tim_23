@@ -13,7 +13,7 @@ namespace Model
     public class Doctor : Employee, Serializable
     {
         private List<Appointment> appointment = new List<Appointment>();
-
+        private List<Vacation> vacations = new List<Vacation>();
 
         public Doctor()
         {
@@ -59,6 +59,25 @@ namespace Model
             }
         }
 
+        public List<Vacation> Vacations
+        {
+            get 
+            {
+                if(vacations == null)
+                    vacations = new List<Vacation>();
+                return vacations; 
+            }
+            set
+            {
+                RemoveAllVacations();
+                if(value != null)
+                {
+                    foreach (Vacation oVacation in value)
+                        AddVacation(oVacation);
+                }
+            }
+        }
+
         /// <summary>
         /// Add a new Appointment in the collection
         /// </summary>
@@ -73,6 +92,18 @@ namespace Model
             {
                 this.appointment.Add(newAppointment);
                 
+            }
+        }
+
+        public void AddVacation(Vacation newVacation)
+        {
+            if (newVacation == null)
+                return;
+            if(this.vacations == null)
+                this.vacations = new List<Vacation>();
+            if(!this.vacations.Contains(newVacation))
+            {
+                this.vacations.Add(newVacation);
             }
         }
 
@@ -91,6 +122,30 @@ namespace Model
                 }
         }
 
+        public void RemoveVacation(Vacation oldVacation)
+        {
+            if (oldVacation == null)
+                return;
+            if (this.vacations != null)
+                if (this.vacations.Contains(oldVacation))
+                {
+                    this.vacations.Remove(oldVacation);
+                }
+        }
+
+        public void UpdateVacation(Vacation vacation)
+        {
+            for(int j = 0; j < vacations.Count; j++)
+            {
+                if (vacations[j].Id == vacation.Id)
+                {
+                    RemoveVacation(vacations[j]);
+                    AddVacation(vacation);
+                    return;
+                }    
+            }
+        }
+
         /// <summary>
         /// Remove all instances of Appointment from the collection
         /// </summary>
@@ -107,6 +162,20 @@ namespace Model
                 tmpAppointment.Clear();
             }
         }
+
+        public void RemoveAllVacations()
+        {
+            if (vacations != null)
+            {
+                System.Collections.ArrayList tmpVacations = new System.Collections.ArrayList();
+                foreach (Vacation oldVacation in vacations)
+                    tmpVacations.Add(oldVacation);
+                vacations.Clear();
+
+                tmpVacations.Clear();
+            }
+        }
+
         private DoctorType doctorType;
 
         /// <summary>
@@ -282,6 +351,18 @@ namespace Model
             result.Add(vacationEndTime.ToString());
             result.Add(vacationDays.ToString());
             result.AddRange(DoctorType.ToCSV());
+            if(vacations==null)
+            {
+                result.Add(nf.ToString());
+            }
+            else
+            {
+                result.Add(vacations.Count.ToString());
+                foreach(Vacation vacation in vacations)
+                {
+                    result.Add(vacation.Id.ToString());
+                }
+            }
             return result;
         }
 
@@ -324,6 +405,23 @@ namespace Model
             vacationEndTime = DateTime.Parse(values[i++]);
             vacationDays = int.Parse(values[i++]);
             doctorType = new DoctorType(values[i++]);
+            count = int.Parse(values[i++]);
+            List<int> vacationsIDs = new List<int>();
+            for (int j = 0; j < count; j++)
+            {
+                vacationsIDs.Add(int.Parse(values[i++]));
+            }
+
+            convertToVacations(vacationsIDs);
+        }
+
+        public void convertToVacations(List<int> list)
+        {
+            Controller.VacationController vacationController = new Controller.VacationController();
+            for(int i = 0; i < list.Count; i++)
+            {
+                vacations.Add(vacationController.ReadVacation(list[i]));
+            }
         }
 
     }

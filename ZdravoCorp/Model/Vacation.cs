@@ -52,7 +52,12 @@ namespace Model
             VacationCause = vacationCause;
             Doctor = doctor;
             Status = Status.PENDING;
-            Comment = "";
+            Comment = "/";
+        }
+
+        public Vacation(int id)
+        {
+            Id = id;
         }
 
         public Vacation()
@@ -83,8 +88,7 @@ namespace Model
             VacationStartDate = DateTime.Parse(values[i++], dateTimeFormat);
             VacationEndDate = DateTime.Parse(values[i++], dateTimeFormat);
             vacationCause = values[i++];
-            Controller.DoctorController doctorController = new Controller.DoctorController();
-            Doctor = doctorController.ReadDoctor(int.Parse(values[i++]));
+            Doctor = new Doctor(int.Parse(values[i++]));
             Status = (Status)Enum.Parse(typeof(Status), values[i++]);
             if (Status == Status.REJECTED)
             {

@@ -37,6 +37,16 @@ namespace Controller
             return VacationService.Instance.DeleteVacation(id);
         }
 
+        public Boolean AcceptVacation(Doctor doctor,Vacation vacation)
+        {
+            return VacationService.Instance.AcceptVacation(doctor, vacation);
+        }
+
+        public Boolean RejectVacation(Doctor doctor, Vacation vacation,String comment)
+        {
+            return VacationService.Instance.RejectVacation(doctor, vacation,comment);
+        }
+
         public VacationController()
         { }
 
