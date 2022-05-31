@@ -15,7 +15,7 @@ namespace Service
     {
         public const int MAX_SUGGESTIONS = 30;
         public const int MAX_ITERATIONS = 10;
-        private int num_of_iterations = 0;
+        private int numOfIterations = 0;
         private static AppointmentService instance = null;
         List<Appointment> appointments = new List<Appointment>();
         
@@ -65,6 +65,7 @@ namespace Service
         {
             if (wantedAppointment.FirstTime)
             {
+                numOfIterations = 0;
                 appointments = new List<Appointment>();
                 wantedAppointment.FirstTime = false;
             }
@@ -84,9 +85,9 @@ namespace Service
             DateTime correctStart = SetStartTime(wantedAppointment);
             DateTime correctEnd = correctStart.Date + new TimeSpan(correctStart.Hour, correctStart.Minute + 45, correctStart.Second);
             SuggestAppointmentsForOneWorkingDay(wantedAppointment, correctStart);
-            if (appointments.Count < MAX_SUGGESTIONS && num_of_iterations < MAX_ITERATIONS) 
+            if (appointments.Count < MAX_SUGGESTIONS && numOfIterations < MAX_ITERATIONS) 
             {
-                num_of_iterations++;
+                numOfIterations++;
                 SetDateTimeForNextDay(wantedAppointment);
                 SuggestAppointments(wantedAppointment);
             }
@@ -96,9 +97,9 @@ namespace Service
         {
             DateTime resetStart = wantedAppointment.Start;
             GoThroughAllDoctors(wantedAppointment, resetStart);
-            if (appointments.Count < MAX_SUGGESTIONS && num_of_iterations < MAX_ITERATIONS)
+            if (appointments.Count < MAX_SUGGESTIONS && numOfIterations < MAX_ITERATIONS)
             {
-                num_of_iterations++;
+                numOfIterations++;
                 SetDateTimeForNextDay(wantedAppointment);
                 
                 SuggestAppointments(wantedAppointment);
