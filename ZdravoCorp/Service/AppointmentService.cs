@@ -14,6 +14,8 @@ namespace Service
     public class AppointmentService
     {
         public const int MAX_SUGGESTIONS = 30;
+        public const int MAX_ITERATIONS = 10;
+        private int num_of_iterations = 0;
         private static AppointmentService instance = null;
         List<Appointment> appointments = new List<Appointment>();
         
@@ -58,120 +60,14 @@ namespace Service
                 return instance;
             }
         }
-        public List<Appointment> SuggestAppointments(Doctor doctor, DateTime start, DateTime end, bool priority, bool firstTime, Patient patient)
-        {
-
-            if (firstTime)
-            {
-                appointments = new List<Appointment>();
-            }
-            //prioritet ima doktor
-            if (priority)
-            {
-                DateTime thisStart = start;
-
-                TimeSpan ts = new TimeSpan(doctor.workStartTime.Hour, doctor.workStartTime.Minute, doctor.workStartTime.Second);
-                thisStart = thisStart.Date + ts;
-                DateTime thisEnd = thisStart.AddMinutes(45);
-
-                while ((thisStart.TimeOfDay >= doctor.workStartTime.TimeOfDay) && (thisEnd.TimeOfDay <= doctor.workEndTime.TimeOfDay))
-                {
-                    if (DoctorService.Instance.IsDoctorFree(doctor.Id, thisStart, thisEnd))
-                    {
-                        Room r = RoomService.Instance.findFreeRoom(thisStart, thisEnd);
-                        if (r != null)
-                        {
-                            Appointment appointment = new Appointment();
-                            appointment.doctor = doctor;
-                            appointment.StartDate = thisStart;
-                            appointment.endDate = thisEnd;
-                            appointment.Room = r;
-
-                            appointment.Patient = patient;
-
-                            appointments.Add(appointment);
-
-
-                        }
-                    }
-                    TimeSpan ts2 = new TimeSpan(thisStart.Hour, thisStart.Minute + 45, thisStart.Second);
-                    TimeSpan ts3 = new TimeSpan(thisEnd.Hour, thisEnd.Minute + 45, thisEnd.Second);
-                    thisStart = thisStart.Date + ts2;
-                    thisEnd = thisEnd.Date + ts3;
-                }
-                if (appointments.Count < MAX_SUGGESTIONS)
-                {
-                    TimeSpan ts2 = new TimeSpan(1, 0, 0, 0);
-                    TimeSpan ts3 = new TimeSpan(1, 0, 0, 0);
-                    start = start.Date + ts2;
-                    end = end.Date + ts3;
-                    
-                    SuggestAppointments(doctor, start, end, true, false, patient);
-
-                }
-            }
-            //prioritet datum
-            else
-            {
-                DateTime resetStart = start;
-                TimeSpan t = new TimeSpan(resetStart.Hour, resetStart.Minute + 45, resetStart.Second);
-                DateTime resetEnd = resetStart.Date + t;
-
-                List<Doctor> doctors = DoctorService.Instance.GetAllDoctors();
-                foreach (Doctor d in doctors)
-                {
-                    TimeSpan ts = new TimeSpan(d.workStartTime.Hour, d.workStartTime.Minute, d.workStartTime.Second);
-
-                    DateTime thisStart = resetStart.Date + ts;
-                    TimeSpan te = new TimeSpan(thisStart.Hour, thisStart.Minute + 45, thisStart.Second);
-
-                    DateTime thisEnd = resetEnd.Date + te;
-                    List<Appointment> apps = doctorsAppointments(d.Id);
-                    while ((thisStart.TimeOfDay >= d.workStartTime.TimeOfDay) && (thisEnd.TimeOfDay <= d.workEndTime.TimeOfDay))
-                    {
-                        if (DoctorService.Instance.IsDoctorFree(d.Id, thisStart, thisEnd))
-                        {
-                            Room r = RoomService.Instance.findFreeRoom(thisStart, thisEnd);
-                            if (r != null)
-                            {
-                                Appointment appointment = new Appointment();
-                                appointment.doctor = d;
-                                appointment.StartDate = thisStart;
-                                appointment.endDate = thisEnd;
-                                appointment.Room = r;
-
-                                appointment.Patient = patient;
-
-                                appointments.Add(appointment);
-
-
-                            }
-                        }
-                        TimeSpan ts2 = new TimeSpan(thisStart.Hour, thisStart.Minute + 45, thisStart.Second);
-                        TimeSpan ts3 = new TimeSpan(thisEnd.Hour, thisEnd.Minute + 45, thisEnd.Second);
-                        thisStart = thisStart.Date + ts2;
-                        thisEnd = thisEnd.Date + ts3;
-                    }
-                }
-                if (appointments.Count < MAX_SUGGESTIONS)
-                {
-                    TimeSpan ts2 = new TimeSpan(1, 0, 0, 0);
-                    TimeSpan ts3 = new TimeSpan(1, 0, 0, 0);
-                    start = start.Date + ts2;
-                    end = end.Date + ts3;
-                    
-                    SuggestAppointments(doctor, start, end, false, false, patient);
-                }
-            }
-            return appointments;
-        }
-        public List<Appointment> sugAppointments(WantedAppointment wantedAppointment)
+        
+        public List<Appointment> SuggestAppointments(WantedAppointment wantedAppointment)
         {
             if (wantedAppointment.FirstTime)
             {
                 appointments = new List<Appointment>();
+                wantedAppointment.FirstTime = false;
             }
-            //doktor ima prioritet
             if (wantedAppointment.Priority)
             {
                 FindAppointmentsWithDoctorPriority(wantedAppointment);
@@ -182,30 +78,34 @@ namespace Service
             }
             return appointments;
         }
+
         public void FindAppointmentsWithDoctorPriority(WantedAppointment wantedAppointment)
         {
             DateTime correctStart = SetStartTime(wantedAppointment);
             DateTime correctEnd = correctStart.Date + new TimeSpan(correctStart.Hour, correctStart.Minute + 45, correctStart.Second);
             SuggestAppointmentsForOneWorkingDay(wantedAppointment, correctStart);
-            if (appointments.Count < MAX_SUGGESTIONS)
+            if (appointments.Count < MAX_SUGGESTIONS && num_of_iterations < MAX_ITERATIONS) 
             {
+                num_of_iterations++;
                 SetDateTimeForNextDay(wantedAppointment);
-                wantedAppointment.FirstTime = false;
-                sugAppointments(wantedAppointment);
+                SuggestAppointments(wantedAppointment);
             }
         }
+
         public void FindAppointmentsWithDatePriority(WantedAppointment wantedAppointment)
         {
             DateTime resetStart = wantedAppointment.Start;
             GoThroughAllDoctors(wantedAppointment, resetStart);
-            if (appointments.Count < MAX_SUGGESTIONS)
+            if (appointments.Count < MAX_SUGGESTIONS && num_of_iterations < MAX_ITERATIONS)
             {
+                num_of_iterations++;
                 SetDateTimeForNextDay(wantedAppointment);
-                wantedAppointment.FirstTime = false;
-                sugAppointments(wantedAppointment);
+                
+                SuggestAppointments(wantedAppointment);
             }
 
         }
+
         public void GoThroughAllDoctors(WantedAppointment wantedAppointment, DateTime resetStart)
         {
             List<Doctor> doctors = DoctorService.Instance.GetAllDoctors();
@@ -216,6 +116,7 @@ namespace Service
                 SuggestAppointmentsForOneWorkingDay(wantedAppointment, correctStart, d);
             }
         }
+
         public void SuggestAppointmentsForOneWorkingDay(WantedAppointment wantedAppointment, DateTime correctStart, Doctor d = null)
         {
             d = d == null ? wantedAppointment.Doctor : d;
@@ -233,12 +134,14 @@ namespace Service
                 correctStart = SetTimeForNextAppointment(correctStart, correctStart.AddMinutes(45));
             }
         }
+
         public DateTime SetStartTimeForDatePriority(DateTime resetStart, Doctor doctor)
         {
             TimeSpan ts = new TimeSpan(doctor.workStartTime.Hour, doctor.workStartTime.Minute, doctor.workStartTime.Second);
             DateTime correctStartTime = resetStart.Date + ts;
             return correctStartTime;
         }
+
         public DateTime SetStartTime(WantedAppointment wantedAppointment)
         {
             DateTime correctStartTime = wantedAppointment.Start;
@@ -246,6 +149,7 @@ namespace Service
             correctStartTime = correctStartTime.Date + ts;
             return correctStartTime;
         }
+
         public void AddAppointmentToSuggestedAppointments(DateTime start, Room room, WantedAppointment wantedAppointment)
         {
             Appointment appointment = new Appointment();
@@ -256,6 +160,7 @@ namespace Service
             appointment.Patient = wantedAppointment.Patient;
             appointments.Add(appointment);
         }
+
         public DateTime SetTimeForNextAppointment(DateTime start, DateTime end)
         {
             TimeSpan ts2 = new TimeSpan(start.Hour, start.Minute + 45, start.Second);
@@ -264,6 +169,7 @@ namespace Service
             end = end.Date + ts3;
             return start;
         }
+
         public void SetDateTimeForNextDay(WantedAppointment wantedAppointment)
         {
             TimeSpan ts2 = new TimeSpan(1, 0, 0, 0);
@@ -271,6 +177,7 @@ namespace Service
             wantedAppointment.Start = wantedAppointment.Start.Date + ts2;
             wantedAppointment.End = wantedAppointment.End.Date + ts3;
         }
+
         public List<Appointment> doctorsAppointments(int id)
         {
             List<Appointment> result = new List<Appointment>();

@@ -37,10 +37,10 @@ namespace Controller
             return AppointmentService.Instance.GetAllAppointments();
         }
 
-        public List<Appointment> SuggestAppointments(Doctor doctor, DateTime start, DateTime end, bool priority, bool first, Patient patient)
-        {
-            return AppointmentService.Instance.SuggestAppointments(doctor, start, end, priority, first, patient);
-        }
+        //public List<Appointment> SuggestAppointments(Doctor doctor, DateTime start, DateTime end, bool priority, bool first, Patient patient)
+        //{
+        //    return AppointmentService.Instance.SuggestAppointments(doctor, start, end, priority, first, patient);
+        //}
         public List<Appointment> GetFutureAppointments()
         {
             return AppointmentService.Instance.GetFutureAppointments();
@@ -62,9 +62,9 @@ namespace Controller
         {
             return AppointmentService.Instance.GetPastAppointmentsForPatient(patient);
         }
-        public List<Appointment> sugAppointment(WantedAppointment wantedAppointment)
+        public List<Appointment> SuggestAppointments(WantedAppointment wantedAppointment)
         {
-            return AppointmentService.Instance.sugAppointments(wantedAppointment);
+            return AppointmentService.Instance.SuggestAppointments(wantedAppointment);
         }
     }
 }

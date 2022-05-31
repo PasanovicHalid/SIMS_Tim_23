@@ -82,11 +82,11 @@ namespace ZdravoCorp.View.Patient.Appointments
             date.AddSeconds((int)doctor.WorkStartTime.Second);
             if (DateRB.IsChecked == true)
             {
-                apps = appointmentController.sugAppointment(new WantedAppointment(doctor, date, date.AddMinutes(45), false, true, patient)); //SuggestAppointments(doctor, date, date.AddMinutes(45), false, true, patient);
+                apps = appointmentController.SuggestAppointments(new WantedAppointment(doctor, date, date.AddMinutes(45), false, true, patient)); //SuggestAppointments(doctor, date, date.AddMinutes(45), false, true, patient);
             }
             else
             {
-                apps = appointmentController.sugAppointment(new WantedAppointment(doctor, date, date.AddMinutes(45), true, true, patient));
+                apps = appointmentController.SuggestAppointments(new WantedAppointment(doctor, date, date.AddMinutes(45), true, true, patient));
                // apps = appointmentController.SuggestAppointments(doctor, date, date.AddMinutes(45), true, true, patient);
 
             }
