@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace Model
 {
-    public class Comments : Serializable
+    public class Report : Serializable
     {
         private String comment;
 
@@ -57,14 +57,14 @@ namespace Model
                 return Appointment.Id.ToString();
             }
         }
-        public Comments(Appointment app, string kom, Doctor doktor)
+        public Report(Appointment app, string kom, Doctor doktor)
         {
             Appointment = app;
             Comment = kom;
             Doctor = doktor;
         }
 
-        public Comments() { }
+        public Report() { }
 
 
         /// <summary>

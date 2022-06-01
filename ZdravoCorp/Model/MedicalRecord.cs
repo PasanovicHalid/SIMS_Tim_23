@@ -18,7 +18,7 @@ namespace Model
         private float weight;
         private List<String> allergens = new List<String>();
 
-        private System.Collections.Generic.List<Comments> comments = new List<Comments>();
+        private System.Collections.Generic.List<Report> comments = new List<Report>();
 
         public MedicalRecord() { }
 
@@ -27,7 +27,7 @@ namespace Model
             this.id = id;
         }
 
-        public MedicalRecord(float height, float weight, BloodType bloodType, List<String> allergens, List<Comments> comments, Patient patient) {
+        public MedicalRecord(float height, float weight, BloodType bloodType, List<String> allergens, List<Report> comments, Patient patient) {
             this.height = height;
             this.weight = weight;
             this.bloodType = bloodType;
@@ -106,12 +106,12 @@ namespace Model
         /// Property for collection of Comments
         /// </summary>
         /// <pdGenerated>Default opposite class collection property</pdGenerated>
-        public System.Collections.Generic.List<Comments> Comments
+        public System.Collections.Generic.List<Report> Comments
         {
             get
             {
                 if (comments == null)
-                    comments = new System.Collections.Generic.List<Comments>();
+                    comments = new System.Collections.Generic.List<Report>();
                 return comments;
             }
             set
@@ -119,7 +119,7 @@ namespace Model
                 RemoveAllComments();
                 if (value != null)
                 {
-                    foreach (Comments oComments in value)
+                    foreach (Report oComments in value)
                         AddComments(oComments);
                 }
             }
@@ -129,12 +129,12 @@ namespace Model
         /// Add a new Comments in the collection
         /// </summary>
         /// <pdGenerated>Default Add</pdGenerated>
-        public void AddComments(Comments newComments)
+        public void AddComments(Report newComments)
         {
             if (newComments == null)
                 return;
             if (this.comments == null)
-                this.comments = new System.Collections.Generic.List<Comments>();
+                this.comments = new System.Collections.Generic.List<Report>();
             if (!this.comments.Contains(newComments))
                 this.comments.Add(newComments);
         }
@@ -143,7 +143,7 @@ namespace Model
         /// Remove an existing Comments from the collection
         /// </summary>
         /// <pdGenerated>Default Remove</pdGenerated>
-        public void RemoveComments(Comments oldComments)
+        public void RemoveComments(Report oldComments)
         {
             if (oldComments == null)
                 return;
@@ -194,7 +194,7 @@ namespace Model
             {
                 result.Add(comments.Count.ToString());
 
-                foreach (Comments c in comments)
+                foreach (Report c in comments)
                 {
                     result.Add(c.Id.ToString());
                 }
@@ -248,7 +248,7 @@ namespace Model
                 allergens.Add(values[i++]);
             }
             count = int.Parse(values[i++]);
-            ZdravoCorp.Controller.CommentController cc = new ZdravoCorp.Controller.CommentController();
+            ZdravoCorp.Controller.ReportController cc = new ZdravoCorp.Controller.ReportController();
             for (int j = 0; j < count; j++)
             {
                 comments.Add(cc.ReadComment(int.Parse(values[i++])));

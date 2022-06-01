@@ -86,7 +86,7 @@
     <Compile Include="Controller\ActionController.cs" />
     <Compile Include="Controller\AppointmentController.cs" />
     <Compile Include="Controller\AppointmentSurveyController.cs" />
-    <Compile Include="Controller\CommentController.cs" />
+    <Compile Include="Controller\ReportController.cs" />
     <Compile Include="Controller\DoctorController.cs" />
     <Compile Include="Controller\EquipmentController.cs" />
     <Compile Include="Controller\GuestController.cs" />
@@ -128,7 +128,7 @@
     <Compile Include="Repository\HospitalSurveyRepository.cs" />
     <Compile Include="Repository\AppointmentSurveyRepository.cs" />
     <Compile Include="Repository\AppointmentRepository.cs" />
-    <Compile Include="Repository\CommentRepository.cs" />
+    <Compile Include="Repository\ReportRepository.cs" />
     <Compile Include="Repository\DoctorRepository.cs" />
     <Compile Include="Repository\EquipmentRepository.cs" />
     <Compile Include="Repository\ManagerRepository.cs" />
@@ -147,7 +147,7 @@
     <Compile Include="Service\HospitalSurveyService.cs" />
     <Compile Include="Service\AppointmentSurveyService.cs" />
     <Compile Include="Service\AppointmentService.cs" />
-    <Compile Include="Service\CommentService.cs" />
+    <Compile Include="Service\ReportService.cs" />
     <Compile Include="Service\DoctorService.cs" />
     <Compile Include="Service\EquipmentService.cs" />
     <Compile Include="Service\LoginService.cs" />
@@ -620,7 +620,7 @@
   <ItemGroup>
     <Compile Include="Model\Appointment.cs" />
     <Compile Include="Model\BloodType.cs" />
-    <Compile Include="Model\Comments.cs" />
+    <Compile Include="Model\Report.cs" />
     <Compile Include="Model\Doctor.cs" />
     <Compile Include="Model\DoctorType.cs" />
     <Compile Include="Model\Employee.cs" />

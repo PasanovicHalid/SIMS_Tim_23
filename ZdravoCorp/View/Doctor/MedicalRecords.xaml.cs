@@ -22,7 +22,7 @@ namespace ZdravoCorp.View.Doctor
     /// </summary>
     public partial class MedicalRecords : Window
     {
-        private ZdravoCorp.Controller.CommentController commentsController;
+        private ZdravoCorp.Controller.ReportController commentsController;
         private MedicalRecordController medicalRecordController;
         private Model.Patient pomocnip;
         PatientController patientController;
@@ -30,7 +30,7 @@ namespace ZdravoCorp.View.Doctor
         private MedicineController medicineController;
         private PrescriptionController pc;
 
-        public ObservableCollection<Model.Comments> comments
+        public ObservableCollection<Model.Report> comments
         {
             get;
             set;
@@ -58,8 +58,8 @@ namespace ZdravoCorp.View.Doctor
             InitializeComponent();
             currentDoctor = doc;
             this.DataContext = this;
-            commentsController = new ZdravoCorp.Controller.CommentController();
-            comments = new ObservableCollection<Model.Comments>();
+            commentsController = new ZdravoCorp.Controller.ReportController();
+            comments = new ObservableCollection<Model.Report>();
             patientController = new PatientController();
             PatientCollection = new ObservableCollection<Model.Patient>(patientController.GetAllPatients());
             PatientsCB.ItemsSource = PatientCollection;
@@ -98,7 +98,7 @@ namespace ZdravoCorp.View.Doctor
 
                     textBox4.Text = pom.BloodType.ToString();
 
-                    List<Model.Comments> commentsl = pom.Comments;
+                    List<Model.Report> commentsl = pom.Comments;
 
                     CommentsGrid.DataContext = commentsl;
 
@@ -148,7 +148,7 @@ namespace ZdravoCorp.View.Doctor
 
                         textBox4.Text = pom.BloodType.ToString();
 
-                        List<Model.Comments> commentsl = pom.Comments;
+                        List<Model.Report> commentsl = pom.Comments;
 
                         CommentsGrid.DataContext = commentsl;
 

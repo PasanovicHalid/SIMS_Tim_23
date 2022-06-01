@@ -37,7 +37,7 @@ namespace ZdravoCorp.View.Secretary
         private float weight;
         private List<String> allergens = new List<String>();
 
-        private System.Collections.Generic.List<Comments> comments;
+        private System.Collections.Generic.List<Report> comments;
         private String description;
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -139,7 +139,7 @@ namespace ZdravoCorp.View.Secretary
             }
         }
 
-        public List<Comments> CommentList
+        public List<Report> CommentList
         {
             get { return comments; }
             set

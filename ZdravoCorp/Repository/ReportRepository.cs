@@ -8,16 +8,16 @@ using System.Threading.Tasks;
 
 namespace ZdravoCorp.Repository
 {
-    internal class CommentRepository
+    internal class ReportRepository
     {
 
         private String dbPath = "..\\..\\Data\\commentsDB.csv";
-        private Serializer<Comments> serializerComments = new Serializer<Model.Comments>();
+        private Serializer<Report> serializerComments = new Serializer<Model.Report>();
 
-        private static CommentRepository instance = null;
-        public Boolean CreateComment(Model.Comments newComment)
+        private static ReportRepository instance = null;
+        public Boolean CreateComment(Model.Report newComment)
         {
-            List<Comments> comments = GetAllComments();
+            List<Report> comments = GetAllComments();
             int id = comments.Count + 1;
             newComment.Id = id;
             comments.Add(newComment);
@@ -26,11 +26,11 @@ namespace ZdravoCorp.Repository
 
         }
 
-        public Boolean UpdateComment(Model.Comments newComment)
+        public Boolean UpdateComment(Model.Report newComment)
         {
             Boolean success = false;
-            List<Comments> comments = GetAllComments();
-            foreach (Comments c in comments)
+            List<Report> comments = GetAllComments();
+            foreach (Report c in comments)
             {
                 if (newComment.Id.Equals(c.Id))
                 {
@@ -51,8 +51,8 @@ namespace ZdravoCorp.Repository
         public Boolean DeleteComment(int identificator)
         {
             Boolean success = false;
-            List<Comments> comments = GetAllComments();
-            foreach (Comments c in comments)
+            List<Report> comments = GetAllComments();
+            foreach (Report c in comments)
             {
                 if (identificator == c.Id)
                 {
@@ -65,10 +65,10 @@ namespace ZdravoCorp.Repository
             return success;
         }
 
-        public Model.Comments ReadComment(int indentificator)
+        public Model.Report ReadComment(int indentificator)
         {
-            List<Comments> comments = GetAllComments();
-            foreach (Comments c in comments)
+            List<Report> comments = GetAllComments();
+            foreach (Report c in comments)
             {
                 if (indentificator == c.Id)
                 {
@@ -78,21 +78,21 @@ namespace ZdravoCorp.Repository
             return null;
         }
 
-        public List<Model.Comments> GetAllComments()
+        public List<Model.Report> GetAllComments()
         {
             return serializerComments.FromCSV(dbPath);
         }
 
-        public CommentRepository()
+        public ReportRepository()
         { }
 
-        public static CommentRepository Instance
+        public static ReportRepository Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = new CommentRepository();
+                    instance = new ReportRepository();
                 }
                 return instance;
             }

@@ -35,7 +35,7 @@ namespace ZdravoCorp.View.Secretary
         private float weight;
         private List<String> allergens = new List<String>();
 
-        private System.Collections.Generic.List<Comments> comments;
+        private System.Collections.Generic.List<Report> comments;
         private String description;
         public ObservableCollection<String> AllergenCollection;
         MedicalRecord record = new MedicalRecord();
@@ -135,7 +135,7 @@ namespace ZdravoCorp.View.Secretary
             }
         }
 
-        public List<Comments> CommentList
+        public List<Report> CommentList
         {
             get { return comments; }
             set

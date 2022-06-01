@@ -23,7 +23,7 @@ namespace ZdravoCorp.View.Doctor
     {
         Model.Patient currentPatient;
         AppointmentController ac = new AppointmentController();
-        Controller.CommentController cc = new Controller.CommentController();
+        Controller.ReportController cc = new Controller.ReportController();
         MedicalRecordController mcc = new MedicalRecordController();
         PatientController pc = new PatientController();
         Model.Doctor currentDoctor;
@@ -56,7 +56,7 @@ namespace ZdravoCorp.View.Doctor
         {
             string komentar = textBpx1.Text;
             Appointment apo = (Appointment)AppointmentCB.SelectedItem;
-            Comments c = new Comments(apo, komentar, currentDoctor);
+            Report c = new Report(apo, komentar, currentDoctor);
             cc.CreateComment(c);
             currentPatient.Record.Comments.Add(c);
             mcc.UpdateMedicalRecord(currentPatient.Record);
