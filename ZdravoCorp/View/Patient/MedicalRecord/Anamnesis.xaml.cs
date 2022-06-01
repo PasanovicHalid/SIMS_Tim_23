@@ -11,7 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
+using Model;
 namespace ZdravoCorp.View.Patient.MedicalRecord
 {
     /// <summary>
@@ -19,9 +19,10 @@ namespace ZdravoCorp.View.Patient.MedicalRecord
     /// </summary>
     public partial class Anamnesis : Window
     {
-        public Anamnesis()
+        public Anamnesis(Model.Appointment appointment)
         {
             InitializeComponent();
+
         }
     }
 }
