@@ -40,20 +40,20 @@ namespace Controller
             throw new NotImplementedException();
         }
 
-        public Boolean CreateEquipmentType(EquipmentTypeModel newEquipmentType)
+        public void CreateEquipmentType(EquipmentTypeModel newEquipmentType)
         {
             EquipmentType result = new EquipmentType(newEquipmentType);
-            return EquipmentService.Instance.CreateEquipmentType(result);
+            EquipmentService.Instance.CreateEquipmentType(result);
         }
 
-        public Boolean UpdateEquipmentType(EquipmentType equipmentType)
+        public void UpdateEquipmentType(EquipmentType equipmentType)
         {
-            return EquipmentService.Instance.UpdateEquipmentType(equipmentType);
+            EquipmentService.Instance.UpdateEquipmentType(equipmentType);
         }
 
-        public Boolean DeleteEquipmentType(int id)
+        public void DeleteEquipmentType(int id)
         {
-            return EquipmentService.Instance.DeleteEquipmentType(id);
+            EquipmentService.Instance.DeleteEquipmentType(id);
         }
 
         public EquipmentType ReadEquipmentType(int id)

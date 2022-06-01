@@ -219,6 +219,12 @@
   <data name="EquipmentDoesntExist" xml:space="preserve">
     <value>Oprema ne postoji u bazi</value>
   </data>
+  <data name="EquipmentDoesntExists" xml:space="preserve">
+    <value>Tip opreme ne postoji u bazi</value>
+  </data>
+  <data name="EquipmentNameExists" xml:space="preserve">
+    <value>Ime opreme vec postoji</value>
+  </data>
   <data name="Error" xml:space="preserve">
     <value>Greska</value>
   </data>

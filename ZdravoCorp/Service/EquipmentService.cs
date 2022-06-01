@@ -45,19 +45,19 @@ namespace Service
             throw new NotImplementedException();
         }
 
-        public Boolean CreateEquipmentType(EquipmentType newEquipmentType)
+        public void CreateEquipmentType(EquipmentType newEquipmentType)
         {
-            return EquipmentRepository.Instance.CreateEquipmentType(newEquipmentType);
+            EquipmentRepository.Instance.CreateEquipmentType(newEquipmentType);
         }
 
-        public Boolean UpdateEquipmentType(EquipmentType equipmentType)
+        public void UpdateEquipmentType(EquipmentType equipmentType)
         {
-            return EquipmentRepository.Instance.UpdateEquipmentType(equipmentType);
+            EquipmentRepository.Instance.UpdateEquipmentType(equipmentType);
         }
 
-        public Boolean DeleteEquipmentType(int id)
+        public void DeleteEquipmentType(int id)
         {
-            return EquipmentRepository.Instance.DeleteEquipmentType(id);
+            EquipmentRepository.Instance.DeleteEquipmentType(id);
         }
 
         public EquipmentType ReadEquipmentType(int id)
