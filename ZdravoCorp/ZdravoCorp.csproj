@@ -173,9 +173,6 @@
     <Compile Include="View\Core\ViewModelInterface.cs" />
     <Compile Include="View\Core\WindowBrowser.cs" />
     <Compile Include="View\Core\WindowInterface.cs" />
-    <Compile Include="View\Doctor\AddAppointment.xaml.cs">
-      <DependentUpon>AddAppointment.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\Doctor\AddAppointmentToDoctor.xaml.cs">
       <DependentUpon>AddAppointmentToDoctor.xaml</DependentUpon>
     </Compile>
@@ -196,9 +193,6 @@
     </Compile>
     <Compile Include="View\Doctor\MedicationsView.xaml.cs">
       <DependentUpon>MedicationsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Doctor\UpdateAppointment.xaml.cs">
-      <DependentUpon>UpdateAppointment.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Doctor\UserWindow.xaml.cs">
       <DependentUpon>UserWindow.xaml</DependentUpon>
@@ -368,10 +362,6 @@
     <Compile Include="View\Manager\Model\Rooms\RenovationActionModel.cs" />
     <Compile Include="View\Manager\Model\Rooms\RoomTypeModel.cs" />
     <Compile Include="View\Manager\Model\Rooms\RoomModel.cs" />
-    <Page Include="View\Doctor\AddAppointment.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\Doctor\AddAppointmentToDoctor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -397,10 +387,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Doctor\MedicationsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Doctor\UpdateAppointment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -671,6 +657,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Data\anamnesisDB.csv" />
+    <None Include="Data\commentsDB.csv" />
     <None Include="Data\guestsDB.csv" />
     <None Include="Data\hospitalSurveysDB.csv" />
     <None Include="Data\appointmentSurveysDB.csv" />
@@ -679,6 +666,7 @@
     <None Include="Data\newMedicationRequestDB.csv" />
     <None Include="Data\medicationTypeDB.csv" />
     <None Include="Data\medicationDB.csv" />
+    <None Include="Data\prescriptionDB.csv" />
     <None Include="Data\secretariesDB.csv" />
     <None Include="Data\medicalRecordDB.csv" />
     <None Include="Data\patientsDB.csv" />

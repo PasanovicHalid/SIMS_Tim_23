@@ -123,6 +123,15 @@ namespace Model
             }
         }
 
+        public string EndDateString
+        {
+            get => EndDate.ToString("g", CultureInfo.GetCultureInfo("en-GB"));
+            set
+            {
+                EndDate = DateTime.Parse(value);
+            }
+        }
+
         public TimeSpan Duration
         {
             get

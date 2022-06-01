@@ -5,37 +5,72 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ZdravoCorp.View.Doctor"
         mc:Ignorable="d"
-        Title="Appointments" Height="494" Width="883"
+        Title="Appointments" Height="522" Width="1023"
         WindowStartupLocation="CenterScreen" Closed="Window_Closed">
     <Grid Margin="0,0,0,-6">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="CreateButton" Content="Create" HorizontalAlignment="Left" Margin="37,65,0,0" VerticalAlignment="Top" Width="64" Height="30" Click="CreateButton_Click"/>
-        <Button x:Name="UpdateButton" Content="Update" HorizontalAlignment="Left" Margin="109,65,0,0" VerticalAlignment="Top" Width="66" Height="30" Click="UpdateButton_Click"/>
-        <Button x:Name="DeleteButton" Content="Delete" HorizontalAlignment="Left" Margin="195,65,0,0" VerticalAlignment="Top" Width="66" Height="30" Click="DeleteButton_Click"/>
-        <Button x:Name="PrintButton" Content="Print" HorizontalAlignment="Left" Margin="279,65,0,0" VerticalAlignment="Top" Width="64" Height="30"/>
+        <Button x:Name="CreateButton" Content="Create" HorizontalAlignment="Left" Margin="37,66,0,0" VerticalAlignment="Top" Width="102" Height="43" Click="CreateButton_Click" IsEnabled="False"/>
+        <Button x:Name="UpdateButton" Content="Update" HorizontalAlignment="Left" Margin="179,65,0,0" VerticalAlignment="Top" Width="102" Height="44" Click="UpdateButton_Click" IsEnabled="False"/>
+        <Button x:Name="DeleteButton" Content="Delete" HorizontalAlignment="Left" Margin="321,65,0,0" VerticalAlignment="Top" Width="102" Height="44" Click="DeleteButton_Click" IsEnabled="False"/>
+        <Button x:Name="PrintButton" Content="Print" HorizontalAlignment="Left" Margin="458,65,0,0" VerticalAlignment="Top" Width="102" Height="44"/>
         <DataGrid x:Name="AppointmentGrid" ItemsSource="{Binding}"
-                              AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" Margin="37,122,37,37">
+                              AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" Margin="37,144,445,41" SelectionChanged="AppointmentGrid_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Start Date" Binding="{Binding StartDate}" Width="140"/>
                 <DataGridTextColumn Header="End Date" Binding="{Binding EndDate}" Width="140"/>
-                <DataGridTextColumn Header="Appointment ID" Binding="{Binding Id}" Width="140" />
-                <DataGridTextColumn Header="Doctor ID" Binding="{Binding DoctorID}" Width="140"/>
-                <DataGridTextColumn Header="Patient ID" Binding="{Binding PatientID}" Width="100"/>
+                <DataGridTextColumn Header="Patient ID" Binding="{Binding PatientID}" Width="140"/>
                 <DataGridTextColumn Header="Room ID" Binding="{Binding RoomID}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Border BorderThickness="1" HorizontalAlignment="Center" Height="27" VerticalAlignment="Top" Width="884" BorderBrush="Black" Background="#FFA79F9F">
-            <Image HorizontalAlignment="Left" Height="24" VerticalAlignment="Center" Width="22" Source="/Resources/user.png" MouseLeftButtonDown="Image_MouseLeftButtonDown" Margin="842,0,0,0" RenderTransformOrigin="0.818,0.509"/>
+        <Border BorderThickness="1" HorizontalAlignment="Center" Height="27" VerticalAlignment="Top" Width="1024" BorderBrush="Black" Background="#FFA79F9F">
+            <Image HorizontalAlignment="Left" Height="24" VerticalAlignment="Center" Width="22" Source="/Resources/user.png" MouseLeftButtonDown="Image_MouseLeftButtonDown" Margin="991,0,0,0" RenderTransformOrigin="0.818,0.509"/>
         </Border>
         <Button x:Name="requestsButton" Content="Medical Request" HorizontalAlignment="Left" Margin="99,0,0,0" VerticalAlignment="Top" Height="27" Width="104" Click="requestsButton_Click"/>
         <Button x:Name="appointmentsButton" Content="Appointments" HorizontalAlignment="Left" VerticalAlignment="Top" Height="27" Width="100"/>
         <Button x:Name="medsButton" Content="Medications List" HorizontalAlignment="Left" Margin="202,0,0,0" VerticalAlignment="Top" Height="27" Width="100" Click="medsButton_Click"/>
         <Button x:Name="vacationRequestButton" Content="Vacation Request" HorizontalAlignment="Left" Margin="301,0,0,0" VerticalAlignment="Top" Height="27" Width="99" Click="vacationRequestButton_Click"/>
         <Button x:Name="kartoniButton" Content="Medical Records" HorizontalAlignment="Left" Margin="399,0,0,0" VerticalAlignment="Top" Width="103" Click="kartoniButton_Click" Height="27"/>
-        <TextBox x:Name="searchTextBox" HorizontalAlignment="Left" Margin="668,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="164" Height="30"/>
+        <ComboBox 
+            x:Name ="PatientsCB"
+            HorizontalAlignment="Left" 
+            Margin="738,258,0,0" 
+            VerticalAlignment="Top" 
+            Width="223"
+            ItemsSource="{Binding}" Height="29" >
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Margin="2" Text="{Binding Name}"/>
+                        <TextBlock Margin="2" Text="{Binding Surname}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <ComboBox 
+            x:Name ="RoomsCB"
+            HorizontalAlignment="Left" 
+            Margin="738,321,0,0" 
+            VerticalAlignment="Top" 
+            Width="223"
+            ItemsSource="{Binding}" Height="28" >
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Margin="2" Text ="{Binding Identifier}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <TextBox x:Name="textBox1" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="223" Height="26" Margin="738,146,0,0"/>
+        <TextBox x:Name="textBox2" HorizontalAlignment="Left" Margin="738,202,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="223" Height="26"/>
+        <Button x:Name="OdustaniButton" Content="Odustani" HorizontalAlignment="Left" Height="44" Margin="859,392,0,0" VerticalAlignment="Top" Width="102" Click="OdustaniButton_Click" IsEnabled="False"/>
+        <Label Content="Start Date:" HorizontalAlignment="Left" Margin="608,146,0,0" VerticalAlignment="Top" Width="74" Height="34" FontSize="14"/>
+        <Label Content="End Date:" HorizontalAlignment="Left" Margin="608,202,0,0" VerticalAlignment="Top" Width="69" Height="33" FontSize="14"/>
+        <Label Content="Patient:" HorizontalAlignment="Left" Margin="608,257,0,0" VerticalAlignment="Top" Width="56" Height="34" FontSize="14"/>
+        <Label Content="Room:" HorizontalAlignment="Left" Margin="608,321,0,0" VerticalAlignment="Top" Width="50" Height="33" FontSize="14"/>
 
     </Grid>
 </Window>
