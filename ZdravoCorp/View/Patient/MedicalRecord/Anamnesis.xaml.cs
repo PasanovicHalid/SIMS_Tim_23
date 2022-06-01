@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace ZdravoCorp.View.Patient.MedicalRecord
 {
     /// <summary>
-    /// Interaction logic for MedicalRecord.xaml
+    /// Interaction logic for Anamnesis.xaml
     /// </summary>
-    public partial class MedicalRecord : Window
+    public partial class Anamnesis : Window
     {
-        public MedicalRecord()
+        public Anamnesis()
         {
             InitializeComponent();
         }
