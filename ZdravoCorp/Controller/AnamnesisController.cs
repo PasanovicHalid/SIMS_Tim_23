@@ -1,8 +1,8 @@
 using Model;
 using System;
 using System.Collections.Generic;
-
-namespace Repository
+using Service;
+namespace Controller
 {
     public class AnamnesisController
     {
@@ -32,6 +32,10 @@ namespace Repository
             return AnamnesisService.Instance.GetAllAnamnesis();
         }
 
+        public Anamnesis FindAnamnesisByAppointmentId(int id)
+        {
+            return AnamnesisService.Instance.FindAnamnesisByAppointmentId(id);
+        }
         public AnamnesisController()
         {
 
