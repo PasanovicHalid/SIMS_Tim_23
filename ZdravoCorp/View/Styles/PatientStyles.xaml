@@ -33,7 +33,7 @@
     <Style x:Key="InfoTextBox" TargetType="{x:Type TextBox}">
         <Setter Property="Foreground" Value="#112847"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
-        <Setter Property="BorderBrush" Value="#0F8587"/>
+        <Setter Property="BorderBrush" Value="#112847"/>
         <Setter Property="IsReadOnly" Value="True"/>
         <Setter Property="FontFamily" Value="/Resources/Fonts/#Poppins"/>
         <Style.Triggers>
