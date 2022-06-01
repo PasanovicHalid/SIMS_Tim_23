@@ -84,6 +84,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Controller\ActionController.cs" />
+    <Compile Include="Controller\AnamnesisController.cs" />
     <Compile Include="Controller\AppointmentController.cs" />
     <Compile Include="Controller\AppointmentSurveyController.cs" />
     <Compile Include="Controller\ReportController.cs" />
@@ -103,6 +104,7 @@
     <Compile Include="Exceptions\LocalisedException.cs" />
     <Compile Include="Model\Action.cs" />
     <Compile Include="Model\ActionType.cs" />
+    <Compile Include="Model\Anamnesis.cs" />
     <Compile Include="Model\ChangeRoomAction.cs" />
     <Compile Include="Model\Guest.cs" />
     <Compile Include="Model\LoginUserEnumeration.cs" />
@@ -124,6 +126,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Repository\ActionRepository.cs" />
+    <Compile Include="Repository\AnamnesisRepository.cs" />
     <Compile Include="Repository\GuestRepository.cs" />
     <Compile Include="Repository\HospitalSurveyRepository.cs" />
     <Compile Include="Repository\AppointmentSurveyRepository.cs" />
@@ -143,6 +146,7 @@
     <Compile Include="Repository\Serializer.cs" />
     <Compile Include="Repository\VacationRepository.cs" />
     <Compile Include="Service\ActionService.cs" />
+    <Compile Include="Service\AnamnesisService.cs" />
     <Compile Include="Service\GuestService.cs" />
     <Compile Include="Service\HospitalSurveyService.cs" />
     <Compile Include="Service\AppointmentSurveyService.cs" />
@@ -314,8 +318,8 @@
     <Compile Include="View\Patient\Appointments\ChangeAppointment.xaml.cs">
       <DependentUpon>ChangeAppointment.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Patient\MedicalRecord\MedicalRecord.xaml.cs">
-      <DependentUpon>MedicalRecord.xaml</DependentUpon>
+    <Compile Include="View\Patient\MedicalRecord\Anamnesis.xaml.cs">
+      <DependentUpon>Anamnesis.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Patient\Modell\Survey\AppointmentSurveyModel.cs" />
     <Compile Include="View\Patient\Patient.xaml.cs">
@@ -536,7 +540,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Patient\MedicalRecord\MedicalRecord.xaml">
+    <Page Include="View\Patient\MedicalRecord\Anamnesis.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -666,6 +670,7 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Data\anamnesisDB.csv" />
     <None Include="Data\guestsDB.csv" />
     <None Include="Data\hospitalSurveysDB.csv" />
     <None Include="Data\appointmentSurveysDB.csv" />

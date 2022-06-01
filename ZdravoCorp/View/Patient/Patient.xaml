@@ -14,7 +14,7 @@
                     Margin="30,10,30,0" 
                     HorizontalAlignment="Stretch"
                 >
-                    
+
 
                     <Image HorizontalAlignment="Left" Height="168" Margin="30,26,0,0" VerticalAlignment="Top" Width="130" Grid.ColumnSpan="2"/>
                     <Button Content="Postavi sliku" Margin="45,208,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Height="35"/>
@@ -25,7 +25,7 @@
                     <Label x:Name="JMBGLabel" Style="{DynamicResource Label}" Content="JMBG " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="200,161,0,0" Grid.Column="1"/>
                     <Label x:Name="TelephoneLabel" Style="{DynamicResource Label}" Content="Kontakt telefon " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="200,194,0,0" Grid.Column="1"/>
                     <Label x:Name="EmailLabel" Style="{DynamicResource Label}" Content="Email " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="200,226,0,0" Grid.Column="1" />
-                    
+
                     <TextBox x:Name="NameTextBox" Style="{DynamicResource InfoTextBox}" TextWrapping="NoWrap" Width="200"  HorizontalAlignment="left" VerticalAlignment="Top" Margin="320,30,0,0" Grid.Column="1"/>
                     <TextBox x:Name="SurnameTextBox" Style="{DynamicResource InfoTextBox}" TextWrapping="Wrap" Width="200"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="320,65,0,0" Grid.Column="1"/>
                     <TextBox x:Name="BirthTextBox" Style="{DynamicResource InfoTextBox}" TextWrapping="Wrap" Width="200"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="320,98,0,0" Grid.Column="1"/>
@@ -69,38 +69,38 @@
                             Style="{DynamicResource BlueButton}"
                             Content="Dodaj" 
                             HorizontalAlignment="Left" 
-                            Margin="52,30,0,0" 
+                            Margin="98,30,0,0" 
                             VerticalAlignment="Top"
                             Click="Add_Appointment" 
-                                Height="30" 
-                                Width="80"/>
+                                Height="40" 
+                                Width="120"/>
                         <Button
                             Style="{DynamicResource BlueButton}"
                             Content="Izmeni" 
                             HorizontalAlignment="Left" 
-                            Margin="237,30,0,0" 
+                            Margin="354,30,0,0" 
                             VerticalAlignment="Top"
                             Click="Change_Appointment" 
-                            Width="80"
-                            Height="30"
+                            Width="120"
+                            Height="40"
                                 />
                         <Button 
                             Style="{DynamicResource CancelButton}"
                             Content="Obriši" 
                             HorizontalAlignment="Left" 
-                            Margin="420,30,0,0" 
+                            Margin="621,30,0,0" 
                             VerticalAlignment="Top" 
                             RenderTransformOrigin="0.265,-0.198"
                             Click="Delete_Appointment" 
-                            Width="80" 
-                            Height="30"
+                            Width="120" 
+                            Height="40"
                         />
 
                     </Grid>
                 </Grid>
 
             </TabItem>
-            <TabItem Header="Karton" Style="{DynamicResource TabsStyle}">
+            <TabItem Header="Karton" Style="{DynamicResource TabsStyle}" Height="22" Margin="15,0,-15,0" VerticalAlignment="Top">
                 <Grid 
                     Background="#FFFFFF" 
                     Margin="30,30,30,30" 
@@ -211,11 +211,8 @@
 
             </TabItem>
         </TabControl>
-        <Menu  VerticalAlignment="Top" Height="25" HorizontalAlignment="Stretch">
-            <MenuItem Header="File" Width="50"/>
-            <MenuItem Header="Open" Width="50"/>
-        </Menu>
-        <Button Style="{DynamicResource BlueButton}" Click="LogOut_Click" Content="Odjavite se" Width="90"  HorizontalAlignment="Right" VerticalAlignment="Top" />
+
+        <Button Style="{DynamicResource BlueButton}" Click="LogOut_Click" Content="Odjavite se" Width="120" Height="40" HorizontalAlignment="Right" VerticalAlignment="Top" />
 
 
 

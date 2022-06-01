@@ -11,17 +11,18 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
+using Model;
 namespace ZdravoCorp.View.Patient.MedicalRecord
 {
     /// <summary>
-    /// Interaction logic for MedicalRecord.xaml
+    /// Interaction logic for Anamnesis.xaml
     /// </summary>
-    public partial class MedicalRecord : Window
+    public partial class Anamnesis : Window
     {
-        public MedicalRecord()
+        public Anamnesis(Model.Appointment appointment)
         {
             InitializeComponent();
+
         }
     }
 }
