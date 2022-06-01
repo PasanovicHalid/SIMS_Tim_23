@@ -66,5 +66,21 @@ namespace Controller
         {
             return AppointmentService.Instance.SuggestAppointments(wantedAppointment);
         }
+
+        public Boolean CheckDoctorAppointments(Doctor currentDoctor,DateTime vacationStartDate, DateTime vacationEndDate)
+        {
+            List<Appointment> appointments = GetAllAppointments();
+            foreach (Appointment appointment in appointments)
+            {
+                if (appointment.DoctorID == currentDoctor.Id)
+                {
+                    if (((vacationStartDate.CompareTo(appointment.startDate.Date) < 0)) && (vacationEndDate.CompareTo(appointment.EndDate.Date) > 0))
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
     }
 }

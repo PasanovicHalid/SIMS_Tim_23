@@ -61,5 +61,18 @@ namespace Controller
                 return instance;
             }
         }
+
+        public Boolean CheckSpecialistInVacation(Doctor doctor)
+        {
+            List<Vacation> vacations = GetAllVacations();
+            foreach (Vacation vacation in vacations)
+            {
+                if (vacation.Doctor.DoctorType.Type.Equals(doctor.DoctorType.Type))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 }
