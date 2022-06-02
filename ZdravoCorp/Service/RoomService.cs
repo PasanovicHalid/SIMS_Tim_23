@@ -45,7 +45,8 @@ namespace Service
 
         public void RenovateRoom(int identifier, DateTime start, DateTime end)
         {
-            actionService.CreateAction(new Model.Action(ActionType.renovation, start, new RenovationAction(end, identifier, true)));
+            actionService.CreateAction(new Model.Action(ActionType.renovation, 
+                start, new RenovationAction(end, identifier, true)));
         }
 
         public void CombineRooms(Room combineInto, Room selectedRoom)

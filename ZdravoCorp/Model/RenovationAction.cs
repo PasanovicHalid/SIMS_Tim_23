@@ -4,12 +4,13 @@
 // Purpose: Definition of Class RenovationAction
 
 using Repository;
+using Service;
 using System;
 using System.Collections.Generic;
 
 namespace Model
 {
-    public class RenovationAction : Serializable
+    public class RenovationAction : IAction
     {
         private DateTime expirationDate;
 
@@ -30,6 +31,35 @@ namespace Model
         public DateTime ExpirationDate { get => expirationDate; set => expirationDate = value; }
         public int Id_room { get => id_room; set => id_room = value; }
         public bool Renovation { get => renovation; set => renovation = value; }
+
+        private void StartRenovation(Room room)
+        {
+            ActionService service = new ActionService();
+            room.Renovating = true;
+            room.RenovatedUntil = ExpirationDate;
+            RoomService.Instance.UpdateRoom(room);
+            service.CreateAction(new Model.Action(ActionType.renovation, ExpirationDate,
+                new RenovationAction(new DateTime(), Id_room, false)));
+        }
+
+        private void EndRenovation(Room room)
+        {
+            room.Renovating = false;
+            RoomService.Instance.UpdateRoom(room);
+        }
+
+        public void Execute()
+        {
+            Room room = RoomService.Instance.ReadRoom(Id_room);
+            if (Renovation)
+            {
+                StartRenovation(room);
+            }
+            else
+            {
+                EndRenovation(room);
+            }
+        }
 
         public void FromCSV(string[] values)
         {

@@ -107,6 +107,7 @@
     <Compile Include="Model\Anamnesis.cs" />
     <Compile Include="Model\ChangeRoomAction.cs" />
     <Compile Include="Model\Guest.cs" />
+    <Compile Include="Model\IAction.cs" />
     <Compile Include="Model\LoginUserEnumeration.cs" />
     <Compile Include="Model\HospitalSurvey.cs" />
     <Compile Include="Model\NewMedicationRequest.cs" />
@@ -167,6 +168,7 @@
     <Compile Include="Service\VacationService.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Utility\DateManipulator.cs" />
+    <Compile Include="View\Core\ChangeSettings.cs" />
     <Compile Include="View\Core\ObservableObject.cs" />
     <Compile Include="View\Core\RelayCommand.cs" />
     <Compile Include="View\Core\TranslationSource.cs" />

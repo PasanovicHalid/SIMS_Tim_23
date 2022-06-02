@@ -41,7 +41,7 @@ namespace Repository
         {
             lock (key)
             {
-                List<Room> rooms = serializerRoom.FromCSV(dbPath);
+                List<Room> rooms = GetAllRooms();
                 List<Room> result = new List<Room>();
                 foreach (Room room in rooms)
                 {
@@ -58,9 +58,12 @@ namespace Repository
         {
             lock (key)
             {
-                Dictionary<int, Room> rooms = serializerRoom.FromCSV(dbPath).ToDictionary(keySelector: m => m.Identifier, elementSelector: m => m);
-                Dictionary<int, EquipmentType> types = EquipmentRepository.Instance.GetAllEquipmentType().ToDictionary(keySelector: m => m.Identifier, elementSelector: m => m);
-                Dictionary<int, Appointment> appointments = AppointmentRepository.Instance.GetAllAppointments().ToDictionary(keySelector: m => m.Id, elementSelector: m => m);
+                Dictionary<int, Room> rooms = serializerRoom.FromCSV(dbPath)
+                    .ToDictionary(keySelector: m => m.Identifier, elementSelector: m => m);
+                Dictionary<int, EquipmentType> types = EquipmentRepository.Instance.GetAllEquipmentType()
+                    .ToDictionary(keySelector: m => m.Identifier, elementSelector: m => m);
+                Dictionary<int, Appointment> appointments = AppointmentRepository.Instance.GetAllAppointments()
+                    .ToDictionary(keySelector: m => m.Id, elementSelector: m => m);
                 if (!rooms.ContainsKey(identifier))
                 {
                     throw new LocalisedException("RoomIdDoesntExist");
@@ -99,8 +102,10 @@ namespace Repository
             lock (key)
             {
                 List<Room> result = serializerRoom.FromCSV(dbPath);
-                Dictionary<int, EquipmentType> types = EquipmentRepository.Instance.GetAllEquipmentType().ToDictionary(keySelector: m => m.Identifier, elementSelector: m => m);
-                Dictionary<int, Appointment> appointments = AppointmentRepository.Instance.GetAllAppointments().ToDictionary(keySelector: m => m.Id, elementSelector: m => m);
+                Dictionary<int, EquipmentType> types = EquipmentRepository.Instance.GetAllEquipmentType()
+                    .ToDictionary(keySelector: m => m.Identifier, elementSelector: m => m);
+                Dictionary<int, Appointment> appointments = AppointmentRepository.Instance.GetAllAppointments()
+                    .ToDictionary(keySelector: m => m.Id, elementSelector: m => m);
                 foreach(Room room in result)
                 {
                     LoadEquipmentTypesForRoom(room, types);
@@ -207,6 +212,7 @@ namespace Repository
                 List<Room> rooms = GetAllRooms();
                 Room room = FindRoomByID(id_from_room, rooms);
                 ChangeActualCountInRoom(room, count, id_equipment);
+                serializerRoom.ToCSV(dbPath, rooms);
             }
         }
 
@@ -284,6 +290,7 @@ namespace Repository
                 id = random.Next();
             }
             while (idMap.Contains(id));
+            idMap.Add(id);
             return id;
         }
 
