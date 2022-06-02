@@ -16,6 +16,7 @@ namespace Model
         private int count;
 
         private MedicationType medicationType;
+        private int v;
 
         /// <summary>
         /// Property for MedicationType
@@ -62,6 +63,11 @@ namespace Model
         {
             this.count = count;
             this.medicationType = medicationType;
+        }
+
+        public Medication(int vid)
+        {
+            this.id = id;
         }
 
         public void FromCSV(string[] values)

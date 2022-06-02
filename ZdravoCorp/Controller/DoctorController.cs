@@ -32,7 +32,7 @@ namespace Controller
         {
             return DoctorService.Instance.ReadDoctor(doctor);
         }
-
+        
         public List<Doctor> GetAllDoctors()
         {
             return DoctorService.Instance.GetAllDoctors();

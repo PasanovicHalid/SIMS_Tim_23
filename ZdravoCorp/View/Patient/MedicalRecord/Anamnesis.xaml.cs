@@ -24,18 +24,40 @@ namespace ZdravoCorp.View.Patient.MedicalRecord
         private AnamnesisController anamnesisController = new AnamnesisController();
         private PatientController patientController = new PatientController();
         private DoctorController doctorController = new DoctorController();
+        private MedicineController medicineController = new MedicineController();
+        private Appointment appointment;
         public Anamnesis(Model.Appointment appointment)
         {
             InitializeComponent();
             this.DataContext = this;
             anamnesis = anamnesisController.FindAnamnesisByAppointmentId(appointment.Id);
-            Patient.Content = patientController.ReadPatient(appointment.Patient.Id).Name;
+            Patient.Content = patientController.ReadPatient(appointment.Patient.Id).Name +" " + patientController.ReadPatient(appointment.Patient.Id).Surname;
             Doctor.Content = doctorController.ReadDoctor(appointment.Doctor.Id).nameSurname;
-            Date.Content = appointment.startDate.Date.ToString();
-            DoctorType.Content = doctorController.ReadDoctor(appointment.Doctor.Id).DoctorType.ToString();
+            Date.Content = appointment.startDate.ToShortDateString();
+            DoctorType.Content = doctorController.ReadDoctor(appointment.Doctor.Id).DoctorType.Type;
             AppointmentType.Content = anamnesis.AppointmentType;
             Diagnosis.Content = anamnesis.Diagnosis;
-            Presciption.Content = anamnesis.Prescription.ToString();
+            this.appointment = appointment;
+            Presciption.Content = "Brufen 600mg. 2 puta dnevno.\n Razmak izmedju uzimanja minimum 6 sati.";
+            Note.Text = anamnesis.Note;
+        }
+        private void AppointmentSurvey_Click(object sender, RoutedEventArgs e)
+        {
+            AppointmentSurveyController appointmentSurveyController = new AppointmentSurveyController();
+            
+            if (appointmentSurveyController.DoneSurvey(appointment))
+            {
+                MessageBox.Show("Vec ste popunili anketu za ovaj pregled", "Pregled ocenjen", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+            ZdravoCorp.View.Patient.View.Survey.AppointmentSurveyView window = new ZdravoCorp.View.Patient.View.Survey.AppointmentSurveyView(appointment);
+            window.ShowDialog();
+        }
+
+        private void SaveNote_Click(object sender, RoutedEventArgs e)
+        {
+            anamnesis.Note = Note.Text;
+            anamnesisController.UpdateAnamnesis(anamnesis);
         }
     }
 }

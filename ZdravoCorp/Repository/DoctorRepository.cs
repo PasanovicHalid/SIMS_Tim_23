@@ -179,15 +179,16 @@ namespace Repository
 
         public DoctorType ReadDoctorType(String type)
         {
+            DoctorType doctorType = null;
             List<DoctorType> dcType = GetAllDoctorType();
             foreach (DoctorType dct in dcType)
             {
                 if (dct.Type.Equals(type))
                 {
-                    return dct;
+                    doctorType = dct;
                 }
             }
-            return null;
+            return doctorType;
         }
 
         public List<DoctorType> GetAllDoctorType()

@@ -17,9 +17,9 @@ namespace Repository
         private static AnamnesisRepository instance = null;
         public List<int> GetAllAnamnesisIds()
         {
-            List<Anamnesis> anamnesis = GetAllAnamnesis();
+            List<Anamnesis> anamneses = GetAllAnamnesis();
             List<int> ids = new List<int>();
-            foreach (Anamnesis a in anamnesis)
+            foreach (Anamnesis a in anamneses)
             {
                 ids.Add(a.Id);
             }
@@ -37,18 +37,18 @@ namespace Repository
         }
         public Boolean CreateAnamnesis(Anamnesis newAnamnesis)
         {
-            List<Anamnesis> anamnesisList = GetAllAnamnesis();
+            List<Anamnesis> anamneses = GetAllAnamnesis();
             GenerateId(newAnamnesis);
-            anamnesisList.Add(newAnamnesis);
-            serializerAnamnesis.ToCSV(dbPath, anamnesisList);
+            anamneses.Add(newAnamnesis);
+            serializerAnamnesis.ToCSV(dbPath, anamneses);
             return true;
         }
 
         public Anamnesis ReadAnamnesis(int id)
         {
-            List<Anamnesis> anamnesisList = GetAllAnamnesis();
+            List<Anamnesis> anamneses = GetAllAnamnesis();
             Anamnesis appointment = null;
-            foreach (Anamnesis app in anamnesisList)
+            foreach (Anamnesis app in anamneses)
             {
                 if (id == app.Id)
                 {
@@ -60,24 +60,36 @@ namespace Repository
 
         public List<Anamnesis> GetAnamnesisById(List<int> id)
         {
-            List<Anamnesis> anamnesis = serializerAnamnesis.FromCSV(dbPath);
+            List<Anamnesis> anamneses = serializerAnamnesis.FromCSV(dbPath);
             List<Anamnesis> appById = new List<Anamnesis>();
-            foreach (Anamnesis appointment in anamnesis)
+            foreach (Anamnesis anamnesis in anamneses)
             {
                 foreach (int i in id)
                 {
-                    if (appointment.Id == i)
+                    if (anamnesis.Id == i)
                     {
-                        appById.Add(appointment);
+                        appById.Add(anamnesis);
                     }
                 }
             }
             return appById;
         }
 
-        public Boolean UpdateAnamnesis(Anamnesis appointment)
+        public Boolean UpdateAnamnesis(Anamnesis anamnesis)
         {
-            throw new NotImplementedException();
+            Boolean success = false;
+            List<Anamnesis> anamneses = GetAllAnamnesis();
+            for (int i = 0; i < anamneses.Count; i++)
+            {
+                if (anamnesis.Id == anamneses[i].Id)
+                {
+                    anamneses[i] = anamnesis;
+                    serializerAnamnesis.ToCSV(dbPath, anamneses);
+                    success = true;
+                }
+            }
+            return success;
+            
 
         }
 
@@ -88,8 +100,8 @@ namespace Repository
 
         public List<Anamnesis> GetAllAnamnesis()
         {
-            List<Anamnesis> anamnesisList = serializerAnamnesis.FromCSV(dbPath);
-            return anamnesisList;
+            List<Anamnesis> anamneses = serializerAnamnesis.FromCSV(dbPath);
+            return anamneses;
 
         }
 

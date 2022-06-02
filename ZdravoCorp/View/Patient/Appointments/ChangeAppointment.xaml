@@ -27,6 +27,7 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
         <Label 
+            Style="{DynamicResource PatientLabel}"
             Content="Datum" 
             HorizontalAlignment="Left" 
             Margin="54,72,0,0" 
@@ -45,17 +46,20 @@
             </DatePicker.BlackoutDates>
         </DatePicker>
         <Label 
+            Style="{DynamicResource PatientLabel}"
             Content="Doktor" 
             HorizontalAlignment="Left" 
             Margin="54,144,0,0" 
             VerticalAlignment="Top" 
             RenderTransformOrigin="0.092,0.233"/>
         <Label 
+            Style="{DynamicResource PatientLabel}"
             Content="Prioritet" 
             HorizontalAlignment="Left" 
             Margin="54,219,0,0" 
             VerticalAlignment="Top" RenderTransformOrigin="0.46,0.618"/>
         <RadioButton 
+            Style="{DynamicResource RadioButton}"
             Name="DateRB"
             Content="Datum" 
             HorizontalAlignment="Left"
@@ -63,6 +67,7 @@
             VerticalAlignment="Top"
             IsChecked="True" />
         <RadioButton 
+            Style="{DynamicResource RadioButton}"
             Name ="DoctorRB"
             Content="Doktor" 
             HorizontalAlignment="Left" 

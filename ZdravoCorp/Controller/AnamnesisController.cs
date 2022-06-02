@@ -16,9 +16,9 @@ namespace Controller
             return AnamnesisService.Instance.ReadAnamnesis(id);
         }
 
-        public Boolean UpdateAnamnesis(Anamnesis appointment)
+        public Boolean UpdateAnamnesis(Anamnesis anamnesis)
         {
-            throw new NotImplementedException();
+            return AnamnesisService.Instance.UpdateAnamnesis(anamnesis);
 
         }
 

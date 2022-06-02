@@ -23,9 +23,9 @@ namespace Service
             return AnamnesisRepository.Instance.ReadAnamnesis(id);
         }
 
-        public Boolean UpdateAnamnesis(Anamnesis appointment)
+        public Boolean UpdateAnamnesis(Anamnesis anamnesis)
         {
-            throw new NotImplementedException();
+            return AnamnesisRepository.Instance.UpdateAnamnesis(anamnesis);
 
         }
 

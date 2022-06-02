@@ -671,6 +671,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Data\anamnesisDB.csv" />
+    <None Include="Data\commentsDB.csv" />
     <None Include="Data\guestsDB.csv" />
     <None Include="Data\hospitalSurveysDB.csv" />
     <None Include="Data\appointmentSurveysDB.csv" />
@@ -679,6 +680,7 @@
     <None Include="Data\newMedicationRequestDB.csv" />
     <None Include="Data\medicationTypeDB.csv" />
     <None Include="Data\medicationDB.csv" />
+    <None Include="Data\prescriptionDB.csv" />
     <None Include="Data\secretariesDB.csv" />
     <None Include="Data\medicalRecordDB.csv" />
     <None Include="Data\patientsDB.csv" />
@@ -688,6 +690,7 @@
     <None Include="Data\managersDB.csv" />
     <None Include="Data\roomTypesDB.csv" />
     <None Include="Data\roomsDB.csv" />
+    <None Include="Data\vacationsDB.csv" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
