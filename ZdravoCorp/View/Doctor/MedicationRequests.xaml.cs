@@ -21,6 +21,7 @@ namespace ZdravoCorp.View.Doctor
     /// </summary>
     public partial class MedicationRequests : Window
     {
+
         NewMedicationRequestController newMedicationRequestController = new NewMedicationRequestController();
         Model.Doctor currentDoctor;
 
@@ -29,20 +30,13 @@ namespace ZdravoCorp.View.Doctor
             get;
             set;
         }
+
         public MedicationRequests(Model.Doctor temp)
         {
             InitializeComponent();
             this.DataContext = this;
             currentDoctor = temp;
-            NewMedicationRequestController newMedicationRequestController = new NewMedicationRequestController();
-            requests = new ObservableCollection<Model.NewMedicationRequest>();
-            List<Model.NewMedicationRequest> listNewMedicationRequests = newMedicationRequestController.GetAllNewMedicationRequests();
-            foreach(Model.NewMedicationRequest request in listNewMedicationRequests)
-            {
-                requests.Add(request);
-            }
-            MedicineGrid.DataContext = requests;
-            rejectButton.IsEnabled = false;
+            UpdateDataGrid();
         }
 
         private void textBlock_TextChanged(object sender, TextChangedEventArgs e)
@@ -80,13 +74,7 @@ namespace ZdravoCorp.View.Doctor
                 return;
             }
             newMedicationRequestController.AcceptNewMedicationRequest(newMedicationRequest);
-            requests = new ObservableCollection<Model.NewMedicationRequest>();
-            List<Model.NewMedicationRequest> listNewMedicationRequests = newMedicationRequestController.GetAllNewMedicationRequests();
-            foreach (Model.NewMedicationRequest request in listNewMedicationRequests)
-            {
-                requests.Add(request);
-            }
-            MedicineGrid.DataContext = requests;
+            UpdateDataGrid();
         }
 
         private void appointmentsButton_Click(object sender, RoutedEventArgs e)
@@ -94,10 +82,6 @@ namespace ZdravoCorp.View.Doctor
             Appointments appointments = new Appointments(currentDoctor);
             this.Close();
             appointments.Show();
-        }
-
-        private void requestsButton_Click_1(object sender, RoutedEventArgs e)
-        {
         }
 
         private void medsButton_Click_1(object sender, RoutedEventArgs e)
@@ -125,6 +109,18 @@ namespace ZdravoCorp.View.Doctor
         {
             UserWindow user = new UserWindow(currentDoctor);
             user.ShowDialog();
+        }
+
+        public void UpdateDataGrid()
+        {
+            requests = new ObservableCollection<Model.NewMedicationRequest>();
+            List<Model.NewMedicationRequest> listNewMedicationRequests = newMedicationRequestController.GetAllNewMedicationRequests();
+            foreach (Model.NewMedicationRequest request in listNewMedicationRequests)
+            {
+                requests.Add(request);
+            }
+            MedicineGrid.DataContext = requests;
+            rejectButton.IsEnabled = false;
         }
     }
 }

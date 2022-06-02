@@ -7,6 +7,7 @@
 using Repository;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Model
 {
@@ -305,105 +306,46 @@ namespace Model
         public List<String> ToCSV()
         {
             List<String> result = new List<String>();
-            result.Add(Id.ToString());
-            result.Add(password);
-            result.Add(username);
-            result.Add(name);
-            result.Add(surname);
-            result.Add(jmbg);
-            result.Add(email);
-            result.Add(address);
-            result.Add(phoneNumber);
-            result.Add(gender.ToString());
-            result.Add(dateOfBirth.ToString());
             int nf = 0;
-            if(appointment == null)
+            if (appointment == null)
             {
                 result.Add(nf.ToString());
             }
             else
             {
                 result.Add(appointment.Count.ToString());
-                foreach(Appointment a in appointment)
+                foreach (Appointment a in appointment)
                 {
                     result.Add(a.Id.ToString());
                 }
             }
-            if (notification == null)
-            {
-                result.Add(nf.ToString());
-            }
-            else
-            {
-                result.Add(notification.Count.ToString());
-                foreach (Notification n in notification)
-                {
-                    result.Add(n.DateCreated.ToString());
-                    result.Add(n.Content);
-                    result.Add(n.User.Id.ToString());
-                }
-            }
-            result.Add(salary.ToString());
-            result.Add(enrolementDate.ToString());
-            result.Add(workStartTime.ToString());
-            result.Add(workEndTime.ToString());
-            result.Add(vacationStartTime.ToString());
-            result.Add(vacationEndTime.ToString());
-            result.Add(vacationDays.ToString());
             result.AddRange(DoctorType.ToCSV());
-            if(vacations==null)
+            if (vacations == null)
             {
                 result.Add(nf.ToString());
             }
             else
             {
                 result.Add(vacations.Count.ToString());
-                foreach(Vacation vacation in vacations)
+                foreach (Vacation vacation in vacations)
                 {
                     result.Add(vacation.Id.ToString());
                 }
             }
+            result.AddRange(base.ToCSV());
             return result;
+
+
         }
 
         public void FromCSV(string[] values)
         {
             int i = 0;
-            id = int.Parse(values[i++]);
-            password = values[i++];
-            username = values[i++];
-            name = values[i++];
-            surname = values[i++];
-            jmbg = values[i++];
-            email = values[i++];
-            address = values[i++];
-            phoneNumber = values[i++];
-            if(values[i++] == "Male")
-            {
-                gender = Gender.Male;
-            }
-            else
-            {
-                gender = Gender.Female;
-            }
-            dateOfBirth = DateTime.Parse(values[i++]);
             int count = int.Parse(values[i++]);
-            for(int j = 0; j < count; j++)
+            for (int j = 0; j < count; j++)
             {
                 appointment.Add(new Appointment(int.Parse(values[i++])));
             }
-            count = int.Parse(values[i++]);
-            for (int j = 0 ; j < count; j++)
-            {
-                notification.Add(new Notification(DateTime.Parse(values[i++]), values[i++], int.Parse(values[i++])));
-            }
-            salary = float.Parse(values[i++]);
-            enrolementDate = DateTime.Parse(values[i++]);
-            workStartTime = DateTime.Parse(values[i++]);
-            workEndTime = DateTime.Parse(values[i++]);
-            vacationStartTime = DateTime.Parse(values[i++]);
-            vacationEndTime = DateTime.Parse(values[i++]);
-            vacationDays = int.Parse(values[i++]);
             doctorType = new DoctorType(values[i++]);
             count = int.Parse(values[i++]);
             List<int> vacationsIDs = new List<int>();
@@ -411,7 +353,8 @@ namespace Model
             {
                 vacationsIDs.Add(int.Parse(values[i++]));
             }
-
+            values = values.Skip(i).ToArray();
+            base.FromCSV(values);
             convertToVacations(vacationsIDs);
         }
 

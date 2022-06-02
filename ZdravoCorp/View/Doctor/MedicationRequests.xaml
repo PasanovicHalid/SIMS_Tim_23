@@ -37,7 +37,7 @@
         <Border BorderThickness="1" HorizontalAlignment="Right" Height="27" VerticalAlignment="Top" Width="875" BorderBrush="Black" Background="#FFA79F9F" Margin="0,0,-1,0">
             <Image HorizontalAlignment="Left" Height="24" VerticalAlignment="Bottom" Width="22" Source="/Resources/user.png" Margin="841,0,0,0" RenderTransformOrigin="0.818,0.509" MouseLeftButtonDown="Image_MouseLeftButtonDown"/>
         </Border>
-        <Button x:Name="requestsButton" Content="Medical Request" HorizontalAlignment="Left" Margin="99,0,0,0" VerticalAlignment="Top" Height="27" Width="104" Click="requestsButton_Click_1"/>
+        <Button x:Name="requestsButton" Content="Medical Request" HorizontalAlignment="Left" Margin="99,0,0,0" VerticalAlignment="Top" Height="27" Width="104"/>
         <Button x:Name="appointmentsButton" Content="Appointments" HorizontalAlignment="Left" VerticalAlignment="Top" Height="27" Width="100" Click="appointmentsButton_Click"/>
         <Button x:Name="medsButton" Content="Medications List" HorizontalAlignment="Left" Margin="202,0,0,0" VerticalAlignment="Top" Height="27" Width="100" Click="medsButton_Click_1"/>
         <Button x:Name="vacationRequestButton" Content="Vacation Request" HorizontalAlignment="Left" Margin="301,0,0,0" VerticalAlignment="Top" Height="27" Width="99" Click="vacationRequestButton_Click_1"/>
