@@ -70,14 +70,11 @@ namespace Service
             return EquipmentRepository.Instance.FindEquipmentTypeByName(name);
         }
 
-        public Boolean ChangePositionOfEquipment(DateTime excecutionDate, int id_from_room, int id_to_room, int id_equipment, int count)
+        public void ChangePositionOfEquipment(DateTime excecutionDate, int id_from_room, int id_to_room, int id_equipment, int count)
         {
-            if(!actionService.CreateAction(new Model.Action(ActionType.changePosition, excecutionDate, new ChangeRoomAction(id_to_room, id_from_room, id_equipment, count))))
-            {
-                return false;
-            }
+            actionService.CreateAction(new Model.Action(ActionType.changePosition, 
+                excecutionDate, new ChangeRoomAction(id_to_room, id_from_room, id_equipment, count)));
             RoomService.Instance.ChangeActualCountOfEquipment(id_from_room, id_equipment, -count);
-            return true;
         }
 
         public ObservableCollection<EquipmentTypeModel> GetAllEquipmentType()
@@ -99,7 +96,9 @@ namespace Service
             {
                 foreach(Equipment it in room.Equipment)
                 {
-                    result.Add(new EquipmentModel(it.Count, it.Actual_count,it.EquipmentType.Name, room.DesignationCode, it.EquipmentType.Description, it.EquipmentType.Disposable ,room.Identifier, it.Identifier));
+                    result.Add(new EquipmentModel(it.Count, it.Actual_count,it.EquipmentType.Name, 
+                        room.DesignationCode, it.EquipmentType.Description, it.EquipmentType.Disposable, 
+                        room.Identifier, it.Identifier));
                 }
                 
             }

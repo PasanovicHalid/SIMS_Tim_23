@@ -23,21 +23,27 @@ namespace ZdravoCorp.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool ColorMode {
             get {
                 return ((bool)(this["ColorMode"]));
             }
+            set {
+                this["ColorMode"] = value;
+            }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("en")]
+        [global::System.Configuration.DefaultSettingValueAttribute("sr")]
         public string Language {
             get {
                 return ((string)(this["Language"]));
+            }
+            set {
+                this["Language"] = value;
             }
         }
     }

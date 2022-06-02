@@ -20,14 +20,7 @@ namespace ZdravoCorp
     {
         public void ChangeLanguage(string currLang)
         {
-            if (currLang.Equals("sr"))
-            {
-                TranslationSource.Instance.CurrentCulture = new System.Globalization.CultureInfo("sr");
-            }
-            else
-            {
-                TranslationSource.Instance.CurrentCulture = new System.Globalization.CultureInfo("en");
-            }
+            ChangeSettings.ChangeLanguage(currLang);
         }
     }
 }

@@ -69,25 +69,27 @@ namespace ZdravoCorp.View.Manager.ViewModel.Rooms
 
             ChangeCommand = new RelayCommand(o =>
             {
-                if (!controller.UpdateRenovationAction(SelectedAction))
+                try
                 {
-                    MessageBox.Show("Nije uspesno izvrsen zadatak", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                else
-                {
+                    controller.UpdateRenovationAction(SelectedAction);
                     CurrentView = new RenovatingRooms(new RenovatingRoomsViewModel());
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             });
 
             DeleteCommand = new RelayCommand(o =>
             {
-                if (!controller.DeleteRenovationAction(SelectedAction))
+                try
                 {
-                    MessageBox.Show("Nije uspesno izvrsen zadatak", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                else
-                {
+                    controller.DeleteRenovationAction(SelectedAction);
                     CurrentView = new RenovatingRooms(new RenovatingRoomsViewModel());
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             });
         }

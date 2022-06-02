@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using ZdravoCorp.Utility;
 using System.Linq;
+using ZdravoCorp.Exceptions;
 
 namespace Repository
 {
@@ -25,116 +26,55 @@ namespace Repository
         {
             idMap = new HashSet<int>();
             List<Model.Action> actions = serializerAction.FromCSV(dbPath);
-
             foreach (Model.Action action in actions)
             {
                 idMap.Add(action.Id);
             }
         }
 
-        public Boolean CreateAction(Model.Action newAction)
+        public void CreateAction(Model.Action newAction)
         {
             lock (key)
             {
-                //Generate ID for action
-                //If ID already exists generate another ID
-                Random random = new Random();
-                do
-                {
-                    newAction.Id = random.Next();
-                }
-                while (idMap.Contains(newAction.Id));
-
-                //Bool for checking if it was added somewhere in the list
-                bool added = false;
+                newAction.Id = GenerateID();
                 List<Model.Action> actions = serializerAction.FromCSV(dbPath);
-
-                for (int i = 0; i < actions.Count; i++)
-                {
-                    if(DateManipulator.checkIfLaterDate(actions[i].ExecutionDate, newAction.ExecutionDate))
-                    {
-                        actions.Insert(i, newAction);
-                        added = true;
-                        break;
-                    }
-                }
-
-                if (!added)
-                {
-                    actions.Add(newAction);
-                }
-
+                AddAction(newAction, actions);
                 serializerAction.ToCSV(dbPath, actions);
-
-                //Add action to Hashmap for later checks
                 idMap.Add(newAction.Id);
-
-                return true;
             }
         }
 
-        private void SortActions(List<Model.Action> actions)
+        private void SwapActions(Model.Action action, List<Model.Action> actions)
         {
-            lock (key)
+            for (int i = 0; i < actions.Count; i++)
             {
-                serializerAction.ToCSV(dbPath, actions.OrderBy(a => a.ExecutionDate).ToList());
+                if (actions[i].Id == action.Id)
+                {
+                    actions[i] = action;
+                    return;
+                }
             }
+            throw new LocalisedException("ActionDoesntExist");
         }
 
-        public Boolean UpdateAction(Model.Action action)
-        {
-            lock (key)
-            {
-                List<Model.Action> actions = serializerAction.FromCSV(dbPath);
-
-                bool found = false;
-                for (int i = 0; i < actions.Count; i++)
-                {
-                    if (actions[i].Id == action.Id)
-                    {
-                        actions[i] = action;
-                        found = true;
-                        break;
-                    }
-                }
-                if (!found)
-                {
-                    return false;
-                }
-
-                SortActions(actions);
-
-                return true;
-            }
-        }
-
-        public Boolean DeleteAction(int identificator)
+        public void UpdateAction(Model.Action action)
         {
             lock (key)
             {
                 List<Model.Action> actions = serializerAction.FromCSV(dbPath);
+                SwapActions(action, actions);
+                SortActionsAscending(actions);
+            }
+        }
 
-                bool found = false;
-                for (int i = 0; i < actions.Count; i++)
-                {
-                    if (actions[i].Id == identificator)
-                    {
-                        actions.RemoveAt(i);
-                        found = true;
-                        break;
-                    }
-                }
-                if (!found)
-                {
-                    return false;
-                }
-
+        public void DeleteAction(int id)
+        {
+            lock (key)
+            {
+                List<Model.Action> actions = serializerAction.FromCSV(dbPath);
+                RemoveActionByID(id, actions);
                 serializerAction.ToCSV(dbPath, actions);
-
-                //Remove action to Hashmap for later checks
-                idMap.Remove(identificator);
-
-                return true;
+                idMap.Remove(id);
             }
         }
 
@@ -146,25 +86,16 @@ namespace Repository
             }
         }
 
-        public Model.Action ReadAction(int identificator)
+        public Model.Action ReadAction(int id)
         {
             lock (key)
             {
-                if (!idMap.Contains(identificator))
+                if (!idMap.Contains(id))
                 {
-                    return null;
+                    throw new LocalisedException("ActionDoesntExist");
                 }
                 List<Model.Action> actions = serializerAction.FromCSV(dbPath);
-
-                for (int i = 0; i < actions.Count; i++)
-                {
-                    if (actions[i].Id == identificator)
-                    {
-                        return actions[i];
-                    }
-                }
-
-                return null;
+                return FindActionByID(id, actions);
             }
         }
 
@@ -174,6 +105,65 @@ namespace Repository
             {
                 return serializerAction.FromCSV(dbPath);
             }
+        }
+
+        private int GenerateID()
+        {
+            Random random = new Random();
+            int id;
+            do
+            {
+                id = random.Next();
+            }
+            while (idMap.Contains(id));
+            idMap.Add(id);
+            return id;
+        }
+
+        /*
+         * Add action sorted by excecution date ascending
+        */
+        private void AddAction(Model.Action newAction, List<Model.Action> actions)
+        {
+            for (int i = 0; i < actions.Count; i++)
+            {
+                if (DateManipulator.checkIfLaterDate(actions[i].ExecutionDate, newAction.ExecutionDate))
+                {
+                    actions.Insert(i, newAction);
+                    return;
+                }
+            }
+            actions.Add(newAction);
+        }
+
+        private void SortActionsAscending(List<Model.Action> actions)
+        {
+            serializerAction.ToCSV(dbPath, actions.OrderBy(a => a.ExecutionDate).ToList());
+        }
+
+        private Model.Action FindActionByID(int id, List<Model.Action> actions)
+        {
+            for (int i = 0; i < actions.Count; i++)
+            {
+                if (actions[i].Id == id)
+                {
+                    return actions[i];
+                }
+            }
+            throw new LocalisedException("ActionDoesntExist");
+        }
+
+        private void RemoveActionByID(int id, List<Model.Action> actions)
+        {
+            for (int i = 0; i < actions.Count; i++)
+            {
+                if (actions[i].Id == id)
+                {
+                    actions.RemoveAt(i);
+                    return;
+                }
+            }
+            throw new LocalisedException("ActionDoesntExist");
         }
 
         public static ActionRepository Instance

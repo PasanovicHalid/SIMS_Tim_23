@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Globalization;
 using System.Linq;
 using System.Resources;
@@ -20,7 +21,7 @@ namespace ZdravoCorp.View.Core
         }
 
         private readonly ResourceManager resManager = Properties.Resources.ResourceManager;
-        private CultureInfo currentCulture = new System.Globalization.CultureInfo("en");
+        private CultureInfo currentCulture = new System.Globalization.CultureInfo(Properties.Settings.Default.Language);
 
         public string this[string key]
         {

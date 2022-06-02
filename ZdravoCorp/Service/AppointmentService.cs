@@ -121,7 +121,8 @@ namespace Service
         public void SuggestAppointmentsForOneWorkingDay(WantedAppointment wantedAppointment, DateTime correctStart, Doctor d = null)
         {
             d = d == null ? wantedAppointment.Doctor : d;
-            while ((correctStart.TimeOfDay >= d.workStartTime.TimeOfDay) && (correctStart.AddMinutes(45).TimeOfDay <= d.workEndTime.TimeOfDay))
+            while ((correctStart.TimeOfDay >= d.workStartTime.TimeOfDay) 
+                && (correctStart.AddMinutes(45).TimeOfDay <= d.workEndTime.TimeOfDay))
             {
                 if (DoctorService.Instance.IsDoctorFree(wantedAppointment.Doctor.Id, correctStart, correctStart.AddMinutes(45)))
                 {

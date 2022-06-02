@@ -2,11 +2,11 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ZdravoCorp.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="ColorMode" Type="System.Boolean" Scope="Application">
+    <Setting Name="ColorMode" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="Language" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">en</Value>
+    <Setting Name="Language" Type="System.String" Scope="User">
+      <Value Profile="(Default)">sr</Value>
     </Setting>
   </Settings>
 </SettingsFile>

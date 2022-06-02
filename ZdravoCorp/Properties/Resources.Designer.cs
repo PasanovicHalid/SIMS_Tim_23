@@ -61,6 +61,15 @@ namespace ZdravoCorp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Action doesnt exist in data base.
+        /// </summary>
+        public static string ActionDoesntExist {
+            get {
+                return ResourceManager.GetString("ActionDoesntExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add.
         /// </summary>
         public static string Add {
