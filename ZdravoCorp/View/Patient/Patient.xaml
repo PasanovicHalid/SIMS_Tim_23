@@ -119,7 +119,7 @@
                     <TextBox 
                         Style="{DynamicResource InfoTextBox}"
                         TextWrapping="Wrap" 
-                        Text="TextBox" 
+                        Text="{Binding Path=Height}"
                         Width="200"
                         HorizontalAlignment="Left" 
                         VerticalAlignment="Top" 
@@ -134,7 +134,7 @@
                     <TextBox 
                         Style="{DynamicResource InfoTextBox}"
                         TextWrapping="Wrap" 
-                        Text="TextBox" 
+                        Text="{Binding Path=Weight}" 
                         Width="200"
                         HorizontalAlignment="Left" 
                         VerticalAlignment="Top" 
