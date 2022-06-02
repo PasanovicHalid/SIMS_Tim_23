@@ -77,6 +77,7 @@ namespace Repository
 
         public Boolean UpdateAppointment(Appointment appointment)
         {
+            Boolean success = false;
             List<Appointment> appointments = GetAllAppointments();
             for (int i = 0; i < appointments.Count; i++)
             {
@@ -84,11 +85,10 @@ namespace Repository
                 {
                     appointments[i] = appointment;
                     serializerAppointment.ToCSV(dbPath, appointments);
-                    return true;
+                    success = true;
                 }
             }
-            return false;
-
+            return success;
         }
 
         public Boolean DeleteAppointment(int id)

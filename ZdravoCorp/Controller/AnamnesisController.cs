@@ -1,8 +1,8 @@
 using Model;
 using System;
 using System.Collections.Generic;
-
-namespace Repository
+using Service;
+namespace Controller
 {
     public class AnamnesisController
     {
@@ -16,9 +16,9 @@ namespace Repository
             return AnamnesisService.Instance.ReadAnamnesis(id);
         }
 
-        public Boolean UpdateAnamnesis(Anamnesis appointment)
+        public Boolean UpdateAnamnesis(Anamnesis anamnesis)
         {
-            throw new NotImplementedException();
+            return AnamnesisService.Instance.UpdateAnamnesis(anamnesis);
 
         }
 
@@ -32,6 +32,10 @@ namespace Repository
             return AnamnesisService.Instance.GetAllAnamnesis();
         }
 
+        public Anamnesis FindAnamnesisByAppointmentId(int id)
+        {
+            return AnamnesisService.Instance.FindAnamnesisByAppointmentId(id);
+        }
         public AnamnesisController()
         {
 

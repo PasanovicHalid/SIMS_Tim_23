@@ -15,6 +15,7 @@ namespace Model
         private int id;
         private int count;
         private MedicationType medicationType;
+        private int v;
 
         public Medication(int id, int count)
         {
@@ -38,6 +39,11 @@ namespace Model
         public string Name { get => medicationType.Name; set => medicationType.Name = value; }
         public string Manufacturer { get => medicationType.Manufacturer; set => medicationType.Manufacturer = value; }
         public string Description { get => medicationType.Description; set => medicationType.Description = value;}
+
+        public Medication(int vid)
+        {
+            this.id = id;
+        }
 
         public void FromCSV(string[] values)
         {
