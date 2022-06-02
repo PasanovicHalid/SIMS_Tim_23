@@ -98,7 +98,7 @@ namespace ZdravoCorp.View.Doctor
 
                     textBox4.Text = pom.BloodType.ToString();
 
-                    List<Model.Report> commentsl = pom.Comments;
+                    List<Model.Report> commentsl = pom.MedicalReports;
 
                     CommentsGrid.DataContext = commentsl;
 
@@ -148,7 +148,7 @@ namespace ZdravoCorp.View.Doctor
 
                         textBox4.Text = pom.BloodType.ToString();
 
-                        List<Model.Report> commentsl = pom.Comments;
+                        List<Model.Report> commentsl = pom.MedicalReports;
 
                         CommentsGrid.DataContext = commentsl;
 

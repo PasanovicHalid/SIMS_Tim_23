@@ -17,31 +17,30 @@ namespace Model
         private float height;
         private float weight;
         private List<String> allergens = new List<String>();
+        private System.Collections.Generic.List<Report> medicalReports = new List<Report>();
 
-        private System.Collections.Generic.List<Report> comments = new List<Report>();
-
-        public MedicalRecord() { }
+        public MedicalRecord() 
+        {
+        }
 
         public MedicalRecord(int id)
         {
             this.id = id;
         }
 
-        public MedicalRecord(float height, float weight, BloodType bloodType, List<String> allergens, List<Report> comments, Patient patient) {
+        public MedicalRecord(float height, float weight, BloodType bloodType, List<String> allergens, List<Report> medicalReports, Patient patient) {
             this.height = height;
             this.weight = weight;
             this.bloodType = bloodType;
             this.allergens = allergens;
-            this.comments = comments;
+            this.medicalReports = medicalReports;
             this.patient = patient;
         }
 
-        public String btname { get => bloodType.ToString(); }
         public BloodType BloodType { get => bloodType; set => bloodType = value; }
         public float Height { get => height; set => height = value; }
         public float Weight { get => weight; set => weight = value; }
         public int Id { get => id; set => id = value; }
-
         public Patient Patient { get => patient; set => patient = value; }
 
         public List<String> Allergens
@@ -100,66 +99,48 @@ namespace Model
             }
         }
 
-
-
-        /// <summary>
-        /// Property for collection of Comments
-        /// </summary>
-        /// <pdGenerated>Default opposite class collection property</pdGenerated>
-        public System.Collections.Generic.List<Report> Comments
+        public System.Collections.Generic.List<Report> MedicalReports
         {
             get
             {
-                if (comments == null)
-                    comments = new System.Collections.Generic.List<Report>();
-                return comments;
+                if (medicalReports == null)
+                    medicalReports = new System.Collections.Generic.List<Report>();
+                return medicalReports;
             }
             set
             {
-                RemoveAllComments();
+                RemoveAllMedicalReports();
                 if (value != null)
                 {
-                    foreach (Report oComments in value)
-                        AddComments(oComments);
+                    foreach (Report reports in value)
+                        AddMedicalRecords(reports);
                 }
             }
         }
 
-        /// <summary>
-        /// Add a new Comments in the collection
-        /// </summary>
-        /// <pdGenerated>Default Add</pdGenerated>
-        public void AddComments(Report newComments)
+        public void AddMedicalRecords(Report newReport)
         {
-            if (newComments == null)
+            if (newReport == null)
                 return;
-            if (this.comments == null)
-                this.comments = new System.Collections.Generic.List<Report>();
-            if (!this.comments.Contains(newComments))
-                this.comments.Add(newComments);
+            if (this.medicalReports == null)
+                this.medicalReports = new System.Collections.Generic.List<Report>();
+            if (!this.medicalReports.Contains(newReport))
+                this.medicalReports.Add(newReport);
         }
 
-        /// <summary>
-        /// Remove an existing Comments from the collection
-        /// </summary>
-        /// <pdGenerated>Default Remove</pdGenerated>
-        public void RemoveComments(Report oldComments)
+        public void RemoveMedicalRecords(Report oldReport)
         {
-            if (oldComments == null)
+            if (oldReport == null)
                 return;
-            if (this.comments != null)
-                if (this.comments.Contains(oldComments))
-                    this.comments.Remove(oldComments);
+            if (this.medicalReports != null)
+                if (this.medicalReports.Contains(oldReport))
+                    this.medicalReports.Remove(oldReport);
         }
 
-        /// <summary>
-        /// Remove all instances of Comments from the collection
-        /// </summary>
-        /// <pdGenerated>Default removeAll</pdGenerated>
-        public void RemoveAllComments()
+        public void RemoveAllMedicalReports()
         {
-            if (comments != null)
-                comments.Clear();
+            if (medicalReports != null)
+                medicalReports.Clear();
         }
 
         public List<String> ToCSV()
@@ -186,17 +167,17 @@ namespace Model
                 }
             }
             int com = 0;
-            if (comments == null)
+            if (medicalReports == null)
             {
                 result.Add(com.ToString());
             }
             else
             {
-                result.Add(comments.Count.ToString());
+                result.Add(medicalReports.Count.ToString());
 
-                foreach (Report c in comments)
+                foreach (Report report in medicalReports)
                 {
-                    result.Add(c.Id.ToString());
+                    result.Add(report.Id.ToString());
                 }
             }
 
@@ -239,8 +220,6 @@ namespace Model
                     break;
 
             }
-            //bloodType = BloodType.aPlus;
-            //i++;
             patient = new Patient(int.Parse(values[i++]));
             int count = int.Parse(values[i++]);
             for(int j = 0; j < count; j++)
@@ -251,7 +230,7 @@ namespace Model
             ZdravoCorp.Controller.ReportController cc = new ZdravoCorp.Controller.ReportController();
             for (int j = 0; j < count; j++)
             {
-                comments.Add(cc.ReadComment(int.Parse(values[i++])));
+                medicalReports.Add(cc.ReadComment(int.Parse(values[i++])));
             }
         }
     }

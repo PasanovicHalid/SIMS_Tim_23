@@ -58,7 +58,7 @@ namespace ZdravoCorp.View.Doctor
             Appointment apo = (Appointment)AppointmentCB.SelectedItem;
             Report c = new Report(apo, komentar, currentDoctor);
             cc.CreateComment(c);
-            currentPatient.Record.Comments.Add(c);
+            currentPatient.Record.MedicalReports.Add(c);
             mcc.UpdateMedicalRecord(currentPatient.Record);
             pc.UpdatePatient(currentPatient);
             this.Close();

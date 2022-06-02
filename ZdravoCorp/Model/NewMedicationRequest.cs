@@ -11,14 +11,40 @@ namespace Model
     public class NewMedicationRequest : ObservableObject, Serializable
     {
         private int id;
-
         private MedicationType medicationType;
-
         private bool change;
-
         private Status status;
-
         private String comment;
+
+        public NewMedicationRequest()
+        {
+        }
+
+        public NewMedicationRequest(NewMedicationRequest request)
+        {
+            Id = request.Id;
+            MedicationType = request.MedicationType;
+            Status = request.Status;
+            Comment = request.Comment;
+            Change = request.Change;
+        }
+
+        public NewMedicationRequest(NewMedicationRequest request, Status status, string comment, bool change)
+        {
+            Id = request.Id;
+            MedicationType = request.MedicationType;
+            Status = status;
+            Comment = comment;
+            Change = change;
+        }
+
+        public NewMedicationRequest(MedicationType medicationType, Status status, string comment, bool change)
+        {
+            this.medicationType = medicationType;
+            this.status = status;
+            this.comment = comment;
+            this.change = change;
+        }
 
         public int Id 
         {
@@ -120,46 +146,6 @@ namespace Model
             }
         }
 
-        public NewMedicationRequest(String name, String manufacturer, String description)
-        {
-            Name = name;
-            Manufacturer = manufacturer;
-            Description = description;
-            Status = Status.PENDING;
-            Change = false;
-        }
-
-        public NewMedicationRequest()
-        { 
-
-        }
-
-        public NewMedicationRequest(NewMedicationRequest request)
-        {
-            Id = request.Id;
-            MedicationType = request.MedicationType;
-            Status = request.Status;
-            Comment = request.Comment;
-            Change = request.Change;
-        }
-
-        public NewMedicationRequest(NewMedicationRequest request, Status status, string comment, bool change)
-        {
-            Id = request.Id;
-            MedicationType = request.MedicationType;
-            Status = status;
-            Comment = comment;
-            Change = change;
-        }
-
-        public NewMedicationRequest(MedicationType medicationType, Status status, string comment, bool change)
-        {
-            this.medicationType = medicationType;
-            this.status = status;
-            this.comment = comment;
-            this.change = change;
-        }
-
         private string[] ReadInfo(string[] values)
         {
             int i = 0;
@@ -171,7 +157,6 @@ namespace Model
         }
         public void FromCSV(string[] values)
         {
-            int i = 0;
             values = ReadInfo(values);
             MedicationType = new MedicationType();
             MedicationType.FromCSV(values);

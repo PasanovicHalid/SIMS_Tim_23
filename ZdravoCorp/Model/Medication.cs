@@ -14,39 +14,7 @@ namespace Model
     {
         private int id;
         private int count;
-
         private MedicationType medicationType;
-
-        /// <summary>
-        /// Property for MedicationType
-        /// </summary>
-        /// <pdGenerated>Default opposite class property</pdGenerated>
-        public MedicationType MedicationType
-        {
-            get
-            {
-                return medicationType;
-            }
-            set
-            {
-                this.medicationType = value;
-            }
-        }
-        public int Id { get => id; set => id = value; }
-        public int Count { get => count; set => count = value; }
-
-        public string Name
-        {
-            get => medicationType.Name; set => medicationType.Name = value;
-        }
-        public string Manufacturer
-        {
-            get => medicationType.Manufacturer; set => medicationType.Manufacturer = value;
-        }
-        public string Description
-        {
-            get => medicationType.Description; set => medicationType.Description = value;
-        }
 
         public Medication(int id, int count)
         {
@@ -63,6 +31,13 @@ namespace Model
             this.count = count;
             this.medicationType = medicationType;
         }
+
+        public MedicationType MedicationType { get => medicationType; set => medicationType = value; }  
+        public int Id { get => id; set => id = value; }
+        public int Count { get => count; set => count = value; }
+        public string Name { get => medicationType.Name; set => medicationType.Name = value; }
+        public string Manufacturer { get => medicationType.Manufacturer; set => medicationType.Manufacturer = value; }
+        public string Description { get => medicationType.Description; set => medicationType.Description = value;}
 
         public void FromCSV(string[] values)
         {

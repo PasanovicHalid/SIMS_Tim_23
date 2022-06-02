@@ -17,43 +17,17 @@ namespace Model
         private int durationDays;
         private int quantity;
         private string description;
+        private Medication medication;
 
-        private Medication medication = new Medication();
-
-        public Medication Medication { get { return medication; } set { medication = value; } }
-
-        public int Quantity { get { return quantity; } set { quantity = value; } }  
-
-        public int MedicationID
-        {
-            get { return medication.Id; } set { medication.Id = value; }
-        }
-
-        public string Description { get { return description; } set { description = value; } }  
-
-        public string Name
-        {
-            get { return medication.Name; } set { medication.Name = value;} 
-        }
-
-        private Notification notification = new Notification();
-
-        public int Id { get => id; set => id = value; }
-
-        public int TimesADay
-        { get => timesADay; set => timesADay = value; }
-
-        public int DurationDays
-        {
-            get => durationDays; set => durationDays = value;
-        }
+        public Prescription()
+        { }
 
         public Prescription(int id)
         {
             this.id = id;
         }
 
-        public Prescription(int medicationId, int timesADay, int numberOfDays,string description)
+        public Prescription(int medicationId, int timesADay, int numberOfDays, string description)
         {
             MedicineController medicineController = new MedicineController();
             Medication = medicineController.ReadMedicine(medicationId);
@@ -63,8 +37,17 @@ namespace Model
             Description = description;
         }
 
-        public Prescription()
-        { }
+
+        public Medication Medication { get { return medication; } set { medication = value; } }
+        public int Quantity { get { return quantity; } set { quantity = value; } }  
+        public int MedicationID { get { return medication.Id; } set { medication.Id = value; } }
+        public string Description { get { return description; } set { description = value; } }  
+        public string Name {  get { return medication.Name; } set { medication.Name = value;}  }
+        public int Id { get => id; set => id = value; }
+        public int TimesADay { get => timesADay; set => timesADay = value; }
+        public int DurationDays { get => durationDays; set => durationDays = value; }
+
+        
 
         public List<String> ToCSV()
         {
@@ -74,9 +57,7 @@ namespace Model
             result.Add(durationDays.ToString());
             result.Add(quantity.ToString());
             result.Add(description);
-            /*Mozda nije dobro*/
             result.Add(medication.Id.ToString());
-            result.Add(notification.Id.ToString());
             return result;
         }
 
@@ -88,10 +69,8 @@ namespace Model
             durationDays = int.Parse (values[i++]);
             quantity = int.Parse(values[i++]);
             description = values[i++];
-            /*Mozda nije dobro*/
-            medication.Id = int.Parse(values[i++]);
-            notification.Id = int.Parse(values[i++]);
-
+            Controller.MedicineController medicationController = new MedicineController();
+            Medication = medicationController.ReadMedicine(int.Parse(values[i++]));
         }
     }
 }
