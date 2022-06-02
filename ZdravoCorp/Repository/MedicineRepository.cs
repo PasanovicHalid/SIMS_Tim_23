@@ -258,7 +258,8 @@ namespace Repository
 
         public List<MedicationType> GetAllMedicationType()
         {
-            Dictionary<int, MedicationType> types = serializerType.FromCSV(dbPathTypes).ToDictionary(keySelector: m => m.Id, elementSelector: m => m);
+            Dictionary<int, MedicationType> types = serializerType.FromCSV(dbPathTypes)
+                .ToDictionary(keySelector: m => m.Id, elementSelector: m => m);
             InstantiateReplacements(types);
             return types.Values.ToList();
         }

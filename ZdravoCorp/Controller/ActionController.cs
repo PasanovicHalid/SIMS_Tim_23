@@ -13,34 +13,34 @@ namespace Controller
     public class ActionController
     {
         public ActionService actionService = new ActionService();
-        public Boolean CreateAction(Model.Action newAction)
+        public void CreateAction(Model.Action newAction)
         {
-            return actionService.CreateAction(newAction);
+            actionService.CreateAction(newAction);
         }
 
-        public Boolean UpdateRenovationAction(RenovationActionModel action)
+        public void UpdateRenovationAction(RenovationActionModel action)
         {
-            return actionService.UpdateRenovationAction(action);
+            actionService.UpdateRenovationAction(action);
         }
 
-        public Boolean DeleteRenovationAction(RenovationActionModel action)
+        public void DeleteRenovationAction(RenovationActionModel action)
         {
-            return actionService.DeleteRenovationAction(action);
+            actionService.DeleteRenovationAction(action);
         }
 
-        public Boolean DeleteChangeAction(ChangeActionModel action)
+        public void DeleteChangeAction(ChangeActionModel action)
         {
-            return actionService.DeleteChangeAction(action);
+            actionService.DeleteChangeAction(action);
         }
 
-        public Boolean UpdateChangeAction(ChangeActionModel action, int count)
+        public void UpdateChangeAction(ChangeActionModel action, int count)
         {
-            return actionService.UpdateChangeAction(action, count);
+            actionService.UpdateChangeAction(action, count);
         }
 
-        public Boolean DeleteAction(int identificator)
+        public void DeleteAction(int identificator)
         {
-            return actionService.DeleteAction(identificator);
+            actionService.DeleteAction(identificator);
         }
 
         public Model.Action ReadAction(int identificator)

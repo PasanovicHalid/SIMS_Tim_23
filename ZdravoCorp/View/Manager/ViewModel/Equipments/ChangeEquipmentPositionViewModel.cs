@@ -160,19 +160,21 @@ namespace ZdravoCorp.View.Manager.ViewModel.Equipments
 
             ChangeCommand = new RelayCommand(o =>
             {
-                DateTime executionDate = new DateTime();
-                if (selected.Disposable == false)
+                try
                 {
-                    executionDate = SelectedDate;
-                    executionDate = executionDate.Add(TimeSpan.Parse(Time));
+                    DateTime executionDate = new DateTime();
+                    if (selected.Disposable == false)
+                    {
+                        executionDate = SelectedDate;
+                        executionDate = executionDate.Add(TimeSpan.Parse(Time));
+                        equipmentController.ChangePositionOfEquipment(executionDate, selected.Room_identifier, SelectedRoom.Identifier, selected.Equipment_identifier, Count);
+                        CurrentView = new View.Equipments.Equipment(new EquipmentViewModel());
+                    }
                 }
-
-                if(!equipmentController.ChangePositionOfEquipment(executionDate, selected.Room_identifier, SelectedRoom.Identifier, selected.Equipment_identifier, Count))
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Nije uspesno napravljena rezervacija", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
+                    MessageBox.Show(ex.Message, "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-                CurrentView = new View.Equipments.Equipment(new EquipmentViewModel());
             }, checkIfAllCorrect);
         }
 

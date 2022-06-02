@@ -213,27 +213,33 @@ namespace ZdravoCorp.View.Manager.ViewModel.Equipments
 
             ChangeCommand = new RelayCommand(o =>
             {
-                TimeSpan temp = TimeSpan.ParseExact(Time, "hh\\:mm", CultureInfo.InvariantCulture);
-
-                SelectedAction.ExecutionDate = SelectedDate.Add(temp);
-                SelectedAction.Id_incoming_room = SelectedRoom.Identifier;
-                if (!ActionController.UpdateChangeAction(SelectedAction, starting_count - SelectedAction.Count))
+                try
                 {
-                    MessageBox.Show("Nije uspesno obrisana akcija", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    TimeSpan temp = TimeSpan.ParseExact(Time, "hh\\:mm", CultureInfo.InvariantCulture);
+                    SelectedAction.ExecutionDate = SelectedDate.Add(temp);
+                    SelectedAction.Id_incoming_room = SelectedRoom.Identifier;
+                    ActionController.UpdateChangeAction(SelectedAction, starting_count - SelectedAction.Count);
+                    parent.Update();
+                    CurrentView = new ReservedEquipment(new ReservedEquipmentViewModel());
                 }
-                parent.Update();
-                CurrentView = new ReservedEquipment(new ReservedEquipmentViewModel());
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }, checkIfAllCorrect);
 
             DeleteCommand = new RelayCommand(o =>
             {
-                if (!ActionController.DeleteChangeAction(SelectedAction))
+                try
                 {
-                    MessageBox.Show("Nije uspesno obrisana akcija", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    ActionController.DeleteChangeAction(SelectedAction);
+                    parent.Update();
+                    CurrentView = new ReservedEquipment(new ReservedEquipmentViewModel());
                 }
-                parent.Update();
-                
-                CurrentView = new ReservedEquipment(new ReservedEquipmentViewModel());
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             });
         }
 

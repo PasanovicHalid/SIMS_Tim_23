@@ -36,7 +36,7 @@ namespace ZdravoCorp.View.Manager
         public Manager(AutoResetEvent autoEvent)
         {
             InitializeComponent();
-            this.CurrentLanguage = "en";
+            this.CurrentLanguage = Properties.Settings.Default.Language;
             this.DataContext = ContentViewModel.Instance;
             this.autoEvent = autoEvent;
             changed = false;

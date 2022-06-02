@@ -15,20 +15,20 @@ namespace Model
         private int id;
         private ActionType type;
         private DateTime executionDate;
-        private Object obj;
+        private IAction obj;
 
         public Action()
         {
         }
 
-        public Action(ActionType type, DateTime executionDate, object obj)
+        public Action(ActionType type, DateTime executionDate, IAction obj)
         {
             this.type = type;
             this.executionDate = executionDate;
             this.obj = obj;
         }
 
-        public Action(int id, ActionType type, object obj, DateTime executionDate)
+        public Action(int id, ActionType type, IAction obj, DateTime executionDate)
         {
             this.Id = id;
             this.type = type;
@@ -38,7 +38,7 @@ namespace Model
         
         public ActionType Type { get => type; }
         public DateTime ExecutionDate { get => executionDate; set => executionDate = value; }
-        public object Object { get => obj; set => obj = value; }
+        public IAction Object { get => obj; set => obj = value; }
         public int Id { get => id; set => id = value; }
 
         public void FromCSV(string[] values)
@@ -66,23 +66,10 @@ namespace Model
         public List<string> ToCSV()
         {
             List<String> result = new List<String>();
-
             result.Add(id.ToString());
             result.Add(type.ToString());
             result.Add(executionDate.ToString());
-
-            switch (type)
-            {
-                case ActionType.changePosition:
-                    ChangeRoomAction change = (ChangeRoomAction)obj;
-                    result.AddRange(change.ToCSV());
-                    break;
-                case ActionType.renovation:
-                    RenovationAction reno = (RenovationAction)obj;
-                    result.AddRange(reno.ToCSV());
-                    break;
-            }
-
+            result.AddRange(obj.ToCSV());
             return result;
         }
     }

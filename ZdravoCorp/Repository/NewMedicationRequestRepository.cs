@@ -126,7 +126,8 @@ namespace Repository
         public List<NewMedicationRequest> GetAllNewMedicationRequests()
         {
             List<NewMedicationRequest> requests = serializerNewMedicationRequest.FromCSV(dbPath);
-            Dictionary<int, MedicationType> types = MedicineRepository.Instance.GetAllMedicationType().ToDictionary(keySelector: m => m.Id, elementSelector: m => m);
+            Dictionary<int, MedicationType> types = MedicineRepository.Instance.GetAllMedicationType()
+                .ToDictionary(keySelector: m => m.Id, elementSelector: m => m);
             foreach(NewMedicationRequest request in requests)
             {
                 for(int i = 0; i < request.MedicationType.Replacement.Count; i++)
