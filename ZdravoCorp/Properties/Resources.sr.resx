@@ -201,6 +201,12 @@
   <data name="Doctor" xml:space="preserve">
     <value>Doctor</value>
   </data>
+  <data name="DoctorTypeDoesntExists" xml:space="preserve">
+    <value>Tip doktora ne postoji</value>
+  </data>
+  <data name="DoctorTypeExists" xml:space="preserve">
+    <value>Tip doktora vec postoji</value>
+  </data>
   <data name="Duration" xml:space="preserve">
     <value>Trajanje</value>
   </data>
@@ -240,6 +246,12 @@
   <data name="Home" xml:space="preserve">
     <value>Pocetna</value>
   </data>
+  <data name="IngredientDoesExist" xml:space="preserve">
+    <value>Sastojak vec postoji</value>
+  </data>
+  <data name="IngredientDoesntExist" xml:space="preserve">
+    <value>Sastojak ne postoji</value>
+  </data>
   <data name="Is Renovating Now" xml:space="preserve">
     <value>Renovira se trenutno</value>
   </data>
@@ -263,6 +275,12 @@
   </data>
   <data name="Medication Types" xml:space="preserve">
     <value>Tipovi lekova</value>
+  </data>
+  <data name="MedicationTypeDoesExist" xml:space="preserve">
+    <value>Tip leka vec postoji</value>
+  </data>
+  <data name="MedicationTypeDoesntExist" xml:space="preserve">
+    <value>Tip leka ne postoji</value>
   </data>
   <data name="Medicine" xml:space="preserve">
     <value>Lek</value>
@@ -365,5 +383,11 @@
   </data>
   <data name="Types" xml:space="preserve">
     <value>Tipovi</value>
+  </data>
+  <data name="UserDoesntExist" xml:space="preserve">
+    <value>Korisnik ne postoji</value>
+  </data>
+  <data name="UserExists" xml:space="preserve">
+    <value>Korisnik vec postoji</value>
   </data>
 </root>

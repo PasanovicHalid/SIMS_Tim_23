@@ -31,7 +31,6 @@ namespace Repository
                 id = random.Next();
             }
             while (CheckIfIDExists(id));
-            idMap.Add(id);
             return id;
         }
 
@@ -52,6 +51,7 @@ namespace Repository
         {
             newMedicationRequest.Id = GenerateID();
             serializerNewMedicationRequest.ToCSVAppend(dbPath, new List<NewMedicationRequest>() { newMedicationRequest });
+            idMap.Add(newMedicationRequest.Id);
             return true;
         }
 

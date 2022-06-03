@@ -6,223 +6,196 @@
 using Model;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using ZdravoCorp.Exceptions;
 
 namespace Repository
 {
-    public class DoctorRepository
+    public class DoctorRepository : UserRepository<Doctor>
     {
-        private String dbPath = "..\\..\\Data\\doctorsDB.csv";
-        private String dbDoctorType = "..\\..\\Data\\doctorTypesDB.csv";
-        private Serializer<Doctor> serializerDoctor = new Serializer<Doctor>();
-        private Serializer<DoctorType> serializerDoctorType = new Serializer<DoctorType>();
-
-        private Dictionary<string, string> userMap = new Dictionary<string, string>();
-
         private static DoctorRepository instance = null;
-
-        public List<int> GetAllDoctorIds()
-        {
-            List<Doctor> doctors = GetAllDoctors();
-            List<int> ids = new List<int>();
-            foreach (Doctor doctor in doctors)
-            {
-                ids.Add(doctor.Id);
-            }
-            return ids;
-        }
-        public void GenerateId(Doctor newDoctor)
-        {
-            List<int> allDoctorsIds = GetAllDoctorIds();
-            Random random = new Random();
-            do
-            {
-                newDoctor.Id = random.Next();
-            }
-            while (allDoctorsIds.Contains(newDoctor.Id));
-        }
-        public Boolean CreateDoctor(Model.Doctor newDoctor)
-        {
-            List<Doctor> doctors = GetAllDoctors();
-            bool exists = false;
-            
-            foreach(Doctor d in doctors)
-            {
-                if(d.Jmbg.Equals(newDoctor.Jmbg))
-                {
-                    exists = true;
-                    break;
-                }
-            }
-            if (!exists)
-            {
-                GenerateId(newDoctor);
-                doctors.Add(newDoctor);
-                serializerDoctor.ToCSV(dbPath, doctors);
-                return true;
-            }
-            return false;
-        }
-
-        public Boolean UpdateDoctor(Model.Doctor doctor)
-        {
-            Boolean success = false;
-            List<Doctor> doctors = GetAllDoctors();
-            for(int i = 0; i < doctors.Count; i++)
-            {
-                if (doctor.Id == doctors[i].Id)
-                {
-                    success = true;
-                    doctors[i] = doctor;
-                    break;
-                }
-            }
-            if (success)
-            {
-                serializerDoctor.ToCSV(dbPath, doctors);
-                
-            }
-            return success;
-        }
-
-        public Boolean DeleteDoctor(int id)
-        {
-            Boolean success = false;
-            List<Doctor> doctors = GetAllDoctors();
-            foreach (Doctor d in doctors)
-            {
-                if (id.Equals(d.Id))
-                {
-                    success = true;
-                    doctors.Remove(d);
-                    serializerDoctor.ToCSV(dbPath, doctors);
-                    break;
-                }
-            }
-            return success;
-        }
-
-        public Model.Doctor ReadDoctor(int id)
-        {
-            List<Doctor> doctors = GetAllDoctors();
-            foreach (Doctor d in doctors)
-            {
-                if (id == d.Id)
-                {
-                    return d ;
-                }
-            }
-            return null;
-        }
-
-        public List<Doctor> GetAllDoctors()
-        {
-            List<Doctor> doctors = serializerDoctor.FromCSV(dbPath);
-            foreach(Doctor d in doctors)
-            {
-                List<int> ids = new List<int>();
-                foreach(Appointment a in d.Appointment)
-                {
-                    ids.Add(a.Id);
-                }
-                d.Appointment = AppointmentRepository.Instance.GetAppointmentsById(ids);
-                
-            }
-            return doctors;
-        }
-
-        public Boolean CreateDoctorType(DoctorType newDoctorType)
-        {
-            List<DoctorType> dcType = GetAllDoctorType();
-            dcType.Add(newDoctorType);
-            serializerDoctorType.ToCSV(dbDoctorType, dcType);
-            return true;
-        }
-
-        public Boolean UpdateDoctorType(DoctorType doctorType)
-        {
-            Boolean success = false;
-            List<DoctorType> dcType = GetAllDoctorType();
-            foreach (DoctorType dct in dcType)
-            {
-                if (dct.Type.Equals(doctorType.Type))
-                {
-                    success = true;
-                    dcType.Remove(doctorType);
-                    break;
-                }
-            }
-            if (success)
-            {
-                dcType.Add(doctorType);
-                serializerDoctorType.ToCSV(dbDoctorType, dcType);
-            }
-            return success;
-        }
-
-        public Boolean DeleteDoctorType(String type)
-        {
-            Boolean success = false;
-            List<DoctorType> dcType = GetAllDoctorType();
-            foreach(DoctorType dct in dcType)
-            {
-                if (dct.Type.Equals(type))
-                {
-                    success = true;
-                    dcType.Remove(dct);
-                    serializerDoctorType.ToCSV(dbDoctorType, dcType);
-                    break;
-                }
-            }
-            
-            return success;
-        }
-
-        public DoctorType ReadDoctorType(String type)
-        {
-            List<DoctorType> dcType = GetAllDoctorType();
-            foreach (DoctorType dct in dcType)
-            {
-                if (dct.Type.Equals(type))
-                {
-                    return dct;
-                }
-            }
-            return null;
-        }
-
-        public List<DoctorType> GetAllDoctorType()
-        {
-            return serializerDoctorType.FromCSV(dbDoctorType);
-        }
-
-        private void InstantiateHashSets()
-        {
-            List<Doctor> doctors = GetAllDoctors();
-            foreach(Doctor doctor in doctors)
-            {
-                userMap.Add(doctor.Username, doctor.Password);
-            }
-        }
-
-        public Dictionary<string, string> GetUsernameHashSet()
-        {
-            return userMap;
-        }
 
         public DoctorRepository()
         {
-            InstantiateHashSets();
+            dbPath = "..\\..\\Data\\doctorsDB.csv";
+            InstantiateHashSets(GetAll());
+        }
+
+        public List<int> GetAllDoctorIds()
+        {
+            return idMap.ToList();
+        }
+
+        public new List<Doctor> GetAll()
+        {
+            lock (key)
+            {
+                List<Doctor> doctors = base.GetAll();
+                foreach (Doctor it in doctors)
+                {
+                    it.Appointment = AppointmentRepository.Instance
+                        .GetAppointmentsById(GetIdsOfAppointments(it));
+                }
+                return doctors;
+            }
+        }
+
+        public Dictionary<string, Doctor> GetUsernameHashSet()
+        {
+            return _users;
+        }
+
+        public override Doctor Read(int id)
+        {
+            lock (key)
+            {
+                CheckIfIDExists(id);
+                return FindDoctorByID(GetAll(), id);
+            }
+        }
+
+        public override void Create(Doctor element)
+        {
+            lock (key)
+            {
+                List<Doctor> elements = GetAll();
+                CheckIfDoctorExists(elements, element);
+                CheckIfUsernameExists(element.Username);
+                element.Id = GenerateID();
+                _users.Add(element.Username, element);
+                idMap.Add(element.Id);
+                AppendToDB(element);
+            }
+        }
+
+        public override void Update(Doctor element)
+        {
+            lock (key)
+            {
+                CheckIfIDExists(element.Id);
+                CheckIfUsernameExists(element.Username);
+                List<Doctor> elements = GetAll();
+                SwapDoctorByID(elements, element);
+                SaveChanges(elements);
+            }
+        }
+
+        public override void Delete(int id)
+        {
+            lock (key)
+            {
+                CheckIfIDExists(id);
+                List<Doctor> elements = GetAll();
+                DeleteDoctorByID(elements, id);
+                SaveChanges(elements);
+            }
+        }
+
+        protected override void InstantiateIDSet(List<Doctor> elements)
+        {
+            lock (key)
+            {
+                foreach(Doctor element in elements)
+                {
+                    idMap.Add(element.Id);
+                }
+            }
+        }
+
+        private void InstantiateHashSets(List<Doctor> doctors)
+        {
+            InstantiateIDSet(doctors);
+            InstantiateUserSet(doctors);
+        }
+
+        private void CheckIfDoctorExists(List<Doctor> doctors, Doctor doctor)
+        {
+            foreach (Doctor it in doctors)
+            {
+                if (it.Jmbg.Equals(doctor.Jmbg))
+                {
+                    throw new LocalisedException("UserExists");
+                }
+            }
+        }
+
+        private void CheckIfUsernameExists(string username)
+        {
+            if (_users.ContainsKey(username))
+                throw new LocalisedException("UserExists");
+        }
+
+        private void CheckIfIDExists(int id)
+        {
+            if (idMap.Contains(id))
+                throw new LocalisedException("UserDoesntExist");
+        }
+
+        private Doctor FindDoctorByID(List<Doctor> doctors, int id)
+        {
+            for (int i = 0; i < doctors.Count; i++)
+            {
+                if (doctors[i].Id == id)
+                {
+                    return doctors[i];
+                }
+            }
+            throw new LocalisedException("UserDoesntExist");
+        }
+
+        private void DeleteDoctorByID(List<Doctor> doctors, int id)
+        {
+            for (int i = 0; i < doctors.Count; i++)
+            {
+                if (doctors[i].Id == id)
+                {
+                    idMap.Remove(id);
+                    _users.Remove(doctors[i].Username);
+                    doctors.RemoveAt(i);
+                    return;
+                }
+            }
+            throw new LocalisedException("UserDoesntExist");
+        }
+
+        private void SwapDoctorByID(List<Doctor> doctors, Doctor doctor)
+        {
+            for (int i = 0; i < doctors.Count; i++)
+            {
+                if (doctors[i].Id == doctor.Id)
+                {
+                    doctors[i] = doctor;
+                    return;
+                }
+            }
+            throw new LocalisedException("UserDoesntExist");
+        }
+
+        private List<int> GetIdsOfAppointments(Doctor doctor)
+        {
+            List<int> ids = new List<int>();
+            foreach (Appointment it in doctor.Appointment)
+            {
+                ids.Add(it.Id);
+            }
+            return ids;
         }
 
         public static DoctorRepository Instance
         {
-            get 
+            get
             {
                 if (instance == null)
                 {
-                    instance = new DoctorRepository();
+                    lock (key)
+                    {
+                        if (instance == null)
+                        {
+                            instance = new DoctorRepository();
+                        }
+                    }
                 }
-                return instance ;
+                return instance;
             }
         }
 

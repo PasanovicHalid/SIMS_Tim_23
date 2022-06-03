@@ -313,6 +313,24 @@ namespace ZdravoCorp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Doctor type doesnt exists.
+        /// </summary>
+        public static string DoctorTypeDoesntExists {
+            get {
+                return ResourceManager.GetString("DoctorTypeDoesntExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Doctor type already exists.
+        /// </summary>
+        public static string DoctorTypeExists {
+            get {
+                return ResourceManager.GetString("DoctorTypeExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Duration.
         /// </summary>
         public static string Duration {
@@ -430,6 +448,24 @@ namespace ZdravoCorp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ingredient already exists.
+        /// </summary>
+        public static string IngredientDoesExist {
+            get {
+                return ResourceManager.GetString("IngredientDoesExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ingredient doesnt exist.
+        /// </summary>
+        public static string IngredientDoesntExist {
+            get {
+                return ResourceManager.GetString("IngredientDoesntExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Is Renovating Now.
         /// </summary>
         public static string Is_Renovating_Now {
@@ -498,6 +534,24 @@ namespace ZdravoCorp.Properties {
         public static string Medication_Types {
             get {
                 return ResourceManager.GetString("Medication Types", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Medication type does exist.
+        /// </summary>
+        public static string MedicationTypeDoesExist {
+            get {
+                return ResourceManager.GetString("MedicationTypeDoesExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Medication type doesnt exist.
+        /// </summary>
+        public static string MedicationTypeDoesntExist {
+            get {
+                return ResourceManager.GetString("MedicationTypeDoesntExist", resourceCulture);
             }
         }
         
@@ -804,6 +858,24 @@ namespace ZdravoCorp.Properties {
         public static string Types {
             get {
                 return ResourceManager.GetString("Types", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User doesnt exist.
+        /// </summary>
+        public static string UserDoesntExist {
+            get {
+                return ResourceManager.GetString("UserDoesntExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User already exists.
+        /// </summary>
+        public static string UserExists {
+            get {
+                return ResourceManager.GetString("UserExists", resourceCulture);
             }
         }
     }

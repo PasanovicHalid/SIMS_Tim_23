@@ -116,7 +116,6 @@ namespace Repository
                 id = random.Next();
             }
             while (idMap.Contains(id));
-            idMap.Add(id);
             return id;
         }
 

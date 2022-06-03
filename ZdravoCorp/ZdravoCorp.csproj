@@ -110,6 +110,7 @@
     <Compile Include="Model\IAction.cs" />
     <Compile Include="Model\LoginUserEnumeration.cs" />
     <Compile Include="Model\HospitalSurvey.cs" />
+    <Compile Include="Model\MedicineIngredient.cs" />
     <Compile Include="Model\NewMedicationRequest.cs" />
     <Compile Include="Model\Status.cs" />
     <Compile Include="Model\Suggestion.cs" />
@@ -128,10 +129,15 @@
     </Compile>
     <Compile Include="Repository\ActionRepository.cs" />
     <Compile Include="Repository\AnamnesisRepository.cs" />
+    <Compile Include="Repository\CSVDataBase.cs" />
+    <Compile Include="Repository\DoctorTypeRepository.cs" />
     <Compile Include="Repository\GuestRepository.cs" />
     <Compile Include="Repository\HospitalSurveyRepository.cs" />
     <Compile Include="Repository\AppointmentSurveyRepository.cs" />
     <Compile Include="Repository\AppointmentRepository.cs" />
+    <Compile Include="Repository\ICrud.cs" />
+    <Compile Include="Repository\MedicationTypeRepository.cs" />
+    <Compile Include="Repository\MedicineIngredientsRepository.cs" />
     <Compile Include="Repository\ReportRepository.cs" />
     <Compile Include="Repository\DoctorRepository.cs" />
     <Compile Include="Repository\EquipmentRepository.cs" />
@@ -141,10 +147,13 @@
     <Compile Include="Repository\NewMedicationRequestRepository.cs" />
     <Compile Include="Repository\PatientRepository.cs" />
     <Compile Include="Repository\PrescriptionRepository.cs" />
+    <Compile Include="Repository\Repository.cs" />
     <Compile Include="Repository\RoomRepository.cs" />
+    <Compile Include="Repository\RoomTypeRepository.cs" />
     <Compile Include="Repository\SecretaryRepository.cs" />
     <Compile Include="Repository\Serializable.cs" />
     <Compile Include="Repository\Serializer.cs" />
+    <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Repository\VacationRepository.cs" />
     <Compile Include="Service\ActionService.cs" />
     <Compile Include="Service\AnamnesisService.cs" />
@@ -668,6 +677,7 @@
     <None Include="Data\newMedicationRequestDB.csv" />
     <None Include="Data\medicationTypeDB.csv" />
     <None Include="Data\medicationDB.csv" />
+    <None Include="Data\ingredientsDB.csv" />
     <None Include="Data\prescriptionDB.csv" />
     <None Include="Data\secretariesDB.csv" />
     <None Include="Data\medicalRecordDB.csv" />

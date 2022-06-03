@@ -102,7 +102,7 @@ namespace Service
 
         public ObservableCollection<RoomTypeModel> GetAllRoomTypeView()
         {
-            List<RoomType> types = RoomRepository.Instance.GetAllRoomType();
+            List<RoomType> types = RoomTypeRepository.Instance.GetAll();
             ObservableCollection<RoomTypeModel> result = new ObservableCollection<RoomTypeModel>();
             foreach(RoomType roomType in types)
             {

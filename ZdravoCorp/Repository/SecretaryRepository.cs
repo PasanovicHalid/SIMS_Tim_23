@@ -6,70 +6,95 @@
 using Model;
 using System;
 using System.Collections.Generic;
+using ZdravoCorp.Exceptions;
 
 namespace Repository
 {
-    public class SecretaryRepository
+    public class SecretaryRepository : UserRepository<Secretary>
     {
-        private String dbPath = "..\\..\\Data\\secretariesDB.csv";
-        private Serializer<Secretary> serializer = new Serializer<Secretary>();
-        private static readonly object key = new object();
         private static SecretaryRepository instance = null;
-
-        private HashSet<int> idMap = new HashSet<int>();
-        private Dictionary<string, string> userMap = new Dictionary<string, string>();
-
         public SecretaryRepository()
         {
-            List<Secretary> secretaryList = GetAllSecretaries();
-            InstantiateHashSets(secretaryList);
+            dbPath = "..\\..\\Data\\secretariesDB.csv";
+            InstantiateHashSets(GetAll());
+        }
+
+        public Dictionary<string, Secretary> GetUsernameHashSet()
+        {
+            return _users;
+        }
+
+        public override Secretary Read(int id)
+        {
+            lock (key)
+            {
+                CheckIfIDExists(id);
+                return FindSecretaryByID(GetAll(), id);
+            }
+        }
+
+        public override void Create(Secretary element)
+        {
+            lock (key)
+            {
+                CheckIfUsernameExists(element.Username);
+                element.Id = GenerateID();
+                AppendToDB(element);
+                _users.Add(element.Username, element);
+                idMap.Add(element.Id);
+            }
+        }
+
+        public override void Update(Secretary element)
+        {
+            lock (key)
+            {
+                CheckIfIDExists(element.Id);
+                CheckIfUsernameExists(element.Username);
+                List<Secretary> secretaries = GetAll();
+                SwapSecretaryByID(secretaries, element);
+                SaveChanges(secretaries);
+            }
+        }
+
+        public override void Delete(int id)
+        {
+            lock (key)
+            {
+                CheckIfIDExists(id);
+                List<Secretary> secretaries = GetAll();
+                DeleteSecretaryByID(secretaries, id);
+                SaveChanges(secretaries);
+            }
+        }
+
+        protected override void InstantiateIDSet(List<Secretary> elements)
+        {
+            lock (key)
+            {
+                foreach (Secretary element in elements)
+                {
+                    idMap.Add(element.Id);
+                }
+            }
         }
 
         private void InstantiateHashSets(List<Secretary> secretaries)
         {
-            foreach (Secretary secretary in secretaries)
-            {
-                idMap.Add(secretary.Id);
-                userMap.Add(secretary.Username, secretary.Password);
-            }
+            InstantiateIDSet(secretaries);
+            InstantiateUserSet(secretaries);
         }
 
-        public bool CheckIfUsernameExists(string username)
+        private void CheckIfUsernameExists(string username)
         {
-            return userMap.ContainsKey(username);
+            if (_users.ContainsKey(username))
+                throw new LocalisedException("UserExists");
         }
 
-        private bool CheckIfIDExists(int id)
+        private void CheckIfIDExists(int id)
         {
-            return idMap.Contains(id);
-        }
-
-        private int GenerateID()
-        {
-            int id;
-            Random random = new Random();
-            do
-            {
-                id = random.Next();
-            }
-            while (idMap.Contains(id));
-            idMap.Add(id);
-            return id;
-        }
-
-        public Boolean CreateSecretary(Secretary newSecretary)
-        {
-            if (!CheckIfUsernameExists(newSecretary.Username))
-            {
-                newSecretary.Id = GenerateID();
-                userMap.Add(newSecretary.Username, newSecretary.Password);
-                serializer.ToCSVAppend(dbPath, new List<Secretary>() { newSecretary });
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            if (idMap.Contains(id))
+                throw new LocalisedException("UserDoesntExist");
         }
 
         private void SwapSecretaryByID(List<Secretary> secretaries, Secretary secretary)
@@ -79,24 +104,10 @@ namespace Repository
                 if (secretaries[i].Id == secretary.Id)
                 {
                     secretaries[i] = secretary;
-                    break;
+                    return;
                 }
             }
-        }
-
-        public Boolean UpdateSecretary(Secretary secretary)
-        {
-            if (CheckIfIDExists(secretary.Id))
-            {
-                List<Secretary> secretaries = GetAllSecretaries();
-                SwapSecretaryByID(secretaries, secretary);
-                serializer.ToCSV(dbPath, secretaries);
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            throw new LocalisedException("UserDoesntExist");
         }
 
         private void DeleteSecretaryByID(List<Secretary> secretaries, int id)
@@ -105,25 +116,13 @@ namespace Repository
             {
                 if (secretaries[i].Id == id)
                 {
+                    idMap.Remove(id);
+                    _users.Remove(secretaries[i].Username);
                     secretaries.RemoveAt(i);
-                    break;
+                    return;
                 }
             }
-        }
-
-        public Boolean DeleteSecretary(int id)
-        {
-            if (CheckIfIDExists(id))
-            {
-                List<Secretary> secretaries = GetAllSecretaries();
-                DeleteSecretaryByID(secretaries, id);
-                serializer.ToCSV(dbPath, secretaries);
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            throw new LocalisedException("UserDoesntExist");
         }
 
         private Secretary FindSecretaryByID(List<Secretary> secretaries, int id)
@@ -135,30 +134,7 @@ namespace Repository
                     return secretaries[i];
                 }
             }
-            return null;
-        }
-
-        public Secretary ReadSecretary(int id)
-        {
-            if (CheckIfIDExists(id))
-            {
-                List<Secretary> secretaries = GetAllSecretaries();
-                return FindSecretaryByID(secretaries, id);
-            }
-            else
-            {
-                return null;
-            }
-        }
-
-        public List<Secretary> GetAllSecretaries()
-        {
-            return serializer.FromCSV(dbPath);
-        }
-
-        public Dictionary<string, string> GetUsernameHashSet()
-        {
-            return userMap;
+            throw new LocalisedException("UserDoesntExist");
         }
 
         public static SecretaryRepository Instance

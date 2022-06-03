@@ -132,7 +132,6 @@ namespace Repository
                 id = random.Next();
             }
             while (typeIdMap.Contains(id));
-            typeIdMap.Add(id);
             return id;
         }
 
@@ -153,6 +152,7 @@ namespace Repository
                 newMedicationType.Id = GenerateTypeID();
                 typeNameMap.Add(newMedicationType.Name);
                 serializerType.ToCSVAppend(dbPathTypes, new List<MedicationType>() { newMedicationType });
+                typeIdMap.Add(newMedicationType.Id);
                 return true;
             }
             else

@@ -6,124 +6,97 @@
 using Model;
 using System;
 using System.Collections.Generic;
+using ZdravoCorp.Exceptions;
 
 namespace Repository
 {
-    public class ManagerRepository
+    public class ManagerRepository : UserRepository<Manager>
     {
-        private String dbPath = "..\\..\\Data\\managersDB.csv";
-        private Serializer<Manager> serializer = new Serializer<Manager>();
-        private static readonly object key = new object();
         private static ManagerRepository instance = null;
-
-        private HashSet<int> idMap = new HashSet<int>();
-        private Dictionary<string, string> userMap = new Dictionary<string, string>();
 
         public ManagerRepository()
         {
-            List<Manager> list = GetAllManagers();
-            InstantiateHashSets(list);
+            dbPath = "..\\..\\Data\\managersDB.csv";
+            InstantiateHashSets(GetAll());
+        }
+
+        public Dictionary<string, Manager> GetUsernameHashSet()
+        {
+            return _users;
+        }
+
+        public override Manager Read(int id)
+        {
+            lock (key)
+            {
+                CheckIfIDExists(id);
+                List<Manager> managers = GetAll();
+                return FindManagerByID(managers, id);
+            }
+        }
+
+        public override void Create(Manager element)
+        {
+            lock (key)
+            {
+                CheckIfUsernameExists(element.Username);
+                element.Id = GenerateID();
+                AppendToDB(element);
+                _users.Add(element.Username, element);
+                idMap.Add(element.Id);
+            }
+        }
+
+        public override void Update(Manager element)
+        {
+            lock (key)
+            {
+                CheckIfIDExists(element.Id);
+                CheckIfUsernameExists(element.Username);
+                List<Manager> elements = GetAll();
+                SwapManagerByID(elements, element);
+                SaveChanges(elements);
+            }
+        }
+
+        public override void Delete(int id)
+        {
+            lock (key)
+            {
+                CheckIfIDExists(id);
+                List<Manager> managers = GetAll();
+                DeleteManagerByID(managers, id);
+                SaveChanges(managers);
+            }
+        }
+
+        protected override void InstantiateIDSet(List<Manager> elements)
+        {
+            lock (key)
+            {
+                foreach (Manager element in elements)
+                {
+                    idMap.Add(element.Id);
+                }
+            }
         }
 
         private void InstantiateHashSets(List<Manager> managers)
         {
-            foreach (Manager manager in managers)
-            {
-                idMap.Add(manager.Id);
-                userMap.Add(manager.Username, manager.Password);
-            }
+            InstantiateIDSet(managers);
+            InstantiateUserSet(managers);
         }
 
-        public bool CheckIfUsernameExists(string username)
+        private void CheckIfUsernameExists(string username)
         {
-            return userMap.ContainsKey(username);
+            if (_users.ContainsKey(username))
+                throw new LocalisedException("UserExists");
         }
 
-        private bool CheckIfIDExists(int id)
+        private void CheckIfIDExists(int id)
         {
-            return idMap.Contains(id);
-        }
-        
-        private int GenerateID()
-        {
-            int id;
-            Random random = new Random();
-            do
-            {
-                id = random.Next();
-            }
-            while (idMap.Contains(id));
-            idMap.Add(id);
-            return id;
-        }
-
-        public Boolean CreateManager(Manager newManager)
-        {
-            if (!CheckIfUsernameExists(newManager.Username))
-            {
-                newManager.Id = GenerateID();
-                userMap.Add(newManager.Username, newManager.Password);
-                serializer.ToCSVAppend(dbPath, new List<Manager>() { newManager });
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        private void SwapManagerByID(List<Manager> managers, Manager manager)
-        {
-            for (int i = 0; i < managers.Count; i++)
-            {
-                if (managers[i].Id == manager.Id)
-                {
-                    managers[i] = manager;
-                    break;
-                }
-            }
-        }
-
-        public Boolean UpdateManager(Manager manager)
-        {
-            if (CheckIfIDExists(manager.Id))
-            {
-                List<Manager> managers = GetAllManagers();
-                SwapManagerByID(managers, manager);
-                serializer.ToCSV(dbPath, managers);
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        private void DeleteManagerByID(List<Manager> managers, int id)
-        {
-            for (int i = 0; i < managers.Count; i++)
-            {
-                if (managers[i].Id == id)
-                {
-                    managers.RemoveAt(i);
-                    break;
-                }
-            }
-        }
-
-        public Boolean DeleteManager(int id)
-        {
-            if (CheckIfIDExists(id))
-            {
-                List<Manager> managers = GetAllManagers();
-                DeleteManagerByID(managers, id);
-                serializer.ToCSV(dbPath, managers);
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            if (idMap.Contains(id))
+                throw new LocalisedException("UserDoesntExist");
         }
 
         private Manager FindManagerByID(List<Manager> managers, int id)
@@ -135,30 +108,35 @@ namespace Repository
                     return managers[i];
                 }
             }
-            return null;
+            throw new LocalisedException("UserDoesntExist");
         }
 
-        public Manager ReadManager(int id)
+        private void SwapManagerByID(List<Manager> managers, Manager manager)
         {
-            if (CheckIfIDExists(id))
+            for (int i = 0; i < managers.Count; i++)
             {
-                List<Manager> managers = GetAllManagers();
-                return FindManagerByID(managers, id);
+                if (managers[i].Id == manager.Id)
+                {
+                    managers[i] = manager;
+                    return;
+                }
             }
-            else
+            throw new LocalisedException("UserDoesntExist");
+        }
+
+        private void DeleteManagerByID(List<Manager> managers, int id)
+        {
+            for (int i = 0; i < managers.Count; i++)
             {
-                return null;
+                if (managers[i].Id == id)
+                {
+                    idMap.Remove(id);
+                    _users.Remove(managers[i].Username);
+                    managers.RemoveAt(i);
+                    return;
+                }
             }
-        }
-
-        public List<Manager> GetAllManagers()
-        {
-            return serializer.FromCSV(dbPath);
-        }
-
-        public Dictionary<string, string> GetUsernameHashSet()
-        {
-            return userMap;
+            throw new LocalisedException("UserDoesntExist");
         }
 
         public static ManagerRepository Instance
