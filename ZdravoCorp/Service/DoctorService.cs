@@ -59,7 +59,7 @@ namespace Service
         {
             return DoctorRepository.Instance.ReadDoctorType(doctorType);
         }
-
+        
         public List<DoctorType> GetAllDoctorType()
         {
             return DoctorRepository.Instance.GetAllDoctorType();

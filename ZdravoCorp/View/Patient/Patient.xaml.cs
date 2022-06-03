@@ -369,21 +369,7 @@ namespace ZdravoCorp.View.Patient
             UpdateTable();
         }
 
-        private void AppointmentSurvey_Click(object sender, RoutedEventArgs e)
-        {
-            AppointmentSurveyController appointmentSurveyController = new AppointmentSurveyController();
-            if (DoneAppointments.SelectedIndex == -1)
-            {
-                return;
-            }
-            else if (appointmentSurveyController.DoneSurvey(PastAppointmentsCollection.ElementAt(DoneAppointments.SelectedIndex)))
-            {
-                MessageBox.Show("Vec ste popunili anketu za ovaj pregled", "Pregled ocenjen", MessageBoxButton.OK, MessageBoxImage.Information);
-                return;
-            }
-            ZdravoCorp.View.Patient.View.Survey.AppointmentSurveyView window = new ZdravoCorp.View.Patient.View.Survey.AppointmentSurveyView(PastAppointmentsCollection.ElementAt(DoneAppointments.SelectedIndex));
-            window.ShowDialog();
-        }
+        
 
         public void PastAppointments()
         {
@@ -412,6 +398,12 @@ namespace ZdravoCorp.View.Patient
             this.Close();
             window.ShowDialog();
            
+        }
+
+        private void Anamnesis_Click(object sender, RoutedEventArgs e)
+        {
+            ZdravoCorp.View.Patient.MedicalRecord.Anamnesis window = new ZdravoCorp.View.Patient.MedicalRecord.Anamnesis(PastAppointmentsCollection.ElementAt(DoneAppointments.SelectedIndex));
+            window.ShowDialog();
         }
     }
 }

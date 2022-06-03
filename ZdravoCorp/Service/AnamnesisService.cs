@@ -6,8 +6,8 @@
 using Model;
 using System;
 using System.Collections.Generic;
-
-namespace Repository
+using Repository;
+namespace Service
 {
     public class AnamnesisService
     {
@@ -23,9 +23,9 @@ namespace Repository
             return AnamnesisRepository.Instance.ReadAnamnesis(id);
         }
 
-        public Boolean UpdateAnamnesis(Anamnesis appointment)
+        public Boolean UpdateAnamnesis(Anamnesis anamnesis)
         {
-            throw new NotImplementedException();
+            return AnamnesisRepository.Instance.UpdateAnamnesis(anamnesis);
 
         }
 
@@ -55,6 +55,18 @@ namespace Repository
                 return instance;
             }
         }
-        
+        public Anamnesis FindAnamnesisByAppointmentId(int id)
+        {
+            Anamnesis anamnesis = null;
+            List<Anamnesis> anamneses = GetAllAnamnesis();
+            foreach(Anamnesis a in anamneses)
+            {
+                if(a.Appointment.Id == id)
+                {
+                    anamnesis = a;
+                }
+            }
+            return anamnesis;
+        }
     }
 }
