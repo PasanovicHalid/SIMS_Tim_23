@@ -62,12 +62,12 @@ namespace ZdravoCorp.View.Secretary
             DateTime date = app.startDate;
             app.Id = exApp.Id;
             exRoom.RemoveAppointment(exApp);
-            rc.UpdateRoom(exRoom);
+            rc.Update(exRoom);
             
-            appointmentController.UpdateAppointment(app);
+            appointmentController.Update(app);
             Room r = app.Room;
             r.AddAppointment(app);
-            rc.UpdateRoom(r);
+            rc.Update(r);
             
             this.Close();
 

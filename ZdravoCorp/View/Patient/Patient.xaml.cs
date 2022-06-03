@@ -292,8 +292,8 @@ namespace ZdravoCorp.View.Patient
             FutureAppointmentsCollection = new ObservableCollection<Appointment>(appointments);
             foreach(Appointment a in appointments)
             {
-                a.doctor = dc.ReadDoctor(a.doctor.Id);
-                a.room = roomController.ReadRoom(a.room.Identifier);
+                a.doctor = dc.Read(a.doctor.Id);
+                a.room = roomController.Read(a.room.Identifier);
             }
             PatientAppointmentTable.DataContext = FutureAppointmentsCollection;
         }
@@ -346,26 +346,22 @@ namespace ZdravoCorp.View.Patient
                 window.ShowDialog();
                 
             }
-            if (!appointmentController.DeleteAppointment(appointment.Id))
-            {
-                MessageBox.Show("Element ne postoji u bazi podataka", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
+            appointmentController.Delete(appointment.Id);
             if (patient.ChangedOrCanceledAppointmentsDates == null)
             {
                 patient.ChangedOrCanceledAppointmentsDates = new List<DateTime>();
             }
             DoctorController doctorController = new DoctorController();
-            Model.Doctor doctor = doctorController.ReadDoctor(appointment.Doctor.Id);
+            Model.Doctor doctor = doctorController.Read(appointment.Doctor.Id);
             doctor.RemoveAppointment(appointment);
-            doctorController.UpdateDoctor(doctor);
+            doctorController.Update(doctor);
             RoomController roomController = new RoomController();
-            Model.Room room = roomController.ReadRoom(appointment.Room.Identifier);
+            Model.Room room = roomController.Read(appointment.Room.Identifier);
             room.RemoveAppointment(appointment);
-            roomController.UpdateRoom(room);
+            roomController.Update(room);
             patient.RemoveAppointment(appointment);
             patient.ChangedOrCanceledAppointmentsDates.Add(DateTime.Now);
-            patientController.UpdatePatient(patient);
+            patientController.Update(patient);
             UpdateTable();
         }
 
@@ -379,8 +375,8 @@ namespace ZdravoCorp.View.Patient
             List<Model.Doctor> doctors = new List<Model.Doctor>();
             foreach (Appointment a in appointments)
             {
-                a.doctor = dc.ReadDoctor(a.doctor.Id);
-                a.room = roomController.ReadRoom(a.room.Identifier);
+                a.doctor = dc.Read(a.doctor.Id);
+                a.room = roomController.Read(a.room.Identifier);
             }
             DoctorCollection = new ObservableCollection<Model.Doctor>();
             DoneAppointments.DataContext = PastAppointmentsCollection;

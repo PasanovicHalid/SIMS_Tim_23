@@ -186,14 +186,7 @@ namespace ZdravoCorp.View.Secretary
             //patientController.UpdatePatient(p);
             MedicalRecord rec = new MedicalRecord(height, weight, BloodType, allergens, null, record.Patient);
             rec.Id = record.Id;
-            if(!mrcontroller.UpdateMedicalRecord(rec))
-            {
-                MessageBox.Show("Nije uspesno izmenjen element", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            else
-            {
-                this.Close();
-            }
+            mrcontroller.Update(rec);
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)

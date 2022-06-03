@@ -171,7 +171,7 @@ namespace ZdravoCorp.View.Patient.View.Survey
         {
             HospitalSurveyController hospitalSurveyController = new HospitalSurveyController();
             HospitalSurvey hospitalSurvey = new HospitalSurvey(Profesionalism, Comfort, Tidiness, Kindness, Hygiene, Modernity, Equipped, OverallExperience, patient);
-            hospitalSurveyController.CreateHospitalSurvey(hospitalSurvey);
+            hospitalSurveyController.Create(hospitalSurvey);
             this.Close();
         }
 

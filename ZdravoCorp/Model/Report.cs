@@ -78,9 +78,9 @@ namespace Model
             Id = Int32.Parse(values[i++]);
             Comment = values[i++];
             Controller.DoctorController dc = new Controller.DoctorController();
-            Doctor = dc.ReadDoctor(Int32.Parse(values[i++]));
+            Doctor = dc.Read(Int32.Parse(values[i++]));
             Controller.AppointmentController ac = new Controller.AppointmentController();
-            Appointment = ac.ReadAppointment(Int32.Parse(values[i++]));
+            Appointment = ac.Read(Int32.Parse(values[i++]));
         }
 
         public List<String> ToCSV()

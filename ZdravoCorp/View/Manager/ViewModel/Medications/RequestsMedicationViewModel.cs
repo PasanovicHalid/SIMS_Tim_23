@@ -91,7 +91,7 @@ namespace ZdravoCorp.View.Manager.ViewModel.Medications
 
         public void Update()
         {
-            MedicationRequests = new ObservableCollection<NewMedicationRequest>(controller.GetAllNewMedicationRequests());
+            MedicationRequests = new ObservableCollection<NewMedicationRequest>(controller.GetAll());
         }
     }
 }

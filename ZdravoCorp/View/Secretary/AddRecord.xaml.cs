@@ -174,7 +174,7 @@ namespace ZdravoCorp.View.Secretary
 
         private void UpdateAllergenTable()
         {
-            List<String> allergens = mrcontroller.ReadMedicalRecord(0).Allergens;
+            List<String> allergens = mrcontroller.Read(0).Allergens;
            
             
             //foreach (Model.Patient pat in patients)
@@ -188,20 +188,20 @@ namespace ZdravoCorp.View.Secretary
         {
             DataContext = this;
             PatientController patientController = new PatientController();
-            patientController.CreatePatient(record.Patient);
+            patientController.Create(record.Patient);
             MedicalRecord mr = new MedicalRecord(height, weight, BloodType, allergens, null, record.Patient);
             mrcontroller = new MedicalRecordController();
-            mrcontroller.CreateMedicalRecord(mr);
+            mrcontroller.Create(mr);
             record.Patient.Record = mr;
             PatientController pc = new PatientController();
-            pc.UpdatePatient(record.Patient);
+            pc.Update(record.Patient);
             this.Close();
         }
 
         private void MedicalRecordCancel_Click(object sender, RoutedEventArgs e)
         {
             PatientController patientController = new PatientController();
-            patientController.DeletePatient(record.Patient.Id);
+            patientController.Delete(record.Patient.Id);
             this.Close();
         }
     }

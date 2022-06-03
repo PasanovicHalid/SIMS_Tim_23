@@ -82,7 +82,7 @@ namespace ZdravoCorp.View.Manager.ViewModel.Rooms
         {
             roomController = new RoomController();
             RoomsCollection = new ObservableCollection<Room>();
-            List<Room> rooms = roomController.GetAllRooms();
+            List<Room> rooms = roomController.GetAll();
             RoomsCollection = new ObservableCollection<Room>(rooms);
 
             ViewRoomCommand = new RelayCommand(o =>
@@ -113,7 +113,7 @@ namespace ZdravoCorp.View.Manager.ViewModel.Rooms
 
         public void Update()
         {
-            List<Room> rooms = roomController.GetAllRooms();
+            List<Room> rooms = roomController.GetAll();
             RoomsCollection = new ObservableCollection<Room>(rooms);
         }
     }

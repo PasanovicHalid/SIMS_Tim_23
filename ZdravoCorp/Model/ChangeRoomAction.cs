@@ -43,8 +43,8 @@ namespace Model
             SetRoomPositions(ref rooms);
             ChangeEquipmentCountIncoming(rooms[0]);
             ChangeEquipmentCountOutgoing(rooms[1]);
-            RoomService.Instance.UpdateRoom(rooms[0]);
-            RoomService.Instance.UpdateRoom(rooms[1]);
+            RoomService.Instance.Update(rooms[0]);
+            RoomService.Instance.Update(rooms[1]);
         }
 
         public void FromCSV(string[] values)

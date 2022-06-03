@@ -31,10 +31,10 @@ namespace ZdravoCorp.View.Patient.MedicalRecord
             InitializeComponent();
             this.DataContext = this;
             anamnesis = anamnesisController.FindAnamnesisByAppointmentId(appointment.Id);
-            Patient.Content = patientController.ReadPatient(appointment.Patient.Id).Name +" " + patientController.ReadPatient(appointment.Patient.Id).Surname;
-            Doctor.Content = doctorController.ReadDoctor(appointment.Doctor.Id).nameSurname;
+            Patient.Content = patientController.Read(appointment.Patient.Id).Name +" " + patientController.Read(appointment.Patient.Id).Surname;
+            Doctor.Content = doctorController.Read(appointment.Doctor.Id).nameSurname;
             Date.Content = appointment.startDate.ToShortDateString();
-            DoctorType.Content = doctorController.ReadDoctor(appointment.Doctor.Id).DoctorType.Type;
+            DoctorType.Content = doctorController.Read(appointment.Doctor.Id).DoctorType.Type;
             AppointmentType.Content = anamnesis.AppointmentType;
             Diagnosis.Content = anamnesis.Diagnosis;
             this.appointment = appointment;
@@ -57,7 +57,7 @@ namespace ZdravoCorp.View.Patient.MedicalRecord
         private void SaveNote_Click(object sender, RoutedEventArgs e)
         {
             anamnesis.Note = Note.Text;
-            anamnesisController.UpdateAnamnesis(anamnesis);
+            anamnesisController.Update(anamnesis);
         }
     }
 }

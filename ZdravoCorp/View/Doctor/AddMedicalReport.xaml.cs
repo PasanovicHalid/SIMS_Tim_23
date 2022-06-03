@@ -34,7 +34,7 @@ namespace ZdravoCorp.View.Doctor
 
             currentPatient = new Model.Patient(pomocnip);
             currentDoctor = doc;
-            List<Model.Appointment> lista = ac.GetAllAppointments();
+            List<Model.Appointment> lista = ac.GetAll();
             List<Model.Appointment> pomocna = new List<Model.Appointment>();
             foreach (Appointment app in lista)
             {
@@ -57,10 +57,10 @@ namespace ZdravoCorp.View.Doctor
             string komentar = textBpx1.Text;
             Appointment apo = (Appointment)AppointmentCB.SelectedItem;
             Report c = new Report(apo, komentar, currentDoctor);
-            cc.CreateComment(c);
+            cc.Create(c);
             currentPatient.Record.MedicalReports.Add(c);
-            mcc.UpdateMedicalRecord(currentPatient.Record);
-            pc.UpdatePatient(currentPatient);
+            mcc.Update(currentPatient.Record);
+            pc.Update(currentPatient);
             this.Close();
         }
 

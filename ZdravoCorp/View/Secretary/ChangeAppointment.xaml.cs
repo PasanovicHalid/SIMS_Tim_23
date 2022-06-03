@@ -126,10 +126,10 @@ namespace ZdravoCorp.View.Secretary
             this.appointment = appointment;
             this.name = appointment.Patient.Name;
             this.surname = appointment.Patient.Surname;
-            this.doctor = doctorController.ReadDoctor(appointment.doctor.Id);
+            this.doctor = doctorController.Read(appointment.doctor.Id);
             this.jmbg = appointment.Patient.Jmbg;
             int i = 0;
-            foreach(Model.Doctor d in doctorController.GetAllDoctors())
+            foreach(Model.Doctor d in doctorController.GetAll())
             {
                 if(d.Id == doctor.Id) 
                 {
@@ -145,8 +145,8 @@ namespace ZdravoCorp.View.Secretary
 
 
 
-            DoctorsCollection = new ObservableCollection<Model.Doctor>(doctorController.GetAllDoctors());
-            PatientsCollection = new ObservableCollection<Model.Patient>(patientController.GetAllPatients());
+            DoctorsCollection = new ObservableCollection<Model.Doctor>(doctorController.GetAll());
+            PatientsCollection = new ObservableCollection<Model.Patient>(patientController.GetAll());
 
             Doctors.ItemsSource = DoctorsCollection;
         }
@@ -160,7 +160,7 @@ namespace ZdravoCorp.View.Secretary
         {
             DataContext = this;
             Model.Doctor d = (Model.Doctor)Doctors.SelectedItem;
-            Model.Doctor doctorr = doctorController.ReadDoctor(d.Id);
+            Model.Doctor doctorr = doctorController.Read(d.Id);
             DateTime date = (DateTime)DATE.SelectedDate;
             if (date < DateTime.Today)
             {

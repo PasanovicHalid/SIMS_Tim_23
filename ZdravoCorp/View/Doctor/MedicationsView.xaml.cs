@@ -35,7 +35,7 @@ namespace ZdravoCorp.View.Doctor
         {
             InitializeComponent();
             medicineController = new MedicationController();
-            MedicineCollection = new ObservableCollection<Model.Medication>(medicineController.GetAllMedicine());
+            MedicineCollection = new ObservableCollection<Model.Medication>(medicineController.GetAll());
 
             MedicineGrid.DataContext = MedicineCollection;
             this.currentDoctor = temp;

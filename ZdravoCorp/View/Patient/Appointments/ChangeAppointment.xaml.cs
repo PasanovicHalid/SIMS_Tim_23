@@ -51,9 +51,9 @@ namespace ZdravoCorp.View.Patient.Appointments
             this.app = appointment;
             exApp = appointment;
            
-            Model.Doctor doctorr = doctorController.ReadDoctor(appointment.doctor.Id);
+            Model.Doctor doctorr = doctorController.Read(appointment.doctor.Id);
             int i = 0;
-            foreach (Model.Doctor d in doctorController.GetAllDoctors())
+            foreach (Model.Doctor d in doctorController.GetAll())
             {
                 if (d.Id == doctorr.Id)
                 {
@@ -62,7 +62,7 @@ namespace ZdravoCorp.View.Patient.Appointments
                 }
                 i++;
             }
-            DoctorsCollection = new ObservableCollection<Model.Doctor>(doctorController.GetAllDoctors());
+            DoctorsCollection = new ObservableCollection<Model.Doctor>(doctorController.GetAll());
             DoctorsCB.ItemsSource = DoctorsCollection;
             DateTime dt = appointment.StartDate;
             String s = dt.ToString();
@@ -82,7 +82,7 @@ namespace ZdravoCorp.View.Patient.Appointments
             DateTime less = exDate.Date + lessDays;
             DateTime more = exDate.Date + moreDays;
             PatientController patientController = new PatientController();
-            Model.Patient patient = patientController.ReadPatient(exApp.Patient.Id);
+            Model.Patient patient = patientController.Read(exApp.Patient.Id);
             if (date < less)
             {
                 MessageBox.Show("Prvobitan datum mozete pomeriti najvise 1 dan uznazad.\nPrvobitan datum :\t" + exDate.ToString(), "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -118,26 +118,26 @@ namespace ZdravoCorp.View.Patient.Appointments
             }
             Appointment appointment = AppointmentsCollection.ElementAt(TableForSuggestedApp.SelectedIndex);
             PatientController patientController = new PatientController();
-            Model.Patient patient = patientController.ReadPatient(appointment.Patient.Id);
+            Model.Patient patient = patientController.Read(appointment.Patient.Id);
             
             appointment.Id = exApp.Id;
             int i = appointment.Id;
-            appointmentController.UpdateAppointment(appointment);
+            appointmentController.Update(appointment);
 
             DoctorController doctorController = new DoctorController();
-            Model.Doctor doctor = doctorController.ReadDoctor(appointment.Doctor.Id);
+            Model.Doctor doctor = doctorController.Read(appointment.Doctor.Id);
             doctor.RemoveAppointment(exApp);
             doctor.AddAppointment(appointment);
-            doctorController.UpdateDoctor(doctor);
+            doctorController.Update(doctor);
             RoomController roomController = new RoomController();
-            Model.Room room = roomController.ReadRoom(appointment.Room.Identifier);
+            Model.Room room = roomController.Read(appointment.Room.Identifier);
             room.RemoveAppointment(exApp);
             room.AddAppointment(appointment);
-            roomController.UpdateRoom(room);
+            roomController.Update(room);
             patient.RemoveAppointment(exApp);
             patient.AddAppointment(appointment);
             patient.ChangedOrCanceledAppointmentsDates.Add(DateTime.Now);
-            patientController.UpdatePatient(patient);
+            patientController.Update(patient);
             this.Close();
             
         }

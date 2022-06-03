@@ -56,7 +56,7 @@ namespace ZdravoCorp.View.Secretary
         private void UpdateTable()
         {
             PatientCollection = new ObservableCollection<Model.Patient>();
-            List<Model.Patient> patients = patientController.GetAllPatients();
+            List<Model.Patient> patients = patientController.GetAll();
             foreach (Model.Patient pat in patients)
             {
                 PatientCollection.Add(pat);
@@ -77,11 +77,7 @@ namespace ZdravoCorp.View.Secretary
             {
                 return;
             }
-            if (!patientController.DeletePatient(PatientCollection.ElementAt(PatientTable.SelectedIndex).Id))
-            {
-                MessageBox.Show("Element ne postoji u bazi podataka", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
+            patientController.Delete(PatientCollection.ElementAt(PatientTable.SelectedIndex).Id);
             UpdateTable();
         }
 
@@ -116,7 +112,7 @@ namespace ZdravoCorp.View.Secretary
             
             
             MedicalRecordController mr = new MedicalRecordController();
-            MedicalRecord record = mr.ReadMedicalRecord(PatientCollection.ElementAt(PatientTable.SelectedIndex).Record.Id);
+            MedicalRecord record = mr.Read(PatientCollection.ElementAt(PatientTable.SelectedIndex).Record.Id);
             ChangeRecord change = new ChangeRecord(record);
             change.ShowDialog();
             UpdateTable();
@@ -132,9 +128,9 @@ namespace ZdravoCorp.View.Secretary
             }
             MedicalRecordController mr = new MedicalRecordController();
             PatientController pc = new PatientController();
-            Model.Patient pat = pc.ReadPatient(PatientCollection.ElementAt(PatientTable.SelectedIndex).Id);
+            Model.Patient pat = pc.Read(PatientCollection.ElementAt(PatientTable.SelectedIndex).Id);
 
-            mr.DeleteMedicalRecord(pat.Record.Id);
+            mr.Delete(pat.Record.Id);
             pat.Record.Id = -1;
             UpdateTable();
         }
@@ -142,7 +138,7 @@ namespace ZdravoCorp.View.Secretary
         private void UpdateGuestTable()
         {
             GuestCollection = new ObservableCollection<Model.Guest>();
-            List<Model.Guest> guests = guestController.GetAllGuests();
+            List<Model.Guest> guests = guestController.GetAll();
             foreach (Model.Guest guest in guests)
             {
                 GuestCollection.Add(guest);
@@ -163,11 +159,7 @@ namespace ZdravoCorp.View.Secretary
             {
                 return;
             }
-            if (!guestController.DeleteGuest(GuestCollection.ElementAt(GuestTable.SelectedIndex).Id))
-            {
-                MessageBox.Show("Element ne postoji u bazi podataka", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
+            guestController.Delete(GuestCollection.ElementAt(GuestTable.SelectedIndex).Id);
             UpdateGuestTable();
         }
 
@@ -178,14 +170,14 @@ namespace ZdravoCorp.View.Secretary
             RoomController roomController = new RoomController();
             patientController = new PatientController();
 
-            List<Appointment> appointments = appointmentController.GetAllAppointments();
+            List<Appointment> appointments = appointmentController.GetAll();
             
             AppointmentsCollection = new ObservableCollection<Appointment>(appointments);
             foreach (Appointment a in appointments)
             {
-                a.doctor = doctorController.ReadDoctor(a.doctor.Id);
-                a.room = roomController.ReadRoom(a.room.Identifier);
-                a.Patient = patientController.ReadPatient(a.Patient.Id);
+                a.doctor = doctorController.Read(a.doctor.Id);
+                a.room = roomController.Read(a.room.Identifier);
+                a.Patient = patientController.Read(a.Patient.Id);
             }
             AppointmentTable.DataContext = AppointmentsCollection;
         }
@@ -206,23 +198,19 @@ namespace ZdravoCorp.View.Secretary
             }
             Appointment appointment = (Appointment) AppointmentTable.SelectedItem;
             appointmentController = new AppointmentController();
-            if (!appointmentController.DeleteAppointment(appointment.Id))
-            {
-                MessageBox.Show("Element ne postoji u bazi podataka", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
+            appointmentController.Delete(appointment.Id);
 
             DoctorController doctorController = new DoctorController();
-            Model.Doctor doctor = doctorController.ReadDoctor(appointment.Doctor.Id);
+            Model.Doctor doctor = doctorController.Read(appointment.Doctor.Id);
             doctor.RemoveAppointment(appointment);
-            doctorController.UpdateDoctor(doctor);
+            doctorController.Update(doctor);
             RoomController roomController = new RoomController();
-            Model.Room room = roomController.ReadRoom(appointment.Room.Identifier);
+            Model.Room room = roomController.Read(appointment.Room.Identifier);
             room.RemoveAppointment(appointment);
-            roomController.UpdateRoom(room);
-            Model.Patient patient = patientController.ReadPatient(appointment.Patient.Id);
+            roomController.Update(room);
+            Model.Patient patient = patientController.Read(appointment.Patient.Id);
             patient.RemoveAppointment(appointment);
-            patientController.UpdatePatient(patient);
+            patientController.Update(patient);
             
             UpdateAppointmentTable();
         }

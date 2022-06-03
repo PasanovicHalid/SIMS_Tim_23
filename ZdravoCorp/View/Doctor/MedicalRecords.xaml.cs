@@ -61,11 +61,11 @@ namespace ZdravoCorp.View.Doctor
             commentsController = new ZdravoCorp.Controller.ReportController();
             comments = new ObservableCollection<Model.Report>();
             patientController = new PatientController();
-            PatientCollection = new ObservableCollection<Model.Patient>(patientController.GetAllPatients());
+            PatientCollection = new ObservableCollection<Model.Patient>(patientController.GetAll());
             PatientsCB.ItemsSource = PatientCollection;
 
             medicineController = new MedicationController();
-            MedicineCollection = new ObservableCollection<Model.Medication>(medicineController.GetAllMedicine());
+            MedicineCollection = new ObservableCollection<Model.Medication>(medicineController.GetAll());
 
             pc = new PrescriptionController();
 
@@ -83,7 +83,7 @@ namespace ZdravoCorp.View.Doctor
 
             medicalRecordController = new MedicalRecordController();
 
-            List<Model.MedicalRecord> med = medicalRecordController.GetAllRecords();
+            List<Model.MedicalRecord> med = medicalRecordController.GetAll();
 
             PrescriptionCollection = new ObservableCollection<Model.Prescription>();
 
@@ -133,7 +133,7 @@ namespace ZdravoCorp.View.Doctor
 
                 medicalRecordController = new MedicalRecordController();
 
-                List<Model.MedicalRecord> med = medicalRecordController.GetAllRecords();
+                List<Model.MedicalRecord> med = medicalRecordController.GetAll();
 
                 PrescriptionCollection = new ObservableCollection<Model.Prescription>();
 

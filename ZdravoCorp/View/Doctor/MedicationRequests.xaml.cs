@@ -114,7 +114,7 @@ namespace ZdravoCorp.View.Doctor
         public void UpdateDataGrid()
         {
             requests = new ObservableCollection<Model.NewMedicationRequest>();
-            List<Model.NewMedicationRequest> listNewMedicationRequests = newMedicationRequestController.GetAllNewMedicationRequests();
+            List<Model.NewMedicationRequest> listNewMedicationRequests = newMedicationRequestController.GetAll();
             foreach (Model.NewMedicationRequest request in listNewMedicationRequests)
             {
                 requests.Add(request);

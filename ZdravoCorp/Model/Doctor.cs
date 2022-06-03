@@ -278,7 +278,7 @@ namespace Model
             Controller.VacationController vacationController = new Controller.VacationController();
             for(int i = 0; i < list.Count; i++)
             {
-                vacations.Add(vacationController.ReadVacation(list[i]));
+                vacations.Add(vacationController.Read(list[i]));
             }
         }
 

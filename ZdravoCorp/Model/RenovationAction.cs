@@ -37,7 +37,7 @@ namespace Model
             ActionService service = new ActionService();
             room.Renovating = true;
             room.RenovatedUntil = ExpirationDate;
-            RoomService.Instance.UpdateRoom(room);
+            RoomService.Instance.Update(room);
             service.CreateAction(new Model.Action(ActionType.renovation, ExpirationDate,
                 new RenovationAction(new DateTime(), Id_room, false)));
         }
@@ -45,12 +45,12 @@ namespace Model
         private void EndRenovation(Room room)
         {
             room.Renovating = false;
-            RoomService.Instance.UpdateRoom(room);
+            RoomService.Instance.Update(room);
         }
 
         public void Execute()
         {
-            Room room = RoomService.Instance.ReadRoom(Id_room);
+            Room room = RoomService.Instance.Read(Id_room);
             if (Renovation)
             {
                 StartRenovation(room);

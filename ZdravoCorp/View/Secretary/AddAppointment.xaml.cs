@@ -105,8 +105,8 @@ namespace ZdravoCorp.View.Secretary
             doctorController = new DoctorController();
             patientController = new PatientController();
             appointmentController = new AppointmentController();
-            DoctorsCollection = new ObservableCollection<Model.Doctor>(doctorController.GetAllDoctors());
-            PatientsCollection = new ObservableCollection<Model.Patient>(patientController.GetAllPatients());
+            DoctorsCollection = new ObservableCollection<Model.Doctor>(doctorController.GetAll());
+            PatientsCollection = new ObservableCollection<Model.Patient>(patientController.GetAll());
            
             Doctors.ItemsSource = DoctorsCollection;
 
@@ -135,7 +135,7 @@ namespace ZdravoCorp.View.Secretary
         {
             DataContext = this;
             Model.Doctor d = (Model.Doctor)Doctors.SelectedItem;
-            Model.Doctor doctor = doctorController.ReadDoctor(d.Id);
+            Model.Doctor doctor = doctorController.Read(d.Id);
             DateTime date = (DateTime) DATE.SelectedDate;
             if(date < DateTime.Today)
             {

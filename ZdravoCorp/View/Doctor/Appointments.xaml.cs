@@ -53,8 +53,8 @@ namespace ZdravoCorp.View.Doctor
             currentDoctor = doctor;
 
             UpdateDataGrid();
-            PatientCollection = new ObservableCollection<Model.Patient>(patientController.GetAllPatients());
-            RoomCollection = new ObservableCollection<Model.Room>(roomController.GetAllRooms());
+            PatientCollection = new ObservableCollection<Model.Patient>(patientController.GetAll());
+            RoomCollection = new ObservableCollection<Model.Room>(roomController.GetAll());
             RoomsCB.ItemsSource = RoomCollection;
             PatientsCB.ItemsSource = PatientCollection;
         }
@@ -71,14 +71,8 @@ namespace ZdravoCorp.View.Doctor
             }
             else
             {
-                if (appointmentController.DeleteAppointment(temp.Id))
-                {
-                    MessageBox.Show("Deleted successfully!");
-                }
-                else
-                {
-                    MessageBox.Show("Not deleted!");
-                }
+                appointmentController.Delete(temp.Id);
+                MessageBox.Show("Deleted successfully!");
             }
             UpdateDataGrid();
         }
@@ -87,7 +81,7 @@ namespace ZdravoCorp.View.Doctor
         {
             DateTime startDate = DateTime.Parse(textBox1.Text);
             DateTime endDate = DateTime.Parse(textBox2.Text);
-            appointmentController.CreateAppointment(new Model.Appointment(startDate, endDate, currentDoctor,
+            appointmentController.Create(new Model.Appointment(startDate, endDate, currentDoctor,
                 (Model.Room)RoomsCB.SelectedItem, (Model.Patient)PatientsCB.SelectedItem));
             MessageBox.Show("Novi Appointment Dodat!");
             UpdateDataGrid();
@@ -103,7 +97,7 @@ namespace ZdravoCorp.View.Doctor
             {
                 DateTime startDate = DateTime.Parse(textBox1.Text);
                 DateTime endDate = DateTime.Parse(textBox2.Text);
-                appointmentController.UpdateAppointment(new Model.Appointment(startDate, endDate, ((Model.Appointment)AppointmentGrid.SelectedItem).Id, currentDoctor,
+                appointmentController.Update(new Model.Appointment(startDate, endDate, ((Model.Appointment)AppointmentGrid.SelectedItem).Id, currentDoctor,
                     (Model.Room)RoomsCB.SelectedItem, (Model.Patient)PatientsCB.SelectedItem));
                 
             }
@@ -173,7 +167,7 @@ namespace ZdravoCorp.View.Doctor
 
         private void UpdateDataGrid()
         {
-            List<Appointment> apps = appointmentController.GetAllAppointments();
+            List<Appointment> apps = appointmentController.GetAll();
             appointments = new ObservableCollection<Appointment>();
             foreach (Appointment temp in apps)
             {

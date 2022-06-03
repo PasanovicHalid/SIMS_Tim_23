@@ -38,7 +38,16 @@ namespace Repository
             }
             while (allPrescriptionsIds.Contains(newPrescription.Id));
         }
-        public int CreatePrescription(Model.Prescription newMedicine)
+
+        public void Create(Prescription newPrescription)
+        {
+            List<Prescription> medicines = GetAllPrescriptions();
+            GenerateId(newPrescription);
+            medicines.Add(newPrescription);
+            serializerPrescription.ToCSV(dbPath, medicines);
+        }
+
+        public int CreateAndReturnID(Prescription newMedicine)
         {
             List<Prescription> medicines = GetAllPrescriptions();
             GenerateId(newMedicine);

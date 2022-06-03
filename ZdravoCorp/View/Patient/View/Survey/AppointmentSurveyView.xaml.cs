@@ -152,7 +152,7 @@ namespace ZdravoCorp.View.Patient.View.Survey
         private void Confirm_Click(object sender, RoutedEventArgs e)
         {
             AppointmentSurveyController appointmentSurveyController = new AppointmentSurveyController();
-            appointmentSurveyController.CreateAppointmentSurvey(new AppointmentSurvey(Profesionalism, Kindness, Comfort, Tidiness, WaitingTime, RoomComfort, OverallExperience, appointment));
+            appointmentSurveyController.Create(new AppointmentSurvey(Profesionalism, Kindness, Comfort, Tidiness, WaitingTime, RoomComfort, OverallExperience, appointment));
             this.Close();
         }
 

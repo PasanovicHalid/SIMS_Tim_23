@@ -39,7 +39,7 @@ namespace ZdravoCorp.View.Doctor
             InitializeComponent();
 
             medicineController = new MedicationController();
-            MedicineCollection = new ObservableCollection<Model.Medication>(medicineController.GetAllMedicine());
+            MedicineCollection = new ObservableCollection<Model.Medication>(medicineController.GetAll());
 
             MedicineGrid.DataContext = MedicineCollection;
             tempPatient = temp;
@@ -59,16 +59,16 @@ namespace ZdravoCorp.View.Doctor
         {
             patientController = new PatientController();
             Controller.PrescriptionController prescriptionController = new Controller.PrescriptionController();
-            int newId = prescriptionController.CreatePrescription(new Model.Prescription(((Model.Medication)MedicineGrid.SelectedItem).Id,Int32.Parse(textBox2.Text),Int32.Parse(textBox3.Text),textBlock.Text));
+            int newId = prescriptionController.CreateAndReturnID(new Model.Prescription(((Model.Medication)MedicineGrid.SelectedItem).Id,Int32.Parse(textBox2.Text),Int32.Parse(textBox3.Text),textBlock.Text));
             Model.Medication tempMedication = (Model.Medication)MedicineGrid.SelectedItem;
             if((Int32.Parse(textBox2.Text)) * (Int32.Parse(textBox3.Text)) > tempMedication.Count)
             {
                 MessageBox.Show("U magacinu ne postoje tolike kolicine leka!");
                 this.Close();
             }
-            patientController.AddPrescription(tempPatient, prescriptionController.ReadPrescription(newId));
+            patientController.AddPrescription(tempPatient, prescriptionController.Read(newId));
             tempMedication.Count = tempMedication.Count - (Int32.Parse(textBox2.Text)) * (Int32.Parse(textBox3.Text));
-            medicineController.UpdateMedicine(tempMedication);
+            medicineController.Update(tempMedication);
             this.Close();
         }
     }

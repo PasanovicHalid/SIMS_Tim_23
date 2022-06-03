@@ -187,7 +187,7 @@ namespace ZdravoCorp.View.Manager.ViewModel.Medications
             ChangeCommand = new RelayCommand(o =>
             {
                 SelectedType.Replacement = new List<MedicationType>(ReplacementTypes);
-                controllerRequest.CreateNewMedicationRequest(new NewMedicationRequest(SelectedType, Status.PENDING, "", true));
+                controllerRequest.Create(new NewMedicationRequest(SelectedType, Status.PENDING, "", true));
                 CurrentView = new View.Medications.Medications(new MedicationsViewModel());
             });
 

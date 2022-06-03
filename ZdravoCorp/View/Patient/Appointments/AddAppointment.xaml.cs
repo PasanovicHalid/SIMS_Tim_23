@@ -62,7 +62,7 @@ namespace ZdravoCorp.View.Patient.Appointments
             SuggestionsCollection = new ObservableCollection<Suggestion>(suggestions);
             Suggestion suggestion;
             AppointmentsCollection = new ObservableCollection<Appointment>();
-            DoctorsCollection = new ObservableCollection<Model.Doctor>(doctorController.GetAllDoctors());
+            DoctorsCollection = new ObservableCollection<Model.Doctor>(doctorController.GetAll());
             DoctorsCB.ItemsSource = DoctorsCollection;
         }
 
@@ -73,7 +73,7 @@ namespace ZdravoCorp.View.Patient.Appointments
 
             DataContext = this;
             Model.Doctor d = (Model.Doctor)DoctorsCB.SelectedItem;
-            Model.Doctor doctor = doctorController.ReadDoctor(d.Id);
+            Model.Doctor doctor = doctorController.Read(d.Id);
             DateTime date = (DateTime)datePicker.SelectedDate;
             Appointment app;
             List<Appointment> apps = new List<Appointment>();
@@ -107,16 +107,16 @@ namespace ZdravoCorp.View.Patient.Appointments
 
             RoomController rc = new RoomController();
 
-            appointmentController.CreateAppointment(app);
+            appointmentController.Create(app);
             Room r = app.Room;
             r.AddAppointment(app);
-            rc.UpdateRoom(r);
+            rc.Update(r);
             Model.Doctor d = app.doctor;
             d.AddAppointment(app);
-            doctorController.UpdateDoctor(d);
+            doctorController.Update(d);
             Model.Patient p = app.Patient;
             p.AddAppointment(app);
-            pc.UpdatePatient(p);
+            pc.Update(p);
             this.Close();
         }
 

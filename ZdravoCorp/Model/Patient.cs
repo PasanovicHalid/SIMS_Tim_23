@@ -306,7 +306,7 @@ namespace Model
             prescription = new List<Prescription>();
             for (int j = 0; j < count3; j++)
             {
-                prescription.Add(pc.ReadPrescription(int.Parse(values[i++])));
+                prescription.Add(pc.Read(int.Parse(values[i++])));
             }
             record = new MedicalRecord(int.Parse(values[i++]));
             int numberOfElementsInList = int.Parse(values[i++]);

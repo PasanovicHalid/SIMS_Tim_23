@@ -187,7 +187,7 @@ namespace ZdravoCorp.View.Manager.ViewModel.Medications
             {
                 SelectedRequest = new NewMedicationRequest(new MedicationType(Name, Manufacturer, Description), Status.PENDING, "", false);
                 SelectedRequest.MedicationType.Replacement = new List<MedicationType>(ReplacementTypes);
-                controller.CreateNewMedicationRequest(SelectedRequest);
+                controller.Create(SelectedRequest);
                 CurrentView = new View.Medications.Medications(new MedicationsViewModel());
             });
 

@@ -230,7 +230,7 @@ namespace Model
             ZdravoCorp.Controller.ReportController cc = new ZdravoCorp.Controller.ReportController();
             for (int j = 0; j < count; j++)
             {
-                medicalReports.Add(cc.ReadComment(int.Parse(values[i++])));
+                medicalReports.Add(cc.Read(int.Parse(values[i++])));
             }
         }
     }

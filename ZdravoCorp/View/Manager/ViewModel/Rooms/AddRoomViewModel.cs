@@ -106,7 +106,7 @@ namespace ZdravoCorp.View.Manager.ViewModel.Rooms
             {
                 try
                 {
-                    controller.CreateRoom(new Room(Identifier, Floor, Size, new RoomType(SelectedRoomType), new List<Appointment>(), new List<Equipment>(), new List<Medication>()));
+                    controller.Create(new Room(Identifier, Floor, Size, new RoomType(SelectedRoomType), new List<Appointment>(), new List<Equipment>(), new List<Medication>()));
                     CurrentView = new View.Rooms.Rooms(new RoomsViewModel());
                 }
                 catch (Exception ex)

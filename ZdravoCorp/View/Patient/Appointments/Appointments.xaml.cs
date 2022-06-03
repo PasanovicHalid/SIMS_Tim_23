@@ -39,7 +39,7 @@ namespace ZdravoCorp.View.Patient.Appointments
         private void UpdateTable() 
         {
             AppointmentsCollection = new ObservableCollection<Appointment>();
-            List<Appointment> appointments = appointmentController.GetAllAppointments();
+            List<Appointment> appointments = appointmentController.GetAll();
             foreach(Appointment app in appointments)
             {
                 AppointmentsCollection.Add(app);

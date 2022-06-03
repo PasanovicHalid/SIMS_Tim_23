@@ -223,7 +223,7 @@ namespace ZdravoCorp.View.Secretary
             window.ShowDialog();
             
             this.Close();
-            patientController.UpdatePatient(patient);
+            patientController.Update(patient);
         }
 
         private void CancelChange_Click(object sender, RoutedEventArgs e)

@@ -30,7 +30,7 @@ namespace Model
         public Prescription(int medicationId, int timesADay, int numberOfDays, string description)
         {
             MedicationController medicineController = new MedicationController();
-            Medication = medicineController.ReadMedicine(medicationId);
+            Medication = medicineController.Read(medicationId);
             TimesADay = timesADay;
             DurationDays = numberOfDays;
             Quantity = timesADay * numberOfDays;
@@ -70,7 +70,7 @@ namespace Model
             quantity = int.Parse(values[i++]);
             description = values[i++];
             Controller.MedicationController medicationController = new MedicationController();
-            Medication = medicationController.ReadMedicine(int.Parse(values[i++]));
+            Medication = medicationController.Read(int.Parse(values[i++]));
         }
     }
 }

@@ -188,7 +188,7 @@ namespace ZdravoCorp.View.Manager.ViewModel.Equipments
 
             RoomsList = RoomController.GetAllRoomsVO();
             SelectedDate = SelectedAction.ExecutionDate.Date;
-            Room room = roomController.ReadRoom(SelectedAction.Id_outgoing_room);
+            Room room = roomController.Read(SelectedAction.Id_outgoing_room);
             foreach (Equipment it in room.Equipment)
             {
                 if (it.Identifier == SelectedAction.Id_equipment)

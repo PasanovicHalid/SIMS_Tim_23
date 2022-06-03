@@ -55,9 +55,9 @@ namespace ZdravoCorp.View.Doctor
             appointmentController = new AppointmentController();
             tempPatient = pomocnip;
 
-            DoctorCollection = new ObservableCollection<Model.Doctor>(doctorController.GetAllDoctors());
-            Model.Doctor pomocniDoctor = doctorController.ReadDoctor(doc.Id);
-            RoomCollection = new ObservableCollection<Model.Room>(roomController.GetAllRooms());
+            DoctorCollection = new ObservableCollection<Model.Doctor>(doctorController.GetAll());
+            Model.Doctor pomocniDoctor = doctorController.Read(doc.Id);
+            RoomCollection = new ObservableCollection<Model.Room>(roomController.GetAll());
             DoctorsCB.ItemsSource = DoctorCollection;
             RoomsCB.ItemsSource = RoomCollection;
             InitializeComponent();
@@ -73,9 +73,9 @@ namespace ZdravoCorp.View.Doctor
             DateTime date2 = DateTime.Parse(textBox2.Text, dateTimeFormat);
             bool isEmergency = (bool)CheckBox1.IsChecked;
             List<Appointment> appointmentList = new List<Appointment>();
-            appointmentList = appointmentController.GetAllAppointments();
+            appointmentList = appointmentController.GetAll();
             Model.Appointment newAppointment = new Model.Appointment(date, date2, tempDoctor, tempRoom, tempPatient);
-            appointmentController.CreateAppointment(newAppointment);
+            appointmentController.Create(newAppointment);
             foreach (Appointment tempAppointment in appointmentList)
             {
                 if((DateTime.Compare(tempAppointment.StartDate,date) < 0 && DateTime.Compare(tempAppointment.EndDate,date) > 0) || (DateTime.Compare(tempAppointment.StartDate, date2) < 0 && DateTime.Compare(tempAppointment.EndDate, date2) > 0) || (DateTime.Compare(tempAppointment.StartDate,date) < 0 && DateTime.Compare(tempAppointment.EndDate, date2) > 0) || (DateTime.Compare(tempAppointment.StartDate, date) > 0 && DateTime.Compare(tempAppointment.EndDate, date2) < 0))
@@ -84,12 +84,12 @@ namespace ZdravoCorp.View.Doctor
                     {
                         if(isEmergency)
                         {
-                            appointmentController.DeleteAppointment(tempAppointment.Id);
+                            appointmentController.Delete(tempAppointment.Id);
                         }
                         else
                         {
                             MessageBox.Show("Termini se preklapaju!");
-                            appointmentController.DeleteAppointment(newAppointment.Id);
+                            appointmentController.Delete(newAppointment.Id);
                             valid = false;
                         }
                         

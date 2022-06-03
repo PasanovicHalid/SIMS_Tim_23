@@ -55,16 +55,16 @@ namespace ZdravoCorp.View.Secretary
 
             DoctorController doctorController = new DoctorController();
 
-            appointmentController.CreateAppointment(app);
+            appointmentController.Create(app);
             Room r = app.Room;
             r.AddAppointment(app);
-            rc.UpdateRoom(r);
+            rc.Update(r);
             Model.Doctor d = app.doctor;
             d.AddAppointment(app);
-            doctorController.UpdateDoctor(d);
+            doctorController.Update(d);
             Model.Patient p = app.Patient;
             p.AddAppointment(app);
-            pc.UpdatePatient(p);
+            pc.Update(p);
             this.Close();
             
         }

@@ -90,7 +90,7 @@ namespace ZdravoCorp.View.Manager.ViewModel.Rooms
         {
             SelectedRoom = selectedRoom;
             roomController = new RoomController();
-            roomsOnFloor = new ObservableCollection<Room>(roomController.GetAllRooms().Where(room => room.Floor == SelectedRoom.Floor && room.Identifier != SelectedRoom.Identifier));
+            roomsOnFloor = new ObservableCollection<Room>(roomController.GetAll().Where(room => room.Floor == SelectedRoom.Floor && room.Identifier != SelectedRoom.Identifier));
 
             CombineCommand = new RelayCommand(o =>
             {

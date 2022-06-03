@@ -120,8 +120,8 @@ namespace ZdravoCorp.View.Manager.ViewModel.Rooms
             SplitCommand = new RelayCommand(o =>
             {
                 selectedRoom.SurfaceArea -= Size;
-                roomController.UpdateRoom(selectedRoom);
-                roomController.CreateRoom(new Room(NewIdentifier, Floor, Size, selectedRoom.RoomType));
+                roomController.Update(selectedRoom);
+                roomController.Create(new Room(NewIdentifier, Floor, Size, selectedRoom.RoomType));
                 CurrentView = new View.Rooms.Rooms(new Rooms.RoomsViewModel());
             }, checkIfReady);
         }

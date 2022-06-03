@@ -37,6 +37,11 @@ namespace Service
             return PrescriptionRepository.Instance.GetAll();
         }
 
+        public int CreateAndReturnID(Prescription newPrescription)
+        {
+            return PrescriptionRepository.Instance.CreateAndReturnID(newPrescription);
+        }
+
         public static PrescriptionService Instance
         {
             get

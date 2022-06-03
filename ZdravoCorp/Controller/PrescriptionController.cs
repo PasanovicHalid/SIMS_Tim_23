@@ -32,6 +32,11 @@ namespace ZdravoCorp.Controller
             return PrescriptionService.Instance.Read(identificator);
         }
 
+        public int CreateAndReturnID(Prescription newPrescription)
+        {
+            return PrescriptionService.Instance.CreateAndReturnID(newPrescription);
+        }
+
         public List<Prescription> GetAll()
         {
             return PrescriptionService.Instance.GetAll();

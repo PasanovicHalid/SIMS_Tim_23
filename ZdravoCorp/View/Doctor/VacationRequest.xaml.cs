@@ -40,7 +40,7 @@ namespace ZdravoCorp.View.Doctor
             String vacationCause = textBox1.Text;
             if (CheckDate(vacationStartDate, vacationEndDate))
             {
-                vacationController.CreateVacation(new Vacation(vacationStartDate, vacationEndDate, vacationCause, currentDoctor));
+                vacationController.Create(new Vacation(vacationStartDate, vacationEndDate, vacationCause, currentDoctor));
                 MessageBox.Show("Uspesno poslat zahtev!");
                 this.Close();
             }

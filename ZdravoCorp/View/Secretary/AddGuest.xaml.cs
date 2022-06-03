@@ -104,14 +104,8 @@ namespace ZdravoCorp.View.Secretary
         private void Add_Click(object sender, RoutedEventArgs e)
         {
             GuestController guestController = new GuestController();
-            if (!guestController.CreateGuest(new Model.Guest(0, name, surname, (BloodType) BloodTypes.SelectedItem)))
-            {
-                MessageBox.Show("Nije uspesno dodat element", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            else
-            {
-                this.Close();
-            }
+            guestController.Create(new Model.Guest(0, name, surname, (BloodType)BloodTypes.SelectedItem));
+            this.Close();
         }
     }
 }
