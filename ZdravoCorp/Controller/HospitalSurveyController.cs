@@ -7,35 +7,36 @@ using Model;
 using Service;
 using System;
 using System.Collections.Generic;
+using Repository;
 
 
 namespace Controller
 {
-    public class HospitalSurveyController
+    public class HospitalSurveyController : ICrud<HospitalSurvey>
     {        
-        public Boolean CreateHospitalSurvey(HospitalSurvey newSurvey)
+        public void Create(HospitalSurvey newSurvey)
         {
-            return HospitalSurveyService.Instance.CreateHospitalSurvey(newSurvey);
+            HospitalSurveyService.Instance.Create(newSurvey);
         }
 
-        public HospitalSurvey ReadHospitalSurvey(int id)
+        public HospitalSurvey Read(int id)
         {
-            return HospitalSurveyService.Instance.ReadHospitalSurvey(id);
+            return HospitalSurveyService.Instance.Read(id);
         }
 
-        public Boolean UpdateHospitalSurvey(HospitalSurvey survey)
+        public void Update(HospitalSurvey survey)
         {
-            return HospitalSurveyService.Instance.UpdateHospitalSurvey(survey);
+            HospitalSurveyService.Instance.Update(survey);
         }
 
-        public Boolean DeleteHospitalSurvey(int id)
+        public void Delete(int id)
         {
-            return HospitalSurveyService.Instance.DeleteHospitalSurvey(id);
+            HospitalSurveyService.Instance.Delete(id);
         }
 
-        public List<HospitalSurvey> GetAllHospitalSurveys()
+        public List<HospitalSurvey> GetAll()
         {
-            return HospitalSurveyService.Instance.GetAllHospitalSurveys();
+            return HospitalSurveyService.Instance.GetAll();
         }
         public List<int> getAllHospitalSurveyIds()
         {

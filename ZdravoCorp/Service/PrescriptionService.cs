@@ -3,37 +3,38 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ZdravoCorp.Repository;
+using Repository;
+using Model;
 
-namespace ZdravoCorp.Service
+namespace Service
 {
-    internal class PrescriptionService
+    internal class PrescriptionService : ICrud<Prescription>
     {
         private static PrescriptionService instance = null;
 
-        public int CreatePrescription(Model.Prescription newPrescription)
+        public void Create(Prescription newPrescription)
         {
-            return PrescriptionRepository.Instance.CreatePrescription(newPrescription);
+            PrescriptionRepository.Instance.Create(newPrescription);
         }
 
-        public Boolean UpdatePrescription(Model.Prescription medicine)
+        public void Update(Prescription prescription)
         {
-            return PrescriptionRepository.Instance.UpdatePrescription(medicine);
+            PrescriptionRepository.Instance.Update(prescription);
         }
 
-        public Boolean DeletePrescription(int identificator)
+        public void Delete(int id)
         {
-            return PrescriptionRepository.Instance.DeletePrescription(identificator);
+            PrescriptionRepository.Instance.Delete(id);
         }
 
-        public Model.Prescription ReadPrescription(int identificator)
+        public Prescription Read(int id)
         {
-            return PrescriptionRepository.Instance.ReadPrescription(identificator);
+            return PrescriptionRepository.Instance.Read(id);
         }
 
-        public List<Model.Prescription> GetAllPrescriptions()
+        public List<Prescription> GetAll()
         {
-            return PrescriptionRepository.Instance.GetAllPrescriptions();
+            return PrescriptionRepository.Instance.GetAll();
         }
 
         public static PrescriptionService Instance

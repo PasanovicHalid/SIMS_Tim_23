@@ -126,7 +126,7 @@ namespace Repository
         public List<NewMedicationRequest> GetAllNewMedicationRequests()
         {
             List<NewMedicationRequest> requests = serializerNewMedicationRequest.FromCSV(dbPath);
-            Dictionary<int, MedicationType> types = MedicineRepository.Instance.GetAllMedicationType()
+            Dictionary<int, MedicationType> types = MedicationRepository.Instance.GetAllMedicationType()
                 .ToDictionary(keySelector: m => m.Id, elementSelector: m => m);
             foreach(NewMedicationRequest request in requests)
             {
@@ -148,7 +148,7 @@ namespace Repository
             {
                 if (request.Id == newMedicationRequest.Id)
                 {
-                    Controller.MedicineController medicationController = new Controller.MedicineController();
+                    Controller.MedicationController medicationController = new Controller.MedicationController();
                     medicationController.CreateMedicationType(newMedicationRequest.MedicationType);
                     requests.Remove(request);
                     serializerNewMedicationRequest.ToCSV(dbPath, requests);

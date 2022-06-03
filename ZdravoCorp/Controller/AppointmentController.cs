@@ -7,40 +7,37 @@ using Model;
 using System;
 using Service;
 using System.Collections.Generic;
+using Repository;
 
 namespace Controller
 {
     public class AppointmentController
     {
-        public Boolean CreateAppointment(Appointment newAppointment)
+        public void Create(Appointment newAppointment)
         {
-            return AppointmentService.Instance.CreateAppointment(newAppointment);
+            AppointmentService.Instance.Create(newAppointment);
         }
 
-        public Appointment ReadAppointment(int appointment)
+        public Appointment Read(int appointment)
         {
-            return AppointmentService.Instance.ReadAppointment(appointment);
+            return AppointmentService.Instance.Read(appointment);
         }
 
-        public Boolean UpdateAppointment(Appointment appointment)
+        public void Update(Appointment appointment)
         {
-            return AppointmentService.Instance.UpdateAppointment(appointment);
+            AppointmentService.Instance.Update(appointment);
         }
 
-        public Boolean DeleteAppointment(int appointment)
+        public void Delete(int appointment)
         {
-            return AppointmentService.Instance.DeleteAppointment(appointment);
+            AppointmentService.Instance.Delete(appointment);
         }
 
-        public List<Appointment> GetAllAppointments()
+        public List<Appointment> GetAll()
         {
-            return AppointmentService.Instance.GetAllAppointments();
+            return AppointmentService.Instance.GetAll();
         }
 
-        //public List<Appointment> SuggestAppointments(Doctor doctor, DateTime start, DateTime end, bool priority, bool first, Patient patient)
-        //{
-        //    return AppointmentService.Instance.SuggestAppointments(doctor, start, end, priority, first, patient);
-        //}
         public List<Appointment> GetFutureAppointments()
         {
             return AppointmentService.Instance.GetFutureAppointments();
@@ -69,7 +66,7 @@ namespace Controller
 
         public Boolean CheckDoctorAppointments(Doctor currentDoctor,DateTime vacationStartDate, DateTime vacationEndDate)
         {
-            List<Appointment> appointments = GetAllAppointments();
+            List<Appointment> appointments = GetAll();
             foreach (Appointment appointment in appointments)
             {
                 if (appointment.DoctorID == currentDoctor.Id)

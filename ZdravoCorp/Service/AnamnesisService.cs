@@ -9,34 +9,35 @@ using System.Collections.Generic;
 using Repository;
 namespace Service
 {
-    public class AnamnesisService
+    public class AnamnesisService : ICrud<Anamnesis>
     {
         
         private static AnamnesisService instance = null;
-        public Boolean CreateAnamnesis(Anamnesis newAnamnesis)
+
+        public void Create(Anamnesis newAnamnesis)
         {
-            return AnamnesisRepository.Instance.CreateAnamnesis(newAnamnesis);
+            AnamnesisRepository.Instance.Create(newAnamnesis);
         }
 
-        public Anamnesis ReadAnamnesis(int id)
+        public Anamnesis Read(int id)
         {
-            return AnamnesisRepository.Instance.ReadAnamnesis(id);
+            return AnamnesisRepository.Instance.Read(id);
         }
 
-        public Boolean UpdateAnamnesis(Anamnesis anamnesis)
+        public void Update(Anamnesis anamnesis)
         {
-            return AnamnesisRepository.Instance.UpdateAnamnesis(anamnesis);
+            AnamnesisRepository.Instance.Update(anamnesis);
 
         }
 
-        public Boolean DeleteAnamnesis(int id)
+        public void Delete(int id)
         {
             throw new NotImplementedException();
         }
 
-        public List<Anamnesis> GetAllAnamnesis()
+        public List<Anamnesis> GetAll()
         {
-            return AnamnesisRepository.Instance.GetAllAnamnesis();
+            return AnamnesisRepository.Instance.GetAll();
         }
 
         public AnamnesisService()
@@ -58,7 +59,7 @@ namespace Service
         public Anamnesis FindAnamnesisByAppointmentId(int id)
         {
             Anamnesis anamnesis = null;
-            List<Anamnesis> anamneses = GetAllAnamnesis();
+            List<Anamnesis> anamneses = GetAll();
             foreach(Anamnesis a in anamneses)
             {
                 if(a.Appointment.Id == id)

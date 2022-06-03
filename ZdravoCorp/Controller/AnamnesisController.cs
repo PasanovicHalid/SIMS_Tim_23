@@ -2,34 +2,37 @@ using Model;
 using System;
 using System.Collections.Generic;
 using Service;
+using Repository;
+
+
 namespace Controller
 {
-    public class AnamnesisController
+    public class AnamnesisController : ICrud<Anamnesis>
     {
-        public Boolean CreateAnamnesis(Anamnesis newAnamnesis)
+        public void Create(Anamnesis newAnamnesis)
         {
-            return AnamnesisService.Instance.CreateAnamnesis(newAnamnesis);
+            AnamnesisService.Instance.Create(newAnamnesis);
         }
 
-        public Anamnesis ReadAnamnesis(int id)
+        public Anamnesis Read(int id)
         {
-            return AnamnesisService.Instance.ReadAnamnesis(id);
+            return AnamnesisService.Instance.Read(id);
         }
 
-        public Boolean UpdateAnamnesis(Anamnesis anamnesis)
+        public void Update(Anamnesis anamnesis)
         {
-            return AnamnesisService.Instance.UpdateAnamnesis(anamnesis);
+            AnamnesisService.Instance.Update(anamnesis);
 
         }
 
-        public Boolean DeleteAnamnesis(int id)
+        public void Delete(int id)
         {
             throw new NotImplementedException();
         }
 
-        public List<Anamnesis> GetAllAnamnesis()
+        public List<Anamnesis> GetAll()
         {
-            return AnamnesisService.Instance.GetAllAnamnesis();
+            return AnamnesisService.Instance.GetAll();
         }
 
         public Anamnesis FindAnamnesisByAppointmentId(int id)

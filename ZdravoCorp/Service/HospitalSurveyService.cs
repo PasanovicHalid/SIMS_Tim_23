@@ -11,43 +11,43 @@ using System.Collections.Generic;
 
 namespace Service
 {
-    public class HospitalSurveyService
+    public class HospitalSurveyService : ICrud<HospitalSurvey>
     {
         private static HospitalSurveyService instance = null;
         
-        public Boolean CreateHospitalSurvey(HospitalSurvey newSurvey)
+        public void Create(HospitalSurvey newSurvey)
         {
-            return HospitalSurveyRepository.Instance.CreateHospitalSurvey(newSurvey);
+            HospitalSurveyRepository.Instance.Create(newSurvey);
         }
 
-        public HospitalSurvey ReadHospitalSurvey(int id)
+        public HospitalSurvey Read(int id)
         {
-            return HospitalSurveyRepository.Instance.ReadHospitalSurvey(id);
+            return HospitalSurveyRepository.Instance.Read(id);
         }
 
-        public Boolean UpdateHospitalSurvey(HospitalSurvey survey)
+        public void Update(HospitalSurvey survey)
         {
-            return HospitalSurveyRepository.Instance.UpdateHospitalSurvey(survey);
+            HospitalSurveyRepository.Instance.Update(survey);
         }
 
-        public Boolean DeleteHospitalSurvey(int id)
+        public void Delete(int id)
         {
-            return HospitalSurveyRepository.Instance.DeleteHospitalSurvey(id);
+            HospitalSurveyRepository.Instance.Delete(id);
         }
 
-        public List<HospitalSurvey> GetAllHospitalSurveys()
+        public List<HospitalSurvey> GetAll()
         {
-            return HospitalSurveyRepository.Instance.GetAllHospitalSurveys();
+            return HospitalSurveyRepository.Instance.GetAll();
         }
         public List<int> getAllHospitalSurveyIds()
         {
             return HospitalSurveyRepository.Instance.getAllHospitalSurveyIds();
         }
+
         public HospitalSurveyService()
         {
 
         }
-
         public static HospitalSurveyService Instance
         {
             get

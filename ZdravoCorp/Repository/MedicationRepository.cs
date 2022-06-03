@@ -10,19 +10,19 @@ using System.Linq;
 
 namespace Repository
 {
-    public class MedicineRepository
+    public class MedicationRepository
     {
         private String dbPath = "..\\..\\Data\\medicationDB.csv";
         private String dbPathTypes = "..\\..\\Data\\medicationTypeDB.csv";
         private Serializer<Medication> serializerMedication = new Serializer<Medication>();
         private Serializer<MedicationType> serializerType = new Serializer<MedicationType>();
 
-        private static MedicineRepository instance = null;
+        private static MedicationRepository instance = null;
 
         private HashSet<int> typeIdMap = new HashSet<int>();
         private HashSet<string> typeNameMap = new HashSet<string>();
 
-        public MedicineRepository()
+        public MedicationRepository()
         {
             List<MedicationType> typeList = GetAllMedicationType();
             InstantiateTypeHashSets(typeList);
@@ -263,13 +263,13 @@ namespace Repository
             InstantiateReplacements(types);
             return types.Values.ToList();
         }
-        public static MedicineRepository Instance
+        public static MedicationRepository Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = new MedicineRepository();
+                    instance = new MedicationRepository();
                 }
                 return instance;
             }

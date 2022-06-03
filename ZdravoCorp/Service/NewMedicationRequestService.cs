@@ -8,40 +8,40 @@ using Repository;
 
 namespace Service
 {
-    public class NewMedicationRequestService
+    public class NewMedicationRequestService : ICrud<NewMedicationRequest>
     {
         private static NewMedicationRequestService instance = null;
 
-        public Boolean CreateNewMedicationRequest(NewMedicationRequest newMedicationRequest)
+        public void Create(NewMedicationRequest newMedicationRequest)
         {
-            return NewMedicationRequestRepository.Instance.CreateNewMedicationRequest(newMedicationRequest);
+            NewMedicationRequestRepository.Instance.Create(newMedicationRequest);
         }
 
-        public NewMedicationRequest ReadNewMedicationRequest(int id)
+        public NewMedicationRequest Read(int id)
         {
-            return NewMedicationRequestRepository.Instance.ReadNewMedicationRequest(id);
+            return NewMedicationRequestRepository.Instance.Read(id);
         }
 
-        public Boolean UpdateNewMedicationRequest(NewMedicationRequest newMedicationRequest)
+        public void Update(NewMedicationRequest newMedicationRequest)
         {
-            return NewMedicationRequestRepository.Instance.UpdateNewMedicationRequest(newMedicationRequest);
+            NewMedicationRequestRepository.Instance.Update(newMedicationRequest);
         }
 
-        public Boolean DeleteNewMedicationRequest(int id)
+        public void Delete(int id)
         {
-            return NewMedicationRequestRepository.Instance.DeleteNewMedicationRequest(id);
+            NewMedicationRequestRepository.Instance.Delete(id);
         }
 
-        public List<NewMedicationRequest> GetAllNewMedicationRequests()
+        public List<NewMedicationRequest> GetAll()
         {
-            return NewMedicationRequestRepository.Instance.GetAllNewMedicationRequests();
+            return NewMedicationRequestRepository.Instance.GetAll();
         }
 
         private bool ExecuteUpdate(NewMedicationRequest newMedicationRequest)
         {
-            if (MedicineRepository.Instance.UpdateMedicationType(newMedicationRequest.MedicationType))
+            if (MedicationRepository.Instance.Update(newMedicationRequest.MedicationType))
             {
-                return NewMedicationRequestRepository.Instance.DeleteNewMedicationRequest(newMedicationRequest.Id);
+                return NewMedicationRequestRepository.Instance.Delete(newMedicationRequest.Id);
             }
             else
             {
@@ -51,9 +51,9 @@ namespace Service
 
         private bool ExecuteCreation(NewMedicationRequest newMedicationRequest)
         {
-            if (MedicineRepository.Instance.CreateMedicationType(newMedicationRequest.MedicationType))
+            if (MedicationRepository.Instance.Create(newMedicationRequest.MedicationType))
             {
-                return NewMedicationRequestRepository.Instance.DeleteNewMedicationRequest(newMedicationRequest.Id);
+                return NewMedicationRequestRepository.Instance.Delete(newMedicationRequest.Id);
             }
             else
             {

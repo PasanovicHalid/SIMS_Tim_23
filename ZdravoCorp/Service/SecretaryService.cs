@@ -10,49 +10,49 @@ using Repository;
 
 namespace Service
 {
-   public class SecretaryService
+   public class SecretaryService : ICrud<Secretary>
    {
       private static SecretaryService instance = null;
       
-      public Boolean CreateSecretary(Secretary newSecretary)
+      public void Create(Secretary newSecretary)
       {
          throw new NotImplementedException();
       }
       
-      public Boolean UpdateSecretary(Secretary secretary)
+      public void Update(Secretary secretary)
       {
          throw new NotImplementedException();
       }
       
-      public Boolean DeleteSecretary(int id)
+      public void Delete(int id)
       {
          throw new NotImplementedException();
       }
       
-      public Secretary ReadSecretary(int id)
+      public Secretary Read(int id)
       {
          throw new NotImplementedException();
       }
       
-      public List<Secretary> GetAllSecretaries()
+      public List<Secretary> GetAll()
       {
-            return SecretaryRepository.Instance.GetAllSecretaries();
+            return SecretaryRepository.Instance.GetAll();
       }
-        public SecretaryService()
-        {
+      public SecretaryService()
+      {
 
-        }
+      }
 
-        public static SecretaryService Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new SecretaryService();
-                }
-                return instance;
-            }
-        }
+      public static SecretaryService Instance
+      {
+          get
+          {
+              if (instance == null)
+              {
+                  instance = new SecretaryService();
+              }
+              return instance;
+          }
+      }
     }
 }

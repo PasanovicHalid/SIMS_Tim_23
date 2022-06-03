@@ -3,34 +3,35 @@ using Model;
 using System;
 using Service;
 using System.Collections.Generic;
+using Repository;
 
 namespace Controller
 {
-    public class GuestController
+    public class GuestController : ICrud<Guest>
     {
-        public Boolean CreateGuest(Guest newGuest)
+        public void Create(Guest newGuest)
         {
-            return GuestService.Instance.CreateGuest(newGuest);
+            GuestService.Instance.Create(newGuest);
         }
 
-        public Guest ReadGuest(int id)
+        public Guest Read(int id)
         {
-            return GuestService.Instance.ReadGuest(id);
+            return GuestService.Instance.Read(id);
         }
 
-        public Boolean UpdateGuest(Guest guest)
+        public void Update(Guest guest)
         {
-            return GuestService.Instance.UpdateGuest(guest);
+            GuestService.Instance.Update(guest);
         }
 
-        public Boolean DeleteGuest(int id)
+        public void Delete(int id)
         {
-            return GuestService.Instance.DeleteGuest(id);
+            GuestService.Instance.Delete(id);
         }
 
-        public List<Guest> GetAllGuests()
+        public List<Guest> GetAll()
         {
-            return GuestService.Instance.GetAllGuests();
+            return GuestService.Instance.GetAll();
         }
 
     }

@@ -78,36 +78,36 @@ namespace Service
             changedAction.ExecutionDate = action.ExecutionDate;
             ChangeRoomAction renovationAction = new ChangeRoomAction(action.Id_incoming_room, action.Id_outgoing_room, action.Id_equipment, action.Count);
             changedAction.Object = renovationAction;
-            Room room = RoomService.Instance.ReadRoom(action.Id_outgoing_room);
+            Room room = RoomService.Instance.Read(action.Id_outgoing_room);
             RevertActualCountWhenUpdating(room, action, count);
             ActionRepository.Instance.UpdateAction(changedAction);
-            RoomService.Instance.UpdateRoom(room);
+            RoomService.Instance.Update(room);
         }
 
         public void DeleteRenovationAction(RenovationActionModel action)
         {
             DeleteAction(action.Id);
-            Room room = RoomService.Instance.ReadRoom(action.Id_room);
+            Room room = RoomService.Instance.Read(action.Id_room);
             room.Renovating = false;
-            RoomService.Instance.UpdateRoom(room);
+            RoomService.Instance.Update(room);
         }
 
         public void DeleteChangeAction(ChangeActionModel action)
         {
             DeleteAction(action.Id);
-            Room room = RoomService.Instance.ReadRoom(action.Id_outgoing_room);
+            Room room = RoomService.Instance.Read(action.Id_outgoing_room);
             RevertActualCount(room, action);
-            RoomService.Instance.UpdateRoom(room);
+            RoomService.Instance.Update(room);
         }
 
-        public void DeleteAction(int identificator)
+        public void DeleteAction(int id)
         {
-            ActionRepository.Instance.DeleteAction(identificator);
+            ActionRepository.Instance.DeleteAction(id);
         }
 
-        public Model.Action ReadAction(int identificator)
+        public Model.Action ReadAction(int id)
         {
-            return ActionRepository.Instance.ReadAction(identificator);
+            return ActionRepository.Instance.ReadAction(id);
         }
 
         public List<Model.Action> GetAllActions()
@@ -126,7 +126,7 @@ namespace Service
                 {
                     renovation = (RenovationAction)action.Object;
                     result.Add(new RenovationActionModel(action.Id, action.ExecutionDate, renovation.ExpirationDate, 
-                        RoomService.Instance.ReadRoom(renovation.Id_room).DesignationCode,renovation.Id_room, renovation.Renovation));
+                        RoomService.Instance.Read(renovation.Id_room).DesignationCode,renovation.Id_room, renovation.Renovation));
                 }
             }
             return result;
@@ -144,8 +144,8 @@ namespace Service
                     changeRoomAction = (ChangeRoomAction) action.Object;
                     result.Add(new ChangeActionModel(action.Id, action.ExecutionDate, changeRoomAction.Id_incoming_room, 
                         changeRoomAction.Id_outgoing_room, changeRoomAction.Id_equipment, changeRoomAction.Count,
-                        RoomService.Instance.ReadRoom(changeRoomAction.Id_incoming_room).DesignationCode, 
-                        RoomService.Instance.ReadRoom(changeRoomAction.Id_outgoing_room).DesignationCode, 
+                        RoomService.Instance.Read(changeRoomAction.Id_incoming_room).DesignationCode, 
+                        RoomService.Instance.Read(changeRoomAction.Id_outgoing_room).DesignationCode, 
                         EquipmentService.Instance.ReadEquipmentType(changeRoomAction.Id_equipment).Name));
                 }
             }

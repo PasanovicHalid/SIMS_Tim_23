@@ -94,7 +94,7 @@
     <Compile Include="Controller\HospitalSurveyController.cs" />
     <Compile Include="Controller\ManagerController.cs" />
     <Compile Include="Controller\MedicalRecordController.cs" />
-    <Compile Include="Controller\MedicineController.cs" />
+    <Compile Include="Controller\MedicationController.cs" />
     <Compile Include="Controller\NewMedicationRequestController.cs" />
     <Compile Include="Controller\PatientController.cs" />
     <Compile Include="Controller\PrescriptionController.cs" />
@@ -137,13 +137,13 @@
     <Compile Include="Repository\AppointmentRepository.cs" />
     <Compile Include="Repository\ICrud.cs" />
     <Compile Include="Repository\MedicationTypeRepository.cs" />
-    <Compile Include="Repository\MedicineIngredientsRepository.cs" />
+    <Compile Include="Repository\MedicationIngredientsRepository.cs" />
     <Compile Include="Repository\ReportRepository.cs" />
     <Compile Include="Repository\DoctorRepository.cs" />
     <Compile Include="Repository\EquipmentRepository.cs" />
     <Compile Include="Repository\ManagerRepository.cs" />
     <Compile Include="Repository\MedicalRecordRepository.cs" />
-    <Compile Include="Repository\MedicineRepository.cs" />
+    <Compile Include="Repository\MedicationRepository.cs" />
     <Compile Include="Repository\NewMedicationRequestRepository.cs" />
     <Compile Include="Repository\PatientRepository.cs" />
     <Compile Include="Repository\PrescriptionRepository.cs" />
@@ -167,7 +167,7 @@
     <Compile Include="Service\LoginService.cs" />
     <Compile Include="Service\ManagerService.cs" />
     <Compile Include="Service\MedicalRecordService.cs" />
-    <Compile Include="Service\MedicineService.cs" />
+    <Compile Include="Service\MedicationService.cs" />
     <Compile Include="Service\NewMedicationRequestService.cs" />
     <Compile Include="Service\PatientService.cs" />
     <Compile Include="Service\PrescriptionService.cs" />

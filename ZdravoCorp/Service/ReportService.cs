@@ -3,40 +3,45 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Model;
+using Repository;
 
-namespace ZdravoCorp.Service
+namespace Service
 {
-    internal class ReportService
+    internal class ReportService : ICrud<Report>
     {
         private static ReportService instance = null;
-        public Boolean CreateComment(Model.Report newComment)
+        public void Create(Report newReport)
         {
-            return Repository.ReportRepository.Instance.CreateComment(newComment);
+            ReportRepository.Instance.Create(newReport);
         }
 
-        public Boolean UpdateComment(Model.Report newComment)
+        public void Update(Model.Report newReport)
         {
-            return Repository.ReportRepository.Instance.UpdateComment(newComment);
-
-        }
-
-        public Boolean DeleteComment(int identificator)
-        {
-            return Repository.ReportRepository.Instance.DeleteComment(identificator);
+            ReportRepository.Instance.Update(newReport);
 
         }
 
-        public Model.Report ReadComment(int identificator)
+        public void Delete(int id)
         {
-            return Repository.ReportRepository.Instance.ReadComment(identificator);
+            ReportRepository.Instance.Delete(id);
 
         }
 
-        public List<Model.Report> GetAllComments()
+        public Report Read(int id)
         {
-            return Repository.ReportRepository.Instance.GetAllComments();
+            return ReportRepository.Instance.Read(id);
 
         }
+
+        public List<Report> GetAll()
+        {
+            return ReportRepository.Instance.GetAll();
+
+        }
+
+        ReportService() 
+        { }
 
         public static ReportService Instance
         {

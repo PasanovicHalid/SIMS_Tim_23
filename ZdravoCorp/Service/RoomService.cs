@@ -13,19 +13,19 @@ using ZdravoCorp.View.Manager.Model.Rooms;
 
 namespace Service
 {
-    public class RoomService
+    public class RoomService : ICrud<Room>
     {
         private static RoomService instance = null;
         private ActionService actionService;
         private static readonly object key = new object();
-        public void CreateRoom(Room newRoom)
+        public void Create(Room newRoom)
         {
-            RoomRepository.Instance.CreateRoom(newRoom);
+            RoomRepository.Instance.Create(newRoom);
         }
 
-        public Room ReadRoom(int identifier)
+        public Room Read(int identifier)
         {
-            return RoomRepository.Instance.ReadRoom(identifier);
+            return RoomRepository.Instance.Read(identifier);
         }
 
         public Room ReadRoomByIndex(int index)
@@ -33,14 +33,14 @@ namespace Service
             return RoomRepository.Instance.ReadRoom(index);
         }
 
-        public void UpdateRoom(Room updatedRoom)
+        public void Update(Room updatedRoom)
         {
-            RoomRepository.Instance.UpdateRoom(updatedRoom);
+            RoomRepository.Instance.Update(updatedRoom);
         }
 
-        public void DeleteRoom(int identifier)
+        public void Delete(int identifier)
         {
-            RoomRepository.Instance.DeleteRoom(identifier);
+            RoomRepository.Instance.Delete(identifier);
         }
 
         public void RenovateRoom(int identifier, DateTime start, DateTime end)
@@ -59,9 +59,9 @@ namespace Service
             return RoomRepository.Instance.GetRoomsByInternalID(identifiers);
         }
 
-        public List<Room> GetAllRooms()
+        public List<Room> GetAll()
         {
-            return RoomRepository.Instance.GetAllRooms();
+            return RoomRepository.Instance.GetAll();
         }
 
         public void CreateRoomType(Model.RoomType newRoomType)
@@ -141,7 +141,7 @@ namespace Service
         {
             Room freeRoom = null;
 
-            List<Room> rooms = GetAllRooms();
+            List<Room> rooms = GetAll();
             foreach (Room room in rooms)
             {
                 if(room.RoomType.Equals("Storage Room") || room.RoomType.Equals("Waiting Room") || room.RoomType.Equals("Meeting Room"))

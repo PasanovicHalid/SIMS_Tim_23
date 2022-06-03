@@ -6,30 +6,31 @@
 using Model;
 using System;
 using Service;
+using Repository;
 using System.Collections.Generic;
 
 namespace Controller
 {
-    public class PatientController
+    public class PatientController : ICrud<Patient>
     {
-        public Boolean CreatePatient(Patient newPatient)
+        public void Create(Patient newPatient)
         {
-            return PatientService.Instance.CreatePatient(newPatient);
+            PatientService.Instance.Create(newPatient);
         }
 
-        public Boolean UpdatePatient(Patient patient)
+        public void Update(Patient patient)
         {
-            return PatientService.Instance.UpdatePatient(patient);
+            PatientService.Instance.Update(patient);
         }
 
-        public Boolean DeletePatient(int patient)
+        public void Delete(int patient)
         {
-            return PatientService.Instance.DeletePatient(patient);
+            PatientService.Instance.Delete(patient);
         }
 
-        public Patient ReadPatient(int patient)
+        public Patient Read(int patient)
         {
-            return PatientService.Instance.ReadPatient(patient);
+            return PatientService.Instance.Read(patient);
         }
 
         public Patient ReadPatientByJmbg(string jmbg)
@@ -37,9 +38,9 @@ namespace Controller
             return PatientService.Instance.ReadPatientByJmbg(jmbg);
         }
 
-        public List<Patient> GetAllPatients()
+        public List<Patient> GetAll()
         {
-            return PatientService.Instance.GetAllPatients();
+            return PatientService.Instance.GetAll();
         }
 
         public Boolean AddPrescription(Model.Patient patient,Model.Prescription newPrescription)

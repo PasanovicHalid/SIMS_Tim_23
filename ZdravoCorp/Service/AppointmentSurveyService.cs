@@ -11,33 +11,33 @@ using System.Collections.Generic;
 
 namespace Service
 {
-    public class AppointmentSurveyService
+    public class AppointmentSurveyService : ICrud<AppointmentSurvey>
     {
         private static AppointmentSurveyService instance = null;
         
-        public Boolean CreateAppointmentSurvey(AppointmentSurvey newSurvey)
+        public void Create(AppointmentSurvey newSurvey)
         {
-            return AppointmentSurveyRepository.Instance.CreateAppointmentSurvey(newSurvey);
+            AppointmentSurveyRepository.Instance.Create(newSurvey);
         }
 
-        public AppointmentSurvey ReadAppointmentSurvey(int id)
+        public AppointmentSurvey Read(int id)
         {
-            return AppointmentSurveyRepository.Instance.ReadAppointmentSurvey(id);
+            return AppointmentSurveyRepository.Instance.Read(id);
         }
 
-        public Boolean UpdateAppointmentSurvey(AppointmentSurvey survey)
+        public void Update(AppointmentSurvey survey)
         {
-            return AppointmentSurveyRepository.Instance.UpdateAppointmentSurvey(survey);
+            AppointmentSurveyRepository.Instance.Update(survey);
         }
 
-        public Boolean DeleteAppointmentSurvey(int id)
+        public void Delete(int id)
         {
-            return AppointmentSurveyRepository.Instance.DeleteAppointmentSurvey(id);
+            AppointmentSurveyRepository.Instance.Delete(id);
         }
 
-        public List<AppointmentSurvey> GetAllAppointmentSurveys()
+        public List<AppointmentSurvey> GetAll()
         {
-            return AppointmentSurveyRepository.Instance.GetAllAppointmentSurveys();
+            return AppointmentSurveyRepository.Instance.GetAll();
         }
         public List<int> getAllAppointmentSurveyIds()
         {
@@ -71,7 +71,7 @@ namespace Service
         public List<int> GetAllAppointmentsIds()
         {
             List<int> ids = new List<int>();
-            foreach(AppointmentSurvey appointmentSurvey in GetAllAppointmentSurveys())
+            foreach(AppointmentSurvey appointmentSurvey in GetAll())
             {
                 ids.Add(appointmentSurvey.Appointment.Id);
             }

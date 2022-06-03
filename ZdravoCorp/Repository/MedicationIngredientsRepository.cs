@@ -9,11 +9,11 @@ using ZdravoCorp.Exceptions;
 
 namespace ZdravoCorp.Repository
 {
-    public class MedicineIngredientsRepository : Repository<MedicineIngredient>
+    public class MedicationIngredientsRepository : Repository<MedicineIngredient>
     {
-        private static MedicineIngredientsRepository instance = null;
+        private static MedicationIngredientsRepository instance = null;
         private HashSet<string> ingredientNameMap = new HashSet<string>();
-        public MedicineIngredientsRepository()
+        public MedicationIngredientsRepository()
         {
             dbPath = "..\\..\\Data\\ingredientsDB.csv";
             InstantiateIDSet(GetAll());
@@ -121,7 +121,7 @@ namespace ZdravoCorp.Repository
             throw new LocalisedException("IngredientDoesntExist");
         }
 
-        public static MedicineIngredientsRepository Instance
+        public static MedicationIngredientsRepository Instance
         {
             get
             {
@@ -131,7 +131,7 @@ namespace ZdravoCorp.Repository
                     {
                         if (instance == null)
                         {
-                            instance = new MedicineIngredientsRepository();
+                            instance = new MedicationIngredientsRepository();
                         }
                     }
                 }

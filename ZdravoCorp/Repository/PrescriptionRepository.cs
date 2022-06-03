@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Model;
 
-namespace ZdravoCorp.Repository
+namespace Repository
 {
     internal class PrescriptionRepository
     {

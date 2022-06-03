@@ -13,34 +13,39 @@ using ZdravoCorp.View.Manager.Model.Rooms;
 
 namespace Service
 {
-    public class EquipmentService
+    public class EquipmentService : ICrud<Equipment>
     {
         private static EquipmentService instance = null;
         private ActionService actionService;
 
         public Boolean CreateEquipment(EquipmentTypeModel type, int count, RoomModel room)
         {
-            Equipment equipment = new Equipment(count, count,FindEquipmentTypeByName(type.Name));
+            Equipment equipment = new Equipment(count, count, FindEquipmentTypeByName(type.Name));
             RoomService.Instance.AddEquipment(equipment, room.Identifier);
             return true;
         }
 
-        public Boolean UpdateEquipment(Equipment equipment)
+        public void Create(Equipment equipment)
         {
             throw new NotImplementedException();
         }
 
-        public Boolean DeleteEquipment(String identificator)
+        public void Update(Equipment equipment)
         {
             throw new NotImplementedException();
         }
 
-        public Equipment ReadEquipment(String identificator)
+        public void Delete(int id)
         {
             throw new NotImplementedException();
         }
 
-        public List<Equipment> GetAllEquipment()
+        public Equipment Read(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Equipment> GetAll()
         {
             throw new NotImplementedException();
         }
@@ -91,7 +96,7 @@ namespace Service
         public ObservableCollection<EquipmentModel> GetAllEquipmentTableVO()
         {
             ObservableCollection<EquipmentModel> result = new ObservableCollection<EquipmentModel>();
-            List<Room> rooms = RoomService.Instance.GetAllRooms();
+            List<Room> rooms = RoomService.Instance.GetAll();
             foreach(Room room in rooms)
             {
                 foreach(Equipment it in room.Equipment)

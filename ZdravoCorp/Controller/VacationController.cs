@@ -4,37 +4,38 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Model;
+using Repository;
 using Service;
 
 namespace Controller
 {
-    public class VacationController
+    public class VacationController : ICrud<Vacation>
     {
         private static VacationController instance = null;
 
-        public List<Vacation> GetAllVacations()
+        public List<Vacation> GetAll()
         {
-            return VacationService.Instance.GetAllVacations();
+            return VacationService.Instance.GetAll();
         }
 
-        public Boolean CreateVacation(Vacation newVacation)
+        public void Create(Vacation newVacation)
         {
-            return VacationService.Instance.CreateVacation(newVacation);
+            VacationService.Instance.Create(newVacation);
         }
 
-        public Vacation ReadVacation(int id)
+        public Vacation Read(int id)
         {
-            return VacationService.Instance.ReadVacation(id);
+            return VacationService.Instance.Read(id);
         }
 
-        public Boolean UpdateVacation(Vacation vacation)
+        public void Update(Vacation vacation)
         {
-            return VacationService.Instance.UpdateVacation(vacation);
+            VacationService.Instance.Update(vacation);
         }
 
-        public Boolean DeleteVacation(int id)
+        public void Delete(int id)
         {
-            return VacationService.Instance.DeleteVacation(id);
+            VacationService.Instance.Delete(id);
         }
 
         public Boolean AcceptVacation(Doctor doctor,Vacation vacation)
@@ -64,7 +65,7 @@ namespace Controller
 
         public Boolean CheckSpecialistInVacation(Doctor doctor)
         {
-            List<Vacation> vacations = GetAllVacations();
+            List<Vacation> vacations = GetAll();
             foreach (Vacation vacation in vacations)
             {
                 if (vacation.Doctor.DoctorType.Type.Equals(doctor.DoctorType.Type))

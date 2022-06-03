@@ -6,6 +6,7 @@
 using Model;
 using Service;
 using System;
+using Repository;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using ZdravoCorp.View.Manager.Model.Equipments;
@@ -13,29 +14,34 @@ using ZdravoCorp.View.Manager.Model.Rooms;
 
 namespace Controller
 {
-    public class EquipmentController
+    public class EquipmentController : ICrud<Equipment>
     {
         public Boolean CreateEquipment(EquipmentTypeModel type, int count, RoomModel room)
         {
             return EquipmentService.Instance.CreateEquipment(type, count, room);
         }
 
-        public Boolean UpdateEquipment(Equipment equipment)
+        public void Create(Equipment equipment)
         {
             throw new NotImplementedException();
         }
 
-        public Boolean DeleteEquipment(String identificator)
+        public void Update(Equipment equipment)
         {
             throw new NotImplementedException();
         }
 
-        public Model.Equipment ReadEquipment(String identificator)
+        public void Delete(int identificator)
         {
             throw new NotImplementedException();
         }
 
-        public List<Equipment> GetAllEquipment()
+        public Equipment Read(int identificator)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Equipment> GetAll()
         {
             throw new NotImplementedException();
         }

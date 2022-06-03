@@ -66,7 +66,7 @@ namespace Repository
             {
                 List<Patient> patients = GetAll();
                 CheckIfJMBGExists(patients, jmbg);
-                return FindPatientByJMBG(patients, jmbg);
+                return FindPatientByJMBG(jmbg);
             }
         }
 
@@ -162,8 +162,9 @@ namespace Repository
             throw new LocalisedException("UserDoesntExist");
         }
 
-        private Patient FindPatientByJMBG(List<Patient> patients, string jmbg)
+        public Patient FindPatientByJMBG(string jmbg)
         {
+            List<Patient> patients = GetAll();
             for (int i = 0; i < patients.Count; i++)
             {
                 if (patients[i].Jmbg.Equals(jmbg))

@@ -5,34 +5,35 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Service;
+using Repository;
 
 namespace Controller
 {
-    public class NewMedicationRequestController
+    public class NewMedicationRequestController : ICrud<NewMedicationRequest>
     {
-        public Boolean CreateNewMedicationRequest(NewMedicationRequest newMedicationRequest)
+        public void Create(NewMedicationRequest newMedicationRequest)
         {
-            return NewMedicationRequestService.Instance.CreateNewMedicationRequest(newMedicationRequest);
+            NewMedicationRequestService.Instance.Create(newMedicationRequest);
         }
 
-        public NewMedicationRequest ReadNewMedicationRequest(int id)
+        public NewMedicationRequest Read(int id)
         {
-            return NewMedicationRequestService.Instance.ReadNewMedicationRequest(id);
+            return NewMedicationRequestService.Instance.Read(id);
         }
 
-        public Boolean UpdateNewMedicationRequest(NewMedicationRequest newMedicationRequest)
+        public void Update(NewMedicationRequest newMedicationRequest)
         {
-            return NewMedicationRequestService.Instance.UpdateNewMedicationRequest(newMedicationRequest);
+            NewMedicationRequestService.Instance.Update(newMedicationRequest);
         }
 
-        public Boolean DeleteNewMedicationRequest(int id)
+        public void Delete(int id)
         {
-            return NewMedicationRequestService.Instance.DeleteNewMedicationRequest(id);
+            NewMedicationRequestService.Instance.Delete(id);
         }
 
-        public List<NewMedicationRequest> GetAllNewMedicationRequests()
+        public List<NewMedicationRequest> GetAll()
         {
-            return NewMedicationRequestService.Instance.GetAllNewMedicationRequests();
+            return NewMedicationRequestService.Instance.GetAll();
         }
 
         public Boolean AcceptNewMedicationRequest(NewMedicationRequest newMedicationRequest)

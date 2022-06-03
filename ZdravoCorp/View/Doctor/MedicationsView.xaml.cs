@@ -21,7 +21,7 @@ namespace ZdravoCorp.View.Doctor
     /// </summary>
     public partial class MedicationsView : Window
     {
-        private MedicineController medicineController;
+        private MedicationController medicineController;
 
         Model.Doctor currentDoctor;
 
@@ -34,7 +34,7 @@ namespace ZdravoCorp.View.Doctor
         public MedicationsView(Model.Doctor temp)
         {
             InitializeComponent();
-            medicineController = new MedicineController();
+            medicineController = new MedicationController();
             MedicineCollection = new ObservableCollection<Model.Medication>(medicineController.GetAllMedicine());
 
             MedicineGrid.DataContext = MedicineCollection;

@@ -8,35 +8,36 @@ using Repository;
 using System;
 using System.Collections.Generic;
 using Service;
+using Repository;
 
 namespace Controller
 {
-    public class AppointmentSurveyController
+    public class AppointmentSurveyController : ICrud<AppointmentSurvey>
     {
         
-        public Boolean CreateAppointmentSurvey(AppointmentSurvey newSurvey)
+        public void Create(AppointmentSurvey newSurvey)
         {
-            return AppointmentSurveyService.Instance.CreateAppointmentSurvey(newSurvey);
+            AppointmentSurveyService.Instance.Create(newSurvey);
         }
 
-        public AppointmentSurvey ReadAppointmentSurvey(int id)
+        public AppointmentSurvey Read(int id)
         {
-            return AppointmentSurveyService.Instance.ReadAppointmentSurvey(id);
+            return AppointmentSurveyService.Instance.Read(id);
         }
 
-        public Boolean UpdateAppointmentSurvey(AppointmentSurvey survey)
+        public void Update(AppointmentSurvey survey)
         {
-            return AppointmentSurveyService.Instance.UpdateAppointmentSurvey(survey);
+            AppointmentSurveyService.Instance.Update(survey);
         }
 
-        public Boolean DeleteAppointmentSurvey(int id)
+        public void Delete(int id)
         {
-            return AppointmentSurveyService.Instance.DeleteAppointmentSurvey(id);
+            AppointmentSurveyService.Instance.Delete(id);
         }
 
-        public List<AppointmentSurvey> GetAllAppointmentSurveys()
+        public List<AppointmentSurvey> GetAll()
         {
-            return AppointmentSurveyService.Instance.GetAllAppointmentSurveys();
+            return AppointmentSurveyService.Instance.GetAll();
         }
        
         public Boolean DoneSurvey(Appointment appointment)

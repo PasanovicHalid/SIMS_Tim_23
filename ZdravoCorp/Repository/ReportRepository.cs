@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ZdravoCorp.Repository
+namespace Repository
 {
     internal class ReportRepository
     {

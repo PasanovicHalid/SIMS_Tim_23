@@ -6,32 +6,33 @@
 using Model;
 using System;
 using System.Collections.Generic;
+using Repository;
 
 namespace Controller
 {
-   public class ManagerController
+   public class ManagerController : ICrud<Manager>
    {
-      public Boolean CreateManager(Manager newManager)
+      public void Create(Manager newManager)
       {
          throw new NotImplementedException();
       }
       
-      public Boolean UpdateManager(Manager manager)
+      public void Update(Manager manager)
       {
          throw new NotImplementedException();
       }
       
-      public Boolean DeleteManager(int id)
+      public void Delete(int id)
       {
          throw new NotImplementedException();
       }
       
-      public Patient ReadManager(int id)
+      public Manager Read(int id)
       {
          throw new NotImplementedException();
       }
-      
-      public List<Manager> GetAllManagers()
+
+      public List<Manager> GetAll ()
       {
          throw new NotImplementedException();
       }

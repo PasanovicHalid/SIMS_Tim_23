@@ -3,36 +3,39 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Model;
+using Repository;
+using Service;
 
 namespace ZdravoCorp.Controller
 {
-    public class ReportController
+    public class ReportController : ICrud<Report>
     {
-        public Boolean CreateComment(Model.Report newComment)
+        public void Create(Model.Report newComment)
         {
-            return Service.ReportService.Instance.CreateComment(newComment);
+            ReportService.Instance.Create(newComment);
         }
 
-        public Boolean UpdateComment(Model.Report newComment)
+        public void Update(Model.Report newComment)
         {
-            return Service.ReportService.Instance.UpdateComment(newComment);
+            ReportService.Instance.Update(newComment);
         }
 
-        public Boolean DeleteComment(int identificator)
+        public void Delete(int identificator)
         {
-            return Service.ReportService.Instance.DeleteComment(identificator);
-
-        }
-
-        public Model.Report ReadComment(int identificator)
-        {
-            return Service.ReportService.Instance.ReadComment(identificator);
+            ReportService.Instance.Delete(identificator);
 
         }
 
-        public List<Model.Report> GetAllComments()
+        public Report Read(int identificator)
         {
-            return Service.ReportService.Instance.GetAllComments();
+            return ReportService.Instance.Read(identificator);
+
+        }
+
+        public List<Report> GetAll()
+        {
+            return ReportService.Instance.GetAll();
 
         }
 

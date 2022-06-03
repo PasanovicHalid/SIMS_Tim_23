@@ -11,7 +11,7 @@ using System.Collections.Generic;
 
 namespace Service
 {
-    public class AppointmentService
+    public class AppointmentService : ICrud<Appointment>
     {
         public const int MAX_SUGGESTIONS = 30;
         public const int MAX_ITERATIONS = 10;
@@ -19,29 +19,29 @@ namespace Service
         private static AppointmentService instance = null;
         List<Appointment> appointments = new List<Appointment>();
         
-        public Boolean CreateAppointment(Appointment newAppointment)
+        public void Create(Appointment newAppointment)
         {
-            return AppointmentRepository.Instance.CreateAppointment(newAppointment);
+            AppointmentRepository.Instance.Create(newAppointment);
         }
 
-        public Appointment ReadAppointment(int appointment)
+        public Appointment Read(int appointment)
         {
-            return AppointmentRepository.Instance.ReadAppointment(appointment);
+            return AppointmentRepository.Instance.Read(appointment);
         }
 
-        public Boolean UpdateAppointment(Appointment appointment)
+        public void Update(Appointment appointment)
         {
-            return AppointmentRepository.Instance.UpdateAppointment(appointment);
+            AppointmentRepository.Instance.Update(appointment);
         }
 
-        public Boolean DeleteAppointment(int appointment)
+        public void Delete(int appointment)
         {
-            return AppointmentRepository.Instance.DeleteAppointment(appointment);
+            AppointmentRepository.Instance.Delete(appointment);
         }
 
-        public List<Appointment> GetAllAppointments()
+        public List<Appointment> GetAll()
         {
-            return AppointmentRepository.Instance.GetAllAppointments();
+            return AppointmentRepository.Instance.GetAll();
         }
 
         public AppointmentService()
@@ -109,7 +109,7 @@ namespace Service
 
         public void GoThroughAllDoctors(WantedAppointment wantedAppointment, DateTime resetStart)
         {
-            List<Doctor> doctors = DoctorService.Instance.GetAllDoctors();
+            List<Doctor> doctors = DoctorService.Instance.GetAll();
             foreach (Doctor d in doctors)
             {
                 DateTime correctStart = SetStartTimeForDatePriority(resetStart, d);
@@ -183,9 +183,9 @@ namespace Service
         public List<Appointment> doctorsAppointments(int id)
         {
             List<Appointment> result = new List<Appointment>();
-            foreach (Appointment app in GetAllAppointments())
+            foreach (Appointment app in GetAll())
             {
-                foreach (Doctor doc in DoctorService.Instance.GetAllDoctors())
+                foreach (Doctor doc in DoctorService.Instance.GetAll())
                 {
                     if (doc.Id == id)
                     {
@@ -197,7 +197,7 @@ namespace Service
         }
         public List<Appointment> GetFutureAppointments()
         {
-            List<Appointment> appointments = GetAllAppointments();
+            List<Appointment> appointments = GetAll();
             List<Appointment> futureAppointments = new List<Appointment>();
             foreach(Appointment appointment in appointments)
             {
@@ -210,7 +210,7 @@ namespace Service
         }
         public List<Appointment> GetPastAppointments()
         {
-            List<Appointment> appointments = GetAllAppointments();
+            List<Appointment> appointments = GetAll();
             List<Appointment> pastAppointments = new List<Appointment>();
             foreach (Appointment appointment in appointments)
             {
@@ -224,7 +224,7 @@ namespace Service
 
         public Boolean IsTroll(Appointment appointment)
         {
-            Patient patient = PatientRepository.Instance.ReadPatient(appointment.Patient.Id);
+            Patient patient = PatientRepository.Instance.Read(appointment.Patient.Id);
             if(patient.ChangedOrCanceledAppointmentsDates == null)
             {
                 patient.ChangedOrCanceledAppointmentsDates = new List<DateTime>();
@@ -232,7 +232,7 @@ namespace Service
             if(patient.ChangedOrCanceledAppointmentsDates.Count >= 5)
             {
                 patient.CanLog = false;
-                PatientRepository.Instance.UpdatePatient(patient);
+                PatientRepository.Instance.Update(patient);
             }
             return !patient.CanLog;
         }

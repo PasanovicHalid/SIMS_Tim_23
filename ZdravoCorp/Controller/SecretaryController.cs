@@ -7,34 +7,35 @@ using Model;
 using System;
 using System.Collections.Generic;
 using Service;
+using Repository;
 
 namespace Controller
 {
-   public class SecretaryController
+   public class SecretaryController : ICrud<Secretary>
    {
-      public Boolean CreateSecretary(Secretary newSecretary)
+      public void Create(Secretary newSecretary)
       {
          throw new NotImplementedException();
       }
       
-      public Boolean UpdateSecretary(Secretary secretary)
+      public void Update(Secretary secretary)
       {
          throw new NotImplementedException();
       }
       
-      public Boolean DeleteSecretary(int id)
+      public void Delete(int id)
       {
          throw new NotImplementedException();
       }
       
-      public Secretary ReadSecretary(int id)
+      public Secretary Read(int id)
       {
          throw new NotImplementedException();
       }
       
-      public List<Secretary> GetAllSecretaries()
+      public List<Secretary> GetAll()
       {
-            return SecretaryService.Instance.GetAllSecretaries();
+            return SecretaryService.Instance.GetAll();
       }
    
    }

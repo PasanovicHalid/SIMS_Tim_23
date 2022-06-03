@@ -8,33 +8,33 @@ using Repository;
 
 namespace Service
 {
-    public class VacationService
+    public class VacationService : ICrud<Vacation>
     {
         private static VacationService instance = null;
 
-        public List<Vacation> GetAllVacations()
+        public List<Vacation> GetAll()
         {
-            return VacationRepository.Instance.GetAllVacations();
+            return VacationRepository.Instance.GetAll();
         }
 
-        public Boolean CreateVacation(Vacation newVacation)
+        public void Create(Vacation newVacation)
         {
-            return VacationRepository.Instance.CreateVacation(newVacation);
+            VacationRepository.Instance.Create(newVacation);
         }
 
-        public Vacation ReadVacation(int id)
+        public Vacation Read(int id)
         {
-            return VacationRepository.Instance.ReadVacation(id);
+            return VacationRepository.Instance.Read(id);
         }
 
-        public Boolean UpdateVacation(Vacation vacation)
+        public void Update(Vacation vacation)
         {
-           return VacationRepository.Instance.UpdateVacation(vacation);
+            VacationRepository.Instance.Update(vacation);
         }
 
-        public Boolean DeleteVacation(int id)
+        public void Delete(int id)
         {
-            return VacationRepository.Instance.DeleteVacation(id);
+            VacationRepository.Instance.Delete(id);
         }
 
         public Boolean AcceptVacation(Doctor doctor, Vacation vacation)

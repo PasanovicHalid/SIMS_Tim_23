@@ -17,7 +17,7 @@ namespace ZdravoCorp.View.Manager.ViewModel.Medications
         private ObservableCollection<MedicationType> medicationTypes;
         private ObservableCollection<MedicationType> replacementTypes;
         private NewMedicationRequestController controller;
-        private MedicineController controllerType;
+        private MedicationController controllerType;
         private NewMedicationRequest selectedRequest;
         private MedicationType selectedReplacement;
         private MedicationType selectedTable;
@@ -177,7 +177,7 @@ namespace ZdravoCorp.View.Manager.ViewModel.Medications
         public ViewPendingViewModel(NewMedicationRequest selected)
         {
             this.selectedRequest = selected;
-            controllerType = new MedicineController();
+            controllerType = new MedicationController();
             controller = new NewMedicationRequestController();
             MedicationTypes = new ObservableCollection<MedicationType>(controllerType.GetAllMedicationType());
             ReplacementTypes = new ObservableCollection<MedicationType>(SelectedRequest.MedicationType.Replacement);

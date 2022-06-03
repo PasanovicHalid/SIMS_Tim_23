@@ -23,7 +23,7 @@ namespace ZdravoCorp.View.Doctor
     public partial class AddTherapy : Window
     {
 
-        private MedicineController medicineController;
+        private MedicationController medicineController;
         private PatientController patientController;
 
         private Model.Patient tempPatient;
@@ -38,7 +38,7 @@ namespace ZdravoCorp.View.Doctor
         {
             InitializeComponent();
 
-            medicineController = new MedicineController();
+            medicineController = new MedicationController();
             MedicineCollection = new ObservableCollection<Model.Medication>(medicineController.GetAllMedicine());
 
             MedicineGrid.DataContext = MedicineCollection;

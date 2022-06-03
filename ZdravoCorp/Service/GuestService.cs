@@ -6,35 +6,35 @@ using System.Collections.Generic;
 
 namespace Service
 {
-    public class GuestService
+    public class GuestService : ICrud<Guest>
     {
 
         private static GuestService instance = null;
         List<Guest> guests = new List<Guest>();
 
-        public Boolean CreateGuest(Guest newGuest)
+        public void Create(Guest newGuest)
         {
-            return GuestRepository.Instance.CreateGuest(newGuest);
+            GuestRepository.Instance.Create(newGuest);
         }
 
-        public Guest ReadGuest(int id)
+        public Guest Read(int id)
         {
-            return GuestRepository.Instance.ReadGuest(id);
+            return GuestRepository.Instance.Read(id);
         }
 
-        public Boolean UpdateGuest(Guest guest)
+        public void Update(Guest guest)
         {
-            return GuestRepository.Instance.UpdateGuest(guest);
+            GuestRepository.Instance.Update(guest);
         }
 
-        public Boolean DeleteGuest(int id)
+        public void Delete(int id)
         {
-            return GuestRepository.Instance.DeleteGuest(id);
+            GuestRepository.Instance.Delete(id);
         }
 
-        public List<Guest> GetAllGuests()
+        public List<Guest> GetAll()
         {
-            return GuestRepository.Instance.GetAllGuests();
+            return GuestRepository.Instance.GetAll();
         }
 
         public GuestService()

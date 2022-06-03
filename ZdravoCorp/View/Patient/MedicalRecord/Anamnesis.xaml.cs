@@ -24,7 +24,7 @@ namespace ZdravoCorp.View.Patient.MedicalRecord
         private AnamnesisController anamnesisController = new AnamnesisController();
         private PatientController patientController = new PatientController();
         private DoctorController doctorController = new DoctorController();
-        private MedicineController medicineController = new MedicineController();
+        private MedicationController medicineController = new MedicationController();
         private Appointment appointment;
         public Anamnesis(Model.Appointment appointment)
         {

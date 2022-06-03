@@ -4,34 +4,37 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ZdravoCorp.Service;
+using Repository;
+using Model;
+using Service;
 
 namespace ZdravoCorp.Controller
 {
-    internal class PrescriptionController
+    internal class PrescriptionController : ICrud<Prescription>
     {
-        public int CreatePrescription(Model.Prescription newPrescription)
+        public void Create(Model.Prescription newPrescription)
         {
-            return PrescriptionService.Instance.CreatePrescription(newPrescription);
+            PrescriptionService.Instance.Create(newPrescription);
         }
 
-        public Boolean UpdatePrescription(Model.Prescription prescription)
+        public void Update(Model.Prescription prescription)
         {
-            return PrescriptionService.Instance.UpdatePrescription(prescription);
+            PrescriptionService.Instance.Update(prescription);
         }
 
-        public Boolean DeletePrescription(int identificator)
+        public void Delete(int identificator)
         {
-            return PrescriptionService.Instance.DeletePrescription(identificator);
+            PrescriptionService.Instance.Delete(identificator);
         }
 
-        public Model.Prescription ReadPrescription(int identificator)
+        public Prescription Read(int identificator)
         {
-            return PrescriptionService.Instance.ReadPrescription(identificator);
+            return PrescriptionService.Instance.Read(identificator);
         }
 
-        public List<Model.Prescription> GetAllPrescriptions()
+        public List<Prescription> GetAll()
         {
-            return PrescriptionService.Instance.GetAllPrescriptions();
+            return PrescriptionService.Instance.GetAll();
         }
     }
 }

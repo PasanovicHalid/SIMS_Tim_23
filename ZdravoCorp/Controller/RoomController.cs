@@ -7,34 +7,35 @@
 using Model;
 using Service;
 using System;
+using Repository;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using ZdravoCorp.View.Manager.Model.Rooms;
 
 namespace Controller
 {
-    public class RoomController
+    public class RoomController : ICrud<Room>
     {
         RoomService roomService = new RoomService();
 
-        public void CreateRoom(Room newRoom)
+        public void Create(Room newRoom)
         {
-            roomService.CreateRoom(newRoom);
+            roomService.Create(newRoom);
         }
 
-        public Room ReadRoom(int identifier)
+        public Room Read(int identifier)
         {
-            return roomService.ReadRoom(identifier);
+            return roomService.Read(identifier);
         }
 
-        public void UpdateRoom(Room updatedRoom)
+        public void Update(Room updatedRoom)
         {
-            roomService.UpdateRoom(updatedRoom);
+            roomService.Update(updatedRoom);
         }
 
-        public void DeleteRoom(int identifier)
+        public void Delete(int identifier)
         {
-            roomService.DeleteRoom(identifier);
+            roomService.Delete(identifier);
         }
 
         public void RenovateRoom(int identifier, DateTime start, DateTime end)
@@ -47,14 +48,14 @@ namespace Controller
             roomService.CombineRooms(combineInto, selectedRoom);
         }
 
-        public List<Room> GetAllRooms()
+        public List<Room> GetAll()
         {
-            return roomService.GetAllRooms();
+            return roomService.GetAll();
         }
 
         public ObservableCollection<RoomModel> GetAllRoomsVO()
         {
-            List<Room> types = roomService.GetAllRooms();
+            List<Room> types = roomService.GetAll();
             ObservableCollection<RoomModel> result = new ObservableCollection<RoomModel>();
             foreach (Room it in types)
             {

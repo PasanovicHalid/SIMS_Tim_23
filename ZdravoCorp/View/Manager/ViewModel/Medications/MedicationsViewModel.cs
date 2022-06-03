@@ -16,7 +16,7 @@ namespace ZdravoCorp.View.Manager.ViewModel.Medications
     {
 
         private ObservableCollection<MedicationType> medicationTypes;
-        private MedicineController controller;
+        private MedicationController controller;
         private MedicationType selectedType;
 
         public RelayCommand AddCommand { get; set; }
@@ -67,7 +67,7 @@ namespace ZdravoCorp.View.Manager.ViewModel.Medications
 
         public MedicationsViewModel()
         {
-            controller = new MedicineController();
+            controller = new MedicationController();
             MedicationTypes = new ObservableCollection<MedicationType>(controller.GetAllMedicationType());
 
             ViewCommand = new RelayCommand(o =>

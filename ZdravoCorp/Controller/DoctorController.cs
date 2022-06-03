@@ -6,51 +6,52 @@
 
 using Model;
 using System;
+using Repository;
 using Service;
 using System.Collections.Generic;
 
 namespace Controller
 {
-    public class DoctorController
+    public class DoctorController : ICrud<Doctor>
     {
-        public Boolean CreateDoctor(Model.Doctor newDoctor)
+        public void Create(Model.Doctor newDoctor)
         {
-            return DoctorService.Instance.CreateDoctor(newDoctor);
+            DoctorService.Instance.Create(newDoctor);
         }
 
-        public Boolean UpdateDoctor(Model.Doctor updatedRoom)
+        public void Update(Model.Doctor updatedRoom)
         {
-            return DoctorService.Instance.UpdateDoctor(updatedRoom);
+            DoctorService.Instance.Update(updatedRoom);
         }
 
-        public Boolean DeleteDoctor(int doctor)
+        public void Delete(int doctor)
         {
-            return DoctorService.Instance.DeleteDoctor(doctor);
+            DoctorService.Instance.Delete(doctor);
         }
 
-        public Model.Doctor ReadDoctor(int doctor)
+        public Doctor Read(int doctor)
         {
-            return DoctorService.Instance.ReadDoctor(doctor);
+            return DoctorService.Instance.Read(doctor);
         }
         
-        public List<Doctor> GetAllDoctors()
+        public List<Doctor> GetAll()
         {
-            return DoctorService.Instance.GetAllDoctors();
+            return DoctorService.Instance.GetAll();
         }
 
-        public Boolean CreateDoctorType(DoctorType newDoctorType)
+        public void CreateDoctorType(DoctorType newDoctorType)
         {
-            return DoctorService.Instance.CreateDoctorType(newDoctorType);
+            DoctorService.Instance.CreateDoctorType(newDoctorType);
         }
 
-        public Boolean UpdateDoctorType(DoctorType doctorType)
+        public void UpdateDoctorType(DoctorType doctorType)
         {
-            return DoctorService.Instance.UpdateDoctorType(doctorType);
+            DoctorService.Instance.UpdateDoctorType(doctorType);
         }
 
-        public Boolean DeleteDoctorType(DoctorType doctorType)
+        public void DeleteDoctorType(DoctorType doctorType)
         {
-            return DoctorService.Instance.DeleteDoctorType(doctorType.Type);
+            DoctorService.Instance.DeleteDoctorType(doctorType.Type);
         }
 
         public DoctorType ReadDoctorType(DoctorType doctorType)

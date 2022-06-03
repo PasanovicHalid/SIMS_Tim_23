@@ -10,42 +10,42 @@ using System.Collections.Generic;
 
 namespace Service
 {
-    public class PatientService
+    public class PatientService : ICrud<Patient>
     {
         
         private static PatientService instance = null;
 
-        public Boolean CreatePatient(Patient newPatient)
+        public void Create(Patient newPatient)
         {
-            return PatientRepository.Instance.CreatePatient(newPatient);
+            PatientRepository.Instance.Create(newPatient);
         }
 
-        public Boolean UpdatePatient(Patient patient)
+        public void Update(Patient patient)
         {
-            return PatientRepository.Instance.UpdatePatient(patient);
+            PatientRepository.Instance.Update(patient);
         }
 
-        public Boolean DeletePatient(int id)
+        public void Delete(int id)
         {
-            return PatientRepository.Instance.DeletePatient(id);
+            PatientRepository.Instance.Delete(id);
         }
 
-        public Patient ReadPatient(int id)
+        public Patient Read(int id)
         {
-            return PatientRepository.Instance.ReadPatient(id);
+            return PatientRepository.Instance.Read(id);
         }
 
         public Patient ReadPatientByJmbg(string jmbg)
         {
-            return PatientRepository.Instance.ReadPatientByJmbg(jmbg);
+            return PatientRepository.Instance.FindPatientByJMBG(jmbg);
         }
 
-        public List<Patient> GetAllPatients()
+        public List<Patient> GetAll()
         {
-            return PatientRepository.Instance.GetAllPatients();
+            return PatientRepository.Instance.GetAll();
         }
 
-        public Boolean AddPrescription(Model.Patient patient,Model.Prescription newPrescription)
+        public Boolean AddPrescription(Patient patient,Prescription newPrescription)
         {
             return PatientRepository.Instance.AddPrescription(patient,newPrescription);
         }
@@ -77,7 +77,7 @@ namespace Service
                 if (date < DateTime.Now.AddMonths(-1))
                 {
                     patient.ChangedOrCanceledAppointmentsDates.Remove(date);
-                    UpdatePatient(patient);
+                    Update(patient);
                 }
             }
         }

@@ -8,31 +8,31 @@ using Repository;
 
 namespace Service
 {
-    public class MedicalRecordService
+    public class MedicalRecordService : ICrud<MedicalRecord>
     {
         private static MedicalRecordService instance = null;
 
-        public Boolean CreateMedicalRecord(MedicalRecord newRecord)
+        public void Create(MedicalRecord newRecord)
         {
-            return MedicalRecordRepository.Instance.CreateMedicalRecord(newRecord);
+            MedicalRecordRepository.Instance.Create(newRecord);
         }
 
-        public Boolean UpdateMedicalRecord(MedicalRecord record)
+        public void Update(MedicalRecord record)
         {
-            return MedicalRecordRepository.Instance.UpdateMedicalRecord(record);
+            MedicalRecordRepository.Instance.Update(record);
         }
 
-        public Boolean DeleteMedicalRecord(int record)
+        public void Delete(int record)
         {
-            return MedicalRecordRepository.Instance.DeleteMedicalRecord(record);
+            MedicalRecordRepository.Instance.Delete(record);
         }
 
-        public MedicalRecord ReadMedicalRecord(int record)
+        public MedicalRecord Read(int record)
         {
-            return MedicalRecordRepository.Instance.ReadMedicalRecord(record);
+            return MedicalRecordRepository.Instance.Read(record);
         }
 
-        public List<MedicalRecord> GetAllRecords()
+        public List<MedicalRecord> GetAll()
         {
             return MedicalRecordRepository.Instance.GetAllRecords();
         }

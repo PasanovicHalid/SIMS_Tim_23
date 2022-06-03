@@ -27,7 +27,7 @@ namespace ZdravoCorp.View.Doctor
         private Model.Patient pomocnip;
         PatientController patientController;
         private Model.Doctor currentDoctor;
-        private MedicineController medicineController;
+        private MedicationController medicineController;
         private PrescriptionController pc;
 
         public ObservableCollection<Model.Report> comments
@@ -64,7 +64,7 @@ namespace ZdravoCorp.View.Doctor
             PatientCollection = new ObservableCollection<Model.Patient>(patientController.GetAllPatients());
             PatientsCB.ItemsSource = PatientCollection;
 
-            medicineController = new MedicineController();
+            medicineController = new MedicationController();
             MedicineCollection = new ObservableCollection<Model.Medication>(medicineController.GetAllMedicine());
 
             pc = new PrescriptionController();

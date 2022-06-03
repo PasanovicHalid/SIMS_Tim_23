@@ -4,35 +4,36 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Model;
+using Repository;
 using Service;
 
 namespace Controller
 {
-    public class MedicalRecordController
+    public class MedicalRecordController : ICrud<MedicalRecord>
     {
-        public Boolean CreateMedicalRecord(MedicalRecord newRecord)
+        public void Create(MedicalRecord newRecord)
         {
-            return MedicalRecordService.Instance.CreateMedicalRecord(newRecord);
+            MedicalRecordService.Instance.Create(newRecord);
         }
 
-        public Boolean UpdateMedicalRecord(MedicalRecord record)
+        public void Update(MedicalRecord record)
         {
-            return MedicalRecordService.Instance.UpdateMedicalRecord(record);
+            MedicalRecordService.Instance.Update(record);
         }
 
-        public Boolean DeleteMedicalRecord(int record)
+        public void Delete(int record)
         {
-            return MedicalRecordService.Instance.DeleteMedicalRecord(record);
+            MedicalRecordService.Instance.Delete(record);
         }
 
-        public MedicalRecord ReadMedicalRecord(int record)
+        public MedicalRecord Read(int record)
         {
-            return MedicalRecordService.Instance.ReadMedicalRecord(record);
+            return MedicalRecordService.Instance.Read(record);
         }
 
-        public List<MedicalRecord> GetAllRecords()
+        public List<MedicalRecord> GetAll()
         {
-            return MedicalRecordService.Instance.GetAllRecords();
+            return MedicalRecordService.Instance.GetAll();
         }
     }
 }
