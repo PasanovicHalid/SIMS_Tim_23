@@ -21,7 +21,7 @@ namespace Repository
 
         public Dictionary<string, Secretary> GetUsernameHashSet()
         {
-            return _users;
+            return Users;
         }
 
         public override Secretary Read(int id)
@@ -40,7 +40,7 @@ namespace Repository
                 CheckIfUsernameExists(element.Username);
                 element.Id = GenerateID();
                 AppendToDB(element);
-                _users.Add(element.Username, element);
+                Users.Add(element.Username, element);
                 idMap.Add(element.Id);
             }
         }
@@ -87,7 +87,7 @@ namespace Repository
 
         private void CheckIfUsernameExists(string username)
         {
-            if (_users.ContainsKey(username))
+            if (Users.ContainsKey(username))
                 throw new LocalisedException("UserExists");
         }
 
@@ -117,7 +117,7 @@ namespace Repository
                 if (secretaries[i].Id == id)
                 {
                     idMap.Remove(id);
-                    _users.Remove(secretaries[i].Username);
+                    Users.Remove(secretaries[i].Username);
                     secretaries.RemoveAt(i);
                     return;
                 }

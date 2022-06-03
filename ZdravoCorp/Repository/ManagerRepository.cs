@@ -22,7 +22,7 @@ namespace Repository
 
         public Dictionary<string, Manager> GetUsernameHashSet()
         {
-            return _users;
+            return Users;
         }
 
         public override Manager Read(int id)
@@ -42,7 +42,7 @@ namespace Repository
                 CheckIfUsernameExists(element.Username);
                 element.Id = GenerateID();
                 AppendToDB(element);
-                _users.Add(element.Username, element);
+                Users.Add(element.Username, element);
                 idMap.Add(element.Id);
             }
         }
@@ -89,7 +89,7 @@ namespace Repository
 
         private void CheckIfUsernameExists(string username)
         {
-            if (_users.ContainsKey(username))
+            if (Users.ContainsKey(username))
                 throw new LocalisedException("UserExists");
         }
 
@@ -131,7 +131,7 @@ namespace Repository
                 if (managers[i].Id == id)
                 {
                     idMap.Remove(id);
-                    _users.Remove(managers[i].Username);
+                    Users.Remove(managers[i].Username);
                     managers.RemoveAt(i);
                     return;
                 }

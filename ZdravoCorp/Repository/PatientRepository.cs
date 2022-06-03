@@ -6,181 +6,210 @@
 using Model;
 using System;
 using System.Collections.Generic;
+using ZdravoCorp.Exceptions;
 
 namespace Repository
 {
-    public class PatientRepository
+    public class PatientRepository : UserRepository<Patient>
     {
-        private String dbPath = "..\\..\\Data\\patientsDB.csv";
-        private Serializer<Patient> serializerPatient = new Serializer<Patient>();
-
         private static PatientRepository instance = null;
-
-        private Dictionary<string, string> userMap = new Dictionary<string, string>();
 
         public PatientRepository()
         {
-            List<Patient> patients = GetAllPatients();
-            InstantiateHashSets(patients);
+            dbPath = "..\\..\\Data\\patientsDB.csv";
+            InstantiateHashSets(GetAll());
         }
 
         private void InstantiateHashSets(List<Patient> secretaries)
         {
-            foreach (Patient secretary in secretaries)
-            {
-                userMap.Add(secretary.Username, secretary.Password);
-            }
+            InstantiateIDSet(secretaries);
+            InstantiateUserSet(secretaries);
         }
 
-        public List<int> GetAllPatientIds()
+        public new List<Patient> GetAll()
         {
-            List<Patient> patients = GetAllPatients();
-            List<int> ids = new List<int>();
+
+            List<Patient> patients = base.GetAll();
             foreach (Patient patient in patients)
             {
-                ids.Add(patient.Id);
-            }
-            return ids;
-        }
-        public void GenerateId(Patient newPatient)
-        {
-            List<int> allPatientsIds = GetAllPatientIds();
-            Random random = new Random();
-            do
-            {
-                newPatient.Id = random.Next();
-            }
-            while (allPatientsIds.Contains(newPatient.Id));
-        }
-        public Boolean CreatePatient(Patient newPatient)
-        {
-            List<Patient> patients = GetAllPatients();
-            bool exists = false;
-            
-            foreach (Patient d in patients)
-            {
-                if (d.Jmbg.Equals(newPatient.Jmbg))
-                {
-                    exists = true;
-                    break;
-                }
-            }
-            if (!exists)
-            {
-                GenerateId(newPatient);
-                patients.Add(newPatient);
-                serializerPatient.ToCSV(dbPath, patients);
-                return true;
-            }
-            return false;
-
-        }
-
-        public Boolean UpdatePatient(Patient patient)
-        {
-            Boolean success = false;
-            List<Patient> patients = GetAllPatients();
-
-            for (int i = 0; i < patients.Count; i++)
-
-            {
-                if (patient.Id == patients[i].Id)
-                {
-                    success = true;
-                    DeletePatient(patient.Id);
-                    break;
-                }
-            }
-            if (success)
-            {
-                patients = GetAllPatients();
-                patients.Add(patient);
-                serializerPatient.ToCSV(dbPath, patients);
-
-            }
-            return success;
-        }
-
-        public Boolean DeletePatient(int id)
-        {
-            Boolean success = false;
-            List<Patient> patients = GetAllPatients();
-            foreach(Patient p in patients)
-            {
-                if(id == p.Id)
-                {
-                    success = true;
-                    patients.Remove(p);
-                    serializerPatient.ToCSV(dbPath, patients);
-                    break;
-                }
-            }
-            return success;
-        }
-
-        public Patient ReadPatient(int id)
-        {
-            List<Patient> patients = GetAllPatients();
-            foreach(Patient p in patients)
-            {
-                if(id == p.Id)
-                {
-                    return p;
-                }
-            }
-            return null;
-        }
-
-        public Patient ReadPatientByJmbg(string jmbg)
-        {
-            Patient patient = null;
-            List<Patient> patients = GetAllPatients();
-            foreach (Patient p in patients)
-            {
-                if (jmbg.Equals(p.Jmbg))
-                {
-                    patient = p;
-                }
-            }
-            return patient;
-        }
-
-        public List<Patient> GetAllPatients()
-        {
-
-            List<Patient> patients = serializerPatient.FromCSV(dbPath);
-            foreach (Patient d in patients)
-            {
-                List<int> ids = new List<int>();
-                foreach (Appointment a in d.Appointment)
-                {
-                    ids.Add(a.Id);
-                }
-                d.Appointment = AppointmentRepository.Instance.GetAppointmentsById(ids);
-                d.Record = MedicalRecordRepository.Instance.ReadMedicalRecord(d.Record.Id);
-
+                patient.Appointment = AppointmentRepository.Instance
+                    .GetAppointmentsById(GetIdsOfAppointments(patient));
+                patient.Record = MedicalRecordRepository.Instance
+                    .ReadMedicalRecord(patient.Record.Id);
             }
             return patients;
         }
 
         public Boolean AddPrescription(Model.Patient patient, Model.Prescription newPrescription)
         {
-            List<Patient> patients = GetAllPatients();
+            List<Patient> patients = GetAll();
             foreach (Patient temp in patients)
             {
                 if(temp.Id == patient.Id)
                 {
                     patient.AddPrescription(newPrescription);
-                    UpdatePatient(patient);
+                    Update(patient);
                     return true;
                 }
             }
             return false;
         }
 
-        public Dictionary<string, string> GetUsernameHashSet()
+        public Dictionary<string, Patient> GetUsernameHashSet()
         {
-            return userMap;
+            return Users;
+        }
+
+        public Patient ReadByJMBG(string jmbg)
+        {
+            lock (key)
+            {
+                List<Patient> patients = GetAll();
+                CheckIfJMBGExists(patients, jmbg);
+                return FindPatientByJMBG(patients, jmbg);
+            }
+        }
+
+        public override Patient Read(int id)
+        {
+            lock (key)
+            {
+                CheckIfIDExists(id);
+                return FindPatientByID(GetAll(), id);
+            }
+        }
+
+        public override void Create(Patient element)
+        {
+            lock (key)
+            {
+                List<Patient> elements = GetAll();
+                CheckIfUsernameExists(element.Username);
+                CheckIfJMBGExists(elements, element.Jmbg);
+                element.Id = GenerateID();
+                Users.Add(element.Username, element);
+                idMap.Add(element.Id);
+                AppendToDB(element);
+            }
+        }
+
+        public override void Update(Patient element)
+        {
+            lock (key)
+            {
+                CheckIfIDExists(element.Id);
+                CheckIfUsernameExists(element.Username);
+                List<Patient> elements = GetAll();
+                SwapPatientByID(elements, element);
+                SaveChanges(elements);
+            }
+        }
+
+        public override void Delete(int id)
+        {
+            lock (key)
+            {
+                CheckIfIDExists(id);
+                List<Patient> elements = GetAll();
+                DeletePatientByID(elements, id);
+                SaveChanges(elements);
+            }
+        }
+
+        protected override void InstantiateIDSet(List<Patient> elements)
+        {
+            lock (key)
+            {
+                foreach (Patient element in elements)
+                {
+                    idMap.Add(element.Id);
+                }
+            }
+        }
+
+        private void CheckIfJMBGExists(List<Patient> patients, string jmbg)
+        {
+            foreach (Patient it in patients)
+            {
+                if (it.Jmbg.Equals(jmbg))
+                {
+                    throw new LocalisedException("UserExists");
+                }
+            }
+        }
+
+        private void CheckIfIDExists(int id)
+        {
+            if (idMap.Contains(id))
+                throw new LocalisedException("UserDoesntExist");
+        }
+
+        private void CheckIfUsernameExists(string username)
+        {
+            if (Users.ContainsKey(username))
+                throw new LocalisedException("UserExists");
+        }
+
+        private Patient FindPatientByID(List<Patient> patients, int id)
+        {
+            for (int i = 0; i < patients.Count; i++)
+            {
+                if (patients[i].Id == id)
+                {
+                    return patients[i];
+                }
+            }
+            throw new LocalisedException("UserDoesntExist");
+        }
+
+        private Patient FindPatientByJMBG(List<Patient> patients, string jmbg)
+        {
+            for (int i = 0; i < patients.Count; i++)
+            {
+                if (patients[i].Jmbg.Equals(jmbg))
+                {
+                    return patients[i];
+                }
+            }
+            throw new LocalisedException("UserDoesntExist");
+        }
+
+        private void DeletePatientByID(List<Patient> patients, int id)
+        {
+            for (int i = 0; i < patients.Count; i++)
+            {
+                if (patients[i].Id == id)
+                {
+                    idMap.Remove(id);
+                    Users.Remove(patients[i].Username);
+                    patients.RemoveAt(i);
+                    return;
+                }
+            }
+            throw new LocalisedException("UserDoesntExist");
+        }
+
+        private void SwapPatientByID(List<Patient> patients, Patient patient)
+        {
+            for (int i = 0; i < patients.Count; i++)
+            {
+                if (patients[i].Id == patient.Id)
+                {
+                    patients[i] = patient;
+                    return;
+                }
+            }
+            throw new LocalisedException("UserDoesntExist");
+        }
+
+        private List<int> GetIdsOfAppointments(Patient patient)
+        {
+            List<int> ids = new List<int>();
+            foreach (Appointment it in patient.Appointment)
+            {
+                ids.Add(it.Id);
+            }
+            return ids;
         }
 
         public static PatientRepository Instance

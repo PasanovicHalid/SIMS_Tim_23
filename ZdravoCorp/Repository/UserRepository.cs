@@ -10,17 +10,20 @@ namespace Repository
 {
     public abstract class UserRepository<T> : Repository<T> where T : User, new()
     {
-        protected Dictionary<string, T> _users = new Dictionary<string, T>();
+        private Dictionary<string, T> _users = new Dictionary<string, T>();
+
+        public Dictionary<string, T> Users { get => _users; set => _users = value; }
+
         public Dictionary<string, T> GetUsers()
         {
-            return _users;
+            return Users;
         }
         
         protected void InstantiateUserSet(List<T> users)
         {
             foreach (T user in users)
             {
-                _users.Add(user.Username, user);
+                Users.Add(user.Username, user);
             }
         }
     }

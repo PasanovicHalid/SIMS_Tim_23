@@ -21,11 +21,6 @@ namespace Repository
             InstantiateHashSets(GetAll());
         }
 
-        public List<int> GetAllDoctorIds()
-        {
-            return idMap.ToList();
-        }
-
         public new List<Doctor> GetAll()
         {
             lock (key)
@@ -42,7 +37,7 @@ namespace Repository
 
         public Dictionary<string, Doctor> GetUsernameHashSet()
         {
-            return _users;
+            return Users;
         }
 
         public override Doctor Read(int id)
@@ -62,7 +57,7 @@ namespace Repository
                 CheckIfDoctorExists(elements, element);
                 CheckIfUsernameExists(element.Username);
                 element.Id = GenerateID();
-                _users.Add(element.Username, element);
+                Users.Add(element.Username, element);
                 idMap.Add(element.Id);
                 AppendToDB(element);
             }
@@ -121,7 +116,7 @@ namespace Repository
 
         private void CheckIfUsernameExists(string username)
         {
-            if (_users.ContainsKey(username))
+            if (Users.ContainsKey(username))
                 throw new LocalisedException("UserExists");
         }
 
@@ -150,7 +145,7 @@ namespace Repository
                 if (doctors[i].Id == id)
                 {
                     idMap.Remove(id);
-                    _users.Remove(doctors[i].Username);
+                    Users.Remove(doctors[i].Username);
                     doctors.RemoveAt(i);
                     return;
                 }

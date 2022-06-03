@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Model;
+using ZdravoCorp.Exceptions;
 
 namespace ZdravoCorp.Service
 {
@@ -13,17 +14,17 @@ namespace ZdravoCorp.Service
         private static readonly object key = new object();
         private static LoginService instance = null;
 
-        private Dictionary<string, string> managerMap = new Dictionary<string, string>();
-        private Dictionary<string, string> doctorMap = new Dictionary<string, string>();
-        private Dictionary<string, string> patientMap = new Dictionary<string, string>();
-        private Dictionary<string, string> secretaryMap = new Dictionary<string, string>();
+        private Dictionary<string, Manager> managerMap;
+        private Dictionary<string, Doctor> doctorMap;
+        private Dictionary<string, Patient> patientMap;
+        private Dictionary<string, Secretary> secretaryMap;
 
         private void InstantiateHashSet()
         {
-            managerMap = ManagerRepository.Instance.GetUsernameHashSet();
-            doctorMap = DoctorRepository.Instance.GetUsernameHashSet();
-            patientMap = PatientRepository.Instance.GetUsernameHashSet();
-            secretaryMap = SecretaryRepository.Instance.GetUsernameHashSet();
+            managerMap = ManagerRepository.Instance.Users;
+            doctorMap = DoctorRepository.Instance.Users;
+            patientMap = PatientRepository.Instance.Users;
+            secretaryMap = SecretaryRepository.Instance.Users;
         }
 
         private void MergeDictionaries(Dictionary<string, string> mergedInto, Dictionary<string, string> dictionary)
@@ -34,27 +35,27 @@ namespace ZdravoCorp.Service
             }
         }
 
-        public LoginUserEnumeration Login(string username, string password)
+        public User Login(string username, string password)
         {
             if(IsPatient(username, password))
             {
-                return LoginUserEnumeration.Patient;
+                return patientMap[username];
             }
             else if(IsDoctor(username, password))
             {
-                return LoginUserEnumeration.Doctor;
+                return doctorMap[username];
             }
             else if (IsManager(username, password))
             {
-                return LoginUserEnumeration.Manager;
+                return managerMap[username];
             }
             else if (IsSecretary(username, password))
             {
-                return LoginUserEnumeration.Secretary;
+                return secretaryMap[username];
             }
             else
             {
-                return LoginUserEnumeration.None;
+                throw new LocalisedException("UserDoesntExist");
             }
         }
 
@@ -62,7 +63,7 @@ namespace ZdravoCorp.Service
         {
             if (patientMap.ContainsKey(username))
             {
-                if(patientMap[username] == password)
+                if(patientMap[username].Password.Equals(password))
                 {
                     return true;
                 }
@@ -74,7 +75,7 @@ namespace ZdravoCorp.Service
         {
             if (managerMap.ContainsKey(username))
             {
-                if (managerMap[username] == password)
+                if (managerMap[username].Password.Equals(password))
                 {
                     return true;
                 }
@@ -86,7 +87,7 @@ namespace ZdravoCorp.Service
         {
             if (doctorMap.ContainsKey(username))
             {
-                if (doctorMap[username] == password)
+                if (doctorMap[username].Password.Equals(password))
                 {
                     return true;
                 }
@@ -98,7 +99,7 @@ namespace ZdravoCorp.Service
         {
             if (secretaryMap.ContainsKey(username))
             {
-                if (secretaryMap[username] == password)
+                if (secretaryMap[username].Password.Equals(password))
                 {
                     return true;
                 }

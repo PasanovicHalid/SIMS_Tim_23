@@ -1,4 +1,5 @@
 ﻿using Controller;
+using Model;
 using Service;
 using System;
 using System.Collections.Generic;
@@ -83,74 +84,50 @@ namespace ZdravoCorp
             string username = User.Text;
             string password = PassBox.Password;
 
-            switch(LoginService.Instance.Login(username, password))
+            try
             {
-                case Model.LoginUserEnumeration.Manager:
-                    Manager managerWindow = new Manager(autoEvent);
+                User user = LoginService.Instance.Login(username, password);
+                if(user is Model.Manager)
+                {
+                    View.Manager.Manager managerWindow = new View.Manager.Manager(autoEvent);
                     anotherWindow = true;
                     this.Close();
                     managerWindow.ShowDialog();
-                    break;
-                case Model.LoginUserEnumeration.Patient:
-                    PatientController patientController = new PatientController();
-                    List<Model.Patient> patients = patientController.GetAllPatients();
-                    foreach(Model.Patient patient in patients)
-                    {
-                        if(patient.Username.Equals(username) && patient.Password.Equals(password))
-                        {
-                            if (patient.CanLog)
-                            {
+                }
+                else if (user is Model.Patient patient)
+                {
 
-                                Patient patientWindow = new Patient(patient);
-                                this.Close();
-                                //patientWindow.ResizeMode = ResizeMode.NoResize;
-                                patientWindow.ShowDialog();
-                                
-                            }
-                            else
-                            {
-                                MessageBox.Show("Zabranjen pristup nalogu. \nZa vraćanje pristupa, molimo da se obratite sekretaru.", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
-                                return;
-                            }
-                        } 
-                    }
-                    break;
-                case Model.LoginUserEnumeration.Doctor:
-                    DoctorController doctorController = new DoctorController();
-                    DoctorCollection = new ObservableCollection<Model.Doctor>();
-                    List<Model.Doctor> doctorList = doctorController.GetAllDoctors();
-                    foreach (Model.Doctor d in doctorList)
+                    if (patient.CanLog)
                     {
-                        if (d.Username.Equals(username))
-                        {
-                            if (d.Password.Equals(password))
-                            {
-                                Appointments appointmentWindow = new Appointments(d);
-                                this.Close();
-                                appointmentWindow.ShowDialog();
-                                return;
-                            }
-                        }
+                        View.Patient.Patient patientWindow = new View.Patient.Patient(patient);
+                        this.Close();
+                        //patientWindow.ResizeMode = ResizeMode.NoResize;
+                        patientWindow.ShowDialog();
                     }
-                    MessageBox.Show("Ne postoji ni jedan doktor");
-                    break;
-                case Model.LoginUserEnumeration.Secretary:
-                    SecretaryController secretaryController = new SecretaryController();
-                    List<Model.Secretary> secretaries = secretaryController.GetAllSecretaries();
-                    foreach(Model.Secretary secretary in secretaries)
+                    else
                     {
-                        if(secretary.Username.Equals(username) && secretary.Password.Equals(password))
-                        {
-                            Secretary secretaryWindow = new Secretary(secretary);
-                            this.Close();
-                            secretaryWindow.ShowDialog();
-                            return;
-                        }
+                        MessageBox.Show("Zabranjen pristup nalogu. \nZa vraćanje pristupa, molimo da se obratite sekretaru.", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
                     }
-                    break;
-                default:
-                    MessageBox.Show("Pogrešan username ili password.\nPokušajte opet.", "Greska", MessageBoxButton.OK, MessageBoxImage.Error);
-                    break;
+                }
+                else if (user is Model.Doctor doctor)
+                {
+                    Appointments appointmentWindow = new Appointments(doctor);
+                    this.Close();
+                    appointmentWindow.ShowDialog();
+                    return;
+                }
+                else if (user is Model.Secretary secretary)
+                {
+                    View.Secretary.Secretary secretaryWindow = new View.Secretary.Secretary(secretary);
+                    this.Close();
+                    secretaryWindow.ShowDialog();
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Pogrešan username ili password.\nPokušajte opet.", "Greska", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }   
