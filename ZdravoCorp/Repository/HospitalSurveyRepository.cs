@@ -6,63 +6,27 @@
 using Model;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Repository
 {
-    public class HospitalSurveyRepository
+    public class HospitalSurveyRepository : Repository<HospitalSurvey>
     {
-        private String dbPath = "..\\..\\Data\\hospitalSurveysDB.csv";
-        private Serializer<HospitalSurvey> serializerAppointment = new Serializer<HospitalSurvey>();
-
         private static HospitalSurveyRepository instance = null;
 
+        public HospitalSurveyRepository()
+        {
+            dbPath = "..\\..\\Data\\hospitalSurveysDB.csv";
+            InstantiateIDSet(GetAll());
+        }
+
         public List<int> getAllHospitalSurveyIds() {
-            List<HospitalSurvey> surveys = GetAllHospitalSurveys();
-            List<int> ids = new List<int>();
-            foreach(HospitalSurvey survey in surveys)
-            {
-                ids.Add(survey.Id);
-            }
-            return ids;
-        }
-        public void generateId(HospitalSurvey newSurvey)
-        {
-            List<int> allSurveyIds = getAllHospitalSurveyIds();
-            Random random = new Random();
-            do
-            {
-                newSurvey.Id = random.Next();
-            }
-            while (allSurveyIds.Contains(newSurvey.Id));
-
-        }
-        public Boolean CreateHospitalSurvey(HospitalSurvey newSurvey)
-        {
-            List<HospitalSurvey> surveys = GetAllHospitalSurveys();
-            generateId(newSurvey);
-            surveys.Add(newSurvey);
-            serializerAppointment.ToCSV(dbPath, surveys);
-            return true;
-        }
-
-        public HospitalSurvey ReadHospitalSurvey(int id)
-        {
-            List<HospitalSurvey> surveys = GetAllHospitalSurveys();
-            HospitalSurvey appointmentSurvey = null;
-            foreach (HospitalSurvey survey in surveys)
-            {
-                if (id == survey.Id)
-                {
-                    appointmentSurvey = survey;
-                    break;
-                }
-            }
-            return appointmentSurvey;
+            return idMap.ToList();
         }
 
         public List<HospitalSurvey> GetSurveysById(List<int> id)
         {
-            List<HospitalSurvey> surveys = serializerAppointment.FromCSV(dbPath);
+            List<HospitalSurvey> surveys = GetAll();
             List<HospitalSurvey> surveyById = new List<HospitalSurvey>();
             foreach (HospitalSurvey survey in surveys)
             {
@@ -77,27 +41,68 @@ namespace Repository
             return surveyById;
         }
 
-        public Boolean UpdateHospitalSurvey(HospitalSurvey appointment)
+        public override HospitalSurvey Read(int id)
+        {
+            lock (key)
+            {
+                CheckIfIDExists(id);
+                return FindHospitalSurveyByID(GetAll(), id);
+            }
+        }
+
+        public override void Create(HospitalSurvey element)
+        {
+            lock (key)
+            {
+                element.Id = GenerateID();
+                AppendToDB(element);
+                idMap.Add(element.Id);
+            }
+        }
+
+        /*
+       * Method isn't needed but is requered for abstract class
+       */
+        public override void Update(HospitalSurvey element)
         {
             throw new NotImplementedException();
-
         }
 
-        public Boolean DeleteHospitalSurvey(int id)
+        /*
+       * Method isn't needed but is requered for abstract class
+       */
+        public override void Delete(int id)
         {
             throw new NotImplementedException();
         }
 
-        public List<HospitalSurvey> GetAllHospitalSurveys()
+        protected override void InstantiateIDSet(List<HospitalSurvey> elements)
         {
-            List<HospitalSurvey> surveys = serializerAppointment.FromCSV(dbPath); 
-            return surveys;
-            
+            lock (key)
+            {
+                foreach (HospitalSurvey element in elements)
+                {
+                    idMap.Add(element.Id);
+                }
+            }
         }
 
-        public HospitalSurveyRepository()
+        private HospitalSurvey FindHospitalSurveyByID(List<HospitalSurvey> elements, int id)
         {
-            
+            for (int i = 0; i < elements.Count; i++)
+            {
+                if (elements[i].Id == id)
+                {
+                    return elements[i];
+                }
+            }
+            throw new Exception("HospitalSurvey doesnt exist");
+        }
+
+        private void CheckIfIDExists(int id)
+        {
+            if (!idMap.Contains(id))
+                throw new Exception("HospitalSurvey doesnt exist");
         }
 
         public static HospitalSurveyRepository Instance

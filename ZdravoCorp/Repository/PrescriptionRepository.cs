@@ -8,108 +8,121 @@ using Model;
 
 namespace Repository
 {
-    internal class PrescriptionRepository
+    internal class PrescriptionRepository : Repository<Prescription>
     {
-        private String dbPath = "..\\..\\Data\\prescriptionDB.csv";
-        private Serializer<Prescription> serializerPrescription = new Serializer<Prescription>();
-
         private static PrescriptionRepository instance = null;
 
         public PrescriptionRepository()
         {
+            dbPath = "..\\..\\Data\\prescriptionDB.csv";
+            InstantiateIDSet(GetAll());
         }
-        public List<int> GetAllPrescriptionIds()
+
+        public override Prescription Read(int id)
         {
-            List<Prescription> prescriptions = GetAllPrescriptions();
-            List<int> ids = new List<int>();
-            foreach (Prescription prescription in prescriptions)
+            lock (key)
             {
-                ids.Add(prescription.Id);
+                CheckIfIDExists(id);
+                return FindPrescriptionByID(GetAll(), id);
             }
-            return ids;
         }
-        public void GenerateId(Prescription newPrescription)
+
+        public override void Create(Prescription element)
         {
-            List<int> allPrescriptionsIds = GetAllPrescriptionIds();
-            Random random = new Random();
-            do
+            lock (key)
             {
-                newPrescription.Id = random.Next();
+                element.Id = GenerateID();
+                AppendToDB(element);
             }
-            while (allPrescriptionsIds.Contains(newPrescription.Id));
         }
 
-        public void Create(Prescription newPrescription)
+        public int CreateAndReturnID(Prescription element)
         {
-            List<Prescription> medicines = GetAllPrescriptions();
-            GenerateId(newPrescription);
-            medicines.Add(newPrescription);
-            serializerPrescription.ToCSV(dbPath, medicines);
-        }
-
-        public int CreateAndReturnID(Prescription newMedicine)
-        {
-            List<Prescription> medicines = GetAllPrescriptions();
-            GenerateId(newMedicine);
-            medicines.Add(newMedicine);
-            serializerPrescription.ToCSV(dbPath, medicines);
-            return newMedicine.Id;
-        }
-
-        public Boolean UpdatePrescription(Model.Prescription medicine)
-        {
-            Boolean success = false;
-            List<Prescription> medicines = GetAllPrescriptions();
-            foreach (Prescription m in medicines)
+            lock (key)
             {
-                if (medicine.Id == m.Id)
+                element.Id = GenerateID();
+                AppendToDB(element);
+                return element.Id;
+            }
+        }
+
+        public override void Update(Prescription element)
+        {
+            lock (key)
+            {
+                CheckIfIDExists(element.Id);
+                List<Prescription> elements = GetAll();
+                SwapPrescriptionByID(elements, element);
+                SaveChanges(elements);
+            }
+        }
+
+        public override void Delete(int id)
+        {
+            lock (key)
+            {
+
+                CheckIfIDExists(id);
+                List<Prescription> elements = GetAll();
+                RemovePrescriptionByID(elements, id);
+                SaveChanges(elements);
+            }
+        }
+
+        protected override void InstantiateIDSet(List<Prescription> elements)
+        {
+            lock (key)
+            {
+                foreach (Prescription element in elements)
                 {
-                    success = true;
-                    medicines.Remove(m);
-                    break;
+                    idMap.Add(element.Id);
                 }
             }
-            if (success)
-            {
-                medicines.Add(medicine);
-                serializerPrescription.ToCSV(dbPath, medicines);
-            }
-            return success;
-
         }
 
-        public Boolean DeletePrescription(int identificator)
+        private void CheckIfIDExists(int id)
         {
-            Boolean success = false;
-            List<Prescription> medicines = GetAllPrescriptions();
-            foreach (Prescription m in medicines)
+            if (!idMap.Contains(id))
+                throw new Exception("Prescription doesnt exist");
+        }
+
+        private void SwapPrescriptionByID(List<Prescription> elements, Prescription element)
+        {
+            for (int i = 0; i < elements.Count; i++)
             {
-                if (identificator == m.Id)
+                if (elements[i].Id == element.Id)
                 {
-                    success = true;
-                    medicines.Remove(m);
-                    serializerPrescription.ToCSV(dbPath, medicines);
-                    break;
+                    elements[i] = element;
+                    return;
                 }
             }
-            return success;
+            throw new Exception("Prescription doesnt exist");
         }
 
-        public Model.Prescription ReadPrescription(int identificator)
+        private Prescription FindPrescriptionByID(List<Prescription> elements, int id)
         {
-            List<Prescription> medicines = GetAllPrescriptions();
-            foreach (Prescription m in medicines)
+            for (int i = 0; i < elements.Count; i++)
             {
-                if (identificator == m.Id)
+                if (elements[i].Id == id)
                 {
-                    return m;
+                    return elements[i];
                 }
             }
-            return null;
+            throw new Exception("Prescription doesnt exist");
         }
-        public List<Prescription> GetAllPrescriptions()
+
+        private void RemovePrescriptionByID(List<Prescription> elements, int id)
         {
-            return serializerPrescription.FromCSV(dbPath);
+            for (int i = 0; i < elements.Count; i++)
+            {
+                if (elements[i].Id == id)
+                {
+                    elements.RemoveAt(i);
+                    idMap.Remove(id);
+                    return;
+                }
+            }
+            throw new Exception("Prescription doesnt exist");
         }
 
         public static PrescriptionRepository Instance

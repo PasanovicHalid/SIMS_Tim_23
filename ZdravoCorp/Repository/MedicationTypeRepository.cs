@@ -14,7 +14,7 @@ namespace Repository
         private HashSet<string> typeNameMap = new HashSet<string>();
         public MedicationTypeRepository()
         {
-            dbPath = "..\\..\\Data\\roomTypesDB.csv";
+            dbPath = "..\\..\\Data\\medicationTypeDB.csv";
             InstantiateIDSet(GetAll());
         }
         public override void Create(MedicationType element)

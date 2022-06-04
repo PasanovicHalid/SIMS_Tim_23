@@ -6,63 +6,27 @@
 using Model;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Repository
 {
-    public class AppointmentSurveyRepository
+    public class AppointmentSurveyRepository : Repository<AppointmentSurvey>
     {
-        private String dbPath = "..\\..\\Data\\appointmentSurveysDB.csv";
-        private Serializer<AppointmentSurvey> serializerAppointment = new Serializer<AppointmentSurvey>();
-
         private static AppointmentSurveyRepository instance = null;
 
+        public AppointmentSurveyRepository()
+        {
+            dbPath = "..\\..\\Data\\appointmentSurveysDB.csv";
+            InstantiateIDSet(GetAll());
+        }
+
         public List<int> getAllAppointmentSurveyIds() {
-            List<AppointmentSurvey> surveys = GetAllAppointmentSurveys();
-            List<int> ids = new List<int>();
-            foreach(AppointmentSurvey survey in surveys)
-            {
-                ids.Add(survey.Id);
-            }
-            return ids;
-        }
-        public void generateId(AppointmentSurvey newSurvey)
-        {
-            List<int> allSurveyIds = getAllAppointmentSurveyIds();
-            Random random = new Random();
-            do
-            {
-                newSurvey.Id = random.Next();
-            }
-            while (allSurveyIds.Contains(newSurvey.Id));
-
-        }
-        public Boolean CreateAppointmentSurvey(AppointmentSurvey newSurvey)
-        {
-            List<AppointmentSurvey> surveys = GetAllAppointmentSurveys();
-            generateId(newSurvey);
-            surveys.Add(newSurvey);
-            serializerAppointment.ToCSV(dbPath, surveys);
-            return true;
-        }
-
-        public AppointmentSurvey ReadAppointmentSurvey(int id)
-        {
-            List<AppointmentSurvey> surveys = GetAllAppointmentSurveys();
-            AppointmentSurvey appointmentSurvey = null;
-            foreach (AppointmentSurvey survey in surveys)
-            {
-                if (id == survey.Id)
-                {
-                    appointmentSurvey = survey;
-                    break;
-                }
-            }
-            return appointmentSurvey;
+            return idMap.ToList();
         }
 
         public List<AppointmentSurvey> GetSurveysById(List<int> id)
         {
-            List<AppointmentSurvey> surveys = serializerAppointment.FromCSV(dbPath);
+            List<AppointmentSurvey> surveys = GetAll();
             List<AppointmentSurvey> surveyById = new List<AppointmentSurvey>();
             foreach (AppointmentSurvey survey in surveys)
             {
@@ -77,27 +41,68 @@ namespace Repository
             return surveyById;
         }
 
-        public Boolean UpdateAppointmentSurvey(AppointmentSurvey appointment)
+        public override AppointmentSurvey Read(int id)
+        {
+            lock (key)
+            {
+                CheckIfIDExists(id);
+                return FindAppointmentSurveyByID(GetAll(), id);
+            }
+        }
+
+        public override void Create(AppointmentSurvey element)
+        {
+            lock (key)
+            {
+                element.Id = GenerateID();
+                AppendToDB(element);
+                idMap.Add(element.Id);
+            }
+        }
+
+        /*
+        * Method isn't needed but is requered for abstract class
+        */
+        public override void Update(AppointmentSurvey element)
         {
             throw new NotImplementedException();
-
         }
 
-        public Boolean DeleteAppointmentSurvey(int id)
+        /*
+        * Method isn't needed but is requered for abstract class
+        */
+        public override void Delete(int id)
         {
             throw new NotImplementedException();
         }
 
-        public List<AppointmentSurvey> GetAllAppointmentSurveys()
+        protected override void InstantiateIDSet(List<AppointmentSurvey> elements)
         {
-            List<AppointmentSurvey> surveys = serializerAppointment.FromCSV(dbPath); 
-            return surveys;
-            
+            lock (key)
+            {
+                foreach (AppointmentSurvey element in elements)
+                {
+                    idMap.Add(element.Id);
+                }
+            }
         }
 
-        public AppointmentSurveyRepository()
+        private void CheckIfIDExists(int id)
         {
-            
+            if (!idMap.Contains(id))
+                throw new Exception("AppointmentSurvey doesnt exist");
+        }
+
+        private AppointmentSurvey FindAppointmentSurveyByID(List<AppointmentSurvey> elements, int id)
+        {
+            for (int i = 0; i < elements.Count; i++)
+            {
+                if (elements[i].Id == id)
+                {
+                    return elements[i];
+                }
+            }
+            throw new Exception("AppointmentSurvey doesnt exist");
         }
 
         public static AppointmentSurveyRepository Instance

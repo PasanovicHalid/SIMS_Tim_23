@@ -38,19 +38,19 @@ namespace Controller
             return MedicationService.Instance.GetAll();
         }
 
-        public Boolean CreateMedicationType(MedicationType newMedicationType)
+        public void CreateMedicationType(MedicationType newMedicationType)
         {
-            return MedicationService.Instance.CreateMedicationType(newMedicationType);
+            MedicationService.Instance.CreateMedicationType(newMedicationType);
         }
 
-        public Boolean UpdateMedicationType(MedicationType medicationType)
+        public void UpdateMedicationType(MedicationType medicationType)
         {
-            return MedicationService.Instance.UpdateMedicationType(medicationType);
+            MedicationService.Instance.UpdateMedicationType(medicationType);
         }
 
-        public Boolean DeleteMedicationType(int id)
+        public void DeleteMedicationType(int id)
         {
-            return MedicationService.Instance.DeleteMedicationType(id);
+            MedicationService.Instance.DeleteMedicationType(id);
         }
 
         public MedicationType ReadMedicationType(int id)

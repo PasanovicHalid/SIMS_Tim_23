@@ -144,6 +144,12 @@
   <data name="Amount" xml:space="preserve">
     <value>Kolicina</value>
   </data>
+  <data name="AnamnesisDoesntExist" xml:space="preserve">
+    <value>Anamneza ne postoji</value>
+  </data>
+  <data name="AnamnesisExists" xml:space="preserve">
+    <value>Anamneza vec postoji</value>
+  </data>
   <data name="Appointments" xml:space="preserve">
     <value>Termini</value>
   </data>

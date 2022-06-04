@@ -39,29 +39,29 @@ namespace Service
             return MedicationRepository.Instance.GetAll();
         }
 
-        public Boolean CreateMedicationType(MedicationType newMedicationType)
+        public void CreateMedicationType(MedicationType newMedicationType)
         {
-            return MedicationRepository.Instance.CreateMedicationType(newMedicationType);
+            MedicationTypeRepository.Instance.Create(newMedicationType);
         }
 
-        public Boolean UpdateMedicationType(MedicationType medicationType)
+        public void UpdateMedicationType(MedicationType medicationType)
         {
-            return MedicationRepository.Instance.UpdateMedicationType(medicationType);
+            MedicationTypeRepository.Instance.Update(medicationType);
         }
 
-        public Boolean DeleteMedicationType(int id)
+        public void DeleteMedicationType(int id)
         {
-            return MedicationRepository.Instance.DeleteMedicationType(id);
+            MedicationTypeRepository.Instance.Delete(id);
         }
 
         public MedicationType ReadMedicationType(int id)
         {
-            return MedicationRepository.Instance.ReadMedicationType(id);
+            return MedicationTypeRepository.Instance.Read(id);
         }
 
         public List<MedicationType> GetAllMedicationType()
         {
-            return MedicationRepository.Instance.GetAllMedicationType();
+            return MedicationTypeRepository.Instance.GetAll();
         }
         public static MedicationService Instance
         {

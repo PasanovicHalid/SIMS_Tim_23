@@ -93,7 +93,7 @@ namespace Repository
 
         private void CheckIfIDExists(int id)
         {
-            if (idMap.Contains(id))
+            if (!idMap.Contains(id))
                 throw new LocalisedException("UserDoesntExist");
         }
 

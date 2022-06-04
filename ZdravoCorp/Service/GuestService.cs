@@ -14,27 +14,27 @@ namespace Service
 
         public void Create(Guest newGuest)
         {
-            GuestRepository.Instance.Create(newGuest);
+            GuestRepository.Instance.CreateGuest(newGuest);
         }
 
         public Guest Read(int id)
         {
-            return GuestRepository.Instance.Read(id);
+            return GuestRepository.Instance.ReadGuest(id);
         }
 
         public void Update(Guest guest)
         {
-            GuestRepository.Instance.Update(guest);
+            GuestRepository.Instance.UpdateGuest(guest);
         }
 
         public void Delete(int id)
         {
-            GuestRepository.Instance.Delete(id);
+            GuestRepository.Instance.DeleteGuest(id);
         }
 
         public List<Guest> GetAll()
         {
-            return GuestRepository.Instance.GetAll();
+            return GuestRepository.Instance.GetAllGuests();
         }
 
         public GuestService()

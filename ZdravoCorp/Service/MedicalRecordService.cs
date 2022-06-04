@@ -34,7 +34,7 @@ namespace Service
 
         public List<MedicalRecord> GetAll()
         {
-            return MedicalRecordRepository.Instance.GetAllRecords();
+            return MedicalRecordRepository.Instance.GetAll();
         }
 
         public MedicalRecordService()

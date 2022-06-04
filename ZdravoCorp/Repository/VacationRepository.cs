@@ -9,109 +9,131 @@ using System.Collections.Generic;
 
 namespace Repository
 {
-    public class VacationRepository
+    public class VacationRepository : Repository<Vacation>
     {
-        private String dbPath = "..\\..\\Data\\vacationsDB.csv";
-        private Serializer<Vacation> serializerVacation = new Serializer<Vacation>();
         private static VacationRepository instance = null;
 
-        public List<int> GetAllVacationsID()
+        public VacationRepository()
         {
-            List<Vacation> vacations = GetAllVacations();
-            List<int> ids = new List<int>();
-            foreach (Vacation vacation in vacations)
-            {
-                ids.Add(vacation.Id);
-            }
-            return ids;
+            dbPath = "..\\..\\Data\\vacationsDB.csv";
+            InstantiateIDSet(GetAll());
         }
 
-        public void GenerateId(Vacation newVacation)
-        {
-            List<int> allVacationIDs = GetAllVacationsID();
-            Random random = new Random();
-            do
-            {
-                newVacation.Id = random.Next();
-            }
-            while (allVacationIDs.Contains(newVacation.Id));
-        }
-
-        public List<Vacation> GetAllVacations()
-        {
-            List<Vacation> vacations = serializerVacation.FromCSV(dbPath);
-            return vacations;
-        }
-
-        public Boolean CreateVacation(Vacation newVacation)
-        {
-            List<Vacation> vacations = GetAllVacations();
-            GenerateId(newVacation);
-            vacations.Add(newVacation);
-            serializerVacation.ToCSV(dbPath, vacations);
-            return true;
-        }
-
-        public Vacation ReadVacation(int id)
-        {
-            List<Vacation> vacations = GetAllVacations();
-            Vacation vacation = null;
-            foreach (Vacation temp in vacations)
-            {
-                if(id == temp.Id)
-                {
-                    vacation = temp;
-                }
-            }
-            return vacation;
-        }
-
-        public Boolean UpdateVacation(Vacation vacation)
-        {
-            List<Vacation> vacations = GetAllVacations();
-            for (int i = 0; i < vacations.Count; i++)
-            {
-                if (vacation.Id == vacations[i].Id)
-                {
-                    vacations[i] = vacation;
-                    serializerVacation.ToCSV(dbPath, vacations);
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        public Boolean DeleteVacation(int id)
-        {
-            List<Vacation> vacations = GetAllVacations();
-            foreach(Vacation vacation in vacations)
-            {
-                if(vacation.Id == id)
-                {
-                    vacations.Remove(vacation);
-                    serializerVacation.ToCSV(dbPath, vacations);
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        public Boolean AcceptVacation(Doctor doctor,Vacation vacation)
+        public bool AcceptVacation(Doctor doctor,Vacation vacation)
         {
             vacation.Status = Status.ACCEPTED;
             vacation.Comment = "/";
-            return UpdateVacation(vacation);
+            Update(vacation);
+            return true;
         }
 
-        public Boolean RejectVacation(Doctor doctor,Vacation vacation, String comment)
+        public bool RejectVacation(Doctor doctor,Vacation vacation, String comment)
         {
             vacation.Status = Status.REJECTED;
             vacation.Comment = comment;
-            return UpdateVacation(vacation);
+            Update(vacation);
+            return true;
         }
 
-        public VacationRepository()
-        { }
+        public override Vacation Read(int id)
+        {
+            lock (key)
+            {
+                lock (key)
+                {
+                    CheckIfIDExists(id);
+                    return FindVacationByID(GetAll(), id);
+                }
+            }
+        }
+
+        public override void Create(Vacation element)
+        {
+            lock (key)
+            {
+                element.Id = GenerateID();
+                AppendToDB(element);
+                idMap.Add(element.Id);
+            }
+        }
+
+        public override void Update(Vacation element)
+        {
+            lock (key)
+            {
+                CheckIfIDExists(element.Id);
+                List<Vacation> elements = GetAll();
+                SwapVacationByID(elements, element);
+                SaveChanges(elements);
+            }
+        }
+
+        public override void Delete(int id)
+        {
+            lock (key)
+            {
+                CheckIfIDExists(id);
+                List<Vacation> elements = GetAll();
+                RemoveVacationByID(elements, id);
+                SaveChanges(elements);
+            }
+        }
+
+        protected override void InstantiateIDSet(List<Vacation> elements)
+        {
+            lock (key)
+            {
+                foreach (Vacation element in elements)
+                {
+                    idMap.Add(element.Id);
+                }
+            }
+        }
+
+        private void SwapVacationByID(List<Vacation> elements, Vacation element)
+        {
+            for (int i = 0; i < elements.Count; i++)
+            {
+                if (elements[i].Id == element.Id)
+                {
+                    elements[i] = element;
+                    return;
+                }
+            }
+            throw new Exception("Vacation doesnt exist");
+        }
+
+        private Vacation FindVacationByID(List<Vacation> elements, int id)
+        {
+            for (int i = 0; i < elements.Count; i++)
+            {
+                if (elements[i].Id == id)
+                {
+                    return elements[i];
+                }
+            }
+            throw new Exception("Vacation doesnt exist");
+        }
+
+        private void RemoveVacationByID(List<Vacation> elements, int id)
+        {
+            for (int i = 0; i < elements.Count; i++)
+            {
+                if (elements[i].Id == id)
+                {
+                    elements.RemoveAt(i);
+                    idMap.Remove(id);
+                    return;
+                }
+            }
+            throw new Exception("Vacation doesnt exist");
+        }
+
+        private void CheckIfIDExists(int id)
+        {
+            if (!idMap.Contains(id))
+                throw new Exception("Vacation doesnt exist");
+        }
 
         public static VacationRepository Instance
         {

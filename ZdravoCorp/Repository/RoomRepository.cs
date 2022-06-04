@@ -12,36 +12,24 @@ using ZdravoCorp.Exceptions;
 
 namespace Repository
 {
-    public class RoomRepository
+    public class RoomRepository : Repository<Room>
     {
-        private String dbPath = "..\\..\\Data\\roomsDB.csv";
-        private String dbRoomTypePath = "..\\..\\Data\\roomTypesDB.csv";
-        private Serializer<Room> serializerRoom = new Serializer<Room>();
-        private Serializer<RoomType> serializerRoomType = new Serializer<RoomType>();
-        private HashSet<int> idMap;
-        private static readonly object key = new object();
-        private static RoomRepository instance = null;  
+        private static RoomRepository instance = null;
 
-        public void CreateRoom(Room newRoom)
+        public RoomRepository()
         {
-            lock (key)
-            {
-                newRoom.Identifier = GenerateId();
-                List<Room> rooms = serializerRoom.FromCSV(dbPath);
-                CheckIfDesignationCodeExists(newRoom.DesignationCode, rooms);
-                serializerRoom.ToCSVAppend(dbPath, new List<Room> { newRoom });
-                idMap.Add(newRoom.Identifier);
-            }
+            dbPath = "..\\..\\Data\\roomsDB.csv";
+            InstantiateIDSet(GetAll());
         }
 
         //Gets Rooms by internal ID
-        //Returns List of rooms if found
-        //Returns empty List if not found
+        //Returns List of all rooms thar are found
+        //Returns empty List if nothing was found
         public List<Room> GetRoomsByInternalID(HashSet<int> identifiers)
         {
             lock (key)
             {
-                List<Room> rooms = GetAllRooms();
+                List<Room> rooms = GetAll();
                 List<Room> result = new List<Room>();
                 foreach (Room room in rooms)
                 {
@@ -54,59 +42,115 @@ namespace Repository
             }
         }
 
-        public Model.Room ReadRoom(int identifier)
-        {
-            lock (key)
-            {
-                Dictionary<int, Room> rooms = serializerRoom.FromCSV(dbPath)
-                    .ToDictionary(keySelector: m => m.Identifier, elementSelector: m => m);
-                Dictionary<int, EquipmentType> types = EquipmentRepository.Instance.GetAllEquipmentType()
-                    .ToDictionary(keySelector: m => m.Identifier, elementSelector: m => m);
-                Dictionary<int, Appointment> appointments = AppointmentRepository.Instance.GetAllAppointments()
-                    .ToDictionary(keySelector: m => m.Id, elementSelector: m => m);
-                if (!rooms.ContainsKey(identifier))
-                {
-                    throw new LocalisedException("RoomIdDoesntExist");
-                }
-                Room room = rooms[identifier];
-                LoadEquipmentTypesForRoom(room, types);
-                LoadAppointmentsForRoom(room, appointments);
-                return room;
-            }
-        }
-
-        public void UpdateRoom(Room updatedRoom)
-        {
-            lock (key)
-            {
-                List<Room> rooms = serializerRoom.FromCSV(dbPath);
-                CheckIfChangedDesignationCodeExists(updatedRoom, rooms);
-                ReplaceRoomByID(rooms, updatedRoom);
-                serializerRoom.ToCSV(dbPath, rooms);
-            }
-        }
         public void AddEquipment(Equipment equipment, int room_id)
         {
             lock (key)
             {
-                bool found = false;
-                List<Room> rooms = serializerRoom.FromCSV(dbPath);
+                List<Room> rooms = GetAll();
                 Room room = FindRoomByID(room_id, rooms);
                 AddEquipmentToRoom(room, equipment);
-                serializerRoom.ToCSV(dbPath, rooms);
+                SaveChanges(rooms);
             }
         }
 
-        public List<Room> GetAllRooms()
+        public void CombineRooms(Room combineInto, Room selectedRoom)
         {
             lock (key)
             {
-                List<Room> result = serializerRoom.FromCSV(dbPath);
-                Dictionary<int, EquipmentType> types = EquipmentRepository.Instance.GetAllEquipmentType()
+                MoveEquipment(combineInto, selectedRoom);
+                MoveAppointements(combineInto, selectedRoom);
+                MoveMedications(combineInto, selectedRoom);
+                combineInto.SurfaceArea += selectedRoom.SurfaceArea;
+                Delete(selectedRoom.Identifier);
+                Update(combineInto);
+            }
+        }
+
+        public int GetActualCountForEquipment(int id_room, int id_equipment)
+        {
+            lock (key)
+            {
+                Room room = Read(id_room);
+                foreach (Equipment it in room.Equipment)
+                {
+                    if (it.Identifier.Equals(id_equipment))
+                    {
+                        return it.Actual_count;
+                    }
+                }
+                return 0;
+            }
+        }
+
+        public void ChangeActualCountOfEquipment(int id_from_room, int id_equipment, int count)
+        {
+            lock (key)
+            {
+                List<Room> rooms = GetAll();
+                Room room = FindRoomByID(id_from_room, rooms);
+                ChangeActualCountInRoom(room, count, id_equipment);
+                SaveChanges(rooms);
+            }
+        }
+
+        public override Room Read(int id)
+        {
+            lock (key)
+            {
+                Dictionary<int, Room> rooms = GetAll()
                     .ToDictionary(keySelector: m => m.Identifier, elementSelector: m => m);
-                Dictionary<int, Appointment> appointments = AppointmentRepository.Instance.GetAllAppointments()
+                if (!rooms.ContainsKey(id))
+                {
+                    throw new LocalisedException("RoomIdDoesntExist");
+                }
+                return rooms[id];
+            }
+        }
+
+        public override void Create(Room element)
+        {
+            lock (key)
+            {
+                element.Identifier = GenerateID();
+                List<Room> rooms = GetAll();
+                CheckIfDesignationCodeExists(element.DesignationCode, rooms);
+                AppendToDB(element);
+                idMap.Add(element.Identifier);
+            }
+        }
+
+        public override void Update(Room element)
+        {
+            lock (key)
+            {
+                List<Room> elements = GetAll();
+                CheckIfChangedDesignationCodeExists(element, elements);
+                ReplaceRoomByID(elements, element);
+                SaveChanges(elements);
+            }
+        }
+
+        public override void Delete(int id)
+        {
+            lock (key)
+            {
+                List<Room> rooms = GetAll();
+                FindAndDeleteRoomByID(id, rooms);
+                SaveChanges(rooms);
+                idMap.Remove(id);
+            }
+        }
+
+        public new List<Room> GetAll()
+        {
+            lock (key)
+            {
+                List<Room> result = base.GetAll();
+                Dictionary<int, EquipmentType> types = EquipmentTypeRepository.Instance.GetAllEquipmentType()
+                    .ToDictionary(keySelector: m => m.Identifier, elementSelector: m => m);
+                Dictionary<int, Appointment> appointments = AppointmentRepository.Instance.GetAll()
                     .ToDictionary(keySelector: m => m.Id, elementSelector: m => m);
-                foreach(Room room in result)
+                foreach (Room room in result)
                 {
                     LoadEquipmentTypesForRoom(room, types);
                     LoadAppointmentsForRoom(room, appointments);
@@ -115,123 +159,14 @@ namespace Repository
             }
         }
 
-        public void CombineRooms(Room combineInto, Room selectedRoom)
-        {
-            MoveEquipment(combineInto, selectedRoom);
-            MoveAppointements(combineInto, selectedRoom);
-            MoveMedications(combineInto, selectedRoom);
-            combineInto.SurfaceArea += selectedRoom.SurfaceArea;
-            DeleteRoom(selectedRoom.Identifier);
-            UpdateRoom(combineInto);
-        }
-
-        public void CreateRoomType(Model.RoomType newRoomType)
+        protected override void InstantiateIDSet(List<Room> elements)
         {
             lock (key)
             {
-
-                List<RoomType> types = serializerRoomType.FromCSV(dbRoomTypePath);
-                if(CheckIfRoomTypeExists(types, newRoomType))
+                foreach (Room element in elements)
                 {
-                    throw new LocalisedException("RoomTypeAlreadyExists");
+                    idMap.Add(element.Identifier);
                 }
-                types.Add(newRoomType);
-                serializerRoomType.ToCSV(dbRoomTypePath, types);
-            }
-        }
-
-        private void SwapRoomTypes(RoomType swappedInto, RoomType type)
-        {
-            throw new NotImplementedException();
-        }
-
-        //Ova funckija ima logicku gresku ne koristiti
-        //Greska je to sto roomType samo sadrzi izmenjeno ime
-        //a ne mozemo da nadjemo prethodno ime u bazi jer nemamo taj podatak
-        public Boolean UpdateRoomType(Model.RoomType roomType)
-        {
-            throw new NotImplementedException();
-            lock (key)
-            {
-                List<RoomType> rooms = serializerRoomType.FromCSV(dbRoomTypePath);
-                bool exists = false;
-                for (int i = 0; i < rooms.Count ; i++)
-                {
-                    if (roomType.Name.Equals(rooms[i].Name))
-                    {
-                        rooms[i] = roomType;
-                        exists = true;
-                        break;
-                    }
-                }
-
-                if (!exists)
-                {
-                    serializerRoomType.ToCSV(dbRoomTypePath, rooms);
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-        }
-
-        public void DeleteRoomType(Model.RoomType roomType)
-        {
-            lock (key)
-            {
-                List<RoomType> rooms = serializerRoomType.FromCSV(dbRoomTypePath);
-                RemoveType(rooms, roomType);
-                serializerRoomType.ToCSV(dbRoomTypePath, rooms);
-            }
-        }
-
-        public Model.RoomType ReadRoomType(Model.RoomType roomType)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int GetMaxCountForEquipment(int id_room, int id_equipment)
-        {
-            Room room = ReadRoom(id_room);
-            foreach(Equipment it in room.Equipment)
-            {
-                if (it.Identifier.Equals(id_equipment))
-                {
-                    return it.Actual_count;
-                }
-            }
-            return 0;
-        }
-
-        public void ChangeActualCountOfEquipment(int id_from_room, int id_equipment, int count)
-        {
-            lock (key)
-            {
-                List<Room> rooms = GetAllRooms();
-                Room room = FindRoomByID(id_from_room, rooms);
-                ChangeActualCountInRoom(room, count, id_equipment);
-                serializerRoom.ToCSV(dbPath, rooms);
-            }
-        }
-
-        public List<RoomType> GetAllRoomType()
-        {
-            lock (key)
-            {
-                return serializerRoomType.FromCSV(dbRoomTypePath);
-            }
-        }
-
-        public void DeleteRoom(int id)
-        {
-            lock (key)
-            {
-                List<Room> rooms = serializerRoom.FromCSV(dbPath);
-                FindAndDeleteRoomByID(id, rooms);
-                serializerRoom.ToCSV(dbPath, rooms);
-                idMap.Remove(id);
             }
         }
 
@@ -279,18 +214,6 @@ namespace Repository
                     room.Appointment[i] = appointments[room.Appointment[i].Id];
                 }
             }
-        }
-
-        private int GenerateId()
-        {
-            Random random = new Random();
-            int id;
-            do
-            {
-                id = random.Next();
-            }
-            while (idMap.Contains(id));
-            return id;
         }
 
         private void CheckIfDesignationCodeExists(string designation, List<Room> rooms)
@@ -353,31 +276,6 @@ namespace Repository
             }
         }
 
-        private bool CheckIfRoomTypeExists(List<RoomType> types, RoomType type)
-        {
-            foreach (RoomType it in types)
-            {
-                if (it.Name.Equals(type.Name))
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        private void RemoveType(List<RoomType> types, RoomType roomType)
-        {
-            foreach (RoomType type in types)
-            {
-                if (roomType.Name.Equals(type.Name))
-                {
-                    types.Remove(type);
-                    return;
-                }
-            }
-            throw new LocalisedException("RoomTypeDoesntExists");
-        }
-
         private void ChangeActualCountInRoom(Room room, int count, int id_equipment)
         {
             for (int i = 0; i < room.Equipment.Count; i++)
@@ -407,17 +305,6 @@ namespace Repository
             if (!exists)
             {
                 room.Equipment.Add(equipment);
-            }
-        }
-
-        public RoomRepository()
-        {
-            idMap = new HashSet<int>();
-            List<Room> rooms = serializerRoom.FromCSV(dbPath);
-
-            foreach(Room room in rooms)
-            {
-                idMap.Add(room.Identifier);
             }
         }
 

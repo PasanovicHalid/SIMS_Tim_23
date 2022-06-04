@@ -10,259 +10,112 @@ using System.Linq;
 
 namespace Repository
 {
-    public class MedicationRepository
+    public class MedicationRepository : Repository<Medication>
     {
-        private String dbPath = "..\\..\\Data\\medicationDB.csv";
-        private String dbPathTypes = "..\\..\\Data\\medicationTypeDB.csv";
-        private Serializer<Medication> serializerMedication = new Serializer<Medication>();
-        private Serializer<MedicationType> serializerType = new Serializer<MedicationType>();
-
         private static MedicationRepository instance = null;
-
-        private HashSet<int> typeIdMap = new HashSet<int>();
-        private HashSet<string> typeNameMap = new HashSet<string>();
 
         public MedicationRepository()
         {
-            List<MedicationType> typeList = GetAllMedicationType();
-            InstantiateTypeHashSets(typeList);
+            dbPath = "..\\..\\Data\\medicationDB.csv";
+            InstantiateIDSet(GetAll());
         }
-
-        private void InstantiateTypeHashSets(List<MedicationType> medicationTypes)
+        public override Medication Read(int id)
         {
-            foreach (MedicationType type in medicationTypes)
+            lock (key)
             {
-                typeIdMap.Add(type.Id);
-                typeNameMap.Add(type.Name);
+                CheckIfIDExists(id);
+                return FindMedicationRecordByID(GetAll(), id);
             }
         }
-        public List<int> GetAllMedicationIds()
+
+        public override void Create(Medication element)
         {
-            List<Medication> medicine = GetAllMedicine();
-            List<int> ids = new List<int>();
-            foreach (Medication medication in medicine)
+            lock (key)
             {
-                ids.Add(medication.Id);
+                element.Id = GenerateID();
+                AppendToDB(element);
+                idMap.Add(element.Id);
             }
-            return ids;
-        }
-        public void GenerateId(Medication newMedication)
-        {
-            List<int> allMedicationIds = GetAllMedicationIds();
-            Random random = new Random();
-            do
-            {
-                newMedication.Id = random.Next();
-            }
-            while (allMedicationIds.Contains(newMedication.Id));
         }
 
-        public Boolean CreateMedicine(Model.Medication newMedicine)
+        public override void Update(Medication element)
         {
-            List<Medication> medicines = GetAllMedicine();
-            GenerateId(newMedicine);
-            medicines.Add(newMedicine);
-            serializerMedication.ToCSV(dbPath, medicines);
-            return true ;
+            lock (key)
+            {
+                CheckIfIDExists(element.Id);
+                List<Medication> elements = GetAll();
+                SwapMedicationRecordByID(elements, element);
+                SaveChanges(elements);
+            }
         }
 
-        public Boolean UpdateMedicine(Model.Medication medicine)
+        public override void Delete(int id)
         {
-            Boolean success = false;
-            List<Medication> medicines = GetAllMedicine();
-            foreach(Medication m in medicines)
+            lock (key)
             {
-                if(medicine.Id == m.Id)
+                CheckIfIDExists(id);
+                List<Medication> elements = GetAll();
+                RemoveMedicationRecordByID(elements, id);
+                SaveChanges(elements);
+            }
+        }
+
+        protected override void InstantiateIDSet(List<Medication> elements)
+        {
+            lock (key)
+            {
+                foreach (Medication element in elements)
                 {
-                    success = true;
-                    medicines.Remove(m);
-                    break;
-                }
-            }
-            if (success)
-            {
-                medicines.Add(medicine);
-                serializerMedication.ToCSV(dbPath, medicines);
-            }   
-            return success;
-
-        }
-
-        public Boolean DeleteMedicine(int identificator)
-        {
-            Boolean success = false;
-            List<Medication> medicines = GetAllMedicine();
-            foreach (Medication m in medicines)
-            {
-                if (identificator == m.Id)
-                {
-                    success = true;
-                    medicines.Remove(m);
-                    serializerMedication.ToCSV(dbPath, medicines);
-                    break;
-                }
-            }
-            return success;
-        }
-
-        public Model.Medication ReadMedicine(int identificator)
-        {
-            List<Medication> medicines = GetAllMedicine();
-            foreach(Medication m in medicines)
-            {
-                if(identificator == m.Id)
-                {
-                    return m;
-                }
-            }
-            return null;
-        }
-
-        public List<Medication> GetAllMedicine()
-        {
-            return serializerMedication.FromCSV(dbPath);
-        }
-
-        private int GenerateTypeID()
-        {
-            int id;
-            Random random = new Random();
-            do
-            {
-                id = random.Next();
-            }
-            while (typeIdMap.Contains(id));
-            return id;
-        }
-
-        public bool CheckIfNameExists(string username)
-        {
-            return typeNameMap.Contains(username);
-        }
-
-        private bool CheckIfTypeIDExists(int id)
-        {
-            return typeIdMap.Contains(id);
-        }
-
-        public Boolean CreateMedicationType(MedicationType newMedicationType)
-        {
-            if (!CheckIfNameExists(newMedicationType.Name))
-            {
-                newMedicationType.Id = GenerateTypeID();
-                typeNameMap.Add(newMedicationType.Name);
-                serializerType.ToCSVAppend(dbPathTypes, new List<MedicationType>() { newMedicationType });
-                typeIdMap.Add(newMedicationType.Id);
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        private void SwapTypesByID(List<MedicationType> types, MedicationType type)
-        {
-            for (int i = 0; i < types.Count; i++)
-            {
-                if (types[i].Id == type.Id)
-                {
-                    types[i] = type;
-                    break;
+                    idMap.Add(element.Id);
                 }
             }
         }
 
-        public Boolean UpdateMedicationType(MedicationType medicationType)
+        private void CheckIfIDExists(int id)
         {
-            if (CheckIfTypeIDExists(medicationType.Id))
-            {
-                List<MedicationType> types = GetAllMedicationType();
-                SwapTypesByID(types, medicationType);
-                serializerType.ToCSV(dbPathTypes, types);
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            if (!idMap.Contains(id))
+                throw new Exception("Medication doesnt exist");
         }
 
-        private void DeleteTypeByID(List<MedicationType> types, int id)
+        private void SwapMedicationRecordByID(List<Medication> elements, Medication element)
         {
-            for (int i = 0; i < types.Count; i++)
+            for (int i = 0; i < elements.Count; i++)
             {
-                if (types[i].Id == id)
+                if (elements[i].Id == element.Id)
                 {
-                    types.RemoveAt(i);
-                    break;
+                    elements[i] = element;
+                    return;
                 }
             }
+            throw new Exception("Medication doesnt exist");
         }
 
-        public Boolean DeleteMedicationType(int id)
+        private Medication FindMedicationRecordByID(List<Medication> elements, int id)
         {
-            if (CheckIfTypeIDExists(id))
+            for (int i = 0; i < elements.Count; i++)
             {
-                List<MedicationType> types = GetAllMedicationType();
-                DeleteTypeByID(types, id);
-                serializerType.ToCSV(dbPathTypes, types);
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        private MedicationType FindTypeByID(List<MedicationType> types, int id)
-        {
-            for (int i = 0; i < types.Count; i++)
-            {
-                if (types[i].Id == id)
+                if (elements[i].Id == id)
                 {
-                    return types[i];
+                    return elements[i];
                 }
             }
-            return null;
+            throw new Exception("Medication doesnt exist");
         }
 
-
-
-        public MedicationType ReadMedicationType(int id)
+        private void RemoveMedicationRecordByID(List<Medication> elements, int id)
         {
-            if (CheckIfTypeIDExists(id))
+            for (int i = 0; i < elements.Count; i++)
             {
-                List<MedicationType> types = GetAllMedicationType();
-                return FindTypeByID(types, id);
-            }
-            else
-            {
-                return null;
-            }
-        }
-
-        private void InstantiateReplacements(Dictionary<int, MedicationType> types)
-        {
-            foreach (MedicationType type in types.Values)
-            {
-                for(int i = 0; i < type.Replacement.Count; i++)
+                if (elements[i].Id == id)
                 {
-                    if (types.ContainsKey(type.Replacement[i].Id))
-                    {
-                        type.Replacement[i] = types[type.Replacement[i].Id];
-                    }
+                    elements.RemoveAt(i);
+                    idMap.Remove(id);
+                    return;
                 }
             }
+            throw new Exception("Medication doesnt exist");
         }
 
-        public List<MedicationType> GetAllMedicationType()
-        {
-            Dictionary<int, MedicationType> types = serializerType.FromCSV(dbPathTypes)
-                .ToDictionary(keySelector: m => m.Id, elementSelector: m => m);
-            InstantiateReplacements(types);
-            return types.Values.ToList();
-        }
         public static MedicationRepository Instance
         {
             get

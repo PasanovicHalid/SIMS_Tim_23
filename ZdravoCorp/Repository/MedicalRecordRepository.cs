@@ -7,114 +7,111 @@ using Model;
 
 namespace Repository
 {
-    public class MedicalRecordRepository
+    public class MedicalRecordRepository : Repository<MedicalRecord>
     {
-        private String dbPath = "..\\..\\Data\\medicalRecordDB.csv";
-        private Serializer<MedicalRecord> serializerRecord = new Serializer<MedicalRecord>();
-
         private static MedicalRecordRepository instance = null;
-
-        public List<int> GetAllMedicalRecordIds()
-        {
-            List<MedicalRecord> medicalRecords = GetAllRecords();
-            List<int> ids = new List<int>();
-            foreach (MedicalRecord medicalRecord in medicalRecords)
-            {
-                ids.Add(medicalRecord.Id);
-            }
-            return ids;
-        }
-        public void GenerateId(MedicalRecord newMedicalRecord)
-        {
-            List<int> allMedicalRecordsIds = GetAllMedicalRecordIds();
-            Random random = new Random();
-            do
-            {
-                newMedicalRecord.Id = random.Next();
-            }
-            while (allMedicalRecordsIds.Contains(newMedicalRecord.Id));
-        }
-
-        public Boolean CreateMedicalRecord(MedicalRecord newRecord)
-        {
-            List<MedicalRecord> records = GetAllRecords();
-            bool exists = false;
-
-
-            if (!exists)
-            {
-                GenerateId(newRecord);
-                records.Add(newRecord);
-                serializerRecord.ToCSV(dbPath, records);
-                return true;
-            }
-            return false;
-
-        }
-
-        public Boolean UpdateMedicalRecord(MedicalRecord record)
-        { 
-
-            Boolean success = false;
-            List<MedicalRecord> records = GetAllRecords();
-            for (int i = 0; i < records.Count; i++)
-            {
-                if (record.Id == records[i].Id)
-                {
-                    success = true;
-                    records[i] = record;
-                    break;
-                }
-            }
-            if (success)
-            {
-                //patients.Add(patient);
-                serializerRecord.ToCSV(dbPath, records);
-
-            }
-            return success;
-        }
-
-        public Boolean DeleteMedicalRecord(int id)
-        {
-            Boolean success = false;
-            List<MedicalRecord> records = GetAllRecords();
-            foreach (MedicalRecord mr in records)
-            {
-                if (id == mr.Id)
-                {
-                    success = true;
-                    records.Remove(mr);
-                    serializerRecord.ToCSV(dbPath, records);
-                    break;
-                }
-            }
-            return success;
-        }
-
-        public MedicalRecord ReadMedicalRecord(int id)
-        {
-            List<MedicalRecord> records = GetAllRecords();
-            foreach (MedicalRecord mr in records)
-            {
-                if (id == mr.Id)
-                {
-                    return mr;
-                }
-            }
-            return null;
-        }
-
-        public List<MedicalRecord> GetAllRecords()
-        {
-            List<MedicalRecord> records =  serializerRecord.FromCSV(dbPath);
-            
-            return records;
-        }
 
         public MedicalRecordRepository()
         {
+            dbPath = "..\\..\\Data\\medicalRecordDB.csv";
+            InstantiateIDSet(GetAll());
+        }
 
+        public override MedicalRecord Read(int id)
+        {
+            lock (key)
+            {
+                CheckIfIDExists(id);
+                return FindMedicalRecordByID(GetAll(), id);
+            }
+        }
+
+        public override void Create(MedicalRecord element)
+        {
+            lock (key)
+            {
+                element.Id = GenerateID();
+                AppendToDB(element);
+                idMap.Add(element.Id);
+            }
+        }
+
+        public override void Update(MedicalRecord element)
+        {
+            lock (key)
+            {
+                CheckIfIDExists(element.Id);
+                List<MedicalRecord> elements = GetAll();
+                SwapMedicalRecordByID(elements, element);
+                SaveChanges(elements);
+            }
+        }
+
+        public override void Delete(int id)
+        {
+            lock (key)
+            {
+                CheckIfIDExists(id);
+                List<MedicalRecord> elements = GetAll();
+                RemoveMedicalRecordByID(elements, id);
+                SaveChanges(elements);
+            }
+        }
+
+        protected override void InstantiateIDSet(List<MedicalRecord> elements)
+        {
+            lock (key)
+            {
+                foreach (MedicalRecord element in elements)
+                {
+                    idMap.Add(element.Id);
+                }
+            }
+        }
+
+        private void CheckIfIDExists(int id)
+        {
+            if (!idMap.Contains(id))
+                throw new Exception("MedicalRecord doesnt exist");
+        }
+
+        private void SwapMedicalRecordByID(List<MedicalRecord> elements, MedicalRecord element)
+        {
+            for (int i = 0; i < elements.Count; i++)
+            {
+                if (elements[i].Id == element.Id)
+                {
+                    elements[i] = element;
+                    return;
+                }
+            }
+            throw new Exception("MedicalRecord doesnt exist");
+        }
+
+        private MedicalRecord FindMedicalRecordByID(List<MedicalRecord> elements, int id)
+        {
+            for (int i = 0; i < elements.Count; i++)
+            {
+                if (elements[i].Id == id)
+                {
+                    return elements[i];
+                }
+            }
+            throw new Exception("MedicalRecord doesnt exist");
+        }
+
+        private void RemoveMedicalRecordByID(List<MedicalRecord> elements, int id)
+        {
+            for (int i = 0; i < elements.Count; i++)
+            {
+                if (elements[i].Id == id)
+                {
+                    elements.RemoveAt(i);
+                    idMap.Remove(id);
+                    return;
+                }
+            }
+            throw new Exception("MedicalRecord doesnt exist");
         }
 
         public static MedicalRecordRepository Instance

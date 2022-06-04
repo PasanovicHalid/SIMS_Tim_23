@@ -55,12 +55,12 @@ namespace Service
         }
         public void CreateAction(Model.Action newAction)
         {
-            ActionRepository.Instance.CreateAction(newAction);
+            ActionRepository.Instance.Create(newAction);
         }
 
         public void UpdateAction(Model.Action action)
         {
-            ActionRepository.Instance.UpdateAction(action);
+            ActionRepository.Instance.Update(action);
         }
 
         public void UpdateRenovationAction(RenovationActionModel action)
@@ -69,7 +69,7 @@ namespace Service
             temp.ExecutionDate = action.ExecutionDate;
             RenovationAction renovationAction = new RenovationAction(action.ExpirationDate, action.Id_room, action.Renovation);
             temp.Object = renovationAction;
-            ActionRepository.Instance.UpdateAction(temp);
+            ActionRepository.Instance.Update(temp);
         }
 
         public void UpdateChangeAction(ChangeActionModel action, int count)
@@ -80,7 +80,7 @@ namespace Service
             changedAction.Object = renovationAction;
             Room room = RoomService.Instance.Read(action.Id_outgoing_room);
             RevertActualCountWhenUpdating(room, action, count);
-            ActionRepository.Instance.UpdateAction(changedAction);
+            ActionRepository.Instance.Update(changedAction);
             RoomService.Instance.Update(room);
         }
 
@@ -102,17 +102,17 @@ namespace Service
 
         public void DeleteAction(int id)
         {
-            ActionRepository.Instance.DeleteAction(id);
+            ActionRepository.Instance.Delete(id);
         }
 
         public Model.Action ReadAction(int id)
         {
-            return ActionRepository.Instance.ReadAction(id);
+            return ActionRepository.Instance.Read(id);
         }
 
         public List<Model.Action> GetAllActions()
         {
-            return ActionRepository.Instance.GetAllActions();
+            return ActionRepository.Instance.GetAll();
         }
 
         public ObservableCollection<RenovationActionModel> GetAllRenovationActions()

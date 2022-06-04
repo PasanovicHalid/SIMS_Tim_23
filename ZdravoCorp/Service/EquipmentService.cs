@@ -52,27 +52,27 @@ namespace Service
 
         public void CreateEquipmentType(EquipmentType newEquipmentType)
         {
-            EquipmentRepository.Instance.CreateEquipmentType(newEquipmentType);
+            EquipmentTypeRepository.Instance.Create(newEquipmentType);
         }
 
         public void UpdateEquipmentType(EquipmentType equipmentType)
         {
-            EquipmentRepository.Instance.UpdateEquipmentType(equipmentType);
+            EquipmentTypeRepository.Instance.Update(equipmentType);
         }
 
         public void DeleteEquipmentType(int id)
         {
-            EquipmentRepository.Instance.DeleteEquipmentType(id);
+            EquipmentTypeRepository.Instance.Delete(id);
         }
 
         public EquipmentType ReadEquipmentType(int id)
         {
-             return EquipmentRepository.Instance.ReadEquipmentType(id);
+             return EquipmentTypeRepository.Instance.Read(id);
         }
 
         public EquipmentType FindEquipmentTypeByName(String name)
         {
-            return EquipmentRepository.Instance.FindEquipmentTypeByName(name);
+            return EquipmentTypeRepository.Instance.FindEquipmentTypeByName(name);
         }
 
         public void ChangePositionOfEquipment(DateTime excecutionDate, int id_from_room, int id_to_room, int id_equipment, int count)
@@ -84,7 +84,7 @@ namespace Service
 
         public ObservableCollection<EquipmentTypeModel> GetAllEquipmentType()
         {
-            List<EquipmentType> types = EquipmentRepository.Instance.GetAllEquipmentType();
+            List<EquipmentType> types = EquipmentTypeRepository.Instance.GetAllEquipmentType();
             ObservableCollection<EquipmentTypeModel> result = new ObservableCollection<EquipmentTypeModel>();
             foreach(EquipmentType it in types)
             {

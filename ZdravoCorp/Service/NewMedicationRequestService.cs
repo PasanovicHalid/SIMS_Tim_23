@@ -39,26 +39,16 @@ namespace Service
 
         private bool ExecuteUpdate(NewMedicationRequest newMedicationRequest)
         {
-            if (MedicationRepository.Instance.Update(newMedicationRequest.MedicationType))
-            {
-                return NewMedicationRequestRepository.Instance.Delete(newMedicationRequest.Id);
-            }
-            else
-            {
-                return false;
-            }
+            MedicationRepository.Instance.Update(new Medication(0, newMedicationRequest.MedicationType));
+            NewMedicationRequestRepository.Instance.Delete(newMedicationRequest.Id);
+            return true;
         }
 
         private bool ExecuteCreation(NewMedicationRequest newMedicationRequest)
         {
-            if (MedicationRepository.Instance.Create(newMedicationRequest.MedicationType))
-            {
-                return NewMedicationRequestRepository.Instance.Delete(newMedicationRequest.Id);
-            }
-            else
-            {
-                return false;
-            }
+            MedicationRepository.Instance.Create(new Medication(0, newMedicationRequest.MedicationType));
+            NewMedicationRequestRepository.Instance.Delete(newMedicationRequest.Id);
+            return true;
         }
 
         public Boolean AcceptNewMedicationRequest(NewMedicationRequest newMedicationRequest)

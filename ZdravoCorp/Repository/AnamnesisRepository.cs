@@ -6,108 +6,115 @@
 using Model;
 using System;
 using System.Collections.Generic;
+using ZdravoCorp.Exceptions;
 
 namespace Repository
 {
-    public class AnamnesisRepository
+    public class AnamnesisRepository : Repository<Anamnesis>
     {
-        private String dbPath = "..\\..\\Data\\anamnesisDB.csv";
-        private Serializer<Anamnesis> serializerAnamnesis = new Serializer<Anamnesis>();
-
         private static AnamnesisRepository instance = null;
-        public List<int> GetAllAnamnesisIds()
-        {
-            List<Anamnesis> anamneses = GetAllAnamnesis();
-            List<int> ids = new List<int>();
-            foreach (Anamnesis a in anamneses)
-            {
-                ids.Add(a.Id);
-            }
-            return ids;
-        }
-        public void GenerateId(Anamnesis newAnamnesis)
-        {
-            List<int> allAnamnesisIds = GetAllAnamnesisIds();
-            Random random = new Random();
-            do
-            {
-                newAnamnesis.Id = random.Next();
-            }
-            while (allAnamnesisIds.Contains(newAnamnesis.Id));
-        }
-        public Boolean CreateAnamnesis(Anamnesis newAnamnesis)
-        {
-            List<Anamnesis> anamneses = GetAllAnamnesis();
-            GenerateId(newAnamnesis);
-            anamneses.Add(newAnamnesis);
-            serializerAnamnesis.ToCSV(dbPath, anamneses);
-            return true;
-        }
-
-        public Anamnesis ReadAnamnesis(int id)
-        {
-            List<Anamnesis> anamneses = GetAllAnamnesis();
-            Anamnesis appointment = null;
-            foreach (Anamnesis app in anamneses)
-            {
-                if (id == app.Id)
-                {
-                    appointment = app;
-                }
-            }
-            return appointment;
-        }
-
-        public List<Anamnesis> GetAnamnesisById(List<int> id)
-        {
-            List<Anamnesis> anamneses = serializerAnamnesis.FromCSV(dbPath);
-            List<Anamnesis> appById = new List<Anamnesis>();
-            foreach (Anamnesis anamnesis in anamneses)
-            {
-                foreach (int i in id)
-                {
-                    if (anamnesis.Id == i)
-                    {
-                        appById.Add(anamnesis);
-                    }
-                }
-            }
-            return appById;
-        }
-
-        public Boolean UpdateAnamnesis(Anamnesis anamnesis)
-        {
-            Boolean success = false;
-            List<Anamnesis> anamneses = GetAllAnamnesis();
-            for (int i = 0; i < anamneses.Count; i++)
-            {
-                if (anamnesis.Id == anamneses[i].Id)
-                {
-                    anamneses[i] = anamnesis;
-                    serializerAnamnesis.ToCSV(dbPath, anamneses);
-                    success = true;
-                }
-            }
-            return success;
-            
-
-        }
-
-        public Boolean DeleteAnamnesis(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Anamnesis> GetAllAnamnesis()
-        {
-            List<Anamnesis> anamneses = serializerAnamnesis.FromCSV(dbPath);
-            return anamneses;
-
-        }
 
         public AnamnesisRepository()
         {
+            dbPath = "..\\..\\Data\\anamnesisDB.csv";
+            InstantiateIDSet(GetAll());
+        }
 
+        public override Anamnesis Read(int id)
+        {
+            lock (key)
+            {
+                CheckIfIDExists(id);
+                return FindAnamnesisByID(GetAll(), id);
+            }
+        }
+
+        public override void Create(Anamnesis element)
+        {
+            lock (key)
+            {
+                element.Id = GenerateID();
+                AppendToDB(element);
+                idMap.Add(element.Id);
+            }
+        }
+
+        public override void Update(Anamnesis element)
+        {
+            lock (key)
+            {
+                CheckIfIDExists(element.Id);
+                List<Anamnesis> elements = GetAll();
+                SwapAnamnesisByID(elements, element);
+                SaveChanges(elements);
+            }
+        }
+
+        public override void Delete(int id)
+        {
+            lock (key)
+            {
+                CheckIfIDExists(id);
+                List<Anamnesis> elements = GetAll();
+                DeleteAnamnesisByID(elements, id);
+                SaveChanges(elements);
+            }
+        }
+
+        protected override void InstantiateIDSet(List<Anamnesis> elements)
+        {
+            lock (key)
+            {
+                foreach (Anamnesis element in elements)
+                {
+                    idMap.Add(element.Id);
+                }
+            }
+        }
+
+        private void CheckIfIDExists(int id)
+        {
+            if (!idMap.Contains(id))
+                throw new LocalisedException("AnamnesisDoesntExist");
+        }
+
+        private Anamnesis FindAnamnesisByID(List<Anamnesis> elements, int id)
+        {
+            for (int i = 0; i < elements.Count; i++)
+            {
+                if (elements[i].Id == id)
+                {
+                    return elements[i];
+                }
+            }
+            throw new LocalisedException("AnamnesisDoesntExist");
+        }
+
+        private void SwapAnamnesisByID(List<Anamnesis> elements, Anamnesis element)
+        {
+            for (int i = 0; i < elements.Count; i++)
+            {
+                if (elements[i].Id == element.Id)
+                {
+                    elements[i] = element;
+                    return;
+                }
+            }
+            throw new LocalisedException("UserDoesntExist");
+        }
+
+        private void DeleteAnamnesisByID(List<Anamnesis> elements, int id)
+        {
+            for (int i = 0; i < elements.Count; i++)
+            {
+                if (elements[i].Id == id)
+                {
+                    idMap.Remove(id);
+                    elements.RemoveAt(i);
+                    return;
+                }
+            }
+            throw new LocalisedException("UserDoesntExist");
         }
 
         public static AnamnesisRepository Instance

@@ -8,83 +8,112 @@ using System.Threading.Tasks;
 
 namespace Repository
 {
-    internal class ReportRepository
+    internal class ReportRepository : Repository<Report>
     {
-
-        private String dbPath = "..\\..\\Data\\commentsDB.csv";
-        private Serializer<Report> serializerComments = new Serializer<Model.Report>();
-
         private static ReportRepository instance = null;
-        public Boolean CreateComment(Model.Report newComment)
-        {
-            List<Report> comments = GetAllComments();
-            int id = comments.Count + 1;
-            newComment.Id = id;
-            comments.Add(newComment);
-            serializerComments.ToCSV(dbPath, comments);
-            return true;
-
-        }
-
-        public Boolean UpdateComment(Model.Report newComment)
-        {
-            Boolean success = false;
-            List<Report> comments = GetAllComments();
-            foreach (Report c in comments)
-            {
-                if (newComment.Id.Equals(c.Id))
-                {
-                    success = true;
-                    comments.Remove(c);
-                    break;
-                }
-            }
-            if (success)
-            {
-                comments.Add(newComment);
-                serializerComments.ToCSV(dbPath, comments);
-
-            }
-            return success;
-        }
-
-        public Boolean DeleteComment(int identificator)
-        {
-            Boolean success = false;
-            List<Report> comments = GetAllComments();
-            foreach (Report c in comments)
-            {
-                if (identificator == c.Id)
-                {
-                    success = true;
-                    comments.Remove(c);
-                    serializerComments.ToCSV(dbPath, comments);
-                    break;
-                }
-            }
-            return success;
-        }
-
-        public Model.Report ReadComment(int indentificator)
-        {
-            List<Report> comments = GetAllComments();
-            foreach (Report c in comments)
-            {
-                if (indentificator == c.Id)
-                {
-                    return c;
-                }
-            }
-            return null;
-        }
-
-        public List<Model.Report> GetAllComments()
-        {
-            return serializerComments.FromCSV(dbPath);
-        }
 
         public ReportRepository()
-        { }
+        {
+            dbPath = "..\\..\\Data\\commentsDB.csv";
+            InstantiateIDSet(GetAll());
+        }
+
+        public override Report Read(int id)
+        {
+            lock (key)
+            {
+                CheckIfIDExists(id);
+                return FindReportRecordByID(GetAll(), id);
+            }
+        }
+
+        public override void Create(Report element)
+        {
+            lock (key)
+            {
+                element.Id = GenerateID();
+                AppendToDB(element);
+                idMap.Add(element.Id);
+            }
+        }
+
+        public override void Update(Report element)
+        {
+            lock (key)
+            {
+                CheckIfIDExists(element.Id);
+                List<Report> elements = GetAll();
+                SwapReportRecordByID(elements, element);
+                SaveChanges(elements);
+            }
+        }
+
+        public override void Delete(int id)
+        {
+            lock (key)
+            {
+                CheckIfIDExists(id);
+                List<Report> elements = GetAll();
+                RemoveReportRecordByID(elements, id);
+                SaveChanges(elements);
+            }
+        }
+
+        protected override void InstantiateIDSet(List<Report> elements)
+        {
+            lock (key)
+            {
+                foreach (Report element in elements)
+                {
+                    idMap.Add(element.Id);
+                }
+            }
+        }
+
+        private void CheckIfIDExists(int id)
+        {
+            if (!idMap.Contains(id))
+                throw new Exception("Report doesnt exist");
+        }
+
+        private void SwapReportRecordByID(List<Report> elements, Report element)
+        {
+            for (int i = 0; i < elements.Count; i++)
+            {
+                if (elements[i].Id == element.Id)
+                {
+                    elements[i] = element;
+                    return;
+                }
+            }
+            throw new Exception("Report doesnt exist");
+        }
+
+        private Report FindReportRecordByID(List<Report> elements, int id)
+        {
+            for (int i = 0; i < elements.Count; i++)
+            {
+                if (elements[i].Id == id)
+                {
+                    return elements[i];
+                }
+            }
+            throw new Exception("Report doesnt exist");
+        }
+
+        private void RemoveReportRecordByID(List<Report> elements, int id)
+        {
+            for (int i = 0; i < elements.Count; i++)
+            {
+                if (elements[i].Id == id)
+                {
+                    elements.RemoveAt(i);
+                    idMap.Remove(id);
+                    return;
+                }
+            }
+            throw new Exception("Report doesnt exist");
+        }
 
         public static ReportRepository Instance
         {

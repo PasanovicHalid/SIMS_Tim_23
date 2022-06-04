@@ -63,7 +63,7 @@ namespace ZdravoCorp.View.Manager.ViewModel.Medications
         public RequestsMedicationViewModel()
         {
             controller = new NewMedicationRequestController();
-            MedicationRequests = new ObservableCollection<NewMedicationRequest>(controller.GetAllNewMedicationRequests());
+            MedicationRequests = new ObservableCollection<NewMedicationRequest>(controller.GetAll());
 
             ViewCommand = new RelayCommand(o =>
             {

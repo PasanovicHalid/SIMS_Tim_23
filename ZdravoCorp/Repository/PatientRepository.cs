@@ -35,7 +35,7 @@ namespace Repository
                 patient.Appointment = AppointmentRepository.Instance
                     .GetAppointmentsById(GetIdsOfAppointments(patient));
                 patient.Record = MedicalRecordRepository.Instance
-                    .ReadMedicalRecord(patient.Record.Id);
+                    .Read(patient.Record.Id);
             }
             return patients;
         }
@@ -60,7 +60,7 @@ namespace Repository
             return Users;
         }
 
-        public Patient ReadByJMBG(string jmbg)
+        public Patient Read(string jmbg)
         {
             lock (key)
             {
@@ -140,7 +140,7 @@ namespace Repository
 
         private void CheckIfIDExists(int id)
         {
-            if (idMap.Contains(id))
+            if (!idMap.Contains(id))
                 throw new LocalisedException("UserDoesntExist");
         }
 

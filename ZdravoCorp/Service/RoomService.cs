@@ -30,7 +30,7 @@ namespace Service
 
         public Room ReadRoomByIndex(int index)
         {
-            return RoomRepository.Instance.ReadRoom(index);
+            return RoomRepository.Instance.Read(index);
         }
 
         public void Update(Room updatedRoom)
@@ -66,22 +66,22 @@ namespace Service
 
         public void CreateRoomType(Model.RoomType newRoomType)
         {
-            RoomRepository.Instance.CreateRoomType(newRoomType);
+            RoomTypeRepository.Instance.Create(newRoomType);
         }
 
         public void UpdateRoomType(Model.RoomType roomType)
         {
-            RoomRepository.Instance.UpdateRoomType(roomType);
+            RoomTypeRepository.Instance.Update(roomType);
         }
 
         public void DeleteRoomType(Model.RoomType roomType)
         {
-            RoomRepository.Instance.DeleteRoomType(roomType);
+            RoomTypeRepository.Instance.Delete(roomType);
         }
 
-        public int GetMaxCountForEquipment(int id_room, int id_equipment)
+        public int GetActualCountForEquipment(int id_room, int id_equipment)
         {
-            return RoomRepository.Instance.GetMaxCountForEquipment(id_room, id_equipment);
+            return RoomRepository.Instance.GetActualCountForEquipment(id_room, id_equipment);
         }
 
         public void ChangeActualCountOfEquipment(int id_from_room, int id_equipment,int count)
@@ -96,7 +96,7 @@ namespace Service
 
         public List<RoomType> GetAllRoomType()
         {
-            return RoomRepository.Instance.GetAllRoomType();
+            return RoomTypeRepository.Instance.GetAll();
         }
 
 

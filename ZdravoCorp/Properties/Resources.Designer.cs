@@ -142,6 +142,24 @@ namespace ZdravoCorp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Anamnesis doesnt exist.
+        /// </summary>
+        public static string AnamnesisDoesntExist {
+            get {
+                return ResourceManager.GetString("AnamnesisDoesntExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anamnesis already exists.
+        /// </summary>
+        public static string AnamnesisExists {
+            get {
+                return ResourceManager.GetString("AnamnesisExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Appointments.
         /// </summary>
         public static string Appointments {

@@ -9,58 +9,19 @@ using System.Collections.Generic;
 
 namespace Repository
 {
-    public class AppointmentRepository
+    public class AppointmentRepository : Repository<Appointment>
     {
-        private String dbPath = "..\\..\\Data\\appointmentsDB.csv";
-        private Serializer<Appointment> serializerAppointment = new Serializer<Appointment>();
-
         private static AppointmentRepository instance = null;
-        public List<int> GetAllAppointmentIds()
-        {
-            List<Appointment> appointemnts = GetAllAppointments();
-            List<int> ids = new List<int>();
-            foreach (Appointment appointment in appointemnts)
-            {
-                ids.Add(appointment.Id);
-            }
-            return ids;
-        }
-        public void GenerateId(Appointment newAppointment)
-        {
-            List<int> allAppointmentsIds = GetAllAppointmentIds();
-            Random random = new Random();
-            do
-            {
-                newAppointment.Id = random.Next();
-            }
-            while (allAppointmentsIds.Contains(newAppointment.Id));
-        }
-        public Boolean CreateAppointment(Appointment newAppointment)
-        {
-            List<Appointment> appointments = GetAllAppointments();
-            GenerateId(newAppointment);
-            appointments.Add(newAppointment);
-            serializerAppointment.ToCSV(dbPath, appointments);
-            return true;
-        }
 
-        public Appointment ReadAppointment(int id)
+        public AppointmentRepository()
         {
-            List<Appointment> appointments = GetAllAppointments();
-            Appointment appointment = null;
-            foreach (Appointment app in appointments)
-            {
-                if (id == app.Id)
-                {
-                    appointment = app;
-                }
-            }
-            return appointment;
+            dbPath = "..\\..\\Data\\appointmentsDB.csv";
+            InstantiateIDSet(GetAll());
         }
 
         public List<Appointment> GetAppointmentsById(List<int> id)
         {
-            List<Appointment> appointments = serializerAppointment.FromCSV(dbPath);
+            List<Appointment> appointments = GetAll();
             List<Appointment> appById = new List<Appointment>();
             foreach (Appointment appointment in appointments)
             {
@@ -75,58 +36,110 @@ namespace Repository
             return appById;
         }
 
-        public Boolean UpdateAppointment(Appointment appointment)
+        public override Appointment Read(int id)
         {
-            Boolean success = false;
-            List<Appointment> appointments = GetAllAppointments();
-            for (int i = 0; i < appointments.Count; i++)
+            lock (key)
             {
-                if (appointment.Id == appointments[i].Id)
-                {
-                    appointments[i] = appointment;
-                    serializerAppointment.ToCSV(dbPath, appointments);
-                    success = true;
-                }
+                CheckIfIDExists(id);
+                return FindAppointmentByID(GetAll(), id);
             }
-            return success;
         }
 
-        public Boolean DeleteAppointment(int id)
+        public override void Create(Appointment element)
         {
-            Boolean success = false;
-            List<Appointment> appointments = GetAllAppointments();
-            foreach (Appointment temp in appointments)
+            lock (key)
             {
-                if (temp.Id == id)
+                element.Id = GenerateID();
+                AppendToDB(element);
+                idMap.Add(element.Id);
+            }
+        }
+
+        public override void Update(Appointment element)
+        {
+            lock (key)
+            {
+                CheckIfIDExists(element.Id);
+                List<Appointment> elements = GetAll();
+                SwapAppointmentByID(elements, element);
+                SaveChanges(elements);
+            }
+        }
+
+        public override void Delete(int id)
+        {
+            lock (key)
+            {
+                CheckIfIDExists(id);
+                List<Appointment> elements = GetAll();
+                RemoveAppointmentByID(elements, id);
+                SaveChanges(elements);
+            }
+        }
+
+        protected override void InstantiateIDSet(List<Appointment> elements)
+        {
+            lock (key)
+            {
+                foreach (Appointment element in elements)
                 {
-                    success = true;
-                    appointments.Remove(temp);
-                    Doctor d = DoctorRepository.Instance.Read(temp.doctor.Id);
-                    d.RemoveAppointment(temp);
+                    idMap.Add(element.Id);
+                }
+            }
+        }
+
+        private void SwapAppointmentByID(List<Appointment> elements, Appointment element)
+        {
+            for (int i = 0; i < elements.Count; i++)
+            {
+                if (elements[i].Id == element.Id)
+                {
+                    elements[i] = element;
+                    return;
+                }
+            }
+            throw new Exception("Appointment doesnt exist");
+        }
+
+        private Appointment FindAppointmentByID(List<Appointment> elements, int id)
+        {
+            for (int i = 0; i < elements.Count; i++)
+            {
+                if (elements[i].Id == id)
+                {
+                    return elements[i];
+                }
+            }
+            throw new Exception("Appointment doesnt exist");
+        }
+
+        private void RemoveAppointmentByID(List<Appointment> elements, int id)
+        {
+            for (int i = 0; i < elements.Count; i++)
+            {
+                if (elements[i].Id == id)
+                {
+                    elements.RemoveAt(i);
+                    idMap.Remove(id);
+                    Doctor d = DoctorRepository.Instance.Read(elements[i].doctor.Id);
+                    d.RemoveAppointment(elements[i]);
                     DoctorRepository.Instance.Update(d);
-                    Room r = RoomRepository.Instance.ReadRoom(temp.Room.Identifier);
-                    r.RemoveAppointment(temp);
-                    RoomRepository.Instance.UpdateRoom(r);
-                    Patient p = PatientRepository.Instance.Read(temp.Patient.Id);
-                    p.RemoveAppointment(temp);
+                    Room r = RoomRepository.Instance.Read(elements[i].Room.Identifier);
+                    r.RemoveAppointment(elements[i]);
+                    RoomRepository.Instance.Update(r);
+                    Patient p = PatientRepository.Instance.Read(elements[i].Patient.Id);
+                    p.RemoveAppointment(elements[i]);
                     PatientRepository.Instance.Update(p);
-                    serializerAppointment.ToCSV(dbPath, appointments);
-                    break;
+                    return;
                 }
             }
-            return success;
+            throw new Exception("Appointment doesnt exist");
         }
 
-        public List<Appointment> GetAllAppointments()
+        private void CheckIfIDExists(int id)
         {
-            List<Appointment> appointments = serializerAppointment.FromCSV(dbPath);
-            return appointments;
-
-        }
-
-        public AppointmentRepository()
-        {
-
+            if (!idMap.Contains(id))
+                throw new Exception("Appointment doesnt exist");
         }
 
         public static AppointmentRepository Instance

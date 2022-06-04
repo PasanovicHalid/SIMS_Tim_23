@@ -140,7 +140,7 @@
     <Compile Include="Repository\MedicationIngredientsRepository.cs" />
     <Compile Include="Repository\ReportRepository.cs" />
     <Compile Include="Repository\DoctorRepository.cs" />
-    <Compile Include="Repository\EquipmentRepository.cs" />
+    <Compile Include="Repository\EquipmentTypeRepository.cs" />
     <Compile Include="Repository\ManagerRepository.cs" />
     <Compile Include="Repository\MedicalRecordRepository.cs" />
     <Compile Include="Repository\MedicationRepository.cs" />

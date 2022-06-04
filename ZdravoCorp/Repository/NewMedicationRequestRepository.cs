@@ -7,65 +7,114 @@ using System.Threading.Tasks;
 
 namespace Repository
 {
-    public class NewMedicationRequestRepository
+    public class NewMedicationRequestRepository : Repository<NewMedicationRequest>
     {
         private static NewMedicationRequestRepository instance = null;
-
-        private String dbPath = "..\\..\\Data\\newMedicationRequestDB.csv";
-        private Serializer<NewMedicationRequest> serializerNewMedicationRequest = new Serializer<NewMedicationRequest>();
-
-        private HashSet<int> idMap = new HashSet<int>();
-
         public NewMedicationRequestRepository()
         {
-            List<NewMedicationRequest> requests = GetAllNewMedicationRequests();
-            InstantiateHashSets(requests);
+            dbPath = "..\\..\\Data\\newMedicationRequestDB.csv";
+            InstantiateIDSet(GetAll());
         }
 
-        private int GenerateID()
+        public Boolean AcceptNewMedicationRequest(NewMedicationRequest newMedicationRequest)
         {
-            int id;
-            Random random = new Random();
-            do
-            {
-                id = random.Next();
-            }
-            while (CheckIfIDExists(id));
-            return id;
-        }
-
-        private void InstantiateHashSets(List<NewMedicationRequest> requests)
-        {
+            List<NewMedicationRequest> requests = GetAll();
             foreach (NewMedicationRequest request in requests)
             {
-                idMap.Add(request.Id);
+                if (request.Id == newMedicationRequest.Id)
+                {
+                    Controller.MedicationController medicationController = new Controller.MedicationController();
+                    medicationController.CreateMedicationType(newMedicationRequest.MedicationType);
+                    requests.Remove(request);
+                    SaveChanges(requests);
+                    return true;
+                }
             }
+            return false;
         }
 
-        private bool CheckIfIDExists(int id)
+        public Boolean RejectNewMedicationRequest(NewMedicationRequest newMedicationRequest, String comment)
         {
-            return idMap.Contains(id);
-        }
-
-        public Boolean CreateNewMedicationRequest(NewMedicationRequest newMedicationRequest)
-        {
-            newMedicationRequest.Id = GenerateID();
-            serializerNewMedicationRequest.ToCSVAppend(dbPath, new List<NewMedicationRequest>() { newMedicationRequest });
-            idMap.Add(newMedicationRequest.Id);
+            newMedicationRequest.Status = Status.REJECTED;
+            newMedicationRequest.Comment = comment;
+            Update(newMedicationRequest);
             return true;
         }
 
-        public NewMedicationRequest ReadNewMedicationRequest(int id)
+        public override NewMedicationRequest Read(int id)
         {
-            List<NewMedicationRequest> requests= GetAllNewMedicationRequests();
-            foreach (NewMedicationRequest temp in requests)
+            lock (key)
             {
-                if (id == temp.Id)
+                CheckIfIDExists(id);
+                return FindRequestByID(GetAll(), id);
+            }
+        }
+
+        public override void Create(NewMedicationRequest element)
+        {
+            lock (key)
+            {
+                element.Id = GenerateID();
+                AppendToDB(element);
+                idMap.Add(element.Id);
+            }
+        }
+
+        public override void Update(NewMedicationRequest element)
+        {
+            lock (key)
+            {
+                CheckIfIDExists(element.Id);
+                List<NewMedicationRequest> elements = GetAll();
+                SwapRequestByID(elements, element);
+                SaveChanges(elements);
+            }
+        }
+
+        public override void Delete(int id)
+        {
+            lock (key)
+            {
+                CheckIfIDExists(id);
+                List<NewMedicationRequest> elements = GetAll();
+                DeleteRequestByID(elements, id);
+                SaveChanges(elements);
+            }
+        }
+
+        public new List<NewMedicationRequest> GetAll()
+        {
+            List<NewMedicationRequest> requests = base.GetAll();
+            Dictionary<int, MedicationType> types = MedicationTypeRepository.Instance.GetAll()
+                .ToDictionary(keySelector: m => m.Id, elementSelector: m => m);
+            foreach (NewMedicationRequest request in requests)
+            {
+                for (int i = 0; i < request.MedicationType.Replacement.Count; i++)
                 {
-                    return temp;
+                    if (types.ContainsKey(request.MedicationType.Replacement[i].Id))
+                    {
+                        request.MedicationType.Replacement[i] = types[request.MedicationType.Replacement[i].Id];
+                    }
                 }
             }
-            return null;
+            return requests;
+        }
+
+        protected override void InstantiateIDSet(List<NewMedicationRequest> elements)
+        {
+            lock (key)
+            {
+                foreach (NewMedicationRequest element in elements)
+                {
+                    idMap.Add(element.Id);
+                }
+            }
+        }
+
+        private void CheckIfIDExists(int id)
+        {
+            if (!idMap.Contains(id))
+                throw new Exception("MedicalRecord doesnt exist");
         }
 
         private void SwapRequestByID(List<NewMedicationRequest> requests, NewMedicationRequest request)
@@ -80,22 +129,6 @@ namespace Repository
             }
         }
 
-        public Boolean UpdateNewMedicationRequest(NewMedicationRequest newMedicationRequest)
-        {
-            if (CheckIfIDExists(newMedicationRequest.Id))
-            {
-                List<NewMedicationRequest> requests = GetAllNewMedicationRequests();
-                SwapRequestByID(requests, newMedicationRequest);
-                serializerNewMedicationRequest.ToCSV(dbPath, requests);
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-
-        }
-
         private void DeleteRequestByID(List<NewMedicationRequest> requests, int id)
         {
             for (int i = 0; i < requests.Count; i++)
@@ -103,67 +136,22 @@ namespace Repository
                 if (requests[i].Id == id)
                 {
                     requests.RemoveAt(i);
+                    idMap.Remove(id);
                     break;
                 }
             }
         }
 
-        public Boolean DeleteNewMedicationRequest(int id)
+        private NewMedicationRequest FindRequestByID(List<NewMedicationRequest> elements, int id)
         {
-            if (CheckIfIDExists(id))
+            for (int i = 0; i < elements.Count; i++)
             {
-                List<NewMedicationRequest> requests = GetAllNewMedicationRequests();
-                DeleteRequestByID(requests, id);
-                serializerNewMedicationRequest.ToCSV(dbPath, requests);
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        public List<NewMedicationRequest> GetAllNewMedicationRequests()
-        {
-            List<NewMedicationRequest> requests = serializerNewMedicationRequest.FromCSV(dbPath);
-            Dictionary<int, MedicationType> types = MedicationRepository.Instance.GetAllMedicationType()
-                .ToDictionary(keySelector: m => m.Id, elementSelector: m => m);
-            foreach(NewMedicationRequest request in requests)
-            {
-                for(int i = 0; i < request.MedicationType.Replacement.Count; i++)
+                if (elements[i].Id == id)
                 {
-                    if (types.ContainsKey(request.MedicationType.Replacement[i].Id))
-                    {
-                        request.MedicationType.Replacement[i] = types[request.MedicationType.Replacement[i].Id];
-                    }
+                    return elements[i];
                 }
             }
-            return requests;
-        }
-
-        public Boolean AcceptNewMedicationRequest(NewMedicationRequest newMedicationRequest)
-        {
-            List<NewMedicationRequest> requests = serializerNewMedicationRequest.FromCSV(dbPath);
-            foreach (NewMedicationRequest request in requests)
-            {
-                if (request.Id == newMedicationRequest.Id)
-                {
-                    Controller.MedicationController medicationController = new Controller.MedicationController();
-                    medicationController.CreateMedicationType(newMedicationRequest.MedicationType);
-                    requests.Remove(request);
-                    serializerNewMedicationRequest.ToCSV(dbPath, requests);
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        public Boolean RejectNewMedicationRequest(NewMedicationRequest newMedicationRequest, String comment)
-        {
-            newMedicationRequest.Status = Status.REJECTED;
-            newMedicationRequest.Comment = comment;
-            UpdateNewMedicationRequest(newMedicationRequest);
-            return true;
+            throw new Exception("MedicalRecord doesnt exist");
         }
 
         public static NewMedicationRequestRepository Instance

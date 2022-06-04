@@ -12,35 +12,74 @@ using ZdravoCorp.Exceptions;
 namespace Repository
 {
     //Sequencial Data Base
-    public class ActionRepository
+    public class ActionRepository : Repository<Model.Action>
     {
-        private String dbPath = "..\\..\\Data\\actionsDB.csv";
-        private Serializer<Model.Action> serializerAction = new Serializer<Model.Action>();
-        private HashSet<int> idMap;
-
         private static ActionRepository instance = null;
-
-        private static readonly object key = new object();
-
         public ActionRepository()
         {
-            idMap = new HashSet<int>();
-            List<Model.Action> actions = serializerAction.FromCSV(dbPath);
-            foreach (Model.Action action in actions)
-            {
-                idMap.Add(action.Id);
-            }
+            dbPath = "..\\..\\Data\\actionsDB.csv";
+            InstantiateIDSet(GetAll());
         }
 
-        public void CreateAction(Model.Action newAction)
+        public override Model.Action Read(int id)
         {
             lock (key)
             {
-                newAction.Id = GenerateID();
-                List<Model.Action> actions = serializerAction.FromCSV(dbPath);
-                AddAction(newAction, actions);
-                serializerAction.ToCSV(dbPath, actions);
-                idMap.Add(newAction.Id);
+                CheckIfIDExists(id);
+                List<Model.Action> actions = GetAll();
+                return FindActionByID(id, actions);
+            }
+        }
+
+        public override void Create(Model.Action element)
+        {
+            lock (key)
+            {
+                element.Id = GenerateID();
+                List<Model.Action> actions = GetAll();
+                AddAction(element, actions);
+                SaveChanges(actions);
+                idMap.Add(element.Id);
+            }
+        }
+
+        public override void Update(Model.Action element)
+        {
+            lock (key)
+            {
+                List<Model.Action> actions = GetAll();
+                SwapActions(element, actions);
+                SortActionsAscendingAndSaveChanges(actions);
+            }
+        }
+
+        public override void Delete(int id)
+        {
+            lock (key)
+            {
+                List<Model.Action> actions = GetAll();
+                RemoveActionByID(id, actions);
+                SaveChanges(actions);
+                idMap.Remove(id);
+            }
+        }
+
+        public void SaveActions(List<Model.Action> actions)
+        {
+            lock (key)
+            {
+                SaveChanges(actions);
+            }
+        }
+
+        protected override void InstantiateIDSet(List<Model.Action> elements)
+        {
+            lock (key)
+            {
+                foreach (Model.Action element in elements)
+                {
+                    idMap.Add(element.Id);
+                }
             }
         }
 
@@ -57,66 +96,10 @@ namespace Repository
             throw new LocalisedException("ActionDoesntExist");
         }
 
-        public void UpdateAction(Model.Action action)
+        private void CheckIfIDExists(int id)
         {
-            lock (key)
-            {
-                List<Model.Action> actions = serializerAction.FromCSV(dbPath);
-                SwapActions(action, actions);
-                SortActionsAscending(actions);
-            }
-        }
-
-        public void DeleteAction(int id)
-        {
-            lock (key)
-            {
-                List<Model.Action> actions = serializerAction.FromCSV(dbPath);
-                RemoveActionByID(id, actions);
-                serializerAction.ToCSV(dbPath, actions);
-                idMap.Remove(id);
-            }
-        }
-
-        public void SaveActions(List<Model.Action> actions)
-        {
-            lock (key)
-            {
-                serializerAction.ToCSV(dbPath, actions);
-            }
-        }
-
-        public Model.Action ReadAction(int id)
-        {
-            lock (key)
-            {
-                if (!idMap.Contains(id))
-                {
-                    throw new LocalisedException("ActionDoesntExist");
-                }
-                List<Model.Action> actions = serializerAction.FromCSV(dbPath);
-                return FindActionByID(id, actions);
-            }
-        }
-
-        public List<Model.Action> GetAllActions()
-        {
-            lock (key)
-            {
-                return serializerAction.FromCSV(dbPath);
-            }
-        }
-
-        private int GenerateID()
-        {
-            Random random = new Random();
-            int id;
-            do
-            {
-                id = random.Next();
-            }
-            while (idMap.Contains(id));
-            return id;
+            if (!idMap.Contains(id))
+                throw new LocalisedException("ActionDoesntExist");
         }
 
         /*
@@ -135,9 +118,9 @@ namespace Repository
             actions.Add(newAction);
         }
 
-        private void SortActionsAscending(List<Model.Action> actions)
+        private void SortActionsAscendingAndSaveChanges(List<Model.Action> actions)
         {
-            serializerAction.ToCSV(dbPath, actions.OrderBy(a => a.ExecutionDate).ToList());
+            serializer.ToCSV(dbPath, actions.OrderBy(a => a.ExecutionDate).ToList());
         }
 
         private Model.Action FindActionByID(int id, List<Model.Action> actions)
