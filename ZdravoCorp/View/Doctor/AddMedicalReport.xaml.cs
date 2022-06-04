@@ -23,7 +23,7 @@ namespace ZdravoCorp.View.Doctor
     {
         Model.Patient currentPatient;
         AppointmentController ac = new AppointmentController();
-        Controller.ReportController cc = new Controller.ReportController();
+        ReportController cc = new ReportController();
         MedicalRecordController mcc = new MedicalRecordController();
         PatientController pc = new PatientController();
         Model.Doctor currentDoctor;

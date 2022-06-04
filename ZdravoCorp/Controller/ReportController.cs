@@ -7,7 +7,7 @@ using Model;
 using Repository;
 using Service;
 
-namespace ZdravoCorp.Controller
+namespace Controller
 {
     public class ReportController : ICrud<Report>
     {

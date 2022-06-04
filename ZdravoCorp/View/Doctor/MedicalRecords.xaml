@@ -5,26 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ZdravoCorp.View.Doctor"
         mc:Ignorable="d"
-        Title="MedicalRecords" Height="494" Width="883"
+        Title="MedicalRecords" Height="522" Width="1023"
         WindowStartupLocation="CenterScreen">
     <Grid>
-        <DataGrid x:Name="CommentsGrid" ItemsSource="{Binding}"
-            AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" Margin="413,71,67,243">
+        <GroupBox HorizontalAlignment="Center" Height="410" Header="Medical Record:" Margin="0,86,0,0" VerticalAlignment="Top" Width="1001" BorderBrush="#FF688CAF"/>
+        <GroupBox HorizontalAlignment="Left" Height="321" Header="Informations:" Margin="32,138,0,0" VerticalAlignment="Top" Width="281"/>
+        <DataGrid x:Name="ReportsGrid" ItemsSource="{Binding}"
+            AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" Margin="338,163,365,23">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Comment ID" Binding="{Binding Id}" Width="103"/>
-                <DataGridTextColumn Header="Comment" Binding="{Binding Comment}" Width="103"/>
-                <DataGridTextColumn Header="Appointment ID" Binding="{Binding AppointmentID}" Width="103" />
-                <DataGridTextColumn Header="Doctor ID" Binding="{Binding DoctorID}" Width="103"/>
+                <DataGridTextColumn Header="Comment" Binding="{Binding Comment}" Width="70"/>
+                <DataGridTextColumn Header="Appointment ID" Binding="{Binding AppointmentID}" Width="110" />
+                <DataGridTextColumn Header="Date" Binding="{Binding AppointmentDate}" Width="60" />
+                <DataGridTextColumn Header="Doctor ID" Binding="{Binding DoctorID}" Width="80"/>
 
             </DataGrid.Columns>
         </DataGrid>
         <ComboBox 
             x:Name ="PatientsCB"
-            HorizontalAlignment="Left" 
-            Margin="167,94,0,0" 
+            HorizontalAlignment="Right" 
+            Margin="0,52,697,0" 
             VerticalAlignment="Top" 
-            Width="206"
-            ItemsSource="{Binding}" SelectionChanged="PatientsCB_SelectionChanged" >
+            Width="204"
+            ItemsSource="{Binding}" SelectionChanged="PatientsCB_SelectionChanged" Height="26" >
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -34,35 +36,42 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="22" Margin="167,156,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="206"/>
-        <TextBox x:Name="textBox2" HorizontalAlignment="Left" Height="22" Margin="167,203,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="206"/>
-        <TextBox x:Name="textBox3" HorizontalAlignment="Left" Height="22" Margin="167,256,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="206"/>
-        <TextBox x:Name="textBox4" HorizontalAlignment="Left" Height="22" Margin="167,309,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="206"/>
-        <Label Content="ID:" HorizontalAlignment="Left" Margin="82,154,0,0" VerticalAlignment="Top"/>
-        <Label Content="Weight:" HorizontalAlignment="Left" Margin="82,196,0,0" VerticalAlignment="Top"/>
-        <Label Content="Height:" HorizontalAlignment="Left" Margin="82,249,0,0" VerticalAlignment="Top"/>
-        <Label Content="Blood Type" HorizontalAlignment="Left" Margin="82,302,0,0" VerticalAlignment="Top"/>
-        <Label Content="Patient:" HorizontalAlignment="Left" Margin="83,94,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="commentButton" Content="Dodaj Pregled" HorizontalAlignment="Left" Margin="94,379,0,0" VerticalAlignment="Top" Height="53" Width="113" Click="commentButton_Click"/>
+        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="20" Margin="122,271,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" IsEnabled="False"/>
+        <TextBox x:Name="textBox2" HorizontalAlignment="Left" Height="19" Margin="122,170,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" IsEnabled="False"/>
+        <TextBox x:Name="textBox3" HorizontalAlignment="Left" Height="20" Margin="122,306,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" IsEnabled="False"/>
+        <TextBox x:Name="textBox4" HorizontalAlignment="Left" Height="20" Margin="122,343,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" IsEnabled="False"/>
+        <Label Content="ID:" HorizontalAlignment="Left" Margin="44,167,0,0" VerticalAlignment="Top"/>
+        <Label Content="Weight:" HorizontalAlignment="Left" Margin="44,265,0,0" VerticalAlignment="Top"/>
+        <Label Content="Height:" HorizontalAlignment="Left" Margin="44,304,0,0" VerticalAlignment="Top"/>
+        <Label Content="Blood Type:" HorizontalAlignment="Left" Margin="44,340,0,0" VerticalAlignment="Top" Width="73"/>
+        <Label Content="Pick Patient:" HorizontalAlignment="Left" Margin="31,50,0,0" VerticalAlignment="Top" RenderTransformOrigin="3.695,-0.326"/>
+        <Button x:Name="commentButton" Content="Add Report" HorizontalAlignment="Left" Margin="44,379,0,0" VerticalAlignment="Top" Height="56" Width="100" Click="commentButton_Click"/>
 
-        <DataGrid x:Name="NoviGrid" ItemsSource="{Binding}"
-            AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" Margin="413,284,67,33">
+        <DataGrid x:Name="PrescriptionsGrid" ItemsSource="{Binding}"
+            AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" Margin="670,163,33,23">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Medication Id" Binding="{Binding MedicationID}" Width="103"/>
-                <DataGridTextColumn Header="Times A Day" Binding="{Binding TimesADay}" Width="103"/>
-                <DataGridTextColumn Header="Duration In Days" Binding="{Binding DurationDays}" Width="103" />
-                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="103"/>
+                <DataGridTextColumn Header="Medication Name" Binding="{Binding Name}" Width="110"/>
+                <DataGridTextColumn Header="Times A Day" Binding="{Binding TimesADay}" Width="80"/>
+                <DataGridTextColumn Header="Days" Binding="{Binding DurationDays}" Width="40" />
+                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="80"/>
 
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="dodajTerapiju" Content="Dodaj Terapiju" HorizontalAlignment="Left" Margin="260,379,0,0" VerticalAlignment="Top" Height="53" Width="113" Click="dodajTerapiju_Click"/>
-        <Border BorderThickness="1" HorizontalAlignment="Center" Height="27" VerticalAlignment="Top" Width="884" BorderBrush="Black" Background="#FFA79F9F">
-            <Image HorizontalAlignment="Left" Height="24" VerticalAlignment="Center" Width="22" Source="/Resources/user.png" MouseLeftButtonDown="Image_MouseLeftButtonDown" Margin="851,0,0,0" RenderTransformOrigin="0.818,0.509"/>
+        <Button x:Name="dodajTerapiju" Content="Add Prescription" HorizontalAlignment="Left" Margin="193,379,0,0" VerticalAlignment="Top" Height="56" Width="100" Click="dodajTerapiju_Click"/>
+        <Border BorderThickness="1" HorizontalAlignment="Center" Height="27" VerticalAlignment="Top" Width="1024" BorderBrush="Black" Background="#FFA79F9F">
+            <Image HorizontalAlignment="Left" Height="24" VerticalAlignment="Center" Width="22" Source="/Resources/user.png" MouseLeftButtonDown="Image_MouseLeftButtonDown" Margin="989,0,0,0" RenderTransformOrigin="0.818,0.509"/>
         </Border>
         <Button x:Name="appointmentsButton" Content="Appointments" HorizontalAlignment="Left" VerticalAlignment="Top" Height="27" Width="100" Click="appointmentsButton_Click"/>
         <Button x:Name="medsButton" Content="Medications List" HorizontalAlignment="Left" Margin="202,0,0,0" VerticalAlignment="Top" Height="27" Width="100" Click="medsButton_Click"/>
         <Button x:Name="vacationRequestButton" Content="Vacation Request" HorizontalAlignment="Left" Margin="301,0,0,0" VerticalAlignment="Top" Height="27" Width="99" Click="vacationRequestButton_Click"/>
         <Button x:Name="kartoniButton" Content="Medical Records" HorizontalAlignment="Left" Margin="399,0,0,0" VerticalAlignment="Top" Width="103" Click="kartoniButton_Click" Height="27"/>
         <Button x:Name="requestsButton" Content="Medical Request" HorizontalAlignment="Left" Margin="99,0,0,0" VerticalAlignment="Top" Height="27" Width="104" Click="requestsButton_Click_1"/>
+        <Label Content="Reports:" HorizontalAlignment="Left" Margin="338,131,0,0" VerticalAlignment="Top" Width="54"/>
+        <Label Content="Prescriptions:" HorizontalAlignment="Left" Margin="670,131,0,0" VerticalAlignment="Top" Width="82"/>
+        <TextBox x:Name="textBox5" HorizontalAlignment="Left" Margin="122,203,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="textBox6" HorizontalAlignment="Left" Margin="122,234,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" Height="19" IsEnabled="False"/>
+        <Label Content="Name:" HorizontalAlignment="Left" Margin="44,200,0,0" VerticalAlignment="Top"/>
+        <Label Content="Surname:" HorizontalAlignment="Left" Margin="44,231,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Margin="786,52,0,0" TextWrapping="Wrap" Text="Search by ID" VerticalAlignment="Top" Width="204" Height="26"/>
     </Grid>
 </Window>
