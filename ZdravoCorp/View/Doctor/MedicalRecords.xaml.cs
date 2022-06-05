@@ -92,6 +92,10 @@ namespace ZdravoCorp.View.Doctor
                     }
                 }*/
 
+                MedicalReport med = new MedicalReport(tempPatient, currentDoctor);
+                this.Close();
+                med.Show();
+
 
             }
         }
