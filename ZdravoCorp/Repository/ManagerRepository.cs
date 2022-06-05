@@ -81,10 +81,10 @@ namespace Repository
             }
         }
 
-        private void InstantiateHashSets(List<Manager> managers)
+        private void InstantiateHashSets(List<Manager> elements)
         {
-            InstantiateIDSet(managers);
-            InstantiateUserSet(managers);
+            InstantiateIDSet(elements);
+            InstantiateUserSet(elements);
         }
 
         private void CheckIfUsernameExists(string username)
@@ -99,40 +99,40 @@ namespace Repository
                 throw new LocalisedException("UserDoesntExist");
         }
 
-        private Manager FindManagerByID(List<Manager> managers, int id)
+        private Manager FindManagerByID(List<Manager> elements, int id)
         {
-            for (int i = 0; i < managers.Count; i++)
+            for (int i = 0; i < elements.Count; i++)
             {
-                if (managers[i].Id == id)
+                if (elements[i].Id == id)
                 {
-                    return managers[i];
+                    return elements[i];
                 }
             }
             throw new LocalisedException("UserDoesntExist");
         }
 
-        private void SwapManagerByID(List<Manager> managers, Manager manager)
+        private void SwapManagerByID(List<Manager> elements, Manager element)
         {
-            for (int i = 0; i < managers.Count; i++)
+            for (int i = 0; i < elements.Count; i++)
             {
-                if (managers[i].Id == manager.Id)
+                if (elements[i].Id == element.Id)
                 {
-                    managers[i] = manager;
+                    elements[i] = element;
                     return;
                 }
             }
             throw new LocalisedException("UserDoesntExist");
         }
 
-        private void DeleteManagerByID(List<Manager> managers, int id)
+        private void DeleteManagerByID(List<Manager> elements, int id)
         {
-            for (int i = 0; i < managers.Count; i++)
+            for (int i = 0; i < elements.Count; i++)
             {
-                if (managers[i].Id == id)
+                if (elements[i].Id == id)
                 {
                     idMap.Remove(id);
-                    Users.Remove(managers[i].Username);
-                    managers.RemoveAt(i);
+                    Users.Remove(elements[i].Username);
+                    elements.RemoveAt(i);
                     return;
                 }
             }

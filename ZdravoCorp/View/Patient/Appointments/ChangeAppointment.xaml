@@ -59,7 +59,7 @@
             Margin="54,219,0,0" 
             VerticalAlignment="Top" RenderTransformOrigin="0.46,0.618"/>
         <RadioButton 
-            Style="{DynamicResource RadioButton}"
+            Style="{DynamicResource RadioButtonCanSelect}"
             Name="DateRB"
             Content="Datum" 
             HorizontalAlignment="Left"
@@ -67,7 +67,7 @@
             VerticalAlignment="Top"
             IsChecked="True" />
         <RadioButton 
-            Style="{DynamicResource RadioButton}"
+            Style="{DynamicResource RadioButtonCanSelect}"
             Name ="DoctorRB"
             Content="Doktor" 
             HorizontalAlignment="Left" 

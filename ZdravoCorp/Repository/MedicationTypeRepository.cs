@@ -92,28 +92,28 @@ namespace Repository
                 throw new LocalisedException("MedicationTypeDoesntExist");
         }
 
-        private void DeleteTypeByID(List<MedicationType> types, int id)
+        private void DeleteTypeByID(List<MedicationType> elements, int id)
         {
-            for (int i = 0; i < types.Count; i++)
+            for (int i = 0; i < elements.Count; i++)
             {
-                if (types[i].Id == id)
+                if (elements[i].Id == id)
                 {
-                    typeNameMap.Remove(types[i].Name);
+                    typeNameMap.Remove(elements[i].Name);
                     idMap.Remove(id);
-                    types.RemoveAt(i);
+                    elements.RemoveAt(i);
                     return;
                 }
             }
             throw new LocalisedException("MedicationTypeDoesntExist");
         }
 
-        private void SwapTypesByID(List<MedicationType> types, MedicationType type)
+        private void SwapTypesByID(List<MedicationType> elements, MedicationType element)
         {
-            for (int i = 0; i < types.Count; i++)
+            for (int i = 0; i < elements.Count; i++)
             {
-                if (types[i].Id == type.Id)
+                if (elements[i].Id == element.Id)
                 {
-                    types[i] = type;
+                    elements[i] = element;
                     return;
                 }
             }

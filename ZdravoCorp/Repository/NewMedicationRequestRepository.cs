@@ -15,7 +15,7 @@ namespace Repository
             dbPath = "..\\..\\Data\\newMedicationRequestDB.csv";
             InstantiateIDSet(GetAll());
         }
-
+        
         public Boolean AcceptNewMedicationRequest(NewMedicationRequest newMedicationRequest)
         {
             List<NewMedicationRequest> requests = GetAll();
@@ -117,25 +117,25 @@ namespace Repository
                 throw new Exception("MedicalRecord doesnt exist");
         }
 
-        private void SwapRequestByID(List<NewMedicationRequest> requests, NewMedicationRequest request)
+        private void SwapRequestByID(List<NewMedicationRequest> elements, NewMedicationRequest element)
         {
-            for (int i = 0; i < requests.Count; i++)
+            for (int i = 0; i < elements.Count; i++)
             {
-                if (requests[i].Id == request.Id)
+                if (elements[i].Id == element.Id)
                 {
-                    requests[i] = request;
+                    elements[i] = element;
                     break;
                 }
             }
         }
 
-        private void DeleteRequestByID(List<NewMedicationRequest> requests, int id)
+        private void DeleteRequestByID(List<NewMedicationRequest> elements, int id)
         {
-            for (int i = 0; i < requests.Count; i++)
+            for (int i = 0; i < elements.Count; i++)
             {
-                if (requests[i].Id == id)
+                if (elements[i].Id == id)
                 {
-                    requests.RemoveAt(i);
+                    elements.RemoveAt(i);
                     idMap.Remove(id);
                     break;
                 }

@@ -16,46 +16,45 @@ namespace Controller
 {
     public class RoomController : ICrud<Room>
     {
-        RoomService roomService = new RoomService();
 
         public void Create(Room newRoom)
         {
-            roomService.Create(newRoom);
+            RoomService.Instance.Create(newRoom);
         }
 
         public Room Read(int identifier)
         {
-            return roomService.Read(identifier);
+            return RoomService.Instance.Read(identifier);
         }
 
         public void Update(Room updatedRoom)
         {
-            roomService.Update(updatedRoom);
+            RoomService.Instance.Update(updatedRoom);
         }
 
         public void Delete(int identifier)
         {
-            roomService.Delete(identifier);
+            RoomService.Instance.Delete(identifier);
         }
 
         public void RenovateRoom(int identifier, DateTime start, DateTime end)
         {
-            roomService.RenovateRoom(identifier, start, end);
+            RoomService.Instance.RenovateRoom(identifier, start, end);
         }
 
         public void CombineRooms(Room combineInto, Room selectedRoom)
         {
-            roomService.CombineRooms(combineInto, selectedRoom);
+            RoomService.Instance.CombineRooms(combineInto, selectedRoom);
         }
 
         public List<Room> GetAll()
         {
-            return roomService.GetAll();
+            return RoomService.Instance.GetAll();
         }
 
         public ObservableCollection<RoomModel> GetAllRoomsVO()
         {
-            List<Room> types = roomService.GetAll();
+            List<Room> types = RoomService.Instance.GetAll();
             ObservableCollection<RoomModel> result = new ObservableCollection<RoomModel>();
             foreach (Room it in types)
             {
@@ -89,14 +88,14 @@ namespace Controller
             throw new NotImplementedException();
         }
 
-        public int GetActualCountForEquipment(int id_room, int id_equipment)
+        public int GetActualCountForEquipment(int idRoom, int idEquipment)
         {
-            return RoomService.Instance.GetActualCountForEquipment(id_room, id_equipment);
+            return RoomService.Instance.GetActualCountForEquipment(idRoom, idEquipment);
         }
 
         public ObservableCollection<RoomTypeModel> GetAllRoomTypeView()
         {
-            return roomService.GetAllRoomTypeView();
+            return RoomService.Instance.GetAllRoomTypeView();
 
         }
         public Room findFreeRoom(DateTime start, DateTime end)

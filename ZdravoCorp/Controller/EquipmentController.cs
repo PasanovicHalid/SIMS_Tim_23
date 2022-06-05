@@ -67,9 +67,9 @@ namespace Controller
             throw new NotImplementedException();
         }
 
-        public void ChangePositionOfEquipment(DateTime excecutionDate,int id_from_room,int id_to_room, int id_equipment, int count)
+        public void ChangePositionOfEquipment(DateTime excecutionDate,int idFromRoom,int idToRoom, int idEquipment, int count)
         {
-            EquipmentService.Instance.ChangePositionOfEquipment(excecutionDate, id_from_room, id_to_room, id_equipment, count);
+            EquipmentService.Instance.ChangePositionOfEquipment(excecutionDate, idFromRoom, idToRoom, idEquipment, count);
         }
 
         public ObservableCollection<EquipmentTypeModel> GetAllEquipmentType()

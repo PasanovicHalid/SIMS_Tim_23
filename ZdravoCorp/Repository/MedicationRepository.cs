@@ -24,7 +24,7 @@ namespace Repository
             lock (key)
             {
                 CheckIfIDExists(id);
-                return FindMedicationRecordByID(GetAll(), id);
+                return FindMedicationByID(GetAll(), id);
             }
         }
 
@@ -44,7 +44,7 @@ namespace Repository
             {
                 CheckIfIDExists(element.Id);
                 List<Medication> elements = GetAll();
-                SwapMedicationRecordByID(elements, element);
+                SwapMedicationByID(elements, element);
                 SaveChanges(elements);
             }
         }
@@ -55,7 +55,7 @@ namespace Repository
             {
                 CheckIfIDExists(id);
                 List<Medication> elements = GetAll();
-                RemoveMedicationRecordByID(elements, id);
+                RemoveMedicationByID(elements, id);
                 SaveChanges(elements);
             }
         }
@@ -77,7 +77,7 @@ namespace Repository
                 throw new Exception("Medication doesnt exist");
         }
 
-        private void SwapMedicationRecordByID(List<Medication> elements, Medication element)
+        private void SwapMedicationByID(List<Medication> elements, Medication element)
         {
             for (int i = 0; i < elements.Count; i++)
             {
@@ -90,7 +90,7 @@ namespace Repository
             throw new Exception("Medication doesnt exist");
         }
 
-        private Medication FindMedicationRecordByID(List<Medication> elements, int id)
+        private Medication FindMedicationByID(List<Medication> elements, int id)
         {
             for (int i = 0; i < elements.Count; i++)
             {
@@ -102,7 +102,7 @@ namespace Repository
             throw new Exception("Medication doesnt exist");
         }
 
-        private void RemoveMedicationRecordByID(List<Medication> elements, int id)
+        private void RemoveMedicationByID(List<Medication> elements, int id)
         {
             for (int i = 0; i < elements.Count; i++)
             {

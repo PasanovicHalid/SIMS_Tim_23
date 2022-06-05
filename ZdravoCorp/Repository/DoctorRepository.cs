@@ -97,17 +97,17 @@ namespace Repository
             }
         }
 
-        private void InstantiateHashSets(List<Doctor> doctors)
+        private void InstantiateHashSets(List<Doctor> elements)
         {
-            InstantiateIDSet(doctors);
-            InstantiateUserSet(doctors);
+            InstantiateIDSet(elements);
+            InstantiateUserSet(elements);
         }
 
-        private void CheckIfDoctorExists(List<Doctor> doctors, Doctor doctor)
+        private void CheckIfDoctorExists(List<Doctor> elements, Doctor element)
         {
-            foreach (Doctor it in doctors)
+            foreach (Doctor it in elements)
             {
-                if (it.Jmbg.Equals(doctor.Jmbg))
+                if (it.Jmbg.Equals(element.Jmbg))
                 {
                     throw new LocalisedException("UserExists");
                 }
@@ -126,50 +126,50 @@ namespace Repository
                 throw new LocalisedException("UserDoesntExist");
         }
 
-        private Doctor FindDoctorByID(List<Doctor> doctors, int id)
+        private Doctor FindDoctorByID(List<Doctor> elements, int id)
         {
-            for (int i = 0; i < doctors.Count; i++)
+            for (int i = 0; i < elements.Count; i++)
             {
-                if (doctors[i].Id == id)
+                if (elements[i].Id == id)
                 {
-                    return doctors[i];
+                    return elements[i];
                 }
             }
             throw new LocalisedException("UserDoesntExist");
         }
 
-        private void DeleteDoctorByID(List<Doctor> doctors, int id)
+        private void DeleteDoctorByID(List<Doctor> elements, int id)
         {
-            for (int i = 0; i < doctors.Count; i++)
+            for (int i = 0; i < elements.Count; i++)
             {
-                if (doctors[i].Id == id)
+                if (elements[i].Id == id)
                 {
                     idMap.Remove(id);
-                    Users.Remove(doctors[i].Username);
-                    doctors.RemoveAt(i);
+                    Users.Remove(elements[i].Username);
+                    elements.RemoveAt(i);
                     return;
                 }
             }
             throw new LocalisedException("UserDoesntExist");
         }
 
-        private void SwapDoctorByID(List<Doctor> doctors, Doctor doctor)
+        private void SwapDoctorByID(List<Doctor> elements, Doctor element)
         {
-            for (int i = 0; i < doctors.Count; i++)
+            for (int i = 0; i < elements.Count; i++)
             {
-                if (doctors[i].Id == doctor.Id)
+                if (elements[i].Id == element.Id)
                 {
-                    doctors[i] = doctor;
+                    elements[i] = element;
                     return;
                 }
             }
             throw new LocalisedException("UserDoesntExist");
         }
 
-        private List<int> GetIdsOfAppointments(Doctor doctor)
+        private List<int> GetIdsOfAppointments(Doctor element)
         {
             List<int> ids = new List<int>();
-            foreach (Appointment it in doctor.Appointment)
+            foreach (Appointment it in element.Appointment)
             {
                 ids.Add(it.Id);
             }
