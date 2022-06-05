@@ -11,7 +11,7 @@ using Repository;
 
 namespace Controller
 {
-    public class AppointmentController
+    public class AppointmentController : ICrud<Appointment>
     {
         public void Create(Appointment newAppointment)
         {

@@ -20,10 +20,10 @@ namespace Repository
             InstantiateHashSets(GetAll());
         }
 
-        private void InstantiateHashSets(List<Patient> secretaries)
+        private void InstantiateHashSets(List<Patient> elements)
         {
-            InstantiateIDSet(secretaries);
-            InstantiateUserSet(secretaries);
+            InstantiateIDSet(elements);
+            InstantiateUserSet(elements);
         }
 
         public new List<Patient> GetAll()
@@ -40,19 +40,21 @@ namespace Repository
             return patients;
         }
 
-        public Boolean AddPrescription(Model.Patient patient, Model.Prescription newPrescription)
+        public Boolean AddPrescription(Model.Patient element, Model.Prescription newPrescription)
         {
+            Boolean success = false;
             List<Patient> patients = GetAll();
             foreach (Patient temp in patients)
             {
-                if(temp.Id == patient.Id)
+                if(temp.Id == element.Id)
                 {
-                    patient.AddPrescription(newPrescription);
-                    Update(patient);
-                    return true;
+                    element.AddPrescription(newPrescription);
+                    Update(element);
+                    success = true;
+                    break;
                 }
             }
-            return false;
+            return success;
         }
 
         public Dictionary<string, Patient> GetUsernameHashSet()
@@ -127,9 +129,9 @@ namespace Repository
             }
         }
 
-        private void CheckIfJMBGExists(List<Patient> patients, string jmbg)
+        private void CheckIfJMBGExists(List<Patient> elements, string jmbg)
         {
-            foreach (Patient it in patients)
+            foreach (Patient it in elements)
             {
                 if (it.Jmbg.Equals(jmbg))
                 {
@@ -150,13 +152,13 @@ namespace Repository
                 throw new LocalisedException("UserExists");
         }
 
-        private Patient FindPatientByID(List<Patient> patients, int id)
+        private Patient FindPatientByID(List<Patient> elements, int id)
         {
-            for (int i = 0; i < patients.Count; i++)
+            for (int i = 0; i < elements.Count; i++)
             {
-                if (patients[i].Id == id)
+                if (elements[i].Id == id)
                 {
-                    return patients[i];
+                    return elements[i];
                 }
             }
             throw new LocalisedException("UserDoesntExist");
@@ -175,38 +177,38 @@ namespace Repository
             throw new LocalisedException("UserDoesntExist");
         }
 
-        private void DeletePatientByID(List<Patient> patients, int id)
+        private void DeletePatientByID(List<Patient> elements, int id)
         {
-            for (int i = 0; i < patients.Count; i++)
+            for (int i = 0; i < elements.Count; i++)
             {
-                if (patients[i].Id == id)
+                if (elements[i].Id == id)
                 {
                     idMap.Remove(id);
-                    Users.Remove(patients[i].Username);
-                    patients.RemoveAt(i);
+                    Users.Remove(elements[i].Username);
+                    elements.RemoveAt(i);
                     return;
                 }
             }
             throw new LocalisedException("UserDoesntExist");
         }
 
-        private void SwapPatientByID(List<Patient> patients, Patient patient)
+        private void SwapPatientByID(List<Patient> elements, Patient element)
         {
-            for (int i = 0; i < patients.Count; i++)
+            for (int i = 0; i < elements.Count; i++)
             {
-                if (patients[i].Id == patient.Id)
+                if (elements[i].Id == element.Id)
                 {
-                    patients[i] = patient;
+                    elements[i] = element;
                     return;
                 }
             }
             throw new LocalisedException("UserDoesntExist");
         }
 
-        private List<int> GetIdsOfAppointments(Patient patient)
+        private List<int> GetIdsOfAppointments(Patient element)
         {
             List<int> ids = new List<int>();
-            foreach (Appointment it in patient.Appointment)
+            foreach (Appointment it in element.Appointment)
             {
                 ids.Add(it.Id);
             }

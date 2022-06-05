@@ -13,8 +13,8 @@ namespace Service
 {
     public class AppointmentService : ICrud<Appointment>
     {
-        public const int MAX_SUGGESTIONS = 30;
-        public const int MAX_ITERATIONS = 10;
+        private const int MAX_SUGGESTIONS = 30;
+        private const int MAX_ITERATIONS = 10;
         private int numOfIterations = 0;
         private static AppointmentService instance = null;
         List<Appointment> appointments = new List<Appointment>();
@@ -80,7 +80,7 @@ namespace Service
             return appointments;
         }
 
-        public void FindAppointmentsWithDoctorPriority(WantedAppointment wantedAppointment)
+        private void FindAppointmentsWithDoctorPriority(WantedAppointment wantedAppointment)
         {
             DateTime correctStart = SetStartTime(wantedAppointment);
             DateTime correctEnd = correctStart.Date + new TimeSpan(correctStart.Hour, correctStart.Minute + 45, correctStart.Second);
@@ -93,7 +93,7 @@ namespace Service
             }
         }
 
-        public void FindAppointmentsWithDatePriority(WantedAppointment wantedAppointment)
+        private void FindAppointmentsWithDatePriority(WantedAppointment wantedAppointment)
         {
             DateTime resetStart = wantedAppointment.Start;
             GoThroughAllDoctors(wantedAppointment, resetStart);
@@ -107,24 +107,27 @@ namespace Service
 
         }
 
-        public void GoThroughAllDoctors(WantedAppointment wantedAppointment, DateTime resetStart)
+        private void GoThroughAllDoctors(WantedAppointment wantedAppointment, DateTime resetStart)
         {
             List<Doctor> doctors = DoctorService.Instance.GetAll();
             foreach (Doctor d in doctors)
             {
                 DateTime correctStart = SetStartTimeForDatePriority(resetStart, d);
-                DateTime correctEnd = correctStart.Date + new TimeSpan(correctStart.Hour, correctStart.Minute + 45, correctStart.Second);
+                DateTime correctEnd = correctStart.Date + new TimeSpan(correctStart.Hour,
+                    correctStart.Minute + 45, correctStart.Second);
                 SuggestAppointmentsForOneWorkingDay(wantedAppointment, correctStart, d);
             }
         }
 
-        public void SuggestAppointmentsForOneWorkingDay(WantedAppointment wantedAppointment, DateTime correctStart, Doctor d = null)
+        private void SuggestAppointmentsForOneWorkingDay(WantedAppointment wantedAppointment,
+            DateTime correctStart, Doctor d = null)
         {
             d = d == null ? wantedAppointment.Doctor : d;
             while ((correctStart.TimeOfDay >= d.workStartTime.TimeOfDay) 
                 && (correctStart.AddMinutes(45).TimeOfDay <= d.workEndTime.TimeOfDay))
             {
-                if (DoctorService.Instance.IsDoctorFree(wantedAppointment.Doctor.Id, correctStart, correctStart.AddMinutes(45)))
+                if (DoctorService.Instance.IsDoctorFree(wantedAppointment.Doctor.Id, 
+                    correctStart, correctStart.AddMinutes(45)))
                 {
                     Room room = RoomService.Instance.findFreeRoom(correctStart, correctStart.AddMinutes(45));
                     if (room != null)
@@ -139,7 +142,8 @@ namespace Service
 
         public DateTime SetStartTimeForDatePriority(DateTime resetStart, Doctor doctor)
         {
-            TimeSpan ts = new TimeSpan(doctor.workStartTime.Hour, doctor.workStartTime.Minute, doctor.workStartTime.Second);
+            TimeSpan ts = new TimeSpan(doctor.workStartTime.Hour, doctor.workStartTime.Minute,
+                doctor.workStartTime.Second);
             DateTime correctStartTime = resetStart.Date + ts;
             return correctStartTime;
         }
@@ -147,7 +151,8 @@ namespace Service
         public DateTime SetStartTime(WantedAppointment wantedAppointment)
         {
             DateTime correctStartTime = wantedAppointment.Start;
-            TimeSpan ts = new TimeSpan(wantedAppointment.Doctor.workStartTime.Hour, wantedAppointment.Doctor.workStartTime.Minute, wantedAppointment.Doctor.workStartTime.Second);
+            TimeSpan ts = new TimeSpan(wantedAppointment.Doctor.workStartTime.Hour,
+                wantedAppointment.Doctor.workStartTime.Minute, wantedAppointment.Doctor.workStartTime.Second);
             correctStartTime = correctStartTime.Date + ts;
             return correctStartTime;
         }

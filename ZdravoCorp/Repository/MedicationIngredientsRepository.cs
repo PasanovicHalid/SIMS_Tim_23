@@ -83,39 +83,39 @@ namespace ZdravoCorp.Repository
                 throw new LocalisedException("IngredientDoesntExist");
         }
 
-        private void DeleteIngredientByID(List<MedicineIngredient> ingredients, int id)
+        private void DeleteIngredientByID(List<MedicineIngredient> elements, int id)
         {
-            for (int i = 0; i < ingredients.Count; i++)
+            for (int i = 0; i < elements.Count; i++)
             {
-                if (ingredients[i].Id == id)
+                if (elements[i].Id == id)
                 {
-                    ingredients.RemoveAt(i);
+                    elements.RemoveAt(i);
                     return;
                 }
             }
             throw new LocalisedException("IngredientDoesntExist");
         }
 
-        private void SwapIngredientsByID(List<MedicineIngredient> ingredients, MedicineIngredient ingredient)
+        private void SwapIngredientsByID(List<MedicineIngredient> elements, MedicineIngredient element)
         {
-            for (int i = 0; i < ingredients.Count; i++)
+            for (int i = 0; i < elements.Count; i++)
             {
-                if (ingredients[i].Id == ingredient.Id)
+                if (elements[i].Id == element.Id)
                 {
-                    ingredients[i] = ingredient;
+                    elements[i] = element;
                     return;
                 }
             }
             throw new LocalisedException("IngredientDoesntExist");
         }
 
-        private MedicineIngredient FindIngredientByID(List<MedicineIngredient> ingredients, int id)
+        private MedicineIngredient FindIngredientByID(List<MedicineIngredient> elements, int id)
         {
-            for (int i = 0; i < ingredients.Count; i++)
+            for (int i = 0; i < elements.Count; i++)
             {
-                if (ingredients[i].Id == id)
+                if (elements[i].Id == id)
                 {
-                    return ingredients[i];
+                    return elements[i];
                 }
             }
             throw new LocalisedException("IngredientDoesntExist");

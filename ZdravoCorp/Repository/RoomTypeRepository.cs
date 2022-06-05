@@ -68,24 +68,24 @@ namespace Repository
             throw new NotImplementedException();
         }
 
-        private void CheckIfRoomTypeExists(List<RoomType> types, RoomType type)
+        private void CheckIfRoomTypeExists(List<RoomType> elements, RoomType element)
         {
-            foreach (RoomType it in types)
+            foreach (RoomType it in elements)
             {
-                if (it.Name.Equals(type.Name))
+                if (it.Name.Equals(element.Name))
                 {
                     throw new LocalisedException("RoomTypeAlreadyExists");
                 }
             }
         }
 
-        private void RemoveType(List<RoomType> types, RoomType roomType)
+        private void RemoveType(List<RoomType> elements, RoomType element)
         {
-            foreach (RoomType type in types)
+            foreach (RoomType type in elements)
             {
-                if (roomType.Name.Equals(type.Name))
+                if (element.Name.Equals(type.Name))
                 {
-                    types.Remove(type);
+                    elements.Remove(type);
                     return;
                 }
             }

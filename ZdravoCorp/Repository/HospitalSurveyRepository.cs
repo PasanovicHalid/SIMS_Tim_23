@@ -1,8 +1,3 @@
-// File:    AppointmentRepository.cs
-// Author:  Dusko
-// Created: Sunday, 10 April 2022 22:43:17
-// Purpose: Definition of Class AppointmentRepository
-
 using Model;
 using System;
 using System.Collections.Generic;

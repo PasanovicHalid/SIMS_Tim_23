@@ -1,8 +1,3 @@
-// File:    AppointmentRepository.cs
-// Author:  Dusko
-// Created: Sunday, 10 April 2022 22:43:17
-// Purpose: Definition of Class AppointmentRepository
-
 using Model;
 using System;
 using System.Collections.Generic;
@@ -24,21 +19,21 @@ namespace Repository
             return idMap.ToList();
         }
 
-        public List<AppointmentSurvey> GetSurveysById(List<int> id)
+        public List<AppointmentSurvey> GetSurveysById(List<int> ids)
         {
             List<AppointmentSurvey> surveys = GetAll();
-            List<AppointmentSurvey> surveyById = new List<AppointmentSurvey>();
+            List<AppointmentSurvey> surveysById = new List<AppointmentSurvey>();
             foreach (AppointmentSurvey survey in surveys)
             {
-               foreach (int i in id)
+               foreach (int i in ids)
                 {
                     if(survey.Id == i)
                     {
-                        surveyById.Add(survey);
+                        surveysById.Add(survey);
                     }
                 }
             }
-            return surveyById;
+            return surveysById;
         }
 
         public override AppointmentSurvey Read(int id)
