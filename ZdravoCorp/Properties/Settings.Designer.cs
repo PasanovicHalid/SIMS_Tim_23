@@ -37,7 +37,7 @@ namespace ZdravoCorp.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("sr")]
+        [global::System.Configuration.DefaultSettingValueAttribute("en")]
         public string Language {
             get {
                 return ((string)(this["Language"]));

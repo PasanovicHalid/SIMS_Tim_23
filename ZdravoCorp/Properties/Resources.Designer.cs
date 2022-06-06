@@ -232,6 +232,15 @@ namespace ZdravoCorp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Content.
+        /// </summary>
+        public static string Content {
+            get {
+                return ResourceManager.GetString("Content", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Count.
         /// </summary>
         public static string Count {
@@ -849,6 +858,15 @@ namespace ZdravoCorp.Properties {
         public static string Surface_Area {
             get {
                 return ResourceManager.GetString("Surface Area", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Report of Survey.
+        /// </summary>
+        public static string Survey {
+            get {
+                return ResourceManager.GetString("Survey", resourceCulture);
             }
         }
         
