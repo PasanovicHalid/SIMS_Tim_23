@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Model;
-using System;
-using System.Collections.Generic;   
+using Model;  
 
 namespace Repository
 {
@@ -19,7 +17,7 @@ namespace Repository
             InstantiateIDSet(GetAll());
         }
 
-        public bool AcceptVacation(Doctor doctor,Vacation vacation)
+        public bool AcceptVacation(Doctor doctor, Vacation vacation)
         {
             vacation.Status = Status.ACCEPTED;
             vacation.Comment = "/";
@@ -27,7 +25,7 @@ namespace Repository
             return true;
         }
 
-        public bool RejectVacation(Doctor doctor,Vacation vacation, String comment)
+        public bool RejectVacation(Doctor doctor, Vacation vacation, String comment)
         {
             vacation.Status = Status.REJECTED;
             vacation.Comment = comment;

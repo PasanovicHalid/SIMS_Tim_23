@@ -1,19 +1,10 @@
 ﻿using Controller;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using ZdravoCorp.Controller;
 
 namespace ZdravoCorp.View.Doctor
 {
@@ -22,27 +13,19 @@ namespace ZdravoCorp.View.Doctor
     /// </summary>
     public partial class MedicalRecords : Window
     {
-        private ZdravoCorp.Controller.ReportController commentsController;
-        private MedicalRecordController medicalRecordController;
-        private Model.Patient pomocnip;
-        PatientController patientController;
+        private ReportController reportController = new ReportController(); 
+        private MedicalRecordController medicalRecordController = new MedicalRecordController();
+        PatientController patientController = new PatientController();
+        private Model.Patient tempPatient;
         private Model.Doctor currentDoctor;
-        private MedicationController medicineController;
-        private PrescriptionController pc;
 
-        public ObservableCollection<Model.Report> comments
+        public ObservableCollection<Model.Report> ReportsCollection
         {
             get;
             set;
         }
 
         public ObservableCollection<Model.Patient> PatientCollection
-        {
-            get;
-            set;
-        }
-
-        public ObservableCollection<Model.Medication> MedicineCollection
         {
             get;
             set;
@@ -58,64 +41,18 @@ namespace ZdravoCorp.View.Doctor
             InitializeComponent();
             currentDoctor = doc;
             this.DataContext = this;
-            commentsController = new ZdravoCorp.Controller.ReportController();
-            comments = new ObservableCollection<Model.Report>();
-            patientController = new PatientController();
+            ReportsCollection = new ObservableCollection<Model.Report>();
             PatientCollection = new ObservableCollection<Model.Patient>(patientController.GetAll());
+
             PatientsCB.ItemsSource = PatientCollection;
-
-            medicineController = new MedicationController();
-            MedicineCollection = new ObservableCollection<Model.Medication>(medicineController.GetAll());
-
-            pc = new PrescriptionController();
-
-            //PrescriptionCollection = new ObservableCollection<Model.Prescription>(pc.GetAllPrescriptions());
-
-
-            
-
 
         }
 
         private void PatientsCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            pomocnip = (Model.Patient)PatientsCB.SelectedItem;
-
-            medicalRecordController = new MedicalRecordController();
-
-            List<Model.MedicalRecord> med = medicalRecordController.GetAll();
-
-            PrescriptionCollection = new ObservableCollection<Model.Prescription>();
-
-            foreach (Model.MedicalRecord pom in med)
-            {
-                if (pomocnip.Record.Id == pom.Id)
-                {
-                    textBox1.Text = pom.Id.ToString();
-                    textBox2.Text = pom.Weight.ToString();
-
-                    textBox3.Text = pom.Height.ToString();
-
-                    textBox4.Text = pom.BloodType.ToString();
-
-                    List<Model.Report> commentsl = pom.MedicalReports;
-
-                    CommentsGrid.DataContext = commentsl;
-
-                }
-            }
-
-            if(pomocnip.Prescription.Count > 0)
-            {
-                foreach(Model.Prescription p in pomocnip.Prescription)
-                {
-                    PrescriptionCollection.Add(p);
-                }
-
-                NoviGrid.DataContext = PrescriptionCollection;
-
-            }
-
+            tempPatient = (Model.Patient)PatientsCB.SelectedItem;
+            fillReportsGrid(tempPatient);
+            FillPrescriptionGrid(tempPatient);
         }
 
         private void commentButton_Click(object sender, RoutedEventArgs e)
@@ -126,10 +63,10 @@ namespace ZdravoCorp.View.Doctor
             }
             else
             {
-                AddComment add = new AddComment(pomocnip, currentDoctor);
+                /*AddComment add = new AddComment(tempPatient, currentDoctor);
                 add.Show();
 
-                pomocnip = (Model.Patient)PatientsCB.SelectedItem;
+                tempPatient = (Model.Patient)PatientsCB.SelectedItem;
 
                 medicalRecordController = new MedicalRecordController();
 
@@ -139,7 +76,7 @@ namespace ZdravoCorp.View.Doctor
 
                 foreach (Model.MedicalRecord pom in med)
                 {
-                    if (pomocnip.Record.Id == pom.Id)
+                    if (tempPatient.Record.Id == pom.Id)
                     {
                         textBox1.Text = pom.Id.ToString();
                         textBox2.Text = pom.Weight.ToString();
@@ -153,7 +90,13 @@ namespace ZdravoCorp.View.Doctor
                         CommentsGrid.DataContext = commentsl;
 
                     }
-                }
+                }*/
+
+                MedicalReport med = new MedicalReport(tempPatient, currentDoctor);
+                this.Close();
+                med.Show();
+
+
             }
         }
 
@@ -207,6 +150,41 @@ namespace ZdravoCorp.View.Doctor
             MedicationRequests medicationRequests = new MedicationRequests(currentDoctor);
             this.Close();
             medicationRequests.Show();
+        }
+
+        private void FillPrescriptionGrid(Model.Patient patient)
+        {
+            PrescriptionCollection = new ObservableCollection<Model.Prescription>();
+
+            if (tempPatient.Prescription.Count > 0)
+            {
+                foreach (Model.Prescription p in tempPatient.Prescription)
+                {
+                    PrescriptionCollection.Add(p);
+                }
+                PrescriptionsGrid.DataContext = PrescriptionCollection;
+            }
+        }
+
+        private void fillReportsGrid(Model.Patient patient)
+        {
+            List<Model.MedicalRecord> medicalRecord = medicalRecordController.GetAll();
+
+            foreach (Model.MedicalRecord temp in medicalRecord)
+            {
+                if (patient.Record.Id == temp.Id)
+                {
+                    textBox1.Text = temp.Id.ToString();
+                    textBox2.Text = temp.Weight.ToString();
+                    textBox3.Text = temp.Height.ToString();
+                    textBox4.Text = temp.BloodType.ToString();
+                    textBox5.Text = patient.Name;
+                    textBox6.Text = patient.Surname;
+
+                    List<Model.Report> reports = temp.MedicalReports;
+                    ReportsGrid.DataContext = reports;
+                }
+            }
         }
     }
 }

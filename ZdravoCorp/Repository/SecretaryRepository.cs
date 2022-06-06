@@ -79,10 +79,10 @@ namespace Repository
             }
         }
 
-        private void InstantiateHashSets(List<Secretary> secretaries)
+        private void InstantiateHashSets(List<Secretary> elements)
         {
-            InstantiateIDSet(secretaries);
-            InstantiateUserSet(secretaries);
+            InstantiateIDSet(elements);
+            InstantiateUserSet(elements);
         }
 
         private void CheckIfUsernameExists(string username)
@@ -97,41 +97,41 @@ namespace Repository
                 throw new LocalisedException("UserDoesntExist");
         }
 
-        private void SwapSecretaryByID(List<Secretary> secretaries, Secretary secretary)
+        private void SwapSecretaryByID(List<Secretary> elements, Secretary element)
         {
-            for (int i = 0; i < secretaries.Count; i++)
+            for (int i = 0; i < elements.Count; i++)
             {
-                if (secretaries[i].Id == secretary.Id)
+                if (elements[i].Id == element.Id)
                 {
-                    secretaries[i] = secretary;
+                    elements[i] = element;
                     return;
                 }
             }
             throw new LocalisedException("UserDoesntExist");
         }
 
-        private void DeleteSecretaryByID(List<Secretary> secretaries, int id)
+        private void DeleteSecretaryByID(List<Secretary> elements, int id)
         {
-            for (int i = 0; i < secretaries.Count; i++)
+            for (int i = 0; i < elements.Count; i++)
             {
-                if (secretaries[i].Id == id)
+                if (elements[i].Id == id)
                 {
                     idMap.Remove(id);
-                    Users.Remove(secretaries[i].Username);
-                    secretaries.RemoveAt(i);
+                    Users.Remove(elements[i].Username);
+                    elements.RemoveAt(i);
                     return;
                 }
             }
             throw new LocalisedException("UserDoesntExist");
         }
 
-        private Secretary FindSecretaryByID(List<Secretary> secretaries, int id)
+        private Secretary FindSecretaryByID(List<Secretary> elements, int id)
         {
-            for (int i = 0; i < secretaries.Count; i++)
+            for (int i = 0; i < elements.Count; i++)
             {
-                if (secretaries[i].Id == id)
+                if (elements[i].Id == id)
                 {
-                    return secretaries[i];
+                    return elements[i];
                 }
             }
             throw new LocalisedException("UserDoesntExist");

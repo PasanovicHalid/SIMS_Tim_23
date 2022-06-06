@@ -139,4 +139,8 @@
         <Setter Property="Foreground" Value="#112847"/>
         <Setter Property="IsHitTestVisible" Value="False"/>
     </Style>
+    <Style x:Key="RadioButtonCanSelect" TargetType="{x:Type RadioButton}">
+        <Setter Property="FontFamily" Value="/Resources/Fonts/#Poppins"/>
+        <Setter Property="Foreground" Value="#112847"/>
+    </Style>
 </ResourceDictionary>

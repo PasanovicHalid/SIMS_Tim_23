@@ -64,11 +64,11 @@ namespace Repository
             }
         }
 
-        public void SaveActions(List<Model.Action> actions)
+        public void SaveActions(List<Model.Action> elements)
         {
             lock (key)
             {
-                SaveChanges(actions);
+                SaveChanges(elements);
             }
         }
 
@@ -83,13 +83,13 @@ namespace Repository
             }
         }
 
-        private void SwapActions(Model.Action action, List<Model.Action> actions)
+        private void SwapActions(Model.Action element, List<Model.Action> elements)
         {
-            for (int i = 0; i < actions.Count; i++)
+            for (int i = 0; i < elements.Count; i++)
             {
-                if (actions[i].Id == action.Id)
+                if (elements[i].Id == element.Id)
                 {
-                    actions[i] = action;
+                    elements[i] = element;
                     return;
                 }
             }
@@ -105,31 +105,31 @@ namespace Repository
         /*
          * Add action sorted by excecution date ascending
         */
-        private void AddAction(Model.Action newAction, List<Model.Action> actions)
+        private void AddAction(Model.Action newAction, List<Model.Action> elements)
         {
-            for (int i = 0; i < actions.Count; i++)
+            for (int i = 0; i < elements.Count; i++)
             {
-                if (DateManipulator.checkIfLaterDate(actions[i].ExecutionDate, newAction.ExecutionDate))
+                if (DateManipulator.checkIfLaterDate(elements[i].ExecutionDate, newAction.ExecutionDate))
                 {
-                    actions.Insert(i, newAction);
+                    elements.Insert(i, newAction);
                     return;
                 }
             }
-            actions.Add(newAction);
+            elements.Add(newAction);
         }
 
-        private void SortActionsAscendingAndSaveChanges(List<Model.Action> actions)
+        private void SortActionsAscendingAndSaveChanges(List<Model.Action> elements)
         {
-            serializer.ToCSV(dbPath, actions.OrderBy(a => a.ExecutionDate).ToList());
+            serializer.ToCSV(dbPath, elements.OrderBy(a => a.ExecutionDate).ToList());
         }
 
-        private Model.Action FindActionByID(int id, List<Model.Action> actions)
+        private Model.Action FindActionByID(int id, List<Model.Action> elements)
         {
-            for (int i = 0; i < actions.Count; i++)
+            for (int i = 0; i < elements.Count; i++)
             {
-                if (actions[i].Id == id)
+                if (elements[i].Id == id)
                 {
-                    return actions[i];
+                    return elements[i];
                 }
             }
             throw new LocalisedException("ActionDoesntExist");

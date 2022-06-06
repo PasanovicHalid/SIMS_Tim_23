@@ -57,6 +57,14 @@ namespace Model
                 return Appointment.Id.ToString();
             }
         }
+
+        public DateTime AppointmentDate
+        {
+            get
+            {
+                return appointment.StartDate.Date;
+            }
+        }
         public Report(Appointment app, string kom, Doctor doktor)
         {
             Appointment = app;

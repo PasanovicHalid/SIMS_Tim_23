@@ -5,6 +5,7 @@
 
 using Repository;
 using System;
+using Controller;
 using System.Collections.Generic;
 
 namespace Model
@@ -227,7 +228,7 @@ namespace Model
                 allergens.Add(values[i++]);
             }
             count = int.Parse(values[i++]);
-            ZdravoCorp.Controller.ReportController cc = new ZdravoCorp.Controller.ReportController();
+            ReportController cc = new ReportController();
             for (int j = 0; j < count; j++)
             {
                 medicalReports.Add(cc.Read(int.Parse(values[i++])));
