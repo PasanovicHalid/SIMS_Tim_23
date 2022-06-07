@@ -77,7 +77,7 @@ namespace ZdravoCorp.View.Manager.ViewModel.Rooms
             {
                 if (value != ContentViewModel.Instance.CurrentView)
                 {
-                    ContentViewModel.Instance.WindowBrosurwser.AddWindow(value);
+                    ContentViewModel.Instance.WindowBrowser.AddWindow(value);
                     ContentViewModel.Instance.CurrentView = value;
                     OnPropertyChanged();
                 }
