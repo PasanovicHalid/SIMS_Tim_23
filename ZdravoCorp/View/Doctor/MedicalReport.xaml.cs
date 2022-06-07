@@ -22,6 +22,8 @@ namespace ZdravoCorp.View.Doctor
         PatientController patientController = new PatientController();
         DoctorController doctorController = new DoctorController();
         RoomController roomController = new RoomController();
+        PrescriptionController prescriptionController = new PrescriptionController();
+
 
         public MedicalReport(Model.Patient tempPatient, Model.Doctor tempDoctor, int index)
         {
@@ -38,7 +40,7 @@ namespace ZdravoCorp.View.Doctor
                 }
             }
             AppointmentCB.ItemsSource = list;
-            probaCB.ItemsSource = medicationController.GetAll();
+            MedicationsCB.ItemsSource = medicationController.GetAll();
             PatientsCB.ItemsSource = patientController.GetAll();
             PatientsCB.SelectedIndex = 1;
             DoctorsCB.ItemsSource = doctorController.GetAll();
@@ -107,6 +109,34 @@ namespace ZdravoCorp.View.Doctor
             MedicalRecords medicalRecord = new MedicalRecords(currentDoctor);
             this.Close();
             medicalRecord.Show();
+        }
+
+        private void MedicationsCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Medication medication = MedicationsCB.SelectedItem as Medication;
+            if(patientController.CheckAllergens(currentPatient,medication) == -1)
+            {
+                DodajButton2.Visibility = Visibility.Hidden;
+                Labela.Visibility = Visibility.Visible;
+                Labela.Content = "Pacijent je alergican na ovaj lek!";
+            }
+            else if(patientController.CheckAllergens(currentPatient, medication) == -2)
+            {
+                DodajButton2.Visibility = Visibility.Hidden;
+                Labela.Visibility = Visibility.Visible;
+                Labela.Content = "Pacijent je alergican na sastojak leka!";
+            }
+            else
+            {
+                Labela.Visibility = Visibility.Hidden;
+                DodajButton2.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void DodajButton2_Click(object sender, RoutedEventArgs e)
+        {
+            int newId = prescriptionController.CreateAndReturnID(new Model.Prescription(((Medication)MedicationsCB.SelectedItem).Id, Int32.Parse(textBox2.Text), Int32.Parse(textBox3.Text), textBlock.Text),currentPatient);
+            MessageBox.Show(newId.ToString());
         }
     }
 }

@@ -7,6 +7,7 @@ using Model;
 using System;
 using System.Collections.Generic;
 using ZdravoCorp.Exceptions;
+using Controller;
 
 namespace Repository
 {
@@ -40,7 +41,7 @@ namespace Repository
             return patients;
         }
 
-        public Boolean AddPrescription(Model.Patient element, Model.Prescription newPrescription)
+        public Boolean AddPrescription(Model.Patient element, Prescription newPrescription)
         {
             Boolean success = false;
             List<Patient> patients = GetAll();
@@ -48,6 +49,7 @@ namespace Repository
             {
                 if(temp.Id == element.Id)
                 {
+                    PrescriptionController prescriptionController = new PrescriptionController();
                     element.AddPrescription(newPrescription);
                     Update(element);
                     success = true;
@@ -100,7 +102,6 @@ namespace Repository
             lock (key)
             {
                 CheckIfIDExists(element.Id);
-                CheckIfUsernameExists(element.Username);
                 List<Patient> elements = GetAll();
                 SwapPatientByID(elements, element);
                 SaveChanges(elements);

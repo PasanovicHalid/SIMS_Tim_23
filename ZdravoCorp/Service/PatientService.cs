@@ -45,9 +45,9 @@ namespace Service
             return PatientRepository.Instance.GetAll();
         }
 
-        public Boolean AddPrescription(Patient patient,Prescription newPrescription)
+        public Boolean AddPrescription(Patient patient, Prescription newPrescription)
         {
-            return PatientRepository.Instance.AddPrescription(patient,newPrescription);
+            return PatientRepository.Instance.AddPrescription(patient, newPrescription);
         }
 
         public PatientService()

@@ -43,14 +43,34 @@ namespace Controller
             return PatientService.Instance.GetAll();
         }
 
-        public Boolean AddPrescription(Model.Patient patient,Model.Prescription newPrescription)
+        public Boolean AddPrescription(Model.Patient patient,Prescription newPrescription)
         {
-            return PatientService.Instance.AddPrescription(patient,newPrescription);
+            return PatientService.Instance.AddPrescription(patient, newPrescription);
         }
 
         public void RemoveFromChangedOrCanceledList(Patient patient)
         {
             PatientService.Instance.RemoveFromChangedOrCanceledList(patient);
+        }
+
+        public int CheckAllergens(Patient patient, Medication medication)
+        {
+            foreach(MedicationType medicationType in patient.Allergens)
+            {
+                if(medicationType.Id == medication.MedicationType.Id)
+                {
+                    return -1;
+                }
+                else
+                {
+                    foreach(MedicationType tempMedicationType in medication.MedicationType.Ingredients)
+                    {
+                        if (medicationType.Id == tempMedicationType.Id)
+                            return -2;
+                    }
+                }
+            }
+            return 1;
         }
     }
 }

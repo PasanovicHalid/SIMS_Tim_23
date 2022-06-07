@@ -57,19 +57,6 @@ namespace ZdravoCorp.View.Doctor
 
         private void DodajButton_Click(object sender, RoutedEventArgs e)
         {
-            patientController = new PatientController();
-            Controller.PrescriptionController prescriptionController = new Controller.PrescriptionController();
-            int newId = prescriptionController.CreateAndReturnID(new Model.Prescription(((Model.Medication)MedicineGrid.SelectedItem).Id,Int32.Parse(textBox2.Text),Int32.Parse(textBox3.Text),textBlock.Text));
-            Model.Medication tempMedication = (Model.Medication)MedicineGrid.SelectedItem;
-            if((Int32.Parse(textBox2.Text)) * (Int32.Parse(textBox3.Text)) > tempMedication.Count)
-            {
-                MessageBox.Show("U magacinu ne postoje tolike kolicine leka!");
-                this.Close();
-            }
-            patientController.AddPrescription(tempPatient, prescriptionController.Read(newId));
-            tempMedication.Count = tempMedication.Count - (Int32.Parse(textBox2.Text)) * (Int32.Parse(textBox3.Text));
-            medicineController.Update(tempMedication);
-            this.Close();
         }
     }
 }

@@ -8,9 +8,8 @@
         WindowStartupLocation="CenterScreen"
         Title="MedicalReport" Height="528" Width="1059">
     <Grid Margin="0,0,0,-6">
-        <GroupBox HorizontalAlignment="Left" Height="388" Header="Refer To Another Doctor:" Margin="718,90,0,0" VerticalAlignment="Top" Width="316" BorderBrush="#FF688CAF"/>
-
         <GroupBox HorizontalAlignment="Left" Height="388" Header="Add Prescription:" Margin="366,90,0,0" VerticalAlignment="Top" Width="322" BorderBrush="#FF688CAF"/>
+        <GroupBox HorizontalAlignment="Left" Height="388" Header="Refer To Another Doctor:" Margin="718,90,0,0" VerticalAlignment="Top" Width="316" BorderBrush="#FF688CAF"/>
 
         <GroupBox HorizontalAlignment="Left" Height="388" Header="Add Medical Report:" Margin="10,90,0,0" VerticalAlignment="Top" Width="326" BorderBrush="#FF688CAF"/>
         <ComboBox 
@@ -36,7 +35,6 @@
         <Label Content="Add Comment:" HorizontalAlignment="Left" Margin="29,160,0,0" VerticalAlignment="Top" Height="26" Width="90"/>
         <TextBox x:Name="textBox2" HorizontalAlignment="Left" Margin="503,169,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="167" Height="24"/>
         <TextBox x:Name="textBox3" HorizontalAlignment="Left" Margin="503,210,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="167" Height="24"/>
-        <Button x:Name="DodajButton2" Content="Dodaj" HorizontalAlignment="Left" Margin="380,418,0,0" VerticalAlignment="Top" Height="45" Width="93"/>
         <Button x:Name="OdustaniButton" Content="Odustani" HorizontalAlignment="Left" Margin="578,418,0,0" VerticalAlignment="Top" Height="45" Width="93" />
         <Label Content="Pick Medication:" HorizontalAlignment="Left" Margin="379,119,0,0" VerticalAlignment="Top"/>
         <Label Content="Times A Day:" HorizontalAlignment="Left" Margin="379,165,0,0" VerticalAlignment="Top"/>
@@ -117,15 +115,17 @@
         <Label Content=":" HorizontalAlignment="Left" Margin="922,202,0,0" VerticalAlignment="Top" FontSize="18"/>
         <TextBox x:Name="textBlock_Copy" HorizontalAlignment="Left" Margin="736,365,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="280" Height="42"/>
         <Label Content="Additional Remark:" HorizontalAlignment="Left" Margin="733,337,0,0" VerticalAlignment="Top" Width="113" Height="28"/>
-        <ComboBox x:Name="probaCB" HorizontalAlignment="Left" Margin="503,124,0,0" VerticalAlignment="Top" Width="168" ItemsSource="{Binding}">
-        <ComboBox.ItemTemplate>
-            <DataTemplate>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Margin="2" Text="{Binding Name}"/>
-                    <TextBlock Margin="2" Text="{Binding Count}"/>
-                </StackPanel>
-            </DataTemplate>
-        </ComboBox.ItemTemplate>
+        <ComboBox x:Name="MedicationsCB" HorizontalAlignment="Left" Margin="503,124,0,0" VerticalAlignment="Top" Width="168" ItemsSource="{Binding}" SelectionChanged="MedicationsCB_SelectionChanged">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Margin="2" Text="{Binding Name}"/>
+                        <TextBlock Margin="2" Text="{Binding Count}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
         </ComboBox>
+        <Label x:Name="Labela" Content="" HorizontalAlignment="Left" Height="26" Margin="371,428,0,0" VerticalAlignment="Top" Width="202" Foreground="Red" FontSize="11.5" HorizontalContentAlignment="Center"/>
+        <Button x:Name="DodajButton2" HorizontalAlignment="Left" Margin="380,418,0,0" VerticalAlignment="Top" Height="45" Width="93" Content="Dodaj" Click="DodajButton2_Click"/>
     </Grid>
 </Window>

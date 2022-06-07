@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Repository;
 using Model;
+using Controller;
 
 namespace Service
 {
@@ -37,11 +38,17 @@ namespace Service
             return PrescriptionRepository.Instance.GetAll();
         }
 
-        public int CreateAndReturnID(Prescription newPrescription)
+        public int CreateAndReturnID(Prescription newPrescription, Patient currentPatient)
         {
-            return PrescriptionRepository.Instance.CreateAndReturnID(newPrescription);
+            int newId = PrescriptionRepository.Instance.CreateAndReturnID(newPrescription);
+            PatientController patientController = new PatientController();
+            MedicationController medicationController = new MedicationController();
+            PrescriptionController prescriptionController = new PrescriptionController();   
+            patientController.AddPrescription(currentPatient,prescriptionController.Read(newId));
+            newPrescription.Medication.Count = newPrescription.Medication.Count - (newPrescription.TimesADay * newPrescription.Quantity);
+            medicationController.Update(newPrescription.Medication);
+            return newId;
         }
-
         public static PrescriptionService Instance
         {
             get
