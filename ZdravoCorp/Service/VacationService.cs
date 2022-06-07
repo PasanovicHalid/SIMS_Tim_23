@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Model;
+using Controller;
 using Repository;
 
 namespace Service
@@ -20,6 +21,10 @@ namespace Service
         public void Create(Vacation newVacation)
         {
             VacationRepository.Instance.Create(newVacation);
+            DoctorController doctorController = new DoctorController();
+            Doctor doctor = doctorController.Read(newVacation.DoctorID);
+            doctor.AddVacation(newVacation);
+            doctorController.Update(doctor);
         }
 
         public Vacation Read(int id)

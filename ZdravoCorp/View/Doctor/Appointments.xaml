@@ -68,7 +68,7 @@
         </ComboBox>
         <TextBox x:Name="textBox1" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="223" Height="26" Margin="738,170,0,0"/>
         <TextBox x:Name="textBox2" HorizontalAlignment="Left" Margin="738,222,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="223" Height="26"/>
-        <Button x:Name="OdustaniButton" Content="Odustani" HorizontalAlignment="Left" Height="44" Margin="859,381,0,0" VerticalAlignment="Top" Width="102" Click="OdustaniButton_Click" IsEnabled="False"/>
+        <Button x:Name="OdustaniButton" Content="Cancel" HorizontalAlignment="Left" Height="44" Margin="859,381,0,0" VerticalAlignment="Top" Width="102" Click="OdustaniButton_Click" IsEnabled="False"/>
         <Label Content="Start Date:" HorizontalAlignment="Left" Margin="608,170,0,0" VerticalAlignment="Top" Width="74" Height="34" FontSize="14"/>
         <Label Content="End Date:" HorizontalAlignment="Left" Margin="608,222,0,0" VerticalAlignment="Top" Width="69" Height="33" FontSize="14"/>
         <Label Content="Patient:" HorizontalAlignment="Left" Margin="608,274,0,0" VerticalAlignment="Top" Width="56" Height="34" FontSize="14"/>

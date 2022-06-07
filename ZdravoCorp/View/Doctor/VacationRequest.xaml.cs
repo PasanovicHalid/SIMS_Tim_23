@@ -44,6 +44,7 @@ namespace ZdravoCorp.View.Doctor
                 MessageBox.Show("Uspesno poslat zahtev!");
                 this.Close();
             }
+
         }
 
         private Boolean CheckDate(DateTime start, DateTime end)
@@ -75,7 +76,7 @@ namespace ZdravoCorp.View.Doctor
 
         private Boolean CheckSpecialistInVacation(DateTime vacationStartDate,DateTime vacationEndDate)
         {
-            if (vacationController.CheckSpecialistInVacation(currentDoctor))
+            if (vacationController.CheckSpecialistInVacation(currentDoctor,vacationStartDate,vacationEndDate))
             {
                 return true;
             }

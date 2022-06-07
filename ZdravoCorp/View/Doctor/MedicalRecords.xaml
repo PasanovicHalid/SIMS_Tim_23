@@ -57,7 +57,7 @@
 
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="dodajTerapiju" Content="Add Prescription" HorizontalAlignment="Left" Margin="193,386,0,0" VerticalAlignment="Top" Height="49" Width="100" Click="dodajTerapiju_Click"/>
+        <Button x:Name="dodajTerapiju" Content="Cancel" HorizontalAlignment="Left" Margin="193,386,0,0" VerticalAlignment="Top" Height="49" Width="100" Click="dodajTerapiju_Click"/>
         <Border BorderThickness="1" HorizontalAlignment="Center" Height="27" VerticalAlignment="Top" Width="1024" BorderBrush="Black" Background="#FFA79F9F">
             <Image HorizontalAlignment="Left" Height="24" VerticalAlignment="Center" Width="22" Source="/Resources/user.png" MouseLeftButtonDown="Image_MouseLeftButtonDown" Margin="989,0,0,0" RenderTransformOrigin="0.818,0.509"/>
         </Border>

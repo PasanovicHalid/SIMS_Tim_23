@@ -68,7 +68,6 @@ namespace Repository
             lock (key)
             {
                 CheckIfIDExists(element.Id);
-                CheckIfUsernameExists(element.Username);
                 List<Doctor> elements = GetAll();
                 SwapDoctorByID(elements, element);
                 SaveChanges(elements);

@@ -63,12 +63,13 @@ namespace Controller
             }
         }
 
-        public Boolean CheckSpecialistInVacation(Doctor doctor)
+        public Boolean CheckSpecialistInVacation(Doctor doctor,DateTime startDate, DateTime endDate)
         {
+            DoctorController doctorController = new DoctorController();
             List<Vacation> vacations = GetAll();
             foreach (Vacation vacation in vacations)
             {
-                if (vacation.Doctor.DoctorType.Type.Equals(doctor.DoctorType.Type))
+                if (!doctor.DoctorType.Type.Equals(doctorController.Read(vacation.DoctorID).DoctorType.Type))
                 {
                     return false;
                 }

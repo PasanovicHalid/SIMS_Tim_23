@@ -166,6 +166,14 @@ namespace Model
             }
         }
 
+        public string DoctorTypeToString
+        {
+            get
+            {
+                return doctorType.Type;
+            }
+        }
+
         public int Id
         {
             get { return this.id; }
