@@ -16,6 +16,8 @@ namespace ZdravoCorp.View.Manager.ViewModel
 
         public RelayCommand MedicationsCommand { get; set; }
 
+        public RelayCommand SurveyCommand { get; set; }
+
         public UserControl CurrentView
         {
             get => ContentViewModel.Instance.CurrentView;
@@ -44,6 +46,11 @@ namespace ZdravoCorp.View.Manager.ViewModel
             MedicationsCommand = new RelayCommand(o =>
             {
                 CurrentView = new View.Medications.Medications(new Medications.MedicationsViewModel());
+            });
+
+            SurveyCommand = new RelayCommand(o =>
+            {
+                CurrentView = new View.Surveys.Surveys(new Surveys.SurveysViewModel());
             });
         }
 

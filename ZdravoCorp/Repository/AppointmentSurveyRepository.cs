@@ -71,6 +71,11 @@ namespace Repository
             throw new NotImplementedException();
         }
 
+        public new List<AppointmentSurvey> GetAll()
+        {
+
+        }
+
         protected override void InstantiateIDSet(List<AppointmentSurvey> elements)
         {
             lock (key)

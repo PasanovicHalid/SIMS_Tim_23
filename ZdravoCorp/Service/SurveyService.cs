@@ -28,7 +28,7 @@ namespace Service
             List<Doctor> doctors = DoctorService.Instance.GetAll();
             foreach (Doctor doctor in doctors)
             {
-                surveys.Add(new Survey(i++, doctor.nameSurname, SurveyEnum.Doctor));
+                surveys.Add(new Survey(doctor.Id, doctor.nameSurname, SurveyEnum.Doctor));
             }
             return surveys;
         }

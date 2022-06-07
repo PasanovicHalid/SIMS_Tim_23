@@ -1,5 +1,6 @@
 ﻿using Controller;
 using Model;
+using Service;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,17 +15,33 @@ namespace ZdravoCorp.View.Manager.ViewModel.Surveys
     public class SurveysViewModel : ObservableObject, ViewModelInterface
     {
         private SurveyController controller;
+        private HospitalSurveyController hospitalController;
+        private AppointmentSurveyController appointmentController;
         private ObservableCollection<Survey> surveys;
         private Survey survey;
 
         public SurveysViewModel()
         {
             controller = new SurveyController();
+            hospitalController = new HospitalSurveyController();
+            appointmentController = new AppointmentSurveyController();
             surveys = new ObservableCollection<Survey>(controller.GetAll());
 
             ViewCommand = new RelayCommand(o =>
             {
-                //CurrentView = new View.Rooms.Rooms(new RoomsViewModel());
+                string description = "";
+                string label = "";
+                if (survey.SurveyType == SurveyEnum.Hospital)
+                {
+                    description = hospitalController.GetResults();
+                    label = "Hospital Survey";
+                }
+                else
+                {
+                    description = appointmentController.GetResultsForDoctor(DoctorService.Instance.Read(survey.Id));
+                    label = survey.Name + "Survey";
+                }
+                CurrentView = new View.Surveys.ViewSurvey(new ViewSurveyViewModel(description, label));
             }, CheckIfReady);
         }
 
