@@ -127,9 +127,9 @@ namespace ZdravoCorp.View.Doctor
 
         private void medsButton_Click(object sender, RoutedEventArgs e)
         {
-            MedicationsView medicationsView = new MedicationsView(currentDoctor);
+            ///MedicationsView medicationsView = new MedicationsView(currentDoctor);
             this.Close();
-            medicationsView.Show();
+            //medicationsView.Show();
         }
 
         private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

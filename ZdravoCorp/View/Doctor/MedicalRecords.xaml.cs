@@ -73,8 +73,6 @@ namespace ZdravoCorp.View.Doctor
 
         private void dodajTerapiju_Click(object sender, RoutedEventArgs e)
         {
-            AddTherapy at = new AddTherapy((Model.Patient)PatientsCB.SelectedItem);
-            at.Show();
         }
 
         private void appointmentsButton_Click(object sender, RoutedEventArgs e)
@@ -93,9 +91,9 @@ namespace ZdravoCorp.View.Doctor
 
         private void medsButton_Click(object sender, RoutedEventArgs e)
         {
-            MedicationsView medicationsView = new MedicationsView(currentDoctor);
+            MedicalReport medicalReport = new MedicalReport(currentDoctor);
             this.Close();
-            medicationsView.Show();
+            medicalReport.Show();
         }
 
         private void vacationRequestButton_Click(object sender, RoutedEventArgs e)

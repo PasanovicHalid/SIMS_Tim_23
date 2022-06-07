@@ -192,15 +192,6 @@
     <Compile Include="View\Core\ViewModelInterface.cs" />
     <Compile Include="View\Core\WindowBrowser.cs" />
     <Compile Include="View\Core\WindowInterface.cs" />
-    <Compile Include="View\Doctor\AddAppointmentToDoctor.xaml.cs">
-      <DependentUpon>AddAppointmentToDoctor.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Doctor\AddComment.xaml.cs">
-      <DependentUpon>AddComment.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Doctor\AddTherapy.xaml.cs">
-      <DependentUpon>AddTherapy.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\Doctor\Appointments.xaml.cs">
       <DependentUpon>Appointments.xaml</DependentUpon>
     </Compile>
@@ -212,9 +203,6 @@
     </Compile>
     <Compile Include="View\Doctor\MedicationRequests.xaml.cs">
       <DependentUpon>MedicationRequests.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Doctor\MedicationsView.xaml.cs">
-      <DependentUpon>MedicationsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Doctor\UserWindow.xaml.cs">
       <DependentUpon>UserWindow.xaml</DependentUpon>
@@ -407,18 +395,6 @@
     <Compile Include="View\Manager\Model\Rooms\RenovationActionModel.cs" />
     <Compile Include="View\Manager\Model\Rooms\RoomTypeModel.cs" />
     <Compile Include="View\Manager\Model\Rooms\RoomModel.cs" />
-    <Page Include="View\Doctor\AddAppointmentToDoctor.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Doctor\AddComment.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Doctor\AddTherapy.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\Doctor\Appointments.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -432,10 +408,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Doctor\MedicationRequests.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Doctor\MedicationsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

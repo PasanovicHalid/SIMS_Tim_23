@@ -107,9 +107,9 @@ namespace ZdravoCorp.View.Doctor
 
         private void medsButton_Click(object sender, RoutedEventArgs e)
         {
-            MedicationsView medicationsView = new MedicationsView(currentDoctor);
+            MedicalReport medicalReport = new MedicalReport(currentDoctor);
             this.Close();
-            medicationsView.Show();
+            medicalReport.Show();
         }
 
         private void kartoniButton_Click(object sender, RoutedEventArgs e)

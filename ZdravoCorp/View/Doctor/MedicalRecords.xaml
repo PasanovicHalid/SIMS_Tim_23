@@ -62,10 +62,10 @@
             <Image HorizontalAlignment="Left" Height="24" VerticalAlignment="Center" Width="22" Source="/Resources/user.png" MouseLeftButtonDown="Image_MouseLeftButtonDown" Margin="989,0,0,0" RenderTransformOrigin="0.818,0.509"/>
         </Border>
         <Button x:Name="appointmentsButton" Content="Appointments" HorizontalAlignment="Left" VerticalAlignment="Top" Height="27" Width="100" Click="appointmentsButton_Click"/>
-        <Button x:Name="medsButton" Content="Medications List" HorizontalAlignment="Left" Margin="202,0,0,0" VerticalAlignment="Top" Height="27" Width="100" Click="medsButton_Click"/>
-        <Button x:Name="vacationRequestButton" Content="Vacation Request" HorizontalAlignment="Left" Margin="301,0,0,0" VerticalAlignment="Top" Height="27" Width="99" Click="vacationRequestButton_Click"/>
+        <Button x:Name="medsButton" Content="Medical Report" HorizontalAlignment="Left" Margin="300,0,0,0" VerticalAlignment="Top" Height="27" Width="100" Click="medsButton_Click"/>
+        <Button x:Name="vacationRequestButton" Content="Vacation Request" HorizontalAlignment="Left" Margin="202,0,0,0" VerticalAlignment="Top" Height="27" Width="99" Click="vacationRequestButton_Click"/>
         <Button x:Name="kartoniButton" Content="Medical Records" HorizontalAlignment="Left" Margin="399,0,0,0" VerticalAlignment="Top" Width="103" Click="kartoniButton_Click" Height="27"/>
-        <Button x:Name="requestsButton" Content="Medical Request" HorizontalAlignment="Left" Margin="99,0,0,0" VerticalAlignment="Top" Height="27" Width="104" Click="requestsButton_Click_1"/>
+        <Button x:Name="requestsButton" Content="Medications:" HorizontalAlignment="Left" Margin="99,0,0,0" VerticalAlignment="Top" Height="27" Width="104" Click="requestsButton_Click_1"/>
         <Label Content="Reports:" HorizontalAlignment="Left" Margin="338,115,0,0" VerticalAlignment="Top" Width="54"/>
         <Label Content="Prescriptions:" HorizontalAlignment="Left" Margin="670,119,0,0" VerticalAlignment="Top" Width="82"/>
         <TextBox x:Name="textBox5" HorizontalAlignment="Left" Margin="122,203,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" Height="19" IsEnabled="False"/>

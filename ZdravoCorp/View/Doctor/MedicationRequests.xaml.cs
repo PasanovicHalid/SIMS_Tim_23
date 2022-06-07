@@ -25,6 +25,14 @@ namespace ZdravoCorp.View.Doctor
         NewMedicationRequestController newMedicationRequestController = new NewMedicationRequestController();
         Model.Doctor currentDoctor;
 
+        private MedicationController medicationController;
+
+        public ObservableCollection<Model.Medication> MedicineCollection
+        {
+            get;
+            set;
+        }
+
         public ObservableCollection<Model.NewMedicationRequest> requests
         {
             get;
@@ -37,6 +45,12 @@ namespace ZdravoCorp.View.Doctor
             this.DataContext = this;
             currentDoctor = temp;
             UpdateDataGrid();
+
+            medicationController = new MedicationController();
+            MedicineCollection = new ObservableCollection<Model.Medication>(medicationController.GetAll());
+
+            MedicineGrid1.DataContext = MedicineCollection;
+            this.currentDoctor = temp;
         }
 
         private void textBlock_TextChanged(object sender, TextChangedEventArgs e)
@@ -86,9 +100,9 @@ namespace ZdravoCorp.View.Doctor
 
         private void medsButton_Click_1(object sender, RoutedEventArgs e)
         {
-            MedicationsView medicationsView = new MedicationsView(currentDoctor);
+            MedicalReport medicalReport= new MedicalReport(currentDoctor);
             this.Close();
-            medicationsView.Show();
+            medicalReport.Show();
         }
 
         private void vacationRequestButton_Click_1(object sender, RoutedEventArgs e)

@@ -42,10 +42,29 @@ namespace ZdravoCorp.View.Doctor
             AppointmentCB.ItemsSource = list;
             MedicationsCB.ItemsSource = medicationController.GetAll();
             PatientsCB.ItemsSource = patientController.GetAll();
-            PatientsCB.SelectedIndex = 1;
             DoctorsCB.ItemsSource = doctorController.GetAll();
             RoomsCB.ItemsSource = roomController.GetAll();
             PatientsCB.SelectedIndex = index;
+        }
+
+        public MedicalReport(Model.Doctor tempDoctor)
+        {
+            InitializeComponent();
+
+            currentDoctor = tempDoctor;
+            List<Appointment> list = new List<Appointment>();
+            foreach (Appointment app in appointmentController.GetAll())
+            {
+                if (app.Patient.Id == currentPatient.Id && app.doctor.Id == currentDoctor.Id)
+                {
+                    list.Add(app);
+                }
+            }
+            AppointmentCB.ItemsSource = list;
+            MedicationsCB.ItemsSource = medicationController.GetAll();
+            PatientsCB.ItemsSource = patientController.GetAll();
+            DoctorsCB.ItemsSource = doctorController.GetAll();
+            RoomsCB.ItemsSource = roomController.GetAll();
         }
 
         private void medicationsComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -94,7 +113,9 @@ namespace ZdravoCorp.View.Doctor
 
         private void medsButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            MedicalReport medicalReport = new MedicalReport(currentDoctor);
+            this.Close();
+            medicalReport.Show();
         }
 
         private void vacationRequestButton_Click(object sender, RoutedEventArgs e)
