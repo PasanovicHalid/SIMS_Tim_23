@@ -8,6 +8,7 @@ namespace Model
     public class HospitalSurvey: Serializable
     {
         private int id;
+        private DateTime issued;
         private int profesionalism;
         private int comfort;
         private int tidiness;
@@ -24,6 +25,7 @@ namespace Model
 
         public HospitalSurvey(int profesionalism, int comfort, int tidiness, int kindness, int hygiene, int modernity, int equipped, int overallExperience, Patient patient)
         {
+            this.issued = DateTime.Now;
             this.profesionalism = profesionalism;
             this.comfort = comfort;
             this.tidiness = tidiness;
@@ -38,6 +40,7 @@ namespace Model
         {
             List<String> result = new List<String>();
             result.Add(id.ToString());
+            result.Add(issued.ToString());
             result.Add(profesionalism.ToString());
             result.Add(comfort.ToString());
             result.Add(tidiness.ToString());
@@ -54,6 +57,7 @@ namespace Model
         {
             int i = 0;
             id = int.Parse(values[i++]);
+            issued = DateTime.Parse(values[i++]);
             profesionalism = int.Parse(values[i++]);
             comfort = int.Parse(values[i++]);
             tidiness = int.Parse(values[i++]);
@@ -74,6 +78,12 @@ namespace Model
         public int Modernity { get => modernity; set => modernity = value; }
         public int Equipped { get => equipped; set => equipped = value; }
         public int OverallExperience { get => overallExperience; set => overallExperience = value; }
+
+        public List<int> ratings { get => new List<int> { profesionalism, comfort, tidiness, kindness, hygiene, modernity, equipped, overallExperience };}
+
+        public static List<string> ratingsLabel { get => new List<string> { "Profesionalism", "Comfort", "Tidiness", "Kindness", "Hygiene", "Modernity", "Equipped", "OverallExperience" }; }
+
+        public static List<string> ratingRangeLabels { get => new List<string> { "Fives", "Fours", "Threes", "Twos", "Ones"}; }
 
     }
 }

@@ -42,5 +42,10 @@ namespace Controller
         {
             return HospitalSurveyService.Instance.getAllHospitalSurveyIds();
         }
+
+        public string GetResults()
+        {
+            return HospitalSurveyService.Instance.GetResults();
+        }
     }
 }
