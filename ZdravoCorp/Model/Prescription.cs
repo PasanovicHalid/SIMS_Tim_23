@@ -42,7 +42,7 @@ namespace Model
         public int Quantity { get { return quantity; } set { quantity = value; } }  
         public int MedicationID { get { return medication.Id; } set { medication.Id = value; } }
         public string Description { get { return description; } set { description = value; } }  
-        public string Name {  get { return medication.Name; } set { medication.Name = value;}  }
+        public string Namee {  get { return medication.Name; } set { medication.Name = value;}  }
         public int Id { get => id; set => id = value; }
         public int TimesADay { get => timesADay; set => timesADay = value; }
         public int DurationDays { get => durationDays; set => durationDays = value; }

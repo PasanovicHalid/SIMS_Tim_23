@@ -78,7 +78,8 @@
                     VerticalAlignment="Top" 
                     Style="{DynamicResource WindowButton}" 
                     Height="130" 
-                    Width="151">
+                    Width="151"
+                    Command="{Binding SurveyCommand}">>
             
         </Button>
 

@@ -11,7 +11,7 @@ using ZdravoCorp.Exceptions;
 
 namespace Controller
 {
-    internal class PrescriptionController : ICrud<Prescription>
+    public class PrescriptionController : ICrud<Prescription>
     {
         public void Create(Model.Prescription newPrescription)
         {

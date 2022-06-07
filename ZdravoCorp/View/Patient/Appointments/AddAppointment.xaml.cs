@@ -16,42 +16,28 @@ using System.Collections.ObjectModel;
 using Model;
 using System.ComponentModel;
 
-using System.Collections.Generic;
-
 namespace ZdravoCorp.View.Patient.Appointments
 {
-    /// <summary>
-    /// Interaction logic for AddAppointment.xaml
-    /// </summary>
+   
     public partial class AddAppointment : Window, INotifyPropertyChanged
     {
         public Appointment app;
         public DoctorController doctorController;
         public AppointmentController appointmentController;
-        List<Model.Suggestion> suggestions = new List<Model.Suggestion>();
         Model.Patient patient;
         public event PropertyChangedEventHandler PropertyChanged;
-
         public ObservableCollection<Appointment> AppointmentsCollection
         {
             get;
             set;
         }
+
         public ObservableCollection<Model.Doctor> DoctorsCollection
         {
             get;
             set;
         }
-        public ObservableCollection<DateTime> DateCollection
-        {
-            get;
-            set;
-        }
-        public ObservableCollection<Model.Suggestion> SuggestionsCollection
-        {
-            get;
-            set;
-        }
+       
         public AddAppointment(Model.Patient logedPatient)
         {
             InitializeComponent();
@@ -59,8 +45,6 @@ namespace ZdravoCorp.View.Patient.Appointments
             doctorController = new DoctorController();
             appointmentController = new AppointmentController();
             patient = logedPatient;
-            SuggestionsCollection = new ObservableCollection<Suggestion>(suggestions);
-            Suggestion suggestion;
             AppointmentsCollection = new ObservableCollection<Appointment>();
             DoctorsCollection = new ObservableCollection<Model.Doctor>(doctorController.GetAll());
             DoctorsCB.ItemsSource = DoctorsCollection;
@@ -68,15 +52,12 @@ namespace ZdravoCorp.View.Patient.Appointments
 
 
         private void Search_Click(object sender, RoutedEventArgs e)
-
         {
-
             DataContext = this;
             Model.Doctor d = (Model.Doctor)DoctorsCB.SelectedItem;
             Model.Doctor doctor = doctorController.Read(d.Id);
             DateTime date = (DateTime)datePicker.SelectedDate;
-            Appointment app;
-            List<Appointment> apps = new List<Appointment>();
+            List<Appointment> apps;
             date.AddHours((int)doctor.WorkStartTime.Hour);
             date.AddMinutes((int)doctor.WorkStartTime.Minute);
             date.AddSeconds((int)doctor.WorkStartTime.Second);
@@ -87,8 +68,7 @@ namespace ZdravoCorp.View.Patient.Appointments
             else
             {
                 apps = appointmentController.SuggestAppointments(new WantedAppointment(doctor, date, date.AddMinutes(45), true, true, patient));
-               // apps = appointmentController.SuggestAppointments(doctor, date, date.AddMinutes(45), true, true, patient);
-
+               
             }
 
             AppointmentsCollection = new ObservableCollection<Appointment>(apps);

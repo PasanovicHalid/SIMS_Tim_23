@@ -121,7 +121,6 @@
     <Compile Include="Model\HospitalSurvey.cs" />
     <Compile Include="Model\NewMedicationRequest.cs" />
     <Compile Include="Model\Status.cs" />
-    <Compile Include="Model\Suggestion.cs" />
     <Compile Include="Model\RenovationAction.cs" />
     <Compile Include="Model\Survey.cs" />
     <Compile Include="Model\Vacation.cs" />
@@ -251,6 +250,8 @@
     <Compile Include="View\Manager\ViewModel\Rooms\RenovateRoomViewModel.cs" />
     <Compile Include="View\Manager\ViewModel\Rooms\RoomsViewModel.cs" />
     <Compile Include="View\Manager\ViewModel\Rooms\ViewRoomViewModel.cs" />
+    <Compile Include="View\Manager\ViewModel\Surveys\SurveysViewModel.cs" />
+    <Compile Include="View\Manager\ViewModel\Surveys\ViewSurveyViewModel.cs" />
     <Compile Include="View\Manager\View\Employees\Employees.xaml.cs">
       <DependentUpon>Employees.xaml</DependentUpon>
     </Compile>
@@ -350,9 +351,6 @@
     <Compile Include="View\Patient\Appointments\AddAppointment.xaml.cs">
       <DependentUpon>AddAppointment.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Patient\Appointments\Appointments.xaml.cs">
-      <DependentUpon>Appointments.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\Patient\Appointments\ChangeAppointment.xaml.cs">
       <DependentUpon>ChangeAppointment.xaml</DependentUpon>
     </Compile>
@@ -364,6 +362,9 @@
       <DependentUpon>Patient.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Patient\ViewModel\Survey\AppointmentSurveyViewModel.cs" />
+    <Compile Include="View\Patient\View\Notification\NotificationView.xaml.cs">
+      <DependentUpon>NotificationView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Patient\View\Survey\AppointmentSurveyView.xaml.cs">
       <DependentUpon>AppointmentSurveyView.xaml</DependentUpon>
     </Compile>
@@ -594,10 +595,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Patient\Appointments\Appointments.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\Patient\Appointments\ChangeAppointment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -607,6 +604,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Patient\Patient.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Patient\View\Notification\NotificationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -810,7 +811,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="View\Manager\Model\Surveys\" />
-    <Folder Include="View\Manager\ViewModel\Surveys\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
