@@ -53,10 +53,6 @@ namespace Model
         public Room room { get; set; }
         public Patient patient { get; set; }
 
-        /// <summary>
-        /// Property for Room
-        /// </summary>
-        /// <pdGenerated>Default opposite class property</pdGenerated>
         public Room Room
         {
             get

@@ -19,9 +19,6 @@ using ZdravoCorp.View.Patient.Appointments;
 
 namespace ZdravoCorp.View.Patient
 {
-    /// <summary>
-    /// Interaction logic for Patient.xaml
-    /// </summary>
     public partial class Patient : Window, INotifyPropertyChanged
     {
         private Appointment app;
@@ -190,7 +187,16 @@ namespace ZdravoCorp.View.Patient
             SetPatientInfo(patient);
             UpdateTable();
             PastAppointments();
+            Therapy();
 
+        }
+        public void Therapy()
+        {
+            Prescription prescription;
+            PrescriptionController prescriptionController = new PrescriptionController();
+            List<Prescription> prescriptions = prescriptionController.GetAll();
+            ObservableCollection<Prescription> prescriptionCollection = new ObservableCollection<Prescription>(prescriptions);
+            CurrentTherapies.DataContext = prescriptionCollection;
         }
         public void SetPatientInfo(Model.Patient patient)
         {
@@ -241,14 +247,6 @@ namespace ZdravoCorp.View.Patient
                     OnPropertyChanged("Room");
                 }
             }
-        }
-        private void Appointments_Click(object sender, RoutedEventArgs e)
-        {
-            Appointments.Appointments window = new Appointments.Appointments();
-            this.Hide();
-            window.ShowDialog();
-            this.Show();
-
         }
 
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -399,6 +397,12 @@ namespace ZdravoCorp.View.Patient
         private void Anamnesis_Click(object sender, RoutedEventArgs e)
         {
             ZdravoCorp.View.Patient.MedicalRecord.Anamnesis window = new ZdravoCorp.View.Patient.MedicalRecord.Anamnesis(PastAppointmentsCollection.ElementAt(DoneAppointments.SelectedIndex));
+            window.ShowDialog();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ZdravoCorp.View.Patient.View.Notification.NotificationView window = new ZdravoCorp.View.Patient.View.Notification.NotificationView();
             window.ShowDialog();
         }
     }
