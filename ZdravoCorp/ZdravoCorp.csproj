@@ -113,7 +113,6 @@
     <Compile Include="Model\MedicineIngredient.cs" />
     <Compile Include="Model\NewMedicationRequest.cs" />
     <Compile Include="Model\Status.cs" />
-    <Compile Include="Model\Suggestion.cs" />
     <Compile Include="Model\RenovationAction.cs" />
     <Compile Include="Model\Vacation.cs" />
     <Compile Include="Model\WantedAppointment.cs" />
@@ -319,9 +318,6 @@
     </Compile>
     <Compile Include="View\Patient\Appointments\AddAppointment.xaml.cs">
       <DependentUpon>AddAppointment.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Patient\Appointments\Appointments.xaml.cs">
-      <DependentUpon>Appointments.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Patient\Appointments\ChangeAppointment.xaml.cs">
       <DependentUpon>ChangeAppointment.xaml</DependentUpon>
@@ -533,10 +529,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Patient\Appointments\AddAppointment.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Patient\Appointments\Appointments.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

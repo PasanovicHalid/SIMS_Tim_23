@@ -19,9 +19,6 @@ using ZdravoCorp.View.Patient.Appointments;
 
 namespace ZdravoCorp.View.Patient
 {
-    /// <summary>
-    /// Interaction logic for Patient.xaml
-    /// </summary>
     public partial class Patient : Window, INotifyPropertyChanged
     {
         private Appointment app;
@@ -241,14 +238,6 @@ namespace ZdravoCorp.View.Patient
                     OnPropertyChanged("Room");
                 }
             }
-        }
-        private void Appointments_Click(object sender, RoutedEventArgs e)
-        {
-            Appointments.Appointments window = new Appointments.Appointments();
-            this.Hide();
-            window.ShowDialog();
-            this.Show();
-
         }
 
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
