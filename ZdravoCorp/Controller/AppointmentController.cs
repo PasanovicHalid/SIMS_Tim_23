@@ -8,6 +8,7 @@ using System;
 using Service;
 using System.Collections.Generic;
 using Repository;
+using ZdravoCorp.Exceptions;
 
 namespace Controller
 {
@@ -15,6 +16,14 @@ namespace Controller
     {
         public void Create(Appointment newAppointment)
         {
+            List<Appointment> appointmentList = GetAll();
+            foreach (Appointment tempAppointment in appointmentList)
+            {
+                if(CheckAppointmentsDates(tempAppointment,newAppointment) && CheckOtherAppointmenstInformations(tempAppointment,newAppointment))
+                {
+                    throw new LocalisedException("Appointment cannot be created,change input data!");
+                }
+            }
             AppointmentService.Instance.Create(newAppointment);
         }
 
@@ -78,6 +87,33 @@ namespace Controller
                 }
             }
             return true;
+        }
+
+        private Boolean CheckAppointmentsDates(Appointment appointmentOne, Appointment appointmentTwo)
+        {
+            if ((DateTime.Compare(appointmentOne.StartDate, appointmentTwo.StartDate) < 0 && DateTime.Compare(appointmentOne.EndDate, appointmentTwo.EndDate) > 0)
+               || (DateTime.Compare(appointmentOne.StartDate, appointmentTwo.endDate) < 0 && DateTime.Compare(appointmentOne.EndDate, appointmentTwo.StartDate) > 0)
+                   || (DateTime.Compare(appointmentOne.StartDate, appointmentTwo.StartDate) < 0 && DateTime.Compare(appointmentOne.EndDate, appointmentTwo.EndDate) > 0)
+                       || (DateTime.Compare(appointmentOne.StartDate, appointmentTwo.StartDate) > 0 && DateTime.Compare(appointmentOne.EndDate, appointmentTwo.EndDate) < 0))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        
+        public Boolean CheckOtherAppointmenstInformations(Appointment appointmentOne, Appointment appointmentTwo)
+        {
+            if (appointmentOne.DoctorID == appointmentTwo.DoctorID || appointmentTwo.RoomID == appointmentOne.RoomID || appointmentTwo.PatientID == appointmentOne.PatientID)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

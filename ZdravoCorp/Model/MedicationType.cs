@@ -18,6 +18,7 @@ namespace Model
         private String manufacturer;
         private String description;
         private List<MedicationType> replacement;
+        private List<MedicationType> ingredients;
 
         public int Id
         {
@@ -100,6 +101,19 @@ namespace Model
             }
         }
 
+        public List<MedicationType> Ingredients
+        {
+            get => ingredients;
+            set
+            {
+                if(value != ingredients)
+                {
+                    ingredients = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         public MedicationType(int id)
         {
             this.Id = id;
@@ -111,6 +125,7 @@ namespace Model
             this.manufacturer = manufacturer;
             this.description = description;
             Replacement = new List<MedicationType>();
+            Ingredients = new List<MedicationType>();
         }
 
         public MedicationType(MedicationType type)
@@ -120,10 +135,12 @@ namespace Model
             this.manufacturer = type.Manufacturer;
             this.description = type.Description;
             Replacement = type.Replacement;
+            Ingredients = type.Ingredients;
         }
 
         public MedicationType()
         {
+
         }
 
         public MedicationType(string name, string manufacturer, string description)
@@ -151,11 +168,21 @@ namespace Model
             }
         }
 
+        private void IngredientsToStrings(List<string> result)
+        {
+            result.Add(Ingredients.Count.ToString());
+            foreach (MedicationType type in Ingredients)
+            {
+                result.Add(type.Id.ToString());
+            }
+        }
+
         public List<string> ToCSV()
         {
             List<string> result = new List<string>();
             InfoToListString(result);
             ReplacementsToListString(result);
+            IngredientsToStrings(result);
             return result;
         }
 
@@ -181,10 +208,23 @@ namespace Model
             return values.Skip(i).ToArray();
         }
 
+        private string[] ReadIngredients(string[] values)
+        {
+            Ingredients = new List<MedicationType>();
+            int i = 0;
+            int count = int.Parse(values[i++]);
+            for (; i < count; i++)
+            {
+                Replacement.Add(new MedicationType(int.Parse(values[i])));
+            }
+            return values.Skip(i).ToArray();
+        }
+
         public void FromCSV(string[] values)
         {
             values = ReadInfo(values);
-            ReadReplacements(values);
+            values = ReadReplacements(values);
+            ReadIngredients(values);
         }
     }
 }

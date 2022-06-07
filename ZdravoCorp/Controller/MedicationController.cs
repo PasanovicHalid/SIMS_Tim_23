@@ -13,12 +13,12 @@ namespace Controller
 {
     public class MedicationController : ICrud<Medication>
     {
-        public void Create(Model.Medication newMedicine)
+        public void Create(Medication newMedicine)
         {
             MedicationService.Instance.Create(newMedicine);
         }
 
-        public void Update(Model.Medication medicine)
+        public void Update(Medication medicine)
         {
             MedicationService.Instance.Update(medicine);
         }

@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ZdravoCorp.View.Doctor"
         mc:Ignorable="d"
-        Title="MedicalRecords" Height="522" Width="1023"
+        Title="MedicalRecords" Height="532" Width="1023"
         WindowStartupLocation="CenterScreen">
-    <Grid>
-        <GroupBox HorizontalAlignment="Center" Height="410" Header="Medical Record:" Margin="0,86,0,0" VerticalAlignment="Top" Width="1001" BorderBrush="#FF688CAF"/>
-        <GroupBox HorizontalAlignment="Left" Height="321" Header="Informations:" Margin="32,138,0,0" VerticalAlignment="Top" Width="281"/>
+    <Grid Margin="0,0,0,-6">
+        <GroupBox HorizontalAlignment="Center" Height="398" Header="Medical Record:" Margin="0,86,0,0" VerticalAlignment="Top" Width="1001" BorderBrush="#FF688CAF"/>
+        <GroupBox HorizontalAlignment="Left" Height="327" Header="Informations:" Margin="32,125,0,0" VerticalAlignment="Top" Width="281"/>
         <DataGrid x:Name="ReportsGrid" ItemsSource="{Binding}"
-            AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" Margin="338,149,365,37">
+            AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" Margin="338,146,365,53">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Comment" Binding="{Binding Comment}" Width="70"/>
                 <DataGridTextColumn Header="Appointment ID" Binding="{Binding AppointmentID}" Width="110" />
@@ -48,7 +48,7 @@
         <Button x:Name="commentButton" Content="Add Report" HorizontalAlignment="Left" Margin="44,386,0,0" VerticalAlignment="Top" Height="49" Width="100" Click="commentButton_Click"/>
 
         <DataGrid x:Name="PrescriptionsGrid" ItemsSource="{Binding}"
-            AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" Margin="670,151,33,35">
+            AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" Margin="670,150,33,55">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Medication Name" Binding="{Binding Name}" Width="110"/>
                 <DataGridTextColumn Header="Times A Day" Binding="{Binding TimesADay}" Width="80"/>

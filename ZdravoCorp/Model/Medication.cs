@@ -4,6 +4,7 @@
 // Purpose: Definition of Class Medication
 
 using Repository;
+using Controller;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,6 @@ namespace Model
         private int id;
         private int count;
         private MedicationType medicationType;
-        private int v;
 
         public Medication(int id, int count)
         {
@@ -50,9 +50,8 @@ namespace Model
             int i = 0;
             id = int.Parse(values[i++]);
             count = int.Parse(values[i++]);
-            values = values.Skip(i).ToArray();
-            medicationType = new MedicationType();
-            medicationType.FromCSV(values);
+            MedicationController medicationController = new MedicationController();
+            MedicationType = medicationController.ReadMedicationType(int.Parse(values[i++]));
         }
 
         public List<String> ToCSV()
@@ -60,7 +59,7 @@ namespace Model
             List<String> result = new List<String>();
             result.Add(id.ToString());
             result.Add(count.ToString());
-            result.AddRange(medicationType.ToCSV());
+            result.Add(medicationType.Id.ToString());
             return result;
         }
     }

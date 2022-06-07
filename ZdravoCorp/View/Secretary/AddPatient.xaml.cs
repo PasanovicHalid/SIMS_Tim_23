@@ -202,7 +202,7 @@ namespace ZdravoCorp.View.Secretary
             {
                 gender = Gender.Female;
             }
-            patient = new Model.Patient(0, password, username, name, surname, jmbg, email, address, phoneNumber, gender, dateOfBirth, null, null, new List<DateTime>());
+            patient = new Model.Patient(0, password, username, name, surname, jmbg, email, address, phoneNumber, gender, dateOfBirth, null, null, new List<DateTime>(),null);
             //if (!patientController.CreatePatient(new Model.Patient(0, password, username, name, surname, jmbg, email, address, phoneNumber, gender, dateOfBirth, null, null, new List<DateTime>())))
             //{
             //    MessageBox.Show("Nije uspesno dodat element", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -214,7 +214,7 @@ namespace ZdravoCorp.View.Secretary
 
         private void CreateMedicalRecord_Click(object sender, RoutedEventArgs e)
         {
-            patient = new Model.Patient(0, password, username, name, surname, jmbg, email, address, phoneNumber, gender, dateOfBirth, null, null, new List<DateTime>());
+            patient = new Model.Patient(0, password, username, name, surname, jmbg, email, address, phoneNumber, gender, dateOfBirth, null, null, new List<DateTime>(),null);
             ZdravoCorp.View.Secretary.AddRecord window = new ZdravoCorp.View.Secretary.AddRecord(patient);
             window.ShowDialog();
             this.Close();

@@ -63,36 +63,7 @@ namespace ZdravoCorp.View.Doctor
             }
             else
             {
-                /*AddComment add = new AddComment(tempPatient, currentDoctor);
-                add.Show();
-
-                tempPatient = (Model.Patient)PatientsCB.SelectedItem;
-
-                medicalRecordController = new MedicalRecordController();
-
-                List<Model.MedicalRecord> med = medicalRecordController.GetAll();
-
-                PrescriptionCollection = new ObservableCollection<Model.Prescription>();
-
-                foreach (Model.MedicalRecord pom in med)
-                {
-                    if (tempPatient.Record.Id == pom.Id)
-                    {
-                        textBox1.Text = pom.Id.ToString();
-                        textBox2.Text = pom.Weight.ToString();
-
-                        textBox3.Text = pom.Height.ToString();
-
-                        textBox4.Text = pom.BloodType.ToString();
-
-                        List<Model.Report> commentsl = pom.MedicalReports;
-
-                        CommentsGrid.DataContext = commentsl;
-
-                    }
-                }*/
-
-                MedicalReport med = new MedicalReport(tempPatient, currentDoctor);
+                MedicalReport med = new MedicalReport(tempPatient, currentDoctor,PatientsCB.SelectedIndex);
                 this.Close();
                 med.Show();
 

@@ -6,6 +6,7 @@
 
 using Repository;
 using System;
+using Controller;
 using System.Collections.Generic;
 
 namespace Model
@@ -14,8 +15,11 @@ namespace Model
     {
         private MedicalRecord record;
         public MedicalRecord Record { get { return record; } set { record = value; } }
-        public Patient(int id, string password, string username, string name, string surname, string jmbg, string email, string address, string phoneNumber, Gender gender, DateTime dateOfBirth, List<Notification> notification, List<AppointmentSurvey> survey,List<DateTime> changedOrCanceled) : base(id, password, username, name, surname, jmbg, email, address, phoneNumber, gender, dateOfBirth, notification, survey)
+
+        private List<MedicationType> allergens;
+        public Patient(int id, string password, string username, string name, string surname, string jmbg, string email, string address, string phoneNumber, Gender gender, DateTime dateOfBirth, List<Notification> notification, List<AppointmentSurvey> survey,List<DateTime> changedOrCanceled, List<MedicationType> allergens) : base(id, password, username, name, surname, jmbg, email, address, phoneNumber, gender, dateOfBirth, notification, survey)
         {
+            Allergens = allergens;
             this.changedOrCanceledAppointmnetsDates = changedOrCanceled;
             this.canLog = true;
         }
@@ -38,6 +42,7 @@ namespace Model
             this.prescription = pomocnip.prescription;
             this.changedOrCanceledAppointmnetsDates = new List<DateTime>();
             this.canLog = true;
+            Allergens = pomocnip.Allergens;
         }
 
         public Patient(int id)
@@ -75,6 +80,50 @@ namespace Model
                         AddAppointment(oAppointment);
                 }
             }
+        }
+
+        public List<MedicationType> Allergens
+        {
+            get
+            {
+                if (allergens == null)
+                    allergens = new List<MedicationType>();
+                return allergens;
+            }
+            set
+            {
+                RemoveAllAllergens();
+                if (value != null)
+                {
+                    foreach (MedicationType oMedicationType in value)
+                        AddAllergen(oMedicationType);
+                }
+            }
+        }
+
+        public void AddAllergen(MedicationType newMedicationType)
+        {
+            if (newMedicationType == null)
+                return;
+            if (this.allergens == null)
+                this.allergens = new List<MedicationType>();
+            if (!this.allergens.Contains(newMedicationType))
+                this.allergens.Add(newMedicationType);
+        }
+
+        public void RemoveAllergen(MedicationType oldMedicationType)
+        {
+            if (oldMedicationType == null)
+                return;
+            if (this.allergens != null)
+                if (this.allergens.Contains(oldMedicationType))
+                    this.allergens.Remove(oldMedicationType);
+        }
+
+        public void RemoveAllAllergens()
+        {
+            if (allergens != null)
+                allergens.Clear();
         }
 
         /// <summary>
@@ -262,6 +311,19 @@ namespace Model
                 }
             }
             result.Add(canLog.ToString());
+            if (allergens == null)
+            {
+                result.Add(nf.ToString());
+            }
+            else
+            {
+                result.Add(allergens.Count.ToString());
+
+                foreach (MedicationType medicationType in allergens)
+                {
+                    result.Add(medicationType.Id.ToString());
+                }
+            }
             return result;
         }
 
@@ -315,6 +377,13 @@ namespace Model
                 changedOrCanceledAppointmnetsDates.Add(DateTime.Parse(values[i++]));
             }
             canLog = Boolean.Parse(values[i++]);
+
+            int numberOfAllergens = int.Parse((values[i++]));
+            MedicationController medicationController = new MedicationController(); 
+            for (int j = 0; j < numberOfAllergens; j++)
+            {
+                AddAllergen(medicationController.ReadMedicationType(int.Parse(values[i++])));
+            }
         }
 
         private List<DateTime> changedOrCanceledAppointmnetsDates = new List<DateTime>();
