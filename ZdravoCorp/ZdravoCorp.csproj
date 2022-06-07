@@ -251,6 +251,8 @@
     <Compile Include="View\Manager\ViewModel\Rooms\RenovateRoomViewModel.cs" />
     <Compile Include="View\Manager\ViewModel\Rooms\RoomsViewModel.cs" />
     <Compile Include="View\Manager\ViewModel\Rooms\ViewRoomViewModel.cs" />
+    <Compile Include="View\Manager\ViewModel\Surveys\SurveysViewModel.cs" />
+    <Compile Include="View\Manager\ViewModel\Surveys\ViewSurveyViewModel.cs" />
     <Compile Include="View\Manager\View\Employees\Employees.xaml.cs">
       <DependentUpon>Employees.xaml</DependentUpon>
     </Compile>
@@ -810,7 +812,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="View\Manager\Model\Surveys\" />
-    <Folder Include="View\Manager\ViewModel\Surveys\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

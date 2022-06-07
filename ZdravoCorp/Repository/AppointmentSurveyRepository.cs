@@ -71,6 +71,33 @@ namespace Repository
             throw new NotImplementedException();
         }
 
+        public new List<AppointmentSurvey> GetAll()
+        {
+            List<AppointmentSurvey> surveys = base.GetAll();
+            List<Appointment> appointments = AppointmentRepository.Instance.GetAll();
+            List<Doctor> doctors = DoctorRepository.Instance.GetAll();
+            foreach(AppointmentSurvey survey in surveys)
+            {
+                foreach(Appointment appointment in appointments)
+                {
+                    if(survey.Appointment.Id == appointment.Id)
+                    {
+                        survey.Appointment = appointment;
+                        foreach(Doctor doctor in doctors)
+                        {
+                            if(survey.Appointment.Doctor.Id == doctor.Id)
+                            {
+                                survey.Appointment.Doctor = doctor;
+                                break;
+                            }
+                        }
+                        break;
+                    }
+                }
+            }
+            return surveys;
+        }
+
         protected override void InstantiateIDSet(List<AppointmentSurvey> elements)
         {
             lock (key)
@@ -98,7 +125,7 @@ namespace Repository
                 }
             }
             throw new Exception("AppointmentSurvey doesnt exist");
-        }
+        } 
 
         public static AppointmentSurveyRepository Instance
         {

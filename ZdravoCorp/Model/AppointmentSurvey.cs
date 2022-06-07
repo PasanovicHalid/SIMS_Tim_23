@@ -182,6 +182,12 @@ namespace Model
                     OnPropertyChanged("OverallExperience");
                 }
             }
-        } 
+        }
+
+        public List<int> ratings { get => new List<int> { profesionalism, comfort, tidiness, kindness, overallExperience }; }
+
+        public static List<string> ratingsLabel { get => new List<string> { "Profesionalism", "Comfort", "Tidiness", "Kindness", "OverallExperience" }; }
+
+        public static List<string> ratingRangeLabels { get => new List<string> { "Fives", "Fours", "Threes", "Twos", "Ones" }; }
     }
 }
