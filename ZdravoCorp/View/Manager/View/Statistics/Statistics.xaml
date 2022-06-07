@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="ZdravoCorp.View.Manager.View.Statistics.Statistics"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ZdravoCorp.View.Manager.View.Statistics"
+             xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             xmlns:p="clr-namespace:ZdravoCorp.View.Core"
+             mc:Ignorable="d" 
+             d:DesignHeight="667" d:DesignWidth="430">
+    <Grid>
+        <DatePicker  Style="{DynamicResource MangerDatePicker}" 
+                     HorizontalAlignment="Left" 
+                     Margin="26,21,0,0" 
+                     VerticalAlignment="Top" 
+                     Height="29" 
+                     Tag="{p:Loc From}" 
+                     CalendarStyle="{DynamicResource ManagerCalendar}" Width="126"/>
+        <lvc:CartesianChart Margin="22,377,22,10">
+
+        </lvc:CartesianChart>
+        <lvc:CartesianChart Margin="22,71,22,316">
+
+        </lvc:CartesianChart>
+        <DatePicker Style="{DynamicResource MangerDatePicker}" 
+                    HorizontalAlignment="Center" 
+                    Margin="0,21,0,0" 
+                    VerticalAlignment="Top" 
+                    Height="29" 
+                    Tag="{p:Loc To}" 
+                    CalendarStyle="{DynamicResource ManagerCalendar}" Width="118"/>
+
+
+    </Grid>
+</UserControl>

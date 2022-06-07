@@ -12,9 +12,10 @@ using System.ComponentModel;
 
 namespace Model
 {
-    public class AppointmentSurvey : ObservableObject ,Serializable, INotifyPropertyChanged
+    public class AppointmentSurvey : ObservableObject ,Serializable
     {
         private int id;
+        private DateTime issued;
         private int profesionalism;
         private int kindness;
         private int comfort;
@@ -23,15 +24,6 @@ namespace Model
         private int roomComfort;
         private int overallExperience;
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged(string name)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
-            }
-        }
         //private String questionAboutProfesionalism = "Ocenite profesionalnost lekara";
         //private String questionAboutComfort = "Ocenite udobnost";
         //private String questionAboutKindness = "Ocenite ljubaznost lekara";
@@ -54,6 +46,7 @@ namespace Model
 
         public AppointmentSurvey(int profesionalism, int kindness, int comfort, int tidiness, int waitingTime, int roomComfort, int overallExperience, Appointment appointment)
         {
+            this.issued = DateTime.Now;
             this.profesionalism = profesionalism;
             this.kindness = kindness;
             this.comfort = comfort;
@@ -78,6 +71,7 @@ namespace Model
         {
             List<String> result = new List<String>();
             result.Add(id.ToString());
+            result.Add(issued.ToString());
             result.Add(profesionalism.ToString());
             result.Add(kindness.ToString());
             result.Add(comfort.ToString());
@@ -93,6 +87,7 @@ namespace Model
         {
             int i = 0;
             id = int.Parse(values[i++]);
+            issued = DateTime.Parse(values[i++]);
             profesionalism = int.Parse(values[i++]);
             kindness = int.Parse(values[i++]);
             comfort = int.Parse(values[i++]);
@@ -187,6 +182,6 @@ namespace Model
                     OnPropertyChanged("OverallExperience");
                 }
             }
-        }
+        } 
     }
 }

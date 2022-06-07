@@ -36,6 +36,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="presentationframework.aero" />
     <Reference Include="PresentationFramework.Aero2" />
     <Reference Include="SharpVectors.Converters.Wpf, Version=1.7.7.0, Culture=neutral, PublicKeyToken=b532964b8548be77, processorArchitecture=MSIL">
@@ -101,6 +107,7 @@
     <Compile Include="Controller\PrescriptionController.cs" />
     <Compile Include="Controller\RoomController.cs" />
     <Compile Include="Controller\SecretaryController.cs" />
+    <Compile Include="Controller\SurveyController.cs" />
     <Compile Include="Controller\VacationController.cs" />
     <Compile Include="Exceptions\LocalisedException.cs" />
     <Compile Include="Model\Action.cs" />
@@ -109,6 +116,7 @@
     <Compile Include="Model\ChangeRoomAction.cs" />
     <Compile Include="Model\Guest.cs" />
     <Compile Include="Model\IAction.cs" />
+    <Compile Include="Model\SurveyEnum.cs" />
     <Compile Include="Model\LoginUserEnumeration.cs" />
     <Compile Include="Model\HospitalSurvey.cs" />
     <Compile Include="Model\MedicineIngredient.cs" />
@@ -116,6 +124,7 @@
     <Compile Include="Model\Status.cs" />
     <Compile Include="Model\Suggestion.cs" />
     <Compile Include="Model\RenovationAction.cs" />
+    <Compile Include="Model\Survey.cs" />
     <Compile Include="Model\Vacation.cs" />
     <Compile Include="Model\WantedAppointment.cs" />
     <Compile Include="Properties\Resources.sr.Designer.cs">
@@ -174,6 +183,7 @@
     <Compile Include="Service\PrescriptionService.cs" />
     <Compile Include="Service\RoomService.cs" />
     <Compile Include="Service\SecretaryService.cs" />
+    <Compile Include="Service\SurveyService.cs" />
     <Compile Include="Service\TimerService.cs" />
     <Compile Include="Service\VacationService.cs" />
     <Compile Include="Settings.cs" />
@@ -243,6 +253,12 @@
     <Compile Include="View\Manager\ViewModel\Rooms\RenovateRoomViewModel.cs" />
     <Compile Include="View\Manager\ViewModel\Rooms\RoomsViewModel.cs" />
     <Compile Include="View\Manager\ViewModel\Rooms\ViewRoomViewModel.cs" />
+    <Compile Include="View\Manager\View\Employees\Employees.xaml.cs">
+      <DependentUpon>Employees.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Manager\View\Employees\ViewEmployee.xaml.cs">
+      <DependentUpon>ViewEmployee.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Manager\View\Equipments\AddEquipment.xaml.cs">
       <DependentUpon>AddEquipment.xaml</DependentUpon>
     </Compile>
@@ -275,6 +291,12 @@
     </Compile>
     <Compile Include="View\Manager\View\Medications\ViewRejected.xaml.cs">
       <DependentUpon>ViewRejected.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Manager\View\Notifications\Notifications.xaml.cs">
+      <DependentUpon>Notifications.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Manager\View\Notifications\ViewNotification.xaml.cs">
+      <DependentUpon>ViewNotification.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Manager\View\Rooms\AddRoom.xaml.cs">
       <DependentUpon>AddRoom.xaml</DependentUpon>
@@ -317,6 +339,15 @@
     </Compile>
     <Compile Include="View\Manager\View\Rooms\ViewRoom.xaml.cs">
       <DependentUpon>ViewRoom.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Manager\View\Statistics\Statistics.xaml.cs">
+      <DependentUpon>Statistics.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Manager\View\Surveys\Surveys.xaml.cs">
+      <DependentUpon>Surveys.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Manager\View\Surveys\ViewSurvey.xaml.cs">
+      <DependentUpon>ViewSurvey.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Patient\Appointments\AddAppointment.xaml.cs">
       <DependentUpon>AddAppointment.xaml</DependentUpon>
@@ -433,6 +464,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Manager\View\Employees\Employees.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Manager\View\Employees\ViewEmployee.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Manager\View\Equipments\AddEquipment.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -474,6 +513,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Manager\View\Medications\ViewRejected.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Manager\View\Notifications\Notifications.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Manager\View\Notifications\ViewNotification.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -530,6 +577,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Manager\View\Rooms\ViewRoom.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Manager\View\Statistics\Statistics.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Manager\View\Surveys\Surveys.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Manager\View\Surveys\ViewSurvey.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -750,6 +809,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="View\Manager\Model\Surveys\" />
+    <Folder Include="View\Manager\ViewModel\Surveys\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

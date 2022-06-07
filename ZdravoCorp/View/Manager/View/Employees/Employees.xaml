@@ -1,9 +1,9 @@
-﻿<UserControl x:Class="ZdravoCorp.View.Manager.View.Rooms.RenovatingRooms"
+﻿<UserControl x:Class="ZdravoCorp.View.Manager.View.Employees.Employees"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:ZdravoCorp.View.Manager.View.Rooms"
+             xmlns:local="clr-namespace:ZdravoCorp.View.Manager.View.Employees"
              xmlns:p="clr-namespace:ZdravoCorp.View.Core"
              mc:Ignorable="d" 
              d:DesignHeight="667" d:DesignWidth="430">
@@ -36,10 +36,8 @@
                       VerticalGridLinesBrush="Transparent" 
                       >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="{p:Loc Name}" Binding="{Binding ExecutionDate}" ElementStyle="{StaticResource WrapText}" Width="*"/>
-                <DataGridTextColumn Header="{p:Loc End}" Binding="{Binding ExpirationDate}" ElementStyle="{StaticResource WrapText}" Width="*"/>
-                <DataGridTextColumn Header="{p:Loc Room}" Binding="{Binding DesignationCode}" ElementStyle="{StaticResource WrapText}" Width="*"/>
-                <DataGridTextColumn Header="{p:Loc Is Renovating Now}" Binding="{Binding RenovationTable}" ElementStyle="{StaticResource WrapText}" Width="135"/>
+                <DataGridTextColumn Header="{p:Loc Start}" Binding="{Binding ExecutionDate}" ElementStyle="{StaticResource WrapText}" Width="130"/>
+                <DataGridTextColumn Header="{p:Loc Description}" Binding="{Binding ExpirationDate}" ElementStyle="{StaticResource WrapText}" Width="*"/>
             </DataGrid.Columns>
             <DataGrid.InputBindings>
                 <MouseBinding Gesture="LeftDoubleClick" Command="{Binding ViewCommand}"/>
