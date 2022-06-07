@@ -119,7 +119,6 @@
     <Compile Include="Model\SurveyEnum.cs" />
     <Compile Include="Model\LoginUserEnumeration.cs" />
     <Compile Include="Model\HospitalSurvey.cs" />
-    <Compile Include="Model\MedicineIngredient.cs" />
     <Compile Include="Model\NewMedicationRequest.cs" />
     <Compile Include="Model\Status.cs" />
     <Compile Include="Model\Suggestion.cs" />
@@ -147,7 +146,6 @@
     <Compile Include="Repository\AppointmentRepository.cs" />
     <Compile Include="Repository\ICrud.cs" />
     <Compile Include="Repository\MedicationTypeRepository.cs" />
-    <Compile Include="Repository\MedicationIngredientsRepository.cs" />
     <Compile Include="Repository\ReportRepository.cs" />
     <Compile Include="Repository\DoctorRepository.cs" />
     <Compile Include="Repository\EquipmentTypeRepository.cs" />
