@@ -13,6 +13,10 @@ namespace Controller
     {
         public void Create(NewMedicationRequest newMedicationRequest)
         {
+            if(newMedicationRequest == null || newMedicationRequest.Name == null)
+            {
+                throw new Exception("Incorect request");
+            }
             NewMedicationRequestService.Instance.Create(newMedicationRequest);
         }
 

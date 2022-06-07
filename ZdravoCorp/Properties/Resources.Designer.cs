@@ -914,5 +914,14 @@ namespace ZdravoCorp.Properties {
                 return ResourceManager.GetString("UserExists", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View Survey.
+        /// </summary>
+        public static string ViewSurvey {
+            get {
+                return ResourceManager.GetString("ViewSurvey", resourceCulture);
+            }
+        }
     }
 }

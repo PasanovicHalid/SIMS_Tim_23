@@ -402,4 +402,7 @@
   <data name="UserExists" xml:space="preserve">
     <value>User already exists</value>
   </data>
+  <data name="ViewSurvey" xml:space="preserve">
+    <value>View Survey</value>
+  </data>
 </root>

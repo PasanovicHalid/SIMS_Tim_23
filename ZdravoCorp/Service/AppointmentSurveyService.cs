@@ -43,6 +43,80 @@ namespace Service
         {
             return AppointmentSurveyRepository.Instance.getAllAppointmentSurveyIds();
         }
+
+        public string GetResultsForDoctor(Doctor doctor)
+        {
+            string result = doctor.nameSurname + ":\n\t";
+            int count = AppointmentSurvey.ratingsLabel.Count;
+            List<AppointmentSurvey> surveys = FindSurveysForDoctor(GetAll(),doctor.Id);
+            for (int i = 0; i < count; i++)
+            {
+                List<int> ratings = GetRatingsForSpecificRating(surveys, i);
+                result += AppointmentSurvey.ratingsLabel[i] + ":\n\t\t";
+                result += "Score: " + GetAvgOfRatings(ratings) + "\n\n\t\t";
+                result = CreateTextOfAmmountOfRatings(result, ratings);
+            }
+            return result;
+        }
+
+        private List<AppointmentSurvey> FindSurveysForDoctor(List<AppointmentSurvey> surveys, int id)
+        {
+            List<AppointmentSurvey> result = new List<AppointmentSurvey>();
+            foreach(AppointmentSurvey survey in surveys)
+            {
+                if(survey.Appointment.Doctor.Id == id)
+                {
+                    result.Add(survey);
+                }
+            }
+            return result;
+        }
+
+        private string CreateTextOfAmmountOfRatings(string result, List<int> ratings)
+        {
+            for (int i = 0; i < AppointmentSurvey.ratingRangeLabels.Count; i++)
+            {
+                result += AppointmentSurvey.ratingRangeLabels[i] + ": " + GetCountOfRating(ratings, 5 - i) + "\n\t\t";
+            }
+            result += "\n\t";
+            return result;
+        }
+
+        private List<int> GetRatingsForSpecificRating(List<AppointmentSurvey> surveys, int rating)
+        {
+            List<int> ratings = new List<int>();
+            foreach (AppointmentSurvey survey in surveys)
+            {
+                ratings.Add(survey.ratings[rating]);
+            }
+            return ratings;
+        }
+
+        private float GetCountOfRating(List<int> ratings, int rating)
+        {
+            int count = 0;
+            foreach (int it in ratings)
+            {
+                if (it == rating)
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
+
+        private float GetAvgOfRatings(List<int> ratings)
+        {
+            int count = 0;
+            float sum = 0;
+            foreach (int rating in ratings)
+            {
+                count++;
+                sum += rating;
+            }
+            return sum / count;
+        }
+
         public AppointmentSurveyService()
         {
 

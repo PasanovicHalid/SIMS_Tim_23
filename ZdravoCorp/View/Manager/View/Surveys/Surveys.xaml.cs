@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ZdravoCorp.View.Manager.ViewModel.Surveys;
 
 namespace ZdravoCorp.View.Manager.View.Surveys
 {
@@ -20,9 +21,10 @@ namespace ZdravoCorp.View.Manager.View.Surveys
     /// </summary>
     public partial class Surveys : UserControl
     {
-        public Surveys()
+        public Surveys(SurveysViewModel model)
         {
             InitializeComponent();
+            this.DataContext = model;
         }
     }
 }

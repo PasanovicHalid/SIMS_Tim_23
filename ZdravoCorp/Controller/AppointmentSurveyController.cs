@@ -44,5 +44,10 @@ namespace Controller
         {
             return AppointmentSurveyService.Instance.DoneSurvey(appointment);
         }
+
+        public string GetResultsForDoctor(Doctor doctor)
+        {
+            return AppointmentSurveyService.Instance.GetResultsForDoctor(doctor);
+        }
     }
 }

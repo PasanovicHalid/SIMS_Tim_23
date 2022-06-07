@@ -402,4 +402,7 @@
   <data name="UserExists" xml:space="preserve">
     <value>Korisnik vec postoji</value>
   </data>
+  <data name="ViewSurvey" xml:space="preserve">
+    <value>Prikaz ankete</value>
+  </data>
 </root>
