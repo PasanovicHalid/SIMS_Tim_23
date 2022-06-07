@@ -330,6 +330,9 @@
       <DependentUpon>Patient.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Patient\ViewModel\Survey\AppointmentSurveyViewModel.cs" />
+    <Compile Include="View\Patient\View\Notification\NotificationView.xaml.cs">
+      <DependentUpon>NotificationView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Patient\View\Survey\AppointmentSurveyView.xaml.cs">
       <DependentUpon>AppointmentSurveyView.xaml</DependentUpon>
     </Compile>
@@ -541,6 +544,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Patient\Patient.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Patient\View\Notification\NotificationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

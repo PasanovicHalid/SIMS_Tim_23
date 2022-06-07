@@ -187,7 +187,16 @@ namespace ZdravoCorp.View.Patient
             SetPatientInfo(patient);
             UpdateTable();
             PastAppointments();
+            Therapy();
 
+        }
+        public void Therapy()
+        {
+            Prescription prescription;
+            PrescriptionController prescriptionController = new PrescriptionController();
+            List<Prescription> prescriptions = prescriptionController.GetAll();
+            ObservableCollection<Prescription> prescriptionCollection = new ObservableCollection<Prescription>(prescriptions);
+            CurrentTherapies.DataContext = prescriptionCollection;
         }
         public void SetPatientInfo(Model.Patient patient)
         {
@@ -388,6 +397,12 @@ namespace ZdravoCorp.View.Patient
         private void Anamnesis_Click(object sender, RoutedEventArgs e)
         {
             ZdravoCorp.View.Patient.MedicalRecord.Anamnesis window = new ZdravoCorp.View.Patient.MedicalRecord.Anamnesis(PastAppointmentsCollection.ElementAt(DoneAppointments.SelectedIndex));
+            window.ShowDialog();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ZdravoCorp.View.Patient.View.Notification.NotificationView window = new ZdravoCorp.View.Patient.View.Notification.NotificationView();
             window.ShowDialog();
         }
     }

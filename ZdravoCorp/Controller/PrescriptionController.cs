@@ -8,9 +8,9 @@ using Repository;
 using Model;
 using Service;
 
-namespace ZdravoCorp.Controller
+namespace Controller
 {
-    internal class PrescriptionController : ICrud<Prescription>
+    public class PrescriptionController : ICrud<Prescription>
     {
         public void Create(Model.Prescription newPrescription)
         {

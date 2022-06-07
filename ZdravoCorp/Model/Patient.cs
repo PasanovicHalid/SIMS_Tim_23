@@ -302,7 +302,7 @@ namespace Model
             }
 
             int count3 = int.Parse(values[i++]);
-            ZdravoCorp.Controller.PrescriptionController pc= new ZdravoCorp.Controller.PrescriptionController();
+            Controller.PrescriptionController pc= new Controller.PrescriptionController();
             prescription = new List<Prescription>();
             for (int j = 0; j < count3; j++)
             {
