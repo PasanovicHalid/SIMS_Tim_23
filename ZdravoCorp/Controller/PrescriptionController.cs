@@ -7,6 +7,7 @@ using ZdravoCorp.Service;
 using Repository;
 using Model;
 using Service;
+using ZdravoCorp.Exceptions;
 
 namespace Controller
 {
@@ -32,9 +33,13 @@ namespace Controller
             return PrescriptionService.Instance.Read(identificator);
         }
 
-        public int CreateAndReturnID(Prescription newPrescription)
+        public int CreateAndReturnID(Prescription newPrescription, Patient currentPatient)
         {
-            return PrescriptionService.Instance.CreateAndReturnID(newPrescription);
+            if ((newPrescription.DurationDays * newPrescription.TimesADay) > newPrescription.Medication.Count)
+            {
+                throw new LocalisedException("U magacinu ne postoje tolike kolicine leka!");
+            }
+            return PrescriptionService.Instance.CreateAndReturnID(newPrescription,currentPatient);
         }
 
         public List<Prescription> GetAll()

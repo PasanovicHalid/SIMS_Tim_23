@@ -215,7 +215,7 @@ namespace Model
             int count = int.Parse(values[i++]);
             for (; i < count; i++)
             {
-                Replacement.Add(new MedicationType(int.Parse(values[i])));
+                Ingredients.Add(new MedicationType(int.Parse(values[i])));
             }
             return values.Skip(i).ToArray();
         }

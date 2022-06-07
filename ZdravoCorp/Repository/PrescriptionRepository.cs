@@ -33,6 +33,7 @@ namespace Repository
             {
                 element.Id = GenerateID();
                 AppendToDB(element);
+                idMap.Add(element.Id);
             }
         }
 
@@ -42,6 +43,7 @@ namespace Repository
             {
                 element.Id = GenerateID();
                 AppendToDB(element);
+                idMap.Add(element.Id);
                 return element.Id;
             }
         }
