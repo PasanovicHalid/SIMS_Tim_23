@@ -405,5 +405,11 @@ namespace ZdravoCorp.View.Patient
             ZdravoCorp.View.Patient.View.Notification.NotificationView window = new ZdravoCorp.View.Patient.View.Notification.NotificationView();
             window.ShowDialog();
         }
+
+        private void Allergies_Click(object sender, RoutedEventArgs e)
+        {
+            ZdravoCorp.View.Patient.View.Allergies.AllergiesView w = new View.Allergies.AllergiesView();
+            w.ShowDialog();
+        }
     }
 }

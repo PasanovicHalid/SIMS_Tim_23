@@ -172,7 +172,8 @@
                     <Button 
                         Style="{DynamicResource BlueButton}"
                         Content="Alergeni" HorizontalAlignment="Left" Margin="479,25,0,0" VerticalAlignment="Top"
-                            Width="120" Height="40"/>
+                            Width="120" Height="40"
+                        Click="Allergies_Click"/>
                     <Button 
                         Style="{DynamicResource BlueButton}"
                         Content="Istorija bolesti" HorizontalAlignment="Left" Margin="479,70,0,0" VerticalAlignment="Top"
