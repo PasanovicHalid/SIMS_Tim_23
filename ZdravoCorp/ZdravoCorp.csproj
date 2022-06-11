@@ -357,6 +357,9 @@
     </Compile>
     <Compile Include="View\Patient\ViewModel\Allergies\AllergiesViewModel.cs" />
     <Compile Include="View\Patient\ViewModel\Survey\AppointmentSurveyViewModel.cs" />
+    <Compile Include="View\Patient\View\Allergies\AllergiesView.xaml.cs">
+      <DependentUpon>AllergiesView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Patient\View\Notification\NotificationView.xaml.cs">
       <DependentUpon>NotificationView.xaml</DependentUpon>
     </Compile>
@@ -366,6 +369,7 @@
     <Compile Include="View\Patient\View\Survey\HospitalSurveyView.xaml.cs">
       <DependentUpon>HospitalSurveyView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Patient\VML\ViewModelLocator.cs" />
     <Compile Include="View\Secretary\AddAppointment.xaml.cs">
       <DependentUpon>AddAppointment.xaml</DependentUpon>
     </Compile>
@@ -587,6 +591,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Patient\Patient.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Patient\View\Allergies\AllergiesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
