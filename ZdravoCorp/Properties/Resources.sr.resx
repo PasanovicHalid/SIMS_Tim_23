@@ -219,6 +219,9 @@
   <data name="Duration" xml:space="preserve">
     <value>Trajanje</value>
   </data>
+  <data name="Employees" xml:space="preserve">
+    <value>Zaposleni</value>
+  </data>
   <data name="Employess" xml:space="preserve">
     <value>Zaposleni</value>
   </data>
@@ -263,6 +266,9 @@
   </data>
   <data name="Is Renovating Now" xml:space="preserve">
     <value>Renovira se trenutno</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Jezik</value>
   </data>
   <data name="Location" xml:space="preserve">
     <value>Lokacija</value>
@@ -360,6 +366,9 @@
   <data name="Selected Room" xml:space="preserve">
     <value>Izabrana soba</value>
   </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Podesavanja</value>
+  </data>
   <data name="Size" xml:space="preserve">
     <value>Velicina</value>
   </data>
@@ -378,6 +387,9 @@
   <data name="Start Time" xml:space="preserve">
     <value>Pocetno vreme</value>
   </data>
+  <data name="Statistics" xml:space="preserve">
+    <value>Statistika</value>
+  </data>
   <data name="Status" xml:space="preserve">
     <value>Status</value>
   </data>
@@ -386,6 +398,12 @@
   </data>
   <data name="Survey" xml:space="preserve">
     <value>Izvestaj ankete</value>
+  </data>
+  <data name="Surveys" xml:space="preserve">
+    <value>Ankete</value>
+  </data>
+  <data name="Theme" xml:space="preserve">
+    <value>Stil</value>
   </data>
   <data name="Time" xml:space="preserve">
     <value>Vreme</value>

@@ -15,7 +15,8 @@
             VerticalAlignment="Top" 
             HorizontalContentAlignment="Center" 
             Width="98"
-            Style="{StaticResource ManagerLabels}"/>
+            Style="{DynamicResource ManagerLabels}"
+               Foreground="{DynamicResource ManagerLabelForeground}"/>
 
         <TextBox HorizontalAlignment="Center"
                  Margin="0,58,0,0" 
@@ -23,7 +24,7 @@
                  Text="{Binding Path=Identifier, UpdateSourceTrigger=PropertyChanged}"
                  VerticalAlignment="Top" 
                  Width="338"
-                 Style="{StaticResource ManagerTextBox}" 
+                 Style="{DynamicResource ManagerTextBox}" 
                  Name="Designation"
                  Tag="{p:Loc Designation}"
                  Height="46"
@@ -35,7 +36,8 @@
             VerticalAlignment="Top" 
             HorizontalContentAlignment="Center" 
             Width="92"
-            Style="{StaticResource ManagerLabels}"/>
+            Style="{DynamicResource ManagerLabels}"
+               Foreground="{DynamicResource ManagerLabelForeground}"/>
 
         <ComboBox x:Name="RoomTypes_Copy1" 
             HorizontalAlignment="Center" 
@@ -62,7 +64,7 @@
                 Height="47" 
                 Width="83"
                 Command="{Binding CombineCommand}"
-                Style="{StaticResource ManagerButtons}"/>
+                Style="{DynamicResource ManagerButtons}"/>
 
     </Grid>
 </UserControl>

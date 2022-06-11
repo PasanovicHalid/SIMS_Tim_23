@@ -15,7 +15,7 @@
                  Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}"
                  VerticalAlignment="Top" 
                  Width="274"
-                 Style="{StaticResource ManagerTextBox}" 
+                 Style="{DynamicResource ManagerTextBox}" 
                  Name="Name"
                  Tag="{p:Loc Name}"
                  Height="45"/>
@@ -27,7 +27,7 @@
                 Height="47" 
                 Width="46"
                 Command="{Binding AddRoomTypeCommand}"
-                Style="{StaticResource ManagerButtons}"/>
+                Style="{DynamicResource ManagerButtons}"/>
 
 
     </Grid>

@@ -13,7 +13,7 @@
                      Text="" 
                      VerticalAlignment="Top" 
                      Width="162"
-                     Style="{StaticResource ManagerSearch}"
+                     Style="{DynamicResource ManagerSearch}"
                      Tag="{p:Loc Search}"
                      Name="Search" 
                      Height="42"/>

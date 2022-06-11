@@ -28,8 +28,8 @@
                       SelectedItem="{Binding SelectedRequest}"
                       >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="{p:Loc Name}" Binding="{Binding Name}" ElementStyle="{StaticResource WrapText}" Width="*"/>
-                <DataGridTextColumn Header="{p:Loc Status}" Binding="{Binding Status}" ElementStyle="{StaticResource WrapText}" Width="*"/>
+                <DataGridTextColumn Header="{p:Loc Name}" Binding="{Binding Name}" ElementStyle="{DynamicResource WrapText}" Width="*"/>
+                <DataGridTextColumn Header="{p:Loc Status}" Binding="{Binding Status}" ElementStyle="{DynamicResource WrapText}" Width="*"/>
             </DataGrid.Columns>
             <DataGrid.InputBindings>
                 <MouseBinding Gesture="LeftDoubleClick" Command="{Binding ViewCommand}"/>
@@ -42,7 +42,7 @@
                      Text="" 
                      VerticalAlignment="Top" 
                      Width="260"
-                     Style="{StaticResource ManagerSearch}" 
+                     Style="{DynamicResource ManagerSearch}" 
                      Name="Search"
                      Tag="{p:Loc Search}"
                      Height="42"/>

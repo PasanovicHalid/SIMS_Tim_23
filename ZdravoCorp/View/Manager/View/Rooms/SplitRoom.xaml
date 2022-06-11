@@ -15,7 +15,8 @@
             VerticalAlignment="Top" 
             HorizontalContentAlignment="Center" 
             Width="98"
-            Style="{StaticResource ManagerLabels}"/>
+            Style="{DynamicResource ManagerLabels}"
+               Foreground="{DynamicResource ManagerLabelForeground}"/>
 
         <TextBox HorizontalAlignment="Center"
                  Margin="0,58,0,0" 
@@ -23,7 +24,7 @@
                  Text="{Binding Path=Identifier, UpdateSourceTrigger=PropertyChanged}"
                  VerticalAlignment="Top" 
                  Width="338"
-                 Style="{StaticResource ManagerTextBox}" 
+                 Style="{DynamicResource ManagerTextBox}" 
                  Name="Designation"
                  Tag="{p:Loc Designation}"
                  Height="46"
@@ -35,7 +36,8 @@
             VerticalAlignment="Top" 
             HorizontalContentAlignment="Center" 
             Width="37"
-            Style="{StaticResource ManagerLabels}"/>
+            Style="{DynamicResource ManagerLabels}"
+               Foreground="{DynamicResource ManagerLabelForeground}"/>
 
         <TextBox HorizontalAlignment="Center"
             Margin="0,141,0,0" 
@@ -43,7 +45,7 @@
             Text="{Binding Floor, UpdateSourceTrigger=PropertyChanged}"
             VerticalAlignment="Top" 
             Width="338"
-            Style="{StaticResource ManagerTextBox}" 
+            Style="{DynamicResource ManagerTextBox}" 
             x:Name="Size_Copy1"
             Tag="{p:Loc Floor}"
             Height="46"
@@ -55,7 +57,8 @@
             VerticalAlignment="Top" 
             HorizontalContentAlignment="Center" 
             Width="166"
-            Style="{StaticResource ManagerLabels}"/>
+            Style="{DynamicResource ManagerLabels}"
+               Foreground="{DynamicResource ManagerLabelForeground}"/>
 
         <TextBox HorizontalAlignment="Center"
             Margin="0,233,0,0" 
@@ -63,7 +66,7 @@
             Text="{Binding NewIdentifier, UpdateSourceTrigger=PropertyChanged}"
             VerticalAlignment="Top" 
             Width="338"
-            Style="{StaticResource ManagerTextBox}" 
+            Style="{DynamicResource ManagerTextBox}" 
             x:Name="Designation_Copy"
             Tag="{p:Loc Designation}"
             Height="46"
@@ -75,7 +78,8 @@
             VerticalAlignment="Top" 
             HorizontalContentAlignment="Center" 
             Width="86"
-            Style="{StaticResource ManagerLabels}"/>
+            Style="{DynamicResource ManagerLabels}"
+               Foreground="{DynamicResource ManagerLabelForeground}"/>
 
         <TextBox HorizontalAlignment="Left"
             Margin="46,334,0,0" 
@@ -83,7 +87,7 @@
             Text="{Binding Size, UpdateSourceTrigger=PropertyChanged}"
             VerticalAlignment="Top" 
             Width="149"
-            Style="{StaticResource ManagerTextBox}" 
+            Style="{DynamicResource ManagerTextBox}" 
             x:Name="Size"
             Tag="{p:Loc Size}"
             Height="46"
@@ -95,7 +99,8 @@
             VerticalAlignment="Top" 
             HorizontalContentAlignment="Center" 
             Width="82"
-            Style="{StaticResource ManagerLabels}"/>
+            Style="{DynamicResource ManagerLabels}"
+               Foreground="{DynamicResource ManagerLabelForeground}"/>
 
         <TextBox HorizontalAlignment="Left"
             Margin="236,334,0,0" 
@@ -103,7 +108,7 @@
             Text="{Binding MaxSize, UpdateSourceTrigger=PropertyChanged}"
             VerticalAlignment="Top" 
             Width="148"
-            Style="{StaticResource ManagerTextBox}" 
+            Style="{DynamicResource ManagerTextBox}" 
             x:Name="Size_Copy"
             Tag="{p:Loc Max}"
             Height="46"
@@ -116,7 +121,7 @@
                 Height="47" 
                 Width="83"
                 Command="{Binding SplitCommand}"
-                Style="{StaticResource ManagerButtons}"/>
+                Style="{DynamicResource ManagerButtons}"/>
 
     </Grid>
 </UserControl>

@@ -14,7 +14,8 @@
             VerticalAlignment="Top" 
             HorizontalContentAlignment="Center" 
             Width="46"
-            Style="{StaticResource ManagerLabels}"/>
+            Style="{DynamicResource ManagerLabels}"
+               Foreground="{DynamicResource ManagerLabelForeground}"/>
 
         <TextBox HorizontalAlignment="Center"
                  Margin="0,45,0,0" 
@@ -22,7 +23,7 @@
                  Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}"
                  VerticalAlignment="Top" 
                  Width="364"
-                 Style="{StaticResource ManagerTextBox}" 
+                 Style="{DynamicResource ManagerTextBox}" 
                  Name="Count"
                  Tag="{p:Loc Name}"
                  Height="46"/>
@@ -33,7 +34,8 @@
                VerticalAlignment="Top"  
                HorizontalContentAlignment="Center"
                Width="86"
-               Style="{StaticResource ManagerLabels}"/>
+               Style="{DynamicResource ManagerLabels}"
+               Foreground="{DynamicResource ManagerLabelForeground}"/>
 
         <TextBox HorizontalAlignment="Center"
                  Margin="0,133,0,0" 
@@ -41,7 +43,7 @@
                  Text="{Binding Path=Manufacturer, UpdateSourceTrigger=PropertyChanged}"
                  VerticalAlignment="Top" 
                  Width="364"
-                 Style="{StaticResource ManagerTextBox}" 
+                 Style="{DynamicResource ManagerTextBox}" 
                  Tag="{p:Loc Manufacturer}"
                  Height="44"/>
 
@@ -51,7 +53,8 @@
                VerticalAlignment="Top"  
                HorizontalContentAlignment="Center" 
                Width="76"
-               Style="{StaticResource ManagerLabels}"/>
+               Style="{DynamicResource ManagerLabels}"
+               Foreground="{DynamicResource ManagerLabelForeground}"/>
 
         <TextBox HorizontalAlignment="Center"
                  Margin="0,223,0,0" 
@@ -59,7 +62,7 @@
                  Text="{Binding Path=Description, UpdateSourceTrigger=PropertyChanged}"
                  VerticalAlignment="Top" 
                  Width="364"
-                 Style="{StaticResource ManagerTextBox}" 
+                 Style="{DynamicResource ManagerTextBox}" 
                  Tag="{p:Loc Description}"
                  Height="102"/>
 
@@ -69,7 +72,8 @@
                VerticalAlignment="Top"  
                HorizontalContentAlignment="Center" 
                Width="90"
-               Style="{StaticResource ManagerLabels}"/>
+               Style="{DynamicResource ManagerLabels}"
+               Foreground="{DynamicResource ManagerLabelForeground}"/>
 
         <ComboBox x:Name="Rooms" 
                   HorizontalAlignment="Center" 
@@ -120,7 +124,7 @@
                 Height="47" 
                 Width="166"
                 Command="{Binding ChangeCommand}"
-                Style="{StaticResource ManagerButtons}"/>
+                Style="{DynamicResource ManagerButtons}"/>
 
         <Button Content="{p:Loc Delete Replacement}" 
                 HorizontalAlignment="Left" 
@@ -129,7 +133,7 @@
                 Height="47" 
                 Width="166"
                 Command="{Binding DeleteReplacementCommand}"
-                Style="{StaticResource ManagerButtons}"/>
+                Style="{DynamicResource ManagerButtons}"/>
 
 
     </Grid>

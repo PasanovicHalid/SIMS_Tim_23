@@ -21,7 +21,8 @@
                     VerticalAlignment="Top" 
                     Height="24" 
                     Tag="{p:Loc To}" 
-                    CalendarStyle="{DynamicResource ManagerCalendar}"/>
+                    CalendarStyle="{DynamicResource ManagerCalendar}"
+                    Foreground="Green"/>
 
         <Label Content="{p:Loc Survey}" 
                    HorizontalAlignment="Center" 
@@ -29,6 +30,7 @@
                    VerticalAlignment="Top" 
                    HorizontalContentAlignment="Center"
                    FontSize="18"
+               Foreground="{DynamicResource ManagerLabelForeground}"
                    Style="{DynamicResource ManagerLabels}" Height="34" Width="364"/>
 
         <TextBox HorizontalAlignment="Center" 
@@ -38,9 +40,9 @@
                  HorizontalContentAlignment="Left"
                  VerticalContentAlignment="Top"
                  Width="364"
-                 Style="{StaticResource ManagerSurveyTextBox}" 
+                 Style="{DynamicResource ManagerSurveyTextBox}" 
                  Tag="{p:Loc Description}"
-                 Height="500" 
+                 Height="481" 
                  Margin="0,117,0,0"/>
 
 

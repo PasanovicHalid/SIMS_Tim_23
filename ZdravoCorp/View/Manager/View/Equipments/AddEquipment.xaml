@@ -13,7 +13,8 @@
             VerticalAlignment="Top"  
             HorizontalContentAlignment="Center" 
             Width="52"
-            Style="{StaticResource ManagerLabels}"/>
+            Style="{DynamicResource ManagerLabels}"
+               Foreground="{DynamicResource ManagerLabelForeground}"/>
 
         <TextBox HorizontalAlignment="Left"
                  Margin="80,103,0,0" 
@@ -21,7 +22,7 @@
                  Text="{Binding Path=Count, UpdateSourceTrigger=PropertyChanged}"
                  VerticalAlignment="Top" 
                  Width="274"
-                 Style="{StaticResource ManagerTextBox}" 
+                 Style="{DynamicResource ManagerTextBox}" 
                  Name="Count"
                  Tag="{p:Loc Count}"
                  Height="45"/>
@@ -32,7 +33,8 @@
                VerticalAlignment="Top"  
                HorizontalContentAlignment="Center" 
                Width="106"
-               Style="{StaticResource ManagerLabels}"/>
+               Style="{DynamicResource ManagerLabels}"
+               Foreground="{DynamicResource ManagerLabelForeground}"/>
 
         <ComboBox x:Name="Types" 
                   HorizontalAlignment="Left" 
@@ -57,7 +59,7 @@
                 Margin="307,195,0,0" 
                 VerticalAlignment="Top" 
                 Height="45" 
-                Style="{StaticResource ManagerButtons}"
+                Style="{DynamicResource ManagerButtons}"
                 Command="{Binding AddEquipmentTypeViewCommand}"
                 Width="47"/>
 
@@ -67,7 +69,8 @@
                VerticalAlignment="Top"  
                HorizontalContentAlignment="Center" 
                Width="48"
-               Style="{StaticResource ManagerLabels}"/>
+               Style="{DynamicResource ManagerLabels}"
+               Foreground="{DynamicResource ManagerLabelForeground}"/>
 
         <ComboBox x:Name="Rooms" 
                   HorizontalAlignment="Left" 
@@ -95,7 +98,7 @@
                 Height="47" 
                 Width="46"
                 Command="{Binding AddViewCommand}"
-                Style="{StaticResource ManagerButtons}"/>
+                Style="{DynamicResource ManagerButtons}"/>
 
 
     </Grid>

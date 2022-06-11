@@ -15,7 +15,8 @@
             VerticalAlignment="Top" 
             HorizontalContentAlignment="Center" 
             Width="116"
-            Style="{StaticResource ManagerLabels}"/>
+            Style="{DynamicResource ManagerLabels}"
+               Foreground="{DynamicResource ManagerLabelForeground}"/>
 
         <TextBox HorizontalAlignment="Left"
                  Margin="131,40,0,0" 
@@ -23,7 +24,7 @@
                  Text="{Binding Path=Identifier, UpdateSourceTrigger=PropertyChanged}"
                  VerticalAlignment="Top" 
                  Width="283"
-                 Style="{StaticResource ManagerTextBox}" 
+                 Style="{DynamicResource ManagerTextBox}" 
                  Name="Designation"
                  Tag="{p:Loc Designation}"
                  Height="46"
@@ -35,7 +36,9 @@
             VerticalAlignment="Top" 
             HorizontalContentAlignment="Center" 
             Width="68"
-            Style="{StaticResource ManagerLabels}" RenderTransformOrigin="0.452,1.071"/>
+            Style="{DynamicResource ManagerLabels}" 
+               Foreground="{DynamicResource ManagerLabelForeground}"
+               RenderTransformOrigin="0.452,1.071"/>
 
         <Calendar CalendarButtonStyle="{DynamicResource ManagerCalendarButtonStyle}" 
                   CalendarDayButtonStyle="{DynamicResource ManagerCalendarDayButtonStyle}" 
@@ -51,7 +54,9 @@
             VerticalAlignment="Top" 
             HorizontalContentAlignment="Center" 
             Width="63"
-            Style="{StaticResource ManagerLabels}" RenderTransformOrigin="0.452,1.071"/>
+            Style="{DynamicResource ManagerLabels}"
+               Foreground="{DynamicResource ManagerLabelForeground}"
+               RenderTransformOrigin="0.452,1.071"/>
 
         <Calendar CalendarButtonStyle="{DynamicResource ManagerCalendarButtonStyle}" 
                   CalendarDayButtonStyle="{DynamicResource ManagerCalendarDayButtonStyle}" 
@@ -68,7 +73,7 @@
                 Height="47" 
                 Width="80"
                 Command="{Binding ChangeCommand}"
-                Style="{StaticResource ManagerButtons}"/>
+                Style="{DynamicResource ManagerButtons}"/>
 
         <Button Content="{p:Loc Delete}" 
                 HorizontalAlignment="Left" 
@@ -77,7 +82,7 @@
                 Height="47" 
                 Width="80"
                 Command="{Binding DeleteCommand}"
-                Style="{StaticResource ManagerButtons}"/>
+                Style="{DynamicResource ManagerButtons}"/>
 
     </Grid>
 </UserControl>

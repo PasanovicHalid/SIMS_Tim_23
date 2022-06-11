@@ -17,7 +17,7 @@
         Closing="CloseManager"
         WindowStartupLocation="CenterScreen">
 
-    <Border Background="#222831"
+    <Border Background = "{DynamicResource ManagerAppBackground}"
             CornerRadius="10">
         <Grid>
             <Grid.RowDefinitions>
@@ -33,17 +33,17 @@
 
                     <Label Content="" 
                            MouseLeftButtonDown="Drag_MouseDown"
-                           Style="{StaticResource LoginLabels}" 
+                           Style="{DynamicResource LoginLabels}" 
                            Width="362" 
                            Height="33"/>
 
                     <Button Content="-"
-                            Style="{StaticResource MinimiseButton}" 
+                            Style="{DynamicResource MinimiseButton}" 
                             Click="Minimize_Click" 
                             Width="34" 
                             Height="35"/>
                     <Button Content="×"
-                            Style="{StaticResource ExitButton}" 
+                            Style="{DynamicResource ExitButton}" 
                             Click="Exit_Click" 
                             Width="34" 
                             Height="34" />
@@ -56,23 +56,24 @@
                         Background="#EEEEEE">
 
                 <Label Content="{Binding Path=Title, UpdateSourceTrigger=PropertyChanged}" 
-                       Style="{StaticResource ActionLabels}" 
+                       Style="{DynamicResource ActionLabels}" 
                        Width="362" 
                        Height="41"/>
 
                 <Button Content="&lt;"
-                    Style="{StaticResource MinimiseButton}"
+                    Style="{DynamicResource MinimiseButton}"
                     Foreground="#393E46" 
                     Width="34" 
                     Height="44" 
                     Command="{Binding BackViewCommand}"/>
-
+                
                 <Button Content="≡"
-                    Style="{StaticResource MinimiseButton}"
+                    Style="{DynamicResource MinimiseButton}"
                     Foreground="#393E46" 
                     Width="34" 
                     Height="40" 
                     Click="Logout_Click" />
+
 
             </StackPanel>
 
@@ -83,7 +84,7 @@
                     CornerRadius="0,0,10,10"
                     Background="#393E46">
                 <StackPanel Orientation="Horizontal">
-                    <Button Style="{StaticResource ActionButton}"
+                    <Button Style="{DynamicResource ActionButton}"
                             Foreground="#EEEEEE"
                             Width="86" 
                             Height="45"
@@ -101,7 +102,7 @@
 
                     </Button>
 
-                    <Button Style="{StaticResource ActionButton}"
+                    <Button Style="{DynamicResource ActionButton}"
                             Foreground="#EEEEEE"
                             Width="86" 
                             Height="45"
@@ -118,7 +119,7 @@
                         </StackPanel>
                     </Button>
 
-                    <Button Style="{StaticResource ActionButton}"
+                    <Button Style="{DynamicResource ActionButton}"
                             Foreground="#EEEEEE"
                             Width="86" 
                             Height="45" 
@@ -135,7 +136,7 @@
                         </StackPanel>
                     </Button>
 
-                    <Button Style="{StaticResource ActionButton}"
+                    <Button Style="{DynamicResource ActionButton}"
                             Foreground="#EEEEEE"
                             Width="86" 
                             Height="45" 
@@ -153,7 +154,7 @@
                     </Button>
 
                     <Button
-                    Style="{StaticResource ActionButton}"
+                    Style="{DynamicResource ActionButton}"
                     Foreground="#EEEEEE"
                     Width="86" 
                     Height="45" Click="Employess_Click" >

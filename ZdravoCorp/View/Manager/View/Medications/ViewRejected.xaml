@@ -16,7 +16,8 @@
                 VerticalAlignment="Top" 
                 HorizontalContentAlignment="Center" 
                 Width="35"
-                Style="{StaticResource ManagerLabels}"/>
+                Style="{DynamicResource ManagerLabels}"
+                   Foreground="{DynamicResource ManagerLabelForeground}"/>
 
             <TextBox HorizontalAlignment="Left"
                 Margin="30,66,0,0" 
@@ -24,7 +25,7 @@
                 Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}"
                 VerticalAlignment="Top" 
                 Width="364"
-                Style="{StaticResource ManagerTextBox}" 
+                Style="{DynamicResource ManagerTextBox}" 
                 Tag="{p:Loc Error}"
                 Height="102"/>
 
@@ -34,7 +35,8 @@
                 VerticalAlignment="Top" 
                 HorizontalContentAlignment="Center" 
                 Width="46"
-                Style="{StaticResource ManagerLabels}"/>
+                Style="{DynamicResource ManagerLabels}"
+                   Foreground="{DynamicResource ManagerLabelForeground}"/>
 
             <TextBox HorizontalAlignment="Left"
                      Margin="30,216,0,0" 
@@ -42,7 +44,7 @@
                      Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}"
                      VerticalAlignment="Top" 
                      Width="364"
-                     Style="{StaticResource ManagerTextBox}" 
+                     Style="{DynamicResource ManagerTextBox}" 
                      Name="Count"
                      Tag="{p:Loc Name}"
                      Height="46"/>
@@ -53,7 +55,8 @@
                    VerticalAlignment="Top" 
                    HorizontalContentAlignment="Center" 
                    Width="86"
-                   Style="{StaticResource ManagerLabels}"/>
+                   Style="{DynamicResource ManagerLabels}"
+                   Foreground="{DynamicResource ManagerLabelForeground}"/>
 
             <TextBox HorizontalAlignment="Left"
                      Margin="30,304,0,0" 
@@ -61,7 +64,7 @@
                      Text="{Binding Path=Manufacturer, UpdateSourceTrigger=PropertyChanged}"
                      VerticalAlignment="Top" 
                      Width="364"
-                     Style="{StaticResource ManagerTextBox}" 
+                     Style="{DynamicResource ManagerTextBox}" 
                      Tag="{p:Loc Manufacturer}"
                      Height="44"/>
 
@@ -71,7 +74,8 @@
                    VerticalAlignment="Top" 
                    HorizontalContentAlignment="Center" 
                    Width="76"
-                   Style="{StaticResource ManagerLabels}"/>
+                   Style="{DynamicResource ManagerLabels}"
+                   Foreground="{DynamicResource ManagerLabelForeground}"/>
 
             <TextBox HorizontalAlignment="Left"
                      Margin="30,394,0,0" 
@@ -79,7 +83,7 @@
                      Text="{Binding Path=Description, UpdateSourceTrigger=PropertyChanged}"
                      VerticalAlignment="Top" 
                      Width="364"
-                     Style="{StaticResource ManagerTextBox}" 
+                     Style="{DynamicResource ManagerTextBox}" 
                      Tag="{p:Loc Description}"
                      Height="102"/>
 
@@ -89,7 +93,8 @@
                    VerticalAlignment="Top" 
                    HorizontalContentAlignment="Center" 
                    Width="90"
-                   Style="{StaticResource ManagerLabels}"/>
+                   Style="{DynamicResource ManagerLabels}"
+                   Foreground="{DynamicResource ManagerLabelForeground}"/>
 
             <ComboBox x:Name="Rooms" 
                       HorizontalAlignment="Center" 
@@ -140,7 +145,7 @@
                     Height="46" 
                     Width="166"
                     Command="{Binding ChangeCommand}"
-                    Style="{StaticResource ManagerButtons}"/>
+                    Style="{DynamicResource ManagerButtons}"/>
 
             <Button Content="{p:Loc Delete Replacement}" 
                     HorizontalAlignment="Left" 
@@ -149,7 +154,7 @@
                     Height="46" 
                     Width="166"
                     Command="{Binding DeleteReplacementCommand}"
-                    Style="{StaticResource ManagerButtons}"/>
+                    Style="{DynamicResource ManagerButtons}"/>
         </Grid>
     </ScrollViewer>
 </UserControl>

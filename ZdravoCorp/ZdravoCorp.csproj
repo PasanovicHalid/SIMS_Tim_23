@@ -188,6 +188,7 @@
     <Compile Include="View\Core\ChangeSettings.cs" />
     <Compile Include="View\Core\ObservableObject.cs" />
     <Compile Include="View\Core\RelayCommand.cs" />
+    <Compile Include="View\Core\ThemesController.cs" />
     <Compile Include="View\Core\TranslationSource.cs" />
     <Compile Include="View\Core\ViewModelInterface.cs" />
     <Compile Include="View\Core\WindowBrowser.cs" />
@@ -238,6 +239,7 @@
     <Compile Include="View\Manager\ViewModel\Rooms\RenovateRoomViewModel.cs" />
     <Compile Include="View\Manager\ViewModel\Rooms\RoomsViewModel.cs" />
     <Compile Include="View\Manager\ViewModel\Rooms\ViewRoomViewModel.cs" />
+    <Compile Include="View\Manager\ViewModel\SettingsViewModel.cs" />
     <Compile Include="View\Manager\ViewModel\Surveys\SurveysViewModel.cs" />
     <Compile Include="View\Manager\ViewModel\Surveys\ViewSurveyViewModel.cs" />
     <Compile Include="View\Manager\View\Employees\Employees.xaml.cs">
@@ -326,6 +328,9 @@
     </Compile>
     <Compile Include="View\Manager\View\Rooms\ViewRoom.xaml.cs">
       <DependentUpon>ViewRoom.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Manager\View\Settings.xaml.cs">
+      <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Manager\View\Statistics\Statistics.xaml.cs">
       <DependentUpon>Statistics.xaml</DependentUpon>
@@ -551,6 +556,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Manager\View\Settings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Manager\View\Statistics\Statistics.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -635,7 +644,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Styles\ManagerStyles.xaml">
+    <Page Include="View\Styles\ManagerStylesLight.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Styles\ManagerStylesDark.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -783,6 +796,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="View\Manager\Model\Surveys\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\surveys.svg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

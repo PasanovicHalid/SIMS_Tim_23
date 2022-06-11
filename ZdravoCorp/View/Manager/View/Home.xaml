@@ -11,8 +11,7 @@
     <Grid>
         <Button 
                     HorizontalAlignment="Left" 
-                    Margin="23,30,0,0" 
-                    Grid.Row="2" 
+                    Margin="30,81,0,0" 
                     VerticalAlignment="Top" 
                     Style="{DynamicResource WindowButton}" 
                     Height="130" 
@@ -23,17 +22,17 @@
 
         <Label Content="{p:Loc Rooms}" 
                    HorizontalAlignment="Left" 
-                   Margin="64,152,0,0" 
-                   Grid.Row="2" 
+                   Margin="71,203,0,0" 
                    VerticalAlignment="Top" 
                    HorizontalContentAlignment="Center"
                    FontSize="18"
-                   Style="{DynamicResource ManagerLabels}" Height="35" Width="76"/>
+                   Style="{DynamicResource ManagerLabels}" 
+                   Height="35" Width="76"
+                   Foreground="{DynamicResource ManagerLabelForeground}"/>
 
         <Button  
                     HorizontalAlignment="Left" 
-                    Margin="247,30,0,0" 
-                    Grid.Row="2" 
+                    Margin="254,81,0,0" 
                     VerticalAlignment="Top" 
                     Style="{DynamicResource WindowButton}" 
                     Height="130" 
@@ -44,17 +43,16 @@
 
         <Label  Content="{p:Loc Equipment}" 
                     HorizontalAlignment="Left" 
-                    Margin="272,154,0,0" 
-                    Grid.Row="2" 
+                    Margin="279,205,0,0" 
                     VerticalAlignment="Top" 
                     HorizontalContentAlignment="Center" 
                     FontSize="18"
-                    Style="{DynamicResource ManagerLabels}" Height="34" Width="105"/>
+                    Style="{DynamicResource ManagerLabels}"
+                Foreground="{DynamicResource ManagerLabelForeground}" Height="34" Width="105"/>
 
         <Button 
                     HorizontalAlignment="Left" 
-                    Margin="23,193,0,0" 
-                    Grid.Row="2" 
+                    Margin="30,244,0,0" 
                     VerticalAlignment="Top" 
                     Style="{DynamicResource WindowButton}" 
                     Height="130" 
@@ -65,85 +63,65 @@
 
         <Label  Content="{p:Loc Medication}" 
                     HorizontalAlignment="Left" 
-                    Margin="48,0,0,0" 
-                    VerticalAlignment="Center" 
+                    Margin="48,368,0,0" 
+                    VerticalAlignment="Top" 
                     HorizontalContentAlignment="Center" 
                     FontSize="18"
-                    Style="{DynamicResource ManagerLabels}" Height="34" Width="106"/>
+                    Foreground="{DynamicResource ManagerLabelForeground}"
+                Style="{DynamicResource ManagerLabels}" Height="34" Width="116"/>
 
         <Button 
                     HorizontalAlignment="Left" 
-                    Margin="247,193,0,0" 
-                    Grid.Row="2" 
+                    Margin="254,244,0,0" 
                     VerticalAlignment="Top" 
                     Style="{DynamicResource WindowButton}" 
                     Height="130" 
                     Width="151"
-                    Command="{Binding SurveyCommand}">>
-            
+                    Command="{Binding SurveyCommand}">
+            <svgc:SvgViewbox Source="\Resources\Icons\surveys.svg" Width="107" Height="107"/>
         </Button>
 
-        <Label  Content="Rooms" 
+        <Label  Content="{p:Loc Surveys}" 
                     HorizontalAlignment="Left" 
-                    Margin="288,0,0,0" 
-                    Grid.Row="2" 
-                    VerticalAlignment="Center" 
+                    Margin="285,368,0,0" 
+                    VerticalAlignment="Top" 
                     HorizontalContentAlignment="Center" 
                     FontSize="18"
-                    Style="{DynamicResource ManagerLabels}" Height="34" Width="73"/>
+                Foreground="{DynamicResource ManagerLabelForeground}"
+                    Style="{DynamicResource ManagerLabels}" Height="34" Width="89"/>
 
         <Button Content="Button" 
                     HorizontalAlignment="Left" 
-                    Margin="23,349,0,0" 
-                    Grid.Row="2" 
+                    Margin="30,400,0,0" 
                     VerticalAlignment="Top" 
                     Style="{DynamicResource WindowButton}" 
                     Height="130" 
                     Width="152"/>
 
-        <Label  Content="Rooms" 
+        <Label  Content="{p:Loc Employess}" 
                     HorizontalAlignment="Left" 
-                    Margin="64,471,0,0" 
-                    Grid.Row="2" 
+                    Margin="51,522,0,0" 
                     VerticalAlignment="Top" 
                     HorizontalContentAlignment="Center" 
                     FontSize="18"
-                    Style="{DynamicResource ManagerLabels}" Height="34" Width="75"/>
+                Foreground="{DynamicResource ManagerLabelForeground}"
+                    Style="{DynamicResource ManagerLabels}" Height="34" Width="110"/>
 
         <Button Content="Button" 
                     HorizontalAlignment="Left" 
-                    Margin="247,349,0,0" 
-                    Grid.Row="2" 
+                    Margin="254,400,0,0" 
                     VerticalAlignment="Top" 
                     Style="{DynamicResource WindowButton}" 
                     Height="130" 
                     Width="151"/>
 
-        <Label  Content="Rooms" 
+        <Label  Content="{p:Loc Statistics}" 
                     HorizontalAlignment="Left" 
-                    Margin="288,471,0,0" 
-                    Grid.Row="2" 
+                    Margin="285,522,0,0" 
                     VerticalAlignment="Top" 
                     HorizontalContentAlignment="Center" 
                     FontSize="18"
-                    Style="{DynamicResource ManagerLabels}" Height="34" Width="73"/>
-
-        <Button Content="Button" 
-                    HorizontalAlignment="Center" 
-                    Margin="0,501,0,0" 
-                    Grid.Row="2" 
-                    VerticalAlignment="Top" 
-                    Style="{DynamicResource WindowButton}" 
-                    Height="131" 
-                    Width="152"/>
-
-        <Label  Content="Rooms" 
-                    HorizontalAlignment="Center" 
-                    Margin="0,622,0,0" 
-                    Grid.Row="2" 
-                    VerticalAlignment="Top" 
-                    HorizontalContentAlignment="Center" 
-                    FontSize="18"
-                    Style="{DynamicResource ManagerLabels}" Height="34" Width="76"/>
+                Foreground="{DynamicResource ManagerLabelForeground}"
+                    Style="{DynamicResource ManagerLabels}" Height="34" Width="89"/>
     </Grid>
 </UserControl>

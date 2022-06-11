@@ -16,7 +16,8 @@
             VerticalAlignment="Top" 
             HorizontalContentAlignment="Center" 
             Width="116"
-            Style="{StaticResource ManagerLabels}"/>
+            Style="{DynamicResource ManagerLabels}"
+                   Foreground="{DynamicResource ManagerLabelForeground}"/>
 
             <TextBox HorizontalAlignment="Center"
                  Margin="0,43,0,0" 
@@ -24,7 +25,7 @@
                  Text="{Binding Path=Identifier, UpdateSourceTrigger=PropertyChanged}"
                  VerticalAlignment="Top" 
                  Width="348"
-                 Style="{StaticResource ManagerTextBox}" 
+                 Style="{DynamicResource ManagerTextBox}" 
                  Name="Designation"
                  Tag="{p:Loc Designation}"
                  Height="46"
@@ -36,7 +37,8 @@
             VerticalAlignment="Top" 
             HorizontalContentAlignment="Center" 
             Width="84"
-            Style="{StaticResource ManagerLabels}"/>
+            Style="{DynamicResource ManagerLabels}"
+                   Foreground="{DynamicResource ManagerLabelForeground}"/>
 
             <TextBox HorizontalAlignment="Left"
             Margin="41,138,0,0" 
@@ -44,7 +46,7 @@
             Text="{Binding Size, UpdateSourceTrigger=PropertyChanged}"
             VerticalAlignment="Top" 
             Width="153"
-            Style="{StaticResource ManagerTextBox}" 
+            Style="{DynamicResource ManagerTextBox}" 
             x:Name="Size"
             Tag="{p:Loc Size}"
             Height="46"
@@ -56,7 +58,8 @@
             VerticalAlignment="Top" 
             HorizontalContentAlignment="Center" 
             Width="40"
-            Style="{StaticResource ManagerLabels}"/>
+            Style="{DynamicResource ManagerLabels}"
+                   Foreground="{DynamicResource ManagerLabelForeground}"/>
 
             <TextBox HorizontalAlignment="Left"
             Margin="235,138,0,0" 
@@ -64,7 +67,7 @@
             Text="{Binding Floor, UpdateSourceTrigger=PropertyChanged}"
             VerticalAlignment="Top" 
             Width="154"
-            Style="{StaticResource ManagerTextBox}" 
+            Style="{DynamicResource ManagerTextBox}" 
             x:Name="Size_Copy"
             Tag="{p:Loc Floor}"
             Height="46"
@@ -76,7 +79,8 @@
                    VerticalAlignment="Top" 
                    HorizontalContentAlignment="Center" 
                    Width="76"
-                   Style="{StaticResource ManagerLabels}"/>
+                   Style="{DynamicResource ManagerLabels}"
+                   Foreground="{DynamicResource ManagerLabelForeground}"/>
 
             <ComboBox x:Name="Types" 
                       HorizontalAlignment="Center" 
@@ -104,7 +108,7 @@
                     Height="47" 
                     Width="170"
                     Command="{Binding AddViewCommand}"
-                    Style="{StaticResource ManagerButtons}"/>
+                    Style="{DynamicResource ManagerButtons}"/>
 
             <Label Content="{p:Loc Equipment}" 
                    HorizontalAlignment="Center" 
@@ -113,7 +117,8 @@
                    HorizontalContentAlignment="Center"
                    FontSize="20"
                    Width="114"
-                   Style="{StaticResource ManagerLabels}"/>
+                   Style="{DynamicResource ManagerLabels}"
+                   Foreground="{DynamicResource ManagerLabelForeground}"/>
 
             <DataGrid x:Name="EquipmentTable" 
                       ItemsSource="{Binding Equipments}" 
@@ -142,8 +147,10 @@
                    VerticalAlignment="Top" 
                    HorizontalContentAlignment="Center"
                    FontSize="20"
-                   Width="128"
-                   Style="{StaticResource ManagerLabels}" Margin="0,620,0,0"/>
+                   Width="149"
+                   Style="{DynamicResource ManagerLabels}"
+                   Foreground="{DynamicResource ManagerLabelForeground}"
+                   Margin="0,620,0,0"/>
 
             <DataGrid x:Name="AppointmentTable" 
                       ItemsSource="{Binding Appointments}" 
@@ -174,7 +181,9 @@
                    HorizontalContentAlignment="Center"
                    FontSize="20"
                    Width="96"
-                   Style="{StaticResource ManagerLabels}" Margin="0,838,0,0"/>
+                   Style="{DynamicResource ManagerLabels}"
+                   Foreground="{DynamicResource ManagerLabelForeground}"
+                   Margin="0,838,0,0"/>
 
             <DataGrid x:Name="MedicineTable" 
                       ItemsSource="{Binding Medications}" 
@@ -206,7 +215,7 @@
                     Height="47" 
                     Width="169"
                     Command="{Binding AddViewCommand}"
-                    Style="{StaticResource ManagerButtons}"/>
+                    Style="{DynamicResource ManagerButtons}"/>
 
             <Button Content="{p:Loc Renovate}" 
                     HorizontalAlignment="Center" 
@@ -215,7 +224,7 @@
                     Height="47" 
                     Width="90"
                     Command="{Binding RenovateCommand}"
-                    Style="{StaticResource ManagerButtons}"/>
+                    Style="{DynamicResource ManagerButtons}"/>
 
             <Button Content="{p:Loc Split Room}" 
                 HorizontalAlignment="Left" 
@@ -224,7 +233,7 @@
                 Height="47" 
                 Width="124"
                 Command="{Binding SplitCommand}"
-                Style="{StaticResource ManagerButtons}"/>
+                Style="{DynamicResource ManagerButtons}"/>
 
             <Button Content="{p:Loc Combine Rooms}" 
                 HorizontalAlignment="Left" 
@@ -233,7 +242,7 @@
                 Height="47" 
                 Width="124"
                 Command="{Binding CombineCommand}"
-                Style="{StaticResource ManagerButtons}"/>
+                Style="{DynamicResource ManagerButtons}"/>
 
         </Grid>
     </ScrollViewer>

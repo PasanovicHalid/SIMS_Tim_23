@@ -50,7 +50,7 @@
                 VerticalAlignment="Top" 
                 Height="42" 
                 Width="48"
-                Style="{StaticResource ManagerButtons}"
+                Style="{DynamicResource ManagerButtons}"
                 Command="{Binding ChangePositionCommand}">
             <StackPanel>
                 <svgc:SvgViewbox Source="\Resources\Icons\timecard.svg" Width="28" Height="25"/>

@@ -219,6 +219,9 @@
   <data name="Duration" xml:space="preserve">
     <value>Duration</value>
   </data>
+  <data name="Employees" xml:space="preserve">
+    <value>Employees</value>
+  </data>
   <data name="Employess" xml:space="preserve">
     <value>Employess</value>
   </data>
@@ -263,6 +266,9 @@
   </data>
   <data name="Is Renovating Now" xml:space="preserve">
     <value>Is Renovating Now</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
   </data>
   <data name="Location" xml:space="preserve">
     <value>Location</value>
@@ -360,6 +366,9 @@
   <data name="Selected Room" xml:space="preserve">
     <value>Selected Room</value>
   </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
   <data name="Size" xml:space="preserve">
     <value>Size</value>
   </data>
@@ -378,6 +387,9 @@
   <data name="Start Time" xml:space="preserve">
     <value>Start Time</value>
   </data>
+  <data name="Statistics" xml:space="preserve">
+    <value>Statistics</value>
+  </data>
   <data name="Status" xml:space="preserve">
     <value>Status</value>
   </data>
@@ -386,6 +398,12 @@
   </data>
   <data name="Survey" xml:space="preserve">
     <value>Report of Survey</value>
+  </data>
+  <data name="Surveys" xml:space="preserve">
+    <value>Surveys</value>
+  </data>
+  <data name="Theme" xml:space="preserve">
+    <value>Theme</value>
   </data>
   <data name="Time" xml:space="preserve">
     <value>Time</value>

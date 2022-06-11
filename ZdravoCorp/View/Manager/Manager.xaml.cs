@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ZdravoCorp.View.Manager.View;
 using ZdravoCorp.View.Manager.ViewModel;
 
 namespace ZdravoCorp.View.Manager
@@ -72,16 +73,7 @@ namespace ZdravoCorp.View.Manager
 
         private void Employess_Click(object sender, RoutedEventArgs e)
         {
-            var app = (App)Application.Current;
-            if (CurrentLanguage.Equals("en"))
-            {
-                CurrentLanguage = "sr";
-            }
-            else
-            {
-                CurrentLanguage = "en";
-            }
-            app.ChangeLanguage(CurrentLanguage);
+            ContentViewModel.Instance.CurrentView = new Settings(new SettingsViewModel());
         }
     }
 }

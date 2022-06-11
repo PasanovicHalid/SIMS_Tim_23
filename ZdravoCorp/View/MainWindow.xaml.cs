@@ -18,6 +18,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ZdravoCorp.Service;
+using ZdravoCorp.View.Core;
 using ZdravoCorp.View.Doctor;
 using ZdravoCorp.View.Manager;
 using ZdravoCorp.View.Patient;
@@ -41,6 +42,14 @@ namespace ZdravoCorp
         }
         public MainWindow()
         {
+            if (Properties.Settings.Default.ColorMode)
+            {
+                ThemesController.SetThemeStartup(ThemesController.ThemeTypes.Light);
+            }
+            else
+            {
+                ThemesController.SetThemeStartup(ThemesController.ThemeTypes.Dark);
+            }
             InitializeComponent();
             autoEvent = new AutoResetEvent(false);
             timerService = new TimerService(autoEvent);

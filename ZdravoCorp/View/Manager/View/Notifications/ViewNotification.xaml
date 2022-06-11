@@ -15,7 +15,7 @@
             VerticalAlignment="Top" 
             HorizontalContentAlignment="Center" 
             Width="40"
-            Style="{StaticResource ManagerLabels}"/>
+            Style="{DynamicResource ManagerLabels}"/>
 
         <TextBox HorizontalAlignment="Left" 
                  TextWrapping="Wrap" 
@@ -24,7 +24,7 @@
                  HorizontalContentAlignment="Left"
                  VerticalContentAlignment="Top"
                  Width="202"
-                 Style="{StaticResource ManagerTextBox}" 
+                 Style="{DynamicResource ManagerTextBox}" 
                  Tag="{p:Loc From}"
                  Height="40" 
                  Margin="73,19,0,0"/>
@@ -35,7 +35,7 @@
             VerticalAlignment="Top" 
             HorizontalContentAlignment="Center" 
             Width="40"
-            Style="{StaticResource ManagerLabels}"/>
+            Style="{DynamicResource ManagerLabels}"/>
 
         <TextBox HorizontalAlignment="Left" 
             TextWrapping="Wrap" 
@@ -44,7 +44,7 @@
             HorizontalContentAlignment="Left"
             VerticalContentAlignment="Top"
             Width="202"
-            Style="{StaticResource ManagerTextBox}" 
+            Style="{DynamicResource ManagerTextBox}" 
             Tag="{p:Loc Date}"
             Height="40" 
             Margin="73,78,0,0"/>
@@ -54,8 +54,9 @@
             Margin="0,131,0,0" 
             VerticalAlignment="Top" 
             HorizontalContentAlignment="Center" 
-            Width="40"
-            Style="{StaticResource ManagerLabels}"/>
+            Width="75"
+            Style="{DynamicResource ManagerLabels}"
+               Foreground="{DynamicResource ManagerLabelForeground}"/>
 
         <TextBox HorizontalAlignment="Center" 
                  TextWrapping="Wrap" 
@@ -64,7 +65,7 @@
                  HorizontalContentAlignment="Left"
                  VerticalContentAlignment="Top"
                  Width="364"
-                 Style="{StaticResource ManagerSurveyTextBox}" 
+                 Style="{DynamicResource ManagerSurveyTextBox}" 
                  Tag="{p:Loc Content}"
                  Height="458" 
                  Margin="0,159,0,0"/>
