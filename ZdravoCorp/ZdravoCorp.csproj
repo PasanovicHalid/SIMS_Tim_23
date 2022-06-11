@@ -186,7 +186,6 @@
     <Compile Include="Settings.cs" />
     <Compile Include="Utility\DateManipulator.cs" />
     <Compile Include="View\Core\ChangeSettings.cs" />
-    <Compile Include="View\Core\DelegateCommand.cs" />
     <Compile Include="View\Core\ObservableObject.cs" />
     <Compile Include="View\Core\RelayCommand.cs" />
     <Compile Include="View\Core\TranslationSource.cs" />
