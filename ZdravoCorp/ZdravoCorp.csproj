@@ -352,12 +352,14 @@
     </Compile>
     <Compile Include="View\Patient\Modell\Allergies\Allergies.cs" />
     <Compile Include="View\Patient\Modell\MedicalHistory\LabAnalysis.cs" />
+    <Compile Include="View\Patient\Modell\MedicalHistory\Operation.cs" />
     <Compile Include="View\Patient\Modell\Survey\AppointmentSurveyModel.cs" />
     <Compile Include="View\Patient\Patient.xaml.cs">
       <DependentUpon>Patient.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Patient\ViewModel\Allergies\AllergiesViewModel.cs" />
     <Compile Include="View\Patient\ViewModel\MedicalHistory\LabAnalysisViewModel.cs" />
+    <Compile Include="View\Patient\ViewModel\MedicalHistory\OperationViewModel.cs" />
     <Compile Include="View\Patient\ViewModel\Survey\AppointmentSurveyViewModel.cs" />
     <Compile Include="View\Patient\View\Allergies\AllergiesView.xaml.cs">
       <DependentUpon>AllergiesView.xaml</DependentUpon>

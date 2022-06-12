@@ -23,6 +23,7 @@ namespace ZdravoCorp.View.Patient.View.MedicalHistory
         {
             InitializeComponent();
             LabAnalysisTable.DataContext = new ViewModel.MedicalHistory.LabAnalysisViewModel();
+            OperationsTable.DataContext = new ViewModel.MedicalHistory.OperationViewModel();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

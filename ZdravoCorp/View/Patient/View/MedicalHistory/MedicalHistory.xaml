@@ -10,6 +10,10 @@
         <TabControl HorizontalAlignment="Center" Height="320" VerticalAlignment="Center" Width="646">
             <TabItem Header="Laboratorija">
                 <Grid Background="White">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="59*"/>
+                        <ColumnDefinition Width="261*"/>
+                    </Grid.ColumnDefinitions>
                     <DataGrid
                         Style="{DynamicResource PatientTables}"
                         AlternationCount="2"
@@ -19,18 +23,37 @@
                         SelectionMode="Single" 
                         IsReadOnly="True" 
                         ItemsSource="{Binding Path=LabAnalysis}"
-                        SelectedItem="{Binding SelectedTable}">
+                        SelectedItem="{Binding SelectedTable}" Grid.ColumnSpan="2">
                         <DataGrid.Columns>
                             <DataGridTextColumn x:Name ="AnalysisType" Header="Vrsta analize" Binding="{Binding Path=AnalysisType}" Width="*">
                             </DataGridTextColumn>
                             <DataGridTextColumn x:Name ="Date" Header="Datum" Binding="{Binding Path=Date}" Width="*"/>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Button Content="Prikaži ceo izveštaj" Command="{Binding LabResultsCommand}" Click="Button_Click" Style="{DynamicResource BlueButton}" HorizontalAlignment="Left" Height="40" Margin="29,18,0,0" VerticalAlignment="Top" Width="120"/>
+                    <Button Content="Prikaži ceo izveštaj" Command="{Binding LabResultsCommand}" Click="Button_Click" Style="{DynamicResource BlueButton}" HorizontalAlignment="Left" Height="40" Margin="29,18,0,0" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Operacije">
-                <Grid Background="White"/>
+                <Grid Background="White">
+                    <DataGrid
+                        Style="{DynamicResource PatientTables}"
+                        AlternationCount="2"
+                        Name ="OperationsTable" 
+                        Margin="29,67,29,34"
+                        AutoGenerateColumns="False"
+                        SelectionMode="Single" 
+                        IsReadOnly="True" 
+                        ItemsSource="{Binding Path=Operations}"
+                        >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn x:Name ="OperationType" Header="Vrsta analize" Binding="{Binding Path=OperationType}" Width="*">
+                            </DataGridTextColumn>
+                            <DataGridTextColumn x:Name ="Doctor" Header="Datum" Binding="{Binding Path=Doctor}" Width="*"/>
+                            <DataGridTextColumn x:Name ="DateOperation" Header="Datum" Binding="{Binding Path=Date}" Width="*"/>
+                            <DataGridTextColumn x:Name ="Duration" Header="Datum" Binding="{Binding Path=Duration}" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
             </TabItem>
             <TabItem Header="Hronične bolesti">
                 <Grid Background="White"/>
