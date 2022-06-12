@@ -411,5 +411,11 @@ namespace ZdravoCorp.View.Patient
             ZdravoCorp.View.Patient.View.Allergies.AllergiesView w = new View.Allergies.AllergiesView();
             w.ShowDialog();
         }
+
+        private void MedHistory_Click(object sender, RoutedEventArgs e)
+        {
+            View.MedicalHistory.MedicalHistory w = new View.MedicalHistory.MedicalHistory();
+            w.ShowDialog();
+        }
     }
 }
