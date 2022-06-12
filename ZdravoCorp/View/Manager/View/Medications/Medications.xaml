@@ -78,7 +78,7 @@
         <TextBox HorizontalAlignment="Left"
                      Margin="256,16,0,0" 
                      TextWrapping="Wrap" 
-                     Text="" 
+                     Text="{Binding Path=SearchBoxText, UpdateSourceTrigger=PropertyChanged}" 
                      VerticalAlignment="Top" 
                      Width="155"
                      Style="{DynamicResource ManagerSearch}" 

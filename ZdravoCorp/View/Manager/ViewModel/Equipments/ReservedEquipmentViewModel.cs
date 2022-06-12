@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using ZdravoCorp.View.Core;
@@ -16,6 +17,8 @@ namespace ZdravoCorp.View.Manager.ViewModel.Equipments
     {
         private ActionController controller;
         private ObservableCollection<ChangeActionModel> actionTable;
+        private ObservableCollection<ChangeActionModel> actionTableSearch;
+        private String searchBox;
         private ChangeActionModel selectedAction;
 
         public RelayCommand ViewReservedCommand { get; set; }
@@ -44,6 +47,50 @@ namespace ZdravoCorp.View.Manager.ViewModel.Equipments
                     actionTable = value;
                     OnPropertyChanged();
                 }
+            }
+        }
+
+        public ObservableCollection<ChangeActionModel> ActionTableSearch
+        {
+            get => actionTableSearch;
+            set
+            {
+                if (value != actionTableSearch)
+                {
+                    actionTableSearch = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public string SearchBoxText
+        {
+            get => searchBox;
+            set
+            {
+                if (value != searchBox)
+                {
+                    ChangeTableSearch(value);
+                    searchBox = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private void ChangeTableSearch(string value)
+        {
+            if (value == null)
+            {
+                return;
+            }
+            else if (value.Length > 0)
+            {
+                value = "(" + value + ")+";
+                ActionTable = new ObservableCollection<ChangeActionModel>(ActionTableSearch.Where(equipment => Regex.IsMatch(equipment.Equipment, value)));
+            }
+            else
+            {
+                ActionTable = new ObservableCollection<ChangeActionModel>(ActionTableSearch);
             }
         }
 
@@ -84,6 +131,7 @@ namespace ZdravoCorp.View.Manager.ViewModel.Equipments
         public void Update()
         {
             ActionTable = controller.GetAllChangeRoomActions();
+            ActionTableSearch = controller.GetAllChangeRoomActions();
         }
     }
 }

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ZdravoCorp.View.Manager.ViewModel.Employees;
 
 namespace ZdravoCorp.View.Manager.View.Employees
 {
@@ -20,9 +21,10 @@ namespace ZdravoCorp.View.Manager.View.Employees
     /// </summary>
     public partial class Employees : UserControl
     {
-        public Employees()
+        public Employees(EmployeesViewModel model)
         {
             InitializeComponent();
+            this.DataContext = model;
         }
     }
 }

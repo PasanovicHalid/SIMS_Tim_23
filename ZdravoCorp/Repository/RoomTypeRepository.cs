@@ -13,7 +13,7 @@ namespace Repository
         private static RoomTypeRepository instance = null;
         public RoomTypeRepository()
         {
-            dbPath = "..\\..\\Data\\medicationTypeDB.csv";
+            dbPath = "..\\..\\Data\\roomTypesDB.csv";
         }
 
         public override void Create(RoomType type)

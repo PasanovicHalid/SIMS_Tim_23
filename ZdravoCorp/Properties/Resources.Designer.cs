@@ -250,6 +250,15 @@ namespace ZdravoCorp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create PDF.
+        /// </summary>
+        public static string Create_PDF {
+            get {
+                return ResourceManager.GetString("Create PDF", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Current Room.
         /// </summary>
         public static string Current_Room {
@@ -259,11 +268,29 @@ namespace ZdravoCorp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Daily number of users.
+        /// </summary>
+        public static string Daily {
+            get {
+                return ResourceManager.GetString("Daily", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Date.
         /// </summary>
         public static string Date {
             get {
                 return ResourceManager.GetString("Date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Days in week.
+        /// </summary>
+        public static string Days {
+            get {
+                return ResourceManager.GetString("Days", resourceCulture);
             }
         }
         
@@ -610,6 +637,15 @@ namespace ZdravoCorp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Monthly number of users.
+        /// </summary>
+        public static string Monthly {
+            get {
+                return ResourceManager.GetString("Monthly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Move.
         /// </summary>
         public static string Move {
@@ -624,6 +660,15 @@ namespace ZdravoCorp.Properties {
         public static string Name {
             get {
                 return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pay.
+        /// </summary>
+        public static string Pay {
+            get {
+                return ResourceManager.GetString("Pay", resourceCulture);
             }
         }
         
@@ -943,6 +988,15 @@ namespace ZdravoCorp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Type.
+        /// </summary>
+        public static string Type {
+            get {
+                return ResourceManager.GetString("Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Types.
         /// </summary>
         public static string Types {
@@ -966,6 +1020,15 @@ namespace ZdravoCorp.Properties {
         public static string UserExists {
             get {
                 return ResourceManager.GetString("UserExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Users.
+        /// </summary>
+        public static string Users {
+            get {
+                return ResourceManager.GetString("Users", resourceCulture);
             }
         }
         

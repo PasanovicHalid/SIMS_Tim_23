@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using ZdravoCorp.View.Core;
+using ZdravoCorp.View.Manager.ViewModel.Employees;
 
 namespace ZdravoCorp.View.Manager.ViewModel
 {
@@ -17,6 +18,10 @@ namespace ZdravoCorp.View.Manager.ViewModel
         public RelayCommand MedicationsCommand { get; set; }
 
         public RelayCommand SurveyCommand { get; set; }
+
+        public RelayCommand EmployeesCommand { get; set; }
+
+        public RelayCommand StatisticsCommand { get; set; }
 
         public UserControl CurrentView
         {
@@ -51,6 +56,16 @@ namespace ZdravoCorp.View.Manager.ViewModel
             SurveyCommand = new RelayCommand(o =>
             {
                 CurrentView = new View.Surveys.Surveys(new Surveys.SurveysViewModel());
+            });
+
+            EmployeesCommand = new RelayCommand(o =>
+            {
+                CurrentView = new View.Employees.Employees(new EmployeesViewModel());
+            });
+
+            StatisticsCommand = new RelayCommand(o =>
+            {
+                CurrentView = new View.Statistics.Statistics(new Statistics.StatisticsViewModel());
             });
         }
 

@@ -16,13 +16,40 @@
                      Height="29" 
                      Tag="{p:Loc From}" 
                      CalendarStyle="{DynamicResource ManagerCalendar}" Width="126"/>
-        <lvc:CartesianChart Margin="22,377,22,10">
 
+        <Label Content="{p:Loc Daily}" 
+                   HorizontalAlignment="Left" 
+                   Margin="56,50,0,0" 
+                   VerticalAlignment="Top" 
+                   HorizontalContentAlignment="Center"
+                   FontSize="16"
+               Foreground="{DynamicResource ManagerLabelForeground}"
+                   Style="{DynamicResource ManagerLabels}" Height="36" Width="336"/>
+        <lvc:CartesianChart Margin="22,377,22,10" Series="{Binding SeriesCollection1}">
+            <lvc:CartesianChart.AxisY>
+                <lvc:Axis Title="Sales" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
+            </lvc:CartesianChart.AxisY>
+            <lvc:CartesianChart.AxisX>
+                <lvc:Axis Title="Month" Labels="{Binding Labels1}"></lvc:Axis>
+            </lvc:CartesianChart.AxisX>
         </lvc:CartesianChart>
-        <lvc:CartesianChart Margin="22,71,22,316">
-
+        <Label Content="{p:Loc Monthly}" 
+                   HorizontalAlignment="Left" 
+                   Margin="56,347,0,0" 
+                   VerticalAlignment="Top" 
+                   HorizontalContentAlignment="Center"
+                   FontSize="16"
+               Foreground="{DynamicResource ManagerLabelForeground}"
+                   Style="{DynamicResource ManagerLabels}" Height="36" Width="336"/>
+        <lvc:CartesianChart Margin="22,76,22,311" Series="{Binding SeriesCollection}" >
+            <lvc:CartesianChart.AxisX>
+                <lvc:Axis Title="{p:Loc Days}" Labels="{Binding Labels}"></lvc:Axis>
+            </lvc:CartesianChart.AxisX>
+            <lvc:CartesianChart.AxisY>
+                <lvc:Axis Title="{p:Loc Users}" LabelFormatter="{Binding Formatter}"></lvc:Axis>
+            </lvc:CartesianChart.AxisY>
         </lvc:CartesianChart>
-        <DatePicker Style="{DynamicResource MangerDatePicker}" 
+            <DatePicker Style="{DynamicResource MangerDatePicker}" 
                     HorizontalAlignment="Center" 
                     Margin="0,21,0,0" 
                     VerticalAlignment="Top" 

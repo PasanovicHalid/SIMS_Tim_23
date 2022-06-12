@@ -54,6 +54,22 @@ namespace ZdravoCorp.View.Manager.ViewModel
         private Language language;
         private Theme theme;
 
+        public RelayCommand LogoutCommand { get; set; }
+
+        public UserControl CurrentView
+        {
+            get => ContentViewModel.Instance.CurrentView;
+            set
+            {
+                if (value != ContentViewModel.Instance.CurrentView)
+                {
+                    ContentViewModel.Instance.WindowBrowser.AddWindow(value);
+                    ContentViewModel.Instance.CurrentView = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         public ObservableCollection<Language> Languages1
         {
             get => languages;
@@ -124,6 +140,13 @@ namespace ZdravoCorp.View.Manager.ViewModel
 
         public SettingsViewModel()
         {
+            LogoutCommand = new RelayCommand(o =>
+            {
+                MainWindow mainWindow = new MainWindow();
+                mainWindow.Show();
+                Manager.Instance.Close();
+            });
+
             Languages1 = new ObservableCollection<Language>() { new Language(Languages.English), new Language(Languages.Serbian) };
             Themes1 = new ObservableCollection<Theme>() { new Theme(Themes.Dark), new Theme(Themes.Light) };
             if(Properties.Settings.Default.Language.Equals("en"))

@@ -107,7 +107,7 @@
                     VerticalAlignment="Top" 
                     Height="47" 
                     Width="170"
-                    Command="{Binding AddViewCommand}"
+                    Command="{Binding ChangeCommand}"
                     Style="{DynamicResource ManagerButtons}"/>
 
             <Label Content="{p:Loc Equipment}" 
@@ -214,7 +214,7 @@
                     VerticalAlignment="Top" 
                     Height="47" 
                     Width="169"
-                    Command="{Binding AddViewCommand}"
+                    Command="{Binding DeleteCommand}"
                     Style="{DynamicResource ManagerButtons}"/>
 
             <Button Content="{p:Loc Renovate}" 

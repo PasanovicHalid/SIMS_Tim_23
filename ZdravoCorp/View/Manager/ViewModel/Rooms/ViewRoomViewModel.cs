@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using ZdravoCorp.View.Core;
 using ZdravoCorp.View.Manager.Model.Rooms;
@@ -157,6 +158,10 @@ namespace ZdravoCorp.View.Manager.ViewModel.Rooms
 
         public RelayCommand CombineCommand { get; set; }
 
+        public RelayCommand DeleteCommand { get; set; }
+
+        public RelayCommand ChangeCommand { get; set; }
+
         public ViewRoomViewModel(Room selectedRoom)
         {
             SelectedRoom = new Room(selectedRoom);
@@ -190,6 +195,37 @@ namespace ZdravoCorp.View.Manager.ViewModel.Rooms
                 CurrentView = new CombineRooms(new CombineRoomsViewModel(selectedRoom));
             });
 
+            DeleteCommand = new RelayCommand(o =>
+            {
+                try
+                {
+                    roomController.Delete(SelectedRoom.Identifier);
+                    CurrentView = new View.Rooms.Rooms(new RoomsViewModel());
+                } catch (Exception e) 
+                {
+                    MessageBox.Show(e.Message, "Greska", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                
+            });
+
+            ChangeCommand = new RelayCommand(o =>
+            {
+                try
+                {
+                    SelectedRoom.RoomType = new RoomType(Type);
+                    roomController.Update(SelectedRoom);
+                    CurrentView = new View.Rooms.Rooms(new RoomsViewModel());
+                } catch (Exception e)
+                {
+                    MessageBox.Show(e.Message, "Greska", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+        }, CheckIfReady);
+
+        }
+
+        private bool CheckIfReady(object arg)
+        {
+            return Size > 0 && Floor > 0 && Type != null && Identifier != null && Identifier.Length > 0;
         }
 
         public string GetTitle()

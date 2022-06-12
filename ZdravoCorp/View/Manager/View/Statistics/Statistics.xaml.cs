@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ZdravoCorp.View.Manager.ViewModel.Statistics;
 
 namespace ZdravoCorp.View.Manager.View.Statistics
 {
@@ -20,9 +21,10 @@ namespace ZdravoCorp.View.Manager.View.Statistics
     /// </summary>
     public partial class Statistics : UserControl
     {
-        public Statistics()
+        public Statistics(StatisticsViewModel model)
         {
             InitializeComponent();
+            this.DataContext = model;
         }
     }
 }
