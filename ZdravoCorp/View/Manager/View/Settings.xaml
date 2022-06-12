@@ -64,6 +64,14 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
 
+        <Button Content="Logout" 
+                    HorizontalAlignment="Left" 
+                    Margin="251,594,0,0" 
+                    VerticalAlignment="Top" 
+                    Height="47" 
+                    Width="169"
+                    Command="{Binding LogoutCommand}"
+                    Style="{DynamicResource ManagerButtons}"/>
 
     </Grid>
 </UserControl>

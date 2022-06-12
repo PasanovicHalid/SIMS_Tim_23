@@ -10,7 +10,7 @@
         <TextBox HorizontalAlignment="Center"
                      Margin="0,15,0,0" 
                      TextWrapping="Wrap" 
-                     Text="" 
+                     Text="{Binding Path=SearchBoxText, UpdateSourceTrigger=PropertyChanged}" 
                      VerticalAlignment="Top" 
                      Width="162"
                      Style="{DynamicResource ManagerSearch}"

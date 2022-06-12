@@ -30,25 +30,7 @@
         </Button>
 
         <Button HorizontalAlignment="Left" 
-                Margin="61,16,0,0"
-                VerticalAlignment="Top" 
-                Height="42" 
-                Width="48"
-                Style="{DynamicResource ManagerButtons}">
-            <StackPanel>
-                <svgc:SvgViewbox Source="\Resources\Icons\category.svg" Width="28" Height="25"/>
-                <Label  Content="{p:Loc Types}" 
-                        Style="{DynamicResource ButtonLabel}" 
-                        FontSize="8"
-                        HorizontalContentAlignment="Center"
-                        VerticalContentAlignment="Top"
-                        Padding="0,0,0,0"
-                        Height="13" Width="40"/>
-            </StackPanel>
-        </Button>
-
-        <Button HorizontalAlignment="Left" 
-                Margin="114,16,0,0" 
+                Margin="61,16,0,0" 
                 VerticalAlignment="Top" 
                 Height="42" 
                 Width="48"
@@ -57,25 +39,6 @@
             <StackPanel>
                 <svgc:SvgViewbox Source="\Resources\Icons\timecard.svg" Width="28" Height="25"/>
                 <Label  Content="{p:Loc Renovate}" 
-                        Style="{DynamicResource ButtonLabel}" 
-                        FontSize="8"
-                        HorizontalContentAlignment="Center"
-                        VerticalContentAlignment="Top"
-                        Padding="0,0,0,0"
-                        Height="13" Width="40"/>
-            </StackPanel>
-        </Button>
-
-        <Button HorizontalAlignment="Left" 
-                Margin="167,16,0,0" 
-                VerticalAlignment="Top" 
-                Height="42" 
-                Width="48"
-                Style="{DynamicResource ManagerButtons}"
-                Command="{Binding ReservedCommand}">
-            <StackPanel>
-                <svgc:SvgViewbox Source="\Resources\Icons\booking-pending.svg" Width="28" Height="25"/>
-                <Label  Content="{p:Loc Combine}" 
                         Style="{DynamicResource ButtonLabel}" 
                         FontSize="8"
                         HorizontalContentAlignment="Center"
@@ -117,7 +80,7 @@
         <TextBox HorizontalAlignment="Left"
                      Margin="256,16,0,0" 
                      TextWrapping="Wrap" 
-                     Text="" 
+                     Text="{Binding Path=SearchBoxText, UpdateSourceTrigger=PropertyChanged}" 
                      VerticalAlignment="Top" 
                      Width="155"
                      Style="{DynamicResource ManagerSearch}" 

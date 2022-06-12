@@ -19,7 +19,7 @@ namespace ZdravoCorp.View.Manager.View
     /// <summary>
     /// Interaction logic for Settings.xaml
     /// </summary>
-    public partial class Settings : UserControl
+    public partial class Settings : UserControl 
     {
         public Settings(SettingsViewModel model)
         {

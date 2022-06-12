@@ -11,7 +11,7 @@
         <TextBox HorizontalAlignment="Center"
                      Margin="0,15,0,0" 
                      TextWrapping="Wrap" 
-                     Text="" 
+                     Text="{Binding Path=SearchBoxText, UpdateSourceTrigger=PropertyChanged}"  
                      VerticalAlignment="Top" 
                      Width="162"
                      Style="{DynamicResource ManagerSearch}"
@@ -19,7 +19,7 @@
                      Height="42"/>
 
         <DataGrid x:Name="ActionTable" 
-                      ItemsSource="{Binding ActionTable}" 
+                      ItemsSource="{Binding Employees}" 
                       Margin="0,70,0,0" 
                       AutoGenerateColumns="False"
                       SelectionMode="Single" 
@@ -30,14 +30,15 @@
                       TextBlock.TextAlignment="Left"
                       FontSize="13"
                       Style="{DynamicResource ManagerTables}"
-                      SelectedItem="{Binding SelectedAction}"
+                      SelectedItem="{Binding SelectedEmployee}"
                       BorderThickness="2"
                       HorizontalGridLinesBrush="Transparent"
                       VerticalGridLinesBrush="Transparent" 
                       >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="{p:Loc Start}" Binding="{Binding ExecutionDate}" ElementStyle="{DynamicResource WrapText}" Width="130"/>
-                <DataGridTextColumn Header="{p:Loc Description}" Binding="{Binding ExpirationDate}" ElementStyle="{DynamicResource WrapText}" Width="*"/>
+                <DataGridTextColumn Header="{p:Loc Name}" Binding="{Binding Name}" ElementStyle="{DynamicResource WrapText}" Width="130"/>
+                <DataGridTextColumn Header="{p:Loc Pay}" Binding="{Binding Pay}" ElementStyle="{DynamicResource WrapText}" Width="*"/>
+                <DataGridTextColumn Header="{p:Loc Type}" Binding="{Binding Type}" ElementStyle="{DynamicResource WrapText}" Width="*"/>
             </DataGrid.Columns>
             <DataGrid.InputBindings>
                 <MouseBinding Gesture="LeftDoubleClick" Command="{Binding ViewCommand}"/>

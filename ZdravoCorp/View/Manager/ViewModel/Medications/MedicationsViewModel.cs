@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using ZdravoCorp.View.Core;
@@ -16,6 +17,8 @@ namespace ZdravoCorp.View.Manager.ViewModel.Medications
     {
 
         private ObservableCollection<MedicationType> medicationTypes;
+        private ObservableCollection<MedicationType> medicationTypesSearch;
+        private String searchBox;
         private MedicationController controller;
         private MedicationType selectedType;
 
@@ -65,10 +68,55 @@ namespace ZdravoCorp.View.Manager.ViewModel.Medications
             }
         }
 
+        public ObservableCollection<MedicationType> MedicationTypesSearch
+        {
+            get => medicationTypesSearch;
+            set
+            {
+                if (value != medicationTypesSearch)
+                {
+                    medicationTypesSearch = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public string SearchBoxText
+        {
+            get => searchBox;
+            set
+            {
+                if (value != searchBox)
+                {
+                    ChangeTableSearch(value);
+                    searchBox = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private void ChangeTableSearch(string value)
+        {
+            if (value == null)
+            {
+                return;
+            }
+            else if (value.Length > 0)
+            {
+                value = "(" + value + ")+";
+                MedicationTypes = new ObservableCollection<MedicationType>(MedicationTypesSearch.Where(equipment => Regex.IsMatch(equipment.Name, value)));
+            }
+            else
+            {
+                MedicationTypes = new ObservableCollection<MedicationType>(MedicationTypesSearch);
+            }
+        }
+
         public MedicationsViewModel()
         {
             controller = new MedicationController();
             MedicationTypes = new ObservableCollection<MedicationType>(controller.GetAllMedicationType());
+            MedicationTypesSearch = new ObservableCollection<MedicationType>(controller.GetAllMedicationType());
 
             ViewCommand = new RelayCommand(o =>
             {

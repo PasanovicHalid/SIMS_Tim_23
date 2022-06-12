@@ -10,6 +10,7 @@ using System.Windows.Controls;
 using ZdravoCorp.View.Core;
 using ZdravoCorp.View.Manager.View;
 using ZdravoCorp.View.Manager.View.Equipments;
+using ZdravoCorp.View.Manager.ViewModel.Employees;
 using ZdravoCorp.View.Manager.ViewModel.Equipments;
 using ZdravoCorp.View.Manager.ViewModel.Medications;
 using ZdravoCorp.View.Manager.ViewModel.Rooms;
@@ -68,6 +69,10 @@ namespace ZdravoCorp.View.Manager.ViewModel
 
         public RelayCommand BackViewCommand { get; set; }
 
+        public RelayCommand SettingsCommand { get; set; }
+
+        public RelayCommand EmployeesCommand { get; set; }
+
         public ContentViewModel()
         {
             WindowBrowser = new WindowBrowser();
@@ -102,6 +107,18 @@ namespace ZdravoCorp.View.Manager.ViewModel
             BackViewCommand = new RelayCommand(o =>
             {
                 CurrentView = WindowBrowser.BackWindow();
+            });
+
+            SettingsCommand = new RelayCommand(o =>
+            {
+                CurrentView = new Settings(new SettingsViewModel());
+                WindowBrowser.AddWindow(CurrentView);
+            });
+
+            EmployeesCommand = new RelayCommand(o =>
+            {
+                CurrentView = new View.Employees.Employees(new EmployeesViewModel());
+                WindowBrowser.AddWindow(CurrentView);
             });
         }
 

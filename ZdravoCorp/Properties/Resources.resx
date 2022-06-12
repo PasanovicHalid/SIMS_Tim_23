@@ -180,11 +180,20 @@
   <data name="Count" xml:space="preserve">
     <value>Count</value>
   </data>
+  <data name="Create PDF" xml:space="preserve">
+    <value>Create PDF</value>
+  </data>
   <data name="Current Room" xml:space="preserve">
     <value>Current Room</value>
   </data>
+  <data name="Daily" xml:space="preserve">
+    <value>Daily number of users</value>
+  </data>
   <data name="Date" xml:space="preserve">
     <value>Date</value>
+  </data>
+  <data name="Days" xml:space="preserve">
+    <value>Days in week</value>
   </data>
   <data name="Delete" xml:space="preserve">
     <value>Delete</value>
@@ -300,11 +309,17 @@
   <data name="Medicine" xml:space="preserve">
     <value>Medicine</value>
   </data>
+  <data name="Monthly" xml:space="preserve">
+    <value>Monthly number of users</value>
+  </data>
   <data name="Move" xml:space="preserve">
     <value>Move</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
+  </data>
+  <data name="Pay" xml:space="preserve">
+    <value>Pay</value>
   </data>
   <data name="Pending Request" xml:space="preserve">
     <value>Pending Request</value>
@@ -411,6 +426,9 @@
   <data name="To" xml:space="preserve">
     <value>To</value>
   </data>
+  <data name="Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
   <data name="Types" xml:space="preserve">
     <value>Types</value>
   </data>
@@ -419,6 +437,9 @@
   </data>
   <data name="UserExists" xml:space="preserve">
     <value>User already exists</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>Users</value>
   </data>
   <data name="ViewSurvey" xml:space="preserve">
     <value>View Survey</value>

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using ZdravoCorp.View.Core;
@@ -19,6 +20,8 @@ namespace ZdravoCorp.View.Manager.ViewModel.Rooms
         private Room selectedRoom;
         private int selectedIndex;
         private ObservableCollection<Room> roomsCollection;
+        private ObservableCollection<Room> roomsCollectionSearch;
+        private String searchBox;
         public RelayCommand ViewRoomCommand { get; set; }
 
         public RelayCommand AddRoomCommand { get; set; }
@@ -36,6 +39,50 @@ namespace ZdravoCorp.View.Manager.ViewModel.Rooms
                     ContentViewModel.Instance.CurrentView = value;
                     OnPropertyChanged();
                 }
+            }
+        }
+
+        public ObservableCollection<Room> RoomsCollectionSearch
+        {
+            get => roomsCollectionSearch;
+            set
+            {
+                if (value != roomsCollectionSearch)
+                {
+                    roomsCollectionSearch = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public string SearchBoxText
+        {
+            get => searchBox;
+            set
+            {
+                if (value != searchBox)
+                {
+                    ChangeTableSearch(value);
+                    searchBox = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private void ChangeTableSearch(string value)
+        {
+            if (value == null)
+            {
+                return;
+            }
+            else if (value.Length > 0)
+            {
+                value = "(" + value + ")+";
+                RoomsCollection = new ObservableCollection<Room>(RoomsCollectionSearch.Where(equipment => Regex.IsMatch(equipment.DesignationCode, value)));
+            }
+            else
+            {
+                RoomsCollection = new ObservableCollection<Room>(RoomsCollectionSearch);
             }
         }
 
@@ -84,6 +131,7 @@ namespace ZdravoCorp.View.Manager.ViewModel.Rooms
             RoomsCollection = new ObservableCollection<Room>();
             List<Room> rooms = roomController.GetAll();
             RoomsCollection = new ObservableCollection<Room>(rooms);
+            RoomsCollectionSearch = new ObservableCollection<Room>(roomController.GetAll());
 
             ViewRoomCommand = new RelayCommand(o =>
             {

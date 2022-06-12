@@ -22,7 +22,8 @@ namespace ZdravoCorp.View.Manager
     /// </summary>
     public partial class Manager : Window
     {
-        private AutoResetEvent autoEvent;
+        private static Manager instance;
+        private static AutoResetEvent autoEvent;
         private bool changed;
         private string currentLanguage;
 
@@ -37,9 +38,10 @@ namespace ZdravoCorp.View.Manager
         public Manager(AutoResetEvent autoEvent)
         {
             InitializeComponent();
+            instance = this;
             this.CurrentLanguage = Properties.Settings.Default.Language;
             this.DataContext = ContentViewModel.Instance;
-            this.autoEvent = autoEvent;
+            Manager.autoEvent = autoEvent;
             changed = false;
         }
 
@@ -59,21 +61,21 @@ namespace ZdravoCorp.View.Manager
             WindowState = WindowState.Minimized;
         }
 
-        private void Logout_Click(object sender, RoutedEventArgs e)
-        {
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
-            this.Close();
-        }
-
         private void CloseManager(object sender, System.ComponentModel.CancelEventArgs e)
         {
             autoEvent.Set();
         }
 
-        private void Employess_Click(object sender, RoutedEventArgs e)
+        public static Manager Instance
         {
-            ContentViewModel.Instance.CurrentView = new Settings(new SettingsViewModel());
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new Manager(Manager.autoEvent);
+                }
+                return instance;
+            }
         }
     }
 }

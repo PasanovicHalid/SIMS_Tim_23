@@ -90,13 +90,16 @@
                 Foreground="{DynamicResource ManagerLabelForeground}"
                     Style="{DynamicResource ManagerLabels}" Height="34" Width="89"/>
 
-        <Button Content="Button" 
+        <Button 
                     HorizontalAlignment="Left" 
                     Margin="30,400,0,0" 
                     VerticalAlignment="Top" 
                     Style="{DynamicResource WindowButton}" 
                     Height="130" 
-                    Width="152"/>
+                    Width="152"
+            Command="{Binding EmployeesCommand}">
+            <svgc:SvgViewbox Source="\Resources\Icons\dr.svg" Width="107" Height="107"/>
+        </Button>
 
         <Label  Content="{p:Loc Employess}" 
                     HorizontalAlignment="Left" 
@@ -107,13 +110,16 @@
                 Foreground="{DynamicResource ManagerLabelForeground}"
                     Style="{DynamicResource ManagerLabels}" Height="34" Width="110"/>
 
-        <Button Content="Button" 
+        <Button 
                     HorizontalAlignment="Left" 
                     Margin="254,400,0,0" 
                     VerticalAlignment="Top" 
                     Style="{DynamicResource WindowButton}" 
                     Height="130" 
-                    Width="151"/>
+                    Width="151"
+            Command="{Binding StatisticsCommand}">
+            <svgc:SvgViewbox Source="\Resources\Icons\dashboard-monitoring.svg" Width="107" Height="107"/>
+        </Button>
 
         <Label  Content="{p:Loc Statistics}" 
                     HorizontalAlignment="Left" 

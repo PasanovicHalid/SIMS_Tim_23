@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using ZdravoCorp.View.Core;
@@ -15,6 +16,8 @@ namespace ZdravoCorp.View.Manager.ViewModel.Rooms
     public class RenovatingRoomsViewModel : ObservableObject, ViewModelInterface
     {
         private ObservableCollection<RenovationActionModel> actionTable;
+        private ObservableCollection<RenovationActionModel> actionTableSearch;
+        private String searchBox;
         private ActionController controller;
         private RenovationActionModel selectedAction;
        
@@ -46,8 +49,63 @@ namespace ZdravoCorp.View.Manager.ViewModel.Rooms
             }
         }
 
+        public ObservableCollection<RenovationActionModel> ActionTableSearch
+        {
+            get => actionTableSearch;
+            set
+            {
+                if (value != actionTableSearch)
+                {
+                    actionTableSearch = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
-        public ObservableCollection<RenovationActionModel> ActionTable { get => actionTable; set => actionTable = value; }
+        public string SearchBoxText
+        {
+            get => searchBox;
+            set
+            {
+                if (value != searchBox)
+                {
+                    ChangeTableSearch(value);
+                    searchBox = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private void ChangeTableSearch(string value)
+        {
+            if (value == null)
+            {
+                return;
+            }
+            else if (value.Length > 0)
+            {
+                value = "(" + value + ")+";
+                ActionTable = new ObservableCollection<RenovationActionModel>(ActionTableSearch.Where(equipment => Regex.IsMatch(equipment.DesignationCode, value)));
+            }
+            else
+            {
+                ActionTable = new ObservableCollection<RenovationActionModel>(ActionTableSearch);
+            }
+        }
+
+
+        public ObservableCollection<RenovationActionModel> ActionTable
+        {
+            get => actionTable;
+            set
+            {
+                if (value != actionTable)
+                {
+                    actionTable = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         public RelayCommand ViewCommand { get; set; }
 
@@ -82,6 +140,7 @@ namespace ZdravoCorp.View.Manager.ViewModel.Rooms
         public void Update()
         {
             ActionTable = controller.GetAllRenovationActions();
+            ActionTableSearch = controller.GetAllRenovationActions();
         }
     }
 }

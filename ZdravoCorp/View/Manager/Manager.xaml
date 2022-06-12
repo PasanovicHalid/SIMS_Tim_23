@@ -54,7 +54,6 @@
             <StackPanel Orientation="Horizontal"
                         Grid.Row="1"
                         Background="#EEEEEE">
-
                 <Label Content="{Binding Path=Title, UpdateSourceTrigger=PropertyChanged}" 
                        Style="{DynamicResource ActionLabels}" 
                        Width="362" 
@@ -72,9 +71,8 @@
                     Foreground="#393E46" 
                     Width="34" 
                     Height="40" 
-                    Click="Logout_Click" />
-
-
+                    Command="{Binding SettingsCommand}"/>
+                
             </StackPanel>
 
             <ContentControl Grid.Row="2"
@@ -157,7 +155,8 @@
                     Style="{DynamicResource ActionButton}"
                     Foreground="#EEEEEE"
                     Width="86" 
-                    Height="45" Click="Employess_Click" >
+                    Height="45"
+                        Command="{Binding EmployeesCommand}">
                         <StackPanel Height="42" Width="84">
                             <svgc:SvgViewbox Source="\Resources\Icons\employees.svg" Width="84" Height="28"/>
                             <Label Content="{p:Loc Employess}" 

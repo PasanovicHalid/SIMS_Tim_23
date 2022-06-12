@@ -8,6 +8,85 @@
              mc:Ignorable="d" 
              d:DesignHeight="667" d:DesignWidth="430">
     <Grid>
-        
+        <Label Content="{p:Loc Name}" 
+            HorizontalAlignment="Center" 
+            Margin="0,29,0,0" 
+            VerticalAlignment="Top"  
+            HorizontalContentAlignment="Center" 
+            Width="105"
+            Style="{DynamicResource ManagerLabels}"
+            Foreground="{DynamicResource ManagerLabelForeground}"/>
+
+        <TextBox HorizontalAlignment="Center"
+                 Margin="0,57,0,0" 
+                 TextWrapping="Wrap" 
+                 Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}"
+                 VerticalAlignment="Top" 
+                 Width="348"
+                 Style="{DynamicResource ManagerTextBox}" 
+                 Name="Equipment_Type"
+                 Tag="{p:Loc Name}"
+                 Height="46"
+                 IsReadOnly="True"/>
+
+        <Label Content="{p:Loc Pay}" 
+            HorizontalAlignment="Center" 
+            Margin="0,130,0,0" 
+            VerticalAlignment="Top"  
+            HorizontalContentAlignment="Center" 
+            Width="104"
+            Style="{DynamicResource ManagerLabels}"
+               Foreground="{DynamicResource ManagerLabelForeground}"/>
+
+        <TextBox HorizontalAlignment="Center"
+            Margin="0,158,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding Pay, UpdateSourceTrigger=PropertyChanged}"
+            VerticalAlignment="Top" 
+            Width="348"
+            Style="{DynamicResource ManagerTextBox}" 
+            x:Name="Description"
+            Tag="{p:Loc Pay}"
+            Height="44"
+            IsReadOnly="True"/>
+
+        <Label Content="{p:Loc Type}" 
+            HorizontalAlignment="Center" 
+            Margin="0,226,0,0" 
+            VerticalAlignment="Top"  
+            HorizontalContentAlignment="Center" 
+            Width="46"
+            Style="{DynamicResource ManagerLabels}"
+               Foreground="{DynamicResource ManagerLabelForeground}"/>
+
+        <TextBox HorizontalAlignment="Center"
+            Margin="0,254,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding Type, UpdateSourceTrigger=PropertyChanged}"
+            VerticalAlignment="Top" 
+            Width="348"
+            Style="{DynamicResource ManagerTextBox}" 
+            x:Name="Count"
+            Tag="{p:Loc Type}"
+            Height="46"/>
+
+        <!--<Button Content="{p:Loc Delete}" 
+                HorizontalAlignment="Left" 
+                Margin="115,601,0,0" 
+                VerticalAlignment="Top" 
+                Height="47" 
+                Width="80"
+                Command="{Binding DeleteCommand}"
+                Style="{DynamicResource ManagerButtons}"/>
+
+        <Button Content="{p:Loc Change}" 
+                HorizontalAlignment="Left" 
+                Margin="235,601,0,0" 
+                VerticalAlignment="Top" 
+                Height="47" 
+                Width="80"
+                Command="{Binding ChangePositionCommand}"
+                Style="{DynamicResource ManagerButtons}"/>-->
+
     </Grid>
 </UserControl>

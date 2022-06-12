@@ -68,9 +68,19 @@
     <Reference Include="SharpVectors.Runtime.Wpf, Version=1.7.7.0, Culture=neutral, PublicKeyToken=d16e717f0a981fb9, processorArchitecture=MSIL">
       <HintPath>..\packages\SharpVectors.1.7.7\lib\net48\SharpVectors.Runtime.Wpf.dll</HintPath>
     </Reference>
+    <Reference Include="Syncfusion.Compression.Base, Version=20.1460.0.59, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Compression.Base.20.1.0.59\lib\net46\Syncfusion.Compression.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Licensing, Version=20.1460.0.59, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Licensing.20.1.0.59\lib\net46\Syncfusion.Licensing.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Pdf.Base, Version=20.1460.0.59, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Pdf.Wpf.20.1.0.59\lib\net46\Syncfusion.Pdf.Base.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -214,6 +224,10 @@
     <Compile Include="View\Manager\Manager.xaml.cs">
       <DependentUpon>Manager.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Manager\Model\Employees\EmployeeDTO.cs" />
+    <Compile Include="View\Manager\Model\Statistics\StatisticDTO.cs" />
+    <Compile Include="View\Manager\ViewModel\Employees\EmployeesViewModel.cs" />
+    <Compile Include="View\Manager\ViewModel\Employees\ViewEmployeeViewModel.cs" />
     <Compile Include="View\Manager\ViewModel\Equipments\AddEquipmentTypeViewModel.cs" />
     <Compile Include="View\Manager\ViewModel\ContentViewModel.cs" />
     <Compile Include="View\Manager\ViewModel\Equipments\AddEquipmentViewModel.cs" />
@@ -240,6 +254,7 @@
     <Compile Include="View\Manager\ViewModel\Rooms\RoomsViewModel.cs" />
     <Compile Include="View\Manager\ViewModel\Rooms\ViewRoomViewModel.cs" />
     <Compile Include="View\Manager\ViewModel\SettingsViewModel.cs" />
+    <Compile Include="View\Manager\ViewModel\Statistics\StatisticsViewModel.cs" />
     <Compile Include="View\Manager\ViewModel\Surveys\SurveysViewModel.cs" />
     <Compile Include="View\Manager\ViewModel\Surveys\ViewSurveyViewModel.cs" />
     <Compile Include="View\Manager\View\Employees\Employees.xaml.cs">
@@ -829,6 +844,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\surveys.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\dr.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\dashboard-monitoring.svg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
