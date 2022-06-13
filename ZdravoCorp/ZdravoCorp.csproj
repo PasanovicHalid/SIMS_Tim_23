@@ -403,6 +403,9 @@
     <Compile Include="View\Secretary\AddGuest.xaml.cs">
       <DependentUpon>AddGuest.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Secretary\AddMeeting.xaml.cs">
+      <DependentUpon>AddMeeting.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Secretary\AddRecord.xaml.cs">
       <DependentUpon>AddRecord.xaml</DependentUpon>
     </Compile>
@@ -424,6 +427,16 @@
     <Compile Include="View\Secretary\ChangeRecord.xaml.cs">
       <DependentUpon>ChangeRecord.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Secretary\EquipmentOrder.xaml.cs">
+      <DependentUpon>EquipmentOrder.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Secretary\Meetings.xaml.cs">
+      <DependentUpon>Meetings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Secretary\Modell\HolidayRequest.cs" />
+    <Compile Include="View\Secretary\MyAccount.xaml.cs">
+      <DependentUpon>MyAccount.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Secretary\Secretary.xaml.cs">
       <DependentUpon>Secretary.xaml</DependentUpon>
     </Compile>
@@ -433,6 +446,19 @@
     <Compile Include="View\Manager\Model\Rooms\RenovationActionModel.cs" />
     <Compile Include="View\Manager\Model\Rooms\RoomTypeModel.cs" />
     <Compile Include="View\Manager\Model\Rooms\RoomModel.cs" />
+    <Compile Include="View\Secretary\SecretaryAppointments.xaml.cs">
+      <DependentUpon>SecretaryAppointments.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Secretary\SecretaryMainPage.xaml.cs">
+      <DependentUpon>SecretaryMainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Secretary\SecretaryMainWindow.xaml.cs">
+      <DependentUpon>SecretaryMainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Secretary\ViewModel\HolidayRequestViewModel.cs" />
+    <Compile Include="View\Secretary\View\HolidayRequestsView.xaml.cs">
+      <DependentUpon>HolidayRequestsView.xaml</DependentUpon>
+    </Compile>
     <Page Include="View\Doctor\Appointments.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -653,6 +679,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Secretary\AddMeeting.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Secretary\AddRecord.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -681,7 +711,35 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Secretary\EquipmentOrder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Secretary\Meetings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Secretary\MyAccount.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Secretary\Secretary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Secretary\SecretaryAppointments.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Secretary\SecretaryMainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Secretary\SecretaryMainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Secretary\View\HolidayRequestsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
