@@ -39,8 +39,14 @@ namespace ZdravoCorp.View.Secretary
 
         private void Holidays_Click(object sender, RoutedEventArgs e)
         {
-            View.HolidayRequestsView holidayRequestsView = new View.HolidayRequestsView();
+            View.HolidayRequestsView holidayRequestsView = new View.HolidayRequestsView(this, secretaryMainWindow);
             secretaryMainWindow.Content = holidayRequestsView;
+        }
+
+        private void EquipmentOrder_Click(object sender, RoutedEventArgs e)
+        {
+            View.EquipmentOrderView equipmentOrderView = new View.EquipmentOrderView(this, secretaryMainWindow);
+            secretaryMainWindow.Content = equipmentOrderView;
         }
     }
 }

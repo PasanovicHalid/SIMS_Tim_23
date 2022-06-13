@@ -4,17 +4,77 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
+using ZdravoCorp.View.Core;
 
+using System.ComponentModel;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Forms;
 
 namespace ZdravoCorp.View.Secretary.ViewModel
 {
     public class HolidayRequestViewModel
     {
-        public HolidayRequestViewModel()
+        private SecretaryMainWindow secretaryyMainWindow;   
+        private SecretaryMainPage secretaryMainPage;
+        public HolidayRequestViewModel(SecretaryMainPage smp, SecretaryMainWindow secretaryMainWindow)
         {
+            this.secretaryyMainWindow = secretaryMainWindow;
+            this.secretaryMainPage = smp;
             loadHolidays();
+            MenuCommand = new RelayCommand(o =>
+            {
+                try
+                {
+                    secretaryyMainWindow.Content = secretaryMainPage;
+                }
+                catch (Exception ex)
+                {
+                    System.Windows.MessageBox.Show(ex.Message, "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            });
+            DeclineCommand = new RelayCommand(o =>
+            {
+                try
+                {
+                    MessageBoxResult dialogResult = (MessageBoxResult) System.Windows.Forms.MessageBox.Show("Da li ste sigurni da želite da odbijete zahtev za odsustvo?", "Upozorenje", MessageBoxButtons.YesNo);
+                    if (dialogResult == MessageBoxResult.Yes)
+                    {
+                        //do something
+                    }
+                    else if (dialogResult == MessageBoxResult.No)
+                    {
+                        //do something else
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Windows.MessageBox.Show(ex.Message, "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            });
+            AcceptCommand = new RelayCommand(o =>
+            {
+                try
+                {
+                    MessageBoxResult dialogResult = (MessageBoxResult)System.Windows.Forms.MessageBox.Show("Da li ste sigurni da želite da odobrite zahtev za odsustvo?", "Upozorenje", MessageBoxButtons.YesNo);
+                    if (dialogResult == MessageBoxResult.Yes)
+                    {
+                        //do something
+                    }
+                    else if (dialogResult == MessageBoxResult.No)
+                    {
+                        //do something else
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Windows.MessageBox.Show(ex.Message, "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            });
         }
-
+        public RelayCommand MenuCommand { get; set; }
+        public RelayCommand DeclineCommand { get; set; }
+        public RelayCommand AcceptCommand { get; set; }
         public ObservableCollection<Modell.HolidayRequest> Holidays { get; set; }
 
         public void loadHolidays() 

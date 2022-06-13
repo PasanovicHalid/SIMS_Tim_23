@@ -30,6 +30,7 @@ namespace ZdravoCorp.View.Secretary
             InitializeComponent();
             SecretaryMainPage secretaryMainPage = new SecretaryMainPage(this); 
             this.Content = secretaryMainPage;
+            
         }
 
        
