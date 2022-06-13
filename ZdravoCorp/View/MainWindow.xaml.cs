@@ -119,9 +119,9 @@ namespace ZdravoCorp
                 }
                 else if (user is Model.Secretary secretary)
                 {
-                    View.Secretary.Secretary secretaryWindow = new View.Secretary.Secretary(secretary);
+                    View.Secretary.SecretaryMainWindow secretaryMainWindow = new View.Secretary.SecretaryMainWindow(secretary);
                     this.Close();
-                    secretaryWindow.ShowDialog();
+                    secretaryMainWindow.ShowDialog();
                     return;
                 }
             }
