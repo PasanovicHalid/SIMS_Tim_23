@@ -217,7 +217,7 @@
                         </DataGrid.Columns>
                     </DataGrid>
                     <TextBox HorizontalAlignment="Left" Height="25" Margin="774,28,0,0" TextWrapping="Wrap" Text="Pretraga" VerticalAlignment="Top" Width="120"/>
-                    <Button Content="Nedeljni izvestaj" Style="{DynamicResource BlueButton}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="774,330,0,0" Width="120" Height="40"/>
+                    <Button Content="Nedeljni izvestaj" Click="Report_Click" Style="{DynamicResource BlueButton}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="774,330,0,0" Width="120" Height="40"/>
 
                 </Grid>
 

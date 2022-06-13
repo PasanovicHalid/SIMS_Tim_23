@@ -4,7 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using Syncfusion.Pdf;
+using Syncfusion.Pdf.Grid;
+using Syncfusion.Pdf.Graphics;
 using System.Windows.Controls;
+using System.Drawing;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -416,6 +420,18 @@ namespace ZdravoCorp.View.Patient
         {
             View.MedicalHistory.MedicalHistory w = new View.MedicalHistory.MedicalHistory();
             w.ShowDialog();
+        }
+
+        private void Report_Click(object sender, RoutedEventArgs e)
+        {
+            PdfDocument doc = new PdfDocument();
+            PdfPage page = doc.Pages.Add();
+            PdfFont font = new PdfStandardFont(PdfFontFamily.Helvetica, 8);
+            PdfGraphics graphics = page.Graphics;
+            PdfGrid pdfGrid = new PdfGrid();
+            pdfGrid.DataSource = CurrentTherapies.DataContext;
+            pdfGrid.Draw(page, new PointF(10, 10));
+            doc.Save("ReportPatient.pdf");
         }
     }
 }
