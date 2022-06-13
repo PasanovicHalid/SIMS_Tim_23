@@ -40,10 +40,18 @@ namespace Service
             return HospitalSurveyRepository.Instance.GetAll();
         }
 
-        public string GetResults()
+        public string GetResults(DateTime start, DateTime end)
         {
             string result = "Hospital:\n\t";
-            List<HospitalSurvey> surveys = GetAll();
+            List<HospitalSurvey> surveys = new List<HospitalSurvey>();
+            List<HospitalSurvey> surveysTemp = GetAll();
+            foreach(HospitalSurvey survey in surveysTemp)
+            {
+                if(survey.Issued > start && survey.Issued < end)
+                {
+                    surveys.Add(survey);
+                }
+            }
             int count = HospitalSurvey.ratingsLabel.Count;
             for (int i = 0; i < count; i++)
             {

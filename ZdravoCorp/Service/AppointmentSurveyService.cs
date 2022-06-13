@@ -44,11 +44,19 @@ namespace Service
             return AppointmentSurveyRepository.Instance.getAllAppointmentSurveyIds();
         }
 
-        public string GetResultsForDoctor(Doctor doctor)
+        public string GetResultsForDoctor(Doctor doctor, DateTime start, DateTime end)
         {
             string result = doctor.nameSurname + ":\n\t";
             int count = AppointmentSurvey.ratingsLabel.Count;
-            List<AppointmentSurvey> surveys = FindSurveysForDoctor(GetAll(),doctor.Id);
+            List<AppointmentSurvey> surveysTemp = FindSurveysForDoctor(GetAll(),doctor.Id);
+            List<AppointmentSurvey> surveys = new List<AppointmentSurvey>();
+            foreach(AppointmentSurvey survey in surveysTemp)
+            {
+                if(survey.Issued > start && survey.Issued < end)
+                {
+                    surveys.Add(survey);
+                }
+            }
             for (int i = 0; i < count; i++)
             {
                 List<int> ratings = GetRatingsForSpecificRating(surveys, i);

@@ -45,9 +45,9 @@ namespace Controller
             return AppointmentSurveyService.Instance.DoneSurvey(appointment);
         }
 
-        public string GetResultsForDoctor(Doctor doctor)
+        public string GetResultsForDoctor(Doctor doctor, DateTime start, DateTime end)
         {
-            return AppointmentSurveyService.Instance.GetResultsForDoctor(doctor);
+            return AppointmentSurveyService.Instance.GetResultsForDoctor(doctor, start, end);
         }
     }
 }
