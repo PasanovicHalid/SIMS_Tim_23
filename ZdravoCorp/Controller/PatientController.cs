@@ -8,49 +8,51 @@ using System;
 using Service;
 using Repository;
 using System.Collections.Generic;
+using ZdravoCorp.Service.Interfaces;
 
 namespace Controller
 {
     public class PatientController : ICrud<Patient>
     {
+        public IPatientService service = PatientService.Instance;
         public void Create(Patient newPatient)
         {
-            PatientService.Instance.Create(newPatient);
+            service.Create(newPatient);
         }
 
         public void Update(Patient patient)
         {
-            PatientService.Instance.Update(patient);
+            service.Update(patient);
         }
 
         public void Delete(int patient)
         {
-            PatientService.Instance.Delete(patient);
+            service.Delete(patient);
         }
 
         public Patient Read(int patient)
         {
-            return PatientService.Instance.Read(patient);
+            return service.Read(patient);
         }
 
         public Patient ReadPatientByJmbg(string jmbg)
         {
-            return PatientService.Instance.ReadPatientByJmbg(jmbg);
+            return service.ReadPatientByJmbg(jmbg);
         }
 
         public List<Patient> GetAll()
         {
-            return PatientService.Instance.GetAll();
+            return service.GetAll();
         }
 
         public Boolean AddPrescription(Model.Patient patient,Prescription newPrescription)
         {
-            return PatientService.Instance.AddPrescription(patient, newPrescription);
+            return service.AddPrescription(patient, newPrescription);
         }
 
         public void RemoveFromChangedOrCanceledList(Patient patient)
         {
-            PatientService.Instance.RemoveFromChangedOrCanceledList(patient);
+            service.RemoveFromChangedOrCanceledList(patient);
         }
 
         public int CheckAllergens(Patient patient, Medication medication)

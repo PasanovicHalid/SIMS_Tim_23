@@ -7,11 +7,13 @@ using Model;
 using System;
 using System.Collections.Generic;
 using Repository;
+using ZdravoCorp.Service.Interfaces;
 
 namespace Controller
 {
    public class ManagerController : ICrud<Manager>
    {
+      public IManagerService service;
       public void Create(Manager newManager)
       {
          throw new NotImplementedException();

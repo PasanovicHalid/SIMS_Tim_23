@@ -9,59 +9,61 @@ using System;
 using Repository;
 using Service;
 using System.Collections.Generic;
+using ZdravoCorp.Service.Interfaces;
 
 namespace Controller
 {
     public class DoctorController : ICrud<Doctor>
     {
+        public IDoctorService service = DoctorService.Instance;
         public void Create(Model.Doctor newDoctor)
         {
-            DoctorService.Instance.Create(newDoctor);
+            service.Create(newDoctor);
         }
 
         public void Update(Model.Doctor updatedRoom)
         {
-            DoctorService.Instance.Update(updatedRoom);
+            service.Update(updatedRoom);
         }
 
         public void Delete(int doctor)
         {
-            DoctorService.Instance.Delete(doctor);
+            service.Delete(doctor);
         }
 
         public Doctor Read(int doctor)
         {
-            return DoctorService.Instance.Read(doctor);
+            return service.Read(doctor);
         }
         
         public List<Doctor> GetAll()
         {
-            return DoctorService.Instance.GetAll();
+            return service.GetAll();
         }
 
         public void CreateDoctorType(DoctorType newDoctorType)
         {
-            DoctorService.Instance.CreateDoctorType(newDoctorType);
+            service.CreateDoctorType(newDoctorType);
         }
 
         public void UpdateDoctorType(DoctorType doctorType)
         {
-            DoctorService.Instance.UpdateDoctorType(doctorType);
+            service.UpdateDoctorType(doctorType);
         }
 
         public void DeleteDoctorType(DoctorType doctorType)
         {
-            DoctorService.Instance.DeleteDoctorType(doctorType.Type);
+            service.DeleteDoctorType(doctorType.Type);
         }
 
         public DoctorType ReadDoctorType(DoctorType doctorType)
         {
-            return DoctorService.Instance.ReadDoctorType(doctorType.Type);
+            return service.ReadDoctorType(doctorType.Type);
         }
 
         public List<DoctorType> GetAllDoctorType()
         {
-            return DoctorService.Instance.GetAllDoctorType();
+            return service.GetAllDoctorType();
         }
     }
 }

@@ -6,48 +6,50 @@ using System.Text;
 using System.Threading.Tasks;
 using Service;
 using Repository;
+using ZdravoCorp.Service.Interfaces;
 
 namespace Controller
 {
     public class NewMedicationRequestController : ICrud<NewMedicationRequest>
     {
+        public INewMedicationRequestService service = NewMedicationRequestService.Instance;
         public void Create(NewMedicationRequest newMedicationRequest)
         {
             if(newMedicationRequest == null || newMedicationRequest.Name == null)
             {
                 throw new Exception("Incorect request");
             }
-            NewMedicationRequestService.Instance.Create(newMedicationRequest);
+            service.Create(newMedicationRequest);
         }
 
         public NewMedicationRequest Read(int id)
         {
-            return NewMedicationRequestService.Instance.Read(id);
+            return service.Read(id);
         }
 
         public void Update(NewMedicationRequest newMedicationRequest)
         {
-            NewMedicationRequestService.Instance.Update(newMedicationRequest);
+            service.Update(newMedicationRequest);
         }
 
         public void Delete(int id)
         {
-            NewMedicationRequestService.Instance.Delete(id);
+            service.Delete(id);
         }
 
         public List<NewMedicationRequest> GetAll()
         {
-            return NewMedicationRequestService.Instance.GetAll();
+            return service.GetAll();
         }
 
         public Boolean AcceptNewMedicationRequest(NewMedicationRequest newMedicationRequest)
         {
-            return NewMedicationRequestService.Instance.AcceptNewMedicationRequest(newMedicationRequest);
+            return service.AcceptNewMedicationRequest(newMedicationRequest);
         }
 
         public Boolean RejectNewMedicationRequest(NewMedicationRequest newMedicationRequest, String comment)
         {
-            return NewMedicationRequestService.Instance.RejectNewMedicationRequest(newMedicationRequest, comment);
+            return service.RejectNewMedicationRequest(newMedicationRequest, comment);
         }
     }
 }

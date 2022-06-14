@@ -8,59 +8,61 @@ using System;
 using System.Collections.Generic;
 using Service;
 using Repository;
+using ZdravoCorp.Service.Interfaces;
 
 namespace Controller
 {
     public class MedicationController : ICrud<Medication>
     {
+        private IMedicationService service = MedicationService.Instance;
         public void Create(Medication newMedicine)
         {
-            MedicationService.Instance.Create(newMedicine);
+            service.Create(newMedicine);
         }
 
         public void Update(Medication medicine)
         {
-            MedicationService.Instance.Update(medicine);
+            service.Update(medicine);
         }
 
         public void Delete(int identificator)
         {
-            MedicationService.Instance.Delete(identificator);
+            service.Delete(identificator);
         }
 
         public Model.Medication Read(int identificator)
         {
-            return MedicationService.Instance.Read(identificator);
+            return service.Read(identificator);
         }
 
         public List<Medication> GetAll()
         {
-            return MedicationService.Instance.GetAll();
+            return service.GetAll();
         }
 
         public void CreateMedicationType(MedicationType newMedicationType)
         {
-            MedicationService.Instance.CreateMedicationType(newMedicationType);
+            service.CreateMedicationType(newMedicationType);
         }
 
         public void UpdateMedicationType(MedicationType medicationType)
         {
-            MedicationService.Instance.UpdateMedicationType(medicationType);
+            service.UpdateMedicationType(medicationType);
         }
 
         public void DeleteMedicationType(int id)
         {
-            MedicationService.Instance.DeleteMedicationType(id);
+            service.DeleteMedicationType(id);
         }
 
         public MedicationType ReadMedicationType(int id)
         {
-            return MedicationService.Instance.ReadMedicationType(id);
+            return service.ReadMedicationType(id);
         }
 
         public List<MedicationType> GetAllMedicationType()
         {
-            return MedicationService.Instance.GetAllMedicationType();
+            return service.GetAllMedicationType();
         }
 
     }

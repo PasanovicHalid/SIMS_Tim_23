@@ -6,46 +6,48 @@ using System.Threading.Tasks;
 using Model;
 using Repository;
 using Service;
+using ZdravoCorp.Service.Interfaces;
 
 namespace Controller
 {
     public class VacationController : ICrud<Vacation>
     {
+        public IVacationService service = VacationService.Instance;
         private static VacationController instance = null;
 
         public List<Vacation> GetAll()
         {
-            return VacationService.Instance.GetAll();
+            return service.GetAll();
         }
 
         public void Create(Vacation newVacation)
         {
-            VacationService.Instance.Create(newVacation);
+            service.Create(newVacation);
         }
 
         public Vacation Read(int id)
         {
-            return VacationService.Instance.Read(id);
+            return service.Read(id);
         }
 
         public void Update(Vacation vacation)
         {
-            VacationService.Instance.Update(vacation);
+            service.Update(vacation);
         }
 
         public void Delete(int id)
         {
-            VacationService.Instance.Delete(id);
+            service.Delete(id);
         }
 
         public Boolean AcceptVacation(Doctor doctor,Vacation vacation)
         {
-            return VacationService.Instance.AcceptVacation(doctor, vacation);
+            return service.AcceptVacation(doctor, vacation);
         }
 
         public Boolean RejectVacation(Doctor doctor, Vacation vacation,String comment)
         {
-            return VacationService.Instance.RejectVacation(doctor, vacation,comment);
+            return service.RejectVacation(doctor, vacation,comment);
         }
 
         public VacationController()

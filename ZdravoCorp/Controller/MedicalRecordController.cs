@@ -6,34 +6,36 @@ using System.Threading.Tasks;
 using Model;
 using Repository;
 using Service;
+using ZdravoCorp.Service.Interfaces;
 
 namespace Controller
 {
     public class MedicalRecordController : ICrud<MedicalRecord>
     {
+        public IMedicalRecordService service = MedicalRecordService.Instance;
         public void Create(MedicalRecord newRecord)
         {
-            MedicalRecordService.Instance.Create(newRecord);
+            service.Create(newRecord);
         }
 
         public void Update(MedicalRecord record)
         {
-            MedicalRecordService.Instance.Update(record);
+            service.Update(record);
         }
 
         public void Delete(int record)
         {
-            MedicalRecordService.Instance.Delete(record);
+            service.Delete(record);
         }
 
         public MedicalRecord Read(int record)
         {
-            return MedicalRecordService.Instance.Read(record);
+            return service.Read(record);
         }
 
         public List<MedicalRecord> GetAll()
         {
-            return MedicalRecordService.Instance.GetAll();
+            return service.GetAll();
         }
     }
 }

@@ -9,11 +9,13 @@ using Service;
 using System.Collections.Generic;
 using Repository;
 using ZdravoCorp.Exceptions;
+using ZdravoCorp.Service.Interfaces;
 
 namespace Controller
 {
     public class AppointmentController : ICrud<Appointment>
     {
+        public IAppointmentService service = AppointmentService.Instance;
         public void Create(Appointment newAppointment)
         {
             List<Appointment> appointmentList = GetAll();
@@ -24,53 +26,53 @@ namespace Controller
                     throw new LocalisedException("Appointment cannot be created,change input data!");
                 }
             }
-            AppointmentService.Instance.Create(newAppointment);
+            service.Create(newAppointment);
         }
 
         public Appointment Read(int appointment)
         {
-            return AppointmentService.Instance.Read(appointment);
+            return service.Read(appointment);
         }
 
         public void Update(Appointment appointment)
         {
-            AppointmentService.Instance.Update(appointment);
+            service.Update(appointment);
         }
 
         public void Delete(int appointment)
         {
-            AppointmentService.Instance.Delete(appointment);
+            service.Delete(appointment);
         }
 
         public List<Appointment> GetAll()
         {
-            return AppointmentService.Instance.GetAll();
+            return service.GetAll();
         }
 
         public List<Appointment> GetFutureAppointments()
         {
-            return AppointmentService.Instance.GetFutureAppointments();
+            return service.GetFutureAppointments();
         }
         public List<Appointment> GetPastAppointments()
         {
-            return AppointmentService.Instance.GetPastAppointments();
+            return service.GetPastAppointments();
         }
 
         public Boolean IsTroll(Appointment appointment)
         {
-            return AppointmentService.Instance.IsTroll(appointment);
+            return service.IsTroll(appointment);
         }
         public List<Appointment> GetFutureAppointmentsForPatient(Patient patient)
         {
-            return AppointmentService.Instance.GetFutureAppointmentsForPatient(patient);
+            return service.GetFutureAppointmentsForPatient(patient);
         }
         public List<Appointment> GetPastAppointmentsForPatient(Patient patient)
         {
-            return AppointmentService.Instance.GetPastAppointmentsForPatient(patient);
+            return service.GetPastAppointmentsForPatient(patient);
         }
         public List<Appointment> SuggestAppointments(WantedAppointment wantedAppointment)
         {
-            return AppointmentService.Instance.SuggestAppointments(wantedAppointment);
+            return service.SuggestAppointments(wantedAppointment);
         }
 
         public Boolean CheckDoctorAppointments(Doctor currentDoctor,DateTime vacationStartDate, DateTime vacationEndDate)
