@@ -151,7 +151,7 @@
                     <TextBox Style="{DynamicResource InfoTextBox}" x:Name="BloodTypeTextBox" Margin="145,115,0,0" HorizontalAlignment="Left" 
                         VerticalAlignment="Top" Width="200"/>
                     <Label Content="Obavljeni pregledi" HorizontalAlignment="Left" 
-                        VerticalAlignment="Center" Margin="40,10,0,0"/>
+                        VerticalAlignment="Center" Margin="40,0,0,0"/>
                     <DataGrid x:Name ="DoneAppointments"
                             Style="{DynamicResource PatientTables}"
                             AlternationCount="2"

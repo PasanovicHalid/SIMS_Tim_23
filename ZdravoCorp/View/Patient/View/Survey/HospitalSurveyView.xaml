@@ -23,8 +23,8 @@
         <ComboBox x:Name="HygieneCB" Width="120" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="313,202,0,0" ItemsSource="{Binding}" SelectedValue="{Binding Path=Hygiene, UpdateSourceTrigger=PropertyChanged}"/>
         <ComboBox x:Name="ModernityCB" Width="120" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="313,233,0,0" ItemsSource="{Binding}" SelectedValue="{Binding Path=Modernity, UpdateSourceTrigger=PropertyChanged}"/>
         <ComboBox x:Name="EquippedCB" Width="120" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="313,264,0,0" ItemsSource="{Binding}" SelectedValue="{Binding Path=Equipped, UpdateSourceTrigger=PropertyChanged}"/>
-        <Button Style="{DynamicResource BlueButton}" Content="Potvrdi" Click="Confirm_Click" HorizontalAlignment="Left" Height="40" Margin="293,352,0,0" VerticalAlignment="Top" Width="80"/>
-        <Button Style="{DynamicResource CancelButton}" Content="Odustani" Click="Cancel_Click" HorizontalAlignment="Left" Height="40" Margin="150,352,0,0" VerticalAlignment="Top" Width="80"/>
+        <Button Style="{DynamicResource BlueButton}" Content="Potvrdi" Click="Confirm_Click" HorizontalAlignment="Left" Height="40" Margin="293,352,0,0" VerticalAlignment="Top" Width="120"/>
+        <Button Style="{DynamicResource CancelButton}" Content="Odustani" Click="Cancel_Click" HorizontalAlignment="Left" Height="40" Margin="150,352,0,0" VerticalAlignment="Top" Width="120"/>
         <ComboBox x:Name="OverallExperienceCB" Width="120" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="313,295,0,0" ItemsSource="{Binding}" SelectedValue="{Binding Path=OverallExperience, UpdateSourceTrigger=PropertyChanged}"/>
 
     </Grid>
