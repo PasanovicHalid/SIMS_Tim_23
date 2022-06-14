@@ -11,50 +11,51 @@ using Repository;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using ZdravoCorp.View.Manager.Model.Rooms;
+using ZdravoCorp.Service.Interfaces;
 
 namespace Controller
 {
     public class RoomController : ICrud<Room>
     {
-
+        public IRoomService service = RoomService.Instance;
         public void Create(Room newRoom)
         {
-            RoomService.Instance.Create(newRoom);
+            service.Create(newRoom);
         }
 
         public Room Read(int identifier)
         {
-            return RoomService.Instance.Read(identifier);
+            return service.Read(identifier);
         }
 
         public void Update(Room updatedRoom)
         {
-            RoomService.Instance.Update(updatedRoom);
+            service.Update(updatedRoom);
         }
 
         public void Delete(int identifier)
         {
-            RoomService.Instance.Delete(identifier);
+            service.Delete(identifier);
         }
 
         public void RenovateRoom(int identifier, DateTime start, DateTime end)
         {
-            RoomService.Instance.RenovateRoom(identifier, start, end);
+            service.RenovateRoom(identifier, start, end);
         }
 
         public void CombineRooms(Room combineInto, Room selectedRoom)
         {
-            RoomService.Instance.CombineRooms(combineInto, selectedRoom);
+            service.CombineRooms(combineInto, selectedRoom);
         }
 
         public List<Room> GetAll()
         {
-            return RoomService.Instance.GetAll();
+            return service.GetAll();
         }
 
         public ObservableCollection<RoomModel> GetAllRoomsVO()
         {
-            List<Room> types = RoomService.Instance.GetAll();
+            List<Room> types = service.GetAll();
             ObservableCollection<RoomModel> result = new ObservableCollection<RoomModel>();
             foreach (Room it in types)
             {
@@ -65,7 +66,7 @@ namespace Controller
 
         public void CreateRoomType(RoomTypeModel newRoomType)
         {
-            RoomService.Instance.CreateRoomType(new RoomType(newRoomType));
+            service.CreateRoomType(new RoomType(newRoomType));
         }
 
         public Boolean UpdateRoomType(Model.RoomType roomType)
@@ -90,17 +91,17 @@ namespace Controller
 
         public int GetActualCountForEquipment(int idRoom, int idEquipment)
         {
-            return RoomService.Instance.GetActualCountForEquipment(idRoom, idEquipment);
+            return service.GetActualCountForEquipment(idRoom, idEquipment);
         }
 
         public ObservableCollection<RoomTypeModel> GetAllRoomTypeView()
         {
-            return RoomService.Instance.GetAllRoomTypeView();
+            return service.GetAllRoomTypeView();
 
         }
         public Room findFreeRoom(DateTime start, DateTime end)
         {
-            return RoomService.Instance.findFreeRoom(start, end);
+            return service.findFreeRoom(start, end);
 
         }
     }

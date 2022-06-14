@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ZdravoCorp.Repository.Interfaces;
 
 namespace Repository
 {
-    public abstract class CSVDataBase<T> where T : Serializable, new()
+    public class CSVDataBase<T> : IDataBase<T> where T : Serializable, new()
     {
         protected string dbPath;
         protected Serializer<T> serializer = new Serializer<T>();
@@ -16,14 +17,24 @@ namespace Repository
             return serializer.FromCSV(dbPath);
         }
 
-        protected void AppendToDB(T element)
+        public void AppendToDB(T element)
         {
             serializer.ToCSVAppend(dbPath, new List<T>() { element });
         }
 
-        protected void SaveChanges(List<T> elements)
+        public void SaveChanges(List<T> elements)
         {
             serializer.ToCSV(dbPath, elements);
+        }
+
+        public string GetPath()
+        {
+            return dbPath;
+        }
+
+        public void SetPath(string path)
+        {
+            this.dbPath = path;
         }
     }
 }

@@ -6,16 +6,17 @@
 using Model;
 using System;
 using System.Collections.Generic;
+using ZdravoCorp.Repository.Interfaces;
 
 namespace Repository
 {
-    public class AppointmentRepository : Repository<Appointment>
+    public class AppointmentRepository : Repository<Appointment> , IAppointmentRepository
     {
         private static AppointmentRepository instance = null;
 
         public AppointmentRepository()
         {
-            dbPath = "..\\..\\Data\\appointmentsDB.csv";
+            dataBase.SetPath("..\\..\\Data\\appointmentsDB.csv");
             InstantiateIDSet(GetAll());
         }
 
@@ -50,7 +51,7 @@ namespace Repository
             lock (key)
             {
                 element.Id = GenerateID();
-                AppendToDB(element);
+                dataBase.AppendToDB(element);
                 idMap.Add(element.Id);
             }
         }
@@ -62,7 +63,7 @@ namespace Repository
                 CheckIfIDExists(element.Id);
                 List<Appointment> elements = GetAll();
                 SwapAppointmentByID(elements, element);
-                SaveChanges(elements);
+                dataBase.SaveChanges(elements);
             }
         }
 
@@ -73,7 +74,7 @@ namespace Repository
                 CheckIfIDExists(id);
                 List<Appointment> elements = GetAll();
                 RemoveAppointmentByID(elements, id);
-                SaveChanges(elements);
+                dataBase.SaveChanges(elements);
             }
         }
 

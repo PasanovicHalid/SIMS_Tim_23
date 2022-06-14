@@ -17,7 +17,7 @@ namespace ZdravoCorp.Service.Interfaces
 
         void CombineRooms(Room combineInto, Room selectedRoom);
 
-        void CreateRoomType(RoomTypeModel newRoomType);
+        void CreateRoomType(RoomType newRoomType);
 
         Boolean UpdateRoomType(Model.RoomType roomType);
 
@@ -32,5 +32,9 @@ namespace ZdravoCorp.Service.Interfaces
         ObservableCollection<RoomTypeModel> GetAllRoomTypeView();
 
         Room findFreeRoom(DateTime start, DateTime end);
+
+        void AddEquipment(Equipment equipment, int id);
+
+        void ChangeActualCountOfEquipment(int id_from_room, int id_equipment, int count);
     }
 }

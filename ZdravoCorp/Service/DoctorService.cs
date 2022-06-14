@@ -8,6 +8,7 @@ using Model;
 using Repository;
 using System;
 using System.Collections.Generic;
+using ZdravoCorp.Repository.Interfaces;
 using ZdravoCorp.Service.Interfaces;
 
 namespace Service
@@ -16,29 +17,31 @@ namespace Service
     {
         private static DoctorService instance = null;
 
+        public IDoctorRepository repository = DoctorRepository.Instance;
+
         public void Create(Doctor newDoctor)
         {
-            DoctorRepository.Instance.Create(newDoctor);
+            repository.Create(newDoctor);
         }
 
         public void Update(Doctor updatedRoom)
         {
-            DoctorRepository.Instance.Update(updatedRoom);
+            repository.Update(updatedRoom);
         }
 
         public void Delete(int doctor)
         {
-            DoctorRepository.Instance.Delete(doctor);
+            repository.Delete(doctor);
         }
 
         public Doctor Read(int doctor)
         {
-            return DoctorRepository.Instance.Read(doctor);
+            return repository.Read(doctor);
         }
 
         public List<Doctor> GetAll()
         {
-            return DoctorRepository.Instance.GetAll();
+            return repository.GetAll();
         }
 
         public void CreateDoctorType(DoctorType newDoctorType)
@@ -99,16 +102,6 @@ namespace Service
                 isFree = true;
             }
             return isFree;
-        }
-
-        public void DeleteDoctorType(DoctorType doctorType)
-        {
-            throw new NotImplementedException();
-        }
-
-        public DoctorType ReadDoctorType(DoctorType doctorType)
-        {
-            throw new NotImplementedException();
         }
     }
 }

@@ -8,16 +8,17 @@ using System;
 using System.Collections.Generic;
 using ZdravoCorp.Exceptions;
 using Controller;
+using ZdravoCorp.Repository.Interfaces;
 
 namespace Repository
 {
-    public class PatientRepository : UserRepository<Patient>
+    public class PatientRepository : UserRepository<Patient> , IPatientRepository
     {
         private static PatientRepository instance = null;
 
         public PatientRepository()
         {
-            dbPath = "..\\..\\Data\\patientsDB.csv";
+            dataBase.SetPath("..\\..\\Data\\patientsDB.csv");
             InstantiateHashSets(GetAll());
         }
 
@@ -93,7 +94,7 @@ namespace Repository
                 element.Id = GenerateID();
                 Users.Add(element.Username, element);
                 idMap.Add(element.Id);
-                AppendToDB(element);
+                dataBase.AppendToDB(element);
             }
         }
 
@@ -104,7 +105,7 @@ namespace Repository
                 CheckIfIDExists(element.Id);
                 List<Patient> elements = GetAll();
                 SwapPatientByID(elements, element);
-                SaveChanges(elements);
+                dataBase.SaveChanges(elements);
             }
         }
 
@@ -115,7 +116,7 @@ namespace Repository
                 CheckIfIDExists(id);
                 List<Patient> elements = GetAll();
                 DeletePatientByID(elements, id);
-                SaveChanges(elements);
+                dataBase.SaveChanges(elements);
             }
         }
 
@@ -214,6 +215,11 @@ namespace Repository
                 ids.Add(it.Id);
             }
             return ids;
+        }
+
+        Dictionary<string, Secretary> IPatientRepository.GetUsernameHashSet()
+        {
+            throw new NotImplementedException();
         }
 
         public static PatientRepository Instance

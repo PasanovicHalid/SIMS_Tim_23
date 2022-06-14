@@ -8,29 +8,31 @@ using Repository;
 using Model;
 using Service;
 using ZdravoCorp.Exceptions;
+using ZdravoCorp.Service.Interfaces;
 
 namespace Controller
 {
     public class PrescriptionController : ICrud<Prescription>
     {
+        public IPrescriptionService service = PrescriptionService.Instance;
         public void Create(Model.Prescription newPrescription)
         {
-            PrescriptionService.Instance.Create(newPrescription);
+            service.Create(newPrescription);
         }
 
         public void Update(Model.Prescription prescription)
         {
-            PrescriptionService.Instance.Update(prescription);
+            service.Update(prescription);
         }
 
         public void Delete(int identificator)
         {
-            PrescriptionService.Instance.Delete(identificator);
+            service.Delete(identificator);
         }
 
         public Prescription Read(int identificator)
         {
-            return PrescriptionService.Instance.Read(identificator);
+            return service.Read(identificator);
         }
 
         public int CreateAndReturnID(Prescription newPrescription, Patient currentPatient)
@@ -39,12 +41,12 @@ namespace Controller
             {
                 throw new LocalisedException("U magacinu ne postoje tolike kolicine leka!");
             }
-            return PrescriptionService.Instance.CreateAndReturnID(newPrescription,currentPatient);
+            return service.CreateAndReturnID(newPrescription,currentPatient);
         }
 
         public List<Prescription> GetAll()
         {
-            return PrescriptionService.Instance.GetAll();
+            return service.GetAll();
         }
     }
 }

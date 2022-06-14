@@ -2,16 +2,17 @@ using Model;
 using System;
 using System.Collections.Generic;
 using ZdravoCorp.Exceptions;
+using ZdravoCorp.Repository.Interfaces;
 
 namespace Repository
 {
-    public class AnamnesisRepository : Repository<Anamnesis>
+    public class AnamnesisRepository : Repository<Anamnesis>, IAnamnesisRepository
     {
         private static AnamnesisRepository instance = null;
 
         public AnamnesisRepository()
         {
-            dbPath = "..\\..\\Data\\anamnesisDB.csv";
+            dataBase.SetPath("..\\..\\Data\\anamnesisDB.csv");
             InstantiateIDSet(GetAll());
         }
 
@@ -29,7 +30,7 @@ namespace Repository
             lock (key)
             {
                 element.Id = GenerateID();
-                AppendToDB(element);
+                dataBase.AppendToDB(element);
                 idMap.Add(element.Id);
             }
         }
@@ -41,7 +42,7 @@ namespace Repository
                 CheckIfIDExists(element.Id);
                 List<Anamnesis> elements = GetAll();
                 SwapAnamnesisByID(elements, element);
-                SaveChanges(elements);
+                dataBase.SaveChanges(elements);
             }
         }
 
@@ -52,7 +53,7 @@ namespace Repository
                 CheckIfIDExists(id);
                 List<Anamnesis> elements = GetAll();
                 DeleteAnamnesisByID(elements, id);
-                SaveChanges(elements);
+                dataBase.SaveChanges(elements);
             }
         }
 

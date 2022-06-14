@@ -7,6 +7,7 @@ using Model;
 using Controller;
 using Repository;
 using ZdravoCorp.Service.Interfaces;
+using ZdravoCorp.Repository.Interfaces;
 
 namespace Service
 {
@@ -14,14 +15,16 @@ namespace Service
     {
         private static VacationService instance = null;
 
+        private IVacationRepository repository = VacationRepository.Instance;
+
         public List<Vacation> GetAll()
         {
-            return VacationRepository.Instance.GetAll();
+            return repository.GetAll();
         }
 
         public void Create(Vacation newVacation)
         {
-            VacationRepository.Instance.Create(newVacation);
+            repository.Create(newVacation);
             DoctorController doctorController = new DoctorController();
             Doctor doctor = doctorController.Read(newVacation.DoctorID);
             doctor.AddVacation(newVacation);
@@ -30,27 +33,27 @@ namespace Service
 
         public Vacation Read(int id)
         {
-            return VacationRepository.Instance.Read(id);
+            return repository.Read(id);
         }
 
         public void Update(Vacation vacation)
         {
-            VacationRepository.Instance.Update(vacation);
+            repository.Update(vacation);
         }
 
         public void Delete(int id)
         {
-            VacationRepository.Instance.Delete(id);
+            repository.Delete(id);
         }
 
         public Boolean AcceptVacation(Doctor doctor, Vacation vacation)
         {
-            return VacationRepository.Instance.AcceptVacation(doctor, vacation);
+            return repository.AcceptVacation(doctor, vacation);
         }
 
         public Boolean RejectVacation(Doctor doctor, Vacation vacation,String comment)
         {
-            return VacationRepository.Instance.RejectVacation(doctor, vacation,comment);
+            return repository.RejectVacation(doctor, vacation,comment);
         }
 
         public VacationService()

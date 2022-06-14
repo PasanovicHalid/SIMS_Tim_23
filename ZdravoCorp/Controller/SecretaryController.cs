@@ -8,11 +8,13 @@ using System;
 using System.Collections.Generic;
 using Service;
 using Repository;
+using ZdravoCorp.Service.Interfaces;
 
 namespace Controller
 {
    public class SecretaryController : ICrud<Secretary>
    {
+      public ISercretaryService service = SecretaryService.Instance;
       public void Create(Secretary newSecretary)
       {
          throw new NotImplementedException();
@@ -35,7 +37,7 @@ namespace Controller
       
       public List<Secretary> GetAll()
       {
-            return SecretaryService.Instance.GetAll();
+            return service.GetAll();
       }
    
    }

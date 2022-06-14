@@ -4,34 +4,36 @@ using System;
 using Service;
 using System.Collections.Generic;
 using Repository;
+using ZdravoCorp.Service.Interfaces;
 
 namespace Controller
 {
     public class GuestController : ICrud<Guest>
     {
+        public IGuestService service = GuestService.Instance;
         public void Create(Guest newGuest)
         {
-            GuestService.Instance.Create(newGuest);
+            service.Create(newGuest);
         }
 
         public Guest Read(int id)
         {
-            return GuestService.Instance.Read(id);
+            return service.Read(id);
         }
 
         public void Update(Guest guest)
         {
-            GuestService.Instance.Update(guest);
+            service.Update(guest);
         }
 
         public void Delete(int id)
         {
-            GuestService.Instance.Delete(id);
+            service.Delete(id);
         }
 
         public List<Guest> GetAll()
         {
-            return GuestService.Instance.GetAll();
+            return service.GetAll();
         }
 
     }

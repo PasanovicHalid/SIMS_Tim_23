@@ -10,7 +10,7 @@ namespace ZdravoCorp.Service
 {
     public class TimerService
     {
-        private int interval = 1000;
+        private int interval = 100000;
         private AutoResetEvent autoEvent;
         private ActionService actionService;
 
@@ -24,7 +24,7 @@ namespace ZdravoCorp.Service
 
         public void initiate()
         {
-            Timer timer = new Timer(actionService.CheckActions, autoEvent, 1000, interval);
+            Timer timer = new Timer(ActionService.Instance.CheckActions, autoEvent, 1000, interval);
 
             autoEvent.WaitOne();
             Console.WriteLine("\n Closing Timer");

@@ -5,16 +5,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ZdravoCorp.Exceptions;
+using ZdravoCorp.Repository.Interfaces;
 
 namespace Repository
 {
-    public class MedicationTypeRepository : Repository<MedicationType>
+    public class MedicationTypeRepository : Repository<MedicationType> , IMedicationTypeRepository
     {
         private static MedicationTypeRepository instance = null;
         private HashSet<string> typeNameMap = new HashSet<string>();
         public MedicationTypeRepository()
         {
-            dbPath = "..\\..\\Data\\medicationTypeDB.csv";
+            dataBase.SetPath("..\\..\\Data\\medicationTypeDB.csv");
             InstantiateIDSet(GetAll());
         }
         public override void Create(MedicationType element)
@@ -23,7 +24,7 @@ namespace Repository
             {
                 CheckIfNameExists(element.Name);
                 element.Id = GenerateID();
-                AppendToDB(element);
+                dataBase.AppendToDB(element);
                 typeNameMap.Add(element.Name);
                 idMap.Add(element.Id);
             }
@@ -36,7 +37,7 @@ namespace Repository
                 CheckIfTypeIDExists(id);
                 List<MedicationType> types = GetAll();
                 DeleteTypeByID(types, id);
-                SaveChanges(types);
+                dataBase.SaveChanges(types);
             }
         }
 
@@ -56,7 +57,7 @@ namespace Repository
                 CheckIfTypeIDExists(element.Id);
                 List<MedicationType> types = GetAll();
                 SwapTypesByID(types, element);
-                SaveChanges(types);
+                dataBase.SaveChanges(types);
             }
         }
 

@@ -7,16 +7,17 @@ using Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ZdravoCorp.Repository.Interfaces;
 
 namespace Repository
 {
-    public class MedicationRepository : Repository<Medication>
+    public class MedicationRepository : Repository<Medication> , IMedicationRepository
     {
         private static MedicationRepository instance = null;
 
         public MedicationRepository()
         {
-            dbPath = "..\\..\\Data\\medicationDB.csv";
+            dataBase.SetPath("..\\..\\Data\\medicationDB.csv");
             InstantiateIDSet(GetAll());
         }
         public override Medication Read(int id)
@@ -33,7 +34,7 @@ namespace Repository
             lock (key)
             {
                 element.Id = GenerateID();
-                AppendToDB(element);
+                dataBase.AppendToDB(element);
                 idMap.Add(element.Id);
             }
         }
@@ -45,7 +46,7 @@ namespace Repository
                 CheckIfIDExists(element.Id);
                 List<Medication> elements = GetAll();
                 SwapMedicationByID(elements, element);
-                SaveChanges(elements);
+                dataBase.SaveChanges(elements);
             }
         }
 
@@ -56,7 +57,7 @@ namespace Repository
                 CheckIfIDExists(id);
                 List<Medication> elements = GetAll();
                 RemoveMedicationByID(elements, id);
-                SaveChanges(elements);
+                dataBase.SaveChanges(elements);
             }
         }
 

@@ -2,16 +2,17 @@ using Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ZdravoCorp.Repository.Interfaces;
 
 namespace Repository
 {
-    public class HospitalSurveyRepository : Repository<HospitalSurvey>
+    public class HospitalSurveyRepository : Repository<HospitalSurvey> , IHospitalSurveyRepository
     {
         private static HospitalSurveyRepository instance = null;
 
         public HospitalSurveyRepository()
         {
-            dbPath = "..\\..\\Data\\hospitalSurveysDB.csv";
+            dataBase.SetPath("..\\..\\Data\\hospitalSurveysDB.csv");
             InstantiateIDSet(GetAll());
         }
 
@@ -50,7 +51,7 @@ namespace Repository
             lock (key)
             {
                 element.Id = GenerateID();
-                AppendToDB(element);
+                dataBase.AppendToDB(element);
                 idMap.Add(element.Id);
             }
         }

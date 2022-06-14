@@ -13,12 +13,18 @@ using System.Collections.ObjectModel;
 using ZdravoCorp.View.Manager.Model.Equipments;
 using ZdravoCorp.View.Manager.Model.Rooms;
 using ZdravoCorp.Exceptions;
+using ZdravoCorp.Repository.Interfaces;
+using ZdravoCorp.Service.Interfaces;
 
 namespace Service
 {
 
     public class ActionService
     {
+        protected static readonly object key = new object();
+        private static ActionService instance = null;
+        public IActionRepository repository = ActionRepository.Instance;
+        //public IEquipmentService equipmentService = EquipmentService.Instance;
         public void CheckActions(Object stateInfo)
         {
             Console.WriteLine("{0} Timer activated", DateTime.Now.ToString("h:mm:ss.fff"));
@@ -55,12 +61,12 @@ namespace Service
         }
         public void CreateAction(Model.Action newAction)
         {
-            ActionRepository.Instance.Create(newAction);
+            repository.Create(newAction);
         }
 
         public void UpdateAction(Model.Action action)
         {
-            ActionRepository.Instance.Update(action);
+            repository.Update(action);
         }
 
         public void UpdateRenovationAction(RenovationActionModel action)
@@ -69,7 +75,7 @@ namespace Service
             temp.ExecutionDate = action.ExecutionDate;
             RenovationAction renovationAction = new RenovationAction(action.ExpirationDate, action.Id_room, action.Renovation);
             temp.Object = renovationAction;
-            ActionRepository.Instance.Update(temp);
+            repository.Update(temp);
         }
 
         public void UpdateChangeAction(ChangeActionModel action, int count)
@@ -80,7 +86,7 @@ namespace Service
             changedAction.Object = renovationAction;
             Room room = RoomService.Instance.Read(action.Id_outgoing_room);
             RevertActualCountWhenUpdating(room, action, count);
-            ActionRepository.Instance.Update(changedAction);
+            repository.Update(changedAction);
             RoomService.Instance.Update(room);
         }
 
@@ -102,17 +108,17 @@ namespace Service
 
         public void DeleteAction(int id)
         {
-            ActionRepository.Instance.Delete(id);
+            repository.Delete(id);
         }
 
         public Model.Action ReadAction(int id)
         {
-            return ActionRepository.Instance.Read(id);
+            return repository.Read(id);
         }
 
         public List<Model.Action> GetAllActions()
         {
-            return ActionRepository.Instance.GetAll();
+            return repository.GetAll();
         }
 
         public ObservableCollection<RenovationActionModel> GetAllRenovationActions()
@@ -155,7 +161,7 @@ namespace Service
 
         public void SaveActions(List<Model.Action> actions)
         {
-            ActionRepository.Instance.SaveActions(actions);
+            repository.SaveActions(actions);
         }
 
         private void RevertActualCount(Room room, ChangeActionModel action)
@@ -199,6 +205,24 @@ namespace Service
                 }
             }
             SaveActions(actions);
+        }
+
+        public static ActionService Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    lock (key)
+                    {
+                        if (instance == null)
+                        {
+                            instance = new ActionService();
+                        }
+                    }
+                }
+                return instance;
+            }
         }
     }
 }

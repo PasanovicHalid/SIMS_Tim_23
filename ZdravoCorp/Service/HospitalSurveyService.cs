@@ -7,6 +7,7 @@ using Model;
 using Repository;
 using System;
 using System.Collections.Generic;
+using ZdravoCorp.Repository.Interfaces;
 using ZdravoCorp.Service.Interfaces;
 
 namespace Service
@@ -14,30 +15,32 @@ namespace Service
     public class HospitalSurveyService : ICrud<HospitalSurvey> , IHospitalSurveyService
     {
         private static HospitalSurveyService instance = null;
+
+        private IHospitalSurveyRepository repository = HospitalSurveyRepository.Instance;
         
         public void Create(HospitalSurvey newSurvey)
         {
-            HospitalSurveyRepository.Instance.Create(newSurvey);
+            repository.Create(newSurvey);
         }
 
         public HospitalSurvey Read(int id)
         {
-            return HospitalSurveyRepository.Instance.Read(id);
+            return repository.Read(id);
         }
 
         public void Update(HospitalSurvey survey)
         {
-            HospitalSurveyRepository.Instance.Update(survey);
+            repository.Update(survey);
         }
 
         public void Delete(int id)
         {
-            HospitalSurveyRepository.Instance.Delete(id);
+            repository.Delete(id);
         }
 
         public List<HospitalSurvey> GetAll()
         {
-            return HospitalSurveyRepository.Instance.GetAll();
+            return repository.GetAll();
         }
 
         public string GetResults(DateTime start, DateTime end)
@@ -65,7 +68,7 @@ namespace Service
 
         public List<int> getAllHospitalSurveyIds()
         {
-            return HospitalSurveyRepository.Instance.getAllHospitalSurveyIds();
+            return repository.getAllHospitalSurveyIds();
         }
 
         private float GetAvgOfRatings(List<int> ratings)

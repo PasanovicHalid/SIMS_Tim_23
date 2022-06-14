@@ -8,16 +8,17 @@ using System.Collections.Generic;
 using ZdravoCorp.Utility;
 using System.Linq;
 using ZdravoCorp.Exceptions;
+using ZdravoCorp.Repository.Interfaces;
 
 namespace Repository
 {
     //Sequencial Data Base
-    public class ActionRepository : Repository<Model.Action>
+    public class ActionRepository : Repository<Model.Action> , IActionRepository
     {
         private static ActionRepository instance = null;
         public ActionRepository()
         {
-            dbPath = "..\\..\\Data\\actionsDB.csv";
+            dataBase.SetPath("..\\..\\Data\\actionsDB.csv");
             InstantiateIDSet(GetAll());
         }
 
@@ -38,7 +39,7 @@ namespace Repository
                 element.Id = GenerateID();
                 List<Model.Action> actions = GetAll();
                 AddAction(element, actions);
-                SaveChanges(actions);
+                dataBase.SaveChanges(actions);
                 idMap.Add(element.Id);
             }
         }
@@ -59,7 +60,7 @@ namespace Repository
             {
                 List<Model.Action> actions = GetAll();
                 RemoveActionByID(id, actions);
-                SaveChanges(actions);
+                dataBase.SaveChanges(actions);
                 idMap.Remove(id);
             }
         }
@@ -68,7 +69,7 @@ namespace Repository
         {
             lock (key)
             {
-                SaveChanges(elements);
+                dataBase.SaveChanges(elements);
             }
         }
 
@@ -120,7 +121,7 @@ namespace Repository
 
         private void SortActionsAscendingAndSaveChanges(List<Model.Action> elements)
         {
-            serializer.ToCSV(dbPath, elements.OrderBy(a => a.ExecutionDate).ToList());
+            dataBase.SaveChanges(elements.OrderBy(a => a.ExecutionDate).ToList());
         }
 
         private Model.Action FindActionByID(int id, List<Model.Action> elements)

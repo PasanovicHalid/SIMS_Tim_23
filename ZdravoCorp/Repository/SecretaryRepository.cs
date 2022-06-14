@@ -7,15 +7,16 @@ using Model;
 using System;
 using System.Collections.Generic;
 using ZdravoCorp.Exceptions;
+using ZdravoCorp.Repository.Interfaces;
 
 namespace Repository
 {
-    public class SecretaryRepository : UserRepository<Secretary>
+    public class SecretaryRepository : UserRepository<Secretary> , ISecretaryRepository
     {
         private static SecretaryRepository instance = null;
         public SecretaryRepository()
         {
-            dbPath = "..\\..\\Data\\secretariesDB.csv";
+            dataBase.SetPath("..\\..\\Data\\secretariesDB.csv");
             InstantiateHashSets(GetAll());
         }
 
@@ -39,7 +40,7 @@ namespace Repository
             {
                 CheckIfUsernameExists(element.Username);
                 element.Id = GenerateID();
-                AppendToDB(element);
+                dataBase.AppendToDB(element);
                 Users.Add(element.Username, element);
                 idMap.Add(element.Id);
             }
@@ -53,7 +54,7 @@ namespace Repository
                 CheckIfUsernameExists(element.Username);
                 List<Secretary> secretaries = GetAll();
                 SwapSecretaryByID(secretaries, element);
-                SaveChanges(secretaries);
+                dataBase.SaveChanges(secretaries);
             }
         }
 
@@ -64,7 +65,7 @@ namespace Repository
                 CheckIfIDExists(id);
                 List<Secretary> secretaries = GetAll();
                 DeleteSecretaryByID(secretaries, id);
-                SaveChanges(secretaries);
+                dataBase.SaveChanges(secretaries);
             }
         }
 

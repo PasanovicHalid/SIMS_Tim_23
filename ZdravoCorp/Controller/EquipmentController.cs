@@ -11,14 +11,16 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using ZdravoCorp.View.Manager.Model.Equipments;
 using ZdravoCorp.View.Manager.Model.Rooms;
+using ZdravoCorp.Service.Interfaces;
 
 namespace Controller
 {
     public class EquipmentController : ICrud<Equipment>
     {
+        public IEquipmentService service = EquipmentService.Instance;
         public Boolean CreateEquipment(EquipmentTypeModel type, int count, RoomModel room)
         {
-            return EquipmentService.Instance.CreateEquipment(type, count, room);
+            return service.CreateEquipment(type, count, room);
         }
 
         public void Create(Equipment equipment)
@@ -49,17 +51,17 @@ namespace Controller
         public void CreateEquipmentType(EquipmentTypeModel newEquipmentType)
         {
             EquipmentType result = new EquipmentType(newEquipmentType);
-            EquipmentService.Instance.CreateEquipmentType(result);
+            service.CreateEquipmentType(result);
         }
 
         public void UpdateEquipmentType(EquipmentType equipmentType)
         {
-            EquipmentService.Instance.UpdateEquipmentType(equipmentType);
+            service.UpdateEquipmentType(equipmentType);
         }
 
         public void DeleteEquipmentType(int id)
         {
-            EquipmentService.Instance.DeleteEquipmentType(id);
+            service.DeleteEquipmentType(id);
         }
 
         public EquipmentType ReadEquipmentType(int id)
@@ -69,17 +71,17 @@ namespace Controller
 
         public void ChangePositionOfEquipment(DateTime excecutionDate,int idFromRoom,int idToRoom, int idEquipment, int count)
         {
-            EquipmentService.Instance.ChangePositionOfEquipment(excecutionDate, idFromRoom, idToRoom, idEquipment, count);
+            service.ChangePositionOfEquipment(excecutionDate, idFromRoom, idToRoom, idEquipment, count);
         }
 
         public ObservableCollection<EquipmentTypeModel> GetAllEquipmentType()
         {
-            return EquipmentService.Instance.GetAllEquipmentType(); ;
+            return service.GetAllEquipmentType(); ;
         }
 
         public ObservableCollection<EquipmentModel> GetAllEquipmentTableVO()
         {
-            return EquipmentService.Instance.GetAllEquipmentTableVO();
+            return service.GetAllEquipmentTableVO();
         }
     }
 }

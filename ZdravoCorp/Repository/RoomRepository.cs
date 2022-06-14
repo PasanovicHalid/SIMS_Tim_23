@@ -9,16 +9,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using ZdravoCorp.Exceptions;
+using ZdravoCorp.Repository.Interfaces;
 
 namespace Repository
 {
-    public class RoomRepository : Repository<Room>
+    public class RoomRepository : Repository<Room> , IRoomRepository
     {
         private static RoomRepository instance = null;
 
         public RoomRepository()
         {
-            dbPath = "..\\..\\Data\\roomsDB.csv";
+            dataBase.SetPath("..\\..\\Data\\roomsDB.csv");
             InstantiateIDSet(GetAll());
         }
 
@@ -49,7 +50,7 @@ namespace Repository
                 List<Room> rooms = GetAll();
                 Room room = FindRoomByID(room_id, rooms);
                 AddEquipmentToRoom(room, equipment);
-                SaveChanges(rooms);
+                dataBase.SaveChanges(rooms);
             }
         }
 
@@ -89,7 +90,7 @@ namespace Repository
                 List<Room> rooms = GetAll();
                 Room room = FindRoomByID(id_from_room, rooms);
                 ChangeActualCountInRoom(room, count, id_equipment);
-                SaveChanges(rooms);
+                dataBase.SaveChanges(rooms);
             }
         }
 
@@ -114,7 +115,7 @@ namespace Repository
                 element.Identifier = GenerateID();
                 List<Room> rooms = GetAll();
                 CheckIfDesignationCodeExists(element.DesignationCode, rooms);
-                AppendToDB(element);
+                dataBase.AppendToDB(element);
                 idMap.Add(element.Identifier);
             }
         }
@@ -126,7 +127,7 @@ namespace Repository
                 List<Room> elements = GetAll();
                 CheckIfChangedDesignationCodeExists(element, elements);
                 ReplaceRoomByID(elements, element);
-                SaveChanges(elements);
+                dataBase.SaveChanges(elements);
             }
         }
 
@@ -136,7 +137,7 @@ namespace Repository
             {
                 List<Room> rooms = GetAll();
                 FindAndDeleteRoomByID(id, rooms);
-                SaveChanges(rooms);
+                dataBase.SaveChanges(rooms);
                 idMap.Remove(id);
             }
         }

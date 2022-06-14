@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Model;
 using Repository;
+using ZdravoCorp.Repository.Interfaces;
 using ZdravoCorp.Service.Interfaces;
 
 namespace Service
@@ -12,32 +13,34 @@ namespace Service
     public class ReportService : ICrud<Report> , IReportService
     {
         private static ReportService instance = null;
+
+        private IReportRepository repository = ReportRepository.Instance;
         public void Create(Report newReport)
         {
-            ReportRepository.Instance.Create(newReport);
+            repository.Create(newReport);
         }
 
         public void Update(Model.Report newReport)
         {
-            ReportRepository.Instance.Update(newReport);
+            repository.Update(newReport);
 
         }
 
         public void Delete(int id)
         {
-            ReportRepository.Instance.Delete(id);
+            repository.Delete(id);
 
         }
 
         public Report Read(int id)
         {
-            return ReportRepository.Instance.Read(id);
+            return repository.Read(id);
 
         }
 
         public List<Report> GetAll()
         {
-            return ReportRepository.Instance.GetAll();
+            return repository.GetAll();
 
         }
 

@@ -7,16 +7,17 @@ using Model;
 using System;
 using System.Collections.Generic;
 using ZdravoCorp.Exceptions;
+using ZdravoCorp.Repository.Interfaces;
 
 namespace Repository
 {
-    public class ManagerRepository : UserRepository<Manager>
+    public class ManagerRepository : UserRepository<Manager> , IManagerRepository
     {
         private static ManagerRepository instance = null;
 
         public ManagerRepository()
         {
-            dbPath = "..\\..\\Data\\managersDB.csv";
+            dataBase.SetPath("..\\..\\Data\\managersDB.csv");
             InstantiateHashSets(GetAll());
         }
 
@@ -41,7 +42,7 @@ namespace Repository
             {
                 CheckIfUsernameExists(element.Username);
                 element.Id = GenerateID();
-                AppendToDB(element);
+                dataBase.AppendToDB(element);
                 Users.Add(element.Username, element);
                 idMap.Add(element.Id);
             }
@@ -55,7 +56,7 @@ namespace Repository
                 CheckIfUsernameExists(element.Username);
                 List<Manager> elements = GetAll();
                 SwapManagerByID(elements, element);
-                SaveChanges(elements);
+                dataBase.SaveChanges(elements);
             }
         }
 
@@ -66,7 +67,7 @@ namespace Repository
                 CheckIfIDExists(id);
                 List<Manager> managers = GetAll();
                 DeleteManagerByID(managers, id);
-                SaveChanges(managers);
+                dataBase.SaveChanges(managers);
             }
         }
 

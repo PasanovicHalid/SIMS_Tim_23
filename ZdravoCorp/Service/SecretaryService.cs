@@ -8,12 +8,15 @@ using System;
 using System.Collections.Generic;
 using Repository;
 using ZdravoCorp.Service.Interfaces;
+using ZdravoCorp.Repository.Interfaces;
 
 namespace Service
 {
    public class SecretaryService : ICrud<Secretary> , ISercretaryService
     {
       private static SecretaryService instance = null;
+
+      private ISecretaryRepository repository = SecretaryRepository.Instance;
       
       public void Create(Secretary newSecretary)
       {
@@ -37,7 +40,7 @@ namespace Service
       
       public List<Secretary> GetAll()
       {
-            return SecretaryRepository.Instance.GetAll();
+            return repository.GetAll();
       }
       public SecretaryService()
       {

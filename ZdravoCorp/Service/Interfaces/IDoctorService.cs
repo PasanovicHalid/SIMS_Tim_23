@@ -14,9 +14,9 @@ namespace ZdravoCorp.Service.Interfaces
 
         void UpdateDoctorType(DoctorType doctorType);
 
-        void DeleteDoctorType(DoctorType doctorType);
+        void DeleteDoctorType(String doctorType);
 
-        DoctorType ReadDoctorType(DoctorType doctorType);
+        DoctorType ReadDoctorType(String doctorType);
 
         List<DoctorType> GetAllDoctorType();
     }

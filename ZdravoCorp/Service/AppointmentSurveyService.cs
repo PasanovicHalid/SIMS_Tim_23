@@ -7,6 +7,7 @@ using Model;
 using Repository;
 using System;
 using System.Collections.Generic;
+using ZdravoCorp.Repository.Interfaces;
 using ZdravoCorp.Service.Interfaces;
 
 namespace Service
@@ -14,34 +15,36 @@ namespace Service
     public class AppointmentSurveyService : ICrud<AppointmentSurvey> , IAppointmentSurveyService
     {
         private static AppointmentSurveyService instance = null;
+
+        public IAppointmentSurveyRepository repository = AppointmentSurveyRepository.Instance;
         
         public void Create(AppointmentSurvey newSurvey)
         {
-            AppointmentSurveyRepository.Instance.Create(newSurvey);
+            repository.Create(newSurvey);
         }
 
         public AppointmentSurvey Read(int id)
         {
-            return AppointmentSurveyRepository.Instance.Read(id);
+            return repository.Read(id);
         }
 
         public void Update(AppointmentSurvey survey)
         {
-            AppointmentSurveyRepository.Instance.Update(survey);
+            repository.Update(survey);
         }
 
         public void Delete(int id)
         {
-            AppointmentSurveyRepository.Instance.Delete(id);
+            repository.Delete(id);
         }
 
         public List<AppointmentSurvey> GetAll()
         {
-            return AppointmentSurveyRepository.Instance.GetAll();
+            return repository.GetAll();
         }
         public List<int> getAllAppointmentSurveyIds()
         {
-            return AppointmentSurveyRepository.Instance.getAllAppointmentSurveyIds();
+            return repository.getAllAppointmentSurveyIds();
         }
 
         public string GetResultsForDoctor(Doctor doctor, DateTime start, DateTime end)

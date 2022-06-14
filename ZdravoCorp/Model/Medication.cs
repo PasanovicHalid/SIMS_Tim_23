@@ -50,8 +50,8 @@ namespace Model
             int i = 0;
             id = int.Parse(values[i++]);
             count = int.Parse(values[i++]);
-            MedicationController medicationController = new MedicationController();
-            MedicationType = medicationController.ReadMedicationType(int.Parse(values[i++]));
+            //MedicationController medicationController = new MedicationController();
+            //MedicationType = medicationController.ReadMedicationType(int.Parse(values[i++]));
         }
 
         public List<String> ToCSV()

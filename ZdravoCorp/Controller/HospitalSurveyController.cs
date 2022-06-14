@@ -8,44 +8,46 @@ using Service;
 using System;
 using System.Collections.Generic;
 using Repository;
+using ZdravoCorp.Service.Interfaces;
 
 
 namespace Controller
 {
     public class HospitalSurveyController : ICrud<HospitalSurvey>
-    {        
+    {
+        public IHospitalSurveyService service = HospitalSurveyService.Instance;       
         public void Create(HospitalSurvey newSurvey)
         {
-            HospitalSurveyService.Instance.Create(newSurvey);
+            service.Create(newSurvey);
         }
 
         public HospitalSurvey Read(int id)
         {
-            return HospitalSurveyService.Instance.Read(id);
+            return service.Read(id);
         }
 
         public void Update(HospitalSurvey survey)
         {
-            HospitalSurveyService.Instance.Update(survey);
+            service.Update(survey);
         }
 
         public void Delete(int id)
         {
-            HospitalSurveyService.Instance.Delete(id);
+            service.Delete(id);
         }
 
         public List<HospitalSurvey> GetAll()
         {
-            return HospitalSurveyService.Instance.GetAll();
+            return service.GetAll();
         }
         public List<int> getAllHospitalSurveyIds()
         {
-            return HospitalSurveyService.Instance.getAllHospitalSurveyIds();
+            return service.getAllHospitalSurveyIds();
         }
 
         public string GetResults(DateTime start, DateTime end)
         {
-            return HospitalSurveyService.Instance.GetResults(start, end);
+            return service.GetResults(start, end);
         }
     }
 }
