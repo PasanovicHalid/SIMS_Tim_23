@@ -3,6 +3,7 @@ using Repository;
 using System;
 using System.Collections.Generic;
 using ZdravoCorp.Service.Interfaces;
+using ZdravoCorp.Repository.Interfaces;
 
 namespace Service
 {
@@ -10,31 +11,33 @@ namespace Service
     {
 
         private static GuestService instance = null;
+
+        private GuestRepository repository = GuestRepository.Instance;
         List<Guest> guests = new List<Guest>();
 
         public void Create(Guest newGuest)
         {
-            GuestRepository.Instance.CreateGuest(newGuest);
+            repository.CreateGuest(newGuest);
         }
 
         public Guest Read(int id)
         {
-            return GuestRepository.Instance.ReadGuest(id);
+            return repository.ReadGuest(id);
         }
 
         public void Update(Guest guest)
         {
-            GuestRepository.Instance.UpdateGuest(guest);
+            repository.UpdateGuest(guest);
         }
 
         public void Delete(int id)
         {
-            GuestRepository.Instance.DeleteGuest(id);
+            repository.DeleteGuest(id);
         }
 
         public List<Guest> GetAll()
         {
-            return GuestRepository.Instance.GetAllGuests();
+            return repository.GetAllGuests();
         }
 
         public GuestService()

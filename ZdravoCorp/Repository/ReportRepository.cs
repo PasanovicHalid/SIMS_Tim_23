@@ -5,16 +5,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ZdravoCorp.Repository.Interfaces;
 
 namespace Repository
 {
-    internal class ReportRepository : Repository<Report>
+    internal class ReportRepository : Repository<Report> , IReportRepository
     {
         private static ReportRepository instance = null;
 
         public ReportRepository()
         {
-            dbPath = "..\\..\\Data\\commentsDB.csv";
+            dataBase.SetPath("..\\..\\Data\\commentsDB.csv");
             InstantiateIDSet(GetAll());
         }
 
@@ -32,7 +33,7 @@ namespace Repository
             lock (key)
             {
                 element.Id = GenerateID();
-                AppendToDB(element);
+                dataBase.AppendToDB(element);
                 idMap.Add(element.Id);
             }
         }
@@ -44,7 +45,7 @@ namespace Repository
                 CheckIfIDExists(element.Id);
                 List<Report> elements = GetAll();
                 SwapReportRecordByID(elements, element);
-                SaveChanges(elements);
+                dataBase.SaveChanges(elements);
             }
         }
 
@@ -55,7 +56,7 @@ namespace Repository
                 CheckIfIDExists(id);
                 List<Report> elements = GetAll();
                 RemoveReportRecordByID(elements, id);
-                SaveChanges(elements);
+                dataBase.SaveChanges(elements);
             }
         }
 

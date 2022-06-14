@@ -9,6 +9,7 @@ using Repository;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using ZdravoCorp.Repository.Interfaces;
 using ZdravoCorp.Service.Interfaces;
 using ZdravoCorp.View.Manager.Model.Rooms;
 
@@ -19,29 +20,31 @@ namespace Service
         private static RoomService instance = null;
         private ActionService actionService;
         private static readonly object key = new object();
+
+        private IRoomRepository repository = RoomRepository.Instance;
         public void Create(Room newRoom)
         {
-            RoomRepository.Instance.Create(newRoom);
+            repository.Create(newRoom);
         }
 
         public Room Read(int identifier)
         {
-            return RoomRepository.Instance.Read(identifier);
+            return repository.Read(identifier);
         }
 
         public Room ReadRoomByIndex(int index)
         {
-            return RoomRepository.Instance.Read(index);
+            return repository.Read(index);
         }
 
         public void Update(Room updatedRoom)
         {
-            RoomRepository.Instance.Update(updatedRoom);
+            repository.Update(updatedRoom);
         }
 
         public void Delete(int identifier)
         {
-            RoomRepository.Instance.Delete(identifier);
+            repository.Delete(identifier);
         }
 
         public void RenovateRoom(int identifier, DateTime start, DateTime end)
@@ -52,17 +55,17 @@ namespace Service
 
         public void CombineRooms(Room combineInto, Room selectedRoom)
         {
-            RoomRepository.Instance.CombineRooms(combineInto, selectedRoom);
+            repository.CombineRooms(combineInto, selectedRoom);
         }
 
         public List<Room> GetRoomsByInternalID(HashSet<int> identifiers)
         {
-            return RoomRepository.Instance.GetRoomsByInternalID(identifiers);
+            return repository.GetRoomsByInternalID(identifiers);
         }
 
         public List<Room> GetAll()
         {
-            return RoomRepository.Instance.GetAll();
+            return repository.GetAll();
         }
 
         public void CreateRoomType(Model.RoomType newRoomType)
@@ -82,12 +85,12 @@ namespace Service
 
         public int GetActualCountForEquipment(int id_room, int id_equipment)
         {
-            return RoomRepository.Instance.GetActualCountForEquipment(id_room, id_equipment);
+            return repository.GetActualCountForEquipment(id_room, id_equipment);
         }
 
         public void ChangeActualCountOfEquipment(int id_from_room, int id_equipment,int count)
         {
-            RoomRepository.Instance.ChangeActualCountOfEquipment(id_from_room, id_equipment, count);
+            repository.ChangeActualCountOfEquipment(id_from_room, id_equipment, count);
         }
 
         public Model.RoomType ReadRoomType(Model.RoomType roomType)
@@ -114,12 +117,12 @@ namespace Service
 
         public void AddEquipment(Equipment equipment, int id)
         {
-            RoomRepository.Instance.AddEquipment(equipment, id);
+            repository.AddEquipment(equipment, id);
         }
 
         public RoomService()
         {
-            actionService = new ActionService();
+            //actionService = ActionService.Instance;
         }
         public static RoomService Instance
         {

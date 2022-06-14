@@ -5,16 +5,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Model;
+using ZdravoCorp.Repository.Interfaces;
 
 namespace Repository
 {
-    internal class PrescriptionRepository : Repository<Prescription>
+    internal class PrescriptionRepository : Repository<Prescription> , IPrescriptionRepository
     {
         private static PrescriptionRepository instance = null;
 
         public PrescriptionRepository()
         {
-            dbPath = "..\\..\\Data\\prescriptionDB.csv";
+           dataBase.SetPath("..\\..\\Data\\prescriptionDB.csv");
             InstantiateIDSet(GetAll());
         }
 
@@ -32,7 +33,7 @@ namespace Repository
             lock (key)
             {
                 element.Id = GenerateID();
-                AppendToDB(element);
+                dataBase.AppendToDB(element);
                 idMap.Add(element.Id);
             }
         }
@@ -42,7 +43,7 @@ namespace Repository
             lock (key)
             {
                 element.Id = GenerateID();
-                AppendToDB(element);
+                dataBase.AppendToDB(element);
                 idMap.Add(element.Id);
                 return element.Id;
             }
@@ -55,7 +56,7 @@ namespace Repository
                 CheckIfIDExists(element.Id);
                 List<Prescription> elements = GetAll();
                 SwapPrescriptionByID(elements, element);
-                SaveChanges(elements);
+                dataBase.SaveChanges(elements);
             }
         }
 
@@ -67,7 +68,7 @@ namespace Repository
                 CheckIfIDExists(id);
                 List<Prescription> elements = GetAll();
                 RemovePrescriptionByID(elements, id);
-                SaveChanges(elements);
+                dataBase.SaveChanges(elements);
             }
         }
 

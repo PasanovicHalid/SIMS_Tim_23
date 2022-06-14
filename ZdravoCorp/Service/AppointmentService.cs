@@ -7,6 +7,7 @@ using Model;
 using Repository;
 using System;
 using System.Collections.Generic;
+using ZdravoCorp.Repository.Interfaces;
 using ZdravoCorp.Service.Interfaces;
 
 namespace Service
@@ -17,31 +18,32 @@ namespace Service
         private const int MAX_ITERATIONS = 10;
         private int numOfIterations = 0;
         private static AppointmentService instance = null;
+        public IAppointmentRepository repository = AppointmentRepository.Instance;
         List<Appointment> appointments = new List<Appointment>();
         
         public void Create(Appointment newAppointment)
         {
-            AppointmentRepository.Instance.Create(newAppointment);
+            repository.Create(newAppointment);
         }
 
         public Appointment Read(int appointment)
         {
-            return AppointmentRepository.Instance.Read(appointment);
+            return repository.Read(appointment);
         }
 
         public void Update(Appointment appointment)
         {
-            AppointmentRepository.Instance.Update(appointment);
+            repository.Update(appointment);
         }
 
         public void Delete(int appointment)
         {
-            AppointmentRepository.Instance.Delete(appointment);
+            repository.Delete(appointment);
         }
 
         public List<Appointment> GetAll()
         {
-            return AppointmentRepository.Instance.GetAll();
+            return repository.GetAll();
         }
 
         public AppointmentService()

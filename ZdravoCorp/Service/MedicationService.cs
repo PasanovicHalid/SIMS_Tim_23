@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using Repository;
 using ZdravoCorp.Service.Interfaces;
+using ZdravoCorp.Repository.Interfaces;
 
 namespace Service
 {
@@ -15,29 +16,31 @@ namespace Service
     {
         private static MedicationService instance = null;
 
+        private IMedicationRepository repository = MedicationRepository.Instance;
+
         public void Create(Medication newMedicine)
         {
-            MedicationRepository.Instance.Create(newMedicine);
+            repository.Create(newMedicine);
         }
 
         public void Update(Medication medicine)
         {
-            MedicationRepository.Instance.Update(medicine);
+            repository.Update(medicine);
         }
 
         public void Delete(int id)
         {
-            MedicationRepository.Instance.Delete(id);
+            repository.Delete(id);
         }
 
         public Medication Read(int id)
         {
-            return MedicationRepository.Instance.Read(id);
+            return repository.Read(id);
         }
 
         public List<Medication> GetAll()
         {
-            return MedicationRepository.Instance.GetAll();
+            return repository.GetAll();
         }
 
         public void CreateMedicationType(MedicationType newMedicationType)

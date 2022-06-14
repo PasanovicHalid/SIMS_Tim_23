@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Model;
 using Repository;
+using ZdravoCorp.Repository.Interfaces;
 using ZdravoCorp.Service.Interfaces;
 
 namespace Service
@@ -13,29 +14,31 @@ namespace Service
     {
         private static MedicalRecordService instance = null;
 
+        private IMedicalRecordRepository repository = MedicalRecordRepository.Instance;
+
         public void Create(MedicalRecord newRecord)
         {
-            MedicalRecordRepository.Instance.Create(newRecord);
+            repository.Create(newRecord);
         }
 
         public void Update(MedicalRecord record)
         {
-            MedicalRecordRepository.Instance.Update(record);
+            repository.Update(record);
         }
 
         public void Delete(int record)
         {
-            MedicalRecordRepository.Instance.Delete(record);
+            repository.Delete(record);
         }
 
         public MedicalRecord Read(int record)
         {
-            return MedicalRecordRepository.Instance.Read(record);
+            return repository.Read(record);
         }
 
         public List<MedicalRecord> GetAll()
         {
-            return MedicalRecordRepository.Instance.GetAll();
+            return repository.GetAll();
         }
 
         public MedicalRecordService()

@@ -8,16 +8,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using ZdravoCorp.Exceptions;
+using ZdravoCorp.Repository.Interfaces;
 
 namespace Repository
 {
-    public class DoctorRepository : UserRepository<Doctor>
+    public class DoctorRepository : UserRepository<Doctor> , IDoctorRepository
     {
         private static DoctorRepository instance = null;
 
         public DoctorRepository()
         {
-            dbPath = "..\\..\\Data\\doctorsDB.csv";
+            dataBase.SetPath("..\\..\\Data\\doctorsDB.csv");
             InstantiateHashSets(GetAll());
         }
 
@@ -59,7 +60,7 @@ namespace Repository
                 element.Id = GenerateID();
                 Users.Add(element.Username, element);
                 idMap.Add(element.Id);
-                AppendToDB(element);
+                dataBase.AppendToDB(element);
             }
         }
 
@@ -70,7 +71,7 @@ namespace Repository
                 CheckIfIDExists(element.Id);
                 List<Doctor> elements = GetAll();
                 SwapDoctorByID(elements, element);
-                SaveChanges(elements);
+                dataBase.SaveChanges(elements);
             }
         }
 
@@ -81,7 +82,7 @@ namespace Repository
                 CheckIfIDExists(id);
                 List<Doctor> elements = GetAll();
                 DeleteDoctorByID(elements, id);
-                SaveChanges(elements);
+                dataBase.SaveChanges(elements);
             }
         }
 

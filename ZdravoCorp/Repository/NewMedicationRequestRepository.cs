@@ -4,15 +4,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ZdravoCorp.Repository.Interfaces;
 
 namespace Repository
 {
-    public class NewMedicationRequestRepository : Repository<NewMedicationRequest>
+    public class NewMedicationRequestRepository : Repository<NewMedicationRequest> , INewMedicationRequestRepository
     {
         private static NewMedicationRequestRepository instance = null;
         public NewMedicationRequestRepository()
         {
-            dbPath = "..\\..\\Data\\newMedicationRequestDB.csv";
+            dataBase.SetPath("..\\..\\Data\\newMedicationRequestDB.csv");
             InstantiateIDSet(GetAll());
         }
         
@@ -26,7 +27,7 @@ namespace Repository
                     Controller.MedicationController medicationController = new Controller.MedicationController();
                     medicationController.CreateMedicationType(newMedicationRequest.MedicationType);
                     requests.Remove(request);
-                    SaveChanges(requests);
+                    dataBase.SaveChanges(requests);
                     return true;
                 }
             }
@@ -55,7 +56,7 @@ namespace Repository
             lock (key)
             {
                 element.Id = GenerateID();
-                AppendToDB(element);
+                dataBase.AppendToDB(element);
                 idMap.Add(element.Id);
             }
         }
@@ -67,7 +68,7 @@ namespace Repository
                 CheckIfIDExists(element.Id);
                 List<NewMedicationRequest> elements = GetAll();
                 SwapRequestByID(elements, element);
-                SaveChanges(elements);
+                dataBase.SaveChanges(elements);
             }
         }
 
@@ -78,7 +79,7 @@ namespace Repository
                 CheckIfIDExists(id);
                 List<NewMedicationRequest> elements = GetAll();
                 DeleteRequestByID(elements, id);
-                SaveChanges(elements);
+                dataBase.SaveChanges(elements);
             }
         }
 

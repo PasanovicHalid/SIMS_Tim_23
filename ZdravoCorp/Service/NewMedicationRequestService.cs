@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Repository;
 using ZdravoCorp.Service.Interfaces;
+using ZdravoCorp.Repository.Interfaces;
 
 namespace Service
 {
@@ -13,42 +14,44 @@ namespace Service
     {
         private static NewMedicationRequestService instance = null;
 
+        private INewMedicationRequestRepository repository = NewMedicationRequestRepository.Instance;
+
         public void Create(NewMedicationRequest newMedicationRequest)
         {
-            NewMedicationRequestRepository.Instance.Create(newMedicationRequest);
+            repository.Create(newMedicationRequest);
         }
 
         public NewMedicationRequest Read(int id)
         {
-            return NewMedicationRequestRepository.Instance.Read(id);
+            return repository.Read(id);
         }
 
         public void Update(NewMedicationRequest newMedicationRequest)
         {
-            NewMedicationRequestRepository.Instance.Update(newMedicationRequest);
+            repository.Update(newMedicationRequest);
         }
 
         public void Delete(int id)
         {
-            NewMedicationRequestRepository.Instance.Delete(id);
+            repository.Delete(id);
         }
 
         public List<NewMedicationRequest> GetAll()
         {
-            return NewMedicationRequestRepository.Instance.GetAll();
+            return repository.GetAll();
         }
 
         private bool ExecuteUpdate(NewMedicationRequest newMedicationRequest)
         {
             MedicationRepository.Instance.Update(new Medication(0, newMedicationRequest.MedicationType));
-            NewMedicationRequestRepository.Instance.Delete(newMedicationRequest.Id);
+            repository.Delete(newMedicationRequest.Id);
             return true;
         }
 
         private bool ExecuteCreation(NewMedicationRequest newMedicationRequest)
         {
             MedicationRepository.Instance.Create(new Medication(0, newMedicationRequest.MedicationType));
-            NewMedicationRequestRepository.Instance.Delete(newMedicationRequest.Id);
+            repository.Delete(newMedicationRequest.Id);
             return true;
         }
 
@@ -66,7 +69,7 @@ namespace Service
 
         public Boolean RejectNewMedicationRequest(NewMedicationRequest newMedicationRequest, String comment)
         {
-            return NewMedicationRequestRepository.Instance.RejectNewMedicationRequest(newMedicationRequest, comment);
+            return repository.RejectNewMedicationRequest(newMedicationRequest, comment);
         }
 
         public static NewMedicationRequestService Instance

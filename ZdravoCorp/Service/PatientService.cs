@@ -8,6 +8,7 @@ using System;
 using Repository;
 using System.Collections.Generic;
 using ZdravoCorp.Service.Interfaces;
+using ZdravoCorp.Repository.Interfaces;
 
 namespace Service
 {
@@ -16,39 +17,40 @@ namespace Service
         
         private static PatientService instance = null;
 
+        private IPatientRepository repository = PatientRepository.Instance;
         public void Create(Patient newPatient)
         {
-            PatientRepository.Instance.Create(newPatient);
+            repository.Create(newPatient);
         }
 
         public void Update(Patient patient)
         {
-            PatientRepository.Instance.Update(patient);
+            repository.Update(patient);
         }
 
         public void Delete(int id)
         {
-            PatientRepository.Instance.Delete(id);
+            repository.Delete(id);
         }
 
         public Patient Read(int id)
         {
-            return PatientRepository.Instance.Read(id);
+            return repository.Read(id);
         }
 
         public Patient ReadPatientByJmbg(string jmbg)
         {
-            return PatientRepository.Instance.FindPatientByJMBG(jmbg);
+            return repository.FindPatientByJMBG(jmbg);
         }
 
         public List<Patient> GetAll()
         {
-            return PatientRepository.Instance.GetAll();
+            return repository.GetAll();
         }
 
         public Boolean AddPrescription(Patient patient, Prescription newPrescription)
         {
-            return PatientRepository.Instance.AddPrescription(patient, newPrescription);
+            return repository.AddPrescription(patient, newPrescription);
         }
 
         public PatientService()

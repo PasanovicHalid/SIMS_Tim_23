@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Model;
 using ZdravoCorp.Exceptions;
+using ZdravoCorp.Repository.Interfaces;
 
 namespace ZdravoCorp.Service
 {
@@ -14,6 +15,10 @@ namespace ZdravoCorp.Service
         private static readonly object key = new object();
         private static LoginService instance = null;
 
+        private IManagerRepository managerRepository = ManagerRepository.Instance;
+        private IDoctorRepository doctorRepository = DoctorRepository.Instance;
+        private IPatientRepository patientRepository = PatientRepository.Instance;
+        private ISecretaryRepository secretaryRepository = SecretaryRepository.Instance;
         private Dictionary<string, Manager> managerMap;
         private Dictionary<string, Doctor> doctorMap;
         private Dictionary<string, Patient> patientMap;
@@ -21,10 +26,10 @@ namespace ZdravoCorp.Service
 
         private void InstantiateHashSet()
         {
-            managerMap = ManagerRepository.Instance.Users;
-            doctorMap = DoctorRepository.Instance.Users;
+            managerMap = managerRepository.GetUsernameHashSet();
+            doctorMap = doctorRepository.GetUsernameHashSet();
             patientMap = PatientRepository.Instance.Users;
-            secretaryMap = SecretaryRepository.Instance.Users;
+            secretaryMap = secretaryRepository.GetUsernameHashSet();
         }
 
         private void MergeDictionaries(Dictionary<string, string> mergedInto, Dictionary<string, string> dictionary)

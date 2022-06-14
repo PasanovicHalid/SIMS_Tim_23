@@ -8,6 +8,7 @@ using Repository;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using ZdravoCorp.Repository.Interfaces;
 using ZdravoCorp.Service.Interfaces;
 using ZdravoCorp.View.Manager.Model.Equipments;
 using ZdravoCorp.View.Manager.Model.Rooms;
@@ -18,11 +19,14 @@ namespace Service
     {
         private static EquipmentService instance = null;
         private ActionService actionService;
+        private IEquipmentTypeRepository typeRepository = EquipmentTypeRepository.Instance;
+
+        private IRoomService roomService = RoomService.Instance;
 
         public Boolean CreateEquipment(EquipmentTypeModel type, int count, RoomModel room)
         {
             Equipment equipment = new Equipment(count, count, FindEquipmentTypeByName(type.Name));
-            RoomService.Instance.AddEquipment(equipment, room.Identifier);
+            roomService.AddEquipment(equipment, room.Identifier);
             return true;
         }
 
@@ -53,39 +57,39 @@ namespace Service
 
         public void CreateEquipmentType(EquipmentType newEquipmentType)
         {
-            EquipmentTypeRepository.Instance.Create(newEquipmentType);
+            typeRepository.Create(newEquipmentType);
         }
 
         public void UpdateEquipmentType(EquipmentType equipmentType)
         {
-            EquipmentTypeRepository.Instance.Update(equipmentType);
+            typeRepository.Update(equipmentType);
         }
 
         public void DeleteEquipmentType(int id)
         {
-            EquipmentTypeRepository.Instance.Delete(id);
+            typeRepository.Delete(id);
         }
 
         public EquipmentType ReadEquipmentType(int id)
         {
-             return EquipmentTypeRepository.Instance.Read(id);
+             return typeRepository.Read(id);
         }
 
         public EquipmentType FindEquipmentTypeByName(String name)
         {
-            return EquipmentTypeRepository.Instance.FindEquipmentTypeByName(name);
+            return typeRepository.FindEquipmentTypeByName(name);
         }
 
         public void ChangePositionOfEquipment(DateTime excecutionDate, int idFromRoom, int idToRoom, int idEquipment, int count)
         {
             actionService.CreateAction(new Model.Action(ActionType.changePosition, 
                 excecutionDate, new ChangeRoomAction(idToRoom, idFromRoom, idEquipment, count)));
-            RoomService.Instance.ChangeActualCountOfEquipment(idFromRoom, idEquipment, -count);
+            roomService.ChangeActualCountOfEquipment(idFromRoom, idEquipment, -count);
         }
 
         public ObservableCollection<EquipmentTypeModel> GetAllEquipmentType()
         {
-            List<EquipmentType> types = EquipmentTypeRepository.Instance.GetAllEquipmentType();
+            List<EquipmentType> types = typeRepository.GetAllEquipmentType();
             ObservableCollection<EquipmentTypeModel> result = new ObservableCollection<EquipmentTypeModel>();
             foreach(EquipmentType it in types)
             {
@@ -97,7 +101,7 @@ namespace Service
         public ObservableCollection<EquipmentModel> GetAllEquipmentTableVO()
         {
             ObservableCollection<EquipmentModel> result = new ObservableCollection<EquipmentModel>();
-            List<Room> rooms = RoomService.Instance.GetAll();
+            List<Room> rooms = roomService.GetAll();
             foreach(Room room in rooms)
             {
                 foreach(Equipment it in room.Equipment)
@@ -113,7 +117,7 @@ namespace Service
         }
         public EquipmentService()
         {
-            actionService = new ActionService();
+            //actionService = ActionService.Instance;
         }
 
         public static EquipmentService Instance

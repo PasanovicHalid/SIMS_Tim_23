@@ -8,22 +8,23 @@ using Model;
 using System;
 using System.Collections.Generic;
 using ZdravoCorp.Exceptions;
+using ZdravoCorp.Repository.Interfaces;
 
 namespace Repository
 {
-    public class EquipmentTypeRepository : Repository<EquipmentType>
+    public class EquipmentTypeRepository : Repository<EquipmentType> , IEquipmentTypeRepository
     {
         private static EquipmentTypeRepository instance = null;
         public EquipmentTypeRepository()
         {
-            dbPath = "..\\..\\Data\\equipmentTypeDB.csv";
+            dataBase.SetPath("..\\..\\Data\\equipmentTypeDB.csv");
             InstantiateIDSet(GetAll());
         }
         public EquipmentType FindEquipmentTypeByName(String name)
         {
             lock (key)
             {
-                List<EquipmentType> equipmentTypes = serializer.FromCSV(dbPath);
+                List<EquipmentType> equipmentTypes = dataBase.GetAll();
                 foreach (EquipmentType type in equipmentTypes)
                 {
                     if (type.Name == name)
@@ -39,7 +40,7 @@ namespace Repository
         {
             lock (key)
             {
-                return serializer.FromCSV(dbPath);
+                return dataBase.GetAll();
             }
         }
 
@@ -66,7 +67,7 @@ namespace Repository
                 List<EquipmentType> equipmentTypes = GetAll();
                 newEquipmentType.Identifier = GenerateID();
                 CheckIfEquipmentNameExists(newEquipmentType.Name, equipmentTypes);
-                AppendToDB(newEquipmentType);
+                dataBase.AppendToDB(newEquipmentType);
                 idMap.Add(newEquipmentType.Identifier);
             }
         }
@@ -79,7 +80,7 @@ namespace Repository
                 CheckIfNameOfChangedEquipmentTypeExists(equipmentType, equipmentTypes);
                 SwapEquipmentByID(equipmentType, equipmentTypes);
                 equipmentTypes.Add(equipmentType);
-                SaveChanges(equipmentTypes);
+                dataBase.SaveChanges(equipmentTypes);
             }
         }
 
@@ -87,9 +88,9 @@ namespace Repository
         {
             lock (key)
             {
-                List<EquipmentType> equipmentTypes = serializer.FromCSV(dbPath);
+                List<EquipmentType> equipmentTypes = dataBase.GetAll();
                 RemoveEquipmentType(id, equipmentTypes);
-                SaveChanges(equipmentTypes);
+                dataBase.SaveChanges(equipmentTypes);
                 idMap.Remove(id);
             }
         }

@@ -5,16 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 using Model;
 using Controller;
+using ZdravoCorp.Repository.Interfaces;
 
 namespace Repository
 {
-    public class VacationRepository : Repository<Vacation>
+    public class VacationRepository : Repository<Vacation> , IVacationRepository
     {
         private static VacationRepository instance = null;
 
         public VacationRepository()
         {
-            dbPath = "..\\..\\Data\\vacationsDB.csv";
+            dataBase.SetPath("..\\..\\Data\\vacationsDB.csv");
             InstantiateIDSet(GetAll());
         }
 
@@ -51,7 +52,7 @@ namespace Repository
             lock (key)
             {
                 element.Id = GenerateID();
-                AppendToDB(element);
+                dataBase.AppendToDB(element);
                 idMap.Add(element.Id);
             }
         }
@@ -63,7 +64,7 @@ namespace Repository
                 CheckIfIDExists(element.Id);
                 List<Vacation> elements = GetAll();
                 SwapVacationByID(elements, element);
-                SaveChanges(elements);
+                dataBase.SaveChanges(elements);
             }
         }
 
@@ -74,7 +75,7 @@ namespace Repository
                 CheckIfIDExists(id);
                 List<Vacation> elements = GetAll();
                 RemoveVacationByID(elements, id);
-                SaveChanges(elements);
+                dataBase.SaveChanges(elements);
             }
         }
 

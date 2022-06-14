@@ -5,16 +5,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ZdravoCorp.Exceptions;
+using ZdravoCorp.Repository.Interfaces;
 
 namespace Repository
 {
-    public class DoctorTypeRepository : Repository<DoctorType>
+    public class DoctorTypeRepository : Repository<DoctorType> , IDoctorTypeRepository
     {
         private static DoctorTypeRepository instance = null;
 
         public DoctorTypeRepository()
         {
-            dbPath = "..\\..\\Data\\doctorTypesDB.csv";
+            dataBase.SetPath("..\\..\\Data\\doctorTypesDB.csv");
         }
 
         public override void Create(DoctorType element)
@@ -22,7 +23,7 @@ namespace Repository
             lock (key)
             {
                 CheckIfTypeExists(GetAll(), element);
-                AppendToDB(element);
+                dataBase.AppendToDB(element);
             }
         }
 
@@ -40,7 +41,7 @@ namespace Repository
             {
                 List<DoctorType> types = GetAll();
                 RemoveType(types, type);
-                SaveChanges(types);
+                dataBase.SaveChanges(types);
             }
         }
 

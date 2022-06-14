@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using Repository;
 using ZdravoCorp.Service.Interfaces;
+using ZdravoCorp.Repository.Interfaces;
 
 namespace Service
 {
@@ -15,20 +16,21 @@ namespace Service
     {
         
         private static AnamnesisService instance = null;
+        public IAnamnesisRepository service = AnamnesisRepository.Instance;
 
         public void Create(Anamnesis newAnamnesis)
         {
-            AnamnesisRepository.Instance.Create(newAnamnesis);
+            service.Create(newAnamnesis);
         }
 
         public Anamnesis Read(int id)
         {
-            return AnamnesisRepository.Instance.Read(id);
+            return service.Read(id);
         }
 
         public void Update(Anamnesis anamnesis)
         {
-            AnamnesisRepository.Instance.Update(anamnesis);
+            service.Update(anamnesis);
 
         }
 
@@ -39,7 +41,7 @@ namespace Service
 
         public List<Anamnesis> GetAll()
         {
-            return AnamnesisRepository.Instance.GetAll();
+            return service.GetAll();
         }
 
         public AnamnesisService()

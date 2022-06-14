@@ -4,16 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Model;
+using ZdravoCorp.Repository.Interfaces;
 
 namespace Repository
 {
-    public class MedicalRecordRepository : Repository<MedicalRecord>
+    public class MedicalRecordRepository : Repository<MedicalRecord> , IMedicalRecordRepository
     {
         private static MedicalRecordRepository instance = null;
 
         public MedicalRecordRepository()
         {
-            dbPath = "..\\..\\Data\\medicalRecordDB.csv";
+            dataBase.SetPath("..\\..\\Data\\medicalRecordDB.csv");
             InstantiateIDSet(GetAll());
         }
 
@@ -31,7 +32,7 @@ namespace Repository
             lock (key)
             {
                 element.Id = GenerateID();
-                AppendToDB(element);
+                dataBase.AppendToDB(element);
                 idMap.Add(element.Id);
             }
         }
@@ -43,7 +44,7 @@ namespace Repository
                 CheckIfIDExists(element.Id);
                 List<MedicalRecord> elements = GetAll();
                 SwapMedicalRecordByID(elements, element);
-                SaveChanges(elements);
+                dataBase.SaveChanges(elements);
             }
         }
 
@@ -54,7 +55,7 @@ namespace Repository
                 CheckIfIDExists(id);
                 List<MedicalRecord> elements = GetAll();
                 RemoveMedicalRecordByID(elements, id);
-                SaveChanges(elements);
+                dataBase.SaveChanges(elements);
             }
         }
 

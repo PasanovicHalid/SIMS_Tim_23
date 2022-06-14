@@ -5,15 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ZdravoCorp.Exceptions;
+using ZdravoCorp.Repository.Interfaces;
 
 namespace Repository
 {
-    public class RoomTypeRepository : Repository<RoomType>
+    public class RoomTypeRepository : Repository<RoomType> , IRoomTypeRepository
     {
         private static RoomTypeRepository instance = null;
         public RoomTypeRepository()
         {
-            dbPath = "..\\..\\Data\\roomTypesDB.csv";
+            dataBase.SetPath("..\\..\\Data\\roomTypesDB.csv");
         }
 
         public override void Create(RoomType type)
@@ -22,7 +23,7 @@ namespace Repository
             {
                 List<RoomType> types = GetAll();
                 CheckIfRoomTypeExists(types, type);
-                AppendToDB(type);
+                dataBase.AppendToDB(type);
             }
         }
 
@@ -40,7 +41,7 @@ namespace Repository
             {
                 List<RoomType> types = GetAll();
                 RemoveType(types, type);
-                SaveChanges(types);
+                dataBase.SaveChanges(types);
             }
         }
 
