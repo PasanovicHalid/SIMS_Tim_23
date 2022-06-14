@@ -216,6 +216,7 @@ namespace ZdravoCorp.View.Secretary
         {
             patient = new Model.Patient(0, password, username, name, surname, jmbg, email, address, phoneNumber, gender, dateOfBirth, null, null, new List<DateTime>(),null);
             ZdravoCorp.View.Secretary.AddRecord window = new ZdravoCorp.View.Secretary.AddRecord(patient);
+            window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             window.ShowDialog();
             this.Close();
             

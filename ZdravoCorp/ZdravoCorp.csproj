@@ -446,12 +446,18 @@
     <Compile Include="View\Secretary\ChangeRecord.xaml.cs">
       <DependentUpon>ChangeRecord.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Secretary\EquipmentOrder.xaml.cs">
-      <DependentUpon>EquipmentOrder.xaml</DependentUpon>
+    <Compile Include="View\Secretary\EditMyAccount.xaml.cs">
+      <DependentUpon>EditMyAccount.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Secretary\EmergencyAppointment.xaml.cs">
+      <DependentUpon>EmergencyAppointment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Secretary\Meeting.cs" />
     <Compile Include="View\Secretary\Meetings.xaml.cs">
       <DependentUpon>Meetings.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Secretary\Modell\EmergencyAppointment.cs" />
+    <Compile Include="View\Secretary\Modell\EquipmentToOrder.cs" />
     <Compile Include="View\Secretary\Modell\HolidayRequest.cs" />
     <Compile Include="View\Secretary\MyAccount.xaml.cs">
       <DependentUpon>MyAccount.xaml</DependentUpon>
@@ -474,7 +480,18 @@
     <Compile Include="View\Secretary\SecretaryMainWindow.xaml.cs">
       <DependentUpon>SecretaryMainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Secretary\SecretaryPatients.xaml.cs">
+      <DependentUpon>SecretaryPatients.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Secretary\ViewModel\EmergencyAppointmentViewModel.cs" />
+    <Compile Include="View\Secretary\ViewModel\EquipmentToOrderViewModel.cs" />
     <Compile Include="View\Secretary\ViewModel\HolidayRequestViewModel.cs" />
+    <Compile Include="View\Secretary\View\EmergencyAppointmentView.xaml.cs">
+      <DependentUpon>EmergencyAppointmentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Secretary\View\EquipmentOrderView.xaml.cs">
+      <DependentUpon>EquipmentOrderView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Secretary\View\HolidayRequestsView.xaml.cs">
       <DependentUpon>HolidayRequestsView.xaml</DependentUpon>
     </Compile>
@@ -730,7 +747,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Secretary\EquipmentOrder.xaml">
+    <Page Include="View\Secretary\EditMyAccount.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Secretary\EmergencyAppointment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -755,6 +776,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Secretary\SecretaryMainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Secretary\SecretaryPatients.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Secretary\View\EmergencyAppointmentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Secretary\View\EquipmentOrderView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -909,9 +942,6 @@
     <Resource Include="Resources\Icons\add-all.svg" />
     <Resource Include="Resources\Icons\booking-pending.svg" />
     <Resource Include="Resources\Icons\timecard.svg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Icons\category.svg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\user.png" />

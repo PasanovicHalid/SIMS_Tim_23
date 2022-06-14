@@ -130,7 +130,9 @@ namespace ZdravoCorp
                 {
                     View.Secretary.SecretaryMainWindow secretaryMainWindow = new View.Secretary.SecretaryMainWindow(secretary);
                     this.Close();
+                    secretaryMainWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                     secretaryMainWindow.ShowDialog();
+                    
                     return;
                 }
             }

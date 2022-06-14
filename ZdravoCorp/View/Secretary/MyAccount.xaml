@@ -9,22 +9,23 @@
       Title="MyAccount">
 
     <Grid Background="White">
-        <Button Style="{DynamicResource SecretaryButtons}" Content="Meni" HorizontalAlignment="Left" Height="50" Margin="10,5,0,0" VerticalAlignment="Top" Width="140" />
+        <Button Style="{DynamicResource SecretaryButtons}" Content="Meni" HorizontalAlignment="Left" Height="50" Margin="10,5,0,0" VerticalAlignment="Top" Width="140" Click="Menu_Click"/>
         <Button Style="{DynamicResource SecretaryButtons}" Content="Odjavi se" HorizontalAlignment="Left" Height="50" Margin="831,5,0,0" VerticalAlignment="Top" Width="140" />
         <Label Content="Moj nalog" Margin="0,20,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <Label Content="Ime:" Margin="164,110,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <Label Content="Prezime:" Margin="164,180,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <Label Content="JMBG:" Margin="164,250,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <Label Content="Email:" Margin="164,320,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Label Content="Pol:" Margin="164,390,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Label Content="Adresa:" Margin="164,460,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" />
-        <TextBox  Width="250" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,110,0,0"/>
-        <TextBox  Width="250" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,180,0,0"/>
-        <TextBox  Width="250" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,250,0,0"/>
-        <TextBox  Width="250" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,320,0,0"/>
-        <TextBox  Width="250" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,390,0,0"/>
-        <TextBox  Width="250" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,460,0,0"/>
-        <Button Style="{DynamicResource SecretaryButtons}" Content="Izmeni nalog" HorizontalAlignment="Center" Height="50" Margin="0,538,0,0" VerticalAlignment="Top" Width="140" />
+        <Label Content="Adresa:" Margin="164,390,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" />
+        <TextBox  Width="250" HorizontalAlignment="Center" Text="{Binding Path=Namee, Mode=TwoWay}" VerticalAlignment="Top" Margin="0,110,0,0"/>
+        <TextBox  Width="250" HorizontalAlignment="Center" Text="{Binding Path=Surname}" VerticalAlignment="Top" Margin="0,180,0,0"/>
+        <TextBox  Width="250" HorizontalAlignment="Center" Text="{Binding Path=Id}" VerticalAlignment="Top" Margin="0,250,0,0"/>
+        <TextBox  Width="250" HorizontalAlignment="Center" Text="{Binding Path=Email}" VerticalAlignment="Top" Margin="0,320,0,0"/>
+        <TextBox  Width="250" HorizontalAlignment="Center" Text="{Binding Path=Address}" VerticalAlignment="Top" Margin="0,390,0,0"/>
+        <Button Style="{DynamicResource SecretaryButtons}" Content="Izmeni nalog" HorizontalAlignment="Center" Height="50" Margin="0,538,0,0" VerticalAlignment="Top" Width="140" Click="Edit_Click"/>
+        <Button Style="{DynamicResource SecretaryButtons}" Content="Postavi sliku" HorizontalAlignment="Left" Height="50" Margin="784,403,0,0" VerticalAlignment="Top" Width="140" />
+        <Label Content="Kontakt telefon:" Margin="164,460,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" />
+        <TextBox  Width="250" HorizontalAlignment="Center" Text="{Binding Path=PhoneNumber}" VerticalAlignment="Top" Margin="0,460,0,0"/>
 
     </Grid>
 </Page>

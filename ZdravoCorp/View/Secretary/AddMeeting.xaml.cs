@@ -22,6 +22,7 @@ namespace ZdravoCorp.View.Secretary
         public AddMeeting()
         {
             InitializeComponent();
+            
         }
     }
 }
