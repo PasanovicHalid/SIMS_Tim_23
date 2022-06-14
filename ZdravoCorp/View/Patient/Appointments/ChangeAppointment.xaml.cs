@@ -45,6 +45,7 @@ namespace ZdravoCorp.View.Patient.Appointments
         public ChangeAppointment(Appointment appointment)
         {
             InitializeComponent();
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
             this.DataContext = this;
             appointmentController = new AppointmentController();
             doctorController = new DoctorController();

@@ -27,6 +27,7 @@ namespace ZdravoCorp.View.Patient.View.Survey
         {
             InitializeComponent();
             this.DataContext = this;
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
             ObservableCollection<int> grades = new ObservableCollection<int>();
             grades = SetGrades(grades);
             OverallExperienceCB.ItemsSource = grades;

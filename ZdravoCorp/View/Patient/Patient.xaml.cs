@@ -43,7 +43,10 @@ namespace ZdravoCorp.View.Patient
         private String phoneNumber;
         private Gender gender;
         private DateTime dateOfBirth;
+        private float weight;
+        private float height;
 
+        
         public String Username
         {
             get { return username; }
@@ -185,6 +188,7 @@ namespace ZdravoCorp.View.Patient
         {
             InitializeComponent();
             patient = logedPatient;
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
             appointmentController = new AppointmentController();
             dc = new DoctorController();
             FutureAppointmentsCollection = new ObservableCollection<Appointment>();
@@ -193,6 +197,7 @@ namespace ZdravoCorp.View.Patient
             RoomCollection = new ObservableCollection<Room>();
             SetPatientInfo(patient);
             SetPieChartHospital();
+            SetColSeries();
             UpdateTable();
             PastAppointments();
             Therapy();
@@ -222,6 +227,9 @@ namespace ZdravoCorp.View.Patient
             {
                 FemaleButton.IsChecked = true;
             }
+            WeightTextBox.Text = patient.Record.Weight.ToString();
+            HeightTextBox.Text = patient.Record.Height.ToString();
+            BloodTypeTextBox.Text = patient.Record.BloodType.ToString();
         }
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string name)
@@ -404,13 +412,17 @@ namespace ZdravoCorp.View.Patient
 
         private void Anamnesis_Click(object sender, RoutedEventArgs e)
         {
+            AnamnesisController anamnesisController = new AnamnesisController();
+            if (anamnesisController.FindAnamnesisByAppointmentId(PastAppointmentsCollection.ElementAt(DoneAppointments.SelectedIndex).Id) == null){
+                return;
+            }
             ZdravoCorp.View.Patient.MedicalRecord.Anamnesis window = new ZdravoCorp.View.Patient.MedicalRecord.Anamnesis(PastAppointmentsCollection.ElementAt(DoneAppointments.SelectedIndex));
             window.ShowDialog();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            ZdravoCorp.View.Patient.View.Notification.NotificationView window = new ZdravoCorp.View.Patient.View.Notification.NotificationView();
+            ZdravoCorp.View.Patient.View.Notification.NotificationView window = new ZdravoCorp.View.Patient.View.Notification.NotificationView((Prescription)CurrentTherapies.SelectedItem);
             window.ShowDialog();
         }
 
@@ -452,7 +464,7 @@ namespace ZdravoCorp.View.Patient
             //PdfPen pen = page.;
             graphics.DrawLine(PdfPens.Black, new PointF(0, 50), new PointF(520, 50));
             //graphics.DrawString("Zauzetost prostorija u periodu od" + start.Day.ToString() + "." start.Month.ToString() + " do " + end.Date.ToString(), font, PdfBrushes.Black, new PointF(0, 70));
-            graphics.DrawString("Izvestaj o rasporeu terapije na sedmicnom nivou", font, PdfBrushes.Black, new PointF(0, 70));
+            graphics.DrawString("Izvestaj o rasporedu terapije\nna sedmicnom nivou", font, PdfBrushes.Black, new PointF(0, 70));
            // graphics.DrawString("Od " + start.Day.ToString() + "." + start.Month.ToString() + "." + start.Year.ToString() + " do " + end.Day.ToString() + "." + end.Month.ToString() + "." + end.Year.ToString(), font, PdfBrushes.Black, new PointF(0, 100));
 
 
@@ -591,7 +603,45 @@ namespace ZdravoCorp.View.Patient
         }
         public void SetColSeries()
         {
-
+            Func<ChartPoint, string> labelPoint = chartPoint => string.Format("{0} ({1:P})", chartPoint.Y, chartPoint.Participation);
+            SeriesCollection piechartData = new SeriesCollection
+            {
+                new PieSeries
+                {
+                    Title = "dr Mina Petrovic",
+                    Values = new ChartValues<double> {7},
+                    DataLabels = true,
+                    LabelPoint = labelPoint,
+                    Fill = System.Windows.Media.Brushes.LightPink
+                },
+                new PieSeries
+                {
+                    Title = "dr Dusko Duskovic",
+                    Values = new ChartValues<double> {3},
+                    DataLabels = true,
+                    LabelPoint = labelPoint,
+                    Fill = System.Windows.Media.Brushes.LightBlue
+                },
+                new PieSeries
+                {
+                    Title = "dr Petar Petrovic",
+                    Values = new ChartValues<double> {1},
+                    DataLabels = true,
+                    LabelPoint = labelPoint,
+                    Fill = System.Windows.Media.Brushes.LightSeaGreen
+                },
+                new PieSeries
+                {
+                    Title = "dr Mika Mikic",
+                    Values = new ChartValues<double> {2},
+                    DataLabels = true,
+                    LabelPoint = labelPoint,
+                    Fill = System.Windows.Media.Brushes.LightCoral
+                }
+            };
+            DoctorsPieChart.Series = piechartData;
+            DoctorsPieChart.LegendLocation = LegendLocation.None;
         }
+        public SeriesCollection SeriesCollection { get; set; }
     }
 }

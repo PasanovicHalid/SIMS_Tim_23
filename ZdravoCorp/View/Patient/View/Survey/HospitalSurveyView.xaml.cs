@@ -27,6 +27,7 @@ namespace ZdravoCorp.View.Patient.View.Survey
         public HospitalSurveyView(Model.Patient logedPatient)
         {
             InitializeComponent();
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
             this.DataContext = this;
             ObservableCollection<int> grades = new ObservableCollection<int>();
             grades = SetGrades(grades);

@@ -22,6 +22,7 @@ namespace ZdravoCorp.View.Patient.View.MedicalHistory
         public LabResults(Modell.MedicalHistory.LabAnalysis labAnalysis)
         {
             InitializeComponent();
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
             this.DataContext = labAnalysis;
         }
     }
