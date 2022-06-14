@@ -7,11 +7,11 @@ using Model;
 using Repository;
 using System;
 using System.Collections.Generic;
-
+using ZdravoCorp.Service.Interfaces;
 
 namespace Service
 {
-    public class AppointmentSurveyService : ICrud<AppointmentSurvey>
+    public class AppointmentSurveyService : ICrud<AppointmentSurvey> , IAppointmentSurveyService
     {
         private static AppointmentSurveyService instance = null;
         

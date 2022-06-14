@@ -7,11 +7,12 @@ using Model;
 using System;
 using System.Collections.Generic;
 using Repository;
+using ZdravoCorp.Service.Interfaces;
 
 namespace Service
 {
-   public class SecretaryService : ICrud<Secretary>
-   {
+   public class SecretaryService : ICrud<Secretary> , ISercretaryService
+    {
       private static SecretaryService instance = null;
       
       public void Create(Secretary newSecretary)

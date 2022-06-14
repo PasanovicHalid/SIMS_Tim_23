@@ -9,6 +9,8 @@ namespace Controller
 {
     public class AnamnesisController : ICrud<Anamnesis>
     {
+
+
         public void Create(Anamnesis newAnamnesis)
         {
             AnamnesisService.Instance.Create(newAnamnesis);

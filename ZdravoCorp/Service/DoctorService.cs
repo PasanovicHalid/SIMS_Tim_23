@@ -8,10 +8,11 @@ using Model;
 using Repository;
 using System;
 using System.Collections.Generic;
+using ZdravoCorp.Service.Interfaces;
 
 namespace Service
 {
-    public class DoctorService : ICrud<Doctor>
+    public class DoctorService : ICrud<Doctor> , IDoctorService
     {
         private static DoctorService instance = null;
 
@@ -98,6 +99,16 @@ namespace Service
                 isFree = true;
             }
             return isFree;
+        }
+
+        public void DeleteDoctorType(DoctorType doctorType)
+        {
+            throw new NotImplementedException();
+        }
+
+        public DoctorType ReadDoctorType(DoctorType doctorType)
+        {
+            throw new NotImplementedException();
         }
     }
 }

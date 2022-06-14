@@ -8,12 +8,13 @@ using Repository;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using ZdravoCorp.Service.Interfaces;
 using ZdravoCorp.View.Manager.Model.Equipments;
 using ZdravoCorp.View.Manager.Model.Rooms;
 
 namespace Service
 {
-    public class EquipmentService : ICrud<Equipment>
+    public class EquipmentService : ICrud<Equipment> , IEquipmentService
     {
         private static EquipmentService instance = null;
         private ActionService actionService;
@@ -110,7 +111,6 @@ namespace Service
 
             return result;
         }
-
         public EquipmentService()
         {
             actionService = new ActionService();

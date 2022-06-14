@@ -5,10 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ZdravoCorp.Service.Interfaces;
 
 namespace Service
 {
-    public class SurveyService : ICrud<Survey>
+    public class SurveyService : ICrud<Survey> , ISurveyService
     {
         private static SurveyService instance = null;
         public void Create(Survey element)

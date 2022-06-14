@@ -7,10 +7,11 @@ using Model;
 using System;
 using Repository;
 using System.Collections.Generic;
+using ZdravoCorp.Service.Interfaces;
 
 namespace Service
 {
-    public class PatientService : ICrud<Patient>
+    public class PatientService : ICrud<Patient> , IPatientService
     {
         
         private static PatientService instance = null;

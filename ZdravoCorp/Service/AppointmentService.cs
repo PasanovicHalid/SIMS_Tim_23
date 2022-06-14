@@ -7,11 +7,11 @@ using Model;
 using Repository;
 using System;
 using System.Collections.Generic;
-
+using ZdravoCorp.Service.Interfaces;
 
 namespace Service
 {
-    public class AppointmentService : ICrud<Appointment>
+    public class AppointmentService : ICrud<Appointment>, IAppointmentService
     {
         private const int MAX_SUGGESTIONS = 30;
         private const int MAX_ITERATIONS = 10;
