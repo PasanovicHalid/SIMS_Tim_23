@@ -25,7 +25,7 @@ namespace Model
 
         public HospitalSurvey(int profesionalism, int comfort, int tidiness, int kindness, int hygiene, int modernity, int equipped, int overallExperience, Patient patient)
         {
-            this.issued = DateTime.Now;
+            this.Issued = DateTime.Now;
             this.profesionalism = profesionalism;
             this.comfort = comfort;
             this.tidiness = tidiness;
@@ -40,7 +40,7 @@ namespace Model
         {
             List<String> result = new List<String>();
             result.Add(id.ToString());
-            result.Add(issued.ToString());
+            result.Add(Issued.ToString());
             result.Add(profesionalism.ToString());
             result.Add(comfort.ToString());
             result.Add(tidiness.ToString());
@@ -57,7 +57,7 @@ namespace Model
         {
             int i = 0;
             id = int.Parse(values[i++]);
-            issued = DateTime.Parse(values[i++]);
+            Issued = DateTime.Parse(values[i++]);
             profesionalism = int.Parse(values[i++]);
             comfort = int.Parse(values[i++]);
             tidiness = int.Parse(values[i++]);
@@ -84,6 +84,6 @@ namespace Model
         public static List<string> ratingsLabel { get => new List<string> { "Profesionalism", "Comfort", "Tidiness", "Kindness", "Hygiene", "Modernity", "Equipped", "OverallExperience" }; }
 
         public static List<string> ratingRangeLabels { get => new List<string> { "Fives", "Fours", "Threes", "Twos", "Ones"}; }
-
+        public DateTime Issued { get => issued; set => issued = value; }
     }
 }

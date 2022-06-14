@@ -13,8 +13,14 @@
                      Margin="107,35,0,0" 
                      VerticalAlignment="Top" 
                      Height="24" 
-                     Tag="{p:Loc From}" 
-                     CalendarStyle="{DynamicResource ManagerCalendar}"/>
+                     Tag="{p:Loc From}"
+                     SelectedDate="{Binding Start, Mode=OneWayToSource}"
+                     CalendarStyle="{DynamicResource ManagerCalendar}">
+            <Validation.ErrorTemplate>
+                <ControlTemplate />
+            </Validation.ErrorTemplate>
+        </DatePicker>
+        
         <DatePicker Style="{DynamicResource MangerDatePicker}" 
                     HorizontalAlignment="Left" 
                     Margin="254,35,0,0" 
@@ -22,8 +28,12 @@
                     Height="24" 
                     Tag="{p:Loc To}" 
                     CalendarStyle="{DynamicResource ManagerCalendar}"
-                    Foreground="Green"/>
-
+                    SelectedDate="{Binding End, Mode=OneWayToSource }">
+            <Validation.ErrorTemplate>
+                <ControlTemplate />
+            </Validation.ErrorTemplate>
+        </DatePicker>
+        
         <Label Content="{p:Loc Survey}" 
                    HorizontalAlignment="Center" 
                    Margin="0,78,0,0" 

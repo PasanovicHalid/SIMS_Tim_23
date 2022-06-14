@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Model;
 using Repository;
+using ZdravoCorp.Service.Interfaces;
 
 namespace Service
 {
-    internal class ReportService : ICrud<Report>
+    public class ReportService : ICrud<Report> , IReportService
     {
         private static ReportService instance = null;
         public void Create(Report newReport)

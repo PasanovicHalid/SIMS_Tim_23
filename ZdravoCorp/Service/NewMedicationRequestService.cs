@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Repository;
+using ZdravoCorp.Service.Interfaces;
 
 namespace Service
 {
-    public class NewMedicationRequestService : ICrud<NewMedicationRequest>
+    public class NewMedicationRequestService : ICrud<NewMedicationRequest> , INewMedicationRequestService
     {
         private static NewMedicationRequestService instance = null;
 
