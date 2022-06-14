@@ -17,7 +17,7 @@ namespace ZdravoCorp.Service.Interfaces
 
         void CombineRooms(Room combineInto, Room selectedRoom);
 
-        void CreateRoomType(RoomTypeModel newRoomType);
+        void CreateRoomType(RoomType newRoomType);
 
         Boolean UpdateRoomType(Model.RoomType roomType);
 

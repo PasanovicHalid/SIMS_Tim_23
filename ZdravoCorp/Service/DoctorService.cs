@@ -100,15 +100,5 @@ namespace Service
             }
             return isFree;
         }
-
-        public void DeleteDoctorType(DoctorType doctorType)
-        {
-            throw new NotImplementedException();
-        }
-
-        public DoctorType ReadDoctorType(DoctorType doctorType)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

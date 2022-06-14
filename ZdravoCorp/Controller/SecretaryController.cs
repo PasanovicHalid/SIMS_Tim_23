@@ -14,7 +14,7 @@ namespace Controller
 {
    public class SecretaryController : ICrud<Secretary>
    {
-      public ISecretaryService service = SecretaryService.Instance;
+      public ISercretaryService service = SecretaryService.Instance;
       public void Create(Secretary newSecretary)
       {
          throw new NotImplementedException();
