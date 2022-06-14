@@ -27,7 +27,7 @@
                 <DataGridTextColumn Header="Room ID" Binding="{Binding RoomID}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Border BorderThickness="1" HorizontalAlignment="Center" Height="27" VerticalAlignment="Top" Width="1024" BorderBrush="Black" Background="#FFA79F9F">
+        <Border BorderThickness="1" HorizontalAlignment="Right" Height="27" VerticalAlignment="Top" Width="1024" BorderBrush="Black" Background="#FFA79F9F" Grid.ColumnSpan="2" Margin="0,0,-1,0">
             <Image HorizontalAlignment="Left" Height="24" VerticalAlignment="Center" Width="22" Source="/Resources/user.png" MouseLeftButtonDown="Image_MouseLeftButtonDown" Margin="991,0,0,0" RenderTransformOrigin="0.818,0.509"/>
         </Border>
         <Button x:Name="requestsButton" Content="Medications" HorizontalAlignment="Left" Margin="99,0,0,0" VerticalAlignment="Top" Height="27" Width="104" Click="requestsButton_Click"/>

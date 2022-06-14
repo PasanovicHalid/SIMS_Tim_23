@@ -4,7 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using Syncfusion.Pdf;
+using Syncfusion.Pdf.Grid;
+using Syncfusion.Pdf.Tables;
+using Syncfusion.Pdf.Graphics;
 using System.Windows.Controls;
+using System.Drawing;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -15,6 +20,8 @@ using System.ComponentModel;
 using System.Collections.ObjectModel;
 using Controller;
 using Model;
+using LiveCharts;
+using LiveCharts.Wpf;
 using ZdravoCorp.View.Patient.Appointments;
 
 namespace ZdravoCorp.View.Patient
@@ -36,7 +43,10 @@ namespace ZdravoCorp.View.Patient
         private String phoneNumber;
         private Gender gender;
         private DateTime dateOfBirth;
+        private float weight;
+        private float height;
 
+        
         public String Username
         {
             get { return username; }
@@ -178,6 +188,7 @@ namespace ZdravoCorp.View.Patient
         {
             InitializeComponent();
             patient = logedPatient;
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
             appointmentController = new AppointmentController();
             dc = new DoctorController();
             FutureAppointmentsCollection = new ObservableCollection<Appointment>();
@@ -185,6 +196,8 @@ namespace ZdravoCorp.View.Patient
             DoctorCollection = new ObservableCollection<Model.Doctor>();
             RoomCollection = new ObservableCollection<Room>();
             SetPatientInfo(patient);
+            SetPieChartHospital();
+            SetColSeries();
             UpdateTable();
             PastAppointments();
             Therapy();
@@ -214,6 +227,9 @@ namespace ZdravoCorp.View.Patient
             {
                 FemaleButton.IsChecked = true;
             }
+            WeightTextBox.Text = patient.Record.Weight.ToString();
+            HeightTextBox.Text = patient.Record.Height.ToString();
+            BloodTypeTextBox.Text = patient.Record.BloodType.ToString();
         }
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string name)
@@ -396,13 +412,17 @@ namespace ZdravoCorp.View.Patient
 
         private void Anamnesis_Click(object sender, RoutedEventArgs e)
         {
+            AnamnesisController anamnesisController = new AnamnesisController();
+            if (anamnesisController.FindAnamnesisByAppointmentId(PastAppointmentsCollection.ElementAt(DoneAppointments.SelectedIndex).Id) == null){
+                return;
+            }
             ZdravoCorp.View.Patient.MedicalRecord.Anamnesis window = new ZdravoCorp.View.Patient.MedicalRecord.Anamnesis(PastAppointmentsCollection.ElementAt(DoneAppointments.SelectedIndex));
             window.ShowDialog();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            ZdravoCorp.View.Patient.View.Notification.NotificationView window = new ZdravoCorp.View.Patient.View.Notification.NotificationView();
+            ZdravoCorp.View.Patient.View.Notification.NotificationView window = new ZdravoCorp.View.Patient.View.Notification.NotificationView((Prescription)CurrentTherapies.SelectedItem);
             window.ShowDialog();
         }
 
@@ -417,5 +437,211 @@ namespace ZdravoCorp.View.Patient
             View.MedicalHistory.MedicalHistory w = new View.MedicalHistory.MedicalHistory();
             w.ShowDialog();
         }
+
+        private void Report_Click(object sender, RoutedEventArgs e)
+        {
+            //PdfDocument doc = new PdfDocument();
+            //PdfPage page = doc.Pages.Add();
+            //PdfFont font = new PdfStandardFont(PdfFontFamily.Helvetica, 8);
+            //PdfGraphics graphics = page.Graphics;
+            //PdfGrid pdfGrid = new PdfGrid();
+            //pdfGrid.DataSource = CurrentTherapies.DataContext;
+            //pdfGrid.Draw(page, new PointF(10, 10));
+            //doc.Save("ReportPatient.pdf");
+            PdfDocument doc = new PdfDocument();
+            PdfPage page = doc.Pages.Add();
+            PdfGraphics graphics = page.Graphics;
+            PdfFont font = new PdfStandardFont(PdfFontFamily.Helvetica, 24);
+            PdfFont maliFont = new PdfStandardFont(PdfFontFamily.Helvetica, 16);
+
+
+
+            //PdfBitmap image = new PdfBitmap("SecretaryPages\acc-icon.png");
+
+
+
+            graphics.DrawString("ZdravoCorp", maliFont, PdfBrushes.Black, new PointF(400, 20));
+            //PdfPen pen = page.;
+            graphics.DrawLine(PdfPens.Black, new PointF(0, 50), new PointF(520, 50));
+            //graphics.DrawString("Zauzetost prostorija u periodu od" + start.Day.ToString() + "." start.Month.ToString() + " do " + end.Date.ToString(), font, PdfBrushes.Black, new PointF(0, 70));
+            graphics.DrawString("Izvestaj o rasporedu terapije\nna sedmicnom nivou", font, PdfBrushes.Black, new PointF(0, 70));
+           // graphics.DrawString("Od " + start.Day.ToString() + "." + start.Month.ToString() + "." + start.Year.ToString() + " do " + end.Day.ToString() + "." + end.Month.ToString() + "." + end.Year.ToString(), font, PdfBrushes.Black, new PointF(0, 100));
+
+
+
+            PdfLightTable pdfLightTable = new PdfLightTable();
+            pdfLightTable.DataSourceType = PdfLightTableDataSourceType.TableDirect;
+            pdfLightTable.Columns.Add(new PdfColumn(" Lek"));
+            pdfLightTable.Columns.Add(new PdfColumn(" Pocetak terapije"));
+            pdfLightTable.Columns.Add(new PdfColumn(" Dnevni broj doza"));
+            pdfLightTable.Columns.Add(new PdfColumn(" Trajanje terapije"));
+
+
+
+            //foreach (Room r in rooms)
+            //{
+            //    List<ScheduledAppointment> sa = (List<ScheduledAppointment>)app.ScheduledAppointmentController.GetFromToDatesForRoom(start, end, r.Id);
+            //    pdfLightTable.Rows.Add(new object[] { " " + r.Name, " " + sa.Count });
+
+
+
+            //}
+            PrescriptionController prescriptionController = new PrescriptionController();
+            int i = 0;
+            foreach (Model.Prescription p in prescriptionController.GetAll())
+            {
+                if(i < 2)
+                {
+                    pdfLightTable.Rows.Add(new object[] { " " + p.Namee, " " + "13/6/2022", " " + p.TimesADay, " " + p.DurationDays});
+                }
+                else if(i >= 2 && i < 5)
+                {
+                    pdfLightTable.Rows.Add(new object[] { " " + p.Namee, " " + "15/6/2022", " " + p.TimesADay, " " + p.DurationDays });
+                }
+                else
+                {
+                    break;
+                }
+                i++;
+                
+            }
+
+            PdfFont font1 = new PdfStandardFont(PdfFontFamily.Helvetica, 14);
+            PdfFont font2 = new PdfStandardFont(PdfFontFamily.Helvetica, 12);
+
+
+
+            //Declare and define the alternate style.
+
+
+
+            PdfCellStyle altStyle = new PdfCellStyle(font2, PdfBrushes.Black, PdfPens.Black);
+
+
+
+
+            PdfCellStyle headerStyle = new PdfCellStyle(font1, PdfBrushes.Black, PdfPens.Black);
+            headerStyle.BackgroundBrush = PdfBrushes.Navy;
+            headerStyle.TextBrush = PdfBrushes.White;
+
+
+            pdfLightTable.Style.DefaultStyle = altStyle;
+
+
+
+            pdfLightTable.Style.HeaderStyle = headerStyle;
+
+
+
+            pdfLightTable.Style.ShowHeader = true;
+
+
+
+            pdfLightTable.Draw(page, new PointF(10, 150));
+            doc.Save("ReportPatient.pdf");
+            doc.Close(true);
+        }
+
+        public void SetPieChartHospital()
+        {
+            /**
+             *https://ourcodeworld.com/articles/read/583/how-to-create-a-pie-chart-using-the-livecharts-library-in-winforms-c-sharp
+             **/
+            HospitalSurveyController hospitalSurveyController = new HospitalSurveyController();
+            List<int> ocena1 = new List<int>();
+            List<int> ocena2 = new List<int>();
+            List<int> ocena3 = new List<int>();
+            List<int> ocena4 = new List<int>();
+            List<int> ocena5 = new List<int>();
+            Func<ChartPoint, string> labelPoint = chartPoint => string.Format("{0} ({1:P})", chartPoint.Y, chartPoint.Participation);
+            SeriesCollection piechartData = new SeriesCollection
+            {
+                new PieSeries
+                {
+                    
+                    Title = "Ocena 1",
+                    Values = new ChartValues<double> {1},
+                    DataLabels = true,
+                    LabelPoint = labelPoint,
+                    Fill = System.Windows.Media.Brushes.LightGray
+                },
+                new PieSeries
+                {
+                    Title = "Ocena 2",
+                    Values = new ChartValues<double> {3},
+                    DataLabels = true,
+                    LabelPoint = labelPoint,
+                    Fill = System.Windows.Media.Brushes.LightPink
+                },
+                new PieSeries
+                {
+                    Title = "Ocena 3",
+                    Values = new ChartValues<double> {5},
+                    DataLabels = true,
+                    LabelPoint = labelPoint,
+                    Fill = System.Windows.Media.Brushes.LightBlue
+                },
+                new PieSeries
+                {
+                    Title = "Ocena 4",
+                    Values = new ChartValues<double> {5},
+                    DataLabels = true,
+                    LabelPoint = labelPoint,
+                    Fill = System.Windows.Media.Brushes.LightCoral
+                },
+                new PieSeries
+                {
+                    Title = "Ocena 5",
+                    Values = new ChartValues<double> {10},
+                    DataLabels = true,
+                    LabelPoint = labelPoint,
+                    Fill = System.Windows.Media.Brushes.LightGreen
+                }
+            };
+            PieChartHospital.Series = piechartData;
+            PieChartHospital.LegendLocation = LegendLocation.Right;
+        }
+        public void SetColSeries()
+        {
+            Func<ChartPoint, string> labelPoint = chartPoint => string.Format("{0} ({1:P})", chartPoint.Y, chartPoint.Participation);
+            SeriesCollection piechartData = new SeriesCollection
+            {
+                new PieSeries
+                {
+                    Title = "dr Mina Petrovic",
+                    Values = new ChartValues<double> {7},
+                    DataLabels = true,
+                    LabelPoint = labelPoint,
+                    Fill = System.Windows.Media.Brushes.LightPink
+                },
+                new PieSeries
+                {
+                    Title = "dr Dusko Duskovic",
+                    Values = new ChartValues<double> {3},
+                    DataLabels = true,
+                    LabelPoint = labelPoint,
+                    Fill = System.Windows.Media.Brushes.LightBlue
+                },
+                new PieSeries
+                {
+                    Title = "dr Petar Petrovic",
+                    Values = new ChartValues<double> {1},
+                    DataLabels = true,
+                    LabelPoint = labelPoint,
+                    Fill = System.Windows.Media.Brushes.LightSeaGreen
+                },
+                new PieSeries
+                {
+                    Title = "dr Mika Mikic",
+                    Values = new ChartValues<double> {2},
+                    DataLabels = true,
+                    LabelPoint = labelPoint,
+                    Fill = System.Windows.Media.Brushes.LightCoral
+                }
+            };
+            DoctorsPieChart.Series = piechartData;
+            DoctorsPieChart.LegendLocation = LegendLocation.None;
+        }
+        public SeriesCollection SeriesCollection { get; set; }
     }
 }

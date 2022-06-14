@@ -24,11 +24,16 @@ namespace ZdravoCorp.View.Patient.View.Notification
         private List<String> timesOfDay = new List<String>();
         private List<String> periods = new List<String>();
         private ObservableCollection<String> collection = new ObservableCollection<String>();
-        public NotificationView()
+        public NotificationView(Model.Prescription prescription)
         {
             InitializeComponent();
             SetTime();
             SetPeriod();
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            Medicine.Content = prescription.Namee;
+            Duration.Content = prescription.DurationDays;
+            Count.Content = prescription.Quantity;
+            Description.Content = prescription.Description;
             PickTime.ItemsSource = new ObservableCollection<String>(timesOfDay);
             PickTime.SelectedItem = timesOfDay[16];
             PickPeriod.ItemsSource = new ObservableCollection<String>(periods);

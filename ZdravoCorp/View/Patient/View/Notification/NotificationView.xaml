@@ -11,10 +11,10 @@
         <Label Content="Trajanje terapije (u danima)" Style="{DynamicResource PatientLabel}" Margin="36,41,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <Label Content="Broj doza" Style="{DynamicResource PatientLabel}" Margin="375,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <Label Content="Opis" Style="{DynamicResource PatientLabel}" Margin="375,41,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Label x:Name="Medicine" Style="{DynamicResource PatientLabel}" Margin="134,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Label x:Name="Duration" Style="{DynamicResource PatientLabel}" Margin="134,41,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Label x:Name="Count" Style="{DynamicResource PatientLabel}" Margin="473,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Label x:Name="Description" Style="{DynamicResource PatientLabel}"  Margin="473,41,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
+        <Label x:Name="Medicine" Style="{DynamicResource PatientLabel}" Content="{Binding}"  Margin="134,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label x:Name="Duration" Style="{DynamicResource PatientLabel}" Content="{Binding}" Margin="230,41,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label x:Name="Count" Style="{DynamicResource PatientLabel}" Content="{Binding}" Margin="473,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label x:Name="Description" Style="{DynamicResource PatientLabel}" Content="{Binding}" Margin="473,41,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
         </Label>
         <GridSplitter Height="3" Width="700" Margin="0,75,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <ComboBox x:Name="PickTime" Margin="107,170,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150"/>
