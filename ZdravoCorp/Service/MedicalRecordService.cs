@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Model;
 using Repository;
+using ZdravoCorp.Service.Interfaces;
 
 namespace Service
 {
-    public class MedicalRecordService : ICrud<MedicalRecord>
+    public class MedicalRecordService : ICrud<MedicalRecord> , IMedicalRecordService
     {
         private static MedicalRecordService instance = null;
 

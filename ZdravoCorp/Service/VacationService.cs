@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 using Model;
 using Controller;
 using Repository;
+using ZdravoCorp.Service.Interfaces;
 
 namespace Service
 {
-    public class VacationService : ICrud<Vacation>
+    public class VacationService : ICrud<Vacation> , IVacationService
     {
         private static VacationService instance = null;
 

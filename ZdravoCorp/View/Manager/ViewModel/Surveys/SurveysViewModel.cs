@@ -37,15 +37,15 @@ namespace ZdravoCorp.View.Manager.ViewModel.Surveys
                 string label = "";
                 if (survey.SurveyType == SurveyEnum.Hospital)
                 {
-                    description = hospitalController.GetResults();
+                    description = hospitalController.GetResults(DateTime.MinValue, DateTime.MaxValue);
                     label = "Hospital Survey";
                 }
                 else
                 {
-                    description = appointmentController.GetResultsForDoctor(DoctorService.Instance.Read(survey.Id));
+                    description = appointmentController.GetResultsForDoctor(DoctorService.Instance.Read(survey.Id), DateTime.MinValue, DateTime.MaxValue);
                     label = survey.Name + "Survey";
                 }
-                CurrentView = new View.Surveys.ViewSurvey(new ViewSurveyViewModel(description, label));
+                CurrentView = new View.Surveys.ViewSurvey(new ViewSurveyViewModel(survey ,description, label));
             }, CheckIfReady);
         }
 

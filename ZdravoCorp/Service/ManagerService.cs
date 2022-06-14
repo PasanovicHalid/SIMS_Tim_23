@@ -7,11 +7,12 @@ using Model;
 using System;
 using System.Collections.Generic;
 using Repository;
+using ZdravoCorp.Service.Interfaces;
 
 namespace Service
 {
-   public class ManagerService : ICrud<Manager>
-   {
+   public class ManagerService : ICrud<Manager>, IManagerService
+    {
       private ManagerService instance;
       
       public void Create(Manager newManager)

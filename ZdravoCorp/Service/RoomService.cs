@@ -9,11 +9,12 @@ using Repository;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using ZdravoCorp.Service.Interfaces;
 using ZdravoCorp.View.Manager.Model.Rooms;
 
 namespace Service
 {
-    public class RoomService : ICrud<Room>
+    public class RoomService : ICrud<Room> , IRoomService
     {
         private static RoomService instance = null;
         private ActionService actionService;
@@ -174,6 +175,20 @@ namespace Service
             
             return freeRoom;
         }
-     
+
+        public void CreateRoomType(RoomTypeModel newRoomType)
+        {
+            throw new NotImplementedException();
+        }
+
+        bool IRoomService.UpdateRoomType(RoomType roomType)
+        {
+            throw new NotImplementedException();
+        }
+
+        bool IRoomService.DeleteRoomType(RoomType roomType)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -2,11 +2,11 @@
 using Repository;
 using System;
 using System.Collections.Generic;
-
+using ZdravoCorp.Service.Interfaces;
 
 namespace Service
 {
-    public class GuestService : ICrud<Guest>
+    public class GuestService : ICrud<Guest> , IGuestService
     {
 
         private static GuestService instance = null;

@@ -22,6 +22,7 @@ namespace ZdravoCorp.View.Patient.View.Allergies
         public AllergiesView()
         {
             InitializeComponent();
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
             this.DataContext = new ViewModel.Allergies.AllergiesViewModel(this);
         }
         public string getTitle()

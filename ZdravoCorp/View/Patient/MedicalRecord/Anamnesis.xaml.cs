@@ -30,6 +30,7 @@ namespace ZdravoCorp.View.Patient.MedicalRecord
         {
             InitializeComponent();
             this.DataContext = this;
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
             anamnesis = anamnesisController.FindAnamnesisByAppointmentId(appointment.Id);
             Patient.Content = patientController.Read(appointment.Patient.Id).Name +" " + patientController.Read(appointment.Patient.Id).Surname;
             Doctor.Content = doctorController.Read(appointment.Doctor.Id).nameSurname;
@@ -38,7 +39,7 @@ namespace ZdravoCorp.View.Patient.MedicalRecord
             AppointmentType.Content = anamnesis.AppointmentType;
             Diagnosis.Content = anamnesis.Diagnosis;
             this.appointment = appointment;
-            Presciption.Content = "Brufen 600mg. 2 puta dnevno.\n Razmak izmedju uzimanja minimum 6 sati.";
+            Presciption.Content = "Brufen 600mg. 2 puta dnevno.\nRazmak izmedju uzimanja minimum 6 sati.";
             Note.Text = anamnesis.Note;
         }
         private void AppointmentSurvey_Click(object sender, RoutedEventArgs e)

@@ -43,9 +43,9 @@ namespace Controller
             return HospitalSurveyService.Instance.getAllHospitalSurveyIds();
         }
 
-        public string GetResults()
+        public string GetResults(DateTime start, DateTime end)
         {
-            return HospitalSurveyService.Instance.GetResults();
+            return HospitalSurveyService.Instance.GetResults(start, end);
         }
     }
 }

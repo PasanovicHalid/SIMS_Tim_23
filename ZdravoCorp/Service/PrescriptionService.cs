@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 using Repository;
 using Model;
 using Controller;
+using ZdravoCorp.Service.Interfaces;
 
 namespace Service
 {
-    internal class PrescriptionService : ICrud<Prescription>
+    public class PrescriptionService : ICrud<Prescription> , IPrescriptionService
     {
         private static PrescriptionService instance = null;
 

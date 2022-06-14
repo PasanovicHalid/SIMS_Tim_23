@@ -22,6 +22,7 @@ namespace ZdravoCorp.View.Patient.View.MedicalHistory
         public MedicalHistory()
         {
             InitializeComponent();
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
             LabAnalysisTable.DataContext = new ViewModel.MedicalHistory.LabAnalysisViewModel();
             OperationsTable.DataContext = new ViewModel.MedicalHistory.OperationViewModel();
             ChronicDeseasesTable.DataContext = new ViewModel.MedicalHistory.ChronicDeseaseViewModel();

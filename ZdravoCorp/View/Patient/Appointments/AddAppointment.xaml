@@ -6,7 +6,7 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         Title="Zakazivanje"
-        Height="450" 
+        Height="470" 
         Width="800"
         >
     <Grid>
@@ -16,7 +16,7 @@
             HorizontalAlignment="Left" 
             Margin="153,148,0,0" 
             VerticalAlignment="Top" 
-            Width="171"
+            Width="200"
             ItemsSource="{Binding}" >
             <ComboBox.ItemTemplate>
                 <DataTemplate>
@@ -34,7 +34,11 @@
             Margin="54,72,0,0" 
             VerticalAlignment="Top"/>
         <DatePicker 
-            Margin="153,58,476,322"
+            Margin="153,66,0,0"
+            HorizontalAlignment="Left"
+            Width="200"
+            Height="40"
+            VerticalAlignment="Top"
             SelectedDateFormat="Short"
             FirstDayOfWeek="Monday"
             IsTodayHighlighted="True"
@@ -96,32 +100,32 @@
                 HorizontalAlignment="Left" 
                 Margin="153,335,0,0" 
                 VerticalAlignment="Top"
-                Height="30"
-                Width="80"
+                Height="40"
+                Width="120"
                 Click="Search_Click"
                 />
         <CheckBox Content="Notifikacije" 
                   HorizontalAlignment="Left" 
-                  Margin="695,335,0,0" 
+                  Margin="685,335,0,0" 
                   VerticalAlignment="Top"
                   IsChecked="True"/>
         <Button 
                 Style="{DynamicResource CancelButton}"
                 Content="Odustani" 
                 HorizontalAlignment="Left"
-                Margin="587,378,0,0" 
+                Margin="520,378,0,0" 
                 VerticalAlignment="Top"
-                Height="30"
-                Width="80"
+                Height="40"
+                Width="120"
                 Click="Cancel_Click"/>
         <Button 
                 Style="{DynamicResource BlueButton}"
                 Content="Potvrdi" 
                 HorizontalAlignment="Left" 
-                Margin="695,378,0,0"
+                Margin="655,378,0,0"
                 VerticalAlignment="Top"
-                Height="30"
-                Width="80"
+                Height="40"
+                Width="120"
                 Click="Confirm_Click"/>
 
     </Grid>

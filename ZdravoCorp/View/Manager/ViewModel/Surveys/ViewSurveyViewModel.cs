@@ -1,4 +1,6 @@
 ﻿using Controller;
+using Model;
+using Service;
 using Syncfusion.Pdf;
 using Syncfusion.Pdf.Graphics;
 using System;
@@ -15,13 +17,21 @@ namespace ZdravoCorp.View.Manager.ViewModel.Surveys
     {
         private string label;
         private string description;
+        private Survey survey;
+        private DateTime start = DateTime.MinValue;
+        private DateTime end = DateTime.MaxValue;
+        private DateTime start2;
+        private DateTime end2;
+        private HospitalSurveyController hospitalController = new HospitalSurveyController();
+        private AppointmentSurveyController appointmentController = new AppointmentSurveyController();
 
         public RelayCommand CreateCommand { get; set; }
 
-        public ViewSurveyViewModel(string description, string label)
+        public ViewSurveyViewModel(Survey survey,string description, string label)
         {
-            Label = label;
-            Description = description;
+            this.label = label;
+            this.description = description;
+            this.survey = survey;
 
             CreateCommand = new RelayCommand(o =>
             {
@@ -57,6 +67,72 @@ namespace ZdravoCorp.View.Manager.ViewModel.Surveys
                     description = value;
                     OnPropertyChanged();
                 }
+            }
+        }
+
+        public DateTime Start
+        {
+            get => start;
+            set
+            {
+                if (value != start)
+                {
+                    start = value;
+                    ChangeDescription();
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public DateTime End
+        {
+            get => end;
+            set
+            {
+                if (value != end)
+                {
+                    end = value;
+                    ChangeDescription();
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public DateTime Start2
+        {
+            get => start2;
+            set
+            {
+                if (value != start2)
+                {
+                    start2 = value;
+                    Start = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public DateTime End2
+        {
+            get => end2;
+            set
+            {
+                if (value != end2)
+                {
+                    end2 = value;
+                    End = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public void ChangeDescription()
+        {
+            if(label.Equals("Hospital Survey"))
+            {
+                Description = hospitalController.GetResults(Start, End);
+            }
+            else
+            {
+                Description = appointmentController.GetResultsForDoctor(DoctorService.Instance.Read(survey.Id), Start, End);
             }
         }
 
