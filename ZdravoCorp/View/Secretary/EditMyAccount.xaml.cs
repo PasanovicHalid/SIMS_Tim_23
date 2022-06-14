@@ -10,16 +10,15 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.ComponentModel;
 
 namespace ZdravoCorp.View.Secretary
 {
     /// <summary>
-    /// Interaction logic for MyAccount.xaml
+    /// Interaction logic for EditMyAccount.xaml
     /// </summary>
-    public partial class MyAccount : Page, INotifyPropertyChanged
+    public partial class EditMyAccount : Window, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         private string name;
@@ -29,10 +28,6 @@ namespace ZdravoCorp.View.Secretary
         private string phoneNumber;
         private string address;
 
-        private SecretaryMainWindow secretaryMainWindow;
-        private SecretaryMainPage secretaryMainPage;
-        
-
         private void OnPropertyChanged(string property)
         {
             if (PropertyChanged != null)
@@ -40,23 +35,14 @@ namespace ZdravoCorp.View.Secretary
                 PropertyChanged(this, new PropertyChangedEventArgs(property));
             }
         }
-        public MyAccount(SecretaryMainPage smp, SecretaryMainWindow smw)
+        private MyAccount ma;
+        private SecretaryMainWindow secmainWindow; 
+        public EditMyAccount(MyAccount myAccount, SecretaryMainWindow smw)
         {
-            this.secretaryMainPage = smp;
-            this.secretaryMainWindow = smw;
             InitializeComponent();
+            this.ma = myAccount;
+            this.secmainWindow = smw;  
             this.DataContext = this;
-            loadData();
-        }
-
-        public void loadData()
-        {
-            Namee = "Duško";
-            Surname = "Radičić";
-            Email = "dusko.rad@gmail.com";
-            Id = "1234567890";
-            PhoneNumber = "065555333";
-            Address = "Kosovska, 80, Novi Sad, Srbija";
         }
 
         public String Namee
@@ -132,35 +118,23 @@ namespace ZdravoCorp.View.Secretary
             }
         }
 
-        private void Menu_Click(object sender, RoutedEventArgs e)
-        {
-            secretaryMainWindow.Content = secretaryMainPage;
-        }
-
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
-            EditMyAccount editMyAccount = new EditMyAccount(this, secretaryMainWindow);
-            editMyAccount.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            editMyAccount.Namee = Namee;
-            editMyAccount.Surname = Surname;
-            editMyAccount.Email = Email;
-            editMyAccount.Id = Id;
-            editMyAccount.PhoneNumber = PhoneNumber;
-            editMyAccount.Address = Address;
-            editMyAccount.ShowDialog();
+            ma.Namee = Namee;
+            ma.Email = Email;
+            ma.PhoneNumber = PhoneNumber;
+            ma.Address = Address;
+            ma.Surname = Surname;
+            ma.Id = Id;
+            
+            secmainWindow.Content = ma;
+            this.Close();
 
         }
-        //public String Gender
-        //{
-        //    get => gender;
-        //    set
-        //    {
-        //        if (value != gender)
-        //        {
-        //            gender = value;
-        //            OnPropertyChanged("Gender");
-        //        }
-        //    }
-        //}
+
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

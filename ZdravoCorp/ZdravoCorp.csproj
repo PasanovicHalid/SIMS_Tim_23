@@ -427,9 +427,17 @@
     <Compile Include="View\Secretary\ChangeRecord.xaml.cs">
       <DependentUpon>ChangeRecord.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Secretary\EditMyAccount.xaml.cs">
+      <DependentUpon>EditMyAccount.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Secretary\EmergencyAppointment.xaml.cs">
+      <DependentUpon>EmergencyAppointment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Secretary\Meeting.cs" />
     <Compile Include="View\Secretary\Meetings.xaml.cs">
       <DependentUpon>Meetings.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Secretary\Modell\EmergencyAppointment.cs" />
     <Compile Include="View\Secretary\Modell\EquipmentToOrder.cs" />
     <Compile Include="View\Secretary\Modell\HolidayRequest.cs" />
     <Compile Include="View\Secretary\MyAccount.xaml.cs">
@@ -453,8 +461,15 @@
     <Compile Include="View\Secretary\SecretaryMainWindow.xaml.cs">
       <DependentUpon>SecretaryMainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Secretary\SecretaryPatients.xaml.cs">
+      <DependentUpon>SecretaryPatients.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Secretary\ViewModel\EmergencyAppointmentViewModel.cs" />
     <Compile Include="View\Secretary\ViewModel\EquipmentToOrderViewModel.cs" />
     <Compile Include="View\Secretary\ViewModel\HolidayRequestViewModel.cs" />
+    <Compile Include="View\Secretary\View\EmergencyAppointmentView.xaml.cs">
+      <DependentUpon>EmergencyAppointmentView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Secretary\View\EquipmentOrderView.xaml.cs">
       <DependentUpon>EquipmentOrderView.xaml</DependentUpon>
     </Compile>
@@ -713,6 +728,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Secretary\EditMyAccount.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Secretary\EmergencyAppointment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Secretary\Meetings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -734,6 +757,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Secretary\SecretaryMainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Secretary\SecretaryPatients.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Secretary\View\EmergencyAppointmentView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -910,6 +941,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\dashboard-monitoring.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\appointments.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

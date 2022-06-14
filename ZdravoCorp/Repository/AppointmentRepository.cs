@@ -119,8 +119,7 @@ namespace Repository
             {
                 if (elements[i].Id == id)
                 {
-                    elements.RemoveAt(i);
-                    idMap.Remove(id);
+                    
                     Doctor d = DoctorRepository.Instance.Read(elements[i].doctor.Id);
                     d.RemoveAppointment(elements[i]);
                     DoctorRepository.Instance.Update(d);
@@ -130,6 +129,8 @@ namespace Repository
                     Patient p = PatientRepository.Instance.Read(elements[i].Patient.Id);
                     p.RemoveAppointment(elements[i]);
                     PatientRepository.Instance.Update(p);
+                    elements.RemoveAt(i);
+                    idMap.Remove(id);
                     return;
                 }
             }

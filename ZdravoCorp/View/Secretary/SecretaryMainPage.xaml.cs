@@ -48,5 +48,39 @@ namespace ZdravoCorp.View.Secretary
             View.EquipmentOrderView equipmentOrderView = new View.EquipmentOrderView(this, secretaryMainWindow);
             secretaryMainWindow.Content = equipmentOrderView;
         }
+
+        private void MyAccount_Click(object sender, RoutedEventArgs e)
+        {
+            MyAccount myAccount = new MyAccount(this, secretaryMainWindow);
+            secretaryMainWindow.Content = myAccount;
+        }
+
+        private void Accounts_Click(object sender, RoutedEventArgs e)
+        {
+            SecretaryPatients secretaryPatients = new SecretaryPatients(this, secretaryMainWindow);
+            secretaryMainWindow.Content = secretaryPatients;
+        }
+
+        private void Emergency_Click(object sender, RoutedEventArgs e)
+        {
+            View.EmergencyAppointmentView emergencyAppointment = new View.EmergencyAppointmentView(this, secretaryMainWindow);
+            secretaryMainWindow.Content = emergencyAppointment;
+        }
+
+        private void Meetings_Click(object sender, RoutedEventArgs e)
+        {
+            Meetings meetings = new Meetings(this, secretaryMainWindow);
+            secretaryMainWindow.Content = meetings;
+        }
+
+        private void LogOut_Click(object sender, RoutedEventArgs e)
+        {
+            
+            MainWindow mw = new MainWindow();
+            mw.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            
+            secretaryMainWindow.Close();
+            mw.ShowDialog();
+        }
     }
 }

@@ -9,20 +9,20 @@
       Title="Meetings">
 
     <Grid Background="White">
-        <Button Style="{DynamicResource SecretaryButtons}" Content="Meni" HorizontalAlignment="Left" Height="50" Margin="10,5,0,0" VerticalAlignment="Top" Width="140"/>
+        <Button Style="{DynamicResource SecretaryButtons}" Content="Meni" HorizontalAlignment="Left" Height="50" Margin="10,5,0,0" VerticalAlignment="Top" Width="140" Click="Menu_Click"/>
         <Label Content="Upravljanje sastancima" Margin="0,20,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <DataGrid x:Name="HolidaysTable" ItemsSource="{Binding}" Margin="45,200,45,35"  Style="{DynamicResource SecretaryTables}"
+        <DataGrid x:Name="MeetingsTable" ItemsSource="{Binding}" Margin="45,200,45,35"  Style="{DynamicResource SecretaryTables}"
             AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" AlternationCount="2">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Sala"  Width="*"/>
-                <DataGridTextColumn Header="Datum"  Width="*"/>
-                <DataGridTextColumn Header="Vreme"  Width="*"/>
+                <DataGridTextColumn Header="Sala" Binding="{Binding Path=Room}" Width="*"/>
+                <DataGridTextColumn Header="Datum" Binding="{Binding Path=Date}" Width="*"/>
+                <DataGridTextColumn Header="Vreme" Binding="{Binding Path=Time}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
         <Button Content="Dodaj" Style="{DynamicResource SecretaryButtons}" HorizontalAlignment="Left" Margin="80,94,0,0" VerticalAlignment="Top"  Height="50" Width="140"/>
-        <Button Content="Izmeni" Style="{DynamicResource SecretaryButtons}" HorizontalAlignment="Left" Margin="300,94,0,0" VerticalAlignment="Top"  Height="50" Width="140"/>
-        <Button Content="Obrisi" Style="{DynamicResource SecretaryCancelButton}"  HorizontalAlignment="Left" Margin="522,94,0,0" VerticalAlignment="Top"  Height="50" Width="140"/>
-        <Button Content="Prikaži detalje" Style="{DynamicResource SecretaryButtons}" HorizontalAlignment="Left" Margin="757,94,0,0" VerticalAlignment="Top"  Height="50" Width="140"/>
+        <Button Content="Izmeni" Style="{DynamicResource SecretaryButtons}" IsEnabled="{Binding ElementName=MeetingsTable, Path=SelectedItems.Count}" HorizontalAlignment="Left" Margin="300,94,0,0" VerticalAlignment="Top"  Height="50" Width="140"/>
+        <Button Content="Obrisi" Style="{DynamicResource SecretaryCancelButton}" IsEnabled="{Binding ElementName=MeetingsTable, Path=SelectedItems.Count}" HorizontalAlignment="Left" Margin="522,94,0,0" VerticalAlignment="Top"  Height="50" Width="140"/>
+        <Button Content="Prikaži detalje" Style="{DynamicResource SecretaryButtons}" IsEnabled="{Binding ElementName=MeetingsTable, Path=SelectedItems.Count}" HorizontalAlignment="Left" Margin="757,94,0,0" VerticalAlignment="Top"  Height="50" Width="140"/>
 
     </Grid>
 </Page>

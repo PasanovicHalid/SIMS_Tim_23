@@ -11,9 +11,10 @@
         <Label Content="Datum:" Margin="161,82,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <Label Content="Vreme:" Margin="161,135,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <Label Content="Tema:" Margin="161,179,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <ComboBox Width="160" Margin="324,33,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <DatePicker HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="324,82,0,0"/>
-        <ComboBox Width="160" Margin="324,135,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        
+        <TextBox  Width="160" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="324,37,0,0"/>
+        <TextBox  Width="160" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="324,86,0,0"/>
+        <TextBox  Width="160" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="324,135,0,0"/>
         <TextBox  Width="160" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="324,179,0,0"/>
 
     </Grid>
