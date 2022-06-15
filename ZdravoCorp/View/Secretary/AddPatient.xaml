@@ -28,7 +28,7 @@
         <RadioButton Name="MaleButton" Style="{DynamicResource SecretaryRadioButton}" Content="Male" Margin="350,300,0,0" IsChecked="True" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <RadioButton Name="FemaleButton" Style="{DynamicResource SecretaryRadioButton}" Content="Female" Margin="450,300,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <DatePicker Margin="350,335,0,0" Height="27" Width="350" VerticalAlignment="Top" HorizontalAlignment="Left" SelectedDate="{Binding Path=DateOfBirth, UpdateSourceTrigger=PropertyChanged}"/>
-        <Button Content="Odustani" Style="{DynamicResource SecretaryCancelButton}" Margin="250,415,0,0"  Height="50" Width="140" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <Button Content="Odustani" Style="{DynamicResource SecretaryCancelButton}" Margin="250,415,0,0"  Height="50" Width="140" VerticalAlignment="Top" HorizontalAlignment="Left" Click="Cancel_Click"/>
         <Button Content="Napravi karton" Style="{DynamicResource SecretaryButtons}" Margin="500,415,0,0" Height="50" Width="140" VerticalAlignment="Top" HorizontalAlignment="Left" Click="CreateMedicalRecord_Click"/>
 
     </Grid>

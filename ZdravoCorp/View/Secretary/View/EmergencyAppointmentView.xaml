@@ -5,26 +5,26 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ZdravoCorp.View.Secretary.View"
       mc:Ignorable="d" 
-      d:DesignHeight="650" d:DesignWidth="1000"
+      d:DesignHeight="768" d:DesignWidth="1024"
       Title="EmergencyAppointmentView">
 
     <Grid Background="White">
         <Button Style="{DynamicResource SecretaryButtons}" Command="{Binding MenuCommand}" Content="Meni" HorizontalAlignment="Left" Height="50" Margin="10,5,0,0" VerticalAlignment="Top" Width="140" Click="Menu_Click" />
-        <Label Content="Hitan slučaj" Margin="0,17,0,0" VerticalAlignment="Top" HorizontalAlignment="Center"/>
-        <Label Content="JMBG pacijenta:" Margin="217,114,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-        <Label Content="Ime pacijenta:" Margin="217,170,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-        <Label Content="Prezime pacijenta:" Margin="217,220,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-        <Label Content="Krvna grupa:" Margin="220,275,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-        <Label Content="Lekar:" Margin="217,325,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-        <Label Content="Soba:" Margin="217,375,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-        <TextBox x:Name="Id" Width="250" HorizontalAlignment="Left" Text="{Binding Path=Id, Mode=TwoWay}" VerticalAlignment="Top" Margin="438,114,0,0"/>
-        <TextBox x:Name="Name" Width="250" HorizontalAlignment="Left" Text="{Binding Path=Name, Mode=TwoWay}" VerticalAlignment="Top" Margin="438,170,0,0"/>
-        <TextBox x:Name="Surname" Width="250" HorizontalAlignment="Left" Text="{Binding Path=Surname, Mode=TwoWay}" VerticalAlignment="Top" Margin="438,220,0,0"/>
-        <ComboBox x:Name="BloodTypes" ItemsSource="{Binding}" Width="250" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="438,272,0,0"/>
-        <ComboBox x:Name="Doctors" ItemsSource="{Binding}" Width="250" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="438,322,0,0"/>
-        <ComboBox x:Name="Rooms" ItemsSource="{Binding}" Width="250" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="438,372,0,0"/>
-        <Button Content="Pretraži" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="774,112,0,0" Width="140" Click="Search_Click"/>
-        <Button Content="Zakaži" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="423,506,0,0" Width="140" Click="Schedule_Click"/>
+        <Label Style="{DynamicResource SecretaryHeaderLabel}" Content="Hitan slučaj" Margin="0,17,0,0" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+        <Label Style="{DynamicResource SecretaryLabel}" FontSize="20" Content="JMBG pacijenta:" Margin="200,130,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <Label Style="{DynamicResource SecretaryLabel}" FontSize="20" Content="Ime pacijenta:" Margin="200,215,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <Label Style="{DynamicResource SecretaryLabel}" FontSize="20" Content="Prezime pacijenta:" Margin="200,300,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <Label Style="{DynamicResource SecretaryLabel}" FontSize="20" Content="Krvna grupa:" Margin="200,385,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <Label Style="{DynamicResource SecretaryLabel}" FontSize="20" Content="Lekar:" Margin="200,470,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <Label Style="{DynamicResource SecretaryLabel}" FontSize="20" Content="Soba:" Margin="200,555,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <TextBox x:Name="Id" FontSize="20" Width="260" HorizontalAlignment="Left" Text="{Binding Path=Id, Mode=TwoWay}" VerticalAlignment="Top" Margin="455,130,0,0"/>
+        <TextBox x:Name="Name" FontSize="20" Width="260" HorizontalAlignment="Left" Text="{Binding Path=Name, Mode=TwoWay}" VerticalAlignment="Top" Margin="455,215,0,0"/>
+        <TextBox x:Name="Surname" FontSize="20" Width="260" HorizontalAlignment="Left" Text="{Binding Path=Surname, Mode=TwoWay}" VerticalAlignment="Top" Margin="455,300,0,0"/>
+        <ComboBox x:Name="BloodTypes" FontSize="20" ItemsSource="{Binding}" Width="260" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="455,385,0,0"/>
+        <ComboBox x:Name="Doctors" FontSize="20" ItemsSource="{Binding}" Width="260" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="455,470,0,0"/>
+        <ComboBox x:Name="Rooms" FontSize="20" ItemsSource="{Binding}" Width="260" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="455,555,0,0"/>
+        <Button Style="{DynamicResource SecretaryButtons}" Content="Pretraži" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="774,130,0,0" Width="140" Click="Search_Click"/>
+        <Button Style="{DynamicResource SecretaryButtons}" Content="Zakaži" HorizontalAlignment="Center"  VerticalAlignment="Top" Margin="0,635,0,0" Width="140" Height="50" Click="Schedule_Click"/>
 
     </Grid>
 </Page>

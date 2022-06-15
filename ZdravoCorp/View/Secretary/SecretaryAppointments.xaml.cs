@@ -71,6 +71,7 @@ namespace ZdravoCorp.View.Secretary
         private void AddAppointment_Click(object sender, RoutedEventArgs e)
         {
             AddAppointment window = new AddAppointment();
+            window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             window.ShowDialog();
             UpdateAppointmentTable();
         }
@@ -81,6 +82,7 @@ namespace ZdravoCorp.View.Secretary
                 return;
             }
             ChangeAppointment window = new ChangeAppointment(AppointmentsCollection.ElementAt(AppointmentTable.SelectedIndex));
+            window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             window.ShowDialog();
             UpdateAppointmentTable();
         }
@@ -123,14 +125,7 @@ namespace ZdravoCorp.View.Secretary
 
         private void Report_Click(object sender, RoutedEventArgs e)
         {
-            //PdfDocument doc = new PdfDocument();
-            //PdfPage page = doc.Pages.Add();
-            //PdfFont font = new PdfStandardFont(PdfFontFamily.Helvetica, 8);
-            //PdfGraphics graphics = page.Graphics;
-            //PdfGrid pdfGrid = new PdfGrid();
-            //pdfGrid.DataSource = CurrentTherapies.DataContext;
-            //pdfGrid.Draw(page, new PointF(10, 10));
-            //doc.Save("ReportPatient.pdf");
+            
             PdfDocument doc = new PdfDocument();
             PdfPage page = doc.Pages.Add();
             PdfGraphics graphics = page.Graphics;
@@ -139,17 +134,12 @@ namespace ZdravoCorp.View.Secretary
 
 
 
-            //PdfBitmap image = new PdfBitmap("SecretaryPages\acc-icon.png");
-
-
-
             graphics.DrawString("ZdravoCorp", maliFont, PdfBrushes.Black, new PointF(400, 20));
-            //PdfPen pen = page.;
+            
             graphics.DrawLine(PdfPens.Black, new PointF(0, 50), new PointF(520, 50));
-            //graphics.DrawString("Zauzetost prostorija u periodu od" + start.Day.ToString() + "." start.Month.ToString() + " do " + end.Date.ToString(), font, PdfBrushes.Black, new PointF(0, 70));
+            
             graphics.DrawString("Nedeljni izvestaj o zakazanim operacijama\ni pregledima", font, PdfBrushes.Black, new PointF(0, 70));
-            // graphics.DrawString("Od " + start.Day.ToString() + "." + start.Month.ToString() + "." + start.Year.ToString() + " do " + end.Day.ToString() + "." + end.Month.ToString() + "." + end.Year.ToString(), font, PdfBrushes.Black, new PointF(0, 100));
-
+            
 
 
             PdfLightTable pdfLightTable = new PdfLightTable();
@@ -162,16 +152,9 @@ namespace ZdravoCorp.View.Secretary
 
 
 
-            //foreach (Room r in rooms)
-            //{
-            //    List<ScheduledAppointment> sa = (List<ScheduledAppointment>)app.ScheduledAppointmentController.GetFromToDatesForRoom(start, end, r.Id);
-            //    pdfLightTable.Rows.Add(new object[] { " " + r.Name, " " + sa.Count });
-
-
-
-            //}
+            
             AppointmentController appointmentController = new AppointmentController();
-            //PrescriptionController prescriptionController = new PrescriptionController();
+           
             PatientController pc = new PatientController();
             DoctorController dc = new DoctorController();
             RoomController rc = new RoomController();
@@ -181,19 +164,7 @@ namespace ZdravoCorp.View.Secretary
                 if ((a.startDate.Date > new DateTime(2022, 5, 29)) && (a.startDate.Date < new DateTime(2022, 6, 6))) {
                     pdfLightTable.Rows.Add(new object[] { " " + dc.Read(a.Doctor.Id).nameSurname, " " + pc.Read(a.Patient.Id).PatNameSurname, " " + a.StartDate.ToString(), " " +a.EndDate.ToString(), " " +rc.Read(a.Room.Identifier).DesignationCode });
                 }
-                //if (i < 2)
-                //{
-                //    pdfLightTable.Rows.Add(new object[] { " " + p.Namee, " " + "13/6/2022", " " + p.TimesADay, " " + p.DurationDays });
-                //}
-                //else if (i >= 2 && i < 5)
-                //{
-                //    pdfLightTable.Rows.Add(new object[] { " " + p.Namee, " " + "15/6/2022", " " + p.TimesADay, " " + p.DurationDays });
-                //}
-                //else
-                //{
-                //    break;
-                //}
-                //i++;
+                
 
             }
 

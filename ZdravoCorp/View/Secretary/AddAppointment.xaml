@@ -30,8 +30,8 @@
             IsTodayHighlighted="True">
 
         </DatePicker>
-        <Button Content="Pretrazi" Margin="603,26,0,0" Height="30" Width="140" Style="{DynamicResource SecretaryButtons}" VerticalAlignment="Top" HorizontalAlignment="Left" Click="SearchPatient_Click"/>
-        <Button Content="Otkazi" Style="{DynamicResource SecretaryCancelButton}" Margin="210,311,0,0" Height="50" Width="140" VerticalAlignment="Top" HorizontalAlignment="Left" Click="CancelAddAppointment_Click"/>
+        <Button Content="Pretraži" Margin="603,26,0,0" Height="30" Width="140" Style="{DynamicResource SecretaryButtons}" VerticalAlignment="Top" HorizontalAlignment="Left" Click="SearchPatient_Click"/>
+        <Button Content="Otkaži" Style="{DynamicResource SecretaryCancelButton}" Margin="210,311,0,0" Height="50" Width="140" VerticalAlignment="Top" HorizontalAlignment="Left" Click="CancelAddAppointment_Click"/>
         <Button Content="Ponudi termin" Margin="420,311,0,0" Style="{DynamicResource SecretaryButtons}" Height="50" Width="140" VerticalAlignment="Top" HorizontalAlignment="Left" Click="SuggestAppointments_Click"/>
         <Label Content="Prioritet pretrage:" Style="{DynamicResource SecretaryLabel}" Margin="60,265,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
         <RadioButton Name="DoctorButton" Style="{DynamicResource SecretaryRadioButton}" Content="Lekar" Margin="242,270,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" IsChecked="True"/>

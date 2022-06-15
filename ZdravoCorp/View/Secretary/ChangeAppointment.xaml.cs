@@ -175,6 +175,7 @@ namespace ZdravoCorp.View.Secretary
             apps = appointmentController.SuggestAppointments(new WantedAppointment(doctor, date, date.AddMinutes(45), true, true, patient));
 
             AppointmentSuggestChange window = new AppointmentSuggestChange(apps, exRoom, exApp);
+            window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             window.ShowDialog();
         }
     }

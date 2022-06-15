@@ -5,13 +5,13 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ZdravoCorp.View.Secretary.View"
       mc:Ignorable="d" 
-      d:DesignHeight="650" d:DesignWidth="1000"
+      d:DesignHeight="768" d:DesignWidth="1024"
       Title="HolidayRequests">
 
     <Grid Background="White">
         <Button Style="{DynamicResource SecretaryButtons}" Command="{Binding MenuCommand}" Content="Meni" HorizontalAlignment="Left" Height="50" Margin="10,5,0,0" VerticalAlignment="Top" Width="140" Click="Menu_Click"/>
-        <Label Content="Zahtevi za slobodne dane" Margin="0,17,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <DataGrid x:Name="HolidaysTable" ItemsSource="{Binding Path=Holidays}" Margin="45,82,45,153"  Style="{DynamicResource SecretaryTables}"
+        <Label Style="{DynamicResource SecretaryHeaderLabel}" Content="Zahtevi za slobodne dane" Margin="0,17,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <DataGrid x:Name="HolidaysTable" ItemsSource="{Binding Path=Holidays}" Margin="45,180,45,48"  Style="{DynamicResource SecretaryTables}" 
             AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" AlternationCount="2">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Pošiljalac" Binding="{Binding Path=RequestSender}"  Width="*"/>
@@ -19,8 +19,8 @@
                 <DataGridTextColumn Header="Kraj odsustva" Binding="{Binding Path=HolidayEndDate}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Style="{DynamicResource SecretaryButtons}" Command="{Binding DeclineCommand}" IsEnabled="{Binding ElementName=HolidaysTable, Path=SelectedItems.Count}" Content="Odbij zahtev" HorizontalAlignment="Left" Height="50" Margin="210,540,0,0" VerticalAlignment="Top" Width="140" Click="Decline_Click"/>
-        <Button Style="{DynamicResource SecretaryButtons}" Command="{Binding AcceptCommand}" IsEnabled="{Binding ElementName=HolidaysTable, Path=SelectedItems.Count}" Content="Odobri zahtev" HorizontalAlignment="Left" Height="50" Margin="618,540,0,0" VerticalAlignment="Top" Width="140" Click="Accept_Click"/>
+        <Button Style="{DynamicResource SecretaryCancelButton}" Command="{Binding DeclineCommand}" IsEnabled="{Binding ElementName=HolidaysTable, Path=SelectedItems.Count}" Content="Odbij zahtev" HorizontalAlignment="Left" Height="50" Margin="45,100,0,0" VerticalAlignment="Top" Width="140" Click="Decline_Click"/>
+        <Button Style="{DynamicResource SecretaryAcceptButton}" Command="{Binding AcceptCommand}" IsEnabled="{Binding ElementName=HolidaysTable, Path=SelectedItems.Count}" Content="Odobri zahtev" HorizontalAlignment="Left" Height="50" Margin="264,100,0,0" VerticalAlignment="Top" Width="140" Click="Accept_Click"/>
 
     </Grid>
 </Page>

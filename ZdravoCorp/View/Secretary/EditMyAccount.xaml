@@ -7,20 +7,20 @@
         mc:Ignorable="d"
         Title="EditMyAccount" Height="650" Width="900">
     <Grid>
-        <Button Style="{DynamicResource SecretaryButtons}" Content="Izmeni" HorizontalAlignment="Left" Height="50" Margin="525,558,0,0" VerticalAlignment="Top" Width="140" Click="Edit_Click"/>
-        <Button Style="{DynamicResource SecretaryCancelButton}" Content="Otkazi" HorizontalAlignment="Left" Height="50" Margin="167,558,0,0" VerticalAlignment="Top" Width="140" Click="Cancel_Click" />
-        <Label Content="Ime:" Margin="190,65,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Label Content="Prezime:" Margin="190,150,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Label Content="JMBG:" Margin="190,235,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Label Content="Email:" Margin="190,320,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Label Content="Adresa:" Margin="190,405,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" />
-        <Label Content="Kontakt telefon:" Margin="190,490,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" />
-        <TextBox  Width="250" HorizontalAlignment="Left" Text="{Binding Path=Namee, Mode=TwoWay}" VerticalAlignment="Top" Margin="400,65,0,0"/>
-        <TextBox  Width="250" HorizontalAlignment="Left" Text="{Binding Surname}" VerticalAlignment="Top" Margin="400,150,0,0"/>
-        <TextBox  Width="250" HorizontalAlignment="Left" Text="{Binding Id}" VerticalAlignment="Top" Margin="400,235,0,0"/>
-        <TextBox  Width="250" HorizontalAlignment="Left" Text="{Binding Email}" VerticalAlignment="Top" Margin="400,320,0,0"/>
-        <TextBox  Width="250" HorizontalAlignment="Left" Text="{Binding Address}" VerticalAlignment="Top" Margin="400,405,0,0"/>
-        <TextBox  Width="250" HorizontalAlignment="Left" Text="{Binding PhoneNumber}" VerticalAlignment="Top" Margin="400,490,0,0"/>
+        <Button Style="{DynamicResource SecretaryButtons}" Content="Izmeni" HorizontalAlignment="Left" Height="50" Margin="525,546,0,0" VerticalAlignment="Top" Width="140" Click="Edit_Click"/>
+        <Button Style="{DynamicResource SecretaryCancelButton}" Content="Otkaži" HorizontalAlignment="Left" Height="50" Margin="167,546,0,0" VerticalAlignment="Top" Width="140" Click="Cancel_Click" />
+        <Label Style="{DynamicResource SecretaryLabel}" FontSize="20" Content="Ime:" Margin="190,50,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label Style="{DynamicResource SecretaryLabel}" FontSize="20" Content="Prezime:" Margin="190,135,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label Style="{DynamicResource SecretaryLabel}" FontSize="20" Content="JMBG:" Margin="190,220,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label Style="{DynamicResource SecretaryLabel}" FontSize="20" Content="Email:" Margin="190,305,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label Style="{DynamicResource SecretaryLabel}" FontSize="20" Content="Adresa:" Margin="190,390,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" />
+        <Label Style="{DynamicResource SecretaryLabel}" FontSize="20" Content="Kontakt telefon:" Margin="190,475,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" />
+        <TextBox  Width="250" HorizontalAlignment="Left" Text="{Binding Path=Namee, Mode=TwoWay}" FontSize="20" VerticalAlignment="Top" Margin="400,50,0,0"/>
+        <TextBox  Width="250" HorizontalAlignment="Left" Text="{Binding Surname}" FontSize="20" VerticalAlignment="Top" Margin="400,135,0,0"/>
+        <TextBox  Width="250" HorizontalAlignment="Left" Text="{Binding Id}" FontSize="20" VerticalAlignment="Top" Margin="400,220,0,0"/>
+        <TextBox  Width="250" HorizontalAlignment="Left" Text="{Binding Email}" FontSize="20" VerticalAlignment="Top" Margin="400,305,0,0"/>
+        <TextBox  Width="250" HorizontalAlignment="Left" Text="{Binding Address}" FontSize="20" VerticalAlignment="Top" Margin="400,390,0,0"/>
+        <TextBox  Width="250" HorizontalAlignment="Left" Text="{Binding PhoneNumber}" FontSize="20" VerticalAlignment="Top" Margin="400,475,0,0"/>
 
     </Grid>
 </Window>

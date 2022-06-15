@@ -7,13 +7,13 @@
         mc:Ignorable="d"
         Title="ChangeAppointment" Height="450" Width="750">
     <Grid>
-        <Label Content="Ime pacijenta:" Style="{DynamicResource SecretaryLabel}" Margin="80,73,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-        <Label Content="Prezime pacijenta:" Style="{DynamicResource SecretaryLabel}" Margin="80,120,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-        <Label Content="Lekar:" Margin="80,170,0,0" Style="{DynamicResource SecretaryLabel}" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-        <Label Content="Datum:" Margin="80,217,0,0" Style="{DynamicResource SecretaryLabel}" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-        <TextBox x:Name="NAME" TextWrapping="Wrap" Margin="210,69,0,0" Height="27" Width="350" VerticalAlignment="Top" HorizontalAlignment="Left" Text="{Binding Path=Namee, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox x:Name="SURNAME" TextWrapping="Wrap" Margin="210,120,0,0" Height="27" Width="350" VerticalAlignment="Top" HorizontalAlignment="Left" Text="{Binding Path=Surname, UpdateSourceTrigger=PropertyChanged}"/>
-        <ComboBox x:Name="Doctors" Margin="210,170,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="350" ItemsSource="{Binding}">
+        <Label Content="Ime pacijenta:" Style="{DynamicResource SecretaryLabel}" Margin="80,70,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <Label Content="Prezime pacijenta:" Style="{DynamicResource SecretaryLabel}" Margin="80,140,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <Label Content="Lekar:" Margin="80,210,0,0" Style="{DynamicResource SecretaryLabel}" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <Label Content="Datum:" Margin="80,280,0,0" Style="{DynamicResource SecretaryLabel}" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <TextBox x:Name="NAME" TextWrapping="Wrap" Margin="250,70,0,0" Height="27" Width="350" VerticalAlignment="Top" HorizontalAlignment="Left" Text="{Binding Path=Namee, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox x:Name="SURNAME" TextWrapping="Wrap" Margin="250,140,0,0" Height="27" Width="350" VerticalAlignment="Top" HorizontalAlignment="Left" Text="{Binding Path=Surname, UpdateSourceTrigger=PropertyChanged}"/>
+        <ComboBox x:Name="Doctors" Margin="250,210,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="350" ItemsSource="{Binding}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel  Orientation="Horizontal">
@@ -23,8 +23,8 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <DatePicker x:Name="DATE" Margin="210,217,0,0" Height="27" Width="350" VerticalAlignment="Top" HorizontalAlignment="Left" SelectedDate="{Binding Path=Date, UpdateSourceTrigger=PropertyChanged}"/>
-        <Button Content="Otkazi" Style="{DynamicResource SecretaryCancelButton}" Margin="173,306,0,0" Height="50" Width="140" VerticalAlignment="Top" HorizontalAlignment="Left" Click="CancelChangeAppointment_Click"/>
-        <Button Content="Ponudi termin" Style="{DynamicResource SecretaryButtons}" Margin="431,306,0,0" Height="50" Width="140" VerticalAlignment="Top" HorizontalAlignment="Left"  Click="SuggestAppointments_Click"/>
+        <DatePicker x:Name="DATE" Margin="250,280,0,0" Height="27" Width="350" VerticalAlignment="Top" HorizontalAlignment="Left" SelectedDate="{Binding Path=Date, UpdateSourceTrigger=PropertyChanged}"/>
+        <Button Content="Otkaži" Style="{DynamicResource SecretaryCancelButton}" Margin="154,350,0,0" Height="50" Width="140" VerticalAlignment="Top" HorizontalAlignment="Left" Click="CancelChangeAppointment_Click"/>
+        <Button Content="Ponudi termin" Style="{DynamicResource SecretaryButtons}" Margin="420,350,0,0" Height="50" Width="140" VerticalAlignment="Top" HorizontalAlignment="Left"  Click="SuggestAppointments_Click"/>
     </Grid>
 </Window>
