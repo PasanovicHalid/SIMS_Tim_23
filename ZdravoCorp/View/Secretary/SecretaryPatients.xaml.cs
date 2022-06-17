@@ -40,6 +40,8 @@ namespace ZdravoCorp.View.Secretary
             this.secretaryMainWindow = smw;
             this.secretaryMainPage = smp;
             InitializeComponent();
+            DoctorTable.DataContext = new ViewModel.DoctorViewModel();
+            SecretaryTable.DataContext = new ViewModel.SecretaryViewModel();
             PatientCollection = new ObservableCollection<Model.Patient>();
             patientController = new PatientController();
 

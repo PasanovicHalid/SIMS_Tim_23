@@ -456,9 +456,11 @@
     <Compile Include="View\Secretary\Meetings.xaml.cs">
       <DependentUpon>Meetings.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Secretary\Modell\Doctor.cs" />
     <Compile Include="View\Secretary\Modell\EmergencyAppointment.cs" />
     <Compile Include="View\Secretary\Modell\EquipmentToOrder.cs" />
     <Compile Include="View\Secretary\Modell\HolidayRequest.cs" />
+    <Compile Include="View\Secretary\Modell\Secretary.cs" />
     <Compile Include="View\Secretary\MyAccount.xaml.cs">
       <DependentUpon>MyAccount.xaml</DependentUpon>
     </Compile>
@@ -483,9 +485,11 @@
     <Compile Include="View\Secretary\SecretaryPatients.xaml.cs">
       <DependentUpon>SecretaryPatients.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Secretary\ViewModel\DoctorViewModel.cs" />
     <Compile Include="View\Secretary\ViewModel\EmergencyAppointmentViewModel.cs" />
     <Compile Include="View\Secretary\ViewModel\EquipmentToOrderViewModel.cs" />
     <Compile Include="View\Secretary\ViewModel\HolidayRequestViewModel.cs" />
+    <Compile Include="View\Secretary\ViewModel\SecretaryViewModel.cs" />
     <Compile Include="View\Secretary\View\EmergencyAppointmentView.xaml.cs">
       <DependentUpon>EmergencyAppointmentView.xaml</DependentUpon>
     </Compile>
@@ -957,6 +961,33 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\dashboard-monitoring.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\appointment.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\cart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\directory.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\emergency.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\holidays.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\logOut.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\meeting.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\myAccount.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\userDusko.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

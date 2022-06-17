@@ -115,5 +115,6 @@ namespace ZdravoCorp.View.Secretary.View
             Doctors.SelectedIndex = 0;
             Rooms.SelectedIndex = 0;
         }
+
     }
 }

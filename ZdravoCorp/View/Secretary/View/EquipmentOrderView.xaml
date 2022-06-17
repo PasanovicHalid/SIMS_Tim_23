@@ -5,13 +5,13 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ZdravoCorp.View.Secretary.View"
       mc:Ignorable="d" 
-      d:DesignHeight="650" d:DesignWidth="1000"
+      d:DesignHeight="768" d:DesignWidth="1024"
       Title="EquipmentOrderView">
 
     <Grid Background="White">
         <Button Style="{DynamicResource SecretaryButtons}" Command="{Binding MenuCommand}" Content="Meni" HorizontalAlignment="Left" Height="50" Margin="10,5,0,0" VerticalAlignment="Top" Width="140" Click="Menu_Click" />
-        <Label Content="Zahtevi za porudžbinu opreme" Margin="0,17,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <DataGrid x:Name="OrderEquipmentTable" ItemsSource="{Binding Path=EquipmentToOrder}" Margin="45,82,45,151"  Style="{DynamicResource SecretaryTables}"
+        <Label Style="{DynamicResource SecretaryHeaderLabel}" Content="Zahtevi za porudžbinu opreme" Margin="0,17,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <DataGrid x:Name="OrderEquipmentTable" ItemsSource="{Binding Path=EquipmentToOrder}" Margin="45,180,45,52"  Style="{DynamicResource SecretaryTables}" BorderBrush="#111158" BorderThickness="3,3,3,3"
             AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" AlternationCount="2">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Naziv proizvoda" Binding="{Binding Path=Name}" Width="*"/>
@@ -19,7 +19,7 @@
 
             </DataGrid.Columns>
         </DataGrid>
-        <Button Style="{DynamicResource SecretaryButtons}" Command="{Binding OrderCommand}" Content="Poruči" IsEnabled="{Binding ElementName=OrderEquipmentTable, Path=SelectedItems.Count}" HorizontalAlignment="Left" Height="50" Margin="414,540,0,0" VerticalAlignment="Top" Width="140" Click="Order_Click"/>
+        <Button Style="{DynamicResource SecretaryButtons}" Command="{Binding OrderCommand}" Content="Poruči" IsEnabled="{Binding ElementName=OrderEquipmentTable, Path=SelectedItems.Count}" HorizontalAlignment="Left" Height="50" Margin="45,100,0,0" VerticalAlignment="Top" Width="140" Click="Order_Click"/>
 
     </Grid>
 </Page>

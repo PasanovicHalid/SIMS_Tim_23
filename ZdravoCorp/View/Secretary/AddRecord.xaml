@@ -14,7 +14,7 @@
         <Label Content="Komentari:" Style="{DynamicResource SecretaryLabel}" Margin="86,304,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <TextBox TextWrapping="Wrap" Margin="197,24,0,0" Height="37" Width="350" VerticalAlignment="Top" HorizontalAlignment="Left" Text="{Binding Path=Heightt, UpdateSourceTrigger=PropertyChanged}"/>
         <TextBox TextWrapping="Wrap" Margin="197,69,0,0" Height="37" Width="350" VerticalAlignment="Top" HorizontalAlignment="Left" Text="{Binding Path=Weight, UpdateSourceTrigger=PropertyChanged}"/>
-        <ComboBox x:Name="BloodTypes" Margin="197,116,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200" ItemsSource="{Binding}">
+        <ComboBox x:Name="BloodTypes" Margin="197,116,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="350" ItemsSource="{Binding}">
 
         </ComboBox>
         <DataGrid Style="{DynamicResource SecretaryTables}" x:Name="AllergensTable" ItemsSource="{Binding }" AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" Margin="197,147,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="350" Height="105" AlternationCount="2">

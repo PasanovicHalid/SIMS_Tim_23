@@ -161,6 +161,7 @@ namespace ZdravoCorp.View.Secretary
 
             
             AppointmentSuggest window = new AppointmentSuggest(apps);
+            window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             window.ShowDialog();
         }
 

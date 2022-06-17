@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="AppointmentSuggest" Height="450" Width="800">
     <Grid>
-        <DataGrid x:Name="SuggestionTable" ItemsSource="{Binding}" Margin="0,25,0,94"  Style="{DynamicResource SecretaryTables}"
+        <DataGrid x:Name="SuggestionTable" ItemsSource="{Binding}" BorderBrush="#111158" BorderThickness="3,3,3,3" Margin="29,25,29,94"  Style="{DynamicResource SecretaryTables}"
                               AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" AlternationCount="2">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Vreme" Binding="{Binding startDate}" Width="*"/>
@@ -15,7 +15,7 @@
 
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Otkazi zakazivanje" Margin="201,364,0,0" Style="{DynamicResource SecretaryCancelButton}" Height="50" Width="140" VerticalAlignment="Top" HorizontalAlignment="Left" Click="CancelSuggestion_Click"/>
-        <Button Content="Zakazi termin" Style="{DynamicResource SecretaryButtons}" Margin="471,364,0,0" Height="50" Width="140" VerticalAlignment="Top" HorizontalAlignment="Left" Click="AddAppointment_Click"/>
+        <Button Content="Otkaži" Margin="201,364,0,0" Style="{DynamicResource SecretaryCancelButton}" Height="50" Width="140" VerticalAlignment="Top" HorizontalAlignment="Left" Click="CancelSuggestion_Click"/>
+        <Button Content="Zakaži termin" Style="{DynamicResource SecretaryButtons}" Margin="471,364,0,0" Height="50" Width="140" VerticalAlignment="Top" HorizontalAlignment="Left" Click="AddAppointment_Click"/>
     </Grid>
 </Window>

@@ -7,16 +7,16 @@
         mc:Ignorable="d"
         Title="AddGuest" Height="300" Width="700">
     <Grid>
-        <Label Content="Name:" Margin="82,26,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{DynamicResource SecretaryLabel}"/>
-        <Label Content="Surname:" Margin="82,69,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{DynamicResource SecretaryLabel}"/>
-        <Label Content="Blood type:" Margin="82,126,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{DynamicResource SecretaryLabel}"/>
+        <Label Content="Ime:" Margin="82,26,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{DynamicResource SecretaryLabel}"/>
+        <Label Content="Prezime:" Margin="82,76,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{DynamicResource SecretaryLabel}"/>
+        <Label Content="Krvna grupa:" Margin="82,126,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{DynamicResource SecretaryLabel}"/>
         <TextBox TextWrapping="Wrap" Margin="210,26,0,0" Height="27" Width="350" VerticalAlignment="Top" HorizontalAlignment="Left" Text="{Binding Path=Namee, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox TextWrapping="Wrap" Margin="210,69,0,0" Height="27" Width="350" VerticalAlignment="Top" HorizontalAlignment="Left" Text="{Binding Path=Surname, UpdateSourceTrigger=PropertyChanged}"/>
-        <ComboBox x:Name="BloodTypes" Margin="210,128,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200" ItemsSource="{Binding}">
+        <TextBox TextWrapping="Wrap" Margin="210,76,0,0" Height="27" Width="350" VerticalAlignment="Top" HorizontalAlignment="Left" Text="{Binding Path=Surname, UpdateSourceTrigger=PropertyChanged}"/>
+        <ComboBox x:Name="BloodTypes" Margin="210,128,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="350" ItemsSource="{Binding}">
 
         </ComboBox>
 
-        <Button Content="Cancel" Style="{DynamicResource SecretaryCancelButton}" Height="50" Width="140" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="155,183,0,0"/>
-        <Button Content="Add" Style="{DynamicResource SecretaryButtons}" Height="50" Width="140" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="404,183,0,0" Click="Add_Click"/>
+        <Button Content="Otkaži" Style="{DynamicResource SecretaryCancelButton}" Height="50" Width="140" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="155,183,0,0"/>
+        <Button Content="Napravi" Style="{DynamicResource SecretaryButtons}" Height="50" Width="140" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="404,183,0,0" Click="Add_Click"/>
     </Grid>
 </Window>
