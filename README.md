@@ -14,7 +14,7 @@
 
 Program written in c# language
 
-- Backend in c#
+- Backend in C#
 
 - Frontend WPF
 
